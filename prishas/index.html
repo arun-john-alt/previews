@@ -3,284 +3,217 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prisha's Patisserie · Sculpted theme cakes, Anna Nagar (concept)</title>
+<title>Prisha's Patisserie · You send the idea (concept)</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Website concept preview for Prisha's Patisserie, Anna Nagar, Chennai.">
-<meta name="theme-color" content="#2e2620">
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=gambetta@400,500,600&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<meta name="description" content="Website concept preview for Prisha's Patisserie, sculpted theme cakes in Anna Nagar, Chennai.">
+<meta name="theme-color" content="#0d2f73">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fragment+Mono&display=swap" rel="stylesheet">
 <style>
-  /* Tokens, taken from her photographs: the brick wall, the oak board, her chocolate and the starry navy cake. */
   :root {
-    --stone: #e7e3dc;      /* ground: the white-washed brick she shoots against */
-    --paper: #f4f2ee;      /* lighter surface */
-    --cocoa: #2e2620;      /* ink and the dark section */
-    --muted: #6d6157;
-    --oak: #8a7458;        /* small details only */
-    --navy: #0b3a86;       /* the one action colour: WhatsApp */
-    --navy-ink: #ffffff;
-    --display: "Gambetta", "Iowan Old Style", Georgia, serif;
-    --body: "Switzer", "Segoe UI", system-ui, sans-serif;
-    --gutter: clamp(16px, 4vw, 40px);
+    --navy: #0d2f73;       /* her starry cake */
+    --cream: #f6ead0;      /* buttercream */
+    --butter: #f5cf3f;     /* the gold sprinkles */
+    --ink: #14130f;
+    --moss: #2c4a32;       /* T-rex jungle */
+    --sky: #9bcde8;        /* duck's bath */
+    --brick: #c9532d;      /* Central Perk orange */
+    --teal: #6fb4b0;       /* the vintage car */
+    --candy: #f2a9c4;      /* lollipops */
+    --lilac: #cdbbe6;      /* unicorn mane */
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --mono: "Fragment Mono", ui-monospace, monospace;
+    --pad: clamp(16px, 4vw, 48px);
   }
   * { box-sizing: border-box; }
   html { overflow-x: clip; }
-  body { margin: 0; background: var(--stone); color: var(--cocoa); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-  img { display: block; width: 100%; height: auto; }
+  body { margin: 0; font: 400 16px/1.5 var(--display); color: var(--cream); background: var(--navy); }
+  img { display: block; max-width: 100%; }
   a { color: inherit; }
-  h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; letter-spacing: -0.025em; text-wrap: balance; }
+  h1, h2, h3 { margin: 0; font-weight: 800; font-stretch: 76%; text-transform: uppercase; letter-spacing: -.01em; line-height: .86; }
   p { margin: 0; }
-  .shell { padding: 0 var(--gutter); max-width: 1440px; margin: 0 auto; }
+  .mono { font-family: var(--mono); }
 
-  .concept { background: var(--cocoa); color: #d9d1c7; font-size: 12.5px; padding: 7px var(--gutter); text-align: center; }
+  .concept { background: var(--ink); color: #cfc7b5; font: 12px/1.3 var(--mono); padding: 8px 16px; text-align: center; }
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 18px var(--pad); position: relative; z-index: 4; }
+  .top b { font: 800 22px/1 var(--display); font-stretch: 80%; text-transform: uppercase; }
+  .top nav { display: none; gap: 26px; font: 13px/1 var(--mono); }
+  .top nav a { text-decoration: none; }
+  .wa { display: inline-flex; align-items: center; gap: 10px; background: var(--butter); color: var(--ink); text-decoration: none; padding: 14px 20px;
+        border-radius: 999px; font: 650 15px/1 var(--display); transition: transform .12s ease-out; }
+  .wa:hover { transform: rotate(-2deg) scale(1.03); }
+  .wa:active { transform: translateY(1px); }
+  .wa svg { width: 18px; height: 18px; fill: currentColor; }
 
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 64px; }
-  .mark { display: inline-block; padding: 10px 0; font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; text-decoration: none; }
-  .bar nav { display: none; gap: 28px; font-size: 15px; }
-  .bar nav a { text-decoration: none; color: var(--muted); }
-  .bar nav a:hover { color: var(--cocoa); }
+  /* Hero */
+  .hero { position: relative; min-height: calc(100svh - 92px); padding: 0 var(--pad) 40px; display: grid; align-content: end; }
+  .hero h1 { font-size: clamp(56px, 9.4vw, 168px); max-width: 66vw; position: relative; z-index: 1; }
+  .hero h1 span { display: block; color: var(--butter); }
+  .hero .cake { position: absolute; z-index: 2; right: 2vw; bottom: 0; height: min(84%, 720px); width: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35));
+                animation: drop .9s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes drop { from { transform: translateY(-24px) rotate(2deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  .note { background: var(--cream); color: var(--ink); font: 13.5px/1.45 var(--mono); padding: 14px 16px 16px; width: 230px; box-shadow: 0 10px 0 rgba(0,0,0,.18); }
+  .note b { display: block; font: 700 11px/1 var(--mono); letter-spacing: .08em; margin-bottom: 8px; color: #6b6352; }
+  .hero .note { position: absolute; z-index: 3; right: 3vw; top: 7%; transform: rotate(3deg); }
+  .hero .sub { position: relative; z-index: 3; display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font: 14px/1.4 var(--mono); }
 
-  .act { display: inline-flex; align-items: center; gap: 10px; background: var(--navy); color: var(--navy-ink); text-decoration: none;
-         font-weight: 500; font-size: 15px; padding: 13px 20px; border-radius: 4px; transition: background .15s ease-out, transform .1s ease-out; }
-  .act:hover { background: #082d69; }
-  .act:active { transform: translateY(1px); }
-  .act svg { width: 18px; height: 18px; fill: currentColor; }
-  .bar .act { display: none; padding: 11px 16px; font-size: 14px; }  /* phones use the bottom bar instead */
-  .textlink { display: inline-block; padding: 11px 0; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  /* Briefs */
+  .briefs { display: grid; }
+  .pair { position: relative; display: grid; gap: 18px; padding: 56px var(--pad) 0; overflow: hidden; min-height: 560px; align-content: space-between; }
+  .pair h2 { font-size: clamp(42px, 5.4vw, 80px); }
+  .pair p { font: 14px/1.5 var(--mono); max-width: 32ch; margin-top: 14px; }
+  .pair img { height: clamp(300px, 34vw, 470px); width: auto; justify-self: center; margin-bottom: -4px; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+  .pair:hover img { transform: translateY(-10px) rotate(-1.5deg); }
+  .moss { background: var(--moss); color: #e9efd9; } .sky { background: var(--sky); color: var(--ink); } .brick { background: var(--brick); color: #fff3e6; }
+  .teal { background: var(--teal); color: var(--ink); } .candy { background: var(--candy); color: var(--ink); } .lilac { background: var(--lilac); color: var(--ink); }
 
-  /* Hero: her starry cake is the biggest thing on the first screen */
-  .hero { display: grid; gap: 22px; padding-bottom: 56px; }
-  .hero figure { margin: 0 calc(var(--gutter) * -1); overflow: hidden; background: #d2cbbf; }
-  .hero figure img { height: min(58vh, 520px); object-fit: cover; object-position: center 12%; animation: settle 1.4s cubic-bezier(.2, .7, .2, 1) both; }
-  @keyframes settle { from { transform: scale(1.05); } to { transform: none; } }
-  .hero h1 { font-size: clamp(40px, 5.2vw, 80px); line-height: .98; max-width: 14ch; }
-  .hero .lead { font-size: clamp(17px, 1.5vw, 19px); color: var(--muted); max-width: 44ch; margin-top: 18px; }
-  .hero .go { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 28px; }
-  .facts { display: grid; gap: 4px; margin-top: 34px; font-size: 14.5px; color: var(--muted); }
-  .facts b { color: var(--cocoa); font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* How it works */
+  .how { background: var(--butter); color: var(--ink); padding: 80px var(--pad); display: grid; gap: 40px; }
+  .how h2 { font-size: clamp(48px, 8vw, 130px); }
+  .steps { display: grid; gap: 28px; counter-reset: s; }
+  .steps div { font: 15px/1.5 var(--mono); max-width: 34ch; }
+  .steps div::before { counter-increment: s; content: counter(s); display: block; font: 800 64px/1 var(--display); font-stretch: 76%; margin-bottom: 6px; }
+  .steps b { display: block; font: 800 26px/1 var(--display); font-stretch: 80%; text-transform: uppercase; margin-bottom: 6px; }
 
-  /* Lookbook */
-  .look { background: var(--paper); padding: 64px 0 72px; }
-  .head2 { display: grid; gap: 14px; margin-bottom: 36px; }
-  .head2 h2 { font-size: clamp(34px, 4.4vw, 60px); line-height: 1; }
-  .head2 p { color: var(--muted); max-width: 46ch; }
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 14px; }
-  .grid figure { margin: 0; }
-  .grid figure .ph { overflow: hidden; background: #ddd6cc; }
-  .grid img { aspect-ratio: 4 / 5; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
-  .grid figure:hover img { transform: scale(1.025); }
-  .grid figcaption { margin-top: 10px; font-size: 14px; line-height: 1.4; }
-  .grid .full { grid-column: 1 / -1; }
-  .grid .full img { aspect-ratio: 3 / 2; }
+  /* Small bakes */
+  .small { background: var(--cream); color: var(--ink); padding: 80px var(--pad) 90px; display: grid; gap: 48px; }
+  .small h2 { font-size: clamp(48px, 7vw, 110px); }
+  .jars img { width: 100%; max-width: 900px; }
+  .jarlist { display: grid; gap: 20px; font: 14px/1.5 var(--mono); }
+  .jarlist h3 { font-size: 30px; line-height: 1; margin-bottom: 4px; }
+  .brand { font: 13px/1.4 var(--mono); color: #6b6352; }
+  .treats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; }
+  .treats figure { margin: 0; }
+  .treats img { height: clamp(160px, 24vw, 320px); width: 100%; object-fit: contain; object-position: bottom; }
+  .treats figcaption { font: 13px/1.4 var(--mono); margin-top: 10px; }
 
-  .said { padding: 64px 0; }
-  .flavours { font-family: var(--display); font-size: clamp(26px, 3.2vw, 44px); line-height: 1.15; letter-spacing: -0.02em; max-width: 26ch; }
-  .flavours span { color: var(--muted); }
+  /* Reviews */
+  .voices { padding: 90px var(--pad); display: grid; gap: 34px; }
+  .voices blockquote { margin: 0; font-weight: 800; font-stretch: 76%; text-transform: uppercase; line-height: .92; font-size: clamp(36px, 5.6vw, 92px); max-width: 16ch; }
+  .voices blockquote:nth-child(2) { color: var(--butter); justify-self: end; text-align: right; }
+  .voices .src { display: block; margin-top: 12px; font: 400 13px/1 var(--mono); text-transform: none; letter-spacing: 0; color: #b9c3dd; }
+  .voices .score { font: 14px/1.5 var(--mono); color: #b9c3dd; }
 
-  /* Small bakes: the one dark section */
-  .small { background: var(--cocoa); color: #ece6de; padding: 64px 0 72px; }
-  .small .head2 p { color: #b9ada1; }
-  .jars { display: grid; gap: 26px; }
-  .jars figure { margin: 0 calc(var(--gutter) * -1); }
-  .jars figure img { aspect-ratio: 16 / 10; object-fit: cover; }
-  .jarlist { display: grid; gap: 18px; }
-  .jarlist h3 { font-size: 24px; }
-  .jarlist p { color: #b9ada1; font-size: 15px; margin-top: 2px; }
-  .jarlist .brand { font-size: 14px; color: #b9ada1; }
-  .cups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 14px; margin-top: 48px; }
-  .cups figure { margin: 0; }
-  .cups img { aspect-ratio: 1 / 1; object-fit: cover; }
-  .cups figcaption { margin-top: 10px; font-size: 14px; color: #d3c9be; }
+  /* Order */
+  .order { background: var(--ink); color: var(--cream); padding: 80px var(--pad) 110px; display: grid; gap: 40px; }
+  .order h2 { font-size: clamp(56px, 10vw, 170px); color: var(--butter); }
+  .order .wa { font-size: 18px; padding: 18px 26px; }
+  .info { display: grid; gap: 28px; font: 14px/1.6 var(--mono); }
+  .info b { display: block; color: #8f8a7c; font-weight: 400; margin-bottom: 4px; }
+  .info a { display: inline-block; padding: 10px 0; text-underline-offset: 4px; }
+  .hours { display: grid; grid-template-columns: auto auto; gap: 0 22px; justify-content: start; }
+  footer { background: var(--ink); color: #8f8a7c; font: 12px/1 var(--mono); padding: 0 var(--pad) 110px; }
 
-  /* Customers */
-  .voices { padding: 64px 0; }
-  .quotes { display: grid; gap: 30px; }
-  .q1 { font-family: var(--display); font-size: clamp(28px, 3.4vw, 46px); line-height: 1.12; letter-spacing: -0.02em; max-width: 22ch; }
-  .q { font-size: 17px; max-width: 40ch; }
-  .src { display: block; margin-top: 10px; font-family: var(--body); font-size: 13.5px; color: var(--muted); letter-spacing: 0; }
-  .score { margin-top: 36px; font-size: 15px; color: var(--muted); }
-  .score b { color: var(--cocoa); font-variant-numeric: tabular-nums; }
+  .dock { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10; }
+  .dock .wa { width: 100%; justify-content: center; padding: 16px; font-size: 16px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
 
-  /* Order + find */
-  .order { background: var(--paper); padding: 64px 0 72px; }
-  .order-grid { display: grid; gap: 40px; }
-  .order h2 { font-size: clamp(34px, 4.4vw, 60px); line-height: 1; }
-  .order .steps { margin-top: 18px; max-width: 46ch; font-size: 17px; }
-  .order .go { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 28px; }
-  .where dt { font-size: 13.5px; color: var(--muted); margin-top: 18px; }
-  .where dt:first-child { margin-top: 0; }
-  .where dd { margin: 2px 0 0; font-size: 17px; }
-  .hours { display: grid; grid-template-columns: auto auto; gap: 2px 28px; justify-content: start; font-variant-numeric: tabular-nums; }
-  .where .links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; }
-
-  footer { padding: 28px 0 100px; font-size: 13.5px; color: var(--muted); }
-
-  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
-          background: rgba(231, 227, 220, .96); backdrop-filter: blur(6px); }
-  .dock .act { width: 100%; justify-content: center; padding: 15px; font-size: 16px; }
-
-  @media (prefers-reduced-motion: reduce) { .hero figure img { animation: none; } .grid img { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero .cake { animation: none; } .pair img, .wa { transition: none; } }
 
   @media (min-width: 760px) {
-    .grid { grid-template-columns: repeat(6, 1fr); gap: 40px 20px; grid-auto-flow: dense; }
-    .grid figure { grid-column: span 2; }
-    .grid .full { grid-column: span 4; }
-    .grid .tall { grid-row: span 2; }
-    .grid .tall img { aspect-ratio: auto; height: 100%; }
-    .grid .tall .ph { height: calc(100% - 34px); }
-    .head2 { grid-template-columns: 1fr 1fr; align-items: end; }
-    .cups { grid-template-columns: repeat(4, 1fr); }
-    .quotes { grid-template-columns: 1.3fr 1fr; align-items: start; }
-    .quotes .rest { display: grid; gap: 28px; padding-top: 8px; }
-    .order-grid { grid-template-columns: 1.1fr .9fr; }
+    .briefs { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(3, 1fr); }
+    .jars { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+    .treats { gap: 28px; }
+    .info { grid-template-columns: repeat(3, 1fr); }
   }
-  @media (min-width: 1024px) {
-    .bar { height: 72px; }
-    .bar nav { display: flex; }
-    .bar .act { display: inline-flex; }
-    .hero { grid-template-columns: 5fr 7fr; align-items: end; gap: 48px; padding-bottom: 80px; }
-    .hero .copy { order: 1; padding-bottom: 8px; }
-    .hero figure { order: 2; margin: 0 calc(var(--gutter) * -1) 0 0; }
-    .hero figure img { height: calc(100vh - 72px - 31px); min-height: 560px; max-height: 860px; }
-    .jars { grid-template-columns: 1.35fr 1fr; align-items: center; gap: 48px; }
-    .jars figure { margin: 0 0 0 calc(var(--gutter) * -1); }
-    .look, .small, .order { padding: 96px 0 104px; }
-    .said, .voices { padding: 96px 0; }
+  @media (min-width: 1100px) {
+    .top nav { display: flex; }
+    .briefs { grid-template-columns: repeat(3, 1fr); }
+    .pair { min-height: 720px; }
+    .how { grid-template-columns: 1fr 1.6fr; align-items: end; }
+    .order { gap: 56px; }
+    .info { max-width: 980px; }
     .dock { display: none; }
+    .order { padding-bottom: 60px; }
     footer { padding-bottom: 32px; }
+  }
+  @media (max-width: 759px) {
+    .top .wa { display: none; }
+    .hero { min-height: auto; }
+    .hero h1 { max-width: none; }
+    .hero .cake { position: relative; right: auto; height: 52vh; margin: 8px auto -30px; }
+    .hero .note { top: 8px; left: var(--pad); right: auto; width: 180px; font-size: 12.5px; }
+    .pair { min-height: 0; }
+    .pair img { height: 300px; margin-top: 10px; }
   }
 </style>
 </head>
 <body>
-
 <div class="concept" data-concept-banner>Website concept preview made for Prisha's Patisserie · not the official site</div>
 
-<div class="shell">
-  <header class="bar">
-    <a class="mark" href="#top">Prisha's Patisserie</a>
-    <nav aria-label="Sections">
-      <a href="#cakes">Cakes</a>
-      <a href="#small">Jars &amp; cupcakes</a>
-      <a href="#order">Ordering</a>
-    </nav>
-    <a class="act" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
-      WhatsApp
-    </a>
-  </header>
+<header class="top">
+  <b>Prisha's Patisserie</b>
+  <nav><a href="#cakes">Cakes</a><a href="#how">How it works</a><a href="#small">Jars &amp; cupcakes</a><a href="#order">Find us</a></nav>
+  <a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">Order on WhatsApp</a>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <figure><img src="assets/starry-three-tier.jpg" alt="Three-tier navy cake with gold stars and a gold collar, on a wooden board" fetchpriority="high"></figure>
-      <div class="copy">
-        <h1>Sculpted theme cakes, made in Anna&nbsp;Nagar.</h1>
-        <p class="lead">Cakes shaped around one idea you send: a T&#8209;rex, a sorting hat, a chessboard, a first car. Cupcakes, brownies and dessert jars too.</p>
-        <div class="go">
-          <a class="act" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">Order on WhatsApp</a>
-          <a class="textlink" href="#cakes">See recent cakes</a>
-        </div>
-        <div class="facts">
-          <span><b>4.8</b> on Google, from <b>67</b> reviews</span>
-          <span>Mon–Fri 10 am–7 pm · Sat 10 am–3 pm · Sun closed</span>
-        </div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<section class="look" id="cakes">
-  <div class="shell">
-    <div class="head2">
-      <h2>Recent cakes</h2>
-      <p>Every one started as a theme and a date on WhatsApp. Send yours and it's designed around that.</p>
-    </div>
-    <div class="grid">
-      <figure class="tall"><div class="ph"><img src="assets/sorting-hat.jpg" alt="Harry Potter sorting hat cake in house colours" loading="lazy"></div><figcaption>Sorting hat, in house colours</figcaption></figure>
-      <figure class="full"><div class="ph"><img src="assets/chessboard.jpg" alt="Chessboard cake with chocolate chess pieces" loading="lazy"></div><figcaption>A chessboard, with the pieces in chocolate</figcaption></figure>
-      <figure><div class="ph"><img src="assets/t-rex.jpg" alt="Jurassic World cake with a T-rex on top" loading="lazy"></div><figcaption>T-rex, Jurassic World</figcaption></figure>
-      <figure><div class="ph"><img src="assets/central-perk.jpg" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></div><figcaption>Central Perk, two tiers</figcaption></figure>
-      <figure><div class="ph"><img src="assets/vintage-car.jpg" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></div><figcaption>A vintage car, for a 60th</figcaption></figure>
-      <figure><div class="ph"><img src="assets/lollipop-first-birthday.jpg" alt="Drip cake with lollipops and gummies for a first birthday" loading="lazy"></div><figcaption>Lollipops for a first birthday</figcaption></figure>
-      <figure class="full"><div class="ph"><img src="assets/cinderella.jpg" alt="Cinderella cake with a gold portrait frame" loading="lazy"></div><figcaption>Cinderella, in a gold frame</figcaption></figure>
-      <figure><div class="ph"><img src="assets/unicorn.jpg" alt="Unicorn cake with a gold horn" loading="lazy"></div><figcaption>Unicorn, gold horn</figcaption></figure>
-      <figure><div class="ph"><img src="assets/duck-in-a-tub.jpg" alt="Duck in a bathtub first birthday cake" loading="lazy"></div><figcaption>A duck in a tub, for turning one</figcaption></figure>
-      <figure><div class="ph"><img src="assets/fashion-desk.jpg" alt="Fashion designer's desk cake with a dress and scissors" loading="lazy"></div><figcaption>A designer's desk</figcaption></figure>
-      <figure><div class="ph"><img src="assets/rainbow-drip.jpg" alt="Rainbow drip cake with macarons" loading="lazy"></div><figcaption>Rainbow drip with macarons</figcaption></figure>
-    </div>
-  </div>
+<section class="hero">
+  <img class="cake" src="assets/sorting-hat.webp" alt="Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board" fetchpriority="high">
+  <div class="note"><b>THE BRIEF</b>Sorting hat. House colours. Write “Mitul” on it.</div>
+  <h1>You send the idea. <span>She makes it cake.</span></h1>
+  <div class="sub"><span>Sculpted theme cakes · Anna Nagar, Chennai</span><span>4.8 on Google · 67 reviews</span></div>
 </section>
 
-<section class="said">
-  <div class="shell">
-    <p class="flavours">Flavours customers mention: Belgian chocolate, white chocolate raspberry, chocolate truffle <span>and the buttercream.</span></p>
+<section class="briefs" id="cakes">
+  <article class="pair moss"><div><h2>A T&#8209;rex that looks real</h2><p>Jurassic World, dinosaur on top, crushed-cookie earth.</p></div><img src="assets/t-rex.webp" alt="Jurassic World cake with a sculpted T-rex" loading="lazy"></article>
+  <article class="pair sky"><div><h2>A duck in a tub</h2><p>Turning one. Bubbles, a checked mat, a little rubber duck.</p></div><img src="assets/duck.webp" alt="Duck in a bathtub first birthday cake" loading="lazy"></article>
+  <article class="pair brick"><div><h2>Central Perk</h2><p>Two tiers of F.R.I.E.N.D.S., “How you doin’?” included.</p></div><img src="assets/central-perk.webp" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></article>
+  <article class="pair teal"><div><h2>A first car, for a 60th</h2><p>Chocolate drum, a sculpted vintage car on the grass.</p></div><img src="assets/vintage-car.webp" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></article>
+  <article class="pair candy"><div><h2>Lollipops for turning one</h2><p>Drip icing, gummies, giant swirl lollipops.</p></div><img src="assets/lollipop.webp" alt="Drip cake with lollipops for a first birthday" loading="lazy"></article>
+  <article class="pair lilac"><div><h2>A unicorn, gold horn</h2><p>Sleepy eyes, buttercream flowers for a mane.</p></div><img src="assets/unicorn.webp" alt="Unicorn cake with a gold horn" loading="lazy"></article>
+</section>
+
+<section class="how" id="how">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div><b>Send the idea</b>A theme, a photo, a name to pipe. Plus the date and how many people.</div>
+    <div><b>Settle it on WhatsApp</b>Design, flavour and price are agreed in the chat before anything is baked.</div>
+    <div><b>Delivered on the day</b>“She delivered the cake neatly packed and in timely manner.” Google review</div>
   </div>
 </section>
 
 <section class="small" id="small">
-  <div class="shell">
-    <div class="head2">
-      <h2>Jars &amp; cupcakes</h2>
-      <p>For smaller days: dessert jars, themed cupcake sets and brownies.</p>
+  <h2>Smaller days</h2>
+  <div class="jars">
+    <img src="assets/dessert-jars.webp" alt="Delectable dessert jars: Boston Cream, Berrylicious, Chocolate Lovers, Lady in Red" loading="lazy">
+    <div class="jarlist">
+      <p class="brand">Delectable · dessert jars by Prisha's</p>
+      <div><h3>Berrylicious</h3>Strawberry cake layered with mixed berry coulis.</div>
+      <div><h3>Chocolate Lovers</h3>Chocolate cake layered with ganache and roasted hazelnuts.</div>
+      <div><h3>Lady in Red</h3>Red velvet, layered.</div>
+      <div><h3>Boston Cream</h3>Topped with toasted almonds.</div>
     </div>
-    <div class="jars">
-      <figure><img src="assets/dessert-jars.jpg" alt="Delectable dessert jars: Boston, Berrylicious, Chocolate Lovers and Lady in Red" loading="lazy"></figure>
-      <div class="jarlist">
-        <p class="brand">Delectable, dessert jars by Prisha's</p>
-        <div><h3>Berrylicious</h3><p>Strawberry cake layered with mixed berry coulis.</p></div>
-        <div><h3>Chocolate Lovers</h3><p>Chocolate cake layered with ganache and roasted hazelnuts.</p></div>
-        <div><h3>Lady in Red</h3><p>Red velvet layers.</p></div>
-        <div><h3>Boston</h3><p>Topped with toasted almonds.</p></div>
-      </div>
-    </div>
-    <div class="cups">
-      <figure><img src="assets/hogwarts-cupcakes.jpg" alt="Harry Potter cupcake set" loading="lazy"><figcaption>Hogwarts cupcake set</figcaption></figure>
-      <figure><img src="assets/wizard-cupcakes.jpg" alt="Wizard-themed birthday cupcakes" loading="lazy"><figcaption>Wizard birthday cupcakes</figcaption></figure>
-      <figure><img src="assets/anniversary-cupcakes.jpg" alt="First anniversary cupcake set" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
-      <figure><img src="assets/brownies.jpg" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
-    </div>
+  </div>
+  <div class="treats">
+    <figure><img src="assets/wizard-cupcakes.webp" alt="Wizard-themed birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
+    <figure><img src="assets/anniversary-cupcakes.webp" alt="First anniversary cupcake toppers" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
+    <figure><img src="assets/brownies.webp" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
   </div>
 </section>
 
 <section class="voices">
-  <div class="shell">
-    <div class="quotes">
-      <blockquote class="q1" style="margin:0">“The Trex model was so realistic my son was very excited and happy to see it.”<span class="src">Google review</span></blockquote>
-      <div class="rest">
-        <blockquote class="q" style="margin:0">“Sharon brought the look of the cake just as I wanted.”<span class="src">Google review</span></blockquote>
-        <blockquote class="q" style="margin:0">“Her cupcakes are really the best in town.”<span class="src">Google review</span></blockquote>
-      </div>
-    </div>
-    <p class="score"><b>61</b> of <b>67</b> Google reviews give five stars.</p>
-  </div>
+  <blockquote>“Her cupcakes are really the best in town.”<span class="src">Google review</span></blockquote>
+  <blockquote>“Sharon brought the look of the cake just as I wanted.”<span class="src">Google review</span></blockquote>
+  <p class="score">61 of 67 Google reviews give five stars. Flavours people mention: Belgian chocolate, white chocolate raspberry, chocolate truffle.</p>
 </section>
 
 <section class="order" id="order">
-  <div class="shell order-grid">
-    <div>
-      <h2>Ordering</h2>
-      <p class="steps">Message the theme, the date and how many people on WhatsApp. The design and price are settled with you there, before anything is baked.</p>
-      <div class="go">
-        <a class="act" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">Order on WhatsApp</a>
-        <a class="textlink" href="tel:+918754297315">or call +91 87542 97315</a>
-      </div>
-    </div>
-    <dl class="where">
-      <dt>Address</dt>
-      <dd>R-25/1, 4th Main Road, 12th Street,<br>Anna Nagar, Chennai 600040</dd>
-      <dt>Hours</dt>
-      <dd class="hours"><span>Monday to Friday</span><span>10 am – 7 pm</span><span>Saturday</span><span>10 am – 3 pm</span><span>Sunday</span><span>Closed</span></dd>
-      <dd class="links">
-        <a class="textlink" href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Google Maps</a>
-        <a class="textlink" href="https://www.facebook.com/Prishas.patisserie/" target="_blank" rel="noopener">Facebook</a>
-      </dd>
-    </dl>
+  <div>
+    <h2>Got an idea?</h2>
+    <p class="mono" style="margin:18px 0 28px;max-width:40ch;font-size:15px">Send it on WhatsApp with the date. That's the whole form.</p>
+    <a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Order on WhatsApp</a>
+  </div>
+  <div class="info">
+    <div><b>Kitchen</b>R-25/1, 4th Main Road, 12th Street, Anna Nagar, Chennai 600040<br><a href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Open in Maps</a></div>
+    <div><b>Hours</b><span class="hours"><span>Mon–Fri</span><span>10 am–7 pm</span><span>Sat</span><span>10 am–3 pm</span><span>Sun</span><span>Closed</span></span></div>
+    <div><b>Elsewhere</b><a href="tel:+918754297315">+91 87542 97315</a><br><a href="https://www.facebook.com/Prishas.patisserie/" target="_blank" rel="noopener">Facebook</a></div>
   </div>
 </section>
+<footer>Prisha's Patisserie · Anna Nagar, Chennai</footer>
 
-<footer class="shell">Prisha's Patisserie · Anna Nagar, Chennai</footer>
-
-<div class="dock"><a class="act" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">Order on WhatsApp</a></div>
-
+<div class="dock"><a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">Order on WhatsApp</a></div>
 </body>
 </html>
