@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mom's Oven · Homemade cakes in Vadapalani, Chennai (concept)</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Website concept preview for Mom's Oven, homemade cakes in Vadapalani, Chennai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #9b3d5a;       /* berry pink from their cakes */
+    --brand-dark: #7a2c45;
+    --brand-ink: #ffffff;
+    --accent: #c9a24a;      /* gold toppers */
+    --bg: #fdf7f1;          /* warm cream */
+    --card: #ffffff;
+    --tint: #f7ebe4;
+    --ink: #2b1d1a;
+    --muted: #7a6660;
+    --line: #ecdcd2;
+    --display: "Playfair Display", Georgia, serif;
+    --body: "Jost", system-ui, sans-serif;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.12; margin: 0; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .sec { padding: 64px 0; }
+  .sec.tint { background: var(--tint); }
+  .eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--brand); font-weight: 600; }
+  .sec-title { font-size: clamp(28px, 4vw, 40px); margin: 8px 0 10px; }
+  .sec-sub { color: var(--muted); max-width: 560px; margin: 0 0 32px; }
+  .center { text-align: center; }
+  .center .sec-sub { margin-left: auto; margin-right: auto; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 26px; border-radius: 999px;
+         font-weight: 500; font-size: 15px; background: var(--brand); color: var(--brand-ink); transition: transform .15s ease, background .15s ease; }
+  .btn:hover { background: var(--brand-dark); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--brand); }
+  .btn.ghost:hover { background: var(--brand); color: var(--brand-ink); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  /* Concept banner: required on every mock */
+  .concept { background: #1d1412; color: #efe3dc; text-align: center; font-size: 12.5px; padding: 7px 14px; }
+  .concept strong { color: var(--accent); font-weight: 500; }
+  .announce { background: var(--brand); color: var(--brand-ink); text-align: center; font-size: 13.5px; padding: 8px 14px; letter-spacing: .02em; }
+
+  header { position: sticky; top: 0; z-index: 20; background: rgba(253, 247, 241, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .logo { display: flex; flex-direction: column; line-height: 1.05; }
+  .logo b { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--brand); }
+  .logo small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  nav.main { display: none; gap: 28px; font-size: 14.5px; }
+  nav.main a:hover { color: var(--brand); }
+  .head .btn { padding: 10px 18px; font-size: 14px; }
+
+  .hero { padding: 40px 0 56px; }
+  .hero-grid { display: grid; gap: 32px; align-items: center; }
+  .hero h1 { font-size: clamp(38px, 6.2vw, 66px); }
+  .hero h1 em { color: var(--brand); font-style: italic; }
+  .hero p.lead { font-size: 18px; color: var(--muted); max-width: 500px; margin: 18px 0 26px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .rating { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; background: var(--card); border: 1px solid var(--line);
+            padding: 10px 16px; border-radius: 999px; font-size: 14.5px; }
+  .rating .stars { color: var(--accent); letter-spacing: 2px; }
+  .hero-pics { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; }
+  .hero-pics img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); box-shadow: 0 18px 40px -22px rgba(80, 30, 40, .45); }
+  .hero-pics .big { grid-row: span 2; aspect-ratio: 4 / 5; }
+  .hero-pics .small { aspect-ratio: 1 / 1; }
+
+  .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border-radius: var(--radius); overflow: hidden; }
+  .features div { background: var(--card); padding: 18px 16px; text-align: center; font-size: 14px; }
+  .features b { display: block; font-family: var(--display); font-weight: 600; font-size: 16.5px; color: var(--brand); margin-bottom: 2px; }
+
+  .occasions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .occ { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: var(--card); }
+  .occ img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .occ:hover img { transform: scale(1.05); }
+  .occ span { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 14px 14px; color: #fff; font-family: var(--display); font-size: 19px;
+              background: linear-gradient(transparent, rgba(30, 12, 16, .78)); }
+
+  .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .cake { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .cake img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .cake .info { padding: 12px 14px 16px; }
+  .cake h3 { font-size: 17px; margin-bottom: 4px; }
+  .cake .price { font-size: 13.5px; color: var(--muted); }
+  .cake a.ask { display: inline-block; margin-top: 10px; font-size: 13.5px; font-weight: 500; color: var(--brand); }
+
+  .steps { display: grid; gap: 16px; counter-reset: step; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+  .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+                  background: var(--brand); color: #fff; font-family: var(--display); font-size: 18px; margin-bottom: 12px; }
+  .step h3 { font-size: 20px; margin-bottom: 6px; }
+  .step p { margin: 0; color: var(--muted); }
+
+  .proof { display: grid; gap: 28px; align-items: center; }
+  .score { text-align: center; }
+  .score .num { font-family: var(--display); font-size: 84px; line-height: 1; color: var(--brand); }
+  .score .stars { color: var(--accent); font-size: 24px; letter-spacing: 4px; }
+  .bars { display: grid; gap: 8px; }
+  .bar { display: grid; grid-template-columns: 34px 1fr 40px; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+  .bar i { display: block; height: 10px; border-radius: 6px; background: var(--line); overflow: hidden; }
+  .bar i b { display: block; height: 100%; background: var(--accent); border-radius: 6px; }
+
+  .visit { display: grid; gap: 22px; }
+  .vcard { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+  .vcard h3 { font-size: 20px; margin-bottom: 10px; }
+  .hours { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .hours td { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .hours td:last-child { text-align: right; color: var(--muted); }
+  .vlinks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+  footer { background: #241816; color: #d9c8c0; padding: 40px 0 110px; font-size: 14px; }
+  footer .logo b { color: #fff; }
+  footer .row { display: grid; gap: 18px; }
+
+  .wa-float { position: fixed; right: 18px; bottom: 84px; z-index: 30; width: 56px; height: 56px; border-radius: 50%; background: #25d366;
+              display: grid; place-items: center; box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .4); }
+  .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+  .bottombar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; display: grid; grid-template-columns: repeat(4, 1fr);
+               background: #fff; border-top: 1px solid var(--line); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); }
+  .bottombar a { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11.5px; color: var(--muted); }
+  .bottombar a svg { width: 22px; height: 22px; stroke: var(--brand); fill: none; stroke-width: 1.8; }
+
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  @media (min-width: 720px) {
+    .features { grid-template-columns: repeat(4, 1fr); }
+    .occasions { grid-template-columns: repeat(3, 1fr); }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .steps { grid-template-columns: repeat(3, 1fr); }
+    .visit { grid-template-columns: 1fr 1fr; }
+    footer .row { grid-template-columns: 2fr 1fr 1fr; }
+  }
+  @media (min-width: 961px) {
+    nav.main { display: flex; }
+    .hero { padding: 64px 0 80px; }
+    .hero-grid { grid-template-columns: 1.05fr .95fr; gap: 56px; }
+    .gallery { grid-template-columns: repeat(4, 1fr); }
+    .proof { grid-template-columns: .8fr 1.2fr; }
+    .wa-float { bottom: 24px; }
+    .bottombar { display: none; }
+    footer { padding-bottom: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Website concept preview made for <strong>Mom's Oven</strong> · not the official site</div>
+<div class="announce">Homemade cakes in Vadapalani, Chennai · Open Mon–Sat 8 AM–7 PM, Sun 9 AM–2 PM</div>
+
+<header>
+  <div class="wrap head">
+    <a class="logo" href="#top"><b>Mom's Oven</b><small>Homemade cakes</small></a>
+    <nav class="main">
+      <a href="#occasions">Cakes</a>
+      <a href="#gallery">Recent bakes</a>
+      <a href="#order">How to order</a>
+      <a href="#visit">Visit us</a>
+    </nav>
+    <a class="btn" href="https://wa.me/919940043417?text=Hi%20Mom%27s%20Oven%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Order
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Vadapalani · Chennai</div>
+        <h1>Homemade cakes for <em>every celebration</em></h1>
+        <p class="lead">Birthday, theme and personalised cakes, cupcakes, bento cakes and desserts, baked at home by Mom's Oven.</p>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/919940043417?text=Hi%20Mom%27s%20Oven%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener">Order on WhatsApp</a>
+          <a class="btn ghost" href="#gallery">See our cakes</a>
+        </div>
+        <div class="rating"><span class="stars">★★★★★</span><span><b>4.9</b> from 269 Google reviews</span></div>
+      </div>
+      <div class="hero-pics">
+        <img class="big" src="assets/fruit-basket-cake.jpg" alt="Fruit basket cake with fresh strawberries and berries">
+        <img class="small" src="assets/unicorn-cake.jpg" alt="Pink unicorn birthday cake">
+        <img class="small" src="assets/cupcakes.jpg" alt="Chocolate cupcakes in a box">
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap reveal">
+    <div class="features">
+      <div><b>Order online</b>Pick a cake, size and date</div>
+      <div><b>Your design</b>Share a photo or idea</div>
+      <div><b>UPI &amp; cards</b>Secure online payment</div>
+      <div><b>WhatsApp</b>Questions answered fast</div>
+    </div>
+  </div>
+
+  <section class="sec" id="occasions">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow">Cakes by occasion</div>
+        <h2 class="sec-title">Something sweet for every day</h2>
+        <p class="sec-sub">From first birthdays to office parties, every cake is made to order with your name and theme.</p>
+      </div>
+      <div class="occasions">
+        <a class="occ reveal" href="#gallery"><img src="assets/spiderman-cake.jpg" alt="Spider-Man theme cake"><span>Kids' theme cakes</span></a>
+        <a class="occ reveal" href="#gallery"><img src="assets/floral-blue-cake.jpg" alt="Blue floral birthday cake"><span>Birthday cakes</span></a>
+        <a class="occ reveal" href="#gallery"><img src="assets/milestone-cake.jpg" alt="43rd birthday cake with gold coins"><span>Milestone birthdays</span></a>
+        <a class="occ reveal" href="#gallery"><img src="assets/bento-cakes.jpg" alt="Bento cakes in lunch boxes"><span>Bento cakes</span></a>
+        <a class="occ reveal" href="#gallery"><img src="assets/cupcakes.jpg" alt="Chocolate cupcakes"><span>Cupcakes</span></a>
+        <a class="occ reveal" href="#gallery"><img src="assets/brownie-sundae.jpg" alt="Brownie with ice cream"><span>Desserts</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint" id="gallery">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow">Recent bakes</div>
+        <h2 class="sec-title">Fresh from Mom's Oven</h2>
+        <p class="sec-sub">A few of the cakes we've made lately. Like one? Ask for it in your size and flavour.</p>
+      </div>
+      <div class="gallery">
+        <div class="cake reveal"><img src="assets/unicorn-cake.jpg" alt="Unicorn birthday cake"><div class="info"><h3>Unicorn birthday cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20unicorn%20birthday%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/jungle-lion-cake.jpg" alt="Jungle lion cake"><div class="info"><h3>Jungle lion cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20jungle%20lion%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/football-cake.jpg" alt="Two-tier football cake"><div class="info"><h3>Two-tier football cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20football%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/cocomelon-cake.jpg" alt="Three-tier Cocomelon cake"><div class="info"><h3>Cocomelon three-tier cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20Cocomelon%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/aeroplane-cake.jpg" alt="Aeroplane birthday cake"><div class="info"><h3>Aeroplane birthday cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20aeroplane%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/baby-shower-cake.jpg" alt="Teddy bear baby shower cake"><div class="info"><h3>Teddy baby shower cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20baby%20shower%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/lily-cake.jpg" alt="Pink lily cake"><div class="info"><h3>Pink lily cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20pink%20lily%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/chocolate-heart-cake.jpg" alt="Chocolate heart cake"><div class="info"><h3>Chocolate heart cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20chocolate%20heart%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/butterfly-cake.jpg" alt="Butterfly birthday cake"><div class="info"><h3>Butterfly garden cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20butterfly%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/new-year-almond-cake.jpg" alt="Almond cream cake"><div class="info"><h3>Almond cream cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20the%20almond%20cream%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/cheesecake-slice.jpg" alt="Cheesecake slice"><div class="info"><h3>Cheesecake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20to%20order%20cheesecake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+        <div class="cake reveal"><img src="assets/bento-portrait-cake.jpg" alt="Hand-painted bento cake"><div class="info"><h3>Hand-painted bento cake</h3><div class="price">Price on request</div><a class="ask" href="https://wa.me/919940043417?text=Hi%2C%20I%27d%20like%20a%20bento%20cake" target="_blank" rel="noopener">Ask on WhatsApp →</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="order">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow">How to order</div>
+        <h2 class="sec-title">Your cake in three easy steps</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3>Choose or share a design</h3><p>Pick a cake from the gallery, or send us a photo or idea for your theme.</p></div>
+        <div class="step reveal"><h3>Pick size, flavour and date</h3><p>Tell us how many guests and the day you need it, and we'll confirm the price.</p></div>
+        <div class="step reveal"><h3>Pay and celebrate</h3><p>Pay securely by UPI or card, and we bake it for your day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint">
+    <div class="wrap proof">
+      <div class="score reveal">
+        <div class="num">4.9</div>
+        <div class="stars">★★★★★</div>
+        <p>269 reviews on Google</p>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Loved in Chennai</div>
+        <h2 class="sec-title">253 of 269 reviews are five stars</h2>
+        <div class="bars">
+          <div class="bar">5 ★<i><b style="width:94%"></b></i>253</div>
+          <div class="bar">4 ★<i><b style="width:4%"></b></i>10</div>
+          <div class="bar">3 ★<i><b style="width:1%"></b></i>2</div>
+          <div class="bar">2 ★<i><b style="width:.5%"></b></i>1</div>
+          <div class="bar">1 ★<i><b style="width:1%"></b></i>3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="visit">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow">Visit us</div>
+        <h2 class="sec-title">Find Mom's Oven</h2>
+      </div>
+      <div class="visit">
+        <div class="vcard reveal">
+          <h3>Address</h3>
+          <p>Sarvamangala Colony, Aruna Colony,<br>Vadapalani, Chennai 600026</p>
+          <div class="vlinks">
+            <a class="btn" href="tel:+919940043417">Call +91 99400 43417</a>
+            <a class="btn ghost" href="https://www.google.com/maps?cid=987778244893432996" target="_blank" rel="noopener">Open in Google Maps</a>
+            <a class="btn ghost" href="https://www.instagram.com/moms_oven_chennai/" target="_blank" rel="noopener">@moms_oven_chennai</a>
+          </div>
+        </div>
+        <div class="vcard reveal">
+          <h3>Opening hours</h3>
+          <table class="hours">
+            <tr><td>Monday – Saturday</td><td>8 AM – 7 PM</td></tr>
+            <tr><td>Sunday</td><td>9 AM – 2 PM</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div><a class="logo" href="#top"><b>Mom's Oven</b><small>Homemade cakes</small></a><p>Homemade cakes, cupcakes and desserts in Vadapalani, Chennai.</p></div>
+    <div><b>Order</b><br><a href="https://wa.me/919940043417" target="_blank" rel="noopener">WhatsApp</a><br><a href="tel:+919940043417">+91 99400 43417</a></div>
+    <div><b>Follow</b><br><a href="https://www.instagram.com/moms_oven_chennai/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.google.com/maps?cid=987778244893432996" target="_blank" rel="noopener">Google Maps</a></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/919940043417?text=Hi%20Mom%27s%20Oven%2C%20I%27d%20like%20to%20order%20a%20cake" target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+</a>
+
+<nav class="bottombar">
+  <a href="#top"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#gallery"><svg viewBox="0 0 24 24"><path d="M4 14h16v6H4zM6 14V9h12v5M12 9V5M12 5a1.5 1.5 0 1 0 0-.1"/></svg>Cakes</a>
+  <a href="https://wa.me/919940043417" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-4-7.5L21 3l-1.5 4A9 9 0 0 1 21 12z"/></svg>Order</a>
+  <a href="#visit"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Visit</a>
+</nav>
+
+<script>
+  document.documentElement.classList.add('js');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
