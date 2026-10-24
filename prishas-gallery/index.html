@@ -75,9 +75,9 @@
   .plinth::after { content: ""; position: absolute; bottom: 0; left: 26%; right: 26%; height: 20px; border-radius: 50%; background: rgba(0, 0, 0, .55); filter: blur(9px); }
   .plinth img { height: 500px; width: auto; position: relative; z-index: 1; transition: transform 300ms var(--ease-out); }
   @media (hover: hover) and (pointer: fine) { .piece:hover .plinth img { transform: translateY(-8px); } }
-  /* Walking through the room: each piece settles in once as it comes into view (only when JS is on) */
-  .js .piece { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
-  .js .piece.seen { opacity: 1; transform: none; }
+  /* Walking through the room: each piece springs in once as it comes into view (Motion, below).
+     Hidden only while the motion script is expected; a failsafe shows everything if it never loads. */
+  .js .piece > * { opacity: 0; }
   .piece h3 { font-size: clamp(32px, 3.6vw, 56px); line-height: 1; }
   .piece p { color: var(--dim); max-width: 34ch; margin-top: 10px; }
   .piece .no { display: block; color: var(--gold); font-size: 13px; letter-spacing: .06em; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
@@ -95,10 +95,19 @@
   .jarlist h3 { font-size: 28px; line-height: 1.1; }
   .jarlist p { color: var(--dim); font-size: 15px; margin-top: 2px; }
   .jarlist .brand { color: var(--gold); font-size: 13px; letter-spacing: .02em; }
-  .smalls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: end; }
-  .smalls figure { margin: 0; }
-  .smalls img { height: clamp(150px, 22vw, 300px); width: 100%; object-fit: contain; object-position: bottom; }
-  .smalls figcaption { color: var(--dim); font-size: 14px; margin-top: 12px; }
+  .shelf { display: grid; gap: 14px; }
+  .shelf .hint { color: var(--dim); font-size: 13px; letter-spacing: .02em; }
+  /* A real scroll container, so touch and trackpads keep their native momentum; a mouse can drag it too */
+  .smalls { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 36%, 460px); gap: 40px; align-items: end;
+            overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--pad); overscroll-behavior-x: contain;
+            margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 8px; scrollbar-width: none; }
+  .smalls::-webkit-scrollbar { display: none; }
+  .smalls figure { margin: 0; scroll-snap-align: start; }
+  .smalls img { height: clamp(150px, 22vw, 300px); width: 100%; object-fit: contain; object-position: bottom;
+                -webkit-user-drag: none; user-select: none; }
+  .smalls figcaption { color: var(--dim); font-size: 14px; margin-top: 12px; user-select: none; }
+  @media (hover: hover) and (pointer: fine) { .smalls { cursor: grab; } }
+  .smalls.dragging { cursor: grabbing; scroll-snap-type: none; }   /* the spring picks the card, not CSS snap */
 
   /* Words */
   .words { padding: 110px var(--pad); display: grid; gap: 48px; }
@@ -129,7 +138,6 @@
     html { scroll-behavior: auto; }
     .stage img { animation: fade 300ms ease both; }
     .plinth img { transition: none; }
-    .js .piece { transform: none; transition: opacity 300ms ease; }  /* a gentle fade instead of movement */
     .btn:active { transform: none; opacity: .85; }
   }
   @keyframes fade { from { opacity: 0; } }
@@ -173,10 +181,7 @@
     .pause { padding: 64px var(--pad); }
     .pause p { font-size: clamp(26px, 7.6vw, 34px); }
     .jars { padding: 72px var(--pad); gap: 40px; }
-    .smalls { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 64vw; overflow-x: auto; scroll-snap-type: x mandatory;
-              margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 8px; scroll-padding: 0 var(--pad); overscroll-behavior-x: contain; scrollbar-width: none; }
-    .smalls::-webkit-scrollbar { display: none; }
-    .smalls figure { scroll-snap-align: start; }
+    .smalls { grid-auto-columns: 64vw; gap: 20px; }
     .smalls img { height: 230px; }
     .words { padding: 72px var(--pad); gap: 34px; }
     .words blockquote { font-size: clamp(28px, 8.4vw, 38px); }
@@ -186,7 +191,12 @@
     .dock { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
   }
 </style>
-<script>if ('IntersectionObserver' in window) document.documentElement.classList.add('js');  // set before first paint: no flash</script>
+<script>
+  // Set before first paint so nothing flashes. If the motion script never arrives (offline, blocked CDN),
+  // drop the flag and everything simply shows.
+  document.documentElement.classList.add('js');
+  setTimeout(() => { if (!window.__motionReady) document.documentElement.classList.remove('js'); }, 2500);
+</script>
 </head>
 <body>
 <div class="concept" data-concept-banner>Website concept preview made for Prisha's Patisserie · not the official site</div>
@@ -230,10 +240,14 @@
       <div><h3>Boston Cream</h3><p>Topped with toasted almonds.</p></div>
     </div>
   </div>
-  <div class="smalls">
+  <div class="shelf">
+  <p class="hint">Drag or swipe the shelf →</p>
+  <div class="smalls" aria-label="Cupcakes and brownies">
     <figure><img src="assets/wizard-cupcakes.webp" srcset="assets/wizard-cupcakes-sm.webp 600w, assets/wizard-cupcakes.webp 1100w" sizes="(max-width: 899px) 80vw, 45vw" width="1100" height="1071" decoding="async" alt="Wizard birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
     <figure><img src="assets/anniversary-cupcakes.webp" srcset="assets/anniversary-cupcakes-sm.webp 600w, assets/anniversary-cupcakes.webp 1029w" sizes="(max-width: 899px) 80vw, 45vw" width="1029" height="1100" decoding="async" alt="First anniversary cupcakes" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
     <figure><img src="assets/brownies.webp" srcset="assets/brownies-sm.webp 600w, assets/brownies.webp 563w" sizes="(max-width: 899px) 80vw, 45vw" width="563" height="777" decoding="async" alt="Brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
+    <figure><img src="assets/hogwarts-cupcakes.webp" srcset="assets/hogwarts-cupcakes-sm.webp 600w, assets/hogwarts-cupcakes.webp 1100w" sizes="(max-width: 899px) 64vw, 30vw" width="1100" height="1000" decoding="async" alt="Hogwarts house cupcakes" loading="lazy"><figcaption>Hogwarts cupcakes</figcaption></figure>
+  </div>
   </div>
 </section>
 
@@ -261,14 +275,64 @@
 </section>
 <footer>Prisha's Patisserie · Anna Nagar, Chennai</footer>
 
-<script>
-  // Reveal each piece once as it enters the view. Without JS, everything is simply visible.
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
-    }), { rootMargin: '0px 0px -12% 0px' });
-    document.querySelectorAll('.piece').forEach((el) => io.observe(el));
-  }
+<script type="module">
+  // Motion (motion.dev), pinned. Springs settle by physics, so a reveal or a fling can be interrupted mid-way.
+  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
+  window.__motionReady = true;
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Spring reveals: the cake lands first, then its label. No bounce, since nothing was thrown.
+  inView(".piece", (piece) => {
+    const parts = [...piece.children];   // Motion wants an array, not a live HTMLCollection
+    if (calm) { animate(parts, { opacity: 1 }, { duration: 0.3 }); return; }
+    animate(parts, { opacity: [0, 1], y: [28, 0] },
+            { type: "spring", bounce: 0, duration: 0.7, delay: stagger(0.09) });
+  }, { amount: 0.25 });
+
+  // Draggable cupcake shelf, for a mouse. Touch and trackpads keep the browser's own momentum scrolling.
+  const shelf = document.querySelector(".smalls");
+  let drag = null, glide = null, moved = 0;
+
+  // Where a fling would come to rest (Apple's deceleration projection, as for scroll views).
+  const project = (v, rate = 0.998) => (v / 1000) * rate / (1 - rate);
+  const cardStops = () => [...shelf.children].map((c) => Math.min(c.offsetLeft - shelf.firstElementChild.offsetLeft,
+                                                               shelf.scrollWidth - shelf.clientWidth));
+
+  shelf.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    glide?.stop();                       // grab it mid-glide: carry on from where it is right now
+    shelf.setPointerCapture(e.pointerId);
+    shelf.classList.add("dragging");
+    drag = { x: e.clientX, left: shelf.scrollLeft, trail: [[e.clientX, e.timeStamp]] };
+    moved = 0;
+  });
+  shelf.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    moved = Math.max(moved, Math.abs(dx));
+    shelf.scrollLeft = drag.left - dx;   // 1:1 with the hand
+    drag.trail.push([e.clientX, e.timeStamp]);
+    if (drag.trail.length > 6) drag.trail.shift();
+  });
+  const release = (e) => {
+    if (!drag) return;
+    const [x0, t0] = drag.trail[0], [x1, t1] = drag.trail[drag.trail.length - 1];
+    const velocity = t1 > t0 ? -((x1 - x0) / (t1 - t0)) * 1000 : 0;   // px/s, in scroll direction
+    drag = null;
+    const from = shelf.scrollLeft;
+    const aim = from + (calm ? 0 : project(velocity));
+    const stops = cardStops();
+    const to = stops.reduce((best, s) => Math.abs(s - aim) < Math.abs(best - aim) ? s : best, stops[0]);
+    const done = () => shelf.classList.remove("dragging");
+    if (calm) { shelf.scrollLeft = to; done(); return; }
+    // A little bounce is earned here: the shelf was thrown.
+    glide = animate(from, to, { type: "spring", bounce: 0.15, duration: 0.5, velocity,
+                                onUpdate: (v) => { shelf.scrollLeft = v; }, onComplete: done });
+  };
+  shelf.addEventListener("pointerup", release);
+  shelf.addEventListener("pointercancel", release);
+  // A drag is not a click on whatever is under the pointer.
+  shelf.addEventListener("click", (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
 </script>
 <div class="dock"><a class="btn" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20commission%20a%20cake" target="_blank" rel="noopener">Commission a cake on WhatsApp</a></div>
 </body>
