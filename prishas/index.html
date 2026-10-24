@@ -34,6 +34,11 @@
   h1, h2, h3 { margin: 0; font-weight: 800; font-stretch: 76%; text-transform: uppercase; letter-spacing: -.01em; line-height: .86; }
   p { margin: 0; }
   .mono { font-family: var(--mono); }
+  /* Phones: comfortable tap targets, no grey tap flash, room for the sticky button */
+  html { -webkit-text-size-adjust: 100%; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  img { height: auto; }
+
 
   .concept { background: var(--ink); color: #cfc7b5; font: 12px/1.3 var(--mono); padding: 8px 16px; text-align: center; }
   .top { display: flex; justify-content: space-between; align-items: center; padding: 18px var(--pad); position: relative; z-index: 4; }
@@ -129,13 +134,38 @@
     footer { padding-bottom: 32px; }
   }
   @media (max-width: 759px) {
+    footer { padding-bottom: 96px !important; }          /* room for the sticky button, in the footer's own colour */
+    .top { padding-top: 14px; padding-bottom: 6px; }
     .top .wa { display: none; }
-    .hero { min-height: auto; }
-    .hero h1 { max-width: none; }
-    .hero .cake { position: relative; right: auto; height: 52vh; margin: 8px auto -30px; }
-    .hero .note { top: 8px; left: var(--pad); right: auto; width: 180px; font-size: 12.5px; }
-    .pair { min-height: 0; }
-    .pair img { height: 300px; margin-top: 10px; }
+    .hero { min-height: auto; padding-bottom: 32px; display: flex; flex-direction: column; }
+    .hero .cake { position: relative; right: auto; height: auto; width: 74vw; max-height: 46svh; object-fit: contain; margin: 4px auto 0; order: 1; }
+    .hero .note { position: relative; top: auto; right: auto; order: 2; align-self: flex-end; margin: -6px 6px 18px 0; width: 196px; font-size: 12.5px; }
+    .hero h1 { order: 3; max-width: none; font-size: clamp(46px, 13.6vw, 64px); }
+    .hero .sub { order: 4; margin-top: 18px; gap: 6px 18px; font-size: 13px; }
+    .pair { min-height: 0; padding-top: 44px; gap: 6px; }
+    .pair h2 { font-size: clamp(38px, 11vw, 52px); }
+    .pair img { height: auto; width: 78vw; max-height: 330px; object-fit: contain; margin-top: 8px; }
+    .how, .small { padding-top: 64px; padding-bottom: 64px; }
+    .how h2 { font-size: clamp(48px, 14vw, 64px); }
+    .steps { gap: 22px; }
+    .steps div::before { font-size: 52px; }
+    /* Treats: a swipeable row instead of three thumbnails */
+    .treats { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 64vw; overflow-x: auto; scroll-snap-type: x mandatory;
+              margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 8px; scrollbar-width: none; }
+    .treats::-webkit-scrollbar { display: none; }
+    .treats figure { scroll-snap-align: start; }
+    .treats img { height: 240px; }
+    .voices { padding-top: 64px; padding-bottom: 64px; gap: 28px; }
+    .voices blockquote { font-size: clamp(34px, 10vw, 46px); }
+    .voices blockquote:nth-child(2) { justify-self: start; text-align: left; }
+    .order { padding-top: 64px; padding-bottom: 40px; }
+    .order h2 { font-size: clamp(56px, 16vw, 76px); }
+    .order .wa { width: 100%; justify-content: center; }
+    .dock { left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); }
+  }
+  @media (max-width: 370px) {
+    .hero h1 { font-size: 44px; }
+    .treats { grid-auto-columns: 72vw; }
   }
 </style>
 </head>
@@ -149,19 +179,19 @@
 </header>
 
 <section class="hero">
-  <img class="cake" src="assets/sorting-hat.webp" alt="Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board" fetchpriority="high">
+  <img class="cake" src="assets/sorting-hat.webp" srcset="assets/sorting-hat-sm.webp 600w, assets/sorting-hat.webp 703w" sizes="(max-width: 760px) 80vw, 40vw" width="703" height="1100" decoding="async" alt="Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board" fetchpriority="high">
   <div class="note"><b>THE BRIEF</b>Sorting hat. House colours. Write “Mitul” on it.</div>
   <h1>You send the idea. <span>She makes it cake.</span></h1>
   <div class="sub"><span>Sculpted theme cakes · Anna Nagar, Chennai</span><span>4.8 on Google · 67 reviews</span></div>
 </section>
 
 <section class="briefs" id="cakes">
-  <article class="pair moss"><div><h2>A T&#8209;rex that looks real</h2><p>Jurassic World, dinosaur on top, crushed-cookie earth.</p></div><img src="assets/t-rex.webp" alt="Jurassic World cake with a sculpted T-rex" loading="lazy"></article>
-  <article class="pair sky"><div><h2>A duck in a tub</h2><p>Turning one. Bubbles, a checked mat, a little rubber duck.</p></div><img src="assets/duck.webp" alt="Duck in a bathtub first birthday cake" loading="lazy"></article>
-  <article class="pair brick"><div><h2>Central Perk</h2><p>Two tiers of F.R.I.E.N.D.S., “How you doin’?” included.</p></div><img src="assets/central-perk.webp" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></article>
-  <article class="pair teal"><div><h2>A first car, for a 60th</h2><p>Chocolate drum, a sculpted vintage car on the grass.</p></div><img src="assets/vintage-car.webp" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></article>
-  <article class="pair candy"><div><h2>Lollipops for turning one</h2><p>Drip icing, gummies, giant swirl lollipops.</p></div><img src="assets/lollipop.webp" alt="Drip cake with lollipops for a first birthday" loading="lazy"></article>
-  <article class="pair lilac"><div><h2>A unicorn, gold horn</h2><p>Sleepy eyes, buttercream flowers for a mane.</p></div><img src="assets/unicorn.webp" alt="Unicorn cake with a gold horn" loading="lazy"></article>
+  <article class="pair moss"><div><h2>A T&#8209;rex that looks real</h2><p>Jurassic World, dinosaur on top, crushed-cookie earth.</p></div><img src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 600w, assets/t-rex.webp 1022w" sizes="(max-width: 760px) 80vw, 40vw" width="1022" height="1100" decoding="async" alt="Jurassic World cake with a sculpted T-rex" loading="lazy"></article>
+  <article class="pair sky"><div><h2>A duck in a tub</h2><p>Turning one. Bubbles, a checked mat, a little rubber duck.</p></div><img src="assets/duck.webp" srcset="assets/duck-sm.webp 600w, assets/duck.webp 763w" sizes="(max-width: 760px) 80vw, 40vw" width="763" height="1100" decoding="async" alt="Duck in a bathtub first birthday cake" loading="lazy"></article>
+  <article class="pair brick"><div><h2>Central Perk</h2><p>Two tiers of F.R.I.E.N.D.S., “How you doin’?” included.</p></div><img src="assets/central-perk.webp" srcset="assets/central-perk-sm.webp 600w, assets/central-perk.webp 686w" sizes="(max-width: 760px) 80vw, 40vw" width="686" height="1090" decoding="async" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></article>
+  <article class="pair teal"><div><h2>A first car, for a 60th</h2><p>Chocolate drum, a sculpted vintage car on the grass.</p></div><img src="assets/vintage-car.webp" srcset="assets/vintage-car-sm.webp 600w, assets/vintage-car.webp 844w" sizes="(max-width: 760px) 80vw, 40vw" width="844" height="1100" decoding="async" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></article>
+  <article class="pair candy"><div><h2>Lollipops for turning one</h2><p>Drip icing, gummies, giant swirl lollipops.</p></div><img src="assets/lollipop.webp" srcset="assets/lollipop-sm.webp 600w, assets/lollipop.webp 775w" sizes="(max-width: 760px) 80vw, 40vw" width="775" height="1100" decoding="async" alt="Drip cake with lollipops for a first birthday" loading="lazy"></article>
+  <article class="pair lilac"><div><h2>A unicorn, gold horn</h2><p>Sleepy eyes, buttercream flowers for a mane.</p></div><img src="assets/unicorn.webp" srcset="assets/unicorn-sm.webp 600w, assets/unicorn.webp 601w" sizes="(max-width: 760px) 80vw, 40vw" width="601" height="1100" decoding="async" alt="Unicorn cake with a gold horn" loading="lazy"></article>
 </section>
 
 <section class="how" id="how">
@@ -176,7 +206,7 @@
 <section class="small" id="small">
   <h2>Smaller days</h2>
   <div class="jars">
-    <img src="assets/dessert-jars.webp" alt="Delectable dessert jars: Boston Cream, Berrylicious, Chocolate Lovers, Lady in Red" loading="lazy">
+    <img src="assets/dessert-jars.webp" srcset="assets/dessert-jars-sm.webp 600w, assets/dessert-jars.webp 1100w" sizes="(max-width: 760px) 80vw, 40vw" width="1100" height="427" decoding="async" alt="Delectable dessert jars: Boston Cream, Berrylicious, Chocolate Lovers, Lady in Red" loading="lazy">
     <div class="jarlist">
       <p class="brand">Delectable · dessert jars by Prisha's</p>
       <div><h3>Berrylicious</h3>Strawberry cake layered with mixed berry coulis.</div>
@@ -186,9 +216,9 @@
     </div>
   </div>
   <div class="treats">
-    <figure><img src="assets/wizard-cupcakes.webp" alt="Wizard-themed birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
-    <figure><img src="assets/anniversary-cupcakes.webp" alt="First anniversary cupcake toppers" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
-    <figure><img src="assets/brownies.webp" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
+    <figure><img src="assets/wizard-cupcakes.webp" srcset="assets/wizard-cupcakes-sm.webp 600w, assets/wizard-cupcakes.webp 1100w" sizes="(max-width: 760px) 80vw, 40vw" width="1100" height="1071" decoding="async" alt="Wizard-themed birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
+    <figure><img src="assets/anniversary-cupcakes.webp" srcset="assets/anniversary-cupcakes-sm.webp 600w, assets/anniversary-cupcakes.webp 1029w" sizes="(max-width: 760px) 80vw, 40vw" width="1029" height="1100" decoding="async" alt="First anniversary cupcake toppers" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
+    <figure><img src="assets/brownies.webp" srcset="assets/brownies-sm.webp 600w, assets/brownies.webp 563w" sizes="(max-width: 760px) 80vw, 40vw" width="563" height="777" decoding="async" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
   </div>
 </section>
 
