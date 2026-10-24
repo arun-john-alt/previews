@@ -70,7 +70,8 @@
   .sheet .days { grid-template-columns: repeat(2, 1fr); }
   .sheet button { min-height: 44px; }
 
-  .table { position: relative; height: min(68svh, 620px); }
+  /* The table keeps one shape on every desktop, so the cakes (sized by width) never run into each other or the hint */
+  .table { position: relative; width: 100%; max-width: 660px; margin-left: auto; aspect-ratio: 1 / .95; }
   .toy { position: absolute; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; cursor: grab; user-select: none; -webkit-user-select: none;
          touch-action: pan-y; /* vertical swipes still scroll the page on phones */ }
   .toy img { width: 100%; pointer-events: none; filter: drop-shadow(0 18px 16px rgba(60, 40, 20, .22)); }
