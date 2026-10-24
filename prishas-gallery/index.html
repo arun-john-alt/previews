@@ -199,7 +199,8 @@
     .actions { margin-top: 22px; }
     .actions .pill { display: none; }                /* the dock does this job on phones */
     .proof { margin-top: 14px; }
-    .table { height: 110vw; max-height: 600px; }
+    .tablewrap { min-width: 0; }
+    .table { height: 110vw; max-height: 600px; aspect-ratio: auto; }   /* a set height plus the desktop shape would force the width wider than the phone */
     .t1 { width: 42%; left: 28%; top: 0; } .t2 { width: 33%; left: -1%; top: 34%; } .t3 { width: 29%; left: 71%; top: 0; }
     .t4 { width: 25%; left: 73%; top: 50%; } .t5 { width: 22%; left: 39%; top: 70%; }
     .t3 { left: auto; right: 3%; z-index: 4; } .t3 .tag { justify-self: end; }
