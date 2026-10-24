@@ -29,6 +29,11 @@
   a { color: inherit; }
   h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; letter-spacing: -.02em; }
   p { margin: 0; }
+  /* Phones: comfortable tap targets, no grey tap flash, room for the sticky button */
+  html { -webkit-text-size-adjust: 100%; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  img { height: auto; }
+
 
   .concept { color: #7d7166; font-size: 12px; text-align: center; padding: 8px 16px; border-bottom: 1px solid #241c17; }
   .top { display: flex; justify-content: space-between; align-items: center; padding: 22px var(--pad); }
@@ -129,12 +134,38 @@
     footer { padding-bottom: 32px; }
   }
   @media (max-width: 899px) {
+    body { padding-bottom: 80px; }
+    .concept { font-size: 11px; }
+    .top { padding-top: 14px; padding-bottom: 6px; }
     .top nav a:not(.go) { display: none; }
-    .stage { min-height: auto; order: -1; }
-    .stage img { height: 52vh; }
-    .plinth { min-height: 380px; }
-    .plinth img { height: 360px; }
-    .room { gap: 80px; padding-top: 80px; }
+    .top nav a.go { display: none; }                     /* the sticky button does this job on phones */
+    .hero { min-height: auto; gap: 18px; padding-top: 0; }
+    .stage { min-height: auto; order: -1; padding-top: 8px; }
+    .stage img { height: auto; width: 56vw; max-height: 44svh; object-fit: contain; }
+    .copy h1 { font-size: clamp(40px, 11.6vw, 56px); }
+    .copy p { margin-top: 12px; font-size: 15.5px; }
+    .label { margin-top: 18px; }
+    .copy .btn { display: none; }                         /* same action as the sticky button */
+    .room { gap: 64px; padding-top: 72px; padding-bottom: 24px; }
+    .intro h2, .jars h2 { font-size: clamp(34px, 10vw, 44px); }
+    .piece { gap: 14px; }
+    .plinth { min-height: 0; padding-top: 12px; }
+    .plinth img { height: auto; width: 70vw; max-height: 340px; object-fit: contain; }
+    .piece h3 { font-size: clamp(30px, 9vw, 40px); }
+    .pause { padding: 64px var(--pad); }
+    .pause p { font-size: clamp(26px, 7.6vw, 34px); }
+    .jars { padding: 72px var(--pad); gap: 40px; }
+    .smalls { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 64vw; overflow-x: auto; scroll-snap-type: x mandatory;
+              margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 8px; scrollbar-width: none; }
+    .smalls::-webkit-scrollbar { display: none; }
+    .smalls figure { scroll-snap-align: start; }
+    .smalls img { height: 230px; }
+    .words { padding: 72px var(--pad); gap: 34px; }
+    .words blockquote { font-size: clamp(28px, 8.4vw, 38px); }
+    .commission { padding: 72px var(--pad) 40px; gap: 36px; }
+    .commission h2 { font-size: clamp(42px, 12vw, 56px); }
+    footer { padding-bottom: 24px; }
+    .dock { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
   }
 </style>
 </head>
@@ -153,17 +184,17 @@
     <div class="label"><b>Starry night, three tiers</b><span>Navy buttercream, gold collar, edible pearls</span></div>
     <a class="btn" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%27d%20like%20to%20commission%20a%20cake" target="_blank" rel="noopener">Commission yours on WhatsApp</a>
   </div>
-  <div class="stage"><img src="assets/starry.webp" alt="Starry night three-tier cake in navy with gold pearls" fetchpriority="high"></div>
+  <div class="stage"><img src="assets/starry.webp" srcset="assets/starry-sm.webp 600w, assets/starry.webp 561w" sizes="(max-width: 899px) 80vw, 45vw" width="561" height="1100" decoding="async" alt="Starry night three-tier cake in navy with gold pearls" fetchpriority="high"></div>
 </section>
 
 <section class="room" id="room">
   <div class="intro"><h2>Recent commissions</h2><p>Each one began as a theme someone sent on WhatsApp. A few from the kitchen in Anna Nagar.</p></div>
-  <article class="piece"><div class="plinth"><img src="assets/sorting-hat.webp" alt="Sorting hat cake" loading="lazy"></div><div><span class="no">01</span><h3>The sorting hat</h3><p>House colours, a gold snitch, a broom, a name piped on the board.</p></div></article>
-  <article class="piece flip"><div class="plinth"><img src="assets/t-rex.webp" alt="Jurassic World T-rex cake" loading="lazy"></div><div><span class="no">02</span><h3>Jurassic</h3><p>“The Trex model was so realistic my son was very excited and happy to see it.” <br>Google review</p></div></article>
-  <article class="piece"><div class="plinth"><img src="assets/central-perk.webp" alt="F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></div><div><span class="no">03</span><h3>Central Perk</h3><p>Two tiers of F.R.I.E.N.D.S., the orange couch and “How you doin’?”.</p></div></article>
-  <article class="piece flip"><div class="plinth"><img src="assets/vintage-car.webp" alt="Vintage car cake" loading="lazy"></div><div><span class="no">04</span><h3>A first car, at sixty</h3><p>A chocolate drum and a sculpted vintage car parked on the grass.</p></div></article>
-  <article class="piece"><div class="plinth"><img src="assets/duck.webp" alt="Duck in a tub cake" loading="lazy"></div><div><span class="no">05</span><h3>Bath time, turning one</h3><p>A duck in a wooden tub, bubbles and a checked mat.</p></div></article>
-  <article class="piece flip"><div class="plinth"><img src="assets/rainbow.webp" alt="Rainbow drip cake with macarons" loading="lazy"></div><div><span class="no">06</span><h3>Rainbow, with macarons</h3><p>Two tiers of drip, shards and macarons, for “the love of my life”.</p></div></article>
+  <article class="piece"><div class="plinth"><img src="assets/sorting-hat.webp" srcset="assets/sorting-hat-sm.webp 600w, assets/sorting-hat.webp 703w" sizes="(max-width: 899px) 80vw, 45vw" width="703" height="1100" decoding="async" alt="Sorting hat cake" loading="lazy"></div><div><span class="no">01</span><h3>The sorting hat</h3><p>House colours, a gold snitch, a broom, a name piped on the board.</p></div></article>
+  <article class="piece flip"><div class="plinth"><img src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 600w, assets/t-rex.webp 1022w" sizes="(max-width: 899px) 80vw, 45vw" width="1022" height="1100" decoding="async" alt="Jurassic World T-rex cake" loading="lazy"></div><div><span class="no">02</span><h3>Jurassic</h3><p>“The Trex model was so realistic my son was very excited and happy to see it.” <br>Google review</p></div></article>
+  <article class="piece"><div class="plinth"><img src="assets/central-perk.webp" srcset="assets/central-perk-sm.webp 600w, assets/central-perk.webp 686w" sizes="(max-width: 899px) 80vw, 45vw" width="686" height="1090" decoding="async" alt="F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></div><div><span class="no">03</span><h3>Central Perk</h3><p>Two tiers of F.R.I.E.N.D.S., the orange couch and “How you doin’?”.</p></div></article>
+  <article class="piece flip"><div class="plinth"><img src="assets/vintage-car.webp" srcset="assets/vintage-car-sm.webp 600w, assets/vintage-car.webp 844w" sizes="(max-width: 899px) 80vw, 45vw" width="844" height="1100" decoding="async" alt="Vintage car cake" loading="lazy"></div><div><span class="no">04</span><h3>A first car, at sixty</h3><p>A chocolate drum and a sculpted vintage car parked on the grass.</p></div></article>
+  <article class="piece"><div class="plinth"><img src="assets/duck.webp" srcset="assets/duck-sm.webp 600w, assets/duck.webp 763w" sizes="(max-width: 899px) 80vw, 45vw" width="763" height="1100" decoding="async" alt="Duck in a tub cake" loading="lazy"></div><div><span class="no">05</span><h3>Bath time, turning one</h3><p>A duck in a wooden tub, bubbles and a checked mat.</p></div></article>
+  <article class="piece flip"><div class="plinth"><img src="assets/rainbow.webp" srcset="assets/rainbow-sm.webp 600w, assets/rainbow.webp 740w" sizes="(max-width: 899px) 80vw, 45vw" width="740" height="1100" decoding="async" alt="Rainbow drip cake with macarons" loading="lazy"></div><div><span class="no">06</span><h3>Rainbow, with macarons</h3><p>Two tiers of drip, shards and macarons, for “the love of my life”.</p></div></article>
 </section>
 
 <section class="pause"><p>Flavours customers mention: <span>Belgian chocolate, white chocolate raspberry, chocolate truffle.</span></p></section>
@@ -171,7 +202,7 @@
 <section class="jars" id="jars">
   <h2>Jars &amp; cupcakes</h2>
   <div class="jarrow">
-    <img src="assets/dessert-jars.webp" alt="Delectable dessert jars" loading="lazy">
+    <img src="assets/dessert-jars.webp" srcset="assets/dessert-jars-sm.webp 600w, assets/dessert-jars.webp 1100w" sizes="(max-width: 899px) 80vw, 45vw" width="1100" height="427" decoding="async" alt="Delectable dessert jars" loading="lazy">
     <div class="jarlist">
       <p class="brand">Delectable · dessert jars by Prisha's</p>
       <div><h3>Berrylicious</h3><p>Strawberry cake layered with mixed berry coulis.</p></div>
@@ -181,9 +212,9 @@
     </div>
   </div>
   <div class="smalls">
-    <figure><img src="assets/wizard-cupcakes.webp" alt="Wizard birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
-    <figure><img src="assets/anniversary-cupcakes.webp" alt="First anniversary cupcakes" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
-    <figure><img src="assets/brownies.webp" alt="Brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
+    <figure><img src="assets/wizard-cupcakes.webp" srcset="assets/wizard-cupcakes-sm.webp 600w, assets/wizard-cupcakes.webp 1100w" sizes="(max-width: 899px) 80vw, 45vw" width="1100" height="1071" decoding="async" alt="Wizard birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
+    <figure><img src="assets/anniversary-cupcakes.webp" srcset="assets/anniversary-cupcakes-sm.webp 600w, assets/anniversary-cupcakes.webp 1029w" sizes="(max-width: 899px) 80vw, 45vw" width="1029" height="1100" decoding="async" alt="First anniversary cupcakes" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
+    <figure><img src="assets/brownies.webp" srcset="assets/brownies-sm.webp 600w, assets/brownies.webp 563w" sizes="(max-width: 899px) 80vw, 45vw" width="563" height="777" decoding="async" alt="Brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
   </div>
 </section>
 
