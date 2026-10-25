@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#28152e">
+<title>Prabhav · Chennai · Tussar silk, georgette and silk cotton, made to order</title>
+<meta name="description" content="Website concept for Prabhav (@prabhavofficial): online-only ethnic wear from Chennai, made to order and shipped worldwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-purple-sm.webp" imagesrcset="assets/hero-purple-sm.webp 480w, assets/hero-purple.webp 720w" imagesizes="(min-width: 900px) 42vw, 100vw" fetchpriority="high">
+<style>
+  :root {
+    --plum: #28152e; --plum-2: #3a2242; --plum-3: #4a2f52; --night: #1a0d1f;
+    --silver: #cfc6d8; --cream: #f3e9df; --ivory: #fafbf9; --gold: #e8d9b0; --ink: #24141f; --muted: #6b5867; --line: #e6dce4; --accent: #6a2a5c;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --head: 56px; --nav: 60px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: calc(var(--head) + 8px); }
+  html.locked { overflow: hidden; }
+  body { font: 400 16px/1.55 Jost, system-ui, sans-serif; color: var(--ink); background: var(--ivory);
+    padding-bottom: calc(var(--nav) + env(safe-area-inset-bottom)); }
+  img, video { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .dark :focus-visible { outline-color: var(--gold); }
+  [tabindex="-1"]:focus { outline: none; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  .concept { font-size: 12px; line-height: 1.3; text-align: center; padding: 7px 12px; background: var(--night); color: var(--silver); }
+  .strip { font-size: 13px; text-align: center; padding: 7px 12px; background: var(--cream); color: var(--ink); }
+
+  header { position: sticky; top: 0; z-index: 20; height: var(--head); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6px 0 16px; background: rgba(40, 21, 46, .92); color: var(--ivory); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .mark { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: .3em; }
+  .mark .eye { font-size: 16px; letter-spacing: 0; }
+  .head-nav { display: none; gap: 4px; }
+  .head-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 12px; text-decoration: none; font-size: 15px; }
+  .icon-btn { position: relative; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; background: none; cursor: pointer; text-decoration: none; }
+  .badge { position: absolute; top: 5px; right: 3px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--gold); color: var(--plum);
+    font-size: 12px; font-weight: 600; line-height: 18px; text-align: center; }
+  .badge[data-n="0"] { display: none; }
+
+  /* Buttons */
+  .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 52px; padding: 0 18px; border-radius: 6px; border: 0;
+    background: var(--plum); color: var(--ivory); font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+    transition: transform .14s var(--ease), background-color .2s var(--ease); -webkit-tap-highlight-color: transparent; }
+  .btn:active { transform: scale(.97); }
+  .btn.light { background: var(--ivory); color: var(--plum); }
+  .btn.line { background: transparent; color: var(--plum); border: 1px solid var(--plum); }
+  .text-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 500; text-decoration: none; }
+
+  /* Hero */
+  .hero { position: relative; height: calc(100svh - var(--head) - 28px - var(--nav)); min-height: 470px; max-height: 860px; overflow: hidden; background: var(--plum); color: var(--ivory); }
+  .hero-media { position: absolute; inset: 0; }
+  .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%;
+    transform: scale(1.12); transform-origin: 50% 18%; }
+  .hero-media video, .card-img video, .slide video { opacity: 0; transition: opacity .4s var(--ease); }
+  .hero-media video.ready, .card-img video.ready, .slide video.ready { opacity: 1; }
+  .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #28152e 0%, #28152ee6 46%, transparent 78%); }
+  .hero-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0 20px 18px; text-shadow: 0 1px 8px rgba(26, 13, 31, .55); }
+  .hero-copy .btn { text-shadow: none; }
+  .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .hero .eyebrow { color: var(--gold); }
+  h1 { font: 500 clamp(36px, 10.5vw, 46px)/1.02 "Cormorant Garamond", serif; letter-spacing: -0.02em; margin: 6px 0 8px; }
+  h1 em, h2 em { font-style: italic; }
+  h1 em { color: var(--cream); }
+  .hero .proof-line { font-size: 16px; font-weight: 500; color: var(--gold); margin-bottom: 14px; }
+  .hero .text-link { color: var(--cream); margin-top: 4px; }
+  .hero-meta { font-size: 15px; color: var(--silver); }
+
+  /* Sections */
+  .pad { padding: 40px 20px; }
+  .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  h2 { font: 500 clamp(30px, 8.6vw, 48px)/1.05 "Cormorant Garamond", serif; letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
+  h2 em { color: var(--accent); }
+  .lead { color: var(--muted); margin-top: 6px; }
+
+  .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cat { position: relative; display: block; border-radius: 8px; overflow: hidden; text-decoration: none; color: var(--ivory); aspect-ratio: 4 / 5; background: var(--plum-2); }
+  .cat img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+  .cat::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #28152ee6, #28152e80 35%, transparent 62%); }
+  .cat span { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1; font: italic 500 21px/1.1 "Cormorant Garamond", serif; }
+
+  /* Product cards */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 12px; }
+  .row { display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; margin: 0 -20px; padding: 0 20px 6px; scrollbar-width: none; }
+  .row::-webkit-scrollbar { display: none; }
+  .row .card { flex: 0 0 64vw; max-width: 280px; scroll-snap-align: start; }
+  .row::after { content: ""; flex: 0 0 8px; }
+  .card { min-width: 0; }
+  .card[hidden] { display: none; }
+  .card-link { display: block; text-decoration: none; }
+  .card-img { position: relative; aspect-ratio: 3 / 4; border-radius: 8px; overflow: hidden; background: var(--cream); }
+  .card-img img, .card-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+  .tag { position: absolute; left: 8px; top: 8px; z-index: 1; font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: rgba(26, 13, 31, .78); color: var(--gold); }
+  .count { position: absolute; left: 8px; bottom: 8px; z-index: 1; font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: rgba(26, 13, 31, .78); color: var(--ivory); }
+  .card h3 { font: 500 16px/1.3 Jost, sans-serif; margin-top: 10px; }
+  .card .colour { font-size: 15px; color: var(--muted); }
+  .price { font-size: 16px; font-weight: 600; margin-top: 2px; }
+  .price small { display: block; font-size: 13px; font-weight: 400; color: var(--muted); }
+
+  .bestsellers { background: var(--plum); color: var(--ivory); }
+  .bestsellers .eyebrow { color: var(--gold); }
+  .bestsellers h2 em { color: var(--cream); }
+  .bestsellers .lead, .bestsellers .colour, .bestsellers .price small { color: var(--silver); }
+
+  /* The first saree */
+  .saree-media { position: relative; margin: 18px -20px 0; }
+  .saree-media .main { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+  .saree-media .detail { position: absolute; right: 16px; bottom: -28px; width: 38%; aspect-ratio: 3 / 4; object-fit: cover; border: 4px solid var(--ivory); border-radius: 6px; }
+  .notes { list-style: none; margin-top: 46px; display: grid; gap: 10px; }
+  .notes li { padding-top: 10px; border-top: 1px solid var(--line); }
+  .saree .btn { margin-top: 20px; }
+
+  .pastel { background: var(--cream); }
+
+  /* Shop all */
+  .chips { display: flex; gap: 8px; overflow-x: auto; margin: 0 -20px 18px; padding: 0 20px 4px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: 15px; cursor: pointer;
+    transition: transform .14s var(--ease); }
+  .chip:active { transform: scale(.97); }
+  .chip[aria-pressed="true"] { background: var(--plum); color: var(--ivory); border-color: var(--plum); }
+
+  .trust { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 30px 20px; background: var(--cream); font-size: 15px; }
+  .trust div { display: flex; gap: 10px; align-items: flex-start; }
+  .trust b { display: block; font-weight: 600; }
+
+  footer { background: var(--night); color: var(--silver); padding: 36px 20px 28px; text-align: center; font-size: 15px; }
+  footer .mark { color: var(--ivory); justify-content: center; }
+  footer .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin: 10px 0 14px; }
+  footer .links a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 12px; text-decoration: none; color: var(--cream); }
+
+  /* Bottom nav (phones) */
+  .bnav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(4, 1fr);
+    padding-bottom: env(safe-area-inset-bottom); background: var(--ivory); border-top: 1px solid var(--line); }
+  .bnav a, .bnav button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: var(--nav);
+    font-size: 12px; font-weight: 500; text-decoration: none; background: none; border: 0; cursor: pointer; color: var(--ink); }
+  .bnav .badge { top: 6px; right: calc(50% - 22px); }
+
+  /* Overlay views: product page, checkout, done */
+  .view { position: fixed; inset: 0; z-index: 50; overflow-y: auto; overscroll-behavior: contain; background: var(--ivory);
+    padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .view[hidden] { display: none; }
+  .view.enter { animation: rise .28s var(--ease); }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .vbar { position: sticky; top: 0; z-index: 3; height: var(--head); display: flex; align-items: center; justify-content: space-between; padding: 0 6px;
+    background: rgba(250, 251, 249, .94); border-bottom: 1px solid var(--line); }
+  .vbar .title { font-weight: 600; font-size: 16px; }
+
+  .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--cream); }
+  .gallery::-webkit-scrollbar { display: none; }
+  .slide { position: relative; flex: 0 0 100%; aspect-ratio: 4 / 5; scroll-snap-align: start; overflow: hidden; }
+  .slide img, .slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+  .reel-mark { position: absolute; left: 10px; bottom: 10px; z-index: 1; font-size: 13px; font-weight: 500; padding: 4px 9px; border-radius: 4px; background: rgba(26, 13, 31, .78); color: var(--ivory); }
+  .dots { display: flex; justify-content: center; gap: 6px; padding: 10px 0 0; }
+  .dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background-color .2s; }
+  .dots span.on { background: var(--plum); }
+  .pdp-body { padding: 16px 20px 0; }
+  .pdp-body h1 { color: var(--ink); font-size: clamp(32px, 9vw, 44px); margin: 4px 0 2px; }
+  .pdp-body .colour { color: var(--muted); }
+  .pdp-body .price { font-size: 20px; margin-top: 10px; }
+  .made { display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; }
+  .opt { margin-top: 20px; }
+  .opt-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 600; margin-bottom: 8px; }
+  .opt-label small { font-weight: 400; color: var(--muted); font-size: 14px; }
+  .swatches, .sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .swatch { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px 0 4px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; font-size: 15px; }
+  .swatch img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+  .swatch[aria-current="true"] { border-color: var(--plum); box-shadow: 0 0 0 1px var(--plum); }
+  .size { min-width: 52px; min-height: 48px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--line); background: #fff; font-weight: 500; cursor: pointer; transition: transform .14s var(--ease); }
+  .size:active { transform: scale(.97); }
+  .size[aria-checked="true"] { background: var(--plum); color: var(--ivory); border-color: var(--plum); }
+  .guide { min-height: 44px; padding: 0 2px; border: 0; background: none; font-size: 15px; text-decoration: underline; cursor: pointer; color: var(--muted); }
+  .guide-text { font-size: 15px; color: var(--muted); margin: -2px 0 10px; }
+  .err { color: #a3123a; font-size: 15px; margin-top: 8px; }
+  .qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 6px; }
+  .qty button { width: 44px; height: 44px; border: 0; background: none; font-size: 20px; cursor: pointer; }
+  .qty output { min-width: 32px; text-align: center; font-weight: 600; }
+  .blurb { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 16px; }
+  .buybar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--ivory);
+    box-shadow: 0 -6px 20px rgba(26, 13, 31, .12); }
+
+  /* Cart drawer */
+  .backdrop { position: fixed; inset: 0; z-index: 60; background: rgba(26, 13, 31, .45); opacity: 0; transition: opacity .25s var(--ease); }
+  .backdrop.on { opacity: 1; }
+  .drawer { position: fixed; left: 0; right: 0; bottom: 0; z-index: 61; max-height: 88svh; display: flex; flex-direction: column; background: var(--ivory);
+    border-radius: 16px 16px 0 0; transform: translateY(100%); transition: transform .3s var(--ease); padding-bottom: env(safe-area-inset-bottom); }
+  .drawer.on { transform: none; }
+  .drawer[hidden], .backdrop[hidden] { display: none; }
+  .drawer .vbar { border-radius: 16px 16px 0 0; position: static; }
+  .lines { overflow-y: auto; padding: 0 16px; flex: 1; }
+  .line { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .line img { width: 72px; height: 96px; object-fit: cover; object-position: 50% 22%; border-radius: 6px; }
+  .line b { display: block; font-weight: 600; }
+  .line small { color: var(--muted); font-size: 14px; }
+  .line .row2 { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .remove { min-height: 44px; padding: 0 6px; border: 0; background: none; text-decoration: underline; color: var(--muted); cursor: pointer; font-size: 15px; }
+  .drawer-foot { padding: 14px 16px; border-top: 1px solid var(--line); }
+  .sum { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 4px; }
+  .sum-note { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+  .added { margin-left: 8px; font-size: 14px; font-weight: 500; color: #2e7d4f; }
+  .continue { width: 100%; justify-content: center; border: 0; background: none; cursor: pointer; }
+  .empty { padding: 30px 4px; text-align: center; color: var(--muted); }
+
+  /* Checkout */
+  .co { padding: 18px 20px 0; max-width: 640px; margin: 0 auto; }
+  .co h2 { font-size: 30px; margin: 22px 0 10px; }
+  .field { display: grid; gap: 6px; margin-bottom: 12px; }
+  .field label { font-weight: 500; font-size: 15px; }
+  .field input, .field select { width: 100%; min-width: 0; min-height: 48px; padding: 0 12px; border: 1px solid #cdbfca; border-radius: 6px; background: #fff; font-size: 16px; }
+  .two { display: grid; grid-template-columns: 1fr; gap: 0 10px; }
+  .two > * { min-width: 0; }
+  @media (min-width: 480px) { .two { grid-template-columns: 1fr 1fr; } }
+  .pay { display: grid; gap: 8px; }
+  .pay label { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; }
+  .pay input { width: 20px; height: 20px; accent-color: var(--plum); }
+  .pay small { color: var(--muted); font-size: 14px; display: block; }
+  .summary { margin-top: 8px; padding: 14px; border-radius: 8px; background: var(--cream); font-size: 15px; }
+  .summary div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+  .summary div > :last-child, .sum span:last-child, .line .price { white-space: nowrap; }
+  .demo-note { margin: 14px 0; font-size: 14px; color: var(--muted); }
+  .done { padding: 40px 20px; max-width: 560px; margin: 0 auto; text-align: center; }
+  .done .tick { font-size: 44px; }
+  .done h1 { color: var(--ink); margin-top: 10px; }
+  .done p { color: var(--muted); margin-top: 10px; }
+
+  .toast { position: fixed; left: 16px; right: 16px; bottom: calc(var(--nav) + 14px + env(safe-area-inset-bottom)); z-index: 70; padding: 12px 14px; border-radius: 6px;
+    background: var(--night); color: var(--ivory); font-size: 15px; text-align: center; opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .2s var(--ease), transform .2s var(--ease); }
+  .toast.show { opacity: 1; transform: none; }
+
+  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-height: 600px) and (max-width: 899px) { .hero { min-height: 380px; } }
+  @media (max-height: 700px) and (max-width: 899px) { .slide { aspect-ratio: auto; height: 54svh; } }  /* name and price stay above the buy bar */
+  @media (min-width: 600px) {
+    .cats { grid-template-columns: repeat(4, 1fr); }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .row .card { flex-basis: 40%; }
+  }
+  @media (min-width: 900px) {
+    :root { --head: 64px; --nav: 0px; }
+    body { padding-bottom: 0; }
+    .bnav { display: none; }
+    header { padding: 0 24px 0 32px; }
+    .head-nav { display: flex; }
+    .hero { display: grid; grid-template-columns: 42vw 1fr; height: calc(100vh - var(--head) - 28px); max-height: 860px; }
+    .hero-media { position: relative; }
+    .hero-media img, .hero-media video { transform: none; }
+    .hero-media::after { background: linear-gradient(to right, transparent 70%, #28152e); }
+    .hero-copy { position: relative; align-self: center; padding: 0 6vw 0 4vw; max-width: 640px; }
+    h1 { font-size: 64px; }
+    .hero-copy .btn { width: auto; display: inline-flex; }
+    .pad { padding: 64px 6vw; }
+    .row { margin: 0 -6vw; padding: 0 6vw 6px; scroll-padding-inline: 6vw; }
+    .row .card { flex-basis: 23%; }
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .saree .wrap { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "head media" "body media"; column-gap: 56px; }
+    .saree-head { grid-area: head; align-self: end; } .saree-media { grid-area: media; margin: 0; } .saree-body { grid-area: body; align-self: start; }
+    .saree .btn { width: auto; display: inline-flex; }
+    .notes { margin-top: 24px; }
+    .chips { margin: 0 0 18px; padding: 0; }
+    .trust { grid-template-columns: repeat(4, 1fr); padding: 30px 6vw; }
+    .toast { left: auto; right: 24px; width: 360px; bottom: 24px; }
+    .view { padding-bottom: 40px; }
+    .pdp { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; max-width: 1180px; margin: 0 auto; padding: 24px 32px; }
+    .gallery { border-radius: 10px; }
+    .pdp-body { padding: 0; }
+    .buybar { position: static; padding: 0; box-shadow: none; background: none; margin-top: 18px; }
+    .drawer { left: auto; top: 0; width: 420px; max-height: none; border-radius: 0; transform: translateX(100%); }
+    .drawer .vbar { border-radius: 0; }
+  }
+  @media (hover: hover) {
+    .btn:hover { background: var(--plum-3); }
+    .btn.light:hover { background: #fff; }
+    .btn.line:hover { background: rgba(40, 21, 46, .06); }
+    .card-link:hover h3 { text-decoration: underline; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-media video, .card-img video, .slide video { display: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .view.enter { animation: none; }
+    .btn, .chip, .size, .drawer, .backdrop, .toast { transition: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) { header { background: var(--plum); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+</style>
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }, 2500);
+</script>
+</head>
+<body>
+<noscript><p class="strip" style="display:block">To shop, turn on JavaScript or visit <a href="https://instagram.com/prabhavofficial">@prabhavofficial</a> on Instagram.</p></noscript>
+<div class="concept" data-concept-banner>Website concept for @prabhavofficial · not the official site</div>
+
+<header class="dark">
+  <a class="mark" href="#top" aria-label="Prabhav, home"><span class="eye" aria-hidden="true">🧿</span>PRABHAV</a>
+  <nav class="head-nav" aria-label="Main"><a href="#shop">Shop all</a><a href="#bestsellers">Bestsellers</a><a href="#saree">Sarees</a></nav>
+  <a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a>
+</header>
+
+<main id="top">
+  <section class="hero dark" aria-label="New launch: Tussar Silk Salwar Suit in purple">
+    <div class="hero-media">
+      <img src="assets/hero-purple-sm.webp" srcset="assets/hero-purple-sm.webp 480w, assets/hero-purple.webp 720w" sizes="(min-width: 900px) 42vw, 100vw"
+           alt="Purple Tussar Silk Salwar Suit with a printed dupatta" width="480" height="853" fetchpriority="high">
+      <video muted loop playsinline preload="none" data-src="assets/hero-purple.mp4" aria-hidden="true"></video>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">New launch</p>
+      <h1>Tussar silk, <em>in purple.</em></h1>
+      <p class="proof-line">1,666 comments on the launch reel 🧿</p>
+      <a class="btn light" href="#/p/tussar-purple">Shop the Tussar suit</a>
+      <a class="text-link" href="#shop">Shop all pieces ↓</a>
+      <p class="hero-meta">Made to order · 15–18 working days · Ships worldwide 🌏</p>
+    </div>
+  </section>
+
+  <section class="pad" aria-labelledby="cat-title">
+    <h2 id="cat-title" class="visually-hidden">Shop by category</h2>
+    <div class="cats">
+<a class="cat" href="#shop" data-filter="salwar"><img loading="lazy" src="assets/purple-tussar-sm.webp" alt="" width="480" height="853"><span>Tussar salwar suits</span></a>
+<a class="cat" href="#shop" data-filter="aline"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="" width="480" height="853"><span>Georgette A-line suits</span></a>
+<a class="cat" href="#shop" data-filter="sets"><img loading="lazy" src="assets/maroon-silk-cotton-sm.webp" alt="" width="480" height="853"><span>Silk cotton sets</span></a>
+<a class="cat" href="#shop" data-filter="sarees"><img loading="lazy" src="assets/plum-kanjivaram-walk-sm.webp" alt="" width="480" height="853"><span>Sarees</span></a>
+    </div>
+  </section>
+
+  <section class="bestsellers pad dark" id="bestsellers" aria-labelledby="best-title">
+    <div class="reveal">
+      <p class="eyebrow">Most loved on Instagram</p>
+      <h2 id="best-title">The Tussar suits, <em>most asked about.</em></h2>
+      <p class="lead">Thousands of comments on the launch reels. Now you can order them here.</p>
+    </div>
+    <div class="grid" style="margin-top:18px">
+<article class="card" data-cat="salwar">
+  <a class="card-link" href="#/p/tussar-purple" aria-label="Tussar Silk Salwar Suit, Purple">
+    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/purple-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span><span class="count">💬 1,666 comments</span></div>
+    <h3>Tussar Silk Salwar Suit</h3><p class="colour">Purple</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="salwar">
+  <a class="card-link" href="#/p/tussar-black" aria-label="Tussar Silk Salwar Suit, Black">
+    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/black-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span><span class="count">💬 1,501 comments</span></div>
+    <h3>Tussar Silk Salwar Suit</h3><p class="colour">Black</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+    </div>
+  </section>
+
+  <section class="pad" aria-labelledby="new-title">
+    <div class="sec-head reveal"><div><p class="eyebrow">New launches ✨</p><h2 id="new-title">Just in</h2></div></div>
+    <div class="row">
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/georgette-red" aria-label="Georgette A-line Suit, Red florals">
+    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral georgette A-line suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/red-georgette.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Red florals</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/georgette-powder" aria-label="Georgette A-line Suit, Powder blue">
+    <div class="card-img"><img loading="lazy" src="assets/mint-georgette-sm.webp" alt="Powder-blue georgette A-line suit with roses, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/mint-georgette.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Powder blue</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="sets">
+  <a class="card-link" href="#/p/silkcotton-maroon" aria-label="Silk Cotton 3 Piece Set, Maroon">
+    <div class="card-img"><img loading="lazy" src="assets/maroon-silk-cotton-sm.webp" alt="Maroon silk cotton 3 piece set, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/maroon-silk-cotton.mp4" aria-hidden="true"></video><span class="tag">Diwali launch</span></div>
+    <h3>Silk Cotton 3 Piece Set</h3><p class="colour">Maroon</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+    </div>
+  </section>
+
+  <section class="saree" id="saree" aria-labelledby="saree-title">
+    <div class="pad wrap">
+      <div class="saree-head reveal">
+        <p class="eyebrow">Diwali 🪔</p>
+        <h2 id="saree-title">Our first saree launch, <em>for Diwali.</em></h2>
+      </div>
+      <div class="saree-media reveal">
+        <img class="main" loading="lazy" src="assets/plum-kanjivaram-sm.webp" srcset="assets/plum-kanjivaram-sm.webp 480w, assets/plum-kanjivaram.webp 720w" sizes="(min-width: 900px) 44vw, 100vw"
+             alt="Plum Banarasi Kanjivaram saree with silver zari, worn beside stone temple pillars" width="480" height="853">
+        <img class="detail" loading="lazy" src="assets/zari-detail-sm.webp" alt="Close-up of the silver zari border" width="480" height="853">
+      </div>
+      <div class="saree-body reveal">
+        <ul class="notes">
+          <li>Banarasi Kanjivaram with silver zari</li>
+          <li>Available in colour options</li>
+          <li>Blouse customised and stitched by Prabhav</li>
+        </ul>
+        <a class="btn" href="#/p/saree-plum">Shop the saree</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pastel pad" aria-labelledby="pastel-title">
+    <div class="reveal">
+      <p class="eyebrow">Georgette A-line suits · Pastel edit</p>
+      <h2 id="pastel-title">Restocked our <em>bestsellers!</em></h2>
+      <p class="lead">Limited edition ✨</p>
+    </div>
+    <div class="row" style="margin-top:18px">
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Pastel green">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Pastel green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel green</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pastel pink">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pastel pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel pink</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Pastel yellow">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Pastel yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel yellow</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+    </div>
+  </section>
+
+  <section class="pad" id="shop" aria-labelledby="shop-title">
+    <h2 id="shop-title">Shop all</h2>
+    <p class="lead" style="margin:4px 0 14px">Prices are added at launch.</p>
+    <div class="chips" role="group" aria-label="Filter by category">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="salwar" aria-pressed="false">Tussar salwar suits</button>
+      <button class="chip" type="button" data-filter="aline" aria-pressed="false">A-line suits</button>
+      <button class="chip" type="button" data-filter="sets" aria-pressed="false">Sets</button>
+      <button class="chip" type="button" data-filter="sarees" aria-pressed="false">Sarees</button>
+    </div>
+    <div class="grid" id="all">
+<article class="card" data-cat="salwar">
+  <a class="card-link" href="#/p/tussar-purple" aria-label="Tussar Silk Salwar Suit, Purple">
+    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span><span class="count">💬 1,666 comments</span></div>
+    <h3>Tussar Silk Salwar Suit</h3><p class="colour">Purple</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="salwar">
+  <a class="card-link" href="#/p/tussar-black" aria-label="Tussar Silk Salwar Suit, Black">
+    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span><span class="count">💬 1,501 comments</span></div>
+    <h3>Tussar Silk Salwar Suit</h3><p class="colour">Black</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/georgette-red" aria-label="Georgette A-line Suit, Red florals">
+    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral georgette A-line suit, worn" width="480" height="853"><span class="tag">New launch</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Red florals</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/georgette-powder" aria-label="Georgette A-line Suit, Powder blue">
+    <div class="card-img"><img loading="lazy" src="assets/mint-georgette-sm.webp" alt="Powder-blue georgette A-line suit with roses, worn" width="480" height="853"><span class="tag">New launch</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Powder blue</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="sets">
+  <a class="card-link" href="#/p/silkcotton-maroon" aria-label="Silk Cotton 3 Piece Set, Maroon">
+    <div class="card-img"><img loading="lazy" src="assets/maroon-silk-cotton-sm.webp" alt="Maroon silk cotton 3 piece set, worn" width="480" height="853"><span class="tag">Diwali launch</span></div>
+    <h3>Silk Cotton 3 Piece Set</h3><p class="colour">Maroon</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="sarees">
+  <a class="card-link" href="#/p/saree-plum" aria-label="Banarasi Kanjivaram Saree, Plum, silver zari">
+    <div class="card-img"><img loading="lazy" src="assets/plum-kanjivaram-sm.webp" alt="Plum Banarasi Kanjivaram saree by stone temple pillars" width="480" height="853"><span class="tag">Our first saree</span></div>
+    <h3>Banarasi Kanjivaram Saree</h3><p class="colour">Plum, silver zari</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Pastel green">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Pastel green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel green</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pastel pink">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pastel pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel pink</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+<article class="card" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Pastel yellow">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Pastel yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pastel yellow</p>
+  </a>
+  <p class="price">₹ —</p>
+</article>
+    </div>
+  </section>
+
+  <section class="trust" aria-label="Shopping with Prabhav">
+    <div><span aria-hidden="true">🔒</span><p><b>Secure checkout</b>UPI, cards and netbanking</p></div>
+    <div><span aria-hidden="true">🧿</span><p><b>Made to order</b>15–18 working days</p></div>
+    <div><span aria-hidden="true">🌏</span><p><b>Shipping</b>Worldwide</p></div>
+    <div><span aria-hidden="true">📦</span><p><b>Order confirmation</b>By email</p></div>
+  </section>
+</main>
+
+<footer class="dark">
+  <a class="mark" href="#top"><span class="eye" aria-hidden="true">🧿</span>PRABHAV</a>
+  <p style="margin-top:8px">From traditional to Indo-western 🌻</p>
+  <div class="links"><a href="#shop">Shop all</a><a href="https://instagram.com/prabhavofficial">@prabhavofficial</a></div>
+  <p>Website concept, not the official site. Photos and reels from @prabhavofficial.</p>
+</footer>
+
+<nav class="bnav" aria-label="Shop">
+  <a href="#top"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Home</a>
+  <a href="#shop"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v6H4zM13 14h7v6h-7z"/></svg>Shop</a>
+  <a href="#/cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Cart<span class="badge" data-n="0" data-count>0</span></a>
+  <a href="https://instagram.com/prabhavofficial"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/></svg>Instagram</a>
+</nav>
+
+<!-- Product page -->
+<section class="view" id="pdp" hidden role="dialog" aria-modal="true" aria-labelledby="pdp-title">
+  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="mark" aria-hidden="true"><span class="eye">🧿</span>PRABHAV</span><a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a></div>
+  <div class="pdp">
+    <div><div class="gallery" id="gallery"></div><div class="dots" id="dots" aria-hidden="true"></div></div>
+    <div class="pdp-body">
+      <p class="eyebrow" id="pdp-tag"></p>
+      <h1 id="pdp-title" tabindex="-1"></h1>
+      <p class="colour" id="pdp-colour"></p>
+      <p class="price">₹ — <small>price added at launch</small></p>
+      <p class="made"><span aria-hidden="true">🧿</span><span><b>Made to order</b> · 15–18 working days · Ships worldwide 🌏</span></p>
+      <div class="opt" id="opt-colour"><div class="opt-label">Colour</div><div class="swatches" id="swatches"></div></div>
+      <div class="opt" id="opt-size"><div class="opt-label"><span>Size</span><button class="guide" type="button" id="guide-btn" aria-expanded="false" aria-controls="guide">Size guide</button></div>
+        <p class="guide-text" id="guide" hidden>Prabhav's size chart will be here at launch.</p>
+        <div class="sizes" id="sizes" role="radiogroup" aria-label="Size"></div><p class="err" id="size-err" hidden>Please choose a size.</p></div>
+      <div class="opt"><div class="opt-label">Quantity</div>
+        <div class="qty"><button type="button" id="qminus" aria-label="One less">−</button><output id="qty">1</output><button type="button" id="qplus" aria-label="One more">+</button></div></div>
+      <p class="blurb" id="blurb"></p>
+      <div class="buybar"><button class="btn" type="button" id="add">Add to cart</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- Cart -->
+<div class="backdrop" id="backdrop" hidden></div>
+<aside class="drawer" id="cart" hidden role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="vbar"><span class="title" id="cart-title" style="padding-left:10px" tabindex="-1">Your cart <span class="added" id="added" hidden>Added ✓</span></span><button class="icon-btn" type="button" data-close aria-label="Close cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="lines" id="lines"></div>
+  <div class="drawer-foot" id="cart-foot">
+    <div class="sum"><span>Subtotal</span><span>₹ —</span></div>
+    <p class="sum-note">Prices and shipping are added at launch.</p>
+    <a class="btn" href="#/checkout" id="to-checkout">Checkout</a>
+    <button class="text-link continue" type="button" data-close>Continue shopping</button>
+  </div>
+</aside>
+
+<!-- Checkout -->
+<section class="view" id="checkout" hidden role="dialog" aria-modal="true" aria-labelledby="co-title">
+  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="title" id="co-title" tabindex="-1">Checkout</span><span style="width:44px"></span></div>
+  <form class="co" id="co-form" novalidate>
+    <h2>Your order</h2>
+    <div class="summary" id="co-summary"></div>
+    <h2>Contact</h2>
+    <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
+    <div class="two">
+      <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+    </div>
+    <h2>Delivery address</h2>
+    <div class="field"><label for="f-addr">Address</label><input id="f-addr" name="address" autocomplete="street-address" required></div>
+    <div class="two">
+      <div class="field"><label for="f-city">City</label><input id="f-city" name="city" autocomplete="address-level2" required></div>
+      <div class="field"><label for="f-pin">PIN / postcode</label><input id="f-pin" name="pin" inputmode="numeric" autocomplete="postal-code" required></div>
+    </div>
+    <div class="field"><label for="f-state">State / region</label><input id="f-state" name="state" autocomplete="address-level1" required></div>
+    <div class="field"><label for="f-country">Country</label><select id="f-country" name="country"><option>India</option><option>Another country</option></select></div>
+    <p class="made"><span aria-hidden="true">🧿</span><span>Made to order · 15–18 working days</span></p>
+    <h2>Payment</h2>
+    <div class="pay" role="radiogroup" aria-label="Payment method">
+      <label><input type="radio" name="pay" value="upi" checked><span>UPI<small>Google Pay, PhonePe, Paytm and others</small></span></label>
+      <label><input type="radio" name="pay" value="card"><span>Credit or debit card</span></label>
+      <label><input type="radio" name="pay" value="nb"><span>Netbanking</span></label>
+    </div>
+    <p class="demo-note">This is a website concept: placing the order shows the confirmation screen only. No order is sent and no payment is taken.</p>
+    <button class="btn" type="submit">Place order</button>
+  </form>
+</section>
+
+<!-- Done -->
+<section class="view" id="done" hidden role="dialog" aria-modal="true" aria-labelledby="done-title">
+  <div class="done">
+    <div class="tick" aria-hidden="true">🌻</div>
+    <h1 id="done-title" tabindex="-1">Thank you!</h1>
+    <p>On the real site, Prabhav would now receive your order with your size, and you'd pay by UPI, card or netbanking. Your piece would be made to order: 15–18 working days.</p>
+    <p><b>This was a demo:</b> no order was sent and no payment was taken.</p>
+    <a class="btn" href="#top" data-home style="margin-top:22px">Back to the shop</a>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var PRODUCTS = [{"id": "tussar-purple", "name": "Tussar Silk Salwar Suit", "colour": "Purple", "cat": "salwar", "tag": "New launch", "comments": 1666, "video": "purple-tussar.mp4", "images": ["hero-purple", "purple-tussar-dupatta", "purple-flatlay"], "details": ["Tussar silk", "Top and shawl set", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Purple Tussar Silk Salwar Suit, worn", "The printed dupatta up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit, as a top and shawl set."}, {"id": "tussar-black", "name": "Tussar Silk Salwar Suit", "colour": "Black", "cat": "salwar", "tag": "New launch", "comments": 1501, "video": "black-tussar.mp4", "images": ["black-tussar", "black-tussar-neck", "black-flatlay"], "details": ["Tussar silk", "Gold zari border", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Black Tussar Silk Salwar Suit, worn", "The zari neckline up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit in black, with a gold zari border."}, {"id": "georgette-red", "name": "Georgette A-line Suit", "colour": "Red florals", "cat": "aline", "tag": "New launch", "video": "red-georgette.mp4", "images": ["red-georgette", "red-georgette-twirl", "red-georgette-mannequin"], "details": ["Georgette", "A-line", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Red floral georgette A-line suit, worn", "The dupatta in motion", "On the mannequin"], "blurb": "Beautiful georgette A-line suits, new launches 🌻 This one in red florals."}, {"id": "georgette-powder", "name": "Georgette A-line Suit", "colour": "Powder blue", "cat": "aline", "tag": "New launch", "video": "mint-georgette.mp4", "images": ["mint-georgette", "powder-blue-dupatta", "powder-blue-mannequin"], "details": ["Georgette", "A-line", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Powder-blue georgette A-line suit with roses, worn", "The rose-print dupatta", "On the mannequin"], "blurb": "Beautiful georgette A-line suits, new launches 🌻 This one in powder blue with roses."}, {"id": "silkcotton-maroon", "name": "Silk Cotton 3 Piece Set", "colour": "Maroon", "cat": "sets", "tag": "Diwali launch", "video": "maroon-silk-cotton.mp4", "images": ["maroon-silk-cotton", "maroon-silk-cotton-drape", "maroon-silk-cotton-zari"], "details": ["Silk cotton", "Top, pant and shawl", "Diwali launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Maroon silk cotton 3 piece set, worn", "The zari shawl draped", "The zari border up close"], "blurb": "Diwali launch ✨ A silk cotton 3 piece set: top, pant and shawl."}, {"id": "saree-plum", "name": "Banarasi Kanjivaram Saree", "colour": "Plum, silver zari", "cat": "sarees", "tag": "Our first saree", "video": "plum-kanjivaram.mp4", "images": ["plum-kanjivaram", "plum-kanjivaram-walk", "zari-detail"], "details": ["Banarasi Kanjivaram", "Silver zari", "Available in colour options", "Blouse customised and stitched by Prabhav"], "sizes": [], "alts": ["Plum Banarasi Kanjivaram saree by stone temple pillars", "The saree in the light", "The silver zari border"], "blurb": "Our first saree launch, for Diwali 🪔 A Banarasi Kanjivaram with silver zari, available in colour options. Blouse customised and stitched by Prabhav."}, {"id": "pastel-green", "name": "Georgette A-line Suit", "colour": "Pastel green", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-green", "pastel-green-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel green georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}, {"id": "pastel-pink", "name": "Georgette A-line Suit", "colour": "Pastel pink", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-pink", "pastel-pink-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel pink georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}, {"id": "pastel-yellow", "name": "Georgette A-line Suit", "colour": "Pastel yellow", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-yellow", "pastel-yellow-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel yellow georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}];
+  var byId = {}; PRODUCTS.forEach(function (p) { byId[p.id] = p; });
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saveData = navigator.connection && navigator.connection.saveData;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  /* ---------- Cart state (kept in this browser) ---------- */
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('prabhav-cart') || '[]').filter(function (l) { return byId[l.id]; }); } catch (e) { cart = []; }
+  function save() { try { localStorage.setItem('prabhav-cart', JSON.stringify(cart)); } catch (e) {} counts(); }
+  function counts() {
+    var n = cart.reduce(function (s, l) { return s + l.qty; }, 0);
+    document.querySelectorAll('[data-count]').forEach(function (b) { b.textContent = n; b.setAttribute('data-n', n); });
+    document.querySelectorAll('a[href="#/cart"]').forEach(function (a) { a.setAttribute('aria-label', 'Cart, ' + n + (n === 1 ? ' item' : ' items')); });
+  }
+
+  var toastEl = $('toast'), toastTimer;
+  function toast(t) { toastEl.textContent = t; toastEl.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2000); }
+
+  /* ---------- Videos: play only while on screen ---------- */
+  var vio = null;
+  function start(v) {
+    if (!v.src) { v.src = v.getAttribute('data-src'); v.addEventListener('canplay', function () { v.classList.add('ready'); }, { once: true }); }
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  }
+  function watch(root) {
+    if (!vio) return;
+    (root || document).querySelectorAll('video[data-src]').forEach(function (v) { vio.observe(v); });
+  }
+  if (!reduce && !saveData && 'IntersectionObserver' in window) {
+    vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { var v = en.target; if (en.isIntersecting) start(v); else if (v.src) v.pause(); });
+    }, { threshold: 0.35 });
+    var go = function () { setTimeout(function () { watch(document.querySelector('main')); }, 800); };
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  }
+
+  /* ---------- Product page ---------- */
+  var current = null, size = null, qty = 1, justAdded = false, ordered = false;
+  function renderPDP(p) {
+    current = p; size = null; qty = 1;
+    $('pdp-tag').textContent = p.tag;
+    $('pdp-title').textContent = p.name;
+    $('pdp-colour').textContent = p.colour;
+    var slides = '';
+    if (p.video) slides += '<div class="slide"><img src="assets/' + p.images[0] + '-sm.webp" alt="' + esc(p.alts[0]) + '" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/' + p.video + '" aria-hidden="true"></video><span class="reel-mark">▶ From the reel' + (p.comments ? ' · ' + p.comments.toLocaleString('en-IN') + ' comments' : '') + '</span></div>';
+    p.images.forEach(function (im, i) {
+      if (p.video && i === 0) return;
+      slides += '<div class="slide"><img ' + (i ? 'loading="lazy" ' : '') + 'src="assets/' + im + '-sm.webp" srcset="assets/' + im + '-sm.webp 480w, assets/' + im + '.webp 720w" sizes="(min-width: 900px) 46vw, 100vw" alt="' + esc(p.alts[i]) + '" width="480" height="853"></div>';
+    });
+    var g = $('gallery'); g.innerHTML = slides; g.scrollLeft = 0;
+    var n = g.children.length;
+    $('dots').innerHTML = n > 1 ? new Array(n + 1).join('<span></span>') : '';
+    dot(0);
+    var sibs = PRODUCTS.filter(function (q) { return q.name === p.name && q.cat === p.cat; });
+    $('opt-colour').hidden = sibs.length < 2;
+    $('swatches').innerHTML = sibs.map(function (q) {
+      return '<a class="swatch" href="#/p/' + q.id + '"' + (q.id === p.id ? ' aria-current="true"' : '') + '><img src="assets/' + q.images[0] + '-sm.webp" alt="" width="36" height="36">' + esc(q.colour) + '</a>';
+    }).join('');
+    $('opt-size').hidden = !p.sizes.length;
+    $('size-err').hidden = true;
+    $('sizes').innerHTML = p.sizes.map(function (s) { return '<button class="size" type="button" role="radio" aria-checked="false" data-size="' + s + '">' + s + '</button>'; }).join('');
+    $('qty').textContent = qty;
+    $('blurb').textContent = p.blurb;
+    watch(g);
+  }
+  function dot(i) { Array.prototype.forEach.call($('dots').children, function (d, j) { d.classList.toggle('on', i === j); }); }
+  $('gallery').addEventListener('scroll', function () { var g = this; dot(Math.round(g.scrollLeft / g.clientWidth)); }, { passive: true });
+  $('sizes').addEventListener('click', function (e) {
+    var b = e.target.closest('.size'); if (!b) return;
+    size = b.getAttribute('data-size'); $('size-err').hidden = true;
+    this.querySelectorAll('.size').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
+  });
+  $('guide-btn').addEventListener('click', function () {
+    var open = $('guide').hidden; $('guide').hidden = !open; this.setAttribute('aria-expanded', String(open));
+  });
+  $('qminus').addEventListener('click', function () { qty = Math.max(1, qty - 1); $('qty').textContent = qty; });
+  $('qplus').addEventListener('click', function () { qty = Math.min(9, qty + 1); $('qty').textContent = qty; });
+  $('add').addEventListener('click', function () {
+    if (!current) return;
+    if (current.sizes.length && !size) { $('size-err').hidden = false; var first = $('sizes').querySelector('.size'); if (first) first.focus(); return; }
+    var key = current.id + '|' + (size || '');
+    var line = cart.filter(function (l) { return l.id + '|' + (l.size || '') === key; })[0];
+    if (line) line.qty = Math.min(9, line.qty + qty); else cart.push({ id: current.id, size: size, qty: qty });
+    save(); justAdded = true; ordered = false;
+    location.hash = '#/cart';
+  });
+
+  /* ---------- Cart drawer ---------- */
+  function renderCart() {
+    var lines = $('lines');
+    if (!cart.length) {
+      lines.innerHTML = '<p class="empty">Your cart is empty.</p>';
+      $('cart-foot').hidden = true; return;
+    }
+    $('cart-foot').hidden = false;
+    lines.innerHTML = cart.map(function (l, i) {
+      var p = byId[l.id];
+      return '<div class="line"><img src="assets/' + p.images[0] + '-sm.webp" alt="" width="72" height="96"><div><b>' + esc(p.name) + '</b><small>' + esc(p.colour) +
+        (l.size ? ' · Size ' + l.size : '') + ' · Made to order</small><div class="row2"><div class="qty"><button type="button" data-dec="' + i + '" aria-label="One less">−</button><output>' + l.qty +
+        '</output><button type="button" data-inc="' + i + '" aria-label="One more">+</button></div><button class="remove" type="button" data-rm="' + i + '">Remove</button></div><p class="price">₹ —</p></div></div>';
+    }).join('');
+  }
+  $('lines').addEventListener('click', function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    var i;
+    if ((i = t.getAttribute('data-inc')) !== null) cart[i].qty = Math.min(9, cart[i].qty + 1);
+    else if ((i = t.getAttribute('data-dec')) !== null) { cart[i].qty -= 1; if (!cart[i].qty) cart.splice(i, 1); }
+    else if ((i = t.getAttribute('data-rm')) !== null) cart.splice(i, 1);
+    else return;
+    save(); renderCart();
+  });
+
+  /* ---------- Checkout ---------- */
+  function renderSummary() {
+    $('co-summary').innerHTML = cart.length ? cart.map(function (l) {
+      var p = byId[l.id];
+      return '<div><span>' + esc(p.name) + ' · ' + esc(p.colour) + (l.size ? ' · ' + l.size : '') + ' × ' + l.qty + '</span><span>₹ —</span></div>';
+    }).join('') + '<div><b>Total</b><b>₹ —</b></div>' : '<div>Your cart is empty.</div>';
+  }
+  $('f-country').addEventListener('change', function () { $('f-pin').setAttribute('inputmode', this.value === 'India' ? 'numeric' : 'text'); });
+  $('co-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!cart.length) { toast('Your cart is empty'); return; }
+    if (!this.checkValidity()) { this.reportValidity(); return; }
+    cart = []; save(); this.reset(); ordered = true;
+    location.replace('#/done');
+  });
+
+  /* ---------- Routing: product, cart, checkout and done live in the address bar ---------- */
+  var views = { pdp: $('pdp'), checkout: $('checkout'), done: $('done') };
+  var drawer = $('cart'), backdrop = $('backdrop'), lastFocus = null, depth = 0;
+  function show(el) {
+    if (el.hidden) { el.hidden = false; el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); el.scrollTop = 0; }
+  }
+  function route() {
+    var h = location.hash;
+    var m = h.match(/^#\/p\/([\w-]+)$/);
+    if (h === '#/cart' && ordered && !cart.length) { history.replaceState(null, '', location.pathname + location.search); ordered = false; h = ''; }  // Back after an order
+    var want = m && byId[m[1]] ? 'pdp' : h === '#/checkout' ? 'checkout' : h === '#/done' ? 'done' : h === '#/cart' ? 'cart' : null;
+    if (want === 'pdp' && (!current || current.id !== m[1] || views.pdp.hidden)) { renderPDP(byId[m[1]]); views.pdp.scrollTop = 0; }
+    if (want === 'checkout') renderSummary();
+    Object.keys(views).forEach(function (k) {
+      if (k === want) show(views[k]);
+      else if (!(want === 'cart' && k === 'pdp' && !views.pdp.hidden)) views[k].hidden = true;
+    });
+    if (want === 'cart') {
+      renderCart(); drawer.hidden = false; backdrop.hidden = false;
+      $('added').hidden = !justAdded;
+      if (justAdded) setTimeout(function () { $('added').hidden = true; }, 1800);
+      justAdded = false;
+      requestAnimationFrame(function () { drawer.classList.add('on'); backdrop.classList.add('on'); });
+    } else if (!drawer.hidden) {
+      drawer.classList.remove('on'); backdrop.classList.remove('on');
+      setTimeout(function () { if (!drawer.classList.contains('on')) { drawer.hidden = true; backdrop.hidden = true; } }, reduce ? 0 : 300);
+    }
+    document.documentElement.classList.toggle('locked', !!want);
+    var under = want === 'cart' && !views.pdp.hidden ? [views.pdp] : [];
+    document.querySelectorAll('body > main, body > header, body > footer, body > .bnav, body > .concept').forEach(function (el) { el.inert = !!want; });
+    Object.keys(views).forEach(function (k) { views[k].inert = under.indexOf(views[k]) !== -1; });
+    if (want) {
+      var t = want === 'pdp' ? $('pdp-title') : want === 'cart' ? $('cart-title') : want === 'checkout' ? $('co-title') : $('done-title');
+      setTimeout(function () { t.focus({ preventScroll: true }); }, 30);
+    } else if (lastFocus && document.body.contains(lastFocus)) { lastFocus.focus({ preventScroll: true }); }
+  }
+  window.addEventListener('hashchange', function (e) {
+    if (/^#\//.test(location.hash)) depth++; else depth = 0;
+    route();
+  });
+  function close() {
+    if (location.hash === '#/done') { history.replaceState(null, '', location.pathname + location.search); depth = 0; route(); window.scrollTo(0, 0); return; }
+    if (depth > 0) { depth -= 2; history.back(); }
+    else { history.replaceState(null, '', location.pathname + location.search); depth = 0; route(); }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#/"]');
+    if (a && !/^#\/(cart|checkout|done)$/.test(location.hash)) lastFocus = a;
+    if (e.target.closest('[data-close]') || e.target === backdrop) { e.preventDefault(); close(); }
+    var home = e.target.closest('[data-home]');
+    if (home) { e.preventDefault(); history.replaceState(null, '', location.pathname + location.search); depth = 0; route(); window.scrollTo(0, 0); }
+    var f = e.target.closest('[data-filter]');
+    if (f) {
+      var k = f.getAttribute('data-filter');
+      document.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-filter') === k)); });
+      document.querySelectorAll('#all .card').forEach(function (c) { c.hidden = k !== 'all' && c.getAttribute('data-cat') !== k; });
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && /^#\//.test(location.hash)) close(); });
+
+  /* ---------- Scroll reveals ---------- */
+  if ('IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { rio.observe(el); });
+  } else { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }
+
+  counts(); route();
+})();
+</script>
+</body>
+</html>
