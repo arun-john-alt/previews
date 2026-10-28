@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>High On Cakes · Point at a cake (concept)</title>
+<meta name="description" content="Website concept for High On Cakes: custom cakes on pre-order by Ashwin & Shashi Kala, Nungambakkam, Chennai.">
+<meta name="theme-color" content="#fff3e3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1b1320;
+    --cream: #fff3e3;
+    --pink: #ff7eb6;      /* brand: the mermaid's tail */
+    --gold: #c9a24a;      /* their acrylic cake toppers */
+    --butter: #ffd23f;    /* chocolate block */
+    --lilac: #c9b2ea;     /* petal ruffles */
+    --rose: #f6a9c0;      /* the teddy's party hat */
+    --sage: #c3cf96;      /* Just Married sprinkles */
+    --cobalt: #2346c8;    /* the blue butterfly */
+    --mint: #9fdcc8;      /* mermaid buttercream */
+    --display: "Anton", "Arial Narrow", sans-serif;
+    --mono: "DM Mono", ui-monospace, monospace;
+    --script: "Mrs Saint Delafield", cursive;
+    --pad: clamp(16px, 4vw, 48px);
+    --ease: cubic-bezier(.23, 1, .32, 1);
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font: 400 16px/1.5 var(--mono); color: var(--ink); background: var(--cream); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; -webkit-tap-highlight-color: transparent; }
+  h1, h2, h3 { margin: 0; font: 400 1em/.95 var(--display); text-transform: uppercase; letter-spacing: 0; word-spacing: .06em; }
+  p { margin: 0; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .tv :focus-visible, .order :focus-visible, .ask:focus-visible, .cobalt :focus-visible { outline-color: var(--butter); }
+
+  .concept { background: var(--ink); color: #d9cfd9; font: 12px/1.2 var(--mono); padding: 6px 12px; text-align: center;
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .concept .short { display: none; }
+  @media (max-width: 399px) { .concept .long { display: none; } .concept .short { display: inline; } .ask { font-size: 16px; padding: 0 14px; } }
+  /* Sticky header: logo + WhatsApp stay in reach the whole way down (the banner above scrolls away). */
+  .top { position: sticky; top: 0; z-index: 30; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+         height: 56px; padding: 0 var(--pad); background: var(--cream); border-bottom: 2px solid var(--ink); }
+  .logo { font: 400 23px/1 var(--display); text-transform: uppercase; text-decoration: none; display: inline-flex;
+          align-items: center; gap: .28em; min-height: 44px; white-space: nowrap; }
+  .logo span { color: #c81f6e; }
+  .wa { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
+        border-radius: 999px; background: var(--butter); color: var(--ink); text-decoration: none; border: 2px solid var(--ink);
+        font: 400 17px/1 var(--display); letter-spacing: .03em; transition: transform .12s var(--ease); }
+  .wa:active, .ask:active, .cake-link:active img { transform: scale(.97); }
+  .wa svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+
+  /* Hero */
+  .hero { background: var(--pink); padding: 14px var(--pad) 92px; display: grid; position: relative; overflow: hidden; }
+  .cake-link { display: block; justify-self: center; position: relative; }
+  .hero .cake { height: min(40svh, 340px); width: auto; filter: drop-shadow(0 24px 26px rgba(90,0,45,.35));
+                animation: drop .7s var(--ease) both; }
+  @keyframes drop { from { transform: translateY(-16px) rotate(2deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  /* A gold "topper" tag like the acrylic ones on their cakes */
+  .topper { position: absolute; top: 17%; right: var(--pad); z-index: 2; transform: rotate(6deg); background: var(--cream); color: var(--ink);
+            border: 3px double var(--gold); border-radius: 10px; padding: 8px 12px; font: 400 17px/1.05 var(--display);
+            text-transform: uppercase; letter-spacing: .02em; text-align: center; max-width: 118px; box-shadow: 0 6px 0 rgba(0,0,0,.15); pointer-events: none; }
+  .topper small { display: block; font: 500 12px/1.3 var(--mono); text-transform: none; letter-spacing: 0; margin-top: 4px; }
+  .hero h1 { font-size: clamp(42px, 12.6vw, 132px); line-height: 1.04; margin-top: 14px; }
+  .hero h1 span { display: table; background: var(--ink); color: var(--cream); padding: .06em .14em .03em; margin-top: .1em; line-height: 1; }
+  .hero .sub { margin-top: 14px; font-size: 15px; display: flex; flex-wrap: wrap; gap: 2px 16px; }
+
+  /* Cook with Comali */
+  .tv { background: var(--ink); color: var(--cream); padding: 48px var(--pad) 52px; display: grid; gap: 22px; scroll-margin-top: 70px; }
+  .tv .logo-cwc { width: 70%; max-width: 300px; }
+  .tv h2 { font-size: clamp(42px, 12vw, 96px); color: var(--butter); }
+  .tv p { font-size: 16px; max-width: 34ch; margin-top: 14px; }
+  .tv a.reel { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
+
+  /* One colour per cake, taken from the cake. The cake comes first; tapping it or the button opens WhatsApp. */
+  .block { display: grid; gap: 4px; padding: 30px var(--pad) 44px; overflow: hidden; }
+  .block .cake-link { justify-self: center; margin-bottom: 18px; }
+  .block .cut { height: min(46svh, 380px); width: auto; filter: drop-shadow(0 20px 20px rgba(0,0,0,.25)); }
+  .block h2 { font-size: clamp(44px, 13vw, 84px); }
+  .block p { font-size: 16px; max-width: 32ch; margin-top: 8px; }
+  .ask { justify-self: start; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; margin-top: 16px; padding: 8px 18px; line-height: 1.15 !important;
+         border-radius: 999px; background: var(--ink); color: var(--cream); text-decoration: none; font: 400 18px/1 var(--display);
+         letter-spacing: .03em; transition: transform .12s var(--ease); }
+  .lilac { background: var(--lilac); } .rose { background: var(--rose); } .sage { background: var(--sage); }
+  .butter { background: var(--butter); } .mint { background: var(--mint); }
+  .cobalt { background: var(--cobalt); color: #fff; } .cobalt .ask { background: var(--butter); color: var(--ink); }
+
+  /* Photo prints with a handwritten caption */
+  .print { display: block; margin: 0 auto 6px; background: #fffaf3; padding: 10px 10px 4px; width: min(290px, 72vw); transform: rotate(-2.5deg);
+           box-shadow: 0 18px 34px rgba(0,0,0,.3); color: var(--ink); text-decoration: none; }
+  .print.r { transform: rotate(2.5deg); }
+  .print img { width: 100%; }
+  .print .cap { display: block; font: 400 32px/1.15 var(--script); text-align: center; padding: 4px 0 2px; color: #4a2c3a; }
+  .block .print { margin-bottom: 26px; }
+
+  /* How to order */
+  .how { background: var(--mint); padding: 52px var(--pad); display: grid; gap: 28px; }
+  .how h2 { font-size: clamp(50px, 15vw, 120px); }
+  .steps { display: grid; gap: 22px; counter-reset: s; }
+  .steps div { font-size: 16px; max-width: 34ch; }
+  .steps div::before { counter-increment: s; content: counter(s); display: block; font: 400 54px/1 var(--display); margin-bottom: 4px; }
+  .steps b { display: block; font: 400 26px/1 var(--display); text-transform: uppercase; margin-bottom: 6px; }
+
+  /* Workshops + bakers */
+  .people { padding: 52px var(--pad) 20px; display: grid; gap: 12px; }
+  .people h2 { font-size: clamp(50px, 15vw, 120px); }
+  .people .pair { margin-bottom: 34px; }
+  .people .print { margin-top: 18px; margin-bottom: 22px; }
+  .people .pair p { font-size: 16px; max-width: 34ch; }
+  .people .pair h3 { font-size: 32px; margin-bottom: 6px; }
+  .handle { font-weight: 500; text-underline-offset: 3px; display: inline-block; padding: 12px 0; margin: -12px 0; }
+
+  /* Order */
+  .order { background: var(--ink); color: var(--cream); padding: 56px var(--pad) 36px; display: grid; gap: 30px; }
+  .order h2 { font-size: clamp(56px, 16vw, 150px); color: var(--butter); }
+  .info { display: grid; gap: 18px; font-size: 16px; }
+  .info b { display: block; color: #a796a3; font-weight: 400; margin-bottom: 2px; }
+  .info a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
+  footer { background: var(--ink); color: #a796a3; font: 13px/1.4 var(--mono); padding: 0 var(--pad) calc(100px + env(safe-area-inset-bottom)); }
+
+  .dock { position: fixed; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 25; }
+  .dock .wa { width: 100%; min-height: 54px; font-size: 20px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
+
+  @media (prefers-reduced-motion: reduce) { .hero .cake { animation: none; } .wa, .ask { transition: none; } }
+
+  @media (max-width: 370px) {
+    .logo { font-size: 20px; }
+    .top .wa { padding: 0 12px; font-size: 16px; }
+    .hero .cake { height: min(30svh, 300px); }
+    .hero h1 { font-size: 42px; }
+    .topper { max-width: 100px; font-size: 14px; padding: 6px 8px; right: 10px; }
+    .topper small { display: none; }
+    .hero { padding-bottom: 84px; }
+  }
+  @media (min-width: 760px) {
+    .cakes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cakes .wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+    .cakes .wide .print { grid-row: 1 / span 4; grid-column: 2; }
+    .block { align-content: start; }
+    .block .cut { height: min(46vh, 400px); max-width: 100%; }
+    .block h2 { font-size: clamp(42px, 6vw, 84px); }
+    .tv { grid-template-columns: auto 1fr; align-items: center; column-gap: 48px; }
+    .steps { grid-template-columns: repeat(3, 1fr); }
+    .people .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .info { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .dock { display: none; }
+    footer { padding-bottom: 32px; }
+    .hero { grid-template-columns: 1.1fr 1fr; grid-template-rows: 1fr auto; min-height: calc(100svh - 90px); align-items: end; padding-bottom: 44px; }
+    .hero h1 { grid-column: 1; grid-row: 1; font-size: clamp(90px, 8.6vw, 150px); }
+    .hero .sub { grid-column: 1; grid-row: 2; }
+    .hero .cake-link { grid-column: 2; grid-row: 1 / 3; align-self: end; }
+    .hero .cake { height: min(72svh, 620px); }
+    .topper { max-width: 190px; font-size: 22px; top: 14%; right: 4%; }
+    .how { grid-template-columns: 1fr 1.8fr; align-items: end; }
+  }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner><span class="long">Concept site for High On Cakes · </span><span class="short">Concept site · </span>not official</div>
+
+<header class="top">
+  <a class="logo" href="#top" aria-label="High On Cakes, back to top"><b style="font-weight:inherit">High</b><b style="font-weight:inherit">On</b><span>Cakes</span></a>
+  <a class="wa" data-wa href="https://wa.me/918939973535" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+    WhatsApp</a>
+</header>
+
+<main id="top">
+<section class="hero">
+  <a class="cake-link" data-cake="Mermaid tail cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a mermaid cake like this one">
+    <img class="cake" src="assets/cut-mermaid.webp" width="398" height="601" fetchpriority="high" alt="Two-tier mermaid cake with a pink tail on top">
+    </a>
+  <span class="topper" aria-hidden="true">Tap a cake → WhatsApp<small>with that cake in the message</small></span>
+  <h1>Point at a cake. <span>We'll make yours.</span></h1>
+  <div class="sub"><span>Custom cakes · pre-orders only</span><span>Nungambakkam, Chennai</span></div>
+</section>
+
+<section class="tv" aria-labelledby="tv-h">
+  <img class="logo-cwc" src="assets/cwc-logo.webp" width="587" height="458" loading="lazy" alt="Cooku with Comali logo">
+  <div>
+    <h2 id="tv-h">We made cakes for Cook with Comali.</h2>
+    <p>On Vijay TV, for season 5, and then once again: “We made it cook with comali once again”.</p>
+    <a class="reel" href="https://www.instagram.com/p/DZW1djUTUZZ" target="_blank" rel="noopener">Watch the reel ↗</a>
+  </div>
+</section>
+
+<section class="cakes" aria-label="Cakes we've made">
+  <article class="block lilac">
+    <a class="cake-link" data-cake="Petal ruffles cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Petal ruffles cake like this one">
+      <img class="cut" src="assets/cut-petals.webp" width="369" height="467" loading="lazy" alt="Pastel petal-ruffle cake with lilies and a Mridhya topper"></a>
+    <h2>Petal ruffles</h2><p>“Ruffles on ruffles, because one layer of sweetness isn't enough!”</p>
+    <a class="ask" data-cake="Petal ruffles cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Petal ruffles →</a>
+  </article>
+  <article class="block rose">
+    <a class="cake-link" data-cake="Party teddy cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Party teddy cake like this one">
+      <img class="cut" src="assets/cut-teddy.webp" width="247" height="445" loading="lazy" alt="Cream cake with a party teddy in a pink hat"></a>
+    <h2>Party teddy</h2><p>“A cake you just want to hug.”</p>
+    <a class="ask" data-cake="Party teddy cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Party teddy →</a>
+  </article>
+  <article class="block butter">
+    <a class="cake-link" data-cake="7-layer chocolate cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a 7-layer chocolate cake like this one">
+      <img class="cut" src="assets/cut-chocolate.webp" width="293" height="309" loading="lazy" alt="Slice of seven-layer chocolate cake"></a>
+    <h2>7-layer chocolate</h2><p>“Say goodbye to normal chocolate cakes.”</p>
+    <a class="ask" data-cake="7-layer chocolate cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the 7-layer chocolate →</a>
+  </article>
+  <article class="block sage">
+    <a class="print r" data-cake="Just Married cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Just Married cake like this one">
+      <img src="assets/post-05.jpg" width="543" height="640" loading="lazy" alt="Long Just Married cake with gold sprinkles"><span class="cap">just married</span></a>
+    <h2>Just married</h2><p>An Italian-style wedding cake.</p>
+    <a class="ask" data-cake="Just Married cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Just Married →</a>
+  </article>
+  <article class="block cobalt wide">
+    <a class="print" data-cake="Blue Butterfly cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Blue Butterfly cake like this one">
+      <img src="assets/post-08.jpg" width="478" height="640" loading="lazy" alt="Blue butterfly birthday cake for Archana"><span class="cap">for Archana</span></a>
+    <h2>The blue butterfly</h2><p>Made for Archana's birthday: butterfly wings around a figure in a flowing gown.</p>
+    <a class="ask" data-cake="Blue Butterfly cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Blue Butterfly →</a>
+  </article>
+</section>
+
+<section class="how" aria-labelledby="how-h">
+  <h2 id="how-h">How to order</h2>
+  <div class="steps">
+    <div><b>Pick a cake</b>Any cake here, or bring your own idea: a name, a theme, a colour.</div>
+    <div><b>Message us</b>WhatsApp or call 89399 73535, or DM @high.on.cakes.</div>
+    <div><b>Book ahead</b>We take cakes on pre-order only, so message us before the day.</div>
+  </div>
+</section>
+
+<section class="people" aria-labelledby="ppl-h">
+  <h2 id="ppl-h">Bake with us</h2>
+  <div class="pairs">
+    <div class="pair">
+      <figure class="print" style="margin-left:auto;margin-right:auto"><img src="assets/post-09.jpg" width="360" height="640" loading="lazy" style="aspect-ratio:4/5;object-fit:cover;object-position:50% 95%" alt="Two guests making a heart sign at a High On Cakes workshop"><figcaption class="cap">cake picnic</figcaption></figure>
+      <h3>Bento-cake workshops</h3>
+      <p>Our first Cake Picnic was at Café Dua, Nungambakkam. Workshops are announced on <a class="handle" href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes</a>.</p>
+    </div>
+    <div class="pair">
+      <figure class="print r" style="margin-left:auto;margin-right:auto"><img src="assets/post-04.jpg" width="359" height="640" loading="lazy" style="aspect-ratio:1/1;object-fit:cover;object-position:50% 0" alt="A baker in an apron taking a bite of chocolate cake"><figcaption class="cap">for the 10,000th time</figcaption></figure>
+      <h3>By Ashwin &amp; Shashi Kala</h3>
+      <p>High On Cakes is by <a class="handle" href="https://instagram.com/ashboy.pk" target="_blank" rel="noopener">@ashboy.pk</a> &amp; <a class="handle" href="https://instagram.com/shashi_kala_" target="_blank" rel="noopener">@shashi_kala_</a>. “POV: You're a baker and somehow still never get tired of your own cake.”</p>
+    </div>
+  </div>
+</section>
+
+<section class="order" aria-labelledby="ord-h">
+  <div>
+    <h2 id="ord-h">Got a cake in mind?</h2>
+    <p style="margin:16px 0 24px;max-width:40ch">Send it on WhatsApp with the date. Pre-orders only.</p>
+    <a class="wa" data-wa href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp 89399 73535</a>
+  </div>
+  <div class="info">
+    <div><b>Based in</b>Nungambakkam, Chennai</div>
+    <div><b>Call</b><a href="tel:+918939973535">+91 89399 73535</a></div>
+    <div><b>Instagram</b><a href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes · 9.8K followers</a></div>
+  </div>
+</section>
+</main>
+<footer>High On Cakes · Nungambakkam, Chennai · Photos from @high.on.cakes. Concept website, not the official site.</footer>
+
+<div class="dock"><a class="wa" data-wa href="https://wa.me/918939973535" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+  WhatsApp</a></div>
+
+<script>
+  // Plain script, no libraries: every WhatsApp link gets its message.
+  const wa = text => "https://wa.me/918939973535?text=" + encodeURIComponent(text);
+  document.querySelectorAll("[data-wa]").forEach(a => a.href = wa("Hi High On Cakes! I'd like to order a custom cake. (Saw your website)"));
+  document.querySelectorAll("[data-cake]").forEach(a => a.href = wa(`Hi High On Cakes! I'd like a cake like your ${a.dataset.cake}. (Saw it on your website)`));
+</script>
+</body>
+</html>
