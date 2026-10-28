@@ -160,6 +160,14 @@
     .topper { max-width: 190px; font-size: 22px; top: 14%; right: 4%; }
     .how { grid-template-columns: 1fr 1.8fr; align-items: end; }
   }
+
+  /* Round call button, bottom right on every screen: one tap opens the phone dialer with the number. */
+  .call-fab { position: fixed; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 26; width: 54px; height: 54px;
+              border-radius: 50%; display: grid; place-items: center; background: #1b1320; color: #ffd23f; text-decoration: none;
+              box-shadow: 0 10px 24px -8px rgba(0,0,0,.55); border: 2px solid #ffd23f; transition: transform .12s cubic-bezier(.23,1,.32,1); }
+  .call-fab:active { transform: scale(.94); }
+  .call-fab svg { width: 24px; height: 24px; fill: currentColor; }
+  .dock { right: 76px !important; }
 </style>
 </head>
 <body>
@@ -274,5 +282,7 @@
   document.querySelectorAll("[data-wa]").forEach(a => a.href = wa("Hi High On Cakes! I'd like to order a custom cake. (Saw your website)"));
   document.querySelectorAll("[data-cake]").forEach(a => a.href = wa(`Hi High On Cakes! I'd like a cake like your ${a.dataset.cake}. (Saw it on your website)`));
 </script>
+<a class="call-fab" href="tel:+918939973535" aria-label="Call High On Cakes, 89399 73535">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"/></svg></a>
 </body>
 </html>
