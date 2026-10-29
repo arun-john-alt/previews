@@ -1,0 +1,371 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><style>:root{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style><title>10x Healthy Skin Landing Page</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+<style>
+/* Layout: one calm, photo-led page in the clinic's own colours, taken from its printed backdrop (espresso brown, gold, white).
+   Sticky top bar with Call + WhatsApp, a big hero photo, centred headings, soft rounded shapes, one short form.
+   Mobile first; a Call / WhatsApp / Book bar stays at the bottom on phones. */
+:root {
+  --bg: #fcf9f6;
+  --surface: #f3ece5;
+  --fg: #2a1f1c;
+  --mute: #6b5c57;
+  --line: rgba(42, 31, 28, .14);
+  --gold: #2358d6;
+  --gold-fill: #2f6bf0;
+  --gold-fg: #ffffff;
+  --star: #e3a008;
+  --bar: #1b1412;
+  --bar-fg: #fcf9f6;
+  --ink: #2a1f1c;
+  --ink-fg: #fcf9f6;
+  --wa: #14803f;
+  --wa-fg: #ffffff;
+  --shadow: 0 10px 30px -14px rgba(42, 31, 28, .35);
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171110; --surface: #231b19; --fg: #f6ede8; --mute: #bba9a3; --line: rgba(246, 237, 232, .16);
+    --gold: #7ea6ff; --gold-fill: #3d7eff; --gold-fg: #ffffff; --ink: #f6ede8; --ink-fg: #171110; --wa: #2fc46c; --wa-fg: #07210f;
+    --shadow: 0 10px 30px -14px rgba(0, 0, 0, .8); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171110; --surface: #231b19; --fg: #f6ede8; --mute: #bba9a3; --line: rgba(246, 237, 232, .16);
+  --gold: #7ea6ff; --gold-fill: #3d7eff; --gold-fg: #ffffff; --ink: #f6ede8; --ink-fg: #171110; --wa: #2fc46c; --wa-fg: #07210f;
+  --shadow: 0 10px 30px -14px rgba(0, 0, 0, .8); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); -webkit-text-size-adjust: 100%; text-align: center;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold-fill); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; text-wrap: balance; letter-spacing: -.012em; }
+h2 { font-size: clamp(1.9rem, 7.6vw, 2.75rem); line-height: 1.1; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1080px; margin: 0 auto; }
+.narrow { max-width: 640px; margin: 0 auto; }
+.svg { width: 20px; height: 20px; flex: none; fill: currentColor; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 52px; padding: 0 1.3rem;
+  border-radius: 999px; border: 1.5px solid transparent; font: 600 1rem/1 var(--body); text-decoration: none; cursor: pointer; text-align: center;
+}
+.btn-wa { background: var(--wa); color: var(--wa-fg); }
+.btn-line { border-color: var(--fg); color: var(--fg); background: transparent; }
+.btn-ink { background: var(--ink); color: var(--ink-fg); }
+
+/* sticky top bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bar); color: var(--bar-fg); }
+.top .inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 64px; padding-block: 8px; }
+.mark { display: block; flex: none; line-height: 0; }
+.mark img { display: block; height: 44px; width: auto; }
+.top-cta { display: flex; gap: 8px; min-width: 0; }
+.top-cta .btn { min-height: 44px; padding: 0 .9rem; font-size: .9rem; gap: .45rem; white-space: nowrap; }
+.top-cta .btn-line { border-color: color-mix(in srgb, var(--bar-fg) 55%, transparent); color: var(--bar-fg); }
+.top-cta .svg { width: 17px; height: 17px; }
+
+/* hero */
+.hero-photo { position: relative; margin: 16px auto 0; max-width: 560px; width: calc(100% - 32px); }
+.hero-photo img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 28px; box-shadow: var(--shadow); }
+.chip { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .95rem; border-radius: 999px; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); box-shadow: var(--shadow); font-size: .86rem; font-weight: 600; white-space: nowrap; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-fill); }
+.hero-copy { padding-top: 30px; padding-bottom: 36px; display: grid; gap: 16px; justify-items: center; }
+.hero h1 { font-size: clamp(2.4rem, 10.6vw, 4rem); line-height: 1.02; font-weight: 500; max-width: 13ch; }
+.lede { color: var(--mute); font-size: 1.08rem; max-width: 32ch; }
+.cta { display: grid; gap: 10px; width: 100%; max-width: 420px; margin-top: 4px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; max-width: 520px; margin-top: 10px; border-top: 1px solid var(--line); }
+.facts div { padding: 18px 6px 0; }
+.facts div + div { border-left: 1px solid var(--line); }
+.facts b { display: block; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; }
+.facts span { display: block; font-size: .8rem; color: var(--mute); line-height: 1.35; margin-top: 6px; }
+
+section { padding-block: 60px; }
+.alt { background: var(--surface); }
+.head { display: grid; gap: 12px; justify-items: center; margin-bottom: 30px; }
+.head p { color: var(--mute); max-width: 44ch; }
+
+/* guests */
+.rail { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(16px, env(safe-area-inset-right, 0px)) 22px max(16px, env(safe-area-inset-left, 0px)); scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.guest { flex: 0 0 min(72vw, 290px); scroll-snap-align: center; margin: 0; }
+.arch { aspect-ratio: 4 / 5; border-radius: 999px 999px 22px 22px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+.arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.guest figcaption { padding-top: 14px; font-family: var(--display); font-size: 1.4rem; font-weight: 500; }
+.swipe { margin-top: 2px; font-size: .82rem; color: var(--mute); }
+
+/* video */
+.video { width: min(100%, 340px); margin: 0 auto; border-radius: 26px; overflow: hidden; background: #000; aspect-ratio: 9 / 16; max-height: 76vh; box-shadow: var(--shadow); }
+.video video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+.vcap { margin-top: 16px; font-family: var(--display); font-size: 1.35rem; }
+.vcap span { display: block; font: 500 .9rem var(--body); color: var(--mute); margin-top: 2px; }
+
+/* reviews */
+.score { display: grid; justify-items: center; gap: 6px; margin-bottom: 26px; }
+.score b { font-family: var(--display); font-size: 4.2rem; font-weight: 500; line-height: .9; }
+.stars { display: flex; gap: 3px; color: var(--star); }
+.stars .svg { width: 22px; height: 22px; }
+.score span { color: var(--mute); font-size: .95rem; }
+.say { display: grid; gap: 12px; margin: 0 auto 22px; padding: 0; list-style: none; max-width: 520px; }
+.say li { padding: 16px 18px; border-radius: 20px; background: var(--bg); box-shadow: var(--shadow); }
+.tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; padding: 0; margin: 0 auto 24px; max-width: 520px; }
+.tags li { padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; background: var(--bg); }
+.tags b { font-weight: 600; margin-left: .3rem; color: var(--gold); }
+.link { font-weight: 600; color: var(--gold); text-underline-offset: 4px; }
+
+/* treatments */
+.list { display: grid; gap: 14px; max-width: 760px; margin: 0 auto; }
+.card { display: grid; gap: 6px; justify-items: center; padding: 24px 20px; border-radius: 24px; background: var(--surface); }
+.card.lead { background: var(--ink); color: var(--ink-fg); }
+.card h3 { font-size: 1.65rem; line-height: 1.15; }
+.card p { color: var(--mute); max-width: 40ch; font-size: .98rem; }
+.card.lead p { color: color-mix(in srgb, var(--ink-fg) 78%, transparent); }
+.card a { margin-top: 8px; font-weight: 600; font-size: .94rem; color: var(--gold); text-underline-offset: 4px; padding: .5rem 1rem; }
+.card.lead a { color: var(--gold-fill); }
+
+/* laser, specialist, steps */
+.areas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; padding: 0; margin: 0 auto 28px; max-width: 520px; }
+.areas li { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .94rem; background: var(--bg); }
+.quote { font-family: var(--display); font-size: clamp(1.45rem, 6vw, 2.1rem); line-height: 1.25; text-wrap: balance; margin: 0 auto 14px; max-width: 26ch; }
+.who { color: var(--mute); font-size: .96rem; }
+.who b { color: var(--fg); font-weight: 600; }
+.steps { display: grid; gap: 22px; list-style: none; padding: 0; margin: 0 auto; max-width: 420px; }
+.steps li { display: grid; gap: 4px; justify-items: center; }
+.steps b { font-family: var(--display); font-size: 1.35rem; font-weight: 500; }
+.steps span { color: var(--mute); font-size: .96rem; }
+.steps li + li::before { content: ""; width: 1px; height: 22px; background: var(--gold-fill); margin: 0 auto 6px; }
+
+/* faq */
+details { border-top: 1px solid var(--line); text-align: left; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 58px; font-weight: 600; font-size: 1.03rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.5rem; color: var(--gold); font-weight: 400; }
+details[open] summary::after { content: "\2212"; }
+details p { color: var(--mute); padding: 0 0 18px; }
+
+/* book */
+.book { background: var(--ink); color: var(--ink-fg); }
+.book .head p, .book .visit { color: color-mix(in srgb, var(--ink-fg) 76%, transparent); }
+.book .grid { display: grid; gap: 30px; max-width: 520px; margin: 0 auto; }
+form { display: grid; gap: 14px; text-align: left; }
+label { display: grid; gap: 6px; font-size: .86rem; font-weight: 600; letter-spacing: .03em; color: color-mix(in srgb, var(--ink-fg) 82%, transparent); }
+input, select { width: 100%; min-height: 54px; padding: 0 16px; border-radius: 16px; border: 1.5px solid color-mix(in srgb, var(--ink-fg) 30%, transparent); background: color-mix(in srgb, var(--ink-fg) 9%, transparent); color: var(--ink-fg); font: 500 1rem var(--body); }
+select option { color: #2a1f1c; }
+input::placeholder { color: color-mix(in srgb, var(--ink-fg) 50%, transparent); }
+.book .btn-gold { background: var(--gold-fill); color: var(--gold-fg); }
+.ok { padding: 14px 16px; border-radius: 16px; background: color-mix(in srgb, var(--gold-fill) 22%, transparent); border: 1px solid var(--gold-fill); font-size: .95rem; text-align: center; }
+.visit { display: grid; gap: 4px; font-style: normal; }
+.visit b { color: var(--ink-fg); font-weight: 600; font-size: 1.05rem; }
+.visit a { color: var(--gold-fill); font-weight: 600; text-underline-offset: 4px; }
+
+/* sticky bottom bar */
+.bar { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 8px;
+  padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+.bar .btn { min-height: 50px; font-size: .94rem; padding: 0 .5rem; gap: .45rem; }
+.bar .btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+
+@media (max-width: 379px) { .top-cta .wa-label { display: none; } .top-cta .btn-wa { padding: 0 .8rem; } }
+@media (min-width: 900px) {
+  body { padding-bottom: 0; }
+  .bar { display: none; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; max-width: 1080px; margin: 0 auto; padding: 36px max(16px, env(safe-area-inset-left, 0px)); }
+  .hero-photo { grid-column: 2; grid-row: 1; max-width: 520px; width: 100%; margin: 0 auto; }
+  .hero-copy { grid-column: 1; grid-row: 1; padding: 0; }
+  .cta { display: flex; flex-wrap: wrap; justify-content: center; max-width: none; }
+  .cta .btn { white-space: nowrap; }
+  .rail { justify-content: center; }
+  .guest { flex-basis: 240px; }
+  .list { grid-template-columns: 1fr 1fr; max-width: 900px; }
+  .card.lead { grid-column: 1 / -1; }
+  .steps { grid-template-columns: repeat(3, 1fr); max-width: 900px; align-items: start; gap: 32px; }
+  .steps li + li::before { display: none; }
+  .book .grid { max-width: 940px; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; text-align: left; }
+  .book .head { justify-items: start; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { .rail { scroll-behavior: auto; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-call" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.23-1.37A9.9 9.9 0 1 0 12.04 2zm5.8 14.15c-.25.7-1.43 1.34-1.97 1.4-.5.06-1.13.09-1.82-.12a16.6 16.6 0 0 1-1.65-.61c-2.9-1.25-4.78-4.17-4.93-4.36-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.57-.36.76-.36l.55.01c.18 0 .42-.07.65.5.25.58.84 2.02.91 2.17.07.14.12.31.02.5-.1.2-.15.31-.29.48-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.3 2.35 1.45.29.14.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.65-.14.27.1 1.7.8 1.99.95.29.14.48.22.55.34.07.12.07.7-.18 1.4z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h1V3a1 1 0 0 1 1-1zm13 8H4v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9zM8 13h3v3H8v-3z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap"><div class="inner">
+    <a class="mark" href="#top" aria-label="10X Healthy Skin"><img src="img/logo.png" alt="10X Healthy Skin" width="640" height="413"></a>
+    <div class="top-cta">
+      <a class="btn btn-line" href="tel:+919514143576"><svg class="svg" aria-hidden="true"><use href="#i-call"/></svg>+(91) 95141 43576</a>
+      <a class="btn btn-wa" href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20laser%20hair%20removal" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="svg" aria-hidden="true"><use href="#i-wa"/></svg><span class="wa-label">WhatsApp</span></a>
+    </div>
+  </div></div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-photo">
+      <img src="img/wall.jpg" alt="Oviya, a guest at 10X Healthy Skin, smiling beside the clinic founder in front of the 10X backdrop" width="1500" height="1500" fetchpriority="high">
+      <span class="chip"><i></i>Oviya at 10X Healthy Skin</span>
+    </div>
+    <div class="hero-copy wrap">
+      <h1>Laser hair removal for skin that glows</h1>
+      <p class="lede">Planned by a dermcosmetologist with 13 years of experience, on Race Course Road, Coimbatore.</p>
+      <div class="cta">
+        <a class="btn btn-wa" href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20laser%20hair%20removal" target="_blank" rel="noopener"><svg class="svg" aria-hidden="true"><use href="#i-wa"/></svg>Chat on WhatsApp</a>
+        <a class="btn btn-line" href="tel:+919514143576"><svg class="svg" aria-hidden="true"><use href="#i-call"/></svg>Call the clinic</a>
+      </div>
+      <div class="facts">
+        <div><b>13+</b><span>years in cosmetology</span></div>
+        <div><b>77K</b><span>follow us on Instagram</span></div>
+        <div><b>Free</b><span>first consultation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="seen">
+    <div class="wrap"><div class="inner">
+      <div class="head">
+        <h2>Faces you know, in our consultation room</h2>
+        <p>Guests who have visited 10X Healthy Skin.</p>
+      </div>
+    </div></div>
+    <div class="rail" tabindex="0" aria-label="Guests at 10X Healthy Skin">
+      <figure class="guest"><div class="arch"><img src="img/cap.jpg" alt="Amy Jackson smiling beside the clinic founder" loading="lazy" width="880" height="1100"></div><figcaption>Amy Jackson</figcaption></figure>
+      <figure class="guest"><div class="arch"><img src="img/smile.jpg" alt="Priyanka smiling beside the clinic founder" loading="lazy" width="900" height="900"></div><figcaption>Priyanka</figcaption></figure>
+      <figure class="guest"><div class="arch"><img src="img/red.jpg" alt="Priyanka smiling beside the clinic founder" loading="lazy" width="900" height="900"></div><figcaption>Priyanka</figcaption></figure>
+      <figure class="guest"><div class="arch"><img src="img/shades.jpg" alt="Sabana beside the clinic founder" loading="lazy" width="825" height="1100"></div><figcaption>Sabana</figcaption></figure>
+    </div>
+    <p class="swipe">Swipe for more</p>
+  </section>
+
+  <section class="alt" id="watch">
+    <div class="wrap"><div class="inner">
+      <div class="head"><h2>See the clinic for yourself</h2></div>
+      <div class="video">
+        <video controls playsinline muted preload="metadata" aria-label="Nirosha at 10X Healthy Skin"><source src="celeb.mp4" type="video/mp4"></video>
+      </div>
+      <p class="vcap">Nirosha<span>Actress</span></p>
+    </div></div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap"><div class="inner">
+      <div class="head"><h2>Rated 4.6 by our patients on Google</h2></div>
+      <div class="score">
+        <b>4.6</b>
+        <div class="stars" role="img" aria-label="4.6 out of 5 stars">
+          <svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg" style="opacity:.55"><use href="#i-star"/></svg>
+        </div>
+        <span>out of 5, from 78 Google reviews</span>
+      </div>
+      <ul class="say">
+        <li>Reviewers mention friendly staff and good service.</li>
+        <li>They describe a warm, welcoming clinic that puts them at ease.</li>
+        <li>Patients report good results on tan, acne and upper-lip laser.</li>
+      </ul>
+      <ul class="tags" aria-label="Topics in reviews"><li>Laser hair removal<b>12</b></li><li>Skin treatments<b>8</b></li><li>Upper lip laser<b>2</b></li><li>Laser machine<b>2</b></li></ul>
+      <a class="link" href="https://www.google.com/maps/place/10x+healthy+skin/@10.9997071,76.9734422,17z" target="_blank" rel="noopener">Read all 78 reviews on Google</a>
+    </div></div>
+  </section>
+
+  <section class="alt" id="treatments">
+    <div class="wrap"><div class="inner">
+      <div class="head"><h2>What we treat</h2><p>Tell us your concern. We plan the rest with you.</p></div>
+      <div class="list">
+        <div class="card lead"><h3>Laser hair removal</h3><p>Gentle, long-lasting hair reduction with laser, for smooth skin from lips to legs.</p>
+          <a href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20laser%20hair%20removal" target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+        <div class="card"><h3>Pigmentation removal</h3><p>Laser and topical treatments to fade dark spots, sun damage and uneven tone.</p>
+          <a href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20pigmentation%20treatment" target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+        <div class="card"><h3>Acne treatment</h3><p>Targeted care to clear breakouts, calm inflammation and help prevent the next ones.</p>
+          <a href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20acne%20treatment" target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+        <div class="card"><h3>Glass glow</h3><p>Exfoliates dead skin cells and boosts cell turnover for a glowing complexion.</p>
+          <a href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20glass%20glow" target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section id="laser">
+    <div class="wrap"><div class="inner">
+      <div class="head"><h2>Laser hair removal, lips to legs</h2><p>Our laser can treat delicate areas too. The team is professional about every question, so ask anything.</p></div>
+      <ul class="areas" aria-label="Areas we treat"><li>Lips</li><li>Underarms</li><li>Arms</li><li>Legs</li><li>Bikini</li><li>Brazilian</li></ul>
+      <div class="narrow">
+        <p class="quote">Our treatments are rooted in science, guided by trust, and focused on results you can see and feel.</p>
+        <p class="who"><b>Padma Priya</b>, Founder. 13 years of experience in cosmetology.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="alt" id="visit">
+    <div class="wrap"><div class="inner">
+      <div class="head"><h2>Your first visit</h2></div>
+      <ol class="steps">
+        <li><b>Message us</b><span>Tell us your concern on WhatsApp. We reply with a time that suits you.</span></li>
+        <li><b>Free consultation</b><span>Your doctor looks at your skin and hair and answers your questions.</span></li>
+        <li><b>Your plan</b><span>You get a treatment plan and decide at your own pace.</span></li>
+      </ol>
+    </div></div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap"><div class="inner narrow">
+      <div class="head"><h2>Before you book</h2></div>
+      <details><summary>How many sessions will I need?</summary><p>It depends on the area, your hair and your skin. Your doctor explains the plan at the free consultation, before you decide.</p></details>
+      <details><summary>Is it suitable for my skin tone?</summary><p>Your doctor checks your skin and hair type at the consultation and tells you what is suitable for you.</p></details>
+      <details><summary>Can I ask about sensitive areas?</summary><p>Yes. Our team is discreet and professional, and has heard every question. Ask on WhatsApp if you prefer to start privately.</p></details>
+      <details><summary>Where is the clinic?</summary><p>4th Floor, Rajnarayan Towers, 70 Race Course Road, Gopalapuram, Coimbatore 641018.</p></details>
+    </div></div>
+  </section>
+
+  <section class="book" id="book">
+    <div class="wrap"><div class="inner grid">
+      <div class="head" style="margin:0">
+        <h2>Book your free consultation</h2>
+        <p>Leave your number and we will call you back.</p>
+        <address class="visit">
+          <b>10X Healthy Skin</b>
+          <span>4th Floor, Rajnarayan Towers, 70 Race Course Road, Coimbatore</span>
+          <span>+(91) 95141 43576</span>
+          <span><a href="https://www.google.com/maps/place/10x+healthy+skin/@10.9997071,76.9734422,17z" target="_blank" rel="noopener">Get directions on Google Maps</a></span>
+        </address>
+      </div>
+      <form id="lead" novalidate>
+        <label for="n">Your name<input id="n" name="n" type="text" autocomplete="name" placeholder="Priya"></label>
+        <label for="p">WhatsApp number<input id="p" name="p" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210"></label>
+        <label for="t">Treatment
+          <select id="t" name="t"><option>Laser hair removal</option><option>Pigmentation removal</option><option>Acne treatment</option><option>Glass glow</option><option>Not sure yet</option></select>
+        </label>
+        <button class="btn btn-gold" type="submit">Request a callback</button>
+        <p class="ok" id="ok" hidden>Mock-up only. On the live page, this sends your details to the clinic's WhatsApp.</p>
+      </form>
+    </div></div>
+  </section>
+</main>
+
+<nav class="bar" aria-label="Contact">
+  <a class="btn btn-line btn-ghost" href="tel:+919514143576"><svg class="svg" aria-hidden="true"><use href="#i-call"/></svg>Call</a>
+  <a class="btn btn-wa" href="https://wa.me/919514143576?text=Hi%2C%20I%20want%20to%20know%20about%20laser%20hair%20removal" target="_blank" rel="noopener"><svg class="svg" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="btn btn-ink" href="#book"><svg class="svg" aria-hidden="true"><use href="#i-cal"/></svg>Book</a>
+</nav>
+
+<script>
+document.getElementById('lead').addEventListener('submit', function (e) {
+  e.preventDefault();
+  document.getElementById('ok').hidden = false;
+});
+</script>
+</head></html>
