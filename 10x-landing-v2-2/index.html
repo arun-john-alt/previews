@@ -112,6 +112,13 @@ h2.display { font-size: clamp(2.35rem, 11.5vw, 4.6rem); }
 .hero .lede { animation-delay: 400ms; }
 .hero-cta { animation-delay: 470ms; }
 .rating { animation-delay: 560ms; }
+/* phones and tablets: photo on top, words on solid ink below, so the headline never sits on a face */
+@media (max-width: 899px) {
+  .hero { display: block; height: auto; min-height: 0; max-height: none; padding-block: 0; }
+  .hero::after { display: none; }
+  .hero-img { position: relative; inset: auto; display: block; width: 100%; height: auto; aspect-ratio: 39 / 27; max-height: 40svh; object-position: 50% 30%; }
+  .hero-copy { padding-top: 20px; padding-bottom: 26px; }
+}
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 @keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
