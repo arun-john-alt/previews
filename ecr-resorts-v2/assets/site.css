@@ -206,3 +206,22 @@ html:has(dialog[open]) { overflow: hidden; }
 
 /* The floating buttons wait until the page script has decided whether the hero buttons are on screen */
 .has-js .cta-page:not(.dock-ready) .dock { opacity: 0; visibility: hidden; pointer-events: none; }
+/* Instagram: always one tap away, and a clear second action in the hero */
+.top-actions { display: flex; align-items: center; gap: 8px; }
+.ig-top { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--line); background: #fff; color: var(--ink); transition: transform .14s var(--ease), border-color .14s var(--ease); }
+.ig-top svg { width: 22px; height: 22px; }
+.ig-top:active { transform: scale(.94); }
+@media (hover: hover) { .ig-top:hover { border-color: var(--teal); color: var(--teal); } }
+.btn.insta { flex: 1 1 100%; background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .85); color: #fff; justify-content: flex-start; gap: 12px; padding-left: 8px; }
+.btn.insta .chip { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none; background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); color: #fff; }
+.btn.insta .chip svg { width: 18px; height: 18px; }
+@media (hover: hover) { .btn.insta:hover { background: rgba(255, 255, 255, .28); border-color: #fff; } }
+
+/* five villas: three across, then two wider */
+@media (min-width: 760px) {
+  .villas { grid-template-columns: repeat(6, 1fr); }
+  .villas .vcard { grid-column: span 2; aspect-ratio: 4 / 5; }
+  .villas .vcard:nth-child(n+4) { grid-column: span 3; aspect-ratio: 4 / 3; }
+}
+@media (min-width: 1100px) { .villas { grid-template-columns: repeat(6, 1fr); } }
+@media (min-width: 760px) { .btn.insta { flex: 0 0 auto; min-width: 380px; } }
