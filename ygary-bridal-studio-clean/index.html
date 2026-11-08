@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Ygary Brides &middot; Bridal makeup by Saigeetha Varma, Coimbatore</title>
+<meta name="description" content="Ygary Bridal Make Up Studio, Saibaba Colony, Coimbatore. Bridal makeup by Saigeetha Varma. Pick your date and book on WhatsApp.">
+<meta name="theme-color" content="#083b42">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* One length of Kanchipuram silk: peacock-neck body, rani-pink korvai border, zari gold lines */
+  :root {
+    --silk: #083b42;
+    --silk-deep: #062e34;
+    --rani: #c8175f;
+    --zari: #d8b25c;
+    --ivory: #f5eee3;
+    --ivory-soft: rgba(245, 238, 227, .74);
+    --hair: rgba(216, 178, 92, .55);
+    --display: "Bodoni Moda", "Didot", Georgia, serif;
+    --body: "Jost", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--silk); }
+  body { margin: 0; background: var(--silk); color: var(--ivory); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--zari); color: var(--silk); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--zari); outline-offset: 3px; }
+  h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; letter-spacing: -.02em; text-wrap: balance; font-optical-sizing: auto; }
+  p { margin: 0; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  .concept { background: var(--silk-deep); color: var(--ivory); text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 16px; }
+  .concept strong { font-weight: 500; color: var(--zari); }
+
+  /* The korvai: a rani-pink border between zari lines, its gopuram teeth woven into the peacock body.
+     The same border runs down one edge of every photo. */
+  .korvai { height: 52px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='52' viewBox='0 0 24 52'%3E%3Crect width='24' height='2.5' fill='%23d8b25c'/%3E%3Crect y='2.5' width='24' height='29' fill='%23c8175f'/%3E%3Crect y='7' width='24' height='1' fill='%23d8b25c' opacity='.75'/%3E%3Crect y='26' width='24' height='1' fill='%23d8b25c' opacity='.75'/%3E%3Ccircle cx='12' cy='16.5' r='2.6' fill='%23d8b25c'/%3E%3Ccircle cx='0' cy='16.5' r='1.1' fill='%23d8b25c'/%3E%3Ccircle cx='24' cy='16.5' r='1.1' fill='%23d8b25c'/%3E%3Crect y='31.5' width='24' height='2.5' fill='%23d8b25c'/%3E%3Cpath d='M2 34h20v5h-3v5h-3v4h-2.5v4h-3v-4H8v-4H5v-5H2Z' fill='%23c8175f' stroke='%23d8b25c' stroke-width='.9' stroke-linejoin='miter'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 52px; }
+  .korvai.foot { transform: scaleY(-1); }
+
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; }
+  .mark { font-family: var(--display); font-weight: 500; font-size: 22px; line-height: 1.2; letter-spacing: 0; text-decoration: none; color: var(--ivory); padding: 10px 0; }
+  .icon-btn { flex: 0 0 auto; width: 44px; height: 44px; display: grid; place-items: center; color: var(--ivory); border: 1px solid var(--hair); border-radius: 50%; text-decoration: none; transition: transform .14s var(--ease); }
+  .icon-btn svg { width: 19px; height: 19px; }
+  .icon-btn:active { transform: scale(.94); }
+
+  /* First screen: her name, two brides, the date */
+  .hero { padding-top: 10px; }
+  .hero h1 { font-size: clamp(34px, 9.6vw, 72px); line-height: 1.04; }
+  .where { margin-top: 8px; font-size: 16px; color: var(--ivory-soft); }
+  .pair { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .pair figure:nth-child(2) { margin-top: 18px; }
+  figure { margin: 0; }
+  .framed { position: relative; }
+  .framed { padding-left: 12px; }
+  .framed.edge-r { padding-left: 0; padding-right: 12px; }
+  .framed::before { content: ""; position: absolute; z-index: 1; top: 0; bottom: 0; left: 0; width: 18px; pointer-events: none;
+                    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Crect width='1.6' height='18' fill='%23d8b25c'/%3E%3Crect x='1.6' width='8.4' height='18' fill='%23c8175f'/%3E%3Ccircle cx='5.8' cy='9' r='1.6' fill='%23d8b25c'/%3E%3Crect x='10' width='1.6' height='18' fill='%23d8b25c'/%3E%3Cpath d='M11.6 2h2.4v3h2v3h2v2h-2v3h-2v3h-2.4Z' fill='%23c8175f' stroke='%23d8b25c' stroke-width='.7'/%3E%3C/svg%3E") repeat-y 0 0 / 18px 18px; }
+  .framed.edge-r::before { left: auto; right: 0; transform: scaleX(-1); }
+  .framed img { width: 100%; background: var(--silk-deep); }
+  .pair figure { animation: rise .6s var(--ease) both; }
+  .pair figure:nth-child(2) { animation-delay: .09s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  .act { margin-top: 18px; display: grid; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 24px; border: 0; border-radius: 2px;
+         font: 500 17px/1.2 var(--body); letter-spacing: .02em; text-decoration: none; cursor: pointer; transition: transform .14s var(--ease), background-color .14s var(--ease); }
+  .btn svg { width: 20px; height: 20px; flex: 0 0 auto; }
+  .btn:active { transform: scale(.97); }
+  .btn.gold { background: var(--zari); color: var(--silk); }
+  .btn.gold:active { background: #c9a14a; }
+  .btn.hair { background: transparent; color: var(--ivory); box-shadow: inset 0 0 0 1px var(--hair); }
+  .proof { display: flex; align-items: center; gap: 8px; font-size: 16px; color: var(--ivory-soft); }
+  .proof svg { width: 16px; height: 16px; color: var(--zari); }
+  .proof b { color: var(--ivory); font-weight: 500; }
+
+  /* Brides: few, large, set in the silk like woven motifs */
+  .brides { padding-top: 88px; padding-bottom: 24px; }
+  .brides h2, .book h2, .studio h2 { font-size: clamp(32px, 8.4vw, 52px); line-height: 1.05; }
+  .stack { margin-top: 32px; display: grid; gap: 40px; }
+  .stack figure:nth-child(1) { width: 62%; max-width: 220px; }
+  .stack figure:nth-child(2) { width: 62%; justify-self: end; }
+  .stack figure:nth-child(3) { width: 70%; margin-left: 8%; }
+  figcaption { margin-top: 10px; font-family: var(--display); font-style: italic; font-size: 17px; color: var(--ivory-soft); }
+
+  /* Booking: the date leads */
+  .book { margin-top: 72px; padding: 64px 0 72px; background: var(--silk-deep); }
+  .book .lead { margin-top: 10px; color: var(--ivory-soft); max-width: 32ch; }
+  .datebox { position: relative; margin-top: 28px; display: flex; align-items: center; gap: 18px; min-height: 112px; padding: 16px 20px;
+             border: 1px solid var(--hair); cursor: pointer; transition: border-color .14s var(--ease); }
+  .datebox:focus-within { border-color: var(--zari); outline: 2px solid var(--zari); outline-offset: 3px; }
+  .datebox input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; margin: 0; padding: 0; cursor: pointer; font-size: 16px; }
+  .datebox input::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+  .day { font-family: var(--display); font-weight: 500; font-size: 76px; line-height: .9; color: var(--zari); font-variant-numeric: lining-nums; min-width: 1.1em; text-align: center; }
+  .day.unset { display: grid; place-items: center; width: 64px; color: var(--zari); }
+  .day.unset svg { width: 40px; height: 40px; }
+  .month { font-family: var(--display); font-size: 22px; line-height: 1.3; }
+  .month small { display: block; font-family: var(--body); font-size: 16px; color: var(--ivory-soft); margin-top: 2px; }
+  .fields { margin-top: 20px; display: grid; gap: 18px; }
+  .fields label { display: block; font-size: 16px; color: var(--ivory-soft); margin-bottom: 4px; }
+  .fields input { width: 100%; min-height: 48px; padding: 8px 0; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; background: transparent; color: var(--ivory);
+                  font: 400 19px/1.3 var(--body); caret-color: var(--zari); -webkit-appearance: none; appearance: none; }
+  .fields input:focus { outline: none; border-bottom: 2px solid var(--zari); }
+  .preview { margin-top: 26px; padding-top: 18px; border-top: 1px solid rgba(216, 178, 92, .25); }
+  .preview p:first-child { font-size: 16px; color: var(--ivory-soft); }
+  .preview q { display: block; margin-top: 6px; font-family: var(--display); font-style: italic; font-size: 19px; line-height: 1.45; quotes: "\201C" "\201D"; overflow-wrap: anywhere; }
+  /* Until she picks a day, the message shows a blank where the date goes */
+  .preview .gap { display: inline-block; min-width: 5.5em; padding: 0 .3em; border-bottom: 1.5px solid var(--zari); font-family: var(--body); font-style: normal;
+                  font-size: 17px; line-height: 1.3; color: var(--ivory-soft); text-align: center; }
+  .send { margin-top: 22px; display: grid; gap: 10px; }
+  .send .call { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; color: var(--ivory); text-underline-offset: 5px; text-decoration-color: var(--hair); }
+
+  /* Studio */
+  .studio { padding-top: 72px; padding-bottom: 56px; }
+  .studio address { margin-top: 18px; font-style: normal; font-size: 18px; max-width: 26ch; }
+  .studio .hours { margin-top: 8px; color: var(--ivory-soft); }
+  .studio .links { margin-top: 26px; display: grid; gap: 10px; }
+  footer { padding: 26px 0 30px; font-size: 15px; color: var(--ivory-soft); }
+
+  @media (min-width: 760px) {
+    .wrap { padding-left: 32px; padding-right: 32px; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; align-items: center; padding-top: 40px; }
+    .hero h1 { font-size: clamp(38px, 5.2vw, 72px); }
+    .hero .copy { grid-column: 1; }
+    .pair { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+    .act { grid-template-columns: max-content; }
+    .act .btn { padding: 12px 40px; }
+    .stack { grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
+    .stack figure:nth-child(n) { width: auto; max-width: none; margin: 0; justify-self: stretch; }
+    .stack figure:nth-child(2) { margin-top: 72px; }
+    .stack figure:nth-child(3) { margin-top: 24px; }
+    .book .wrap { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; align-items: start; }
+    .book .right { padding-top: 6px; }
+    .studio .links { display: flex; flex-wrap: wrap; }
+  }
+  @media (hover: hover) {
+    .btn.gold:hover { background: #e4c273; }
+    .btn.hair:hover { box-shadow: inset 0 0 0 1px var(--zari); }
+    .icon-btn:hover, .datebox:hover { border-color: var(--zari); }
+    .send .call:hover { text-decoration-color: var(--zari); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .pair figure { animation: none; }
+    .btn, .icon-btn, .datebox { transition: none; }
+    .btn:active, .icon-btn:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept for <strong>@ygarybridescbe</strong> &middot; not the official site</div>
+<div class="korvai" aria-hidden="true"></div>
+
+<header class="wrap top">
+  <a class="mark" href="#top">Ygary Brides</a>
+  <a class="icon-btn" href="tel:+919074643514" aria-label="Call the studio, 90746 43514">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+  </a>
+</header>
+
+<main id="top">
+  <section class="wrap hero" aria-labelledby="h1">
+    <div class="copy">
+      <h1 id="h1">Bridal makeup by Saigeetha Varma</h1>
+      <p class="where">Saibaba Colony, Coimbatore</p>
+    </div>
+    <div class="pair">
+      <figure class="framed"><img src="assets/bride-pink-silk.jpg" width="360" height="640" alt="A Ygary bride in pink and gold silk with temple jewellery, eyes lowered"></figure>
+      <figure class="framed edge-r"><img src="assets/bride-veil.jpg" width="361" height="640" alt="A Ygary bride in a lilac sequinned saree, white veil and silver jewellery"></figure>
+    </div>
+    <div class="act copy">
+      <a class="btn gold" href="#book">Book your date</a>
+      <p class="proof">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.7 5.9 6.4.7-4.8 4.3 1.3 6.3L12 16.8 6.4 20l1.3-6.3L2.9 9.4l6.4-.7Z"/></svg>
+        <span><b>4.9</b> on Google &middot; 154 reviews</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap brides" aria-labelledby="bridesTitle">
+    <h2 id="bridesTitle">Ygary brides</h2>
+    <div class="stack">
+      <figure>
+        <div class="framed"><img src="assets/bride-red-silk.jpg" width="360" height="512" alt="A Ygary bride in red silk with layered gold necklaces and jasmine in her hair" loading="lazy"></div>
+        <figcaption>Red silk and jasmine</figcaption>
+      </figure>
+      <figure>
+        <div class="framed edge-r"><img src="assets/bride-purple-silk.jpg" width="361" height="640" alt="A Ygary bride in purple silk and gold, eyes closed to show the eye makeup" loading="lazy"></div>
+        <figcaption>Purple silk, gold lids</figcaption>
+      </figure>
+      <figure>
+        <div class="framed"><img src="assets/bride-pink-smile.jpg" width="361" height="604" alt="A smiling Ygary bride in rani pink silk with a gold maang tikka" loading="lazy"></div>
+        <figcaption>Rani pink</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="book" id="book" aria-labelledby="bookTitle">
+    <div class="wrap">
+      <div class="left">
+        <h2 id="bookTitle">Book your date</h2>
+        <p class="lead">Choose the day, add your name and the venue. WhatsApp opens with the message written for you.</p>
+        <label class="datebox" id="dateBox">
+          <span class="day unset" id="day" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></span>
+          <span class="month" id="month">Choose the date<small id="weekday">Tap to open the calendar</small></span>
+          <input type="date" id="date" aria-label="Choose the date">
+        </label>
+      </div>
+      <div class="right">
+        <div class="fields">
+          <div><label for="name">Your name</label><input id="name" type="text" maxlength="40" autocomplete="name" enterkeyhint="next"></div>
+          <div><label for="place">Hall or town</label><input id="place" type="text" maxlength="60" enterkeyhint="done"></div>
+        </div>
+        <div class="preview" aria-live="polite">
+          <p>WhatsApp opens with</p>
+          <q id="msg"></q>
+        </div>
+        <div class="send">
+          <a class="btn gold" id="send" data-wa href="https://wa.me/919074643514" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+            <span id="sendLabel">Send on WhatsApp</span>
+          </a>
+          <a class="call" href="tel:+919074643514">Or call the studio: 90746 43514</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap studio" aria-labelledby="studioTitle">
+    <h2 id="studioTitle">The studio</h2>
+    <address>206-B, NSR Road, Saibaba Colony, Coimbatore 641011</address>
+    <p class="hours">Open every day, 10 AM to 7 PM</p>
+    <div class="links">
+      <a class="btn hair" href="https://www.google.com/maps/search/?api=1&amp;query=Ygary%20Bridal%20Make%20Up%20Studio%20Coimbatore&amp;query_place_id=ChIJfXWEkJpZqDsRWD5zZ7EnRvM" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        Directions</a>
+      <a class="btn hair" href="tel:+919074643514">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+        Call 90746 43514</a>
+      <a class="btn hair" href="https://wa.me/919074643514?text=Hi%20Ygary%20Brides.%20I%27d%20like%20to%20ask%20about%20bridal%20makeup." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+        Ask on WhatsApp</a>
+      <a class="btn hair" href="https://instagram.com/ygarybridescbe" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @ygarybridescbe</a>
+    </div>
+  </section>
+</main>
+
+<div class="korvai foot" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <p>Ygary Bridal Make Up Studio, Coimbatore. Photos: Ygary brides, from @ygarybridescbe.</p>
+  </div>
+</footer>
+
+<script>
+  // Plain script: builds the WhatsApp message from the date, name and venue. No other library needed.
+  (function () {
+    var WA = "https://wa.me/919074643514";
+    var $ = function (id) { return document.getElementById(id); };
+    var date = $("date"), name = $("name"), place = $("place"), send = $("send");
+    var picked = null;
+    var t = new Date(), pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    date.min = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+    var clean = function (s) { return s.replace(/\s+/g, " ").trim(); };
+    var nice = function (d) { return d.toLocaleDateString("en-IN", { weekday: "short" }) + " " + d.getDate() + " " + d.toLocaleDateString("en-IN", { month: "short" }) + " " + d.getFullYear(); };
+
+    // Only what she filled in goes into the message; the link never carries a placeholder
+    function parts() {
+      var n = clean(name.value), p = clean(place.value);
+      return { start: "Hi Ygary Brides" + (n ? ", I'm " + n : "") + ". I'd like to book bridal makeup for my wedding",
+               end: (p ? " at " + p : "") + "." };
+    }
+    function message() {
+      var m = parts();
+      return m.start + (picked ? " on " + nice(picked) : "") + m.end;
+    }
+    // The preview shows a blank where the date goes until she picks one
+    function preview() {
+      var m = parts(), q = $("msg");
+      q.textContent = m.start + " on ";
+      if (picked) q.appendChild(document.createTextNode(nice(picked)));
+      else { var gap = document.createElement("span"); gap.className = "gap"; gap.textContent = "your date"; q.appendChild(gap); }
+      q.appendChild(document.createTextNode(m.end));
+    }
+    function sync() {
+      preview();
+      var href = WA + "?text=" + encodeURIComponent(message());
+      document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
+      $("sendLabel").textContent = picked ? "Send on WhatsApp" : "Pick your date first";
+    }
+    function openPicker() { try { if (date.showPicker) { date.showPicker(); return; } } catch (e) {} date.focus(); }
+
+    var icon = $("day").innerHTML;
+    date.addEventListener("change", function () {
+      var day = $("day"), month = $("month");
+      if (date.value) {
+        var p = date.value.split("-");
+        picked = new Date(+p[0], +p[1] - 1, +p[2]);
+        day.textContent = picked.getDate(); day.classList.remove("unset");
+        month.firstChild.nodeValue = picked.toLocaleDateString("en-IN", { month: "long", year: "numeric" });
+        $("weekday").textContent = picked.toLocaleDateString("en-IN", { weekday: "long" });
+      } else {
+        picked = null; day.innerHTML = icon; day.classList.add("unset");
+        month.firstChild.nodeValue = "Choose the date"; $("weekday").textContent = "Tap to open the calendar";
+      }
+      sync();
+    });
+    date.addEventListener("click", openPicker);
+    // The send button won't pretend: without a date it opens the calendar instead
+    send.addEventListener("click", function (e) {
+      if (!picked) { e.preventDefault(); $("dateBox").scrollIntoView({ block: "center" }); openPicker(); }
+    });
+    name.addEventListener("input", sync);
+    place.addEventListener("input", sync);
+    name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); place.focus(); } });
+    place.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); place.blur(); } });
+    sync();
+  })();
+</script>
+</body>
+</html>

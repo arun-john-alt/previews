@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>The Good Baker, Coimbatore · Puffs, buns, cakes, cookies</title>
+<meta name="description" content="The Good Baker, Coimbatore. Puffs, buns, breads, cakes and cookies, made fresh daily. Open 9 AM to 11 PM at Saibaba Colony. Order on WhatsApp.">
+<meta name="theme-color" content="#5e1b36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>/* static instances: Playwright's WebKit draws variable fonts at their default weight */
+@font-face{font-family:"Catamaran";font-style:normal;font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/npm/@fontsource/catamaran@5.3.0/files/catamaran-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Catamaran";font-style:normal;font-weight:600;font-display:swap;src:url(https://cdn.jsdelivr.net/npm/@fontsource/catamaran@5.3.0/files/catamaran-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Catamaran";font-style:normal;font-weight:700;font-display:swap;src:url(https://cdn.jsdelivr.net/npm/@fontsource/catamaran@5.3.0/files/catamaran-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Catamaran";font-style:normal;font-weight:800;font-display:swap;src:url(https://cdn.jsdelivr.net/npm/@fontsource/catamaran@5.3.0/files/catamaran-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Catamaran";font-style:normal;font-weight:600;font-display:swap;src:url(https://cdn.jsdelivr.net/npm/@fontsource/catamaran@5.3.0/files/catamaran-tamil-600-normal.woff2) format("woff2");unicode-range:U+0964-0965,U+0B82-0BFA,U+200C-200D,U+20B9,U+25CC}
+</style>
+<style>
+/* A Tamil daily sheet: the shop's name on the header board, today on a thin white sheet, near-black ink, one red for Sundays. */
+:root{
+  --board:#5e1b36;          /* their plum, as on the shop sign and logo */
+  --board-ink:#f3da64;      /* the logo's lemon */
+  --paper:#ffffff;
+  --wall:#e9e5e7;           /* only seen around the pad on wide screens */
+  --ink:#201d1f;            /* from their own palette */
+  --ink-soft:#5d5459;
+  --rule:#dcd5d8;
+  --sunday:#c0161d;         /* calendar red: Sundays only */
+  --num:"League Gothic", "Arial Narrow", sans-serif;
+  --text:"Catamaran", system-ui, sans-serif;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --pad:22px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--text)}
+img{display:block;max-width:100%;height:auto}
+figure{margin:0}
+a{color:inherit}
+::selection{background:var(--board);color:#fff}
+:focus-visible{outline:3px solid var(--board);outline-offset:3px;border-radius:4px}
+.board :focus-visible{outline-color:var(--board-ink)}
+h1,h2,h3,p{margin:0}
+.concept{background:var(--ink);color:#e8e3e5;font:600 13px/1.4 var(--text);text-align:center;padding:7px 16px}
+
+.pad{max-width:600px;margin:0 auto;background:var(--paper)}
+
+/* the header board, printed with the shop's name */
+.board{position:relative;background:var(--board);color:#fff;padding:22px var(--pad) 20px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
+.board::before,.board::after{content:"";position:absolute;top:9px;width:9px;height:9px;border-radius:50%;background:var(--wall);box-shadow:inset 0 1px 1px rgba(0,0,0,.35)}
+.board::before{left:calc(50% - 40px)}
+.board::after{left:calc(50% + 31px)}
+.board img{grid-row:span 2;width:52px;height:52px;border-radius:9px}
+.board h1{font:800 26px/1.05 var(--text);letter-spacing:-.01em}
+.board .ta{font:600 16px/1.2 var(--text);color:var(--board-ink)}
+.board .line{grid-column:1/-1;margin-top:12px;padding-top:10px;border-top:1px solid rgba(243,218,100,.45);font:600 16px/1.3 var(--text);letter-spacing:.02em;color:var(--board-ink)}
+
+/* the perforation between board and sheet */
+.perf{height:12px;background:radial-gradient(circle at 6px 6px,var(--wall) 2.4px,transparent 2.9px) 0 0/12px 12px repeat-x var(--paper)}
+
+/* today's sheet: the date is one line at the top, then their food */
+.today{padding:12px var(--pad) 26px}
+.date{display:flex;align-items:center;gap:12px}
+.num{font:400 58px/.8 var(--num);letter-spacing:-.01em;color:var(--ink);padding-top:.1em;min-width:.9ch}
+.num.sun{color:var(--sunday)}
+.dmeta{display:grid;gap:1px;min-width:0}
+.dmeta .wd{font:800 22px/1.1 var(--text);letter-spacing:-.01em}
+.dmeta .mo{font:600 16px/1.25 var(--text);color:var(--ink-soft)}
+.hero{margin-top:12px}
+.hero img{width:100%;aspect-ratio:2/1;object-fit:cover;object-position:50% 55%;border-radius:3px;background:var(--rule)}
+.courses{list-style:none;margin:14px 0 0;padding:0;border-top:2px solid var(--ink)}
+.courses li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0 9px;border-bottom:1px solid var(--rule)}
+.courses b{font-weight:700}
+.courses span{color:var(--ink-soft);text-align:right;font-size:16px}
+.courses li.here{display:block}
+.courses li.here > span{display:block;text-align:left;margin-top:1px}
+.now{display:inline-block;font:700 15px/1 var(--text);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:#e7f2e9;color:#1d5b2c;vertical-align:1px;margin-left:8px}
+.now.shut{background:#f4e6e6;color:#8a1d1d}
+.order{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;margin-top:20px;border-radius:8px;background:var(--board);
+  color:#fff;text-decoration:none;font:700 19px/1 var(--text);transition:transform .14s var(--ease),background-color .2s}
+.order:active{transform:scale(.98)}
+.order svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.call{display:flex;justify-content:center;align-items:center;min-height:44px;margin-top:6px;font-weight:600;font-size:16px;color:var(--ink);text-underline-offset:4px}
+
+/* the rest of the pad: quiet sections, ruled like the small print */
+section{padding:30px var(--pad) 8px;border-top:1px solid var(--rule)}
+section h2{font:800 28px/1.1 var(--text);letter-spacing:-.015em}
+.lead{margin-top:8px;color:var(--ink-soft);max-width:38ch}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;margin-top:20px}
+.grid figure{margin:0}
+.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px}
+.grid figcaption{margin-top:8px;font-size:17px;line-height:1.35;font-weight:700}
+/* the named things from their posts, ruled like the small print */
+.menu{list-style:none;margin:24px 0 0;padding:0;border-top:2px solid var(--ink)}
+.menu li{display:grid;grid-template-columns:5.2em 1fr;gap:12px;padding:10px 0 9px;border-bottom:1px solid var(--rule);font-size:16px;line-height:1.45}
+.menu b{font-weight:700}
+.menu span{color:var(--ink-soft)}
+
+.shop{margin:20px calc(-1 * var(--pad)) 0}
+.shop img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 40%}
+.shop figcaption{margin-top:8px;padding:0 var(--pad);font-size:16px;color:var(--ink-soft)}
+.outlets{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
+.outlets li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.outlets b{font-weight:700;font-size:18px}
+.outlets span{grid-column:1;color:var(--ink-soft);font-size:16px;line-height:1.4}
+.outlets a{grid-column:2;grid-row:1/span 2;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:1.5px solid var(--ink);border-radius:6px;
+  text-decoration:none;font-weight:600;font-size:16px;transition:transform .12s var(--ease)}
+.outlets a:active{transform:scale(.96)}
+.outlets a svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.close{padding:34px var(--pad) 30px}
+.close p{color:var(--ink-soft);max-width:36ch}
+footer{background:var(--ink);color:#d8d1d4;padding:22px var(--pad) calc(26px + env(safe-area-inset-bottom));font-size:16px;line-height:1.6}
+footer .row{display:flex;flex-wrap:wrap;gap:4px 16px}
+footer a{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px;color:#fff}
+footer small{display:block;margin-top:6px;font-size:15px;color:#a69ca1}
+
+/* a quiet WhatsApp button, only once the main one has scrolled away */
+.float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:10;width:56px;height:56px;border-radius:50%;background:var(--board);color:#fff;
+  display:grid;place-items:center;box-shadow:0 6px 18px rgba(32,29,31,.28);transform:translateY(90px);opacity:0;pointer-events:none;
+  transition:transform .3s var(--ease),opacity .2s var(--ease)}
+.float.show{transform:none;opacity:1;pointer-events:auto}
+.float:active{transform:scale(.94)}
+.float svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:350px){ :root{--pad:16px} }
+/* short phones (iPhone SE, 320x568): keep the Order button on the first screen */
+@media (max-height:600px){
+  .board{padding:16px var(--pad) 14px}
+  .board .line{display:none}
+  .hero img{aspect-ratio:5/2}
+}
+@media (min-width:640px){
+  body{background:var(--wall)}
+  .pad{margin:40px auto 0;box-shadow:0 2px 3px rgba(32,29,31,.12),0 18px 40px rgba(32,29,31,.14)}
+  footer{max-width:600px;margin:0 auto 40px}
+  .grid{gap:22px 18px}
+  .hero img{aspect-ratio:16/9}
+}
+@media (prefers-reduced-motion:reduce){ *{transition-duration:.01ms!important} }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Concept site for The Good Baker · not official</div>
+
+<div class="pad">
+  <header class="board">
+    <img src="assets/logo.jpg" alt="The Good Baker logo, a slice of toast with a bite out of it" width="52" height="52">
+    <h1>The Good Baker</h1>
+    <p class="ta" lang="ta">தி குட் பேக்கர் · Coimbatore</p>
+    <p class="line">Puffs · Buns · Cakes · Cookies</p>
+  </header>
+  <div class="perf" aria-hidden="true"></div>
+
+  <main>
+    <div class="today">
+      <div class="date" role="group" aria-label="Today">
+        <p class="num" id="num">8</p>
+        <div class="dmeta">
+          <p class="wd" id="wd">Sunday</p>
+          <p class="mo"><span id="wt" lang="ta">ஞாயிறு</span> · <span id="mo">November</span></p>
+        </div>
+      </div>
+      <figure class="hero"><img src="assets/hero-puff.jpg" alt="A golden, many-layered puff on a wooden board, with a cup of red sauce" width="900" height="600" fetchpriority="high"></figure>
+      <ul class="courses">
+        <li class="here"><b>Saibaba Colony, NSR Road</b><span>9 AM to 11 PM daily<span class="now" id="now" hidden></span></span></li>
+        <li><b>4.7 on Google</b><span>318 reviews</span></li>
+      </ul>
+      <a class="order" id="order" href="https://wa.me/918667763811?text=Hi%20The%20Good%20Baker!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 19z"/><path d="M9.2 8.6c.2 2.9 2.5 5.4 5.4 5.9l1-1.4-1.9-1-.8.8c-.9-.4-1.7-1.2-2.1-2.1l.8-.8-1-1.9z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a class="call" href="tel:+918667763811">or call +91 86677 63811</a>
+    </div>
+
+    <section aria-labelledby="counter-h">
+      <h2 id="counter-h">On the counter</h2>
+      <p class="lead">Puffs, buns, breads, cakes and cookies, made fresh daily and pocket-friendly.</p>
+      <div class="grid">
+        <figure><img src="assets/buns.jpg" alt="A bun cut in half, with a red jam filling, on a wooden board" width="600" height="600" loading="lazy"><figcaption>Buns</figcaption></figure>
+        <figure><img src="assets/burgers.jpg" alt="A burger with a grilled bun on a wooden board" width="600" height="600" loading="lazy"><figcaption>Burgers</figcaption></figure>
+        <figure><img src="assets/cake-slice.jpg" alt="A slice of layered cake with pink icing on a white plate" width="900" height="900" loading="lazy"><figcaption>Cakes</figcaption></figure>
+        <figure><img src="assets/cookies.jpg" alt="A stack of cookies on a yellow plate" width="900" height="900" loading="lazy"><figcaption>Cookies and biscuits</figcaption></figure>
+      </div>
+      <ul class="menu">
+        <li><b>Puffs</b><span>Open, Chicken Sukka, Chicken, Mushroom</span></li>
+        <li><b>Buns</b><span>Cream, Masala</span></li>
+        <li><b>Burgers</b><span>Mutton Kari Vadai, Chicken Kari Vadai</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="outlets-h">
+      <h2 id="outlets-h">Outlets in Coimbatore</h2>
+      <figure class="shop">
+        <img src="assets/storefront.jpg" alt="The Good Baker's shop front: a plum sign in Tamil and English and a lemon band that reads Semmaaa Fresh" width="1039" height="1100" loading="lazy">
+        <figcaption>Look for the plum sign: Semmaaa fresh!</figcaption>
+      </figure>
+      <ul class="outlets">
+        <li><b>Saibaba Colony</b><span>471A, NSR Road, near JK Hotels. 9 AM to 11 PM daily.</span><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Good%20Baker%20Saibaba%20Colony%20Coimbatore&amp;query_place_id=ChIJ75P7_WRZqDsRQLXLQxv1BuE" target="_blank" rel="noopener" aria-label="Map for Saibaba Colony"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Map</a></li>
+        <li><b>Saravanampatti</b><span>Near KCT Tech Park</span><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Good%20Baker%20Saravanampatti%20Coimbatore" target="_blank" rel="noopener" aria-label="Map for Saravanampatti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Map</a></li>
+        <li><b>Vadavalli</b><span>210, Marudhamalai Road, next to Central Ghee</span><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Good%20Baker%20Vadavalli%20Coimbatore" target="_blank" rel="noopener" aria-label="Map for Vadavalli"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Map</a></li>
+        <li><b>Sowripalayam</b><span>Call for this outlet's hours</span><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Good%20Baker%20Sowripalayam%20Coimbatore" target="_blank" rel="noopener" aria-label="Map for Sowripalayam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Map</a></li>
+      </ul>
+    </section>
+
+    <section class="close" aria-labelledby="close-h">
+      <h2 id="close-h">Send us your list</h2>
+      <p class="lead">Write it on WhatsApp, or call.</p>
+      <a class="order" href="https://wa.me/918667763811?text=Hi%20The%20Good%20Baker!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 19z"/><path d="M9.2 8.6c.2 2.9 2.5 5.4 5.4 5.9l1-1.4-1.9-1-.8.8c-.9-.4-1.7-1.2-2.1-2.1l.8-.8-1-1.9z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a class="call" href="tel:+918667763811">or call +91 86677 63811</a>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="row">
+    <a href="https://instagram.com/thegoodbaker_in" target="_blank" rel="noopener">Instagram @thegoodbaker_in</a>
+    <a href="tel:+918667763811">+91 86677 63811</a>
+  </div>
+  <small>A website concept preview for The Good Baker. Not the official site.</small>
+</footer>
+
+<a class="float" id="float" href="https://wa.me/918667763811?text=Hi%20The%20Good%20Baker!%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="Order on WhatsApp" tabindex="-1">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 19z"/><path d="M9.2 8.6c.2 2.9 2.5 5.4 5.4 5.9l1-1.4-1.9-1-.8.8c-.9-.4-1.7-1.2-2.1-2.1l.8-.8-1-1.9z"/></svg>
+</a>
+
+<script>
+/* Today's sheet, in Coimbatore time. Hours are the Saibaba Colony listing's: 9 AM to 11 PM, every day. */
+(function () {
+  var EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var TA = ["ஞாயிறு", "திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி"];
+  var MO = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  // the visitor's clock, moved to India time (UTC+5:30), so the sheet matches the shop's day
+  var d = new Date(Date.now() + (new Date().getTimezoneOffset() + 330) * 60000);
+  var day = d.getDay();
+  document.getElementById("num").textContent = d.getDate();
+  document.getElementById("num").classList.toggle("sun", day === 0);
+  document.getElementById("mo").textContent = MO[d.getMonth()];
+  document.getElementById("wd").textContent = EN[day];
+  document.getElementById("wt").textContent = TA[day];
+  var h = d.getHours() + d.getMinutes() / 60, open = h >= 9 && h < 23, now = document.getElementById("now");
+  now.textContent = open ? "Open now" : "Closed now";
+  now.classList.toggle("shut", !open);
+  now.hidden = false;
+
+  // the floating button shows once the first Order button has scrolled away, and hides again near the last one
+  var float = document.getElementById("float"), first = document.getElementById("order");
+  var last = document.querySelector(".close .order");
+  // a scroll check, not an IntersectionObserver: a jump from the bottom back to the top never crosses the button
+  var shown = null, ticking = false;
+  function check() {
+    ticking = false;
+    var end = last.getBoundingClientRect();
+    var gone = first.getBoundingClientRect().bottom < 0 && !(end.top < innerHeight && end.bottom > 0);
+    if (gone === shown) return;
+    shown = gone;
+    float.classList.toggle("show", gone);
+    float.tabIndex = gone ? 0 : -1;
+    float.setAttribute("aria-hidden", gone ? "false" : "true");
+  }
+  addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(check); } }, { passive: true });
+  addEventListener("resize", check);
+  check();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Candid Clicz · Photography, Coimbatore</title>
+<meta name="description" content="Candid Clicz, wedding and couple photography and customised photo gifts in Udayampalayam, Coimbatore.">
+<meta name="theme-color" content="#fafbf9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* A kolam at the doorstep: rice-flour white, one ink line, the logo's teal for the one action.
+     --teal is sampled from the lens at the centre of their logo (assets/logo.jpg), deep enough for white text. */
+  :root {
+    --paper: #fafbf9;
+    --ink: #1b2321;
+    --muted: #59645f;
+    --rule: #d8dedb;
+    --teal: #0d7671;
+    --teal-press: #0a5e5a;
+    --teal-ink: #ffffff;
+    --head: "Tenor Sans", "Gill Sans", "Trebuchet MS", sans-serif;
+    --body: "Hanken Grotesk", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gut: 20px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; min-width: 320px; overflow-x: hidden; background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--teal); color: #fff; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--head); font-weight: 400; margin: 0; letter-spacing: -.005em; }
+  p { margin: 0; }
+  svg { display: block; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding-left: var(--gut); padding-right: var(--gut); }
+
+  .concept { background: var(--ink); color: #dfe5e2; text-align: center; font-size: 13px; line-height: 1.35; padding: 6px 12px; }
+
+  /* Header */
+  .top { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 12px; }
+  .mark { text-decoration: none; display: flex; align-items: center; gap: 10px; min-height: 44px; }
+  /* Their logo is a white square: multiply lets the white fall away into the page */
+  .mark img { width: 40px; height: 40px; flex: none; border-radius: 50%; mix-blend-mode: multiply; }
+  .mark b { display: block; font-family: var(--head); font-weight: 400; font-size: 20px; letter-spacing: .06em; line-height: 1.2; }
+  .mark small { display: block; font-size: 14px; color: var(--muted); letter-spacing: .01em; }
+  .call { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 2px 0 10px; text-decoration: none; font-weight: 500; font-size: 16px; }
+  .call svg { width: 18px; height: 18px; color: var(--teal); }
+
+  /* Hero */
+  .hero { padding-bottom: 8px; }
+  .hero figure { margin: 0; }
+  .hero img { width: 100%; aspect-ratio: 1; object-fit: cover; height: min(calc(100vw - 2 * var(--gut)), 37vh); max-height: 520px; object-position: 50% 42%; }
+  .cap { border-top: 1px solid var(--ink); margin-top: 8px; padding-top: 6px; font-size: 16px; line-height: 1.4; color: var(--muted); }
+  .hero h1 { font-size: 28px; line-height: 1.18; max-width: 16em; margin-top: 18px; }
+  .hero .sub { color: var(--muted); margin-top: 8px; max-width: 34em; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 52px; margin-top: 18px; padding: 12px 18px;
+         background: var(--teal); color: var(--teal-ink); text-decoration: none; font-weight: 600; font-size: 17px; line-height: 1.2; border: 0;
+         transition: transform .14s var(--ease), background-color .2s; }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn:active { transform: scale(.97); }
+  @media (hover: hover) { .btn:hover { background: var(--teal-press); } }
+
+  section { padding: 72px 0 0; }
+  .sec-h { font-size: 26px; line-height: 1.2; }
+  .sec-p { color: var(--muted); margin-top: 8px; max-width: 34em; }
+
+  /* Work: plates with ruled captions */
+  .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 14px; margin-top: 30px; align-items: start; }
+  .plate { margin: 0; }
+  .plate img { width: 100%; object-fit: cover; }
+  .plate.a img { aspect-ratio: 360 / 560; }
+  .plate.b { margin-top: 56px; }
+  .plate.b img { aspect-ratio: 361 / 525; }
+  .plate.c { grid-column: 1 / -1; width: 78%; }
+  .plate.c img { aspect-ratio: 480 / 600; object-position: 50% 35%; }
+  .plate figcaption { border-top: 1px solid var(--ink); margin-top: 8px; padding-top: 6px; font-size: 16px; line-height: 1.4; }
+  .plate figcaption b { display: block; font-weight: 500; }
+  .plate figcaption span { display: block; color: var(--muted); font-size: 16px; }
+  .plate figcaption svg { display: inline-block; width: 11px; height: 11px; vertical-align: 0; margin: 0 4px; color: var(--teal); }
+  .more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 22px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--rule); }
+  .more svg { width: 18px; height: 18px; color: var(--teal); }
+
+  /* Gifts: one repeated row */
+  .gifts { list-style: none; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+  .gifts li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .gifts img { width: 88px; height: 116px; object-fit: cover; }
+  .gifts h3 { font-family: var(--body); font-weight: 600; font-size: 17px; line-height: 1.3; }
+  .gifts p { font-size: 16px; line-height: 1.45; color: var(--muted); margin-top: 2px; }
+  .gifts .row-end { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 12px; margin-top: 4px; }
+  .gifts .price { font-size: 16px; color: var(--ink); }
+  .gifts a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 16px; font-weight: 600; color: var(--teal); text-decoration: none; }
+  .gifts a svg { width: 16px; height: 16px; }
+
+  /* Enquiry: three dots, one line that closes around them */
+  .ask { max-width: 560px; }
+  .form { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0 14px; margin-top: 26px; }
+  .form svg.k { grid-row: 1 / span 3; width: 40px; height: 252px; }
+  .form svg.k path { fill: none; stroke: #bcc5c1; stroke-width: 1.2; stroke-dasharray: 3 4; }
+  .form svg.k path.ink { stroke: var(--ink); stroke-width: 1.4; stroke-linecap: butt; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s var(--ease); }
+  .form svg.k circle { fill: var(--paper); stroke: var(--ink); stroke-width: 1.3; transition: fill .25s, stroke .25s; }
+  .form svg.k circle.on { fill: var(--teal); stroke: var(--teal); }
+  .field { height: 84px; display: flex; flex-direction: column; justify-content: center; }
+  .field label { font-size: 14px; color: var(--muted); line-height: 1.3; }
+  .field select, .field input { font: 400 19px/1.3 var(--body); color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0;
+    min-height: 46px; padding: 6px 0; width: 100%; -webkit-appearance: none; appearance: none; }
+  .field input::placeholder { color: #67726e; }
+  .field input { caret-color: var(--teal); }
+  .field select { padding-right: 24px; cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%231b2321' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 2px center / 12px 8px; }
+  .field input[type=date] { min-width: 0; }
+  .field input[type=date]::-webkit-date-and-time-value { text-align: left; }
+  .field select:focus, .field input:focus { outline: none; border-bottom: 2px solid var(--teal); }
+  .msg { margin-top: 22px; padding: 14px 16px; background: #eef2f0; font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+  .msg span { display: block; font-size: 14px; color: var(--muted); }
+  .msg q { display: block; quotes: none; }
+  .or { margin-top: 12px; color: var(--muted); font-size: 16px; }
+  .or a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-weight: 500; text-underline-offset: 3px; font-variant-numeric: tabular-nums; }
+
+  /* Facts on ruled lines */
+  .facts { list-style: none; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+  .facts li { padding: 18px 0 16px; border-bottom: 1px solid var(--rule); }
+  .facts b { display: block; font-family: var(--head); font-weight: 400; font-size: 22px; line-height: 1.25; font-variant-numeric: tabular-nums; }
+  .facts span { display: block; color: var(--muted); font-size: 16px; line-height: 1.5; margin-top: 3px; }
+  .facts a { display: inline-flex; align-items: center; min-height: 44px; color: var(--teal); font-weight: 600; text-decoration: none; }
+  /* The bar steps aside while the footer is on screen, so the end needs only the safe area */
+  footer { padding: 56px 0 calc(24px + env(safe-area-inset-bottom)); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; border-top: 1px solid var(--rule); padding-top: 16px; }
+  footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-underline-offset: 3px; }
+
+  /* The action on its own plane */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: grid; grid-template-columns: 1fr auto; gap: 8px;
+         padding: 10px var(--gut) calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 251, 249, .88);
+         -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-top: 1px solid var(--rule);
+         transform: translateY(110%); transition: transform .32s var(--ease); }
+  .bar.on { transform: none; }
+  .bar a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; text-decoration: none; font-weight: 600; font-size: 16px; }
+  .bar .b-wa { background: var(--teal); color: #fff; }
+  .bar .b-call { width: 52px; border: 1px solid var(--ink); }
+  .bar svg { width: 20px; height: 20px; }
+
+  @media (min-width: 760px) {
+    :root { --gut: 40px; }
+    .hero-in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: end; padding-top: 10px; }
+    .hero img { height: auto; }
+    .hero h1 { font-size: 40px; }
+    .btn { width: auto; display: inline-flex; padding: 12px 28px; }
+    section { padding-top: 110px; }
+    .sec-h { font-size: 34px; }
+    .plates { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+    .plate.b { margin-top: 90px; }
+    .plate.c { grid-column: auto; width: 100%; margin-top: 30px; }
+    .gifts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .split section { padding-top: 110px; }
+    .bar { display: none; }
+    footer { padding-bottom: 48px; }
+  }
+  /* Tablet: the hero's text column is about 300px, so the button fills it to keep its label on one line */
+  @media (min-width: 760px) and (max-width: 1023px) {
+    .hero .btn { width: 100%; padding-left: 16px; padding-right: 16px; font-size: 16px; }
+  }
+  @media (max-width: 759px) and (max-height: 620px) {
+    .hero img { height: min(calc(100vw - 2 * var(--gut)), 34vh); }
+    .hero .sub { display: none; }
+  }
+  @media (max-width: 359px) {
+    :root { --gut: 16px; }
+    .hero h1 { font-size: 25px; }
+    /* keeps "Check your date on WhatsApp" on one line at 320px */
+    .btn { font-size: 16px; gap: 8px; padding-left: 12px; padding-right: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .form svg.k path, .bar { transition: none; }
+    .btn:active { transform: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) { .bar { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
+  .js .reveal { opacity: 0; }
+</style>
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('js'); }, 2500);
+</script>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept preview made for Candid Clicz · not the official site</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.6 4.5c2.2 0 3.7 1.3 5.4 3.2 1.7-1.9 3.2-3.2 5.4-3.2 3.6 0 5.7 3.8 4.2 7.2C19.5 16.4 12 21 12 21Z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></symbol>
+  <symbol id="i-call" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a1.6 1.6 0 0 1-1.7 1.6C10.5 20.1 3.9 13.5 3.4 5.2A1.6 1.6 0 0 1 5 3.5Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor"/></symbol>
+</svg>
+
+<header class="wrap top">
+  <a class="mark" href="#top" aria-label="Candid Clicz, back to top"><img src="assets/logo.jpg" alt="" width="40" height="40"><span><b>Candid Clicz</b><small>Photography · Coimbatore</small></span></a>
+  <a class="call" href="tel:+917708730302"><svg aria-hidden="true"><use href="#i-call"/></svg>Call</a>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="hero-in">
+      <figure>
+        <img src="assets/post-06.jpg" alt="A couple in navy smiling at each other under a tree, photographed by Candid Clicz" width="640" height="640" fetchpriority="high">
+        <figcaption class="cap">One love, two hearts, one forever.</figcaption>
+      </figure>
+      <div>
+        <h1>We capture your memories.</h1>
+        <p class="sub">Wedding photographer in Udayampalayam, Coimbatore. Photo gifts too.</p>
+        <a class="btn" id="wa1" href="https://wa.me/917708730302" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Check your date on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap" aria-labelledby="work-h">
+    <h2 class="sec-h" id="work-h">Recent shoots</h2>
+    <div class="plates">
+      <figure class="plate a reveal">
+        <img src="assets/post-12.jpg" alt="Mathew and Nisha walking hand in hand on a beach, both in white" width="360" height="560" loading="lazy">
+        <figcaption><b>Mathew<svg aria-hidden="true"><use href="#i-heart"/></svg><span class="sr"> and </span>Nisha</b><span>Pre-wedding story, save the date 27.08.2026</span></figcaption>
+      </figure>
+      <figure class="plate b reveal">
+        <img src="assets/post-01.jpg" alt="A bride in a silk saree with a green border and her groom in a maroon shirt, at night" width="361" height="525" loading="lazy">
+        <figcaption><b>Wedding ceremony</b></figcaption>
+      </figure>
+      <figure class="plate c reveal">
+        <img src="assets/post-08.jpg" alt="A couple leaning close against a pink, yellow and blue painted wall" width="480" height="640" loading="lazy">
+        <figcaption><b>Couple shoot</b></figcaption>
+      </figure>
+    </div>
+    <a class="more" href="https://instagram.com/candid__clicz__photography" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg>More on Instagram</a>
+  </section>
+
+  <section class="wrap" aria-labelledby="gifts-h">
+    <h2 class="sec-h" id="gifts-h">Gifts from your photos</h2>
+    <p class="sec-p">1000+ models. Design and theme can be customised, and shipping is free.</p>
+    <ul class="gifts">
+      <li class="reveal">
+        <img src="assets/post-02.jpg" alt="A wooden plaque engraved with a portrait and a birthday message" width="361" height="640" loading="lazy">
+        <div><h3>Wooden engraving</h3><p>12x8 inch shown; all sizes available.</p>
+          <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wooden engraving" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
+      </li>
+      <li class="reveal">
+        <img src="assets/post-07.jpg" alt="A round wall clock ringed with small photo frames of a couple" width="360" height="485" loading="lazy">
+        <div><h3>Wall photo clock</h3><p>Wooden wall clock, glossy finish.</p>
+          <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wall photo clock" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
+      </li>
+      <li class="reveal">
+        <img src="assets/post-11.jpg" alt="A white and gold acrylic stand with a wedding couple's photo and spaces for thumb impressions" width="360" height="472" loading="lazy">
+        <div><h3>Thumb impression frame</h3><p>A wedding gift, with the couple's names.</p>
+          <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wedding thumb impression frame" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
+      </li>
+      <li class="reveal">
+        <img src="assets/post-10.jpg" alt="Dozens of small framed portraits laid out on a floor as farewell gifts" width="360" height="640" loading="lazy">
+        <div><h3>Farewell photo frames</h3><p>Trending frames; designs customised.</p>
+          <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Farewell photo frames" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="wrap split">
+    <section class="ask" id="ask" aria-labelledby="ask-h">
+      <h2 class="sec-h" id="ask-h">Tell us the day</h2>
+      <p class="sec-p">Occasion, date and place, sent to us on WhatsApp.</p>
+      <form class="form" id="form" onsubmit="return false">
+        <svg class="k" viewBox="0 -2 40 256" aria-hidden="true">
+          <path d="M20 0C0 0 2 76 20 84C38 92 38 160 20 168C2 176 0 252 20 252C40 252 38 176 20 168C2 160 2 92 20 84C38 76 40 0 20 0Z"/>
+          <!-- One lobe of the line per answer, so each closes around its own dot -->
+          <path class="ink" id="k1" pathLength="1" d="M20 0C0 0 2 76 20 84C38 76 40 0 20 0Z"/>
+          <path class="ink" id="k2" pathLength="1" d="M20 84C38 92 38 160 20 168C2 160 2 92 20 84Z"/>
+          <path class="ink" id="k3" pathLength="1" d="M20 168C2 176 0 252 20 252C40 252 38 176 20 168Z"/>
+          <circle id="d1" cx="20" cy="42" r="4"/><circle id="d2" cx="20" cy="126" r="4"/><circle id="d3" cx="20" cy="210" r="4"/>
+        </svg>
+        <div class="field"><label for="occasion">Occasion</label>
+          <select id="occasion"><option value="">Choose one</option><option>Wedding</option><option>Pre-wedding shoot</option><option>Puberty ceremony</option></select></div>
+        <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
+        <div class="field"><label for="place">Place</label><input id="place" type="text" placeholder="Town or venue" autocomplete="off" maxlength="60" enterkeyhint="done"></div>
+      </form>
+      <p class="msg" aria-live="polite"><span>Your message</span><q id="msg"></q></p>
+      <a class="btn" id="wa2" href="https://wa.me/917708730302" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
+      <p class="or">or call <a href="tel:+917708730302">+91 77087 30302</a></p>
+    </section>
+
+    <section aria-labelledby="visit-h">
+      <h2 class="sec-h" id="visit-h">Find us</h2>
+      <ul class="facts">
+        <li><b>5.0 on Google</b><span>from 237 reviews</span></li>
+        <li><b>8 AM to 10 PM</b><span>open every day</span></li>
+        <li><b>Udayampalayam, Coimbatore</b><span>28, Kannapiran Mills Rd, Chinna Ayyavu Thevar Layout, 641028</span>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Candid%20Clicz%20Coimbatore&amp;query_place_id=ChIJCXgJG0tZqDsR7s_RtyVTGaE" target="_blank" rel="noopener">Directions</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>Candid Clicz Photography, Coimbatore</span><a href="https://instagram.com/candid__clicz__photography" target="_blank" rel="noopener">Instagram</a></div>
+</footer>
+
+<nav class="bar" id="bar" aria-label="Quick contact">
+  <a class="b-wa" id="wa3" href="https://wa.me/917708730302" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Check your date</a>
+  <a class="b-call" href="tel:+917708730302" aria-label="Call Candid Clicz"><svg aria-hidden="true"><use href="#i-call"/></svg></a>
+</nav>
+
+<script>
+  // Plain script: builds the WhatsApp message and closes the kolam line as each answer is given.
+  (function () {
+    var WA = "https://wa.me/917708730302";
+    var $ = function (id) { return document.getElementById(id); };
+    var occ = $("occasion"), date = $("date"), place = $("place"), out = $("msg");
+    var lobes = [$("k1"), $("k2"), $("k3")], dots = [$("d1"), $("d2"), $("d3")];
+    var links = [$("wa1"), $("wa2"), $("wa3")];
+
+    function ddmmyyyy(v) { var p = v.split("-"); return p[2] + "." + p[1] + "." + p[0]; }
+    function message() {
+      var o = occ.value, d = date.value, p = place.value.trim();
+      if (!o && !d && !p) return "Hi Candid Clicz! I'd like to check a date for a shoot. Are you free?";
+      // Place before date, and a missing date in its own sentence, so the place never follows "not fixed yet"
+      var s = "Hi Candid Clicz! I'd like to book you for a " + (o ? o.toLowerCase() : "shoot") + (p ? " in " + p : "");
+      s += d ? " on " + ddmmyyyy(d) + "." : ". The date isn't fixed yet.";
+      return s + " Are you free?";
+    }
+    function sync() {
+      var text = message(), href = WA + "?text=" + encodeURIComponent(text);
+      links.forEach(function (a) { a.href = href; });
+      out.textContent = text;
+      var filled = [!!occ.value, !!date.value, !!place.value.trim()];
+      // Each answer closes the lobe around its own dot, in whatever order they're given
+      filled.forEach(function (f, i) {
+        dots[i].classList.toggle("on", f);
+        lobes[i].style.strokeDashoffset = f ? "0" : "1";
+      });
+    }
+    occ.addEventListener("change", sync);
+    date.addEventListener("change", sync);
+    date.addEventListener("input", sync);
+    place.addEventListener("input", sync);
+    place.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); place.blur(); } });
+    var t = new Date(); date.min = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
+    sync();
+
+    document.querySelectorAll("[data-gift]").forEach(function (a) {
+      a.href = WA + "?text=" + encodeURIComponent("Hi Candid Clicz! I'd like to know about the " + a.dataset.gift + ". Price and details, please.");
+      a.setAttribute("aria-label", "Ask about the " + a.dataset.gift + " on WhatsApp");
+    });
+
+    // The bar appears once the hero button has scrolled away, and steps aside while the
+    // enquiry (with its own WhatsApp button) or the footer is on screen
+    var bar = $("bar"), first = $("wa1"), ask = $("ask"), foot = document.querySelector("footer"), ticking = false;
+    function onScreen(el) { var r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }
+    function barState() {
+      ticking = false;
+      bar.classList.toggle("on", first.getBoundingClientRect().bottom < 0 && !onScreen(ask) && !onScreen(foot));
+    }
+    addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(barState); } }, { passive: true });
+    barState();
+  })();
+</script>
+
+<script type="module">
+  // Motion (motion.dev), pinned: plates settle in once as they arrive.
+  import { animate } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
+  const late = !document.documentElement.classList.contains("js");
+  window.__motionReady = true;
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Reveal anything that has reached the screen, including whatever a fast scroll skipped past
+  try {
+    const pending = new Set(late ? [] : document.querySelectorAll(".reveal"));
+    const show = (el) => {
+      pending.delete(el);
+      if (calm) { animate(el, { opacity: 1 }, { duration: 0.25 }); return; }
+      animate(el, { opacity: [0, 1], y: [14, 0] }, { type: "spring", bounce: 0, duration: 0.7 });
+    };
+    const sweep = () => { for (const el of [...pending]) if (el.getBoundingClientRect().top < innerHeight * 0.92) show(el); };
+    let queued = false;
+    const onScroll = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; sweep(); if (!pending.size) removeEventListener("scroll", onScroll); }, 60); };
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    sweep();
+  } catch (err) { document.documentElement.classList.remove("js"); }
+</script>
+</body>
+</html>

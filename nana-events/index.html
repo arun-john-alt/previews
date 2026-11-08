@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>NANA Events · Event management in Padi, Chennai</title>
+<meta name="description" content="Website concept for NANA Events, event management in Elango Nagar, Padi, Chennai. Fill in your date, occasion and place and send it on WhatsApp.">
+<meta name="theme-color" content="#e7ecf2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* The front door of a Tamil home on function day: neelam-blued limewash, a mango-leaf thoranam
+     on the lintel, the open doorway holding the enquiry, and the turmeric threshold as the step that sends it. */
+  :root {
+    --lime: #e7ecf2;          /* limewash with neelam (indigo) in it: cool, not cream */
+    --lime-deep: #d9e1ea;
+    --ink: #1b1d36;
+    --ink-2: #474c68;
+    --rule: rgba(27, 29, 54, .22);
+    --leaf: #2e6a2b;
+    --leaf-2: #5b8f2e;
+    --saffron: #9f4600;       /* answered words */
+    --marigold: #f2a31b;
+    --turmeric: #edb714;
+    --turmeric-press: #dca70c;
+    --kumkum: #c1132f;
+    /* Static faces only: sign-painter condensed for the name and headings, semi-condensed for the sentence,
+       Hind Madurai (Latin and Tamil) for reading. */
+    --sign: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --say: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+    --face: "Hind Madurai", "Noto Sans Tamil", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --step-h: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-color: var(--ink-2) var(--lime); }
+  body {
+    margin: 0; background: var(--lime); color: var(--ink);
+    font: 400 17px/1.5 var(--face);
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(var(--step-h) + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--turmeric); color: var(--ink); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+  h1, h2, p { margin: 0; }
+
+  .concept { background: var(--ink); color: #dfe4ee; text-align: center; font-size: 13px; line-height: 1.35; padding: 6px 12px; letter-spacing: .01em; }
+
+  /* ---- Lintel: the thoranam ---- */
+  .lintel { position: relative; height: 62px; }
+  .leaves {
+    position: absolute; inset: 0 0 auto 0; height: 54px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='54' viewBox='0 0 40 54'%3E%3Cpath d='M0 3.5h40' stroke='%231b1d36' stroke-width='1.6'/%3E%3Cpath d='M10 3c-7.2 9.5-7.6 28 0 48c7.6-20 7.2-38.5 0-48z' fill='%232e6a2b'/%3E%3Cpath d='M10 7v38' stroke='%23a9c47a' stroke-width='.9' opacity='.75'/%3E%3Cpath d='M30 3c-6.4 8.5-6.9 24.5 0 42c6.9-17.5 6.4-33.5 0-42z' fill='%235b8f2e'/%3E%3Cpath d='M30 7v32' stroke='%23c3d896' stroke-width='.9' opacity='.75'/%3E%3Cpath d='M6.5 2.2h7l-1.3 3.4h-4.4z M26.6 2.2h6.8l-1.3 3.4h-4.2z' fill='%23234f20'/%3E%3C/svg%3E") 0 0 / 40px 54px repeat-x;
+    background-position-x: calc(50% + 20px);
+  }
+  .knot { position: absolute; top: 0; left: var(--x); width: 34px; height: 62px; margin-left: -17px; pointer-events: none; }
+  .knot svg { display: block; width: 34px; height: 62px; overflow: visible; }
+  .knot .flower { transform-origin: 17px 4px; opacity: 0; transform: translateY(-6px) rotate(-14deg) scale(.7); transition: opacity .18s var(--ease), transform .42s cubic-bezier(.34, 1.45, .64, 1); }
+  .knot.tied .flower { opacity: 1; transform: none; }
+
+  /* ---- The doorway ---- */
+  /* Door posts: a painted double rule each side, fading out where the doorway meets the wall */
+  .door { position: relative; margin: 0 10px; padding: 18px 18px 30px; }
+  .door::before, .door::after {
+    content: ""; position: absolute; top: -8px; bottom: 0; width: 5px; pointer-events: none;
+    border-left: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); opacity: .62;
+    -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent);
+  }
+  .door::before { left: 0; }
+  .door::after { right: 0; }
+  .welcome { font-size: 16px; font-weight: 500; color: var(--ink-2); letter-spacing: .02em; }
+  h1 {
+    font-size: clamp(48px, 15.8vw, 124px); line-height: .86; font-weight: 800; font-family: var(--sign);
+    letter-spacing: -.01em; margin: 2px 0 10px; white-space: nowrap;
+  }
+  .what { font-size: 17px; line-height: 1.35; color: var(--ink-2); }
+  .what b { color: var(--ink); font-weight: 600; }
+
+  .ask { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .sentence {
+    font-size: clamp(27px, 7.6vw, 46px); line-height: 1.32; font-weight: 500; font-family: var(--say);
+    letter-spacing: -.012em; text-wrap: pretty;
+  }
+  .slot, .sentence input {
+    font: inherit; letter-spacing: inherit; color: var(--saffron); font-weight: 700;
+    background: transparent; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0;
+    padding: 0 2px 3px; margin: 0; min-height: 44px; vertical-align: baseline; max-width: 100%;
+    -webkit-appearance: none; appearance: none;
+  }
+  .sentence input { width: 6.4em; caret-color: var(--saffron); }
+  .sentence input::placeholder { color: var(--ink-2); font-weight: 400; opacity: 1; }
+  .sentence input:focus, .slot:focus-within { outline: none; background: rgba(237, 183, 20, .28); }
+  #guests { width: 4.2em; }
+  #place { width: 7.6em; }
+  .slot { position: relative; display: inline-block; line-height: inherit; cursor: pointer; }
+  .slot .ph { color: var(--ink-2); font-weight: 400; }
+  .slot input[type="date"] {
+    position: absolute; inset: -2px 0; width: 100%; height: calc(100% + 4px); opacity: 0; border: 0; padding: 0;
+    font-size: 16px; cursor: pointer; min-height: 0;
+  }
+  .nw { white-space: nowrap; }   /* the comma stays with its blank instead of starting a line */
+  .measure { position: absolute; visibility: hidden; white-space: pre; left: -9999px; top: 0; }
+  .hint { margin-top: 16px; font-size: 16px; color: var(--ink-2); max-width: 34em; }
+
+  /* ---- The wall beside the door: facts from the Google listing ---- */
+  .facts { margin: 0 10px; padding: 8px 18px 8px; }
+  .fact { padding: 26px 0; border-bottom: 1px solid var(--rule); }
+  .fact:first-child { padding-top: 14px; }
+  .blooms { display: flex; align-items: center; gap: 6px; margin-top: 14px; }
+  .blooms svg { width: 30px; height: 30px; display: block; }
+  .blooms .part { clip-path: inset(0 20% 0 0); }
+  .blooms .empty { opacity: .2; }
+  .fact h2 { font-size: clamp(26px, 7vw, 36px); line-height: 1.12; font-weight: 700; font-family: var(--sign); letter-spacing: 0; text-wrap: balance; }
+  .fact p, .fact address { font-style: normal; margin-top: 8px; color: var(--ink-2); }
+  .now { font-weight: 600; color: var(--ink) !important; }
+  .now:empty { display: none; }
+  .week { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .week li { text-align: center; padding: 8px 0 7px; border-top: 3px solid var(--leaf-2); background: var(--lime-deep); font-size: 15px; line-height: 1.35; }
+  .week b { display: block; font-weight: 700; font-size: 16px; }
+  .week li.today { border-top-color: var(--marigold); background: #f6e3b4; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 10px !important; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .source { padding: 18px 0 8px; font-size: 15px; color: var(--ink-2); }
+
+  footer { margin: 0 10px; padding: 18px 16px 28px; font-size: 14px; color: var(--ink-2); border-top: 1px solid var(--rule); }
+
+  /* ---- The threshold: turmeric step with kumkum dots, the one action ---- */
+  .threshold {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--turmeric); padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -6px 18px -8px rgba(27, 29, 54, .35);
+  }
+  .threshold::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 5px; height: 8px; pointer-events: none;
+    background: radial-gradient(circle, var(--kumkum) 2.6px, transparent 3.2px) 0 0 / 24px 8px repeat-x;
+    background-position-x: calc(50% + 12px);
+  }
+  .threshold { transition: transform .22s var(--ease); }
+  /* While the phone keyboard is up, the step steps aside so it never covers the blank being typed in.
+     body.kb is set from the visual viewport, not from focus: Android's Back closes the keyboard but keeps the focus. */
+  @media (pointer: coarse) {
+    body.kb .threshold { transform: translateY(110%); }
+  }
+  .step { display: flex; max-width: 940px; margin: 0 auto; height: var(--step-h); }
+  .step a {
+    display: flex; align-items: center; justify-content: center; gap: 10px; padding-top: 10px;
+    text-decoration: none; color: var(--ink); font-weight: 700; font-size: 20px; font-family: var(--say);
+    transition: transform .14s var(--ease), background-color .14s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .step a:active { transform: scale(.97); background: var(--turmeric-press); }
+  .step .send { flex: 1; }
+  .step .call { width: 96px; border-left: 1px solid rgba(27, 29, 54, .35); font-size: 17px; }
+  .step svg { width: 22px; height: 22px; flex: none; }
+
+  @media (hover: hover) {
+    .step a:hover { background: var(--turmeric-press); }
+    .links a:hover { text-decoration-thickness: 2px; }
+  }
+
+  @media (min-width: 720px) {
+    .door, .facts, footer { max-width: 940px; margin-left: auto; margin-right: auto; }
+    .door { padding: 28px 40px 40px; }
+    .facts { padding: 8px 40px; display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 0 36px; }
+    .fact { border-bottom: 0; }
+    .source { grid-column: 1 / -1; border-top: 1px solid var(--rule); }
+    footer { padding-left: 40px; padding-right: 40px; }
+    .lintel { height: 70px; }
+    .leaves { height: 62px; background-size: 46px 62px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .knot .flower, .step a, .threshold { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Website concept for NANA Events · not the official site</div>
+
+<div class="lintel" aria-hidden="true">
+  <div class="leaves"></div>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <g id="marigold">
+        <g fill="#e79512"><circle cx="10.6" cy="0.0" r="4.7"/><circle cx="9.7" cy="4.3" r="4.7"/><circle cx="7.1" cy="7.9" r="4.7"/><circle cx="3.3" cy="10.1" r="4.7"/><circle cx="-1.1" cy="10.5" r="4.7"/><circle cx="-5.3" cy="9.2" r="4.7"/><circle cx="-8.6" cy="6.2" r="4.7"/><circle cx="-10.4" cy="2.2" r="4.7"/><circle cx="-10.4" cy="-2.2" r="4.7"/><circle cx="-8.6" cy="-6.2" r="4.7"/><circle cx="-5.3" cy="-9.2" r="4.7"/><circle cx="-1.1" cy="-10.5" r="4.7"/><circle cx="3.3" cy="-10.1" r="4.7"/><circle cx="7.1" cy="-7.9" r="4.7"/><circle cx="9.7" cy="-4.3" r="4.7"/></g>
+        <g fill="#f2a31b"><circle cx="9.9" cy="0.0" r="4.2"/><circle cx="9.0" cy="4.0" r="4.2"/><circle cx="6.6" cy="7.4" r="4.2"/><circle cx="3.1" cy="9.4" r="4.2"/><circle cx="-1.0" cy="9.8" r="4.2"/><circle cx="-4.9" cy="8.6" r="4.2"/><circle cx="-8.0" cy="5.8" r="4.2"/><circle cx="-9.7" cy="2.1" r="4.2"/><circle cx="-9.7" cy="-2.1" r="4.2"/><circle cx="-8.0" cy="-5.8" r="4.2"/><circle cx="-4.9" cy="-8.6" r="4.2"/><circle cx="-1.0" cy="-9.8" r="4.2"/><circle cx="3.1" cy="-9.4" r="4.2"/><circle cx="6.6" cy="-7.4" r="4.2"/><circle cx="9.0" cy="-4.0" r="4.2"/></g>
+        <g fill="#ea860e"><circle cx="6.8" cy="1.2" r="4.1"/><circle cx="5.1" cy="4.7" r="4.1"/><circle cx="1.8" cy="6.7" r="4.1"/><circle cx="-2.1" cy="6.6" r="4.1"/><circle cx="-5.3" cy="4.4" r="4.1"/><circle cx="-6.9" cy="0.8" r="4.1"/><circle cx="-6.2" cy="-3.0" r="4.1"/><circle cx="-3.6" cy="-5.9" r="4.1"/><circle cx="0.2" cy="-6.9" r="4.1"/><circle cx="3.9" cy="-5.7" r="4.1"/><circle cx="6.4" cy="-2.7" r="4.1"/></g>
+        <g fill="#dd6f08"><circle cx="3.4" cy="0.3" r="3.3"/><circle cx="1.9" cy="2.8" r="3.3"/><circle cx="-1.1" cy="3.2" r="3.3"/><circle cx="-3.2" cy="1.2" r="3.3"/><circle cx="-2.9" cy="-1.7" r="3.3"/><circle cx="-0.5" cy="-3.4" r="3.3"/><circle cx="2.3" cy="-2.5" r="3.3"/></g>
+        <circle r="2.1" fill="#a9480a"/>
+      </g>
+    </defs>
+  </svg>
+  <div class="knot" data-for="occasion" style="--x:13%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="date" style="--x:37.6%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="place" style="--x:62.4%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="guests" style="--x:87%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+</div>
+
+<main>
+  <section class="door" aria-labelledby="name">
+    <p class="welcome"><span lang="ta">நல்வரவு</span> · welcome</p>
+    <h1 id="name">NANA EVENTS</h1>
+    <p class="what">Event management in Padi, Chennai<br><b>4.8 on Google</b> from 273 reviews</p>
+
+    <form class="ask" id="ask" action="https://wa.me/919345052030" method="get" target="_blank" novalidate>
+      <p class="sentence">
+        We’re planning <span id="article">an</span>
+        <input id="occasion" name="occasion" type="text" placeholder="occasion" autocomplete="off" autocapitalize="off" maxlength="60" enterkeyhint="next" aria-label="What is the occasion?">
+        on <span class="slot" id="dateSlot"><span id="dateText" class="ph">which date?</span><input id="date" name="date" type="date" aria-label="Which date?"></span>
+        at <span class="nw"><input id="place" name="place" type="text" placeholder="venue or area" autocomplete="off" maxlength="80" enterkeyhint="next" aria-label="Which venue or area?">,</span>
+        for about <input id="guests" name="guests" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="how many" maxlength="5" autocomplete="off" enterkeyhint="done" aria-label="About how many guests?"> guests.
+      </p>
+      <p class="hint">Fill the gaps, then tap the yellow Send on WhatsApp. You can still change the message there before it goes.</p>
+    </form>
+  </section>
+
+  <section class="facts" aria-label="From the Google Maps listing">
+    <div class="fact">
+      <h2>4.8 on Google, from 273 reviews.</h2>
+      <div class="blooms" role="img" aria-label="4.8 out of 5">
+        <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
+        <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
+        <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
+        <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
+        <span style="position:relative;width:30px;height:30px"><svg class="empty" viewBox="-16 -16 32 32" aria-hidden="true" style="position:absolute"><use href="#marigold"/></svg><svg class="part" viewBox="-16 -16 32 32" aria-hidden="true" style="position:absolute"><use href="#marigold"/></svg></span>
+      </div>
+    </div>
+    <div class="fact">
+      <h2>Open every day, 9 AM to 5 PM.</h2>
+      <p class="now" id="now" aria-live="polite"></p>
+      <ol class="week" aria-label="Hours by day">
+        <li data-d="Mon">Mon<b>9–5</b></li>
+        <li data-d="Tue">Tue<b>9–5</b></li>
+        <li data-d="Wed">Wed<b>9–5</b></li>
+        <li data-d="Thu">Thu<b>9–5</b></li>
+        <li data-d="Fri">Fri<b>9–5</b></li>
+        <li data-d="Sat">Sat<b>9–5</b></li>
+        <li data-d="Sun">Sun<b>9–5</b></li>
+      </ol>
+    </div>
+    <div class="fact">
+      <h2>Elango Nagar, Padi.</h2>
+      <address>12/47, 1st St, Elango Nagar, Padi, Chennai, Tamil Nadu 600050</address>
+      <p class="links">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=NANA%20EVENTS%2C%20Elango%20Nagar%2C%20Padi%2C%20Chennai&amp;query_place_id=ChIJbZgwkd1jUjoRJIReXcAg9GI" target="_blank" rel="noopener">Open in Google Maps</a>
+        <a href="tel:+919345052030">Call +91 93450 52030</a>
+      </p>
+    </div>
+    <p class="source">The rating, hours and address are from NANA Events’ Google Maps listing.</p>
+  </section>
+</main>
+
+<footer>Website concept for NANA Events · not the official site</footer>
+
+<nav class="threshold" aria-label="Contact NANA Events">
+  <div class="step">
+    <a class="send" id="send" data-wa href="https://wa.me/919345052030" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+      Send on WhatsApp
+    </a>
+    <a class="call" href="tel:+919345052030" aria-label="Call NANA Events on +91 93450 52030">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2L20 15.5V19a1.6 1.6 0 0 1-1.7 1.6C10.4 20.1 3.9 13.6 3.4 5.7A1.6 1.6 0 0 1 5 4Z"/></svg>
+      Call
+    </a>
+  </div>
+</nav>
+
+<script>
+  // Plain script, no libraries: the enquiry and every link work on any phone.
+  (function () {
+    var WA = "https://wa.me/919345052030";
+    var $ = function (id) { return document.getElementById(id); };
+    var occasion = $("occasion"), date = $("date"), place = $("place"), guests = $("guests");
+    var dateText = $("dateText"), article = $("article");
+
+    // Dates are read as the visitor's own calendar day; nothing is promised about availability.
+    var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var dayLabel = function (v, withYear) {
+      var p = v.split("-");
+      var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      if (isNaN(d)) return v;
+      return DAYS[d.getDay()] + " " + d.getDate() + " " + MONTHS[d.getMonth()] + (withYear ? " " + d.getFullYear() : "");
+    };
+    var istParts = function () {
+      var o = {};
+      new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", weekday: "short", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false })
+        .formatToParts(new Date()).forEach(function (x) { o[x.type] = x.value; });
+      return o;
+    };
+    try { var t = istParts(); date.min = t.year + "-" + t.month + "-" + t.day; } catch (e) {}
+
+    // "a" / "an" / nothing, so the sentence reads right whatever is typed ("an occasion" while it is empty)
+    var articleFor = function (s) {
+      if (!s) return "an";
+      if (/^(a|an|the|my|our|his|her|their)\s/i.test(s)) return "";
+      return /^[aeiou]/i.test(s) ? "an" : "a";
+    };
+
+    var message = function () {
+      var occ = occasion.value.trim(), pl = place.value.trim(), n = guests.value.replace(/\D/g, "");
+      var art = articleFor(occ);
+      var m = "Hi NANA Events, we're planning " + (occ ? (art ? art + " " : "") + occ : "a function");
+      if (date.value) m += " on " + dayLabel(date.value, true);
+      if (pl) m += " at " + pl;
+      if (+n > 0) m += ", for about " + n + " guests";
+      m += ".";
+      m += date.value ? " Are you free that day?" : " Could you help us with it?";
+      return m;
+    };
+
+    // Inputs grow with what is typed, so the sentence stays a sentence
+    var mirror = document.createElement("span");
+    mirror.className = "measure sentence";
+    document.body.appendChild(mirror);
+    var fit = function (input) {
+      var cs = getComputedStyle(input);
+      mirror.style.fontWeight = input.value ? "700" : "400";
+      mirror.textContent = input.value || input.placeholder;
+      var w = mirror.getBoundingClientRect().width + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + 2;
+      input.style.width = Math.ceil(w) + "px";
+    };
+
+    var sync = function () {
+      var occ = occasion.value.trim();
+      article.textContent = articleFor(occ);
+      article.hidden = !article.textContent;
+      dateText.textContent = date.value ? dayLabel(date.value) : "which date?";
+      dateText.className = date.value ? "" : "ph";
+      var filled = { occasion: !!occ, date: !!date.value, place: !!place.value.trim(), guests: +guests.value.replace(/\D/g, "") > 0 };
+      document.querySelectorAll(".knot").forEach(function (k) { k.classList.toggle("tied", filled[k.getAttribute("data-for")]); });
+      var href = WA + "?text=" + encodeURIComponent(message());
+      document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
+      [occasion, place, guests].forEach(fit);
+    };
+
+    guests.addEventListener("input", function () {
+      var clean = guests.value.replace(/\D/g, "");
+      if (clean !== guests.value) guests.value = clean;
+    });
+    [occasion, place, guests, date].forEach(function (el) {
+      el.addEventListener("input", sync);
+      el.addEventListener("change", sync);
+    });
+    // Desktop browsers only open the calendar from its icon; open it from anywhere on the blank
+    date.addEventListener("click", function () { try { date.showPicker(); } catch (e) {} });
+    // Enter (Next / Done on a phone keyboard) moves to the next empty blank, or closes the keyboard when all are filled.
+    // The form has no submit button, so this has to listen for the key itself.
+    var order = [occasion, date, place, guests];
+    var moveOn = function (from) {
+      var next = order.find(function (el) { return el !== from && !el.value.trim(); });
+      if (!next) { if (from) from.blur(); return; }
+      next.focus();
+      if (next === date) { try { date.showPicker(); } catch (e) {} }
+    };
+    [occasion, place, guests].forEach(function (el) {
+      el.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" || e.isComposing) return;
+        e.preventDefault();
+        moveOn(el);
+      });
+    });
+    $("ask").addEventListener("submit", function (e) { e.preventDefault(); moveOn(document.activeElement); });
+
+    // The yellow step hides only while the on-screen keyboard is actually up (the visual viewport shrinks),
+    // so it is back as soon as the keyboard closes, even if a blank still has focus.
+    var body = document.body, lintel = document.querySelector(".lintel");
+    var typing = function () { var a = document.activeElement; return !!a && a.tagName === "INPUT" && a.type === "text"; };
+    // The tallest the window has been at this width: browsers that shrink the whole window for the keyboard still count
+    var full = { w: window.innerWidth, h: window.innerHeight };
+    var kbUp = function () {
+      if (window.innerWidth !== full.w) full = { w: window.innerWidth, h: window.innerHeight };
+      full.h = Math.max(full.h, window.innerHeight);
+      var vv = window.visualViewport;
+      return !!vv && typing() && vv.height * vv.scale < full.h * 0.75;
+    };
+    // Once every blank is answered and the keyboard is down, bring the thoranam back into view to show the four marigolds
+    var shown = false;
+    var allFilled = function () { return !!(occasion.value.trim() && date.value && place.value.trim() && +guests.value.replace(/\D/g, "") > 0); };
+    var reveal = function () {
+      if (!allFilled()) { shown = false; return; }
+      if (shown || kbUp()) return;
+      shown = true;
+      if (lintel.getBoundingClientRect().bottom < 0) {
+        var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
+      }
+    };
+    var checkKb = function () {
+      var up = kbUp();
+      if (body.classList.contains("kb") !== up) body.classList.toggle("kb", up);
+      if (!up) setTimeout(reveal, 120);
+    };
+    if (window.visualViewport) visualViewport.addEventListener("resize", checkKb);
+    window.addEventListener("resize", checkKb);
+    document.addEventListener("focusin", checkKb);
+    document.addEventListener("focusout", function () { setTimeout(checkKb, 60); });
+    date.addEventListener("change", function () { setTimeout(reveal, 120); });
+
+    // Open now? (the listed hours, in India time)
+    try {
+      var p = istParts(), h = +p.hour % 24;
+      var li = document.querySelector('.week li[data-d="' + p.weekday + '"]');
+      if (li) { li.classList.add("today"); li.setAttribute("aria-current", "date"); }
+      $("now").textContent = h >= 9 && h < 17 ? "Open now, until 5 PM." : h < 9 ? "Closed now. Opens at 9 AM today." : "Closed now. Opens at 9 AM tomorrow.";
+    } catch (e) {}
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

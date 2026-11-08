@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Tree Top Villa · Homestay in Naidupuram, Kodaikanal</title>
+<meta name="description" content="Tree Top Villa, a homestay on Rifle Range Road, Naidupuram, Kodaikanal. 2, 3, 5 and 8 BHK, by the day, for families and groups of friends. Write to Mydeen on WhatsApp.">
+<meta name="theme-color" content="#c6d9e8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&family=Kalam:wght@400;700&family=Krona+One&display=swap" rel="stylesheet">
+<style>
+  /* Picture postcard world: inland-letter blue ground, white card stock, postmark ink,
+     ballpoint blue for what the guest writes, post-box red only for the live element. */
+  :root {
+    --ground: #c6d9e8;
+    --night: #1b2737;
+    --card: #fdfdfb;
+    --ink: #1c273e;
+    --ink-2: #44506a;
+    --pen: #1d3ca3;
+    --pen-soft: #5466a6;
+    --red: #c3262a;
+    --red-press: #a81f23;
+    --rule: #c5d1e0;
+    --paper: #e4eaf1;
+    --print: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --wide: "Krona One", "Archivo", Arial, sans-serif;
+    --hand: "Kalam", "Segoe Print", "Bradley Hand", cursive;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gut: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font: 400 17px/1.55 var(--print); -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  ::selection { background: var(--pen); color: #fff; }
+  :focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
+  h1, h2 { margin: 0; font-family: var(--wide); font-weight: 400; letter-spacing: 0; line-height: 1.12; text-wrap: balance; }
+
+  .concept {
+    background: var(--ink); color: #e6edf6; font: 500 13px/1.4 var(--print);
+    text-align: center; padding: 7px var(--gut);
+  }
+
+  /* ---------- First screen: the front print and the card back ---------- */
+  .hero { padding: 14px var(--gut) 8px; max-width: 1180px; margin: 0 auto; }
+  .print {
+    background: var(--card); padding: 7px 7px 0; margin: 0;
+    box-shadow: 0 10px 22px -8px rgba(18, 34, 58, .35), 0 2px 4px rgba(18, 34, 58, .12);
+  }
+  .front { transform: rotate(-1.4deg); position: relative; z-index: 1; }
+  .front img { width: 100%; aspect-ratio: 2.35; object-fit: cover; object-position: 72% 40%; }
+  .front .caption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 12px; padding: 8px 4px 20px; }
+  .front h1 { font-size: clamp(21px, 6.6vw, 40px); text-transform: uppercase; color: var(--ink); }
+  .front .place { margin: 0; font: 500 16px/1.3 var(--print); color: var(--ink-2); }
+
+  .back {
+    position: relative; z-index: 2; background: var(--card);
+    margin: -12px 4px 0; padding: 12px 14px 12px; transform: rotate(.7deg);
+    box-shadow: 0 14px 28px -10px rgba(18, 34, 58, .4), 0 2px 5px rgba(18, 34, 58, .12);
+  }
+  .back-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; min-height: 42px; }
+  .dear { margin: 2px 0 0; font: 700 clamp(22px, 7vw, 26px)/1.2 var(--hand); color: var(--pen); white-space: nowrap; }
+  .postmark { width: clamp(84px, 27vw, 104px); height: auto; aspect-ratio: 182 / 120; margin: -8px -8px -18px 0; color: var(--ink); opacity: .78; pointer-events: none; flex: none; }
+  .postmark.thunk { animation: thunk .26s var(--ease); }
+  @keyframes thunk { from { transform: scale(1.14) rotate(-6deg); opacity: .4; } to { transform: none; opacity: .78; } }
+
+  .stamps { border: 0; margin: 4px 0 0; padding: 0; min-width: 0; }
+  .stamps legend { padding: 0; font: 500 16px/1.3 var(--print); color: var(--ink-2); margin-bottom: 6px; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .stamp { position: relative; display: block; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .stamp input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 2; }
+  .face {
+    display: grid; place-items: center; align-content: center; height: 64px; position: relative;
+    color: var(--ink);
+    /* perforations: half-holes of card colour along every edge */
+    background-color: var(--paper);
+    --hole: radial-gradient(circle, var(--card) 2.3px, transparent 2.8px);
+    background-image: var(--hole), var(--hole), var(--hole), var(--hole);
+    background-position: 0 -4px, 0 calc(100% + 4px), -4px 0, calc(100% + 4px) 0;
+    background-size: 8px 8px;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    transition: opacity .16s ease, transform .16s var(--ease), background-color .16s ease;
+  }
+  .face::before { content: ""; position: absolute; inset: 6px; border: 1px solid currentColor; opacity: .55; }
+  .face b { font: 400 25px/1 var(--wide); }
+  .face span { font: 700 12px/1.2 var(--print); letter-spacing: .14em; margin-top: 2px; }
+  .strip.picked .stamp:not(.on) .face { opacity: .72; }
+  .stamp.on .face {
+    color: #fff; transform: rotate(-4deg); background-color: var(--red);
+    filter: drop-shadow(0 3px 3px rgba(18, 34, 58, .25));
+  }
+  .stamp.on.press .face { animation: stick .24s var(--ease); }
+  @keyframes stick { from { transform: rotate(-11deg) scale(1.1); } to { transform: rotate(-4deg); } }
+  .stamp input:focus-visible + .face { outline: 2px solid var(--pen); outline-offset: 3px; }
+
+  .sentence {
+    margin: 8px 0 0; font: 400 18px/46px var(--print); color: var(--ink);
+  }
+  .blank {
+    position: relative; display: inline-block; min-width: 46px; height: 44px; padding: 0 16px 0 5px;
+    font: 700 24px/44px var(--hand); color: var(--pen); text-align: left; vertical-align: top;
+    background: linear-gradient(var(--pen-soft), var(--pen-soft)) 0 41px / 100% 2px no-repeat;
+    border: 0; border-radius: 0; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .blank::after {
+    content: ""; position: absolute; right: 4px; top: 19px; width: 6px; height: 6px;
+    border: solid var(--pen-soft); border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .blank select {
+    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
+    font-size: 16px; border: 0; margin: 0; -webkit-appearance: none; appearance: none;
+  }
+  .blank:focus-within { outline: 2px solid var(--pen); outline-offset: 2px; }
+  button.blank { font-family: var(--hand); padding-right: 6px; }
+  button.blank::after { display: none; }
+  input.blank { width: 5.8em; padding: 0 5px; cursor: text; caret-color: var(--pen); }
+  input.blank::placeholder { color: var(--pen-soft); opacity: 1; font-weight: 400; }
+  input.blank:focus { outline: 2px solid var(--pen); outline-offset: 2px; }
+  .date-wrap { white-space: nowrap; }
+
+  .post {
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px;
+    min-height: 54px; padding: 0 16px; background: var(--red); color: #fff; text-decoration: none;
+    font: 700 17px/1.1 var(--print); letter-spacing: .06em; text-transform: uppercase;
+    border-radius: 2px; transition: transform .14s var(--ease), background-color .14s ease;
+  }
+  .post svg { width: 22px; height: 22px; fill: currentColor; flex: none; }
+  .post:active { transform: scale(.97); background: var(--red-press); }
+  .or { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 6px; margin: 4px 0 0; font-size: 16px; color: var(--ink-2); }
+  .or a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: var(--ink); font-weight: 600; }
+
+  /* ---------- Sections ---------- */
+  section.band { padding: 56px var(--gut) 8px; max-width: 1180px; margin: 0 auto; }
+  .band h2 { font-size: clamp(27px, 8.4vw, 50px); text-transform: uppercase; }
+  .band .lede { margin: 12px 0 0; max-width: 36em; font-size: 18px; }
+  .prints { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 14px; align-items: start; }
+  .prints li:nth-child(odd) .print { transform: rotate(-1.2deg); }
+  .prints li:nth-child(even) .print { transform: rotate(1.3deg); }
+  .prints .tall:nth-child(odd) .print { margin-top: 18px; }
+  .prints .wide { grid-column: 1 / -1; }
+  .prints img { width: 100%; object-fit: cover; }
+  .prints figcaption { padding: 7px 3px 9px; font: 400 18px/1.25 var(--hand); color: var(--pen); }
+  .tall img { aspect-ratio: 4 / 5; }
+  .land img { aspect-ratio: 4 / 3; }
+  .wide img { aspect-ratio: 16 / 10; }
+
+  .night-wrap { background: var(--night); color: #e9eef6; margin-top: 56px; }
+  .night-wrap section.band { padding-bottom: 60px; }
+  .night-wrap h2 { color: #fff; }
+  .night-wrap .print { box-shadow: 0 12px 22px -10px rgba(0, 0, 0, .6); }
+  .night-wrap .lede { color: #c9d3e1; }
+
+  .where-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; margin-top: 24px; }
+  .addr { background: var(--card); padding: 18px 18px 16px; transform: rotate(-.6deg); box-shadow: 0 12px 24px -10px rgba(18, 34, 58, .35); }
+  .addr .to { margin: 0; font: 500 16px/1.3 var(--print); color: var(--ink-2); }
+  .addr address {
+    font: 700 22px/44px var(--hand); font-style: normal; color: var(--pen); margin-top: 2px;
+    background: repeating-linear-gradient(to bottom, transparent 0 43px, var(--rule) 43px 44px);
+  }
+  .pin { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 14px; }
+  .pin .lbl { font: 700 13px/1 var(--print); letter-spacing: .12em; color: var(--ink-2); margin-right: 6px; }
+  .pin b { display: grid; place-items: center; width: 29px; height: 37px; border: 1.5px solid var(--ink-2); font: 700 22px/1 var(--hand); color: var(--pen); }
+  .facts { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .facts li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(28, 39, 62, .25); font-size: 17px; }
+  .facts li span:first-child { color: var(--ink-2); }
+  .facts li span:last-child { font-weight: 600; text-align: right; }
+  .links { display: grid; gap: 10px; margin-top: 18px; }
+  .btn {
+    display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px;
+    background: var(--card); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 17px;
+    border: 1.5px solid var(--ink); border-radius: 2px; transition: transform .14s var(--ease);
+  }
+  .btn svg { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .btn small { margin-left: auto; min-width: 0; overflow-wrap: anywhere; text-align: right; font-size: 16px; font-weight: 500; color: var(--ink-2); }
+  /* A phone number never breaks; on a narrow button it drops under the label instead */
+  .btn[href^="tel"] { flex-wrap: wrap; column-gap: 12px; row-gap: 0; padding-top: 6px; padding-bottom: 6px; }
+  .btn[href^="tel"] small { white-space: nowrap; }
+  .btn:active { transform: scale(.97); }
+
+  footer { max-width: 1180px; margin: 0 auto; padding: 40px var(--gut) 28px; font-size: 15px; color: var(--ink-2); }
+  footer p { margin: 0 0 6px; }
+
+  /* Sticky Post bar: appears whenever the card's Post button is off the screen */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: 8px;
+    padding: 10px var(--gut) calc(10px + env(safe-area-inset-bottom)); background: var(--ink);
+    visibility: hidden; transform: translateY(100%); transition: transform .24s var(--ease), visibility 0s linear .24s;
+  }
+  .dock.show { visibility: visible; transform: none; transition: transform .24s var(--ease), visibility 0s; }
+  .dock .post { flex: 1; margin: 0; min-height: 50px; padding: 0 10px; white-space: nowrap; }
+  .dock .call { display: grid; place-items: center; width: 50px; min-height: 50px; border: 1.5px solid #9fb0c8; color: #fff; border-radius: 2px; }
+  .dock .call svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+  /* Small phones: lift the Post button into the first screen (iPhone SE with Safari's toolbar) */
+  @media (max-width: 399px) {
+    .sentence { line-height: 42px; }
+    .front img { aspect-ratio: 2.6; }
+    input.blank { width: 5em; }
+  }
+  @media (min-width: 640px) {
+    :root { --gut: 28px; }
+    .hero { padding-top: 28px; }
+    /* Once the place line sits beside the title, the title is the last line: keep it clear of the tilted card back */
+    .front .caption { padding-bottom: 38px; }
+    .back { margin: -18px 22px 0; padding: 18px 22px 16px; }
+    .prints { grid-template-columns: repeat(3, 1fr); }
+    /* The campfire frame is a 570px reel still: two columns, not three, so it isn't blown up */
+    .night-wrap .prints .wide { grid-column: span 2; grid-row: span 2; }
+    .night-wrap .prints .wide img { aspect-ratio: 5 / 4; }
+    .where-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 40px; }
+  }
+  /* Phones held sideways: a shorter print, so the name shows on the first screen above the sticky Post bar */
+  @media (min-width: 640px) and (max-height: 500px) {
+    .hero { padding-top: 16px; }
+    .front img { aspect-ratio: auto; height: 42vh; }
+  }
+  @media (min-width: 960px) {
+    body { padding-bottom: 0; }
+    .hero { display: grid; grid-template-columns: 1.08fr 1fr; gap: 44px; align-items: center; padding-top: 48px; padding-bottom: 24px; }
+    .front { transform: rotate(-2deg); }
+    .front .caption { padding-bottom: 20px; }
+    .postmark { width: 128px; }
+    .front img { aspect-ratio: 1.48; }
+    .back { margin: 0; transform: rotate(1.2deg); padding: 22px 26px 18px; }
+    .prints.house { grid-template-columns: repeat(4, 1fr); }
+    .prints.house .wide { grid-column: auto; }
+    .prints.house .wide img { aspect-ratio: 4 / 5; }
+    section.band { padding-top: 88px; }
+    .night-wrap { margin-top: 88px; }
+    .dock { display: none; }
+  }
+  @media (hover: hover) {
+    .post:hover { background: var(--red-press); }
+    .btn:hover { border-color: var(--pen); color: var(--pen); }
+    .strip .stamp:not(.on):hover .face { opacity: 1; transform: translateY(-2px); }
+    .or a:hover { color: var(--pen); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Website concept for <strong>Tree Top Villa</strong> &middot; not the official site</div>
+
+<main>
+<section class="hero" id="top">
+  <header class="front print">
+    <img src="assets/villa-day.jpg" width="1200" height="809" fetchpriority="high"
+      alt="Tree Top Villa by day: the cream house with a curved balcony, pots along every ledge and red and blue umbrellas in the courtyard">
+    <div class="caption">
+      <h1>Tree Top Villa</h1>
+      <p class="place">Homestay &middot; Naidupuram, Kodaikanal</p>
+    </div>
+  </header>
+
+  <form class="back" id="card" aria-labelledby="dear" onsubmit="return false">
+    <div class="back-head">
+      <p class="dear" id="dear">Dear Mydeen,</p>
+      <svg class="postmark" id="postmark" viewBox="-62 0 182 120" aria-hidden="true">
+        <defs>
+          <path id="pmTop" d="M 21 60 A 39 39 0 0 1 99 60"/>
+          <path id="pmBot" d="M 13 60 A 47 47 0 0 0 107 60"/>
+        </defs>
+        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M -60 34 q 9 -7 18 0 t 18 0 t 18 0 t 18 0"/>
+          <path d="M -60 50 q 9 -7 18 0 t 18 0 t 18 0 t 18 0"/>
+          <path d="M -60 70 q 9 -7 18 0 t 18 0 t 18 0 t 18 0"/>
+          <path d="M -60 86 q 9 -7 18 0 t 18 0 t 18 0 t 18 0"/>
+          <circle cx="60" cy="60" r="54"/>
+          <circle cx="60" cy="60" r="33" stroke-width="1.4"/>
+        </g>
+        <g fill="currentColor" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="1.5">
+          <text><textPath href="#pmTop" startOffset="50%" text-anchor="middle">KODAIKANAL</textPath></text>
+          <text><textPath href="#pmBot" startOffset="50%" text-anchor="middle">624 101</textPath></text>
+          <text id="pmDate" x="60" y="65" text-anchor="middle" font-size="14" letter-spacing=".5">DATE</text>
+        </g>
+      </svg>
+    </div>
+
+    <fieldset class="stamps">
+      <legend>Stick a stamp for the size you want</legend>
+      <div class="strip picked" id="strip">
+        <label class="stamp"><input type="radio" name="house" value="2 BHK"><span class="face"><b>2</b><span>BHK</span></span></label>
+        <label class="stamp on"><input type="radio" name="house" value="3 BHK" checked><span class="face"><b>3</b><span>BHK</span></span></label>
+        <label class="stamp"><input type="radio" name="house" value="5 BHK"><span class="face"><b>5</b><span>BHK</span></span></label>
+        <label class="stamp"><input type="radio" name="house" value="8 BHK"><span class="face"><b>8</b><span>BHK</span></span></label>
+      </div>
+    </fieldset>
+
+    <p class="sentence">
+      We're a
+      <span class="blank"><span id="groupShown">family</span><select id="group" aria-label="Family or friends">
+        <option value="family" selected>family</option>
+        <option value="friends">group of friends</option>
+      </select></span>
+      of
+      <span class="blank"><span id="peopleShown">6</span><select id="people" aria-label="How many people">
+        <option>2</option><option>3</option><option>4</option><option>5</option>
+        <option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+        <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+        <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+        <option value="20+">more than 20</option>
+      </select></span>.
+      We'd like the
+      <button type="button" class="blank" id="houseShown" aria-label="Size: 3 BHK. Change it with the stamps">3 BHK</button>
+      for
+      <span class="blank"><span id="nightsShown">2</span><select id="nights" aria-label="How many nights">
+        <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option>
+        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+      </select></span>
+      <span id="nightsWord">nights</span>
+      <span class="date-wrap">from <input class="blank" id="date" type="text" placeholder="a date" aria-label="From which date" autocomplete="off" enterkeyhint="done" maxlength="40"></span>.
+      What's the tariff?
+    </p>
+
+    <a class="post" id="post" data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Post it on WhatsApp
+    </a>
+    <p class="or">or call Mydeen <a href="tel:+919994734286">+91 99947 34286</a></p>
+  </form>
+</section>
+
+<section class="band" id="house">
+  <h2>The villa, by day</h2>
+  <p class="lede">2, 3, 5 and 8 BHK, rented by the day to families and to bachelor groups.</p>
+  <ul class="prints house">
+    <li class="wide"><figure class="print"><img src="assets/courtyard-day.jpg" width="820" height="509" loading="lazy" alt="The courtyard by day with red and blue umbrellas over two tables, potted plants along the wall and trees behind"><figcaption>Umbrellas out in the courtyard</figcaption></figure></li>
+    <li class="tall"><figure class="print"><img src="assets/bedroom.jpg" width="612" height="968" loading="lazy" alt="A bedroom with a double bed, red pillows, a patterned blanket and a window with purple curtains"><figcaption>One of the bedrooms</figcaption></figure></li>
+    <li class="tall"><figure class="print"><img src="assets/room.jpg" width="760" height="950" loading="lazy" alt="Another bedroom: an orange blanket on the bed, a tea table with a kettle, and brown and gold curtains drawn"><figcaption>Another room, curtains drawn</figcaption></figure></li>
+    <li class="wide"><figure class="print"><img src="assets/stairs.jpg" width="1100" height="951" loading="lazy" alt="The outside staircase with black railings, potted palms and hanging pots, against a green wall"><figcaption>The stairs, lined with pots</figcaption></figure></li>
+  </ul>
+</section>
+
+<div class="night-wrap">
+<section class="band" id="nights">
+  <h2>Campfire nights</h2>
+  <p class="lede">Campfire and food are charged extra. Ask Mydeen for both when you write.</p>
+  <ul class="prints">
+    <li class="wide"><figure class="print"><img src="assets/campfire.jpg" width="570" height="610" loading="lazy" alt="Guests on plastic chairs round a fire pit at night, the fire burning high under string lights"><figcaption>Campfire Night @ Tree Top Villa</figcaption></figure></li>
+    <li class="land"><figure class="print"><img src="assets/villa-night.jpg" width="800" height="760" loading="lazy" alt="The villa at night with its porch and stair lights on, seen past the garden and the gate"><figcaption>The villa, lights on</figcaption></figure></li>
+    <li class="land"><figure class="print"><img src="assets/courtyard-night.jpg" width="1200" height="867" loading="lazy" alt="The courtyard after dark, guests gathered by a circle of chairs beside the lit house"><figcaption>The courtyard after dark</figcaption></figure></li>
+  </ul>
+</section>
+</div>
+
+<section class="band" id="where">
+  <h2>On Rifle Range Road</h2>
+  <div class="where-grid">
+    <div class="addr">
+      <p class="to">To,</p>
+      <address>Mydeen, Tree Top Villa<br>1/154, Rifle Range Road<br>Naidupuram, Kodaikanal<br>Tamil Nadu</address>
+      <div class="pin" role="img" aria-label="PIN code 624101"><span class="lbl">PIN</span><b>6</b><b>2</b><b>4</b><b>1</b><b>0</b><b>1</b></div>
+    </div>
+    <div>
+      <ul class="facts">
+        <li><span>From the lake</span><span>1 km</span></li>
+        <li><span>On Google</span><span>4.7, from 475 reviews</span></li>
+        <li><span>Stays</span><span>By the day</span></li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Tree%20Top%20Villa%20Kodaikanal&amp;query_place_id=ChIJY7Vm38pnBzsRvI6RaI5iAts" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          Directions <small>Google Maps</small></a>
+        <a class="btn" href="tel:+919994734286">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          Call <small>+91 99947 34286</small></a>
+        <a class="btn" href="tel:+917695980756">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          Call (2nd number) <small>+91 76959 80756</small></a>
+        <a class="btn" href="https://instagram.com/tree_topvilla_homestay" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>
+          Instagram <small>@tree_topvilla_<wbr>homestay</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Tree Top Villa &middot; Homestay &middot; 1/154, Rifle Range Road, Naidupuram, Kodaikanal 624101</p>
+  <p>Photos from the villa's Google Maps listing and Instagram.</p>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="post" data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener" tabindex="-1">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+    Post your card</a>
+  <a class="call" href="tel:+919994734286" aria-label="Call Mydeen" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></a>
+</div>
+
+<script>
+  /* Builds the WhatsApp message from the card. Plain script, no libraries. */
+  (function () {
+    var WA = "https://wa.me/919994734286?text=";
+    var $ = function (id) { return document.getElementById(id); };
+    var group = $("group"), people = $("people"), nights = $("nights"), date = $("date");
+    var strip = $("strip"), houseShown = $("houseShown"), pmDate = $("pmDate"), postmark = $("postmark");
+    var radios = Array.prototype.slice.call(document.querySelectorAll('input[name="house"]'));
+    var links = Array.prototype.slice.call(document.querySelectorAll("[data-wa]"));
+
+    function house() {
+      for (var i = 0; i < radios.length; i++) if (radios[i].checked) return radios[i].value;
+      return "";
+    }
+
+    function message() {
+      var n = people.value, nn = nights.value, d = date.value.replace(/\s+/g, " ").trim(), h = house();
+      var who = group.value === "friends"
+        ? (n === "20+" ? "a group of more than 20 friends" : "a group of " + n + " friends")
+        : (n === "20+" ? "a family of more than 20" : "a family of " + n);
+      var stay = nn + " night" + (nn === "1" ? "" : "s") + (d ? " from " + d : " (our dates are open)");
+      var ask = h ? "We'd like the " + h + " for " + stay + "." : "Which size would suit us, for " + stay + "?";
+      return "Hello Mydeen,\nWe're " + who + ". " + ask + "\nWhat's the tariff?\n\n(Sent from the Tree Top Villa website)";
+    }
+
+    function update() {
+      $("groupShown").textContent = group.value === "friends" ? "group of friends" : "family";
+      $("peopleShown").textContent = people.value === "20+" ? "20+" : people.value;
+      $("nightsShown").textContent = nights.value;
+      $("nightsWord").textContent = nights.value === "1" ? "night" : "nights";
+      var h = house();
+      houseShown.textContent = h || "size";
+      houseShown.setAttribute("aria-label", "Size: " + (h || "none yet") + ". Change it with the stamps");
+      var href = WA + encodeURIComponent(message());
+      links.forEach(function (a) { a.href = href; });
+    }
+
+    /* The postmark only has room for a short date: "Saturday 25 December 2026" stamps as "25 DEC 2026".
+       The WhatsApp message always carries exactly what the guest typed. */
+    function postmarkText(v) {
+      var d = v.replace(/\s+/g, " ").trim().toUpperCase()
+        .replace(/\b(MON|TUES?|WED|WEDNES|THU|THURS?|FRI|SAT|SATUR|SUN)(DAY)?\b\.?,?\s*/g, "")
+        .replace(/\b(JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(UARY|RUARY|CH|IL|E|Y|UST|T|TEMBER|OBER|EMBER)?\b\.?/g, "$1").trim();
+      return d.length > 12 ? d.slice(0, 11).trim() + "…" : d;
+    }
+
+    function stampDate() {
+      var d = postmarkText(date.value);
+      pmDate.textContent = d || "DATE";
+      if (d.length > 8) { pmDate.setAttribute("textLength", "62"); pmDate.setAttribute("lengthAdjust", "spacingAndGlyphs"); pmDate.setAttribute("font-size", "12"); }
+      else { pmDate.removeAttribute("textLength"); pmDate.removeAttribute("lengthAdjust"); pmDate.setAttribute("font-size", "14"); }
+      postmark.classList.remove("thunk"); void postmark.getBoundingClientRect(); postmark.classList.add("thunk");
+    }
+
+    radios.forEach(function (r) {
+      r.addEventListener("change", function () {
+        radios.forEach(function (o) { o.parentNode.classList.toggle("on", o.checked); o.parentNode.classList.remove("press"); });
+        r.parentNode.classList.add("press");
+        strip.classList.add("picked");
+        update();
+      });
+    });
+    houseShown.addEventListener("click", function () {
+      var on = document.querySelector('input[name="house"]:checked') || radios[0];
+      on.focus();
+    });
+    [group, people, nights].forEach(function (s) { s.addEventListener("change", update); });
+    date.addEventListener("input", update);
+    date.addEventListener("change", stampDate);
+    date.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); date.blur(); } });
+    update();
+
+    /* Sticky Post bar whenever the card's own Post button is off the screen: scrolled away above, or still below
+       the fold on a small or sideways phone (320px wide, landscape), so the main action is always in reach */
+    var dock = $("dock"), post = $("post");
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        var show = !es[0].isIntersecting;
+        dock.classList.toggle("show", show);
+        dock.querySelectorAll("a").forEach(function (a) { a.tabIndex = show ? 0 : -1; });
+      }).observe(post);
+    }
+  })();
+</script>
+</body>
+</html>

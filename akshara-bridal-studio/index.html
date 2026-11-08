@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#22120f">
+<title>Akshara Bridal Studio · Anna Nagar, Chennai</title>
+<meta name="description" content="Bridal makeup, saree draping and bridal hairstyling in Anna Nagar, Chennai. Pick a look and send it on WhatsApp.">
+<link rel="preload" href="fonts/kalnia-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/catamaran-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Static instances (Latin), self-hosted so every phone engine draws the same weights */
+  @font-face { font-family: "Kalnia"; font-weight: 500; font-display: swap; src: url(fonts/kalnia-500.woff2) format("woff2"); }
+  @font-face { font-family: "Kalnia"; font-weight: 600; font-display: swap; src: url(fonts/kalnia-600.woff2) format("woff2"); }
+  @font-face { font-family: "Catamaran"; font-weight: 400; font-display: swap; src: url(fonts/catamaran-400.woff2) format("woff2"); }
+  @font-face { font-family: "Catamaran"; font-weight: 600; font-display: swap; src: url(fonts/catamaran-600.woff2) format("woff2"); }
+  @font-face { font-family: "Catamaran"; font-weight: 700; font-display: swap; src: url(fonts/catamaran-700.woff2) format("woff2"); }
+  :root {
+    /* The green room: one warm bulb light tints every surface */
+    --room: #22120f;
+    --room-lift: #2d1814;
+    --frame: #33201a;
+    --ledge: #5a3027;
+    --ink: #f4e5d5;
+    --ink-soft: #d6bba6;
+    --brass: #c9a36c;
+    --brass-deep: #7c5d3d;
+    --lit: #ffd492;
+    --lit-ink: #2a1410;
+    --slip: #f4e6da;
+    --slip-ink: #3b1c18;
+    --slip-soft: #6e4038;
+    --slip-rule: #9a6c5c;
+    --display: "Kalnia", "Georgia", serif;
+    --body: "Catamaran", "Segoe UI", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gutter: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--brass-deep) var(--room); }
+  body {
+    margin: 0; background: var(--room); color: var(--ink);
+    font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--lit); color: var(--lit-ink); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  button, input { font: inherit; color: inherit; }
+  button { background: none; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--lit); outline-offset: 3px; border-radius: 6px; }
+  svg { display: block; }
+  h1, h2, h3 { margin: 0; font-weight: 500; }
+
+  .concept { background: #120907; color: var(--ink-soft); text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
+
+  /* Header: the studio's name over the door */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) 6px; max-width: 1180px; margin: 0 auto; }
+  .name h1 { font-family: var(--display); font-size: 23px; line-height: 1.08; letter-spacing: -.01em; }
+  .name p { margin: 3px 0 0; font-size: 16px; color: var(--ink-soft); line-height: 1.3; }
+  .round { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--brass-deep); color: var(--brass); text-decoration: none; transition: transform .14s var(--ease), border-color .2s; }
+  .round:active { transform: scale(.94); }
+  .round svg { width: 20px; height: 20px; }
+
+  /* The stage: mirror, ledge, slip */
+  .stage { max-width: 1180px; margin: 0 auto; padding: 4px var(--gutter) 0; }
+  .mirror { position: relative; background: var(--frame); border-radius: 22px 22px 10px 10px; padding: 0 9px 0; box-shadow: inset 0 1px 0 rgba(255, 226, 190, .07), 0 26px 40px -24px rgba(0, 0, 0, .7); }
+
+  .bulbs { display: flex; justify-content: space-between; padding: 0 2px; height: 46px; align-items: center; }
+  .bulb { position: relative; width: 44px; height: 46px; display: grid; place-items: center; }
+  .bulb::before { /* the light the bulb throws on the frame */
+    content: ""; position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 206, 136, .42), rgba(255, 206, 136, 0));
+    opacity: .35; transition: opacity .3s var(--ease); pointer-events: none;
+  }
+  .bulb i { position: relative; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #6e5237;
+    background: radial-gradient(circle at 40% 34%, #fff6e6 0 18%, #f3cf98 52%, #c98f4e 100%);
+    filter: saturate(.75) brightness(.78); transition: filter .3s var(--ease), transform .3s var(--ease); }
+  .bulb[aria-current="true"]::before { opacity: 1; }
+  .bulb[aria-current="true"] i { filter: none; transform: scale(1.08); border-color: var(--brass); }
+  .bulb:active i { transform: scale(.92); }
+
+  .glass { position: relative; border-radius: 10px; overflow: hidden; border: 2px solid var(--brass); background: #140b09;
+    height: clamp(280px, calc(100svh - 340px), 480px); }
+  .glass::after { /* warm spill from the bulbs onto the top of the glass */
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 28%; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255, 210, 145, .16), rgba(255, 210, 145, 0)); }
+  .track { display: flex; height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .track::-webkit-scrollbar { display: none; }
+  .look { flex: 0 0 100%; height: 100%; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+  .look img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 30%); }
+
+  .foot { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 6px; padding: 6px 0 8px; }
+  .arrow { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--brass); transition: transform .14s var(--ease); }
+  .arrow:active { transform: scale(.9); }
+  .arrow svg { width: 20px; height: 20px; }
+  .now { text-align: center; min-width: 0; }
+  .now { margin: 0; }
+  .now b { display: block; font-family: var(--display); font-weight: 500; font-size: 18px; line-height: 1.2; color: var(--ink); overflow-wrap: anywhere; }
+  .now .hint, .now .credit { display: block; font-size: 16px; line-height: 1.35; color: var(--ink-soft); margin-top: 2px; }
+  .now .hint, .now .credit { text-wrap: balance; }
+  .name .nb { white-space: nowrap; }
+  .now [hidden] { display: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .ledge { height: 14px; margin: 0 -7px; background: var(--ledge); border-radius: 3px 3px 6px 6px; box-shadow: 0 14px 20px -12px rgba(0, 0, 0, .75); }
+
+  /* The booking slip: one typed column on one paper stock */
+  .slip { position: relative; margin: 26px 2px 0; background: var(--slip); color: var(--slip-ink); border-radius: 4px; padding: 22px 18px 20px; box-shadow: 0 18px 28px -18px rgba(0, 0, 0, .8); }
+  .sentence { font-family: var(--body); font-weight: 500; font-size: 21px; line-height: 1.9; margin: 0; letter-spacing: -.005em; }
+  .sentence .picked { font-family: var(--display); font-weight: 600; font-size: 23px; color: #5b1f22; display: inline; transition: opacity .18s var(--ease); }
+  .sentence .picked.swap { opacity: 0; }
+  .blank { border: 0; border-bottom: 2px solid var(--slip-rule); background: transparent; color: #5b1f22; font: 600 20px/1.3 var(--body); padding: 4px 2px 3px; min-height: 44px; border-radius: 0; width: 8.6em; max-width: 100%; vertical-align: baseline; -webkit-appearance: none; appearance: none; }
+  .blank::placeholder { color: #7a5248; font-weight: 500; }
+  .blank { caret-color: #5b1f22; }
+  .blank:focus { outline: none; border-bottom-color: #5b1f22; background: rgba(185, 142, 122, .14); }
+  .blank.date { width: 9.4em; }
+  /* iPhone draws an empty date field as a bare line, so the slip writes its own hint until a date is picked */
+  .datewrap { position: relative; display: inline-block; max-width: 100%; vertical-align: baseline; }
+  .datewrap::after { content: "pick a date"; position: absolute; left: 2px; right: 30px; top: 0; bottom: 3px; display: flex; align-items: center; font: 500 20px/1.3 var(--body); color: #7a5248; pointer-events: none; white-space: nowrap; overflow: hidden; }
+  .datewrap.filled::after, .datewrap:focus-within::after { display: none; }
+  .datewrap:not(.filled) .blank.date:not(:focus) { color: transparent; }
+  .blank.place { width: 100%; }
+  .blank::-webkit-calendar-picker-indicator { opacity: .7; }
+
+  .needs { border: 0; margin: 18px 0 0; padding: 0; }
+  .needs legend { font-size: 16px; font-weight: 600; color: var(--slip-soft); padding: 0; margin-bottom: 8px; }
+  .chips { display: grid; gap: 6px; }
+  .chip { position: relative; display: block; }
+  .chip input { position: absolute; opacity: 0; left: 0; top: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; -webkit-appearance: none; appearance: none; }
+  .chip span { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 8px 12px; border: 1.5px solid var(--slip-rule); border-radius: 6px; font-size: 17px; font-weight: 600; color: var(--slip-ink); transition: background .18s, border-color .18s, transform .14s var(--ease); }
+  .chip span::before { content: ""; width: 18px; height: 18px; border-radius: 3px; border: 1.5px solid var(--slip-soft); flex: none; }
+  .chip input:checked + span { background: #5b1f22; border-color: #5b1f22; color: var(--slip); }
+  .chip input:checked + span::before { background: var(--lit); border-color: var(--lit); box-shadow: inset 0 0 0 3px #5b1f22; }
+  .chip input:focus-visible + span { outline: 2px solid #5b1f22; outline-offset: 2px; }
+  .chip:active span { transform: scale(.97); }
+
+  .preview-label { margin: 20px 0 6px; font-size: 16px; font-weight: 600; color: var(--slip-soft); }
+  .preview { display: block; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 16px; line-height: 1.5; color: var(--slip-ink); background: rgba(185, 142, 122, .16); border-left: 1px solid var(--slip-rule); padding: 10px 12px; border-radius: 0 4px 4px 0; }
+
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 12px 18px; border-radius: 10px; background: var(--lit); color: var(--lit-ink); font-weight: 700; font-size: 17px; text-decoration: none; text-align: center; line-height: 1.2; transition: transform .14s var(--ease), background .2s; }
+  .send:active { transform: scale(.97); }
+  .send svg { width: 22px; height: 22px; flex: none; fill: currentColor; }
+  .slip .send { margin-top: 18px; background: #5b1f22; color: #fff1e2; }
+  .fine { margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: var(--slip-soft); }
+
+  /* Why people trust the studio */
+  .proof { max-width: 1180px; margin: 0 auto; padding: 52px var(--gutter) 8px; }
+  .proof p { margin: 0; padding: 18px 0 20px; border-top: 1px solid rgba(201, 163, 108, .3); border-bottom: 1px solid rgba(201, 163, 108, .3); font-family: var(--display); font-weight: 500; font-size: 23px; line-height: 1.4; color: var(--ink); max-width: 26em; text-wrap: pretty; }
+
+  /* Reels */
+  .reels { max-width: 1180px; margin: 0 auto; padding: 48px var(--gutter) 8px; }
+  .reels h2, .studio h2 { font-family: var(--display); font-size: 28px; line-height: 1.15; letter-spacing: -.015em; }
+  .reels > p { margin: 8px 0 18px; color: var(--ink-soft); max-width: 34em; }
+  .reel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .reel { position: relative; display: block; border-radius: 8px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--room-lift); text-decoration: none; transition: transform .16s var(--ease); }
+  .reel:active { transform: scale(.98); }
+  .reel img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 25%); }
+  .reel .play { position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 50%; background: rgba(34, 18, 15, .72); display: grid; place-items: center; color: var(--ink); }
+  .reel .play svg { width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
+  .more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; color: var(--lit); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+  /* The studio */
+  .studio { max-width: 1180px; margin: 0 auto; padding: 52px var(--gutter) 40px; }
+  .studio address { font-style: normal; margin: 12px 0 4px; font-size: 18px; line-height: 1.5; max-width: 26em; }
+  .studio .hours { margin: 0 0 20px; color: var(--ink-soft); }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 460px; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--brass-deep); color: var(--ink); font-weight: 600; text-decoration: none; transition: transform .14s var(--ease), border-color .2s; }
+  .btn:active { transform: scale(.97); }
+  .btn svg { width: 19px; height: 19px; flex: none; color: var(--brass); }
+
+  footer { border-top: 1px solid rgba(201, 163, 108, .2); max-width: 1180px; margin: 0 auto; padding: 22px var(--gutter) 28px; color: var(--ink-soft); font-size: 16px; }
+  footer p { margin: 0 0 6px; }
+  footer a { color: var(--ink); text-underline-offset: 3px; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  footer .links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  /* Fixed bar: the main action is always one tap away */
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: rgba(26, 13, 11, .94); border-top: 1px solid rgba(201, 163, 108, .25); transition: transform .28s var(--ease), opacity .28s var(--ease); }
+  .dock.away { transform: translateY(110%); opacity: 0; pointer-events: none; }
+  .dock .send { max-width: 520px; margin: 0 auto; }
+
+  /* The mirror switches on: the one authored moment */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .bulb i { animation: on .5s var(--ease) both; animation-delay: calc(var(--n) * 70ms + 120ms); }
+    .js .bulb::before { animation: glow .6s var(--ease) both; animation-delay: calc(var(--n) * 70ms + 160ms); }
+    @keyframes on { from { filter: saturate(.2) brightness(.45); } }
+    @keyframes glow { from { opacity: 0; } }
+  }
+  @media (prefers-reduced-transparency: reduce) { .dock { background: #1a0d0b; } }
+  @media (hover: hover) {
+    .send:hover { background: #ffe0ad; }
+    .slip .send:hover { background: #6e2629; }
+    .round:hover, .btn:hover { border-color: var(--brass); }
+    .arrow:hover { color: var(--lit); }
+    .bulb:hover i { filter: saturate(.9) brightness(.92); }
+    .bulb[aria-current="true"]:hover i { filter: none; }
+    .reel:hover img { opacity: .9; }
+    .more:hover, footer a:hover { text-decoration-thickness: 2px; }
+  }
+
+  .proof .num { font-family: var(--body); font-weight: 700; letter-spacing: 0; }
+
+  @media (max-width: 359px) {
+    .name h1 { font-size: 19px; }
+    .glass { height: clamp(200px, calc(100svh - 390px), 420px); }
+  }
+  @media (min-width: 600px) {
+    :root { --gutter: 28px; }
+    .glass { height: clamp(360px, calc(100svh - 330px), 560px); }
+    .mirror-col, .stage > .slip { max-width: 520px; margin-left: auto; margin-right: auto; }
+    .stage > .slip { margin-top: 26px; }
+    .reel-grid { grid-template-columns: repeat(4, 1fr); }
+    .proof p { font-size: 28px; }
+  }
+  @media (min-width: 960px) {
+    body { padding-bottom: 0; }
+    .dock { display: none; }
+    .name h1 { font-size: 32px; }
+    .stage { display: grid; grid-template-columns: minmax(0, 470px) minmax(0, 500px); justify-content: center; gap: 0 64px; align-items: start; padding-top: 18px; }
+    .mirror-col { max-width: none; margin: 0; }
+    .stage > .slip { margin: 0; max-width: none; position: sticky; top: 24px; padding: 30px 28px 26px; }
+    .top, .proof, .reels, .studio, footer { max-width: calc(1034px + 2 * var(--gutter)); }
+    .btns { align-self: start; }
+    .glass { height: min(640px, calc(100vh - 220px)); }
+    .sentence { font-size: 24px; }
+    .sentence .picked { font-size: 26px; }
+    .studio-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .reels h2, .studio h2 { font-size: 36px; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="concept" data-concept-banner>Concept for @aksharabridalstudio.in · not the official site</div>
+
+<header class="top">
+  <div class="name">
+    <h1>Akshara Bridal Studio</h1>
+    <p>Bridal makeup · <span class="nb">Anna Nagar, Chennai</span></p>
+  </div>
+  <a class="round" href="tel:+919884078045" aria-label="Call the studio, +91 98840 78045">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></svg>
+  </a>
+</header>
+
+<main>
+<section class="stage" aria-label="Pick a look">
+  <div class="mirror-col">
+    <div class="mirror">
+      <div class="bulbs" role="group" aria-label="Looks in the mirror">
+        <button class="bulb" style="--n:0" aria-current="true" aria-label="Look 1 of 6"><i></i></button>
+        <button class="bulb" style="--n:1" aria-label="Look 2 of 6"><i></i></button>
+        <button class="bulb" style="--n:2" aria-label="Look 3 of 6"><i></i></button>
+        <button class="bulb" style="--n:3" aria-label="Look 4 of 6"><i></i></button>
+        <button class="bulb" style="--n:4" aria-label="Look 5 of 6"><i></i></button>
+        <button class="bulb" style="--n:5" aria-label="Look 6 of 6"><i></i></button>
+      </div>
+      <div class="glass">
+        <div class="track" id="track" tabindex="0" aria-label="Looks from the studio. Swipe to change the look.">
+          <figure class="look" data-name="Plum saree, temple jewellery" data-url="https://www.instagram.com/p/DfB5KZLu08o" style="--pos:50% 22%">
+            <img src="assets/post-11.jpg" width="360" height="640" alt="Woman in a plum saree and a temple necklace, a mehndi hand at her hair, against a dark wall">
+          </figure>
+          <figure class="look" data-name="Glass skin finish" data-url="https://www.instagram.com/p/DKUY9nsypW2" style="--pos:50% 4%">
+            <img src="assets/post-03.jpg" width="361" height="488" alt="Smiling bride in a yellow saree with a garland of peach roses and small white flowers" loading="lazy">
+          </figure>
+          <figure class="look" data-name="Muhurtham soft glam look" data-url="https://www.instagram.com/p/DKlwPVPSwWP" style="--pos:52% 40%">
+            <img src="assets/post-02-upright.jpg" width="624" height="358" alt="Bride holding a mehndi hand over one eye, gold maang tikka in her hair" loading="lazy">
+          </figure>
+          <figure class="look" data-name="Muhurtham bride in trendy look" data-url="https://www.instagram.com/p/DAfr-uFy7Vd" style="--pos:50% 0%">
+            <img src="assets/post-01.jpg" width="360" height="640" alt="Bride seen from the back: a long braid wrapped in gold, pink and blue flowers at the top, pink and silver silk" loading="lazy">
+          </figure>
+          <figure class="look" data-name="Embroidered blouse, stone choker" data-url="https://www.instagram.com/p/DfZNJmIugOW" data-credit="Hair @shalini_hairartist · Costume @studio149" style="--pos:50% 20%">
+            <img src="assets/post-04.jpg" width="360" height="640" alt="Woman in a yellow and red embroidered blouse with a stone-set choker, against a grey wall" loading="lazy">
+          </figure>
+          <figure class="look" data-name="Ivory saree, pearls" data-url="https://www.instagram.com/p/De3fg2bOiOv" style="--pos:58% 30%">
+            <img src="assets/post-12.jpg" width="360" height="640" alt="Woman in an ivory saree with a pearl necklace and a loose side braid, by a white curtain" loading="lazy">
+          </figure>
+        </div>
+      </div>
+      <div class="foot">
+        <button class="arrow" id="prev" aria-label="Previous look"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <p class="now" aria-live="polite"><b id="nowName">Plum saree, temple jewellery</b><span class="sr" id="nowCount">Look 1 of 6</span><span class="hint" id="nowHint">Swipe the mirror, or tap a bulb</span><span class="credit" id="nowCredit" hidden></span></p>
+        <button class="arrow" id="next" aria-label="Next look"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="ledge" aria-hidden="true"></div>
+  </div>
+
+  <form class="slip" id="book" onsubmit="return false" aria-label="Booking message">
+    <p class="sentence">I'd like this look, <span class="picked" id="pickedName">Plum saree, temple jewellery</span>, for my
+      <input class="blank" id="occasion" value="muhurtham" maxlength="40" autocomplete="off" aria-label="Occasion">
+      on <span class="datewrap" id="dateWrap"><input class="blank date" id="date" type="date" aria-label="Date"></span>
+      at <input class="blank place" id="place" maxlength="80" autocomplete="off" placeholder="hall, area or town" aria-label="Hall, area or town">
+    </p>
+    <fieldset class="needs">
+      <legend>I need</legend>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="need" value="Bridal makeup" checked><span>Bridal makeup</span></label>
+        <label class="chip"><input type="checkbox" name="need" value="Saree draping"><span>Saree draping</span></label>
+        <label class="chip"><input type="checkbox" name="need" value="Bridal hairstyling"><span>Bridal hairstyling</span></label>
+      </div>
+    </fieldset>
+    <p class="preview-label" id="pvLabel">Your WhatsApp message</p>
+    <output class="preview" id="preview" aria-labelledby="pvLabel">Hello Akshara Bridal Studio, I'd like this look: Plum saree, temple jewellery.</output>
+    <a class="send" id="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%20I%27d%20like%20to%20book%20bridal%20makeup." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Send this look on WhatsApp</a>
+    <p class="fine">Opens WhatsApp to +91 98840 78045 with this message. You can change it there before sending.</p>
+  </form>
+</section>
+
+<section class="proof" aria-label="About the studio">
+  <p><span class="num">4.8</span> on Google from <span class="num">532</span> reviews. <span class="num">325K</span> follow the studio on Instagram. A decade of expertise.</p>
+</section>
+
+<section class="reels" aria-labelledby="reelsTitle">
+  <h2 id="reelsTitle">More looks, in the reels</h2>
+  <p>Each one opens the reel on Instagram.</p>
+  <div class="reel-grid">
+    <a class="reel" href="https://www.instagram.com/p/DfHS4ljuyNb" target="_blank" rel="noopener" style="--pos:50% 30%">
+      <img src="assets/post-08.jpg" width="360" height="640" alt="A gold necklace being fastened on a woman in wine silk" fetchpriority="low" decoding="async">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
+    </a>
+    <a class="reel" href="https://www.instagram.com/p/DfML7jaO971" target="_blank" rel="noopener" style="--pos:50% 2%">
+      <img src="assets/post-07.jpg" width="360" height="640" alt="Woman seated in orange and cream silk with a long temple necklace" fetchpriority="low" decoding="async">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
+    </a>
+    <a class="reel" href="https://www.instagram.com/p/DfChpBhu8PC" target="_blank" rel="noopener" style="--pos:50% 38%">
+      <img src="assets/post-10.jpg" width="360" height="640" alt="Woman with long waves and a layered stone necklace, smiling" fetchpriority="low" decoding="async">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
+    </a>
+    <a class="reel" href="https://www.instagram.com/p/DfRc1aHuDYw" target="_blank" rel="noopener" style="--pos:50% 30%">
+      <img src="assets/post-06.jpg" width="360" height="640" alt="Bride in red silk and flower garlands beside the groom during the wedding ritual" fetchpriority="low" decoding="async">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
+    </a>
+  </div>
+  <a class="more" href="https://instagram.com/aksharabridalstudio.in" target="_blank" rel="noopener">See more on Instagram</a>
+</section>
+
+<section class="studio" aria-labelledby="studioTitle">
+  <div class="studio-wrap">
+    <div>
+      <h2 id="studioTitle">Come to the studio</h2>
+      <address>AJ-52, 4th Street, A J Block, Shanthi Colony, Anna Nagar, Chennai 600040</address>
+      <p class="hours">Open every day, 10 AM to 8:30 PM</p>
+    </div>
+    <div class="btns">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Akshara%20bridal%20studio%20Anna%20Nagar&amp;query_place_id=ChIJW2EznMBvUjoRqkbqpNrfGSY" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Directions</a>
+      <a class="btn" href="tel:+919884078045">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></svg>Call</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Akshara Bridal Studio, Anna Nagar, Chennai</p>
+  <div class="links">
+    <a href="https://instagram.com/aksharabridalstudio.in" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://youtube.com/@aksharasalonandstudio" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://wa.me/919884078045" target="_blank" rel="noopener" id="footWa">WhatsApp</a>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%20I%27d%20like%20to%20book%20bridal%20makeup." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+    Send this look on WhatsApp</a>
+</div>
+
+<script>
+(function () {
+  var WA = '919884078045';
+  var track = document.getElementById('track');
+  var looks = Array.prototype.slice.call(track.querySelectorAll('.look'));
+  var bulbs = Array.prototype.slice.call(document.querySelectorAll('.bulb'));
+  var nowName = document.getElementById('nowName');
+  var nowCount = document.getElementById('nowCount');
+  var nowCredit = document.getElementById('nowCredit');
+  var nowHint = document.getElementById('nowHint');
+  var picked = document.getElementById('pickedName');
+  var occasion = document.getElementById('occasion');
+  var date = document.getElementById('date');
+  var dateWrap = document.getElementById('dateWrap');
+  var place = document.getElementById('place');
+  var preview = document.getElementById('preview');
+  var waLinks = Array.prototype.slice.call(document.querySelectorAll('[data-wa]'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var current = 0;
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function niceDate(v) {
+    if (!v) return '';
+    var p = v.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (isNaN(d)) return v;
+    return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function message() {
+    var look = looks[current];
+    var needs = Array.prototype.slice.call(document.querySelectorAll('input[name="need"]:checked')).map(function (c) { return c.value; });
+    var occ = occasion.value.trim();
+    var lines = ['Hello Akshara Bridal Studio,', "I'd like this look: " + look.dataset.name, look.dataset.url];
+    if (occ) lines.push('Occasion: ' + occ);
+    lines.push('Date: ' + (niceDate(date.value) || 'not fixed yet'));
+    if (place.value.trim()) lines.push('Place: ' + place.value.trim());
+    if (needs.length) lines.push('I need: ' + needs.join(', '));
+    lines.push('Could you share your availability and details?');
+    return lines.join('\n');
+  }
+
+  function refresh() {
+    dateWrap.classList.toggle('filled', !!date.value);
+    var text = message();
+    preview.textContent = text;
+    var href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
+    waLinks.forEach(function (a) { a.href = href; });
+  }
+
+  function show(i) {
+    current = i;
+    var look = looks[i];
+    bulbs.forEach(function (b, n) { if (n === i) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    nowName.textContent = look.dataset.name;
+    nowCount.textContent = 'Look ' + (i + 1) + ' of ' + looks.length;
+    nowHint.hidden = true;
+    if (look.dataset.credit) { nowCredit.textContent = look.dataset.credit; nowCredit.hidden = false; } else { nowCredit.hidden = true; }
+    if (picked.textContent !== look.dataset.name) {
+      if (reduce) { picked.textContent = look.dataset.name; }
+      else {
+        picked.classList.add('swap');
+        setTimeout(function () { picked.textContent = look.dataset.name; picked.classList.remove('swap'); }, 160);
+      }
+    }
+    refresh();
+  }
+
+  function go(i) {
+    i = (i + looks.length) % looks.length;
+    track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+    show(i);
+  }
+
+  var ticking = false;
+  track.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      i = Math.max(0, Math.min(looks.length - 1, i));
+      if (i !== current) show(i);
+    });
+  }, { passive: true });
+
+  bulbs.forEach(function (b, n) {
+    b.setAttribute('aria-label', 'Look ' + (n + 1) + ' of ' + looks.length + ': ' + looks[n].dataset.name);
+    b.addEventListener('click', function () { go(n); });
+  });
+  document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
+  document.getElementById('next').addEventListener('click', function () { go(current + 1); });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  });
+  [occasion, date, place].forEach(function (el) { el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
+  Array.prototype.slice.call(document.querySelectorAll('input[name="need"]')).forEach(function (c) { c.addEventListener('change', refresh); });
+  window.addEventListener('resize', function () { track.scrollLeft = current * track.clientWidth; });
+
+  // Hide the fixed bar while the slip's own button is on screen
+  var dock = document.getElementById('dock');
+  var slipSend = document.getElementById('send');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { dock.classList.toggle('away', en.isIntersecting); });
+    }, { threshold: 0.2 }).observe(slipSend);
+  }
+
+  refresh();
+})();
+</script>
+</body>
+</html>

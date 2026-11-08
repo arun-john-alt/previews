@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Butterflies Event Management · Website concept</title>
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!-- One link per weight: Google then serves static files, which every phone browser draws at the right weight -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* A specimen case: white mounting card, ink, hairlines; the logo's six colours live only in the pins */
+  :root {
+    --card: #ffffff;
+    --ink: #1d1a1b;
+    --muted: #625a58;
+    --hair: #e2dcd9;
+    --wash: #f6f3f2;
+    --pin-1: #e0322c; --pin-2: #f08a1c; --pin-3: #f3c217; --pin-4: #36a152; --pin-5: #2b7bd6; --pin-6: #7a4cc6;
+    --serif: "Libre Caslon Text", Georgia, serif;
+    --sans: "Hanken Grotesk", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gutter: 20px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--card); color: var(--ink); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--ink); color: #fff; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  button, input, select { font: inherit; color: inherit; }
+
+  .concept { background: var(--wash); color: var(--muted); text-align: center; font-size: 12.5px; line-height: 1.4; padding: 7px var(--gutter); }
+
+  .top { border-bottom: 1px solid var(--hair); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px var(--gutter); }
+  .top .who { display: flex; align-items: center; gap: 10px; text-decoration: none; min-height: 44px; }
+  .top img { width: 34px; height: 34px; }
+  .top .who span { font: 600 14px/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
+  .top .call { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; font-weight: 500; }
+
+  /* First screen: the name like a specimen title, three setups mounted, one action */
+  /* On phones the three setups sit between the name and the action, so the work shows before the button */
+  .hero { display: flex; flex-direction: column; padding: 14px var(--gutter) 34px; }
+  .hero > .says { display: contents; }
+  .hero h1 { order: 1; } .hero .what { order: 2; } .hero .case3 { order: 3; } .hero .proof { order: 4; } .hero .act { order: 5; }
+  /* The case title is set upright, like the heading on a museum case; italic is kept for the specimen names */
+  h1 { margin: 0; font: 400 min(60px, 15.5vw)/1 var(--serif); letter-spacing: -.03em; }
+  h1 small { display: block; margin-top: 6px; font: 400 15px/1.3 var(--sans); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .what { margin: 12px 0 0; }
+  /* Phones: two specimens big enough to read; the third joins them on wider screens */
+  .case3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+  .case3 .spec:nth-child(3) { display: none; }
+
+  .spec { margin: 0; position: relative; }
+  .mount { position: relative; border: 1px solid var(--hair); padding: 5px; background: var(--card); }
+  /* 4:5 from the top of each reel cover: the burned-in "Event Mgmt" phone line sits lower, below y=470 of 640 */
+  .mount .ph { aspect-ratio: 4 / 5; overflow: hidden; background: var(--wash); }
+  .mount img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+  .pin { position: absolute; top: -7px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--c, var(--pin-1)); box-shadow: inset -1px -2px 2px rgba(0,0,0,.25), inset 1px 1px 1px rgba(255,255,255,.55), 0 2px 3px rgba(29,26,27,.25); }
+  .spec figcaption { margin-top: 8px; line-height: 1.3; }
+  .spec figcaption i { display: block; font: italic 400 17px/1.25 var(--serif); }
+  .spec figcaption span { display: block; font-size: 15px; color: var(--muted); }
+  /* First screen: tighter captions so the action still fits on a 375x667 phone */
+  .case3 .spec { min-width: 0; }
+  .case3 .spec figcaption { margin-top: 6px; line-height: 1.25; }
+  .case3 .spec figcaption i { font-size: 16px; }
+
+  .proof { display: flex; align-items: center; gap: 8px; margin: 18px 0 0; font-size: 16px; }
+  .proof svg { width: 16px; height: 16px; flex: none; }
+  .proof b { font: 700 17px/1 var(--serif); }
+  .act { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; margin-top: 14px; border: 0; border-radius: 2px; background: var(--ink); color: #fff; font: 600 17px/1 var(--sans); letter-spacing: .02em; text-decoration: none; cursor: pointer; transition: transform .14s var(--ease), background-color .14s; }
+  .act:active { transform: scale(.98); background: #000; }
+  .act svg { width: 20px; height: 20px; flex: none; }
+
+  /* The case */
+  .sec { padding: 46px var(--gutter) 10px; border-top: 1px solid var(--hair); }
+  h2 { margin: 0; font: 400 32px/1.15 var(--serif); letter-spacing: -.015em; text-wrap: balance; }
+  .sub { margin: 8px 0 0; color: var(--muted); }
+  .sub a { color: var(--ink); }
+  /* Links inside a sentence get a full 44px tap height without opening up the line */
+  .sub a, .or a { display: inline-block; padding: 12px 0; margin: -12px 0; }
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; margin-top: 30px; }
+
+  /* Enquiry */
+  .ask { display: grid; gap: 14px; margin-top: 24px; max-width: 460px; }
+  .ask label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .ask select, .ask input { width: 100%; min-height: 50px; padding: 0 14px; border: 1px solid var(--hair); border-radius: 2px; background: var(--card); color: var(--ink); font: 400 17px/1.2 var(--sans); letter-spacing: 0; text-transform: none; -webkit-appearance: none; appearance: none; }
+  .ask select { background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231d1a1b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center; padding-right: 40px; }
+  .ask input::placeholder { color: #6f6765; opacity: 1; }
+  .ask select:focus, .ask input:focus { outline: none; border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .ask .act { margin-top: 4px; }
+  .or { margin: 4px 0 0; font-size: 16px; color: var(--muted); }
+  .or a { color: var(--ink); }
+
+  /* The label card */
+  .label { margin-top: 26px; border: 1px solid var(--ink); padding: 20px 18px; max-width: 520px; }
+  .label h3 { margin: 0; font: italic 400 24px/1.2 var(--serif); }
+  .label dl { margin: 16px 0 0; }
+  .label dt { font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .label dd { margin: 2px 0 16px; }
+  .label dd:last-child { margin-bottom: 0; }
+  .label a { display: inline-block; padding: 2px 0; }
+  .label .tap { display: inline-flex; align-items: center; min-height: 44px; }
+  footer { padding: 40px 0 36px; font-size: 14px; color: var(--muted); }
+  footer .wrap { padding: 0 var(--gutter); }
+
+  /* After the first screen, the one action follows you, quietly */
+  .float { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; transform: translateY(calc(100% + 24px)); transition: transform .32s var(--ease); }
+  .float.show { transform: none; }
+  .float .act { margin: 0; box-shadow: 0 8px 24px rgba(29, 26, 27, .22); }
+
+  @media (min-width: 760px) {
+    :root { --gutter: 40px; }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    .hero { padding-top: 48px; padding-bottom: 56px; }
+    .case3 { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .case3 .spec:nth-child(3) { display: block; }
+    .act { display: inline-flex; width: auto; padding: 0 30px; align-self: flex-start; }
+    .case { grid-template-columns: repeat(4, 1fr); gap: 36px 24px; }
+    .sec { padding-top: 72px; }
+    h2 { font-size: 42px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .float { left: auto; right: 24px; bottom: 24px; }
+    .case3 .spec figcaption i { font-size: 17px; }
+  }
+  /* Title and specimens side by side only where the title fits its column; tablets keep the stacked case */
+  @media (min-width: 1000px) {
+    .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: end; padding-top: 64px; padding-bottom: 64px; }
+    .hero > .says { display: block; }
+    h1 { font-size: min(96px, 8vw); }
+    .case3 { margin-top: 0; }
+  }
+  @media (max-width: 340px) {
+    :root { --gutter: 16px; }
+    .case3 { gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .act, .float { transition: none; }
+    .act:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept preview made for Butterflies Event Management · not the official site</div>
+
+<header class="top"><div class="wrap">
+  <a class="who" href="#top" aria-label="Butterflies Event Management, back to top"><img src="assets/logo.jpg" alt="" width="34" height="34"><span>Butterflies</span></a>
+  <a class="call" href="tel:+919176707070">Call 91767 07070</a>
+</div></header>
+
+<main id="top">
+<div class="wrap">
+  <section class="hero">
+    <div class="says">
+      <h1>Butterflies <small>Event Management</small></h1>
+      <p class="what">Themed birthday stages, baby showers and ceremony decor in Chennai.</p>
+      <p class="proof"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17.1l-5.9 3.2 1.3-6.5-4.9-4.5 6.6-.8z"/></svg><span><b>4.9</b> on Google, from 288 reviews</span></p>
+      <a class="act" id="heroAct" data-wa href="https://wa.me/919176707070" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+        Enquire on WhatsApp
+      </a>
+    </div>
+    <div class="case3">
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-1)"></span><div class="ph"><img src="assets/post-02.jpg" alt="Butterflies-theme first birthday: pink and cream balloon arch, a white arch printed 'Dhwani turns One', a light-up 1 and a neon butterfly" width="360" height="640"></div></div><figcaption><i>Butterflies</i><span>first birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-4)"></span><div class="ph"><img src="assets/post-03.jpg" alt="Half-saree ceremony backdrop: grass wall with marigold strings, red lotus cut-outs, a gold Ganesha and a red and gold throne chair" width="360" height="640"></div></div><figcaption><i>Ganesha</i><span>half-saree ceremony</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-5)"></span><div class="ph"><img src="assets/post-09.jpg" alt="Space-theme birthday: blue balloon ring around a backdrop printed 'Ayansh turns 5', astronaut plinths and the name in light-up letters" width="360" height="640"></div></div><figcaption><i>Space</i><span>fifth birthday</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="setups">
+    <h2 id="setups">The setups</h2>
+    <p class="sub">As posted on <a href="https://instagram.com/eventsbybutterflies" target="_blank" rel="noopener">@eventsbybutterflies</a>, followed by 9,682 people.</p>
+    <div class="case">
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-5)"></span><div class="ph"><img src="assets/post-10.jpg" alt="Space-theme 10th birthday: blue and silver balloons, a backdrop printed 'Happy 10th trip around the sun, Kathryn!!', astronaut cut-outs and printed plinths" width="360" height="640" loading="lazy"></div></div><figcaption><i>Space</i><span>tenth birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-1)"></span><div class="ph"><img src="assets/post-04.jpg" alt="Masha and the Bear birthday: printed forest backdrop, red and gold balloons, three printed plinths and light-up name letters" width="360" height="640" loading="lazy"></div></div><figcaption><i>Masha and the Bear</i><span>third birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-6)"></span><div class="ph"><img src="assets/post-06.jpg" alt="Ben and Holly birthday: pastel balloon arch, castle backdrop and printed plinths" width="360" height="640" loading="lazy"></div></div><figcaption><i>Ben and Holly</i><span>fifth birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-2)"></span><div class="ph"><img src="assets/post-12.jpg" alt="Spider-Man birthday: city backdrop, red and blue balloons, web-print floor and printed plinths" width="360" height="640" loading="lazy"></div></div><figcaption><i>Spider-Man</i><span>third birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-3)"></span><div class="ph"><img src="assets/post-11.jpg" alt="Mickey-theme birthday stage: Mickey and Goofy cut-outs, a balloon hoop and a red stage carpet" width="360" height="640" loading="lazy"></div></div><figcaption><i>Mickey</i><span>birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-6)"></span><div class="ph"><img src="assets/post-08.jpg" alt="K-pop birthday: arched backdrop with three singers, purple, orange and gold balloons, and a sequin wall" width="360" height="640" loading="lazy"></div></div><figcaption><i>K-pop</i><span>seventh birthday</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-1)"></span><div class="ph"><img src="assets/post-01.jpg" alt="Baby shower welcome board on an easel, painted with the couple and framed in flowers, beside a brass lamp" width="360" height="640" loading="lazy"></div></div><figcaption><i>Traditional flowers</i><span>baby shower</span></figcaption></figure>
+      <figure class="spec"><div class="mount"><span class="pin" style="--c:var(--pin-2)"></span><div class="ph"><img src="assets/post-05.jpg" alt="Navratri decor: mandala-print wall edged in marigold, with painted umbrellas in front" width="360" height="640" loading="lazy"></div></div><figcaption><i>Mandala and marigold</i><span>Navratri</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec split" id="enquire" aria-labelledby="ask">
+    <div>
+      <h2 id="ask">Tell us the occasion and the date</h2>
+      <p class="sub">Your message opens in WhatsApp, ready to send to 91767 07070.</p>
+      <form class="ask" onsubmit="return false">
+        <label>Occasion
+          <select id="occasion">
+            <option value="a birthday">Birthday</option>
+            <option value="a first birthday">First birthday</option>
+            <option value="a baby shower">Baby shower</option>
+            <option value="a half-saree ceremony">Half-saree ceremony</option>
+            <option value="Navratri decor">Navratri decor</option>
+            <option value="an event">Something else</option>
+          </select>
+        </label>
+        <label>Date
+          <input id="date" type="text" placeholder="e.g. 14 December" maxlength="30" autocomplete="off" enterkeyhint="done">
+        </label>
+        <a class="act" data-wa href="https://wa.me/919176707070" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+          Enquire on WhatsApp
+        </a>
+        <p class="or">Or call <a href="tel:+919176707070">91767 07070</a>.</p>
+      </form>
+    </div>
+    <div class="label">
+      <h3>Butterflies Event Management</h3>
+      <dl>
+        <dt>On Google</dt>
+        <dd>Event planner, rated 4.9 from 288 reviews</dd>
+        <dt>Address</dt>
+        <dd>4/64, Mangali Aman Kovil Street, St. Thomas Mount, Chennai 600074. Landmark: DMI Foundation.<br><a class="tap" href="https://www.google.com/maps/search/?api=1&amp;query=Butterflies%20Event%20Management%20St.Thomas%20Mount&amp;query_place_id=ChIJgb9HeIBhUjoRT-GWwI6nVKo" target="_blank" rel="noopener">Open in Google Maps</a></dd>
+        <dt>Hours</dt>
+        <dd>Open 24 hours, every day</dd>
+        <dt>Phone and Instagram</dt>
+        <dd><a class="tap" href="tel:+919176707070">91767 07070</a> &nbsp;·&nbsp; <a class="tap" href="https://instagram.com/eventsbybutterflies" target="_blank" rel="noopener">@eventsbybutterflies</a></dd>
+      </dl>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer><div class="wrap">Butterflies Event Management, St. Thomas Mount, Chennai</div></footer>
+
+<div class="float" id="float" aria-hidden="true">
+  <a class="act" data-wa href="https://wa.me/919176707070" target="_blank" rel="noopener" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+    Enquire on WhatsApp
+  </a>
+</div>
+
+<script>
+/* Plain script: every WhatsApp link carries the visitor's occasion and date. */
+(function () {
+  var WA = "919176707070";
+  var occ = document.getElementById("occasion"), date = document.getElementById("date");
+  var links = document.querySelectorAll("[data-wa]");
+  function sync() {
+    var d = date.value.trim();
+    var text = "Hi Butterflies, I'm planning " + occ.value + (d ? " on " + d : "") + ". Could you share the details?";
+    var href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(text);
+    for (var i = 0; i < links.length; i++) links[i].href = href;
+  }
+  occ.addEventListener("change", sync);
+  date.addEventListener("input", sync);
+  date.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); date.blur(); } });
+  sync();
+
+  // The floating button shows once the first-screen button has scrolled away, and steps aside at the enquiry
+  var fl = document.getElementById("float"), hero = document.getElementById("heroAct"), ask = document.getElementById("enquire");
+  if ("IntersectionObserver" in window) {
+    var heroGone = false, askIn = false;
+    function show() { var on = heroGone && !askIn; fl.classList.toggle("show", on); fl.setAttribute("aria-hidden", on ? "false" : "true"); fl.firstElementChild.tabIndex = on ? 0 : -1; }
+    // also shows while the first-screen button is still below the fold on a short phone, so an action is always in view
+    new IntersectionObserver(function (es) { heroGone = !es[0].isIntersecting || es[0].intersectionRatio < .9; show(); }, { threshold: [0, .9] }).observe(hero);
+    new IntersectionObserver(function (es) { askIn = es[0].isIntersecting; show(); }, { threshold: .15 }).observe(ask);
+  }
+})();
+</script>
+</body>
+</html>

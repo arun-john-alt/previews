@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Surprise Cakes · Custom cakes in Tatabad, Coimbatore</title>
+<meta name="description" content="Custom cakes for birthdays, weddings and anniversaries. Tatabad, Coimbatore. Open 24 hours.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Albert+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* Three inks, like a printed cake box: white board, cocoa print, and one satin ribbon in the yellow
+     of their logo. */
+  :root {
+    --board: #ffffff;
+    --ink: #2b1810;
+    --ink-soft: #6a5047;
+    --line: rgba(43, 24, 16, .14);
+    --ribbon: #ffde59;
+    --ribbon-edge: #e3bf2f;
+    --ribbon-line: #a88316; /* the ribbon's yellow, deep enough to show as an underline on white */
+    --print: "Bodoni Moda", Georgia, serif;
+    --text: "Albert Sans", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --wrap: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--ink) var(--board); }
+  body { margin: 0; background: var(--board); color: var(--ink); font: 400 17px/1.55 var(--text); font-variant-numeric: lining-nums; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--ribbon); color: var(--ink); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  h1, h2 { font-family: var(--print); font-weight: 600; font-optical-sizing: auto; margin: 0; letter-spacing: -.01em; line-height: 1.05; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  svg { width: 22px; height: 22px; flex: none; }
+
+  /* Required on every mock */
+  .concept { background: var(--ink); color: #f1e6df; text-align: center; font-size: 13px; line-height: 1.3; padding: 7px 16px; }
+
+  /* The lid: the stamp, the printed name, the die-cut window */
+  .lid { padding: 20px 0 18px; text-align: center; }
+  .stamp { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .stamp img { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--line); }
+  .lid h1 { font-size: 34px; white-space: nowrap; }
+  /* The die-cut window: one hard edge, cut into the lid, not a card */
+  .window { margin: 18px auto 0; width: min(100%, 360px); }
+  .window .pane { overflow: hidden; border: 2px solid var(--ink); border-radius: 6px; }
+  .window img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 40%; animation: settle 1.1s var(--ease) both; }
+  @keyframes settle { from { transform: scale(1.045); } to { transform: none; } }
+  .what { margin: 16px auto 0; max-width: 30ch; font-size: 19px; line-height: 1.4; text-wrap: balance; }
+  .where { margin: 6px 0 0; color: var(--ink-soft); font-size: 16px; letter-spacing: .01em; }
+  .nw { white-space: nowrap; }
+
+  /* The ribbon: the one action, edge to edge */
+  .ribbon { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 60px; padding: 0 20px; background: var(--ribbon); color: var(--ink); text-decoration: none; font: 600 18px/1.2 var(--text); letter-spacing: .02em; border-top: 3px solid var(--ribbon-edge); border-bottom: 3px solid var(--ribbon-edge); box-shadow: inset 0 3px 0 rgba(255,255,255,.4), inset 0 -3px 0 rgba(255,255,255,.4); transition: background-color .12s var(--ease); -webkit-tap-highlight-color: transparent; }
+  .ribbon:active { background: var(--ink); color: var(--ribbon); border-color: var(--ink); }
+  .ribbon:focus-visible { outline-color: var(--ink); outline-offset: -6px; }
+  .call { margin: 4px 0 0; text-align: center; }
+  .call a, .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; text-decoration-color: var(--ribbon-line); }
+
+  /* Inside the box: a few of their cakes */
+  .inside { padding: 64px 0 8px; }
+  .inside h2, .visit h2 { font-size: 30px; }
+  .inside .lede { margin: 8px 0 0; color: var(--ink-soft); }
+  .cakes { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 12px; }
+  .cakes figure { margin: 0; }
+  .cakes .pane { overflow: hidden; border-radius: 14px; border: 1px solid var(--line); }
+  .cakes img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .cakes figcaption { margin-top: 10px; font-size: 16px; line-height: 1.4; }
+  .cakes figcaption b { display: block; font-weight: 600; font-size: 17px; line-height: 1.3; letter-spacing: .01em; }
+
+  /* The shop */
+  .visit { padding: 72px 0 40px; }
+  .visit .grid { padding-top: 24px; }
+  .visit .pane { overflow: hidden; border-radius: 16px; border: 1px solid var(--line); }
+  .visit .pane img { width: 100%; aspect-ratio: 640 / 743; object-fit: cover; }
+  .facts { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .facts li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .facts .k { display: block; color: var(--ink-soft); font-size: 16px; letter-spacing: .01em; }
+  .facts .v { display: block; font-size: 18px; line-height: 1.4; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 14px 0 0 -6px; }
+
+  .close { padding: 8px 0 28px; }
+  .foot { padding: 18px 20px calc(36px + env(safe-area-inset-bottom)); text-align: center; color: var(--ink-soft); font-size: 16px; }
+  .foot a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-underline-offset: 4px; }
+
+  /* A slim ribbon that follows once the big one has scrolled away */
+  .follow { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; min-height: 54px; padding-bottom: env(safe-area-inset-bottom); border-bottom: 0; transform: translateY(110%); visibility: hidden; transition: transform .28s var(--ease), visibility 0s .28s; }
+  .follow.on { transform: none; visibility: visible; transition: transform .28s var(--ease), visibility 0s; }
+
+  @media (hover: hover) {
+    .ribbon:hover { background: var(--ribbon-edge); }
+    .call a:hover, .links a:hover { text-decoration-thickness: 3px; }
+  }
+  @media (max-width: 380px) { .concept { font-size: 12px; padding: 6px 10px; } }
+  /* Smallest phones (320 x 568): a smaller window keeps the ribbon on the first screen under the bigger logo */
+  @media (max-width: 350px) { .lid h1 { font-size: 29px; } .window { width: 78%; } .what { font-size: 18px; } }
+
+  @media (min-width: 720px) {
+    .cakes { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .visit .grid { display: grid; grid-template-columns: 5fr 6fr; gap: 56px; align-items: start; }
+    .visit .facts { margin-top: 0; }
+  }
+  @media (min-width: 960px) {
+    .lid { padding: 48px 0 40px; text-align: left; }
+    .lid .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+    .window { margin: 0; width: 100%; max-width: 500px; justify-self: end; }
+    .stamp { justify-content: flex-start; }
+    .lid h1 { font-size: clamp(56px, 6.2vw, 72px); margin-top: 18px; } /* the name stays inside its column, 960 to 1440 */
+    .stamp { flex-direction: column; align-items: flex-start; gap: 0; }
+    .what { margin: 22px 0 0; font-size: 22px; max-width: 26ch; }
+    .where { font-size: 17px; }
+    .inside { padding-top: 96px; }
+    .inside h2, .visit h2 { font-size: 40px; }
+    .visit { padding-top: 104px; }
+    .follow { display: none; }
+    .ribbon { min-height: 72px; font-size: 20px; }
+    .visit .grid { padding-top: 36px; }
+    .foot { padding-bottom: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .window img { animation: none; } .follow, .follow.on, .ribbon { transition: none; } }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept for Surprise Cakes · not the official site</div>
+
+<header class="lid">
+  <div class="wrap grid">
+    <div class="print">
+      <div class="stamp">
+        <img src="assets/logo.jpg" alt="Surprise Cakes logo" width="64" height="64">
+        <h1>Surprise Cakes</h1>
+      </div>
+      <p class="what">Custom cakes for birthdays, weddings and anniversaries.</p>
+      <p class="where">Tatabad, Coimbatore · <span class="nw">Open 24 hours</span></p>
+    </div>
+    <figure class="window">
+      <div class="pane"><img src="assets/window-tiers.jpg" alt="Two-tier cake in white and mint combed buttercream, dressed with pink roses, white carnations and baby's breath, the names Steffi and Samson in fondant letters on the board" width="1200" height="1147" fetchpriority="high"></div>
+    </figure>
+  </div>
+</header>
+
+<a class="ribbon" id="ribbon" href="https://wa.me/918870284862?text=Hi%20Surprise%20Cakes!%20I%27d%20like%20to%20order%20a%20custom%20cake." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+  Order on WhatsApp
+</a>
+<p class="call"><a href="tel:+918438337388">or call the shop, 84383 37388</a></p>
+
+<main>
+  <section class="inside" aria-labelledby="inside-h">
+    <div class="wrap">
+      <h2 id="inside-h">Some of our cakes</h2>
+      <p class="lede">Each one with the name it was made for.</p>
+      <ul class="cakes">
+        <li><figure>
+          <div class="pane"><img src="assets/cake-bunny.jpg" alt="Tall pink-and-white ombre cake with a sugar bunny, a pink number 1, sprinkles and the name Juana on a white disc" width="720" height="720" loading="lazy"></div>
+          <figcaption><b>Juana</b>Pink ombre, a sugar bunny and a big 1</figcaption>
+        </figure></li>
+        <li><figure>
+          <div class="pane"><img src="assets/cake-kitkat.jpg" alt="Round chocolate cake walled with KitKat bars and a red ribbon, topped with gems, chocolate balls, wafer rolls, a gold Happy Birthday topper and the name Aiya" width="720" height="720" loading="lazy"></div>
+          <figcaption><b>Aiya</b>A KitKat wall, gems and a gold topper</figcaption>
+        </figure></li>
+        <li><figure>
+          <div class="pane"><img src="assets/cake-mermaid.jpg" alt="Pink and aqua drip cake with a sugar mermaid, a seahorse, coral and the name Nakshatra on the board" width="720" height="900" loading="lazy"></div>
+          <figcaption><b>Nakshatra</b>A mermaid on a pink drip</figcaption>
+        </figure></li>
+        <li><figure>
+          <div class="pane"><img src="assets/cake-elephant.jpg" alt="White and blue cake with a grey sugar elephant, gold paper fans, hot-air balloon toppers and the name SaiNilani in gold" width="640" height="640" loading="lazy"></div>
+          <figcaption><b>SaiNilani</b>A baby elephant and gold balloons</figcaption>
+        </figure></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-h">
+    <div class="wrap"><h2 id="visit-h">The shop in Tatabad</h2></div>
+    <div class="wrap grid">
+      <div class="pane"><img src="assets/shop-counter.jpg" alt="Inside the shop: a lit glass cake counter with small cakes and pastries, birthday banners on the wall" width="640" height="743" loading="lazy"></div>
+      <div>
+        <ul class="facts">
+          <li><span class="k">Address</span><span class="v">45/58 Nedunchezhian St, near Kumar Tailors, Rathinapuri, Tatabad, Coimbatore 641027</span></li>
+          <li><span class="k">Hours</span><span class="v">Open 24 hours, every day</span></li>
+          <li><span class="k">Google</span><span class="v">5.0 from 142 reviews</span></li>
+          <li><span class="k">Delivery</span><span class="v">Available across Coimbatore</span></li>
+        </ul>
+        <div class="links">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Surprise%20Cakes%20Tatabad%20Coimbatore&amp;query_place_id=ChIJ51dmOsJYqDsR2P064RbSaa0" target="_blank" rel="noopener">Directions</a>
+          <a href="tel:+918438337388">Call 84383 37388</a>
+          <a href="https://instagram.com/surprisecakescoimbatore" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://youtube.com/@surprisecakescoimbatore" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="close">
+  <a class="ribbon" id="ribbon-end" href="https://wa.me/918870284862?text=Hi%20Surprise%20Cakes!%20I%27d%20like%20to%20order%20a%20custom%20cake." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+    Order on WhatsApp
+  </a>
+</div>
+<footer class="foot">Surprise Cakes, Tatabad, Coimbatore<br><span class="nw">WhatsApp <a href="https://wa.me/918870284862">88702 84862</a></span> · <span class="nw">Shop <a href="tel:+918438337388">84383 37388</a></span></footer>
+
+<a class="ribbon follow" id="follow" href="https://wa.me/918870284862?text=Hi%20Surprise%20Cakes!%20I%27d%20like%20to%20order%20a%20custom%20cake." target="_blank" rel="noopener" tabindex="-1">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+  Order on WhatsApp
+</a>
+
+<script>
+/* The slim ribbon shows only while neither full ribbon is on screen. Plain script, no library. */
+(function () {
+  var follow = document.getElementById("follow");
+  var big = [document.getElementById("ribbon"), document.getElementById("ribbon-end")];
+  if (!("IntersectionObserver" in window)) return;
+  var seen = new Map();
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen.set(e.target, e.isIntersecting); });
+    var anyVisible = big.some(function (el) { return seen.get(el); });
+    var heroAbove = big[0].getBoundingClientRect().bottom < 0;
+    var on = heroAbove && !anyVisible;
+    follow.classList.toggle("on", on);
+    follow.tabIndex = on ? 0 : -1;
+  });
+  big.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

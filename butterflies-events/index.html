@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Butterflies Event Management · Website concept</title>
+<meta name="theme-color" content="#2c1119">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- One link per weight: Google then serves static files, which every phone browser draws at the right weight
+     (a multi-weight request gets one variable file, and some WebKit builds draw its thin default) -->
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* Function hall after dark: curtain maroon ground, bulb light, one marigold action */
+  :root {
+    --hall: #2c1119;
+    --hall-up: #3a1924;
+    --floor: #1c0a10;
+    --line: #5a3040;
+    --text: #fbecef;
+    --soft: #dcb9c3;
+    --bulb: #ffd27a;
+    --socket: #4a2130;
+    --marigold: #f6a821;
+    --marigold-ink: #2a0f17;
+    --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --body: "Albert Sans", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gutter: 16px;
+    --bar: 76px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scrollbar-color: var(--line) var(--floor); }
+  body { margin: 0; background: var(--hall); color: var(--text); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; padding-bottom: calc(var(--bar) + env(safe-area-inset-bottom)); }
+  ::selection { background: var(--marigold); color: var(--marigold-ink); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--marigold); outline-offset: 3px; border-radius: 4px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .concept { background: var(--floor); color: var(--soft); text-align: center; font-size: 12.5px; line-height: 1.4; padding: 7px var(--gutter); border-bottom: 1px solid var(--line); }
+
+  /* Header */
+  .top { display: flex; align-items: center; gap: 10px; padding: 8px var(--gutter); }
+  .mark { width: 40px; height: 40px; border-radius: 50%; background: #fff; overflow: hidden; flex: none; }
+  .mark img { width: 100%; height: 100%; object-fit: contain; }
+  .top h1 { margin: 0; font: 800 23px/1 var(--display); letter-spacing: .01em; text-transform: uppercase; }
+  .top h1 small { display: block; font: 500 13px/1.3 var(--body); letter-spacing: .02em; text-transform: none; color: var(--soft); margin-top: 3px; }
+  .call { margin-left: auto; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); color: var(--bulb); transition: transform .14s var(--ease), background-color .14s; }
+  .call:active { transform: scale(.94); background: var(--hall-up); }
+  .call svg { width: 20px; height: 20px; }
+
+  /* The backdrop row: their real setups, the centred one lit */
+  .stage { position: relative; }
+  .row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 26vw 4px calc(26vw - 50px); scrollbar-width: none; overscroll-behavior-x: contain; }
+  .row::-webkit-scrollbar { display: none; }
+  /* Only the photo dims off-centre; the labels stay readable */
+  .set { flex: none; width: 48vw; max-width: 236px; scroll-snap-align: center; margin: 0; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; transform: scale(.93); transform-origin: 50% 60%; transition: transform .28s var(--ease); }
+  .set .ph { opacity: .5; transition: opacity .28s var(--ease); }
+  .set b { color: var(--soft); transition: color .28s; }
+  .set.on { transform: none; }
+  .set.on .ph { opacity: 1; }
+  .set.on b { color: var(--text); }
+  .set:active img { transform: scale(.98); }
+  /* 4:5 from the top of each reel cover: the burned-in "Event Mgmt" phone line sits lower, below y=470 of 640 */
+  .set .ph { aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; background: var(--floor); }
+  .set img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transition: transform .14s var(--ease); }
+  .set b { display: block; margin-top: 8px; font: 700 20px/1.05 var(--display); text-transform: uppercase; letter-spacing: .02em; }
+  .set span { display: block; font-size: 16px; color: var(--soft); line-height: 1.35; padding-bottom: 3px; }
+  .set.on span { box-shadow: inset 0 -2px 0 var(--marigold); width: fit-content; }
+  .tier { flex: none; align-self: stretch; width: 38px; display: grid; place-items: center; scroll-snap-align: none; }
+  .tier p { margin: 0; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 15px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--bulb); white-space: nowrap; }
+
+  /* The name in lights at the stage front */
+  .front { padding: 14px var(--gutter) 0; }
+  .board { position: relative; display: grid; place-items: center; min-height: 66px; padding: 10px 12px; background: var(--floor); border-radius: 6px; border: 1px solid var(--line); cursor: text; }
+  .board svg { display: block; max-width: 100%; height: auto; }
+  .board .plain { font: 800 40px/1.05 var(--display); color: var(--bulb); letter-spacing: .08em; text-transform: uppercase; overflow-wrap: break-word; text-align: center; max-width: 100%; }
+  .bulb { opacity: 0; transition: opacity .18s ease-out; }
+  .lit .bulb, .bulb.keep { opacity: 1; }
+  .bulb.keep { transition: none; }
+  .hint { margin: 8px 2px 0; font-size: 16px; color: var(--soft); }
+
+  /* The sentence that becomes the WhatsApp message */
+  .ask { padding: 14px var(--gutter) 6px; }
+  .ask p.say { margin: 0; font: 700 31px/50px var(--display); letter-spacing: .005em; }
+  .nb { white-space: nowrap; }
+  .f { display: inline-block; vertical-align: baseline; height: 44px; margin: 0 1px; padding: 0 2px; border: 0; border-radius: 0; background: transparent; color: var(--bulb); font: 700 31px/44px var(--display); border-bottom: 2px dashed var(--soft); min-width: 2.2em; -webkit-appearance: none; appearance: none; caret-color: var(--marigold); }
+  .f::placeholder { color: var(--soft); opacity: .8; font-weight: 600; }
+  .f:focus { outline: none; border-bottom: 2px solid var(--marigold); }
+  .f:focus-visible { outline: none; }
+  select.f { padding-right: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffd27a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 2px center; cursor: pointer; max-width: 100%; }
+  select.f option { color: #1c0a10; background: #fff; font: 500 16px var(--body); }
+  .note { margin: 14px 0 0; font-size: 16px; color: var(--soft); }
+  .note a { color: var(--text); }
+  /* Links inside a sentence get a full 44px tap height without opening up the line */
+  .note a, .fact p a { display: inline-block; padding: 13px 0; margin: -13px 0; }
+
+  /* Pinned action */
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: rgba(28, 10, 16, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; width: 100%; border-radius: 6px; background: var(--marigold); color: var(--marigold-ink); font: 800 21px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: transform .14s var(--ease), filter .14s; }
+  .send:active { transform: scale(.97); filter: brightness(.95); }
+  .send svg { width: 22px; height: 22px; flex: none; }
+
+  /* Inside one stage: a labelled photo */
+  .sec { padding: 52px var(--gutter) 8px; }
+  .sec h2 { margin: 0; font: 800 34px/1.02 var(--display); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+  .sec .lead { margin: 8px 0 0; color: var(--soft); max-width: 60ch; }
+  .anat { position: relative; display: grid; grid-template-columns: 56% 1fr; margin: 24px 0 0; max-width: 560px; }
+  /* Top 470 of 640: keeps the KATHRYN letters, leaves out the burned-in phone line under them */
+  .anat .ph { position: relative; aspect-ratio: 36 / 47; border-radius: 4px; overflow: hidden; background: var(--floor); }
+  .anat img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+  .anat svg.lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .anat .dot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--bulb); box-shadow: 0 0 0 3px var(--floor); }
+  .anat ol { list-style: none; margin: 0; padding: 0; position: relative; }
+  .anat li { position: absolute; left: 14px; right: 0; transform: translateY(-50%); font-size: 15px; line-height: 1.3; font-weight: 600; }
+  .use { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; margin-top: 22px; padding: 0 18px; border: 1px solid var(--bulb); border-radius: 6px; background: transparent; color: var(--bulb); font: 700 19px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; cursor: pointer; transition: transform .14s var(--ease), background-color .14s; }
+  .use:active { transform: scale(.97); background: var(--hall-up); }
+
+  /* Find us */
+  .facts { display: grid; gap: 0; margin-top: 20px; border-top: 1px solid var(--line); max-width: 640px; }
+  .fact { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .fact svg { width: 22px; height: 22px; color: var(--bulb); margin-top: 2px; }
+  .fact strong { display: block; font-weight: 600; }
+  .fact p { margin: 0; color: var(--soft); }
+  .fact a { color: var(--text); }
+  .num { font: 800 30px/1 var(--display); color: var(--text); }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .links a { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; border-radius: 6px; border: 1px solid var(--line); text-decoration: none; font-weight: 600; transition: transform .14s var(--ease), background-color .14s; }
+  .links a:active { transform: scale(.97); background: var(--hall-up); }
+  .links svg { width: 19px; height: 19px; color: var(--bulb); }
+  footer { padding: 44px var(--gutter) 28px; color: var(--soft); font-size: 14px; }
+  footer b { display: block; font: 800 22px/1.1 var(--display); color: var(--text); text-transform: uppercase; letter-spacing: .02em; }
+
+  @media (min-width: 720px) {
+    :root { --gutter: 32px; }
+    /* One left edge for everything on wide screens: the 1040px column's content edge (column edge + 32px gutter) */
+    .top, .front, .ask { max-width: 1040px; margin: 0 auto; }
+    .row { padding-inline: max(32px, calc(50% - 488px)); scroll-padding-inline: max(32px, calc(50% - 488px)); }
+    .tier { width: 16px; scroll-snap-align: start; }
+    .set { width: 250px; max-width: none; scroll-snap-align: start; }
+    .board { min-height: 96px; }
+    .ask p.say, .f { font-size: 40px; }
+    .ask p.say { line-height: 62px; }
+    .f { height: 54px; line-height: 54px; }
+    .dock { left: auto; right: 24px; bottom: 24px; padding: 0; background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .send { width: auto; padding: 0 28px; min-height: 58px; box-shadow: 0 10px 28px rgba(0, 0, 0, .35); }
+    body { padding-bottom: 40px; }
+    .sec { max-width: 1040px; margin: 0 auto; }
+    .sec-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 56px; align-items: start; }
+    .sec-grid .intro { grid-column: 1; grid-row: 1; }
+    .sec-grid .use { grid-column: 1; grid-row: 2; justify-self: start; }
+    .sec-grid .anat { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+    .sec h2 { font-size: 46px; }
+    footer { max-width: 1040px; margin: 0 auto; }
+  }
+  @media (max-width: 340px) {
+    .ask p.say, .f { font-size: 27px; }
+    .top h1 { font-size: 20px; }
+    .anat li { font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .set, .set .ph, .set b, .set img, .bulb, .send, .call, .use, .links a { transition: none; }
+    .set:active img, .send:active, .call:active, .use:active, .links a:active { transform: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) { .dock { background: var(--floor); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept preview made for Butterflies Event Management · not the official site</div>
+
+<header class="top">
+  <div class="mark"><img src="assets/logo.jpg" alt="Butterflies logo: a rainbow butterfly" width="40" height="40"></div>
+  <h1>Butterflies <small>Event Management, Chennai</small></h1>
+  <a class="call" href="tel:+919176707070" aria-label="Call Butterflies on 91767 07070">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+  </a>
+</header>
+
+<main>
+<section class="stage" aria-label="Our setups and your enquiry">
+  <div class="row" id="row" role="group" aria-label="Setups by Butterflies. Swipe to choose a theme.">
+    <div class="tier" aria-hidden="true"><p>Birthdays</p></div>
+    <button class="set" type="button" data-theme="space"><div class="ph"><img src="assets/post-09.jpg" alt="Space-theme birthday: blue balloon ring around a backdrop printed 'Ayansh turns 5', astronaut plinths and a light-up 5" width="360" height="640"></div><b>Space</b><span>Birthday</span></button>
+    <button class="set" type="button" data-theme="butterflies"><div class="ph"><img src="assets/post-02.jpg" alt="Butterflies-theme first birthday: pink and cream balloon arch, a white arch printed 'Dhwani turns One', a light-up 1 and a neon butterfly" width="360" height="640"></div><b>Butterflies</b><span>First birthday</span></button>
+    <button class="set" type="button" data-theme="mickey"><div class="ph"><img src="assets/post-11.jpg" alt="Mickey-theme birthday stage: Mickey and Goofy cut-outs, a balloon hoop and a red stage carpet" width="360" height="640" loading="lazy"></div><b>Mickey</b><span>Birthday</span></button>
+    <button class="set" type="button" data-theme="spiderman"><div class="ph"><img src="assets/post-12.jpg" alt="Spider-Man birthday: city backdrop, red and blue balloons and printed plinths" width="360" height="640" loading="lazy"></div><b>Spider-Man</b><span>Birthday</span></button>
+    <button class="set" type="button" data-theme="masha"><div class="ph"><img src="assets/post-04.jpg" alt="Masha and the Bear birthday: printed forest backdrop, red and gold balloons and three printed plinths" width="360" height="640" loading="lazy"></div><b>Masha and the Bear</b><span>Birthday</span></button>
+    <button class="set" type="button" data-theme="benholly"><div class="ph"><img src="assets/post-06.jpg" alt="Ben and Holly birthday: pastel balloon arch, castle backdrop and printed plinths" width="360" height="640" loading="lazy"></div><b>Ben and Holly</b><span>Birthday</span></button>
+    <button class="set" type="button" data-theme="kpop"><div class="ph"><img src="assets/post-08.jpg" alt="K-pop birthday: arched backdrop with three singers, purple, orange and gold balloons, and a sequin wall" width="360" height="640" loading="lazy"></div><b>K-pop</b><span>Birthday</span></button>
+    <div class="tier" aria-hidden="true"><p>Ceremonies &amp; festivals</p></div>
+    <button class="set" type="button" data-theme="ganesha"><div class="ph"><img src="assets/post-03.jpg" alt="Half-saree ceremony backdrop: grass wall with marigold strings, red lotus cut-outs, a gold Ganesha and a red and gold throne chair" width="360" height="640" loading="lazy"></div><b>Ganesha and marigold</b><span>Half-saree ceremony</span></button>
+    <button class="set" type="button" data-theme="traditional"><div class="ph"><img src="assets/post-01.jpg" alt="Baby shower welcome board on an easel, painted with the couple and framed in flowers" width="360" height="640" loading="lazy"></div><b>Traditional flowers</b><span>Baby shower</span></button>
+    <button class="set" type="button" data-theme="mandala"><div class="ph"><img src="assets/post-05.jpg" alt="Navratri decor: mandala-print wall edged in marigold, with painted umbrellas in front" width="360" height="640" loading="lazy"></div><b>Mandala and marigold</b><span>Navratri, Dussehra</span></button>
+  </div>
+
+  <div class="front">
+    <div class="board" id="board" role="img" aria-label="BUTTERFLIES in light-up letters"><span class="plain">Butterflies</span></div>
+    <p class="hint" id="hint">Type a name below and it lights up here, like the letters at the front of our stages.</p>
+  </div>
+
+  <form class="ask" id="ask" action="https://wa.me/919176707070" onsubmit="return false">
+    <h2 class="sr">Plan your setup</h2>
+    <p class="say">A
+      <label class="sr" for="theme">Theme</label><select class="f" id="theme">
+        <option value="space">space</option>
+        <option value="butterflies">butterflies</option>
+        <option value="mickey">Mickey</option>
+        <option value="spiderman">Spider-Man</option>
+        <option value="masha">Masha and the Bear</option>
+        <option value="benholly">Ben and Holly</option>
+        <option value="kpop">K-pop</option>
+        <option value="ganesha">Ganesha and marigold</option>
+        <option value="traditional">traditional flowers</option>
+        <option value="mandala">mandala and marigold</option>
+        <option value="different">different</option>
+      </select> theme for
+      <span class="nb"><label class="sr" for="name">Name</label><input class="f" id="name" type="text" placeholder="name" maxlength="32" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="next">'s</span>
+      <label class="sr" for="occasion">Occasion</label><select class="f" id="occasion">
+        <option value="birthday">birthday</option>
+        <option value="first birthday">first birthday</option>
+        <option value="baby shower">baby shower</option>
+        <option value="half-saree ceremony">half-saree ceremony</option>
+        <option value="Navratri decor">Navratri decor</option>
+        <option value="event">event</option>
+      </select>, on
+      <label class="sr" for="date">Date</label><input class="f" id="date" type="text" placeholder="date" maxlength="24" autocomplete="off" enterkeyhint="next"> at
+      <span class="nb"><label class="sr" for="place">Place</label><input class="f" id="place" type="text" placeholder="place" maxlength="40" autocomplete="off" enterkeyhint="send">.</span>
+    </p>
+    <p class="note">This sentence becomes your WhatsApp message to 91767 07070. Rather talk? <a href="tel:+919176707070">Call us</a>.</p>
+  </form>
+</section>
+
+<section class="sec" aria-labelledby="inside">
+  <div class="sec-grid">
+    <div class="intro">
+      <h2 id="inside">Inside one of our stages</h2>
+      <p class="lead">A space theme for a 10th birthday, part by part.</p>
+    </div>
+    <figure class="anat">
+      <div class="ph">
+        <img src="assets/post-10.jpg" alt="Space-theme 10th birthday: blue and silver balloon garland, a backdrop printed 'Happy 10th trip around the sun, Kathryn!!', astronaut cut-outs, three printed plinths with a light-up 10, and KATHRYN in light-up letters" width="360" height="640" loading="lazy">
+      </div>
+      <ol>
+        <li style="top:8%">Balloon garland</li>
+        <li style="top:34%">Name on the backdrop</li>
+        <li style="top:54%">Light-up age number</li>
+        <li style="top:73%">Printed plinths</li>
+        <li style="top:92%">Name in light-up letters</li>
+      </ol>
+      <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke-linecap="round">
+          <g stroke="#1c0a10" stroke-width="4" vector-effect="non-scaling-stroke">
+            <path d="M46.7 6.4 L57 8" vector-effect="non-scaling-stroke"/><path d="M31.1 43.6 L57 34" vector-effect="non-scaling-stroke"/><path d="M23.6 59.1 L57 54" vector-effect="non-scaling-stroke"/><path d="M35.5 73.4 L57 73" vector-effect="non-scaling-stroke"/><path d="M33.4 91.9 L57 92" vector-effect="non-scaling-stroke"/>
+          </g>
+          <g stroke="#ffd27a" stroke-width="1.5" vector-effect="non-scaling-stroke">
+            <path d="M46.7 6.4 L57 8" vector-effect="non-scaling-stroke"/><path d="M31.1 43.6 L57 34" vector-effect="non-scaling-stroke"/><path d="M23.6 59.1 L57 54" vector-effect="non-scaling-stroke"/><path d="M35.5 73.4 L57 73" vector-effect="non-scaling-stroke"/><path d="M33.4 91.9 L57 92" vector-effect="non-scaling-stroke"/>
+          </g>
+        </g>
+      </svg>
+      <span class="dot" style="left:46.7%;top:6.4%"></span><span class="dot" style="left:31.1%;top:43.6%"></span><span class="dot" style="left:23.6%;top:59.1%"></span><span class="dot" style="left:35.5%;top:73.4%"></span><span class="dot" style="left:33.4%;top:91.9%"></span>
+    </figure>
+    <button class="use" type="button" data-pick="space">Use the space theme
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="find">
+  <h2 id="find">Find Butterflies</h2>
+  <div class="facts">
+    <div class="fact">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17.1l-5.9 3.2 1.3-6.5-4.9-4.5 6.6-.8z"/></svg>
+      <div><span class="num">4.9</span> <strong style="display:inline">on Google</strong><p>from 288 reviews</p></div>
+    </div>
+    <div class="fact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+      <div><span class="num">9,682</span> <strong style="display:inline">followers</strong><p>on Instagram, <a href="https://instagram.com/eventsbybutterflies" target="_blank" rel="noopener">@eventsbybutterflies</a></p></div>
+    </div>
+    <div class="fact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <div><strong>Open 24 hours, every day</strong><p>as listed on Google</p></div>
+    </div>
+    <div class="fact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <div><strong>4/64, Mangali Aman Kovil Street, St. Thomas Mount, Chennai 600074</strong><p>Landmark: DMI Foundation. <a href="https://www.google.com/maps/search/?api=1&amp;query=Butterflies%20Event%20Management%20St.Thomas%20Mount&amp;query_place_id=ChIJgb9HeIBhUjoRT-GWwI6nVKo" target="_blank" rel="noopener">Open in Google Maps</a></p></div>
+    </div>
+  </div>
+  <div class="links">
+    <a href="tel:+919176707070"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>91767 07070</a>
+    <a href="https://wa.me/919176707070" target="_blank" rel="noopener" data-wa><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>WhatsApp</a>
+    <a href="https://instagram.com/eventsbybutterflies" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>Instagram</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <b>Butterflies Event Management</b>
+  St. Thomas Mount, Chennai
+</footer>
+
+<div class="dock">
+  <a class="send" id="send" href="https://wa.me/919176707070" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+    Send on WhatsApp
+  </a>
+</div>
+
+<script>
+/* Everything here is plain script: the WhatsApp link, the theme row and the lights work without any library. */
+(function () {
+  var WA = "919176707070";
+  var row = document.getElementById("row");
+  var sets = Array.prototype.slice.call(row.querySelectorAll(".set"));
+  var theme = document.getElementById("theme");
+  var occasion = document.getElementById("occasion");
+  var nameEl = document.getElementById("name");
+  var dateEl = document.getElementById("date");
+  var placeEl = document.getElementById("place");
+  var send = document.getElementById("send");
+  var board = document.getElementById("board");
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Each theme's photo already shows the occasion it was made for; we follow it until the visitor picks one.
+  var THEMES = {
+    butterflies: { say: "a butterflies theme", occ: "first birthday" },
+    space: { say: "a space theme", occ: "birthday" },
+    mickey: { say: "a Mickey theme", occ: "birthday" },
+    spiderman: { say: "a Spider-Man theme", occ: "birthday" },
+    masha: { say: "a Masha and the Bear theme", occ: "birthday" },
+    benholly: { say: "a Ben and Holly theme", occ: "birthday" },
+    kpop: { say: "a K-pop theme", occ: "birthday" },
+    ganesha: { say: "a Ganesha and marigold setup", occ: "half-saree ceremony" },
+    traditional: { say: "a traditional flower setup", occ: "baby shower" },
+    mandala: { say: "a mandala and marigold setup", occ: "Navratri decor" },
+    different: { say: "a theme of my own", occ: null }
+  };
+  var occTouched = false;
+
+  /* ---- 5x7 bulb letters, like the light-up letters at the front of their stages ---- */
+  var F = {
+    A:"01110100011000111111100011000110001", B:"11110100011000111110100011000111110", C:"01110100011000010000100001000101110",
+    D:"11100100101000110001100011001011100", E:"11111100001000011110100001000011111", F:"11111100001000011110100001000010000",
+    G:"01110100011000010111100011000101111", H:"10001100011000111111100011000110001", I:"01110001000010000100001000010001110",
+    J:"00111000100001000010000101001001100", K:"10001100101010011000101001001010001", L:"10000100001000010000100001000011111",
+    M:"10001110111010110101100011000110001", N:"10001100011100110101100111000110001", O:"01110100011000110001100011000101110",
+    P:"11110100011000111110100001000010000", Q:"01110100011000110001101011001001101", R:"11110100011000111110101001001010001",
+    S:"01111100001000001110000010000111110", T:"11111001000010000100001000010000100", U:"10001100011000110001100011000101110",
+    V:"10001100011000110001100010101000100", W:"10001100011000110101101011010101010", X:"10001100010101000100010101000110001",
+    Y:"10001100011000101010001000010000100", Z:"11111000010001000100010001000011111",
+    "0":"01110100011001110101110011000101110", "1":"00100011000010000100001000010001110", "2":"01110100010000100010001000100011111",
+    "3":"11111000100010000010000011000101110", "4":"00010001100101010010111110001000010", "5":"11111100001111000001000011000101110",
+    "6":"00110010001000011110100011000101110", "7":"11111000010001000100010000100001000", "8":"01110100011000101110100011000101110",
+    "9":"01110100011000101111000010001001100", "'":"00100001000100000000000000000000000", "&":"01100100101010001000101011001001101",
+    "-":"00000000000000011111000000000000000", ".":"00000000000000000000000000110001100"
+  };
+  var NS = "http://www.w3.org/2000/svg";
+  var shown = "";
+
+  function drawable(text) {
+    for (var i = 0; i < text.length; i++) { var c = text[i]; if (c !== " " && !F[c]) return false; }
+    return true;
+  }
+  function lightUp(raw, instant) {
+    var text = raw.trim().toUpperCase().replace(/\s+/g, " ") || "BUTTERFLIES";
+    if (text === shown) return;
+    var keep = 0;   // letters already lit stay lit; only the new ones switch on, left to right
+    while (keep < text.length && keep < shown.length && text[keep] === shown[keep]) keep++;
+    if (instant) keep = text.length;
+    shown = text;
+    board.setAttribute("aria-label", text + " in light-up letters");
+    if (!drawable(text) || text.length > 18) {
+      board.innerHTML = "";
+      var s = document.createElement("span"); s.className = "plain"; s.textContent = text;
+      // long names step down in size so they break between words, not inside one
+      var big = window.innerWidth >= 720 ? 1.4 : 1;
+      s.style.fontSize = Math.round((text.length > 22 ? 22 : text.length > 13 ? 28 : 40) * big) + "px";
+      board.appendChild(s);
+      return;
+    }
+    var cols = 0, starts = [];
+    for (var i = 0; i < text.length; i++) { starts.push(cols); cols += (text[i] === " " ? 3 : 5) + 1; }
+    cols -= 1;
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + cols + " 7");
+    var avail = board.clientWidth - 24, cell = Math.min(avail / cols, window.innerWidth >= 720 ? 11 : 8.5);
+    svg.setAttribute("width", Math.round(cell * cols)); svg.setAttribute("height", Math.round(cell * 7));
+    svg.innerHTML = '<defs><radialGradient id="g"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#ffd27a"/><stop offset="1" stop-color="#e8952e"/></radialGradient>' +
+      '<radialGradient id="h"><stop offset="0" stop-color="#ffc56b" stop-opacity=".5"/><stop offset="1" stop-color="#ffc56b" stop-opacity="0"/></radialGradient></defs>';
+    var sockets = document.createElementNS(NS, "g"), bulbs = document.createElementNS(NS, "g");
+    sockets.setAttribute("fill", "#4a2130");
+    for (var k = 0; k < text.length; k++) {
+      var ch = text[k], w = ch === " " ? 3 : 5, map = F[ch];
+      for (var y = 0; y < 7; y++) for (var x = 0; x < w; x++) {
+        var cx = starts[k] + x + .5, cy = y + .5;
+        var sk = document.createElementNS(NS, "circle");
+        sk.setAttribute("cx", cx); sk.setAttribute("cy", cy); sk.setAttribute("r", .27); sockets.appendChild(sk);
+        if (map && map[y * 5 + x] === "1") {
+          var b = document.createElementNS(NS, "g"); b.setAttribute("class", k < keep || calm ? "bulb keep" : "bulb");
+          if (k >= keep && !calm) b.style.transitionDelay = ((k - keep) * 70 + x * 12) + "ms";
+          b.innerHTML = '<circle cx="' + cx + '" cy="' + cy + '" r=".95" fill="url(#h)"/><circle cx="' + cx + '" cy="' + cy + '" r=".36" fill="url(#g)"/>';
+          bulbs.appendChild(b);
+        }
+      }
+    }
+    svg.appendChild(sockets); svg.appendChild(bulbs);
+    board.innerHTML = ""; board.appendChild(svg);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { svg.classList.add("lit"); }); });
+  }
+
+  /* ---- fields sized to what is typed, so the sentence stays a sentence ---- */
+  var meas = document.createElement("canvas").getContext("2d");
+  function fit(el) {
+    var cs = getComputedStyle(el);
+    meas.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    var t = el.tagName === "SELECT" ? el.options[el.selectedIndex].text : (el.value || el.placeholder);
+    var extra = el.tagName === "SELECT" ? 30 : 6;
+    el.style.width = Math.min(Math.ceil(meas.measureText(t).width) + extra, el.closest(".say").clientWidth - 24) + "px";
+  }
+  function fitAll() { [theme, nameEl, occasion, dateEl, placeEl].forEach(fit); }
+
+  /* ---- the message ---- */
+  function message() {
+    var t = THEMES[theme.value], n = nameEl.value.trim(), o = occasion.value, d = dateEl.value.trim(), p = placeEl.value.trim();
+    var forWhom;
+    if (o === "Navratri decor") forWhom = n ? "for " + n + "'s Navratri decor" : "for Navratri decor";
+    else if (o === "event") forWhom = n ? "for " + n + "'s event" : "for an event";
+    else forWhom = n ? "for " + n + "'s " + o : "for a " + o;
+    var line = "Hi Butterflies! I'd like " + t.say + " " + forWhom;
+    if (d) line += ", on " + d;
+    if (p) line += ", at " + p;
+    return line + ". Could you share the details?";
+  }
+  var waLinks = document.querySelectorAll("[data-wa]");
+  function sync() {
+    send.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(message());
+    for (var i = 0; i < waLinks.length; i++) waLinks[i].href = send.href;
+    fitAll();
+  }
+
+  /* ---- the backdrop row: on phones the centred setup is the chosen theme; on wide screens a click chooses ---- */
+  var wide = window.matchMedia("(min-width: 720px)");
+  var active = -1, steering = false;
+  function setActive(i, fromRow) {
+    if (i === active) return;
+    active = i;
+    sets.forEach(function (s, k) { s.classList.toggle("on", k === i); s.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    if (fromRow) { theme.value = sets[i].dataset.theme; themeChanged(); }
+  }
+  function centred() {
+    var mid = row.scrollLeft + row.clientWidth / 2, best = 0, gap = Infinity;
+    sets.forEach(function (s, k) { var c = s.offsetLeft + s.offsetWidth / 2, g = Math.abs(c - mid); if (g < gap) { gap = g; best = k; } });
+    return best;
+  }
+  var ticking = false;
+  row.addEventListener("scroll", function () {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () { ticking = false; if (!steering && !wide.matches) setActive(centred(), true); });
+  }, { passive: true });
+  function bringIn(i, smooth) {
+    var s = sets[i];
+    steering = true;
+    var left = s.offsetLeft + s.offsetWidth / 2 - row.clientWidth / 2;
+    if (wide.matches) {   // only scroll when the card is not fully in view
+      var pad = parseFloat(getComputedStyle(row).paddingLeft);
+      if (s.offsetLeft >= row.scrollLeft + pad && s.offsetLeft + s.offsetWidth <= row.scrollLeft + row.clientWidth) left = row.scrollLeft;
+      else left = s.offsetLeft - pad;
+    }
+    row.scrollTo({ left: left, behavior: smooth && !calm ? "smooth" : "auto" });
+    setActive(i, false);
+    clearTimeout(bringIn.t); bringIn.t = setTimeout(function () { steering = false; }, 700);
+  }
+  sets.forEach(function (s, k) {
+    s.addEventListener("click", function () { theme.value = s.dataset.theme; themeChanged(); bringIn(k, true); });
+  });
+  function themeChanged() {
+    var t = THEMES[theme.value];
+    if (t.occ && !occTouched) occasion.value = t.occ;
+    sync();
+  }
+  theme.addEventListener("change", function () {
+    var i = sets.findIndex(function (s) { return s.dataset.theme === theme.value; });
+    themeChanged();
+    if (i >= 0) bringIn(i, true); else setActive(-1, false);   // "different": no card stays lit
+  });
+  occasion.addEventListener("change", function () { occTouched = true; sync(); });
+  nameEl.addEventListener("input", function () { lightUp(nameEl.value); sync(); });
+  [dateEl, placeEl].forEach(function (el) { el.addEventListener("input", sync); });
+  board.addEventListener("click", function () { nameEl.focus(); });
+  // Enter moves along the sentence instead of submitting
+  [nameEl, dateEl].forEach(function (el, k) { el.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); (k === 0 ? occasion : placeEl).focus(); } }); });
+  placeEl.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); placeEl.blur(); } });
+
+  document.querySelectorAll("[data-pick]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      theme.value = b.dataset.pick; occTouched = false; themeChanged();
+      var i = sets.findIndex(function (s) { return s.dataset.theme === theme.value; });
+      document.querySelector(".stage").scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+      setTimeout(function () { bringIn(i, true); }, calm ? 0 : 350);
+    });
+  });
+
+  var lastW = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (Math.abs(window.innerWidth - lastW) < 2) return;   // phones fire resize when the keyboard opens; width is what matters
+    lastW = window.innerWidth; var s = shown; shown = ""; lightUp(s === "BUTTERFLIES" ? "" : s, true); fitAll(); if (active >= 0) bringIn(active, false);
+  });
+
+  function start() { lightUp(nameEl.value); themeChanged(); bringIn(0, false); }
+  if (document.fonts && document.fonts.ready) { start(); document.fonts.ready.then(fitAll); } else start();
+})();
+</script>
+</body>
+</html>

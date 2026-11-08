@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Tree Top Villa · Homestay in Kodaikanal</title>
+<meta name="description" content="Tree Top Villa, a homestay on Rifle Range Road, Naidupuram, Kodaikanal. 2, 3, 5 and 8 BHK by the day, for families and groups of friends. Ask Mydeen on WhatsApp.">
+<meta name="theme-color" content="#0e1620">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* The villa at night with the campfire lit: Kodaikanal night blue, warm-white type,
+     firelight amber only on the live control. */
+  :root {
+    --night: #0e1620;
+    --night-2: #142030;
+    --text: #eee8dd;
+    --muted: #a9b3be;
+    --line: rgba(238, 232, 221, .17);
+    --fire: #f2a43c;
+    --fire-ink: #1b1206;
+    --display: "Marcellus", "Trajan Pro", Georgia, serif;
+    --body: "Albert Sans", "Segoe UI", Roboto, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gut: 20px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--night); }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  ::selection { background: var(--fire); color: var(--fire-ink); }
+  :focus-visible { outline: 2px solid var(--fire); outline-offset: 3px; }
+  h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.08; letter-spacing: -.01em; text-wrap: balance; }
+
+  .concept { background: #070b10; color: var(--muted); font: 500 12.5px/1.4 var(--body); text-align: center; padding: 7px 10px; }
+
+  /* ---------- First screen ---------- */
+  .hero { position: relative; }
+  .hero img { width: 100%; height: clamp(240px, 40svh, 470px); object-fit: cover; object-position: 50% 30%; }
+  /* The lit house stays clear at the top; the name sits where the photo fades into the night page below */
+  .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 60%; background: linear-gradient(rgba(14, 22, 32, 0), rgba(14, 22, 32, .72) 55%, var(--night)); pointer-events: none; }
+  .hero .name { position: absolute; z-index: 1; bottom: 14px; left: var(--gut); right: var(--gut); text-shadow: 0 1px 8px rgba(0, 0, 0, .6); }
+  .hero h1 { font-size: clamp(36px, 11vw, 64px); }
+  .hero .place { margin: 6px 0 0; font: 500 16px/1.3 var(--body); letter-spacing: .04em; color: #e3e8ee; }
+
+  .ask { padding: 22px var(--gut) 8px; }
+  .sentence { margin: 0; font: 400 clamp(23px, 6.6vw, 30px)/46px var(--display); color: var(--text); }
+  .blank {
+    position: relative; display: inline-block; height: 45px; min-width: 46px; padding: 0 18px 4px 2px;
+    font: inherit; line-height: 40px; color: var(--text); vertical-align: top; cursor: pointer;
+    border-bottom: 1px solid rgba(238, 232, 221, .55); -webkit-tap-highlight-color: transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .blank::after {
+    content: ""; position: absolute; right: 4px; top: 18px; width: 6px; height: 6px;
+    border: solid var(--muted); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+  }
+  .blank select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; font-size: 16px; border: 0; margin: 0; cursor: pointer; -webkit-appearance: none; appearance: none; }
+  .blank:focus-within, .blank.live { color: var(--fire); border-color: var(--fire); }
+  .blank:focus-within::after { border-color: var(--fire); }
+  input.blank {
+    width: 5.6em; padding: 0 2px; background: transparent; border-width: 0 0 1px; border-radius: 0;
+    caret-color: var(--fire); outline: none; cursor: text;
+  }
+  input.blank::placeholder { color: var(--muted); opacity: 1; }
+  input.blank:focus { color: var(--fire); border-color: var(--fire); }
+  .nowrap { white-space: nowrap; }
+
+  .send {
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; min-height: 54px; padding: 0 18px;
+    background: var(--fire); color: var(--fire-ink); text-decoration: none; font: 600 17px/1.2 var(--body);
+    border-radius: 3px; transition: transform .14s var(--ease), background-color .14s ease;
+  }
+  .send svg { width: 21px; height: 21px; fill: currentColor; flex: none; }
+  .send:active { transform: scale(.97); background: #e0942f; }
+  .alt { margin: 8px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 6px; color: var(--muted); font-size: 16px; }
+  .alt a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; color: var(--text); }
+  .proof { margin: 26px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; text-align: center; }
+
+  /* ---------- Photos: one quiet sequence ---------- */
+  .photos { padding: 60px 0 0; }
+  .photos figure { margin: 0 0 40px; }
+  .photos figcaption, .fire figcaption { margin-top: 12px; padding: 0 var(--gut); font-size: 16px; color: var(--muted); }
+  .ph-day img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 60% 50%; }
+  .ph-stairs { width: 84%; margin-left: auto !important; }
+  .ph-stairs img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .ph-stairs figcaption { padding-left: 0; }
+  .ph-room { width: 70%; margin-left: var(--gut) !important; }
+  .ph-room img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 70%; }
+  .ph-room figcaption { padding: 0; }
+
+  /* Campfire: a plain print with the villa's own caption */
+  .fire figure { margin: 0; }
+  .fire img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .fire p { margin: 14px 0 0; padding: 0 var(--gut); max-width: 26em; color: var(--text); font-size: 17px; }
+
+  /* ---------- Facts: a ruled board ---------- */
+  .facts { padding: 64px var(--gut) 0; max-width: 760px; }
+  .facts h2 { font-size: clamp(30px, 8.6vw, 46px); }
+  .board { margin: 26px 0 0; border-top: 1px solid var(--text); }
+  .board div { display: grid; grid-template-columns: 7.4em minmax(0, 1fr); gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .board dt { color: var(--muted); font-size: 16px; padding-top: 1px; }
+  .board dd { margin: 0; font-size: 17px; }
+
+  .close { padding: 64px var(--gut) 0; max-width: 760px; }
+  .close h2 { font-size: clamp(28px, 8vw, 42px); }
+  .quote { margin: 18px 0 0; padding-left: 16px; border-left: 1px solid var(--line); color: var(--muted); font-size: 17px; white-space: pre-line; }
+  .links { display: grid; margin-top: 28px; border-top: 1px solid var(--line); }
+  .links a { display: flex; align-items: center; gap: 14px; min-height: 56px; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .links svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .links span { margin-left: auto; color: var(--muted); font-size: 16px; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+  /* A phone number never breaks; on a narrow phone it drops under the label instead */
+  .links a[href^="tel"] { flex-wrap: wrap; column-gap: 14px; padding: 6px 0; }
+  .links a[href^="tel"] span { white-space: nowrap; }
+
+  footer { padding: 56px var(--gut) calc(32px + env(safe-area-inset-bottom)); color: var(--muted); font-size: 15px; }
+  footer p { margin: 0 0 6px; }
+
+  @media (min-width: 700px) {
+    :root { --gut: 40px; }
+    .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; padding: 88px var(--gut) 0; }
+    .photos figcaption { padding: 0; }
+    .ph-day { grid-column: 1 / -1; }
+    .ph-stairs, .ph-room { width: auto; margin: 0 0 56px !important; }
+    .ph-room { margin-top: 96px !important; }
+    .fire { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 40px; align-items: end; padding: 0 var(--gut); }
+    .fire figcaption, .fire p { padding: 0; }
+    .facts { padding-top: 88px; }
+    .close { padding-top: 80px; }
+  }
+  @media (min-width: 1000px) {
+    .top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; }
+    .hero img { height: clamp(520px, calc(100svh - 33px), 640px); }
+    .ask { padding: 48px 40px; max-width: 620px; }
+    .sentence { font-size: 34px; line-height: 52px; }
+    .photos, .fire, .facts, .close, footer { max-width: 1180px; margin-left: auto; margin-right: auto; }
+    .photos, .fire { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+    .facts, .close { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; max-width: 1180px; }
+    .facts .board, .close .quote { margin-top: 0; }
+    .close .links { grid-column: 2; margin-top: 0; }
+    .close .quote { grid-column: 2; }
+    .close h2 { grid-row: 1 / span 2; }
+  }
+  @media (min-width: 1280px) {
+    .top { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+    .ask { padding: 48px 56px 48px 48px; }
+  }
+  @media (hover: hover) {
+    .send:hover { background: #f6b45a; }
+    .links a:hover, .alt a:hover { text-decoration: underline; }
+    .links a:hover svg { stroke: var(--text); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Website concept for <strong>Tree Top Villa</strong> &middot; not the official site</div>
+
+<main>
+<div class="top">
+  <header class="hero">
+    <img src="assets/villa-night.jpg" width="780" height="570" fetchpriority="high"
+      alt="Tree Top Villa at night: the cream house with its porch and stair lights on, behind the gate">
+    <div class="name">
+      <h1>Tree Top Villa</h1>
+      <p class="place">Homestay &middot; Kodaikanal</p>
+    </div>
+  </header>
+
+  <section class="ask" id="ask" aria-label="Ask about a stay">
+    <p class="sentence">
+      I'd like to stay
+      <span class="blank"><span id="nightsShown">2 nights</span><select id="nights" aria-label="How many nights">
+        <option value="1">1 night</option><option value="2" selected>2 nights</option><option value="3">3 nights</option>
+        <option value="4">4 nights</option><option value="5">5 nights</option><option value="6">6 nights</option>
+        <option value="7">7 nights</option><option value="8">8 nights</option><option value="9">9 nights</option>
+        <option value="10">10 nights</option>
+      </select></span>
+      <span class="nowrap">from <input class="blank" id="date" type="text" placeholder="your date" aria-label="From which date" autocomplete="off" enterkeyhint="done" maxlength="40">,</span>
+      <span class="blank"><span id="guestsShown">4 guests</span><select id="guests" aria-label="How many guests">
+        <option value="2">2 guests</option><option value="3">3 guests</option><option value="4" selected>4 guests</option>
+        <option value="5">5 guests</option><option value="6">6 guests</option><option value="7">7 guests</option>
+        <option value="8">8 guests</option><option value="9">9 guests</option><option value="10">10 guests</option>
+        <option value="12">12 guests</option><option value="15">15 guests</option><option value="20">20 guests</option>
+        <option value="20+">20+ guests</option>
+      </select></span>,
+      in the
+      <span class="blank"><span id="houseShown">3 BHK</span><select id="house" aria-label="Which size (BHK)">
+        <option value="2 BHK">2 BHK</option><option value="3 BHK" selected>3 BHK</option>
+        <option value="5 BHK">5 BHK</option><option value="8 BHK">8 BHK</option>
+        <option value="">size you suggest</option>
+      </select></span>.
+    </p>
+    <a class="send" data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Send on WhatsApp</a>
+    <p class="alt">Tariff on WhatsApp, or call <a href="tel:+919994734286">+91 99947 34286</a></p>
+    <p class="proof">4.7 on Google from 475 reviews &middot; Rifle Range Road, Naidupuram</p>
+  </section>
+</div>
+
+<section class="photos" aria-label="Photos of the villa">
+  <figure class="ph-day">
+    <img src="assets/villa-day.jpg" width="1440" height="809" loading="lazy" alt="The villa by day: a cream two-storey house with a curved balcony, pots on the ledges and red and blue umbrellas in the courtyard">
+    <figcaption>By day, Naidupuram</figcaption>
+  </figure>
+  <figure class="ph-stairs">
+    <img src="assets/stairs.jpg" width="1100" height="951" loading="lazy" alt="The outside staircase with black railings, potted palms and hanging pots, against a green wall">
+    <figcaption>The stairs, lined with pots</figcaption>
+  </figure>
+  <figure class="ph-room">
+    <img src="assets/bedroom.jpg" width="612" height="968" loading="lazy" alt="A bedroom with a double bed, red pillows, a patterned blanket and a window with purple curtains">
+    <figcaption>One of the bedrooms</figcaption>
+  </figure>
+</section>
+
+<section class="fire" aria-label="Campfire nights">
+  <figure>
+    <img src="assets/campfire.jpg" width="570" height="428" loading="lazy" alt="Guests on chairs round a fire pit at night, the fire burning high under string lights">
+    <figcaption>Campfire Night @ Tree Top Villa</figcaption>
+  </figure>
+  <p>Campfire and food are charged extra. Ask Mydeen when you write.</p>
+</section>
+
+<section class="facts" aria-labelledby="factsTitle">
+  <h2 id="factsTitle">Four sizes, by the day</h2>
+  <dl class="board">
+    <div><dt>Sizes</dt><dd>2, 3, 5 and 8 BHK</dd></div>
+    <div><dt>For</dt><dd>Families and bachelor groups</dd></div>
+    <div><dt>Rented</dt><dd>By the day</dd></div>
+    <div><dt>Campfire, food</dt><dd>Charged extra</dd></div>
+    <div><dt>The lake</dt><dd>1 km away</dd></div>
+    <div><dt>Google</dt><dd>4.7, from 475 reviews</dd></div>
+    <div><dt>Address</dt><dd>1/154, Rifle Range Road, Naidupuram, Kodaikanal, Tamil Nadu 624101</dd></div>
+  </dl>
+</section>
+
+<section class="close" aria-labelledby="closeTitle">
+  <h2 id="closeTitle">Ask Mydeen</h2>
+  <p class="quote" id="quote">I'd like to stay 2 nights, 4 guests, in the 3 BHK.</p>
+  <div class="links">
+    <a data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7Z"/></svg>WhatsApp <span>send this message</span></a>
+    <a href="tel:+919994734286"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call <span>+91 99947 34286</span></a>
+    <a href="tel:+917695980756"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call (2nd number) <span>+91 76959 80756</span></a>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Tree%20Top%20Villa%20Kodaikanal&amp;query_place_id=ChIJY7Vm38pnBzsRvI6RaI5iAts" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Directions <span>Google Maps</span></a>
+    <a href="https://instagram.com/tree_topvilla_homestay" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>Instagram <span>@tree_topvilla_<wbr>homestay</span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Tree Top Villa &middot; Homestay &middot; Naidupuram, Kodaikanal 624101</p>
+  <p>Photos from the villa's Google Maps listing and Instagram.</p>
+</footer>
+
+<script>
+  /* Builds the WhatsApp message from the sentence. Plain script, no libraries. */
+  (function () {
+    var WA = "https://wa.me/919994734286?text=";
+    var $ = function (id) { return document.getElementById(id); };
+    var nights = $("nights"), date = $("date"), guests = $("guests"), house = $("house");
+    var links = Array.prototype.slice.call(document.querySelectorAll("[data-wa]"));
+
+    function label(sel) { return sel.options[sel.selectedIndex].text; }
+
+    function line() {
+      var d = date.value.replace(/\s+/g, " ").trim(), h = house.value;
+      return "I'd like to stay " + label(nights) + (d ? " from " + d : "") + ", " + label(guests) +
+        (h ? ", in the " + h + "." : ". Which size would suit us?");
+    }
+
+    function update() {
+      $("nightsShown").textContent = label(nights);
+      $("guestsShown").textContent = label(guests);
+      $("houseShown").textContent = house.value || "size you suggest";
+      var l = line(), d = date.value.trim();
+      $("quote").textContent = l + (d ? "" : "\n(Dates open: add yours above.)");
+      var msg = "Hello Mydeen,\n" + l + (d ? "" : " Our dates are open.") + "\nWhat's the tariff?\n\n(Sent from the Tree Top Villa website)";
+      var href = WA + encodeURIComponent(msg);
+      links.forEach(function (a) { a.href = href; });
+    }
+
+    [nights, guests, house].forEach(function (s) { s.addEventListener("change", update); });
+    date.addEventListener("input", update);
+    date.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); date.blur(); } });
+    update();
+  })();
+</script>
+</body>
+</html>

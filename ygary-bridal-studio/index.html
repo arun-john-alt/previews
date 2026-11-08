@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Ygary Brides · Bridal makeup studio, Saibaba Colony, Coimbatore</title>
+<meta name="description" content="Bridal makeup by Saigeetha Varma at Ygary Bridal Make Up Studio, Saibaba Colony, Coimbatore. Book your date on WhatsApp.">
+<meta name="theme-color" content="#fbfcf6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eczar:wght@500;600;700&family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Three dyes: jasmine white, kanakambaram orange (the flower tied in with jasmine), rose-maroon ink from her photos */
+  :root {
+    --ground: #fbfcf6;
+    --white: #ffffff;
+    --kanakam: #f2803a;
+    --kanakam-press: #e56d24;
+    --ink: #3a0d17;
+    --ink-soft: #74434c;
+    --line: rgba(58, 13, 23, .16);
+    --display: "Eczar", Georgia, serif;
+    --body: "Hind Madurai", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gap: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--kanakam); color: var(--ink); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+  p { margin: 0; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* Required on every mock */
+  .concept { background: var(--ink); color: var(--ground); text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 16px; }
+  .concept strong { font-weight: 600; color: var(--kanakam); }
+
+  .icon-btn { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; color: var(--ink); text-decoration: none; transition: transform .14s var(--ease), background-color .14s var(--ease); }
+  .icon-btn svg { width: 20px; height: 20px; }
+  .icon-btn:active { transform: scale(.94); background: var(--white); }
+
+  /* Hero: the name, then the string of brides */
+  .hero { padding-top: 12px; }
+  /* The name shares its row with the call button, so the brides get the height */
+  .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .hero h1 { font-size: clamp(40px, 12.6vw, 96px); line-height: .95; }
+  .lede { margin-top: 6px; max-width: 30ch; font-size: 17px; color: var(--ink-soft); }
+  .lede b { font-weight: 600; color: var(--ink); }
+
+  .string { list-style: none; margin: 14px -16px 0; padding: 0 16px 4px; display: flex; align-items: flex-start; gap: var(--gap);
+            overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; }
+  .string::-webkit-scrollbar { display: none; }
+  /* Under two brides per view, big enough to see her eyes and base. On a short phone they shrink just enough
+     that Book your date stays on the first screen. */
+  .bride { position: relative; flex: 0 0 auto; width: calc((100vw - 32px - var(--gap)) / 1.8);
+           width: clamp(140px, min(calc((100vw - 32px - var(--gap)) / 1.8), calc((100svh - 344px) * .5625)), 196px);
+           max-width: 196px; margin: 0; padding-top: 26px; scroll-snap-align: start;
+           transform-origin: 50% 0; animation: hang .62s var(--ease) both; }
+  .bride:nth-child(2) { animation-delay: .07s; } .bride:nth-child(3) { animation-delay: .14s; } .bride:nth-child(4) { animation-delay: .21s; }
+  .bride:nth-child(5) { animation-delay: .28s; } .bride:nth-child(6) { animation-delay: .35s; }
+  @keyframes hang {
+    0% { opacity: 0; transform: translateY(-12px) rotate(-3deg); }
+    45% { opacity: 1; transform: translateY(0) rotate(1.2deg); }
+    75% { transform: rotate(-.4deg); }
+    100% { opacity: 1; transform: none; }
+  }
+  .bride img { position: relative; z-index: 1; width: 100%; background: #efe6dc; }
+  .bride figcaption { margin-top: 8px; font-size: 16px; line-height: 1.3; color: var(--ink-soft); }
+  /* Each knot is a bunch of jasmine buds tied round one kanakambaram floret */
+  .knot { position: absolute; z-index: 2; top: 3px; left: 50%; width: 44px; height: 40px; margin-left: -22px; color: var(--ink); overflow: visible; pointer-events: none; }
+  .swag { position: absolute; z-index: 0; top: 8px; left: 50%; width: calc(100% + var(--gap)); height: 26px; overflow: visible; pointer-events: none; }
+  .swag.lead { left: -16px; width: calc(50% + 16px); }
+  .swag { fill: none; stroke: var(--kanakam); stroke-width: 2; }
+
+  /* The empty knot at the end: the next Ygary bride */
+  .next { text-decoration: none; display: block; }
+  .next .frame { position: relative; z-index: 1; aspect-ratio: 9 / 16; border: 1.5px dashed var(--kanakam); background: var(--white);
+                 display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 14px 12px; text-align: center; transition: transform .14s var(--ease); }
+  .next:active .frame { transform: scale(.97); }
+  .next .frame small { font-size: 16px; line-height: 1.3; color: var(--ink-soft); }
+  .next .who { font-family: var(--display); font-weight: 600; font-size: 21px; line-height: 1.1; letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .next .who.unset { color: var(--ink-soft); font-weight: 500; }
+  .next .who.long { font-size: 16px; }
+  .tag .who.long { font-size: 23px; }
+  .next figcaption { color: var(--ink); font-weight: 600; }
+
+  .hint { display: flex; align-items: center; gap: 6px; margin: -4px 0 0 auto; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+          font: 500 16px/1.35 var(--body); color: var(--ink-soft); }
+  .hint svg { width: 18px; height: 18px; color: var(--kanakam); }
+  .hero-actions { margin-top: 4px; display: grid; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 22px; border: 0; border-radius: 6px;
+         font: 600 17px/1.2 var(--body); text-decoration: none; cursor: pointer; transition: transform .14s var(--ease), background-color .14s var(--ease); }
+  .btn svg { width: 21px; height: 21px; flex: 0 0 auto; }
+  .btn:active { transform: scale(.97); }
+  .btn.orange { background: var(--kanakam); color: var(--ink); }
+  .btn.orange:active { background: var(--kanakam-press); }
+  .btn.ink { background: var(--ink); color: var(--ground); }
+  .proof { display: flex; align-items: center; gap: 8px; font-size: 16px; color: var(--ink-soft); }
+  .proof svg { width: 18px; height: 18px; color: var(--kanakam); flex: 0 0 auto; }
+  .proof b { color: var(--ink); font-weight: 600; }
+
+  /* Booking: one sentence that becomes the WhatsApp message */
+  .book { position: relative; margin-top: 56px; background: var(--kanakam); padding: 44px 0 52px; }
+  /* A jasmine string hangs across the top edge of the booking panel: bud pairs on one thread, a kanakambaram every third */
+  .book::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 40px; pointer-events: none;
+                  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='40' viewBox='0 0 48 40'%3E%3Cpath d='M0 3h48' stroke='%233a0d17' stroke-opacity='.45' stroke-width='1.2'/%3E%3Cg transform='translate(8 3)'%3E%3Cg transform='rotate(15) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3Cg transform='rotate(-15) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3C/g%3E%3Cg transform='translate(24 3)'%3E%3Cg transform='rotate(19) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3Cg transform='rotate(-12) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3C/g%3E%3Cg transform='translate(40 3)'%3E%3Cg transform='rotate(17) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3Cg transform='rotate(-16) translate(0 1.5)'%3E%3Cpath d='M0 0C1.04 2.7 1.3 4.86 1.3 7.02C4.3 9.72 4.51 16.74 2.58 22.68C1.38 25.65 .1 27 0 27C-.1 27 -1.38 25.65 -2.58 22.68C-4.51 16.74 -4.3 9.72 -1.3 7.02C-1.3 4.86 -1.04 2.7 0 0Z' fill='%23fff' stroke='%233a0d17' stroke-opacity='.5' stroke-width='.9'/%3E%3Cpath d='M-1.5.4 0 4.6 1.5.4Z' fill='%238a9a55'/%3E%3C/g%3E%3C/g%3E%3Cg transform='translate(40 11.2) scale(1.0)' fill='%23f2803a' stroke='%233a0d17' stroke-opacity='.4' stroke-width='.8'%3E%3Cpath d='M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z' transform='rotate(0)'/%3E%3Cpath d='M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z' transform='rotate(72)'/%3E%3Cpath d='M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z' transform='rotate(144)'/%3E%3Cpath d='M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z' transform='rotate(216)'/%3E%3Cpath d='M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z' transform='rotate(288)'/%3E%3Ccircle r='1.7' fill='%23c4561b' stroke='none'/%3E%3C/g%3E%3C/svg%3E") repeat-x 0 0 / 48px 40px; }
+  .book h2 { font-size: clamp(34px, 9.5vw, 56px); line-height: 1; }
+  .book .help { margin-top: 10px; font-size: 17px; max-width: 34ch; }
+  .sentence { margin-top: 22px; font-family: var(--display); font-weight: 500; font-size: clamp(25px, 7vw, 34px); line-height: 1.75; letter-spacing: -.01em; }
+  .blank { display: inline-flex; align-items: center; vertical-align: middle; position: relative; min-height: 44px; margin: 2px 0; padding: 4px 10px;
+           background: var(--white); color: var(--ink); border: 0; border-radius: 4px; box-shadow: 0 1px 0 rgba(58, 13, 23, .25);
+           font: inherit; line-height: 1.25; }
+  input.blank { -webkit-appearance: none; appearance: none; caret-color: var(--ink); }
+  input.blank::placeholder { color: var(--ink-soft); opacity: .8; }
+  .blank:focus-within, .blank:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  input.blank:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+  /* The full stop stays with its blank, so a long name never leaves ". My" at the start of a line */
+  .glue { white-space: nowrap; }
+  #name { width: 7.2em; max-width: calc(100% - .4em); }
+  #place { width: 7.8em; max-width: calc(100% - .4em); }
+  .chev { position: absolute; right: 10px; top: 50%; width: 14px; height: 14px; margin-top: -7px; pointer-events: none; }
+  .datewrap { padding-right: 34px; cursor: pointer; }
+  .datewrap .unset { color: var(--ink-soft); }
+  .datewrap.want { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .datewrap input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; padding: 0; margin: 0; cursor: pointer; font-size: 16px; }
+  .datewrap input::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+
+  /* Her tag: written as she types, like the YGARY BRIDES tag on the reel covers */
+  .tagline { margin-top: 30px; display: flex; justify-content: flex-end; }
+  .tag { position: relative; width: min(100%, 300px); background: var(--white); padding: 22px 20px 18px; transform: rotate(-1.5deg); transform-origin: 50% 0;
+         box-shadow: 0 10px 22px -12px rgba(58, 13, 23, .45); }
+  .tag::before { content: ""; position: absolute; top: 9px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--kanakam); box-shadow: inset 0 0 0 2px rgba(58, 13, 23, .3); }
+  .tag::after { content: ""; position: absolute; bottom: 100%; left: 50%; width: 1.5px; height: 30px; margin-left: -.75px; background: rgba(58, 13, 23, .45); }
+  .tag .label { display: block; text-align: center; font-size: 13px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); margin-top: 6px; }
+  .tag .who { display: block; text-align: center; font-family: var(--display); font-weight: 600; font-size: 30px; line-height: 1.15; margin-top: 6px; overflow-wrap: anywhere; }
+  .tag .who.unset { color: var(--ink-soft); font-weight: 500; }
+  .tag .when { display: block; text-align: center; font-size: 16px; color: var(--ink-soft); margin-top: 4px; overflow-wrap: anywhere; }
+  .pop { animation: pop .32s var(--ease); }
+  @keyframes pop { from { transform: translateY(3px); opacity: .4; } to { transform: none; opacity: 1; } }
+
+  .send { margin-top: 30px; display: grid; gap: 14px; justify-items: start; }
+  .send .btn { width: 100%; }
+  .send .call { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+
+  /* The artist, in her own bio's words */
+  .artist { padding: 64px 0 8px; }
+  .artist h2, .visit h2 { font-size: clamp(32px, 8.6vw, 48px); line-height: 1.05; }
+  .artist blockquote { margin: 18px 0 0; font-family: var(--display); font-weight: 500; font-size: clamp(24px, 6.6vw, 32px); line-height: 1.3; letter-spacing: -.01em; max-width: 22ch; }
+  .artist blockquote::before { content: "\201C"; }
+  .artist blockquote::after { content: "\201D"; }
+  .artist .cite { margin-top: 10px; font-size: 16px; color: var(--ink-soft); }
+  .artist .more { margin-top: 22px; max-width: 34ch; }
+  .ig { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .ig a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--kanakam); text-decoration-thickness: 2px; }
+  .ig svg { width: 19px; height: 19px; }
+
+  .visit { padding: 56px 0 40px; }
+  .visit address { margin-top: 16px; font-style: normal; font-size: 18px; max-width: 26ch; }
+  .visit .hours { margin-top: 8px; color: var(--ink-soft); }
+  .visit .links { margin-top: 22px; display: grid; gap: 10px; }
+  .btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .btn.line:active { background: var(--white); }
+
+  footer { border-top: 1px solid var(--line); padding: 22px 0 calc(96px + env(safe-area-inset-bottom)); font-size: 15px; color: var(--ink-soft); }
+  footer p + p { margin-top: 4px; }
+
+  /* Phone dock: appears once the hero button has scrolled away, hides at the booking sentence */
+  .dock { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; display: flex; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+          background: rgba(251, 252, 246, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-top: 1px solid var(--line);
+          transform: translateY(110%); visibility: hidden; transition: transform .28s var(--ease), visibility 0s linear .28s; }
+  .dock.show { transform: none; visibility: visible; transition: transform .28s var(--ease); }
+  .dock .btn { flex: 1; }
+  .dock .icon-btn { width: 52px; height: 52px; }
+
+  @media (min-width: 720px) {
+    .bride { width: 196px; }
+    .hero-actions { grid-template-columns: auto 1fr; align-items: center; gap: 22px; }
+    .hero-actions .btn { padding: 12px 34px; }
+    .visit .links { grid-template-columns: repeat(3, max-content); }
+  }
+  @media (min-width: 960px) {
+    .hero { padding-top: 28px; }
+    .string { margin: 34px 0 0; padding: 0 0 4px; overflow: visible; }
+    .bride { width: calc((100% - 5 * var(--gap)) / 6); max-width: none; }
+    .swag.lead { left: -40px; width: calc(50% + 40px); }
+    .book { margin-top: 80px; padding: 72px 0 80px; }
+    .book .wrap { display: grid; grid-template-columns: 1fr 1.25fr; column-gap: 64px; align-items: start; }
+    .book .intro { grid-row: 1 / span 2; }
+    .tagline { justify-content: flex-start; margin-top: 44px; }
+    .sentence { margin-top: 0; }
+    .lower { display: grid; grid-template-columns: 1.2fr 1fr; column-gap: 64px; }
+    .artist { padding-top: 80px; }
+    .visit { padding-top: 80px; }
+    .dock, .hint { display: none; }
+    .hero-actions { margin-top: 18px; }
+  }
+  @media (hover: hover) {
+    .btn.orange:hover { background: var(--kanakam-press); }
+    .btn.ink:hover { background: #551628; }
+    .btn.line:hover, .icon-btn:hover { background: var(--white); }
+    .next:hover .frame { border-style: solid; }
+    .ig a:hover, .send .call:hover { text-decoration-thickness: 3px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .bride, .pop { animation: none; }
+    .btn, .icon-btn, .next .frame, .dock { transition: none; }
+    .btn:active, .icon-btn:active, .next:active .frame { transform: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) { .dock { background: var(--ground); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- One knot of the malli string: a bunch of jasmine buds hanging from a kanakambaram floret -->
+    <symbol id="buds" viewBox="0 0 44 40"><g transform="translate(22 9)" fill="#fff" stroke="currentColor" stroke-opacity=".5" stroke-width=".9"><path d="M0 0C1.04 1.8 1.3 3.24 1.3 4.68C3.4 6.48 3.57 11.16 2.04 15.12C1.09 17.1 .1 18 0 18C-.1 18 -1.09 17.1 -2.04 15.12C-3.57 11.16 -3.4 6.48 -1.3 4.68C-1.3 3.24 -1.04 1.8 0 0Z" transform="rotate(62) translate(0 4)"/><path d="M0 0C1.04 1.9 1.3 3.42 1.3 4.94C3.4 6.84 3.57 11.78 2.04 15.96C1.09 18.05 .1 19 0 19C-.1 19 -1.09 18.05 -2.04 15.96C-3.57 11.78 -3.4 6.84 -1.3 4.94C-1.3 3.42 -1.04 1.9 0 0Z" transform="rotate(-60) translate(0 4)"/><path d="M0 0C1.04 2.3 1.3 4.14 1.3 5.98C3.6 8.28 3.78 14.26 2.16 19.32C1.15 21.85 .1 23 0 23C-.1 23 -1.15 21.85 -2.16 19.32C-3.78 14.26 -3.6 8.28 -1.3 5.98C-1.3 4.14 -1.04 2.3 0 0Z" transform="rotate(38) translate(0 4)"/><path d="M0 0C1.04 2.2 1.3 3.96 1.3 5.72C3.6 7.92 3.78 13.64 2.16 18.48C1.15 20.9 .1 22 0 22C-.1 22 -1.15 20.9 -2.16 18.48C-3.78 13.64 -3.6 7.92 -1.3 5.72C-1.3 3.96 -1.04 2.2 0 0Z" transform="rotate(-40) translate(0 4)"/><path d="M0 0C1.04 2.6 1.3 4.68 1.3 6.76C3.7 9.36 3.89 16.12 2.22 21.84C1.18 24.7 .1 26 0 26C-.1 26 -1.18 24.7 -2.22 21.84C-3.89 16.12 -3.7 9.36 -1.3 6.76C-1.3 4.68 -1.04 2.6 0 0Z" transform="rotate(19) translate(0 3.5)"/><path d="M0 0C1.04 2.5 1.3 4.5 1.3 6.5C3.7 9 3.89 15.5 2.22 21C1.18 23.75 .1 25 0 25C-.1 25 -1.18 23.75 -2.22 21C-3.89 15.5 -3.7 9 -1.3 6.5C-1.3 4.5 -1.04 2.5 0 0Z" transform="rotate(-18) translate(0 3.5)"/><path d="M0 0C1.04 2.3 1.3 4.14 1.3 5.98C3.7 8.28 3.89 14.26 2.22 19.32C1.18 21.85 .1 23 0 23C-.1 23 -1.18 21.85 -2.22 19.32C-3.89 14.26 -3.7 8.28 -1.3 5.98C-1.3 4.14 -1.04 2.3 0 0Z" transform="rotate(1) translate(0 4)"/></g><g transform="translate(22 9) scale(1.0)" fill="#f2803a" stroke="#3a0d17" stroke-opacity=".4" stroke-width=".8"><path d="M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z" transform="rotate(0)"/><path d="M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z" transform="rotate(72)"/><path d="M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z" transform="rotate(144)"/><path d="M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z" transform="rotate(216)"/><path d="M0 0C-3.4-1.4-4.6-7 0-8.2 4.6-7 3.4-1.4 0 0Z" transform="rotate(288)"/><circle r="1.7" fill="#c4561b" stroke="none"/></g></symbol>
+    <symbol id="swag" viewBox="0 0 100 26" preserveAspectRatio="none"><path d="M0 4.5Q50 20 100 4.5" vector-effect="non-scaling-stroke"/></symbol>
+  </defs>
+</svg>
+
+<div class="concept" data-concept-banner>Website concept for <strong>@ygarybridescbe</strong> &middot; not the official site</div>
+
+<main id="top">
+  <section class="wrap hero" aria-labelledby="h1">
+    <div class="title-row">
+      <h1 id="h1">Ygary Brides</h1>
+      <a class="icon-btn" href="tel:+919074643514" aria-label="Call the studio, 90746 43514">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+      </a>
+    </div>
+    <p class="lede">Bridal makeup by <b>Saigeetha Varma</b>, in Saibaba Colony, Coimbatore.</p>
+
+    <ul class="string" aria-label="Ygary brides, swipe for more">
+      <li class="bride">
+        <svg class="swag lead" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="swag" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <figure style="margin:0">
+          <img src="assets/bride-pink-silk.jpg" width="360" height="640" alt="A Ygary bride in pink and gold silk with temple jewellery, eyes lowered">
+          <figcaption>Pink silk, winged eyes</figcaption>
+        </figure>
+      </li>
+      <li class="bride">
+        <svg class="swag" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <figure style="margin:0">
+          <img src="assets/bride-veil.jpg" width="361" height="640" alt="A Ygary bride in a lilac sequinned saree, white veil and silver jewellery">
+          <figcaption>Lilac, with a veil</figcaption>
+        </figure>
+      </li>
+      <li class="bride">
+        <svg class="swag" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <figure style="margin:0">
+          <img src="assets/bride-red-silk.jpg" width="360" height="512" alt="A Ygary bride in red silk with layered gold necklaces and jasmine in her hair" loading="lazy">
+          <figcaption>Red silk, jasmine</figcaption>
+        </figure>
+      </li>
+      <li class="bride">
+        <svg class="swag" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <figure style="margin:0">
+          <img src="assets/bride-purple-silk.jpg" width="361" height="640" alt="A Ygary bride in purple silk and gold, eyes closed to show the eye makeup" loading="lazy">
+          <figcaption>Purple silk, gold lids</figcaption>
+        </figure>
+      </li>
+      <li class="bride">
+        <svg class="swag" aria-hidden="true"><use href="#swag"/></svg>
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <figure style="margin:0">
+          <img src="assets/bride-pink-smile.jpg" width="361" height="604" alt="A smiling Ygary bride in rani pink silk with a gold maang tikka" loading="lazy">
+          <figcaption>Rani pink, smiling</figcaption>
+        </figure>
+      </li>
+      <li class="bride">
+        <svg class="knot" aria-hidden="true"><use href="#buds"/></svg>
+        <a class="next" href="#book">
+          <figure style="margin:0">
+            <span class="frame">
+              <small>The next Ygary bride</small>
+              <span class="who unset" data-name>your name?</span>
+              <small data-when>pick your date</small>
+            </span>
+            <figcaption>Write yourself in</figcaption>
+          </figure>
+        </a>
+      </li>
+    </ul>
+
+    <button class="hint" type="button" data-to-end>The last frame is yours
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+    <div class="hero-actions">
+      <a class="btn orange" href="#book" data-book>Book your date</a>
+      <p class="proof">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.7 5.9 6.4.7-4.8 4.3 1.3 6.3L12 16.8 6.4 20l1.3-6.3L2.9 9.4l6.4-.7Z"/></svg>
+        <span><b>4.9</b> on Google, from 154 reviews</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="book" id="book" aria-labelledby="bookTitle">
+    <div class="wrap">
+      <div class="intro">
+        <h2 id="bookTitle">The next Ygary bride</h2>
+        <p class="help">Fill in the blanks. WhatsApp opens with your message, ready to send.</p>
+        <div class="tagline" aria-hidden="true">
+          <div class="tag">
+            <span class="label">Ygary bride</span>
+            <span class="who unset" data-name>your name</span>
+            <span class="when" data-when>pick your date</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="sentence" id="sentence" onsubmit="return false">
+        Hi Ygary Brides, I'm
+        <span class="glue"><input class="blank" id="name" type="text" maxlength="40" autocomplete="given-name" enterkeyhint="next" placeholder="your name" aria-label="Your name">.</span>
+        My wedding is on
+        <span class="blank datewrap" id="dateBlank">
+          <span id="dateText" class="unset">pick a date</span>
+          <input id="date" type="date" aria-label="Wedding date, pick a date">
+          <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3.5 6 4.5 4.5L12.5 6"/></svg>
+        </span>
+        at
+        <span class="glue"><input class="blank" id="place" type="text" maxlength="60" enterkeyhint="done" placeholder="hall or town" aria-label="Hall or town">.</span>
+        I'd like to book my bridal makeup.
+      </form>
+
+      <div class="send">
+        <a class="btn ink" id="send" data-wa href="https://wa.me/919074643514" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+          Send on WhatsApp
+        </a>
+        <a class="call" href="tel:+919074643514">Or call the studio: 90746 43514</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap lower">
+    <section class="artist" aria-labelledby="artistTitle">
+      <h2 id="artistTitle">Saigeetha Varma</h2>
+      <blockquote>International certified makeup artist. Celebrity makeup artist.</blockquote>
+      <p class="cite">From the studio's Instagram bio, which tags her as @saigeetha_varma.</p>
+      <p class="more">Ygary also runs a makeup academy, with branches in Palakkad, Guruvayoor, Ottapalam and Coimbatore.</p>
+      <div class="ig">
+        <a href="https://instagram.com/ygarybridescbe" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @ygarybridescbe</a>
+        <a href="https://instagram.com/ygarybridesofficial" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @ygarybridesofficial</a>
+      </div>
+    </section>
+
+    <section class="visit" aria-labelledby="visitTitle">
+      <h2 id="visitTitle">The studio</h2>
+      <address>206-B, NSR Road, Saibaba Colony, Coimbatore 641011</address>
+      <p class="hours">Open every day, 10 AM to 7 PM</p>
+      <div class="links">
+        <a class="btn line" href="https://www.google.com/maps/search/?api=1&amp;query=Ygary%20Bridal%20Make%20Up%20Studio%20Coimbatore&amp;query_place_id=ChIJfXWEkJpZqDsRWD5zZ7EnRvM" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          Directions</a>
+        <a class="btn line" href="tel:+919074643514">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+          Call 90746 43514</a>
+        <a class="btn line" data-wa href="https://wa.me/919074643514" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+          WhatsApp</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Ygary Bridal Make Up Studio, Saibaba Colony, Coimbatore</p>
+    <p>Photos: Ygary brides, from @ygarybridescbe on Instagram</p>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn orange" href="#book">Book your date</a>
+  <a class="icon-btn" href="tel:+919074643514" aria-label="Call the studio, 90746 43514">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+  </a>
+</div>
+
+<script>
+  // Plain script: the WhatsApp message is built here, so it works with no other library.
+  (function () {
+    var WA = "https://wa.me/919074643514";
+    var $ = function (id) { return document.getElementById(id); };
+    var name = $("name"), place = $("place"), date = $("date"), dateText = $("dateText");
+    var picked = null;
+
+    // The earliest date is today (a booking is for a day ahead)
+    var t = new Date();
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    date.min = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+
+    var nice = function (d) { return d.toLocaleDateString("en-IN", { weekday: "short" }) + " " + d.getDate() + " " + d.toLocaleDateString("en-IN", { month: "short" }) + " " + d.getFullYear(); };
+    var clean = function (s) { return s.replace(/\s+/g, " ").trim(); };
+
+    // Only what she filled in goes into the message; with no date yet it is a plain hello
+    function message() {
+      var n = clean(name.value), p = clean(place.value);
+      var hi = "Hi Ygary Brides" + (n ? ", I'm " + n : "") + ".";
+      if (!picked) return hi + " I'd like to ask about bridal makeup.";
+      return hi + " My wedding is on " + nice(picked) + (p ? " at " + p : "") + ". I'd like to book my bridal makeup.";
+    }
+    function sync() {
+      var n = clean(name.value), p = clean(place.value);
+      var href = WA + "?text=" + encodeURIComponent(message());
+      document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
+      document.querySelectorAll("[data-name]").forEach(function (el) {
+        var fallback = el.closest(".next") ? "your name?" : "your name";
+        var next = n || fallback;
+        var first = n && el.classList.contains("unset");   // settle once, when her name first lands, not on every key
+        el.textContent = next;
+        if (first) { el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+        el.classList.toggle("unset", !n);
+        el.classList.toggle("long", n.split(" ").some(function (w) { return w.length > 11; }));
+      });
+      var when = picked ? nice(picked) + (p ? ", " + p : "") : (p ? p : "pick your date");
+      document.querySelectorAll("[data-when]").forEach(function (el) { el.textContent = when; });
+    }
+    // Blanks grow with what is typed, so the sentence keeps reading as one line of text
+    var ruler = document.createElement("canvas").getContext("2d");
+    function textWidth(el, text) { var cs = getComputedStyle(el); ruler.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily; return ruler.measureText(text).width; }
+    function fit(el, fallback, extra) {
+      var w = textWidth(el, el.value || el.placeholder || fallback);
+      el.style.width = Math.ceil(w + extra) + "px";
+    }
+    function fitAll() { fit(name, "your name", 24); fit(place, "hall or town", 24); }
+    name.addEventListener("input", function () { fit(name, "your name", 24); sync(); });
+    place.addEventListener("input", function () { fit(place, "hall or town", 24); sync(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+    fitAll();
+    date.addEventListener("change", function () {
+      if (date.value) {
+        var p = date.value.split("-");
+        picked = new Date(+p[0], +p[1] - 1, +p[2]);
+        dateText.textContent = nice(picked);
+        dateText.classList.remove("unset");
+        $("dateBlank").classList.remove("want");
+      } else { picked = null; dateText.textContent = "pick a date"; dateText.classList.add("unset"); }
+      sync();
+    });
+    // Desktop browsers open the calendar only from its icon; open it from anywhere on the blank
+    function openPicker() { try { if (date.showPicker) { date.showPicker(); return; } } catch (e) {} date.focus(); }
+    date.addEventListener("click", openPicker);
+    // The send button needs the date: without one it points at the blank and opens the calendar
+    var dateBlank = $("dateBlank"), nudge;
+    $("send").addEventListener("click", function (e) {
+      if (picked) return;
+      e.preventDefault();
+      dateBlank.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      dateBlank.classList.add("want"); clearTimeout(nudge);
+      nudge = setTimeout(function () { dateBlank.classList.remove("want"); }, 1600);
+      openPicker();
+    });
+    name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); place.focus(); } });
+    place.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); place.blur(); } });
+    sync();
+
+    // The hint swipes the string to its last knot, the empty one
+    var row = document.querySelector(".string"), toEnd = document.querySelector("[data-to-end]");
+    if (row && toEnd) toEnd.addEventListener("click", function () {
+      var smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+      row.scrollTo({ left: row.scrollWidth, behavior: smooth ? "smooth" : "auto" });
+    });
+
+    // The phone dock: shown after the hero button scrolls away, hidden as soon as the booking panel comes up
+    var dock = $("dock"), heroBtn = document.querySelector("[data-book]"), book = $("book");
+    if ("IntersectionObserver" in window && dock) {
+      var heroOut = false, bookIn = false;
+      var update = function () { dock.classList.toggle("show", heroOut && !bookIn); };
+      new IntersectionObserver(function (es) { es.forEach(function (e) { heroOut = !e.isIntersecting && e.boundingClientRect.top < 0; }); update(); }).observe(heroBtn);
+      new IntersectionObserver(function (es) { es.forEach(function (e) { bookIn = e.isIntersecting; }); update(); }, { rootMargin: "0px 0px -80px 0px" }).observe(book);
+    }
+  })();
+</script>
+</body>
+</html>

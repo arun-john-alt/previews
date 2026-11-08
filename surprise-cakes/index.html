@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Surprise Cakes · Tatabad, Coimbatore</title>
+<meta name="description" content="Custom cakes for birthdays, weddings and anniversaries. Tatabad, Coimbatore. Open 24 hours.">
+<meta name="theme-color" content="#3a1d12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@800&family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette: the logo's yellow is the ground; cocoa from their chocolate cakes is the ink;
+     the pink is the fondant on the bunny cake. */
+  :root {
+    --sun: #ffde59;
+    --sun-soft: #ffe98f;
+    --cocoa: #3a1d12;
+    --cocoa-2: #5b3423;
+    --cocoa-3: #4a2618;
+    --milk: #fff4c9;
+    --icing: #ff9ebb;
+    --icing-edge: #a8355d;
+    --leaf: #3fa34d;
+    --paper: #ffffff;
+    --ink-soft: #6b4636;
+    --name: "Sniglet", "Hind Madurai", system-ui, sans-serif;
+    --text: "Hind Madurai", system-ui, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --col: 640px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--cocoa) var(--sun); }
+  body { margin: 0; background: var(--sun); color: var(--cocoa); font: 400 17px/1.45 var(--text); font-variant-numeric: lining-nums; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--cocoa); color: var(--sun); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--cocoa); outline-offset: 3px; }
+  .top :focus-visible, .composer :focus-visible, .me :focus-visible { outline-color: var(--sun); }
+  .me .draft :focus-visible { outline-color: var(--cocoa); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  svg { width: 22px; height: 22px; flex: none; }
+
+  /* Required on every mock */
+  .concept { background: #24110a; color: #f3e3b0; text-align: center; font-size: 13px; line-height: 1.3; padding: 7px 16px; }
+
+  /* Chat header: the shop, its status, a call button */
+  .top { position: sticky; top: 0; z-index: 20; background: var(--cocoa); color: var(--milk); }
+  .top .in { max-width: 1088px; margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 14px; }
+  .avatar { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--sun); object-fit: cover; flex: none; }
+  .who { flex: 1; min-width: 0; }
+  .who h1 { margin: 0; font: 800 21px/1.1 var(--name); letter-spacing: 0; color: #fff; }
+  .status { display: flex; align-items: center; gap: 7px; margin: 3px 0 0; font-size: 16px; line-height: 1.2; color: var(--sun); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 2px rgba(63,163,77,.25); flex: none; }
+  .round { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--sun); color: var(--cocoa); text-decoration: none; flex: none; transition: transform .14s var(--ease); }
+  .round:active { transform: scale(.94); }
+
+  /* Layout: one conversation column; on wide screens the shop's profile sits beside it */
+  .app { max-width: 1088px; margin: 0 auto; }
+  .profile { display: none; }
+  main { max-width: var(--col); margin: 0 auto; padding: 14px 12px 0; }
+
+  .stamp { display: table; margin: 4px auto 6px; padding: 5px 14px; border-radius: 8px; background: var(--sun-soft); color: var(--cocoa-2); font: 600 16px/1.3 var(--text); text-align: center; }
+
+  /* Message groups: shop on the left, the visitor's replies on the right */
+  .msg { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 16px; }
+  .msg.me { align-items: flex-end; }
+  .b { position: relative; max-width: min(86%, 440px); background: var(--paper); color: var(--cocoa); border-radius: 18px; padding: 9px 14px 10px; box-shadow: 0 1px 2px rgba(58, 29, 18, .18); }
+  .b p { margin: 0; }
+  .b p + p { margin-top: 6px; }
+  .msg > .b:first-child { border-top-left-radius: 5px; }
+  .me .b { background: var(--cocoa); color: var(--milk); }
+  .me > .b:first-child { border-top-left-radius: 18px; border-top-right-radius: 5px; }
+
+  figure.b { margin: 0; }
+  .photo { padding: 4px; width: min(76%, 360px); }
+  .photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; background: var(--sun-soft); }
+  .photo.wide { width: min(74%, 400px); }
+  .photo.wide img { aspect-ratio: 5 / 4; }
+  .photo figcaption, .photo .cap { padding: 7px 10px 5px; font-size: 16px; line-height: 1.4; }
+  .photo figure { margin: 0; }
+
+  /* Reply chips (occasion, pickup) are real radio buttons */
+  .chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; max-width: 100%; }
+  .chip { position: relative; display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 13px; border-radius: 24px; border: 2px solid var(--cocoa); background: transparent; font-weight: 700; font-size: 16.5px; cursor: pointer; transition: transform .14s var(--ease), background-color .18s var(--ease), color .18s var(--ease); -webkit-tap-highlight-color: transparent; }
+  .chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .chip:active { transform: scale(.96); }
+  .chip:has(input:checked) { background: var(--cocoa); color: var(--sun); }
+  .chip:has(input:focus-visible) { outline: 3px solid var(--cocoa); outline-offset: 3px; }
+  .chip .tick { width: 18px; height: 18px; display: none; }
+  .chip:has(input:checked) .tick { display: block; }
+
+  /* Typed replies: the name in fondant letters, the date, the theme */
+  .field { width: min(86%, 440px); padding: 8px 14px 6px; }
+  .field, .chips, #draft { scroll-margin: 96px 0 96px; }
+  .field input { display: block; width: 100%; min-height: 48px; border: 0; background: transparent; color: var(--milk); padding: 0; outline: none; caret-color: var(--sun); }
+  .field input::placeholder { color: rgba(255, 244, 201, .58); opacity: 1; }
+  .field.name input { font: 800 34px/1.15 var(--name); letter-spacing: .01em; color: var(--icing); text-shadow: 0 2px 0 var(--icing-edge); min-height: 56px; }
+  .field.name input::placeholder { font-size: 25px; text-shadow: none; }
+  .field.plain input { font-weight: 700; font-size: 19px; }
+  .field input[type=date] { color-scheme: dark; font-weight: 700; font-size: 19px; }
+  #f-date:not(.done) input { color: transparent; }
+  .pick { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-weight: 700; font-size: 19px; color: rgba(255, 244, 201, .62); pointer-events: none; }
+  #f-date.done .pick { display: none; }
+  .field:focus-within { box-shadow: 0 0 0 3px var(--cocoa), 0 0 0 6px var(--sun-soft); }
+  .ticks { position: absolute; right: 10px; bottom: 6px; width: 20px; height: 14px; color: var(--sun); opacity: 0; transform: scale(.6); transition: opacity .2s var(--ease), transform .2s var(--ease); }
+  .done .ticks { opacity: 1; transform: none; }
+
+  /* A shop "album" of four cakes; tapping one sets the theme */
+  .album { padding: 4px; width: min(86%, 440px); display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .tile { position: relative; display: flex; flex-direction: column; width: 100%; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: var(--sun-soft); cursor: pointer; text-align: left; transition: transform .14s var(--ease); }
+  .album .tile:first-child { border-top-left-radius: 4px; }
+  .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .tile span { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 4px; min-height: 36px; padding: 6px 8px; background: var(--cocoa); color: var(--milk); font-size: 16px; font-weight: 500; line-height: 1.2; }
+  .tile:active { transform: scale(.97); }
+  .tile[aria-pressed=true] { box-shadow: inset 0 0 0 3px var(--sun); }
+  .tile[aria-pressed=true] span { background: var(--icing-edge); color: #fff; }
+  .tile .tick { width: 16px; height: 16px; opacity: 0; }
+  .tile[aria-pressed=true] .tick { opacity: 1; }
+
+  /* The visitor's unsent message */
+  .draft { width: min(90%, 460px); background: transparent !important; color: var(--cocoa) !important; border: 2px dashed var(--cocoa); box-shadow: none; padding: 12px 14px 14px; }
+  .draft .lbl { display: block; font: 800 16px/1.2 var(--name); margin-bottom: 6px; }
+  .draft .text { font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; }
+  .draft .text q { quotes: none; font-weight: 700; }
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; margin-top: 12px; padding: 0 20px; border-radius: 26px; background: var(--cocoa); color: var(--sun); font-weight: 700; font-size: 18px; text-decoration: none; transition: transform .14s var(--ease); }
+  .send:active { transform: scale(.97); }
+
+  /* Shop info messages */
+  .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .act { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--sun); color: var(--cocoa); font-weight: 700; font-size: 16px; text-decoration: none; transition: transform .14s var(--ease); }
+  .act svg { width: 18px; height: 18px; }
+  .act:active { transform: scale(.96); }
+  .big { font: 800 26px/1.1 var(--name); }
+  .big { display: flex; align-items: center; gap: 8px; }
+  .star { color: #e0a100; width: 26px; height: 26px; }
+  time { font-weight: 700; white-space: nowrap; }
+  .end { margin: 28px auto 8px; padding: 10px 16px; max-width: 420px; text-align: center; font-size: 16px; color: var(--cocoa-2); }
+  .end .nw { white-space: nowrap; }
+  .end a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+  /* Composer: the draft in one line and the send button, always in reach */
+  .composer { position: sticky; bottom: 0; z-index: 15; margin: 18px -12px 0; background: var(--cocoa); padding: 12px 12px calc(12px + env(safe-area-inset-bottom)); display: flex; gap: 10px; align-items: center; }
+  .preview { flex: 1; min-width: 0; min-height: 48px; display: flex; align-items: center; padding: 0 16px; border: 0; border-radius: 24px; background: var(--cocoa-3); color: var(--milk); font-size: 16px; text-align: left; cursor: pointer; }
+  .preview span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .preview .hint { color: rgba(255, 244, 201, .72); }
+  .go { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px 0 14px; border-radius: 24px; background: var(--sun); color: var(--cocoa); font-weight: 700; font-size: 17px; text-decoration: none; flex: none; transition: transform .14s var(--ease); }
+  .go:active { transform: scale(.95); }
+  .go svg { width: 24px; height: 24px; }
+
+  @media (hover: hover) {
+    .chip:hover { background: rgba(58, 29, 18, .08); }
+    .act:hover { background: #ffd43a; }
+    .go:hover { background: var(--sun-soft); }
+    .send:hover, .round:hover { filter: brightness(1.12); }
+    .tile:hover img { opacity: .9; }
+  }
+  @media (max-width: 350px) { .concept { font-size: 12px; padding: 6px 10px; } .who h1 { font-size: 18px; } .status { font-size: 15px; } .avatar { width: 40px; height: 40px; } .photo.wide { width: 70%; } }
+  @media (min-width: 400px) { main { padding-left: 16px; padding-right: 16px; } .composer { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; } }
+  @media (min-width: 700px) { .composer { margin-left: 0; margin-right: 0; border-radius: 26px 26px 0 0; } }
+
+  /* Wide screens: the shop's profile beside the conversation, like a desktop chat */
+  @media (min-width: 1024px) {
+    .app { display: grid; grid-template-columns: 340px minmax(0, var(--col)); gap: 56px; justify-content: center; padding: 0 32px; }
+    main { margin: 0; padding: 24px 0 0; }
+    .profile { display: block; position: sticky; top: 92px; align-self: start; padding: 40px 0 32px; }
+    .profile img { width: 132px; height: 132px; border-radius: 50%; border: 4px solid var(--cocoa); }
+    .profile .name { margin: 22px 0 6px; font: 800 50px/1 var(--name); letter-spacing: -.01em; }
+    .profile p { margin: 0 0 18px; font-size: 19px; line-height: 1.45; max-width: 30ch; }
+    .profile ul { list-style: none; margin: 0; padding: 18px 0 0; border-top: 2px solid var(--cocoa); }
+    .profile li { padding: 0; font-size: 17px; line-height: 44px; }
+    .profile li b { font-weight: 700; }
+    .profile a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  }
+
+  /* Bubbles arrive from their own side. The first screen's arrive in plain CSS, so they never wait on the
+     network; the rest wait for Motion and show at once if it never loads. */
+  @keyframes arrive-l { from { opacity: 0; transform: translateX(-10px) scale(.96); } }
+  @keyframes arrive-r { from { opacity: 0; transform: translateX(10px) scale(.96); } }
+  .js .msg.now > * { transform-origin: 0 100%; animation: arrive-l .32s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  .js .msg.me.now > * { transform-origin: 100% 100%; animation-name: arrive-r; }
+  .js .msg.later > * { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) { .js .msg > * { opacity: 1; animation: none; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept for Surprise Cakes · not the official site</div>
+
+<header class="top">
+  <div class="in">
+    <img class="avatar" src="assets/logo.jpg" alt="Surprise Cakes logo" width="46" height="46">
+    <div class="who">
+      <h1>Surprise Cakes</h1>
+      <p class="status"><span class="dot" aria-hidden="true"></span>Open 24 hours · Tatabad</p>
+    </div>
+    <a class="round" href="tel:+918438337388" aria-label="Call the shop, 84383 37388">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="profile" aria-label="About the shop">
+    <img src="assets/logo.jpg" alt="" width="132" height="132">
+    <p class="name">Surprise Cakes</p>
+    <p>Custom cakes for birthdays, weddings and anniversaries. Tatabad, Coimbatore.</p>
+    <ul>
+      <li><b>Open 24 hours</b>, every day</li>
+      <li><b>5.0</b> on Google, 142 reviews</li>
+      <li>WhatsApp <a href="https://wa.me/918870284862">88702 84862</a></li>
+      <li>Shop <a href="tel:+918438337388">84383 37388</a></li>
+    </ul>
+  </aside>
+
+  <main id="order">
+    <div class="msg">
+      <figure class="b photo wide">
+        <img src="assets/cake-kitkat-wide.jpg" alt="Round chocolate cake walled with KitKat bars and a red ribbon, topped with gems, chocolate balls, wafer rolls, a gold Happy Birthday topper and the name Aiya" width="800" height="640">
+        <figcaption>Aiya's cake: a KitKat wall, gems, and the name right on top.</figcaption>
+      </figure>
+      <div class="b"><p>Hi! Custom cakes for birthdays, weddings and anniversaries. What's yours for?</p></div>
+    </div>
+
+    <div class="msg me">
+      <div class="chips" role="radiogroup" aria-label="What's the cake for?">
+        <label class="chip"><input type="radio" name="occ" value="birthday"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Birthday</label>
+        <label class="chip"><input type="radio" name="occ" value="wedding"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Wedding</label>
+        <label class="chip"><input type="radio" name="occ" value="anniversary"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Anniversary</label>
+      </div>
+    </div>
+
+    <div class="msg">
+      <div class="b"><p id="q-name">Whose name goes on the cake?</p></div>
+    </div>
+    <div class="msg me">
+      <div class="b field name" id="f-name">
+        <input id="name" type="text" maxlength="40" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Type the name" aria-labelledby="q-name">
+        <svg class="ticks" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1 7.5 3.5 3.5L11 3.5M8.5 11 15 3.5"/></svg>
+      </div>
+    </div>
+
+    <div class="msg">
+      <div class="b"><p id="q-date">Which day do you need it?</p></div>
+    </div>
+    <div class="msg me">
+      <div class="b field plain" id="f-date">
+        <input id="date" type="date" aria-labelledby="q-date">
+        <span class="pick" aria-hidden="true">Tap to pick a day</span>
+        <svg class="ticks" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1 7.5 3.5 3.5L11 3.5M8.5 11 15 3.5"/></svg>
+      </div>
+    </div>
+
+    <div class="msg">
+      <div class="b"><p>Will you pick it up from the shop in Tatabad, or should we deliver? We deliver across Coimbatore.</p></div>
+    </div>
+    <div class="msg me">
+      <div class="chips" role="radiogroup" aria-label="Pick up or delivery">
+        <label class="chip"><input type="radio" name="get" value="pickup"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>I'll pick it up</label>
+        <label class="chip"><input type="radio" name="get" value="delivery"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Deliver it</label>
+      </div>
+    </div>
+
+    <div class="msg">
+      <div class="b"><p id="q-theme">Any theme in mind? Type a word, or tap one of these.</p></div>
+      <div class="b album" role="group" aria-label="Cakes from the shop">
+        <button class="tile" type="button" aria-pressed="false" data-theme="two tiers with fresh roses, like the one on your page">
+          <img src="assets/cake-tiers.jpg" alt="Two-tier mint and white cake with combed buttercream, pink roses and white carnations, the names Steffi and Samson in fondant letters on the board" width="800" height="800" loading="lazy">
+          <span>Two tiers, roses <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+        </button>
+        <button class="tile" type="button" aria-pressed="false" data-theme="pink bunny with a number, like the one on your page">
+          <img src="assets/cake-bunny.jpg" alt="Tall pink-and-white ombre cake with a sugar bunny, a pink number 1, sprinkles and the name Juana on a white disc" width="800" height="800" loading="lazy">
+          <span>Pink bunny <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+        </button>
+        <button class="tile" type="button" aria-pressed="false" data-theme="mermaid with a pink drip, like the one on your page">
+          <img src="assets/cake-mermaid.jpg" alt="Pink and aqua drip cake topped with a waving sugar mermaid, a seahorse and coral" width="800" height="800" loading="lazy">
+          <span>Mermaid drip <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+        </button>
+        <button class="tile" type="button" aria-pressed="false" data-theme="baby elephant with balloons, like the one on your page">
+          <img src="assets/cake-elephant.jpg" alt="White and blue cake with a grey sugar elephant, gold paper fans, hot-air balloon toppers and the name SaiNilani in gold" width="640" height="640" loading="lazy">
+          <span>Baby elephant <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+        </button>
+      </div>
+    </div>
+    <div class="msg me">
+      <div class="b field plain" id="f-theme">
+        <input id="theme" type="text" maxlength="80" autocomplete="off" placeholder="Unicorn, CSK, mermaid…" aria-labelledby="q-theme">
+        <svg class="ticks" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1 7.5 3.5 3.5L11 3.5M8.5 11 15 3.5"/></svg>
+      </div>
+    </div>
+
+    <div class="msg">
+      <div class="b"><p>Your message is below. Send it on WhatsApp to ask about the design and the price.</p></div>
+    </div>
+    <div class="msg me" id="draft-wrap">
+      <div class="b draft" id="draft">
+        <span class="lbl">Your message</span>
+        <p class="text" id="draft-text">Hi Surprise Cakes! I'd like to order a custom cake. Could you share the options and the price?</p>
+        <a class="send" id="send" href="https://wa.me/918870284862" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+          Send on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <h2 class="stamp" style="margin-top:30px">The shop</h2>
+
+    <div class="msg">
+      <figure class="b photo">
+        <img src="assets/shop-counter.jpg" alt="Inside the shop: a lit glass cake counter with small cakes and pastries, birthday banners on the wall" width="640" height="640" loading="lazy">
+        <figcaption>Our counter in Tatabad.</figcaption>
+      </figure>
+      <div class="b">
+        <p>45/58 Nedunchezhian St, near Kumar Tailors, Rathinapuri, Tatabad, Coimbatore 641027.</p>
+        <div class="acts">
+          <a class="act" href="https://www.google.com/maps/search/?api=1&amp;query=Surprise%20Cakes%20Tatabad%20Coimbatore&amp;query_place_id=ChIJ51dmOsJYqDsR2P064RbSaa0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Directions</a>
+          <a class="act" href="tel:+918438337388"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>84383 37388</a>
+        </div>
+      </div>
+      <div class="b"><p>We're open 24 hours, every day of the week. Right now it's <time id="now">late</time> in Coimbatore.</p></div>
+      <div class="b">
+        <p class="big"><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8L12 2.8Z"/></svg>5.0 on Google</p>
+        <p>From 142 reviews.</p>
+        <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&amp;query=Surprise%20Cakes%20Tatabad%20Coimbatore&amp;query_place_id=ChIJ51dmOsJYqDsR2P064RbSaa0" target="_blank" rel="noopener">Read the reviews</a></div>
+      </div>
+      <div class="b">
+        <p>There are more of our cakes on Instagram and YouTube.</p>
+        <div class="acts">
+          <a class="act" href="https://instagram.com/surprisecakescoimbatore" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+          <a class="act" href="https://youtube.com/@surprisecakescoimbatore" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg>YouTube</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="end">Surprise Cakes, Tatabad, Coimbatore<br><span class="nw">WhatsApp <a href="https://wa.me/918870284862">88702 84862</a></span> · <span class="nw">Shop <a href="tel:+918438337388">84383 37388</a></span></p>
+
+    <div class="composer">
+      <button class="preview" id="preview" type="button"><span class="sr">See your message: </span><span class="hint" id="preview-text">Your message builds here</span></button>
+      <a class="go" id="go" href="https://wa.me/918870284862" target="_blank" rel="noopener" aria-label="Send your order on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+        Send
+      </a>
+    </div>
+  </main>
+</div>
+
+<script>
+/* The order message, built in plain script so it works even if Motion never loads. */
+(function () {
+  var WA = "https://wa.me/918870284862";
+  var $ = function (id) { return document.getElementById(id); };
+  var nameEl = $("name"), dateEl = $("date"), themeEl = $("theme");
+  var tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
+  var OCC = { birthday: "a birthday cake", wedding: "a wedding cake", anniversary: "an anniversary cake" };
+  var SHORT = { birthday: "Birthday", wedding: "Wedding", anniversary: "Anniversary" };
+
+  function picked(n) { var r = document.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ""; }
+  function niceDate(v) {
+    if (!v) return "";
+    var p = v.split("-"), d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  }
+  function fitName() {
+    var n = nameEl.value.length;
+    nameEl.style.fontSize = n > 26 ? "18px" : n > 18 ? "22px" : n > 12 ? "27px" : "";
+  }
+  function build() {
+    var occ = picked("occ"), get = picked("get");
+    var name = nameEl.value.trim(), day = niceDate(dateEl.value), theme = themeEl.value.trim();
+    var s = "Hi Surprise Cakes! I'd like " + (OCC[occ] || "a custom cake");
+    if (name) s += ' with the name "' + name + '" on it';
+    if (day) s += (name ? ", for " : " for ") + day;
+    s += ".";
+    if (theme) s += " Theme: " + theme + ".";
+    if (get === "pickup") s += " I'll pick it up from the shop in Tatabad.";
+    if (get === "delivery") s += " I'd like it delivered in Coimbatore.";
+    s += " Could you share the options and the price?";
+
+    var href = WA + "?text=" + encodeURIComponent(s);
+    $("send").href = href; $("go").href = href;
+    $("draft-text").textContent = s;
+
+    var bits = [];
+    if (occ) bits.push(SHORT[occ]);
+    if (name) bits.push("“" + name + "”");
+    if (day) bits.push(day);
+    if (theme) bits.push(theme.split(",")[0]);
+    var pv = $("preview-text");
+    pv.textContent = bits.length ? bits.join(" · ") : "Your message builds here";
+    pv.className = bits.length ? "" : "hint";
+
+    $("f-name").classList.toggle("done", !!name);
+    $("f-date").classList.toggle("done", !!day);
+    $("f-theme").classList.toggle("done", !!theme);
+  }
+
+  // No cake can be ordered for a day that has passed
+  var t = new Date(), pad = function (n) { return (n < 10 ? "0" : "") + n; };
+  dateEl.min = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+
+  nameEl.addEventListener("input", function () { fitName(); build(); });
+  [dateEl, themeEl].forEach(function (el) { el.addEventListener("input", build); el.addEventListener("change", build); });
+  document.querySelectorAll('input[type=radio]').forEach(function (r) { r.addEventListener("change", build); });
+  themeEl.addEventListener("input", function () {
+    tiles.forEach(function (x) { if (x.getAttribute("data-theme") !== themeEl.value) x.setAttribute("aria-pressed", "false"); });
+  });
+  tiles.forEach(function (tile) {
+    tile.addEventListener("click", function () {
+      var on = tile.getAttribute("aria-pressed") !== "true";
+      tiles.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      tile.setAttribute("aria-pressed", on ? "true" : "false");
+      themeEl.value = on ? tile.getAttribute("data-theme") : "";
+      build();
+    });
+  });
+  $("preview").addEventListener("click", function () {
+    $("draft").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+  });
+
+  // The shop is open 24 hours; say what time it is there now.
+  function tick() {
+    try { $("now").textContent = new Date().toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour: "numeric", minute: "2-digit" }); }
+    catch (e) { $("now").textContent = "any hour"; }
+  }
+  tick(); setInterval(tick, 30000);
+  build();
+})();
+</script>
+
+<script>
+/* Bubbles already on the first screen arrive in CSS, one after another. Bubbles further down are hidden
+   only while Motion is expected; a 2.5 s failsafe shows everything if it never loads. */
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  (function () {
+    var root = document.documentElement, k = 0;
+    root.classList.add("js");
+    document.querySelectorAll(".msg").forEach(function (g) {
+      if (g.getBoundingClientRect().top < innerHeight) {
+        g.classList.add("now");
+        Array.prototype.forEach.call(g.children, function (c) { c.style.setProperty("--i", Math.min(k++, 8)); });
+      } else {
+        g.classList.add("later");
+      }
+    });
+    setTimeout(function () { if (!window.__motionReady) root.classList.remove("js"); }, 2500);
+  })();
+}
+</script>
+<script type="module">
+import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
+const root = document.documentElement;
+if (root.classList.contains("js")) {
+  window.__motionReady = true;
+  const pending = new Set(document.querySelectorAll(".msg.later"));
+  // A group arrives from its own side; one already scrolled past (a fast fling, the jump to the draft)
+  // is shown at once, so nothing can stay hidden.
+  const reveal = (g, instant) => {
+    if (!pending.delete(g)) return;
+    const mine = g.classList.contains("me");
+    const kids = Array.from(g.children);
+    if (instant) { kids.forEach((k) => { k.style.opacity = "1"; }); return; }
+    kids.forEach((k) => { k.style.transformOrigin = mine ? "100% 100%" : "0% 100%"; });
+    animate(kids, { opacity: [0, 1], x: [mine ? 10 : -10, 0], scale: [0.96, 1] },
+      { duration: 0.32, delay: stagger(0.07), ease: [0.23, 1, 0.32, 1] });
+  };
+  const sweep = () => {
+    pending.forEach((g) => {
+      const r = g.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92) reveal(g, r.bottom < 0);
+    });
+  };
+  pending.forEach((g) => inView(g, () => reveal(g, false), { amount: 0.15 }));
+  let queued = false;
+  addEventListener("scroll", () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; sweep(); });
+  }, { passive: true });
+  sweep();
+}
+</script>
+</body>
+</html>
