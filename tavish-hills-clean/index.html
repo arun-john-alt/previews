@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Tavish Hills, homestay in Kotagiri</title>
+<meta name="description" content="Tavish Hills: a hill-view homestay and private villa in Kotagiri, Tamil Nadu. Send your dates on WhatsApp.">
+<meta name="theme-color" content="#eef1f6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/balcony-hills.webp">
+<style>
+  :root {
+    /* Receding ranges, as seen from their terrace: palest mist up top, each band one ridge nearer and one tone deeper.
+       Sampled from their hills and their blue logo, which is the only colour that acts. */
+    --mist: #eef1f6;
+    --haze: #dce3ee;
+    --far: #b3c0d6;
+    --near: #43557f;
+    --night: #1b2440;
+    --ink: #18203a;
+    --ink-soft: #4a5571;
+    --on-dark: #edf0f7;
+    --on-dark-soft: #cdd5e6;
+    --brand: #5070f8; /* unslop-ignore: their logo's blue */
+    --act: #3c5ae2;
+    --act-press: #2f4cd0;
+    --u: 8px;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --serif: "Tiro Tamil", Georgia, serif;
+    --sans: "Hind Madurai", "Segoe UI", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: clip; }
+  body { margin: 0; background: var(--mist); color: var(--ink); font: 400 18px/1.6 var(--sans); }
+  ::selection { background: var(--brand); color: #fff; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--act); outline-offset: 3px; }
+
+  .concept { font: 500 13px/1.4 var(--sans); text-align: center; padding: var(--u) calc(var(--u) * 2); background: var(--night); color: var(--on-dark-soft); }
+  .concept strong { color: var(--on-dark); font-weight: 600; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 calc(var(--u) * 2); }
+  .band { position: relative; padding: calc(var(--u) * 6) 0; }
+  .mist { background: var(--mist); padding-top: 0; }
+  .haze { background: var(--haze); }
+  .far { background: var(--far); }
+  .near { background: var(--near); color: var(--on-dark); }
+  .night { position: relative; background: var(--night); color: var(--on-dark-soft); padding: calc(var(--u) * 4) 0 calc(var(--u) * 6); }
+
+  /* Each band is one ridge nearer: its top edge is the skyline traced from their balcony photo, in the band's own
+     tone, rising into the paler band above. Alternate ridges are mirrored so no two neighbours repeat. */
+  .ridge { position: absolute; left: 0; bottom: 100%; width: 100%; height: 32px; margin-bottom: -1px; display: block; pointer-events: none; }
+  .haze .ridge { fill: var(--haze); }
+  .far .ridge { fill: var(--far); transform: scaleX(-1); }
+  .near .ridge { fill: var(--near); }
+  .night .ridge { fill: var(--night); transform: scaleX(-1); }
+
+  /* header */
+  .top { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: inline-flex; align-items: center; gap: calc(var(--u) * 1.25); min-height: 44px; text-decoration: none; font: 400 23px/1 var(--serif); letter-spacing: -.01em; }
+  .brand img { width: 30px; height: 30px; }
+  .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(24, 32, 58, .25); color: var(--ink); transition: transform .14s var(--ease), border-color .2s var(--ease); }
+  .icon-btn:active { transform: scale(.95); }
+  .icon-btn svg { width: 20px; height: 20px; }
+
+  h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.015em; text-wrap: balance; margin: 0; }
+  h1 { font-size: 36px; line-height: 1.08; max-width: 13em; }
+  h2 { font-size: 30px; line-height: 1.1; max-width: 18em; }
+  .sub { margin: var(--u) 0 0; color: var(--ink-soft); font-size: 18px; }
+
+  .hero-photo { margin: calc(var(--u) * 1.5) 0 0; }
+  .hero-photo img { width: 100%; aspect-ratio: 343 / 196; object-fit: cover; object-position: 50% 20%; background: var(--far); }
+  figcaption { margin-top: var(--u); font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
+  /* the two food photos are stills from another channel's reel: the credit stays with them */
+  figcaption .credit { display: block; }
+
+  /* the request: one sentence, three choices */
+  .ask { margin-top: calc(var(--u) * 1.5); }
+  .ask p { margin: 0; font: 400 20px/48px var(--sans); }
+  .ask p .pick { font-weight: 600; }
+  .pick {
+    font: inherit; font-weight: 600; color: var(--ink); background: transparent; border: 0; border-radius: 0;
+    border-bottom: 2px solid rgba(60, 90, 226, .45); height: 44px; line-height: 44px; padding: 0 22px 0 2px; margin: 0 2px;
+    -webkit-appearance: none; appearance: none; vertical-align: baseline; cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%233c5ae2' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 4px center;
+    transition: border-color .2s var(--ease), background-color .2s var(--ease);
+  }
+  .pick:focus { outline: none; border-bottom-color: var(--act); background-color: rgba(80, 112, 248, .1); }
+  input.pick { padding-right: 2px; background-image: none; width: 7.8em; }
+  input.pick::-webkit-calendar-picker-indicator { opacity: .55; }
+  .date-pick { position: relative; display: inline-block; vertical-align: baseline; }
+  .date-pick .hint { position: absolute; left: 4px; top: 0; line-height: 44px; color: #586180; pointer-events: none; white-space: nowrap; font-weight: 400; }
+  .date-pick.filled .hint { display: none; }
+  .date-pick:not(.filled) input::-webkit-datetime-edit { color: transparent; }
+  .date-pick:not(.filled) input:focus::-webkit-datetime-edit { color: var(--ink-soft); }
+  .send { display: flex; align-items: center; justify-content: center; gap: var(--u); width: 100%; min-height: 54px; margin-top: calc(var(--u) * 2);
+    background: var(--act); color: #fff; text-decoration: none; font: 600 18px/1 var(--sans); letter-spacing: .01em; padding-top: 2px;
+    transition: transform .14s var(--ease), background-color .2s var(--ease); }
+  .send:hover { background: var(--act-press); }
+  .send:active { transform: scale(.98); }
+  .send svg { width: 20px; height: 20px; }
+  .fine { margin: var(--u) 0 0; display: flex; flex-wrap: wrap; align-items: center; column-gap: calc(var(--u) * 1.5); font-size: 16px; color: var(--ink-soft); }
+  .fine a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-weight: 600; font-variant-numeric: lining-nums; }
+
+  /* bands below */
+  .lede { margin: calc(var(--u) * 1.5) 0 0; max-width: 32em; color: var(--ink-soft); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 1.5); margin-top: calc(var(--u) * 3); }
+  .pair figure, .duo figure { margin: 0; }
+  .pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 30%; background: var(--far); }
+  .pair figure:last-child { margin-top: calc(var(--u) * 4); }
+  /* guests: Siva Sir's group and Sharvesh Sir's, stacked on a phone so each group stays readable */
+  .duo { display: grid; gap: calc(var(--u) * 3); margin-top: calc(var(--u) * 3); }
+  .duo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%; background: var(--haze); }
+  .duo figure:first-child img { object-position: 50% 14%; }
+  .far .lede, .far figcaption { color: #2b3552; }
+
+  .near h2 { color: #fff; }
+  .near .lede { color: var(--on-dark-soft); }
+  .near .send { background: var(--mist); color: var(--act); }
+  .near .send:hover { background: #fff; }
+  .near .fine { color: var(--on-dark-soft); }
+  .near .fine a { color: #fff; }
+
+  .night p { margin: 0 0 var(--u); font-size: 16px; }
+  .night a { display: inline-flex; align-items: center; min-height: 44px; color: var(--on-dark); }
+
+  /* one action stays within reach after the hero */
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--u) calc(var(--u) * 1.5) calc(var(--u) + env(safe-area-inset-bottom));
+    background: var(--mist); border-top: 1px solid rgba(24, 32, 58, .14);
+    transform: translateY(110%); visibility: hidden; transition: transform .3s var(--ease), visibility 0s linear .3s; }
+  .dock.on { transform: none; visibility: visible; transition: transform .3s var(--ease); }
+  .dock .send { margin: 0; min-height: 50px; }
+
+  @media (min-width: 400px) {
+    h1 { font-size: 40px; }
+  }
+  @media (min-width: 600px) {
+    .duo { grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 2); }
+  }
+  @media (min-width: 860px) {
+    .wrap { padding: 0 calc(var(--u) * 5); }
+    .band { padding: calc(var(--u) * 12) 0; }
+    .mist { padding-top: 0; padding-bottom: calc(var(--u) * 10); }
+    .hero { display: grid; grid-template-columns: 1fr 1.1fr; grid-template-rows: auto auto; column-gap: calc(var(--u) * 8); row-gap: calc(var(--u) * 5); align-content: center; margin-top: calc(var(--u) * 4); }
+    .hero > div { align-self: end; }
+    .sub { font-size: 20px; }
+    h1 { font-size: 62px; }
+    h2 { font-size: 46px; }
+    .hero-photo { margin: 0; grid-column: 2; grid-row: 1 / span 2; max-width: 440px; justify-self: end; }
+    .hero-photo img { aspect-ratio: 4 / 4.4; object-position: 50% 20%; }
+    .ask p { font-size: 22px; }
+    .send { display: inline-flex; width: auto; padding: 0 calc(var(--u) * 5); }
+    .split { display: grid; grid-template-columns: 1fr 1.3fr; gap: calc(var(--u) * 8); align-items: start; }
+    .pair { margin-top: 0; }
+    /* the guests band turns the other way: photos left, words right */
+    .far .split { grid-template-columns: 1.25fr 1fr; }
+    .far .split > div:first-child { order: 2; align-self: center; }
+    .far h2 { font-size: 40px; }
+    .duo { margin-top: 0; }
+    .dock { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Concept for <strong>@tavish_hills_kotagiri</strong> &middot; not the official site</div>
+
+<!-- the skyline from their balcony photo (post-07), traced by data/mock-work/tavish-hills-clean/ridge.py -->
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <symbol id="ridge" viewBox="0 0 720 32" preserveAspectRatio="none"><path d="M0 32V18.8L12 19.7L24 21.3L36 22.6L47.9 23.6L59.9 25.3L71.9 26.8L83.9 27L95.9 25.7L107.9 23.6L119.8 21.3L131.8 19.8L143.8 19.4L155.8 18.4L167.8 16L179.8 13.3L191.7 12.7L203.7 14.6L215.7 17.6L227.7 20.2L239.7 21.4L251.7 21.5L263.6 21.3L275.6 21.3L287.6 22.4L299.6 24.6L311.6 26.7L323.6 27.8L335.5 28L347.5 27.8L359.5 27.5L371.5 26.4L383.5 24.5L395.5 23.3L407.4 23.8L419.4 24.6L431.4 24.5L443.4 24.1L455.4 23.7L467.4 22.3L479.3 21.3L491.3 21.8L503.3 22L515.3 21.2L527.3 20.6L539.3 19.9L551.2 18.5L563.2 18.2L575.2 19.7L587.2 22.1L599.2 22.9L611.2 20L623.1 15L635.1 10.9L647.1 7.1L659.1 3.7L671.1 2.2L683.1 2L695 2.4L707 2.5L719 2.4L720 2.4V32Z"/></symbol>
+</svg>
+
+<main>
+  <section class="band mist" aria-labelledby="h1">
+    <div class="wrap">
+      <header class="top">
+        <a class="brand" href="./" aria-label="Tavish Hills home"><img src="assets/mark.png" width="396" height="402" alt="">Tavish Hills</a>
+        <a class="icon-btn" href="tel:+919047747473" aria-label="Call Tavish Hills on 90477 47473">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        </a>
+      </header>
+
+      <div class="hero">
+        <div>
+          <h1 id="h1">A hill-view homestay in Kotagiri</h1>
+          <p class="sub">and a private villa, with homemade food and trekking.</p>
+        </div>
+        <figure class="hero-photo">
+          <img src="assets/balcony-hills.webp" width="722" height="1048" alt="Anuroop Sir and his group from Kerala on the balcony, hills behind">
+          <figcaption>Anuroop Sir's group, from Kerala.</figcaption>
+        </figure>
+        <form class="ask" id="ask" action="https://wa.me/919047747473" onsubmit="return false">
+          <p>I'd like to stay <select class="pick" id="nights" aria-label="How many nights"></select>
+            from <span class="date-pick" id="date-wrap"><input class="pick" id="date" type="date" aria-label="Arrival date"><span class="hint" aria-hidden="true">pick a date</span></span>,
+            <select class="pick" id="guests" aria-label="How many guests"></select>.</p>
+          <a class="send wa" id="send" href="https://wa.me/919047747473" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+            Send on WhatsApp</a>
+          <p class="fine">Tariff on WhatsApp <a href="tel:+919047747473">Call 90477 47473</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="band haze" aria-labelledby="stay">
+    <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
+    <div class="wrap split">
+      <div>
+        <h2 id="stay">From the terrace</h2>
+        <p class="lede">Homemade food on the terrace and in the garden, a hill view, and trekking. We host families, reunions and office groups.</p>
+      </div>
+      <div class="pair">
+        <figure>
+          <img src="assets/terrace-tea.webp" width="722" height="810" loading="lazy" alt="Lunch on the Tavish Hills terrace, the tea estate sloping away beside it">
+          <figcaption>Lunch on the terrace <span class="credit">Still: Semma Theeni</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/garden-table.webp" width="722" height="740" loading="lazy" alt="Two diners at a garden table set with steel serving bowls, a tall hedge behind">
+          <figcaption>Homely food at the garden table <span class="credit">Still: Semma Theeni</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band far" aria-labelledby="guests-h">
+    <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
+    <div class="wrap split">
+      <div>
+        <h2 id="guests-h">Guests from Kerala, Coimbatore and across Tamil Nadu</h2>
+        <p class="lede">Recent guests, each welcomed by name on our Instagram.</p>
+      </div>
+      <div class="duo">
+        <figure>
+          <img src="assets/guests-kerala.webp" width="722" height="824" loading="lazy" alt="Siva Sir's group from Kerala, adults and children, on the red-earth lawn in front of the hedge">
+          <figcaption>Siva Sir, from Kerala</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/guests-coimbatore.webp" width="686" height="512" loading="lazy" alt="Sharvesh Sir's group from Coimbatore lined up on the lawn in front of the hedge">
+          <figcaption>Sharvesh Sir, from Coimbatore</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band near" aria-labelledby="ask-h">
+    <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
+    <div class="wrap">
+      <h2 id="ask-h">Send us your dates</h2>
+      <p class="lede">The tariff comes back on WhatsApp. You can also ask about booking the whole property.</p>
+      <a class="send wa" href="https://wa.me/919047747473" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+        Send on WhatsApp</a>
+      <p class="fine"><a href="tel:+919047747473">Call 90477 47473</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="night">
+  <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
+  <div class="wrap">
+    <p>Tavish Hills, Kotagiri, Tamil Nadu</p>
+    <p><a href="https://instagram.com/tavish_hills_kotagiri" target="_blank" rel="noopener">Instagram @tavish_hills_kotagiri</a></p>
+  </div>
+</footer>
+
+<div class="dock" id="dock" aria-hidden="true">
+  <a class="send wa" href="https://wa.me/919047747473" target="_blank" rel="noopener" tabindex="-1">Send on WhatsApp</a>
+</div>
+
+<script>
+/* Plain script, no library: builds the WhatsApp message from the three choices. */
+(function () {
+  var WA = "https://wa.me/919047747473";
+  var $ = function (id) { return document.getElementById(id); };
+  var nights = $("nights"), date = $("date"), guests = $("guests");
+
+  for (var n = 1; n <= 7; n++) nights.add(new Option(n + (n === 1 ? " night" : " nights"), String(n), n === 2, n === 2));
+  for (var g = 1; g <= 20; g++) guests.add(new Option(g + (g === 1 ? " guest" : " guests"), String(g), g === 4, g === 4));
+  guests.add(new Option("20+ guests", "more than 20"));
+
+  var t = new Date(), pad = function (v) { return (v < 10 ? "0" : "") + v; };
+  date.min = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+
+  function niceDate(v) {
+    var p = v.split("-");
+    if (p.length !== 3) return "";
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d.getDay()] + " " + d.getDate() + " " +
+      ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()] + " " + d.getFullYear();
+  }
+  function message() {
+    var who = guests.value === "more than 20" ? "more than 20 guests" : guests.options[guests.selectedIndex].text;
+    var when = date.value ? "from " + niceDate(date.value) : "(dates flexible)";
+    return "Hello Tavish Hills, I'd like to stay " + nights.options[nights.selectedIndex].text + " " + when + ", " + who +
+      ". Please share the tariff.";
+  }
+  var dateWrap = $("date-wrap");
+  function update() {
+    dateWrap.classList.toggle("filled", !!date.value);
+    var href = WA + "?text=" + encodeURIComponent(message());
+    var links = document.querySelectorAll("a.wa");
+    for (var i = 0; i < links.length; i++) links[i].href = href;
+  }
+  [nights, date, guests].forEach(function (el) { el.addEventListener("input", update); el.addEventListener("change", update); });
+  update();
+
+  var dock = $("dock"), ask = $("ask"), near = document.querySelector(".near");
+  if ("IntersectionObserver" in window) {
+    var seen = { ask: true, near: false };
+    var sync = function () {
+      var on = !seen.ask && !seen.near;
+      dock.classList.toggle("on", on);
+      dock.setAttribute("aria-hidden", on ? "false" : "true");
+      dock.querySelector("a").tabIndex = on ? 0 : -1;
+    };
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { seen[e.target === ask ? "ask" : "near"] = e.isIntersecting; });
+      sync();
+    }).observe(ask);
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { seen.near = e.isIntersecting; });
+      sync();
+    }).observe(near);
+  }
+})();
+</script>
+</body>
+</html>

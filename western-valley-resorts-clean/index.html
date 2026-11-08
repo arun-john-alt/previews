@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Western Valley Resorts, Ooty &middot; Website concept</title>
+<meta name="theme-color" content="#f6f7f5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Their gate as the page: white plaster render, pillar brick, wrought iron. Brick red marks the pillars and the one
+     action, nothing else. Castoro Titling reads like letters on a stone plaque; Hind Madurai carries Tamil as well as
+     English, so the real site can add Tamil copy later without a new font. */
+  :root {
+    --plaster: #f6f7f5;
+    --white: #ffffff;
+    --brick: #9a3d2f;
+    --brick-deep: #7e2f23;
+    --iron: #1c1d1a;
+    --stone: #63625b;
+    --hair: #d8d8d1;
+    --plaque: "Castoro Titling", "Trajan Pro", Georgia, serif;
+    --read: "Hind Madurai", "Segoe UI", Roboto, sans-serif;
+    --gut: 16px;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--plaster); color: var(--iron); font: 400 17px/1.6 var(--read); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--brick); color: var(--white); }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; background: #e4e5e0; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--brick); outline-offset: 3px; }
+  h1, h2 { font-family: var(--plaque); font-weight: 400; margin: 0; letter-spacing: .07em; line-height: 1.1; text-wrap: balance; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--gut); }
+
+  .concept { background: var(--iron); color: #d9d9d3; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
+  .concept strong { color: var(--white); font-weight: 500; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; min-height: 52px; }
+  .top img { width: 84px; height: auto; background: none; mix-blend-mode: multiply; }
+  .top a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: flex-end; gap: 7px; text-decoration: none; font-weight: 500; }
+  .top svg { width: 18px; height: 18px; }
+
+  /* The gate: brick pillars either side of one photo; the iron leaves open once on load */
+  .gate { display: grid; grid-template-columns: 14px minmax(0, 1fr) 14px; align-items: stretch; }
+  .pillar { position: relative; background: var(--brick); z-index: 2; }
+  /* align-self: start, so WebKit keeps the aspect ratio instead of stretching the photo box to the empty row */
+  .view { position: relative; overflow: hidden; aspect-ratio: 5 / 4; align-self: start; }
+  .view img { position: absolute; inset: 0; width: 100%; height: 100%; object-position: 50% 70%; }
+  .leaf { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 1; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(28, 29, 26, .92) 0 3px, transparent 3px 19px);
+    border-top: 5px solid var(--iron); border-bottom: 5px solid var(--iron); }
+  .leaf::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 3px solid var(--iron); }
+  .leaf.l { left: 0; animation: open-l 1.15s .45s var(--ease) both; }
+  .leaf.r { right: 0; animation: open-r 1.15s .45s var(--ease) both; background-position: 8px 0; }
+  @keyframes open-l { to { transform: translateX(-104%); visibility: hidden; } }
+  @keyframes open-r { to { transform: translateX(104%); visibility: hidden; } }
+  .gate-base { height: 6px; background: var(--hair); }
+
+  .plaque { text-align: center; padding: 18px 0 4px; }
+  .plaque h1 { font-size: clamp(31px, 9.4vw, 58px); }
+  .plaque .bio { margin: 6px 0 0; color: var(--stone); }
+
+  .ask { text-align: center; margin-top: 14px; }
+  .sentence { margin: 0; font-size: 21px; line-height: 1.6; font-weight: 400; }
+  .blank { position: relative; display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; color: var(--brick); font-weight: 600;
+    border-bottom: 1.5px solid currentColor; padding: 4px 1px 0; line-height: 1.25; cursor: pointer; }
+  .blank svg { width: 11px; height: 11px; align-self: center; }
+  .blank select { position: absolute; inset: -8px -4px; width: calc(100% + 8px); height: calc(100% + 16px); min-height: 44px; opacity: 0; cursor: pointer; font-size: 16px; border: 0; -webkit-appearance: none; appearance: none; }
+  .blank:focus-within { outline: 2px solid var(--brick); outline-offset: 5px; }
+  .nw { white-space: nowrap; }
+  .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 420px; min-height: 54px; margin: 16px auto 0; padding: 12px 18px;
+    background: var(--brick); color: var(--white); text-decoration: none; font-weight: 600; font-size: 18px; letter-spacing: .01em; border-radius: 2px;
+    box-shadow: 0 8px 18px -10px rgba(126, 47, 35, .7); transition: transform .14s var(--ease), background-color .2s; }
+  .send svg { width: 22px; height: 22px; }
+  .send:active { transform: scale(.97); }
+  .alt { margin: 6px 0 0; color: var(--stone); font-size: 16px; }
+  .alt a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; text-decoration-thickness: 1px; color: var(--iron); }
+
+  /* The bio's three words, set like an engraved sign */
+  .sign { margin: 52px 0 0; padding: 18px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); text-align: center; }
+  .sign ul { list-style: none; margin: 0; padding: 0; font-family: var(--plaque); font-size: 19px; letter-spacing: .1em; line-height: 2.1; }
+
+  .seq { padding-top: 64px; padding-bottom: 8px; }
+  .seq h2, .find h2 { font-size: clamp(25px, 7vw, 40px); margin-bottom: 26px; }
+  .shot { margin: 0 0 56px; }
+  .shot figcaption { margin-top: 12px; color: var(--stone); }
+  .shot.aerial img { aspect-ratio: 512 / 552; }
+  .shot.lawn img { aspect-ratio: 512 / 474; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pair img { aspect-ratio: 3 / 4; }
+
+  .find { padding-top: 8px; padding-bottom: 64px; }
+  .find .gatephoto img { aspect-ratio: 512 / 426; }
+  .addr { font-style: normal; margin: 18px 0 0; }
+  .addr b { display: block; font-weight: 600; }
+  .route { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--hair); color: var(--stone); }
+  .route b { color: var(--iron); font-weight: 600; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+  .line-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 10px; border: 1px solid var(--iron); text-decoration: none; font-weight: 500; font-size: 16px; border-radius: 2px; transition: transform .14s var(--ease), background-color .2s; }
+  .line-btn svg { width: 18px; height: 18px; }
+  .line-btn:active { transform: scale(.97); }
+  .find .send { max-width: none; margin-top: 12px; }
+
+  footer { border-top: 1px solid var(--hair); padding: 26px 0 calc(34px + env(safe-area-inset-bottom)); color: var(--stone); font-size: 16px; }
+  footer .wrap { display: grid; gap: 4px; }
+  footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--iron); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+  @media (min-width: 600px) {
+    :root { --gut: 32px; }
+    .gate { grid-template-columns: 22px minmax(0, 1fr) 22px; }
+    .view { aspect-ratio: 5 / 4; }
+  }
+  /* Short phones (iPhone SE 1st gen, 320x568): a wider, shorter gate photo keeps Send on the first screen */
+  @media (max-width: 959px) and (max-height: 600px) {
+    .view { aspect-ratio: 16 / 10; }
+    .plaque { padding-top: 10px; }
+  }
+  @media (min-width: 960px) {
+    :root { --gut: 48px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 500px) minmax(0, 1fr); gap: 64px; align-items: center; padding-top: 22px; }
+    .view { aspect-ratio: 4 / 5; }
+    .gate { grid-template-columns: 26px minmax(0, 1fr) 26px; }
+    .plaque { padding-top: 0; }
+    .plaque h1 { font-size: 58px; }
+    .sentence { font-size: 24px; }
+    .sign ul { display: flex; justify-content: center; gap: 0 40px; }
+    .seq { max-width: 700px; }
+    .find { max-width: 700px; }
+    .find-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 36px; align-items: start; }
+    .line-btn { white-space: nowrap; }
+    .addr { margin-top: 0; }
+  }
+  @media (hover: hover) {
+    .send:hover { background: var(--brick-deep); }
+    .line-btn:hover { background: var(--white); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .leaf { display: none; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Concept for <strong>@westernvalleyresorts</strong> &middot; not the official site</div>
+
+<header class="wrap top">
+  <img src="assets/logo.jpg" width="134" height="58" alt="Western Valley Resorts">
+  <a href="tel:+919003930530" aria-label="Call Western Valley on 90039 30530">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+    Call
+  </a>
+</header>
+
+<main>
+  <section class="wrap hero" aria-label="Plan a stay">
+    <div>
+      <div class="gate" style="margin-top:12px">
+        <span class="pillar" aria-hidden="true"></span>
+        <div class="view">
+          <img src="assets/pergola.jpg" width="480" height="640" alt="A white and brick building at Western Valley, with a timber pergola, a balcony and a couple at the railing">
+          <span class="leaf l" aria-hidden="true"></span><span class="leaf r" aria-hidden="true"></span>
+        </div>
+        <span class="pillar" aria-hidden="true"></span>
+      </div>
+      <div class="gate-base" aria-hidden="true"></div>
+    </div>
+
+    <div>
+      <div class="plaque">
+        <h1>Western Valley</h1>
+        <p class="bio">Immersed in nature, nestled in Ooty.</p>
+      </div>
+      <form class="ask" id="ask" action="https://wa.me/919003930530" method="get">
+        <p class="sentence">
+          Stay <label class="blank"><span aria-hidden="true" data-v="nights">2 nights</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <select name="nights" aria-label="How many nights"></select></label>
+          from
+          <span class="nw"><label class="blank"><span aria-hidden="true" data-v="date">a date</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <select name="date" aria-label="First night"><option value="a date we'll confirm">a date</option></select></label>,</span>
+          <span class="nw">for <label class="blank"><span aria-hidden="true" data-v="guests">2 guests</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <select name="guests" aria-label="How many guests"></select></label>.</span>
+        </p>
+        <a class="send" id="send" href="https://wa.me/919003930530?text=Hello%20Western%20Valley!%20We%27d%20like%20to%20plan%20a%20stay.%20Please%20share%20the%20tariff.">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+          Send on WhatsApp
+        </a>
+        <p class="alt">Tariff on WhatsApp, or <a href="tel:+919003930530">call 90039 30530</a></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="sign">
+      <ul aria-label="At Western Valley">
+        <li>Valley View Suites</li>
+        <li>Wooden Villas</li>
+        <li>Scenic Garden</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="wrap seq" aria-labelledby="seq-h">
+    <h2 id="seq-h">Among the tea</h2>
+    <figure class="shot aerial">
+      <img src="assets/aerial.jpg" width="512" height="552" loading="lazy" alt="Western Valley's red-roofed buildings among terraced tea gardens, seen from above">
+      <figcaption>Endless tea gardens and breathtaking views.</figcaption>
+    </figure>
+    <figure class="shot lawn">
+      <img src="assets/house-lawn.jpg" width="512" height="474" loading="lazy" alt="A brick and white building with a pergola, a sloping lawn and flower beds under a blue sky">
+      <figcaption>For the love of quiet mornings and mountain views.</figcaption>
+    </figure>
+    <figure class="shot">
+      <div class="pair">
+        <img src="assets/view.jpg" width="360" height="504" loading="lazy" alt="The view from a railing over rows of tea, a red-roofed building and the hills beyond">
+        <img src="assets/garden-path.jpg" width="360" height="606" loading="lazy" alt="A couple walking on stepping stones through a hedged garden">
+      </div>
+      <figcaption>Views that make you slow down, and charming pathways.</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap find" aria-labelledby="find-h">
+    <h2 id="find-h">Find us</h2>
+    <div class="find-grid">
+      <figure class="shot gatephoto" style="margin:0">
+        <img src="assets/gate.jpg" width="512" height="426" loading="lazy" alt="Brick gate pillars, an open iron gate and the Western Valley sign on a stone wall">
+      </figure>
+      <div>
+        <address class="addr"><b>Western Valley Resorts</b>Bygada Road, Yellakandi, Nanjanad, Ooty, Tamil Nadu 643004</address>
+        <p class="route"><b>Coming up from Mettupalayam?</b> While the Mettupalayam&ndash;Coonoor route is closed, take the Kotagiri road to Ooty.</p>
+        <div class="row">
+          <a class="line-btn" href="tel:+919003930530">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+            Call</a>
+          <a class="line-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Western%20Valley%20Resorts%2C%20Bygada%20Road%2C%20Nanjanad%2C%20Ooty%20643004" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>
+            Open in Maps</a>
+        </div>
+        <a class="send" data-wa href="https://wa.me/919003930530">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+          Send your enquiry
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Western Valley Resorts &middot; Nanjanad, Ooty</span>
+    <a href="https://instagram.com/westernvalleyresorts" target="_blank" rel="noopener">@westernvalleyresorts on Instagram</a>
+    <span>A website concept made from Western Valley&rsquo;s own Instagram posts.</span>
+  </div>
+</footer>
+
+<script>
+/* The enquiry: plain script, no libraries. It fills the choices, keeps the sentence in step and builds the WhatsApp
+   link. The page never states availability or a tariff. */
+(function () {
+  var WA = "919003930530";
+  var form = document.getElementById("ask");
+  var sel = function (n) { return form.querySelector('select[name="' + n + '"]'); };
+  var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function fill(select, items, chosen) {
+    select.innerHTML = "";
+    items.forEach(function (it) {
+      var o = document.createElement("option");
+      o.value = it[0]; o.textContent = it[1];
+      if (it[0] === chosen) o.selected = true;
+      select.appendChild(o);
+    });
+  }
+  var guests = [], nights = [], dates = [];
+  for (var g = 1; g <= 15; g++) guests.push([String(g), g + (g === 1 ? " guest" : " guests")]);
+  guests.push(["16+", "16+ guests"]);
+  for (var n = 1; n <= 10; n++) nights.push([String(n), n + (n === 1 ? " night" : " nights")]);
+  var today = new Date(); today.setHours(12, 0, 0, 0);
+  var firstSat = null;
+  for (var i = 1; i <= 120; i++) {
+    var d = new Date(today); d.setDate(today.getDate() + i);
+    var txt = DAYS[d.getDay()] + " " + d.getDate() + " " + MONTHS[d.getMonth()];
+    dates.push([txt, txt]);
+    if (!firstSat && d.getDay() === 6) firstSat = txt;
+  }
+  fill(sel("nights"), nights, "2");
+  fill(sel("date"), dates, firstSat);
+  fill(sel("guests"), guests, "2");
+
+  function shown(name) { var s = sel(name); return s.options[s.selectedIndex].text; }
+  function update() {
+    ["nights", "date", "guests"].forEach(function (k) { form.querySelector('[data-v="' + k + '"]').textContent = shown(k); });
+    var one = sel("guests").value === "1";
+    var msg = "Hello Western Valley! " + (one ? "I'd" : "We'd") + " like to stay " + shown("nights") + " from " +
+      sel("date").value + (one ? ", just me." : ", for " + shown("guests") + ".") + " Please share the tariff.";
+    var href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    document.getElementById("send").href = href;
+    document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
+  }
+  form.addEventListener("change", update);
+  form.addEventListener("submit", function (e) { e.preventDefault(); location.href = document.getElementById("send").href; });
+  update();
+})();
+</script>
+</body>
+</html>
