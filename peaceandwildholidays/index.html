@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Peace &amp; Wild Holidays · Trips from Chennai</title>
+<meta name="description" content="Waterfall days, treks, Gokarna, Himachal, Kashmir and Europe with Peace &amp; Wild Holidays, Adyar, Chennai. Ask on WhatsApp: 90439 38491.">
+<meta name="theme-color" content="#0b5a3a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23f7b52a'/%3E%3Ccircle cx='32' cy='32' r='25' fill='%230b5a3a'/%3E%3Cpath d='M32 9l4 19 19 4-19 4-4 19-4-19-19-4 19-4z' fill='%23eef2ee'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@500;700;800;900&family=Doto:wght@900&family=Racing+Sans+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --body: #0b5a3a;        /* the bus: one deep enamel green owns the page */
+  --body-deep: #073f29;
+  --body-hi: #0f6a46;
+  --orange: #e8501a;      /* swoosh + door */
+  --orange-ink: #c63f0e;  /* orange text on white vinyl */
+  --marigold: #f7b52a;
+  --marigold-text: #ffc84a; /* small marigold labels: 4.5:1 on the green */
+  --chrome: #eef2ee;
+  --chrome-mid: #b7c1bc;
+  --chrome-dark: #75807a;
+  --glass: #10201b;
+  --ink: #0d110e;
+  --mint: #cfe6d8;        /* secondary text, tinted from the green */
+  --led: #ffb21a;         /* amber: dated departures only */
+  --board: #0a0b0a;
+  --vinyl: #fbfbf7;
+  --enamel: #f2f4f0;
+  --display: "Racing Sans One", "Arial Black", sans-serif;
+  --text: "Catamaran", system-ui, sans-serif;
+  --dot: "Doto", ui-monospace, monospace;
+  --sign: .018em .018em 0 var(--ink), .036em .036em 0 var(--ink), .054em .054em 0 var(--ink), .072em .072em 0 var(--ink);
+  --glow: 0 0 5px rgba(255, 166, 0, .65), 0 0 14px rgba(255, 140, 0, .35);
+  --rim: 0 0 0 3px var(--ink), 0 0 0 6px #d3dad6, 0 0 0 7px var(--chrome-dark);
+  --ease: cubic-bezier(.23, 1, .32, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--body); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark;
+  scrollbar-color: var(--marigold) var(--body-deep); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--body); color: var(--chrome); font: 500 17px/1.55 var(--text);
+  overflow-x: hidden; overflow-x: clip; caret-color: var(--marigold); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--marigold); color: var(--ink); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 2px; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ico { width: 22px; height: 22px; flex: none; }
+
+/* Concept banner: required on every mock */
+.concept { background: var(--ink); color: #d9dfdb; font: 600 13px/1.3 var(--text); text-align: center; padding: 7px 14px; }
+
+/* ===== The bus pulls in: LED board, lettered flank, windows, door, wheels ===== */
+.bus { position: relative; overflow-x: hidden; overflow-x: clip;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 26%), var(--body); }
+.bus-in { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 12px 14px 0; }
+
+.board { --row: 78px; position: relative; display: flex; padding: 3px; border-radius: 14px;
+  background: #e4e9e5; box-shadow: inset 0 0 0 1px #8d9893, 0 2px 3px rgba(0,0,0,.25), 0 10px 22px rgba(0,0,0,.25);
+}
+.board-glass { position: relative; flex: 1; min-width: 0; border-radius: 11px 0 0 11px; background-color: var(--board);
+  background-image: radial-gradient(circle, rgba(255,178,26,.11) 0 1px, transparent 1.4px); background-size: 5px 5px; }
+.board.is-live .board-glass { height: var(--row); overflow: hidden; overflow: clip; }
+.board-strip { list-style: none; margin: 0; padding: 0; transform: translateY(calc(var(--i, 0) * var(--row) * -1));
+  transition: transform .52s steps(9, end); }
+.dep { display: flex; flex-direction: column; justify-content: center; gap: 6px; height: var(--row); padding: 0 10px 0 14px;
+  color: var(--led); text-decoration: none; font-family: var(--dot); font-weight: 900; text-transform: uppercase;
+  text-shadow: var(--glow); }
+.dep:focus-visible { outline-offset: -5px; outline-color: var(--chrome); }
+.dep-to { display: flex; align-items: center; gap: .28em; font-size: 26px; line-height: 1; white-space: nowrap; letter-spacing: .01em; }
+.dep-meta { display: block; font-size: 18px; line-height: 1; white-space: nowrap; }
+.dep-meta .fit-in { display: inline-flex; align-items: center; gap: .3em; }
+.dm { height: .74em; width: auto; flex: none; fill: currentColor; filter: drop-shadow(0 0 3px rgba(255,166,0,.75)); }
+.dm-r { height: .8em; }
+.board-btn { flex: none; width: 48px; display: grid; place-items: center; border: 0; padding: 0; cursor: pointer;
+  border-radius: 0 11px 11px 0; background: #171a18; color: #c9d2cd; border-left: 1px solid #2c302d; }
+.board-btn:active { background: #222623; }
+.board-btn .ico { width: 20px; height: 20px; }
+.board-btn .i-next, .board[data-mode="step"] .board-btn .i-pause, .board[data-mode="step"] .board-btn .i-play,
+.board-btn[aria-pressed="true"] .i-pause, .board-btn[aria-pressed="false"] .i-play { display: none; }
+.board[data-mode="step"] .board-btn .i-next { display: block; }
+.board:not(.is-live) .board-btn { display: none; }
+.board-btn[hidden] { display: none; }
+
+.flank-name { position: relative; margin: 14px -14px 0; padding: 8px 14px 12px; }
+.swoosh { position: absolute; z-index: 0; left: 0; top: 18%; width: 100%; height: 82%; pointer-events: none; }
+.name { position: relative; z-index: 1; margin: 0; font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .9; }
+.name-1 { display: block; font-size: clamp(38px, 13.9vw, 150px); color: var(--chrome); text-shadow: var(--sign); white-space: nowrap; padding-right: .1em; }
+.name-2 { display: flex; align-items: center; gap: .3em; margin-top: .14em; font-size: clamp(24px, 7.4vw, 76px);
+  -webkit-text-stroke: .075em var(--ink); paint-order: stroke fill;
+  color: var(--marigold); text-shadow: var(--sign); letter-spacing: .03em; }
+.badge { width: 1.3em; height: 1.3em; flex: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,.4)) drop-shadow(0 6px 8px rgba(0,0,0,.25)); }
+
+.windows { position: relative; list-style: none; margin: 14px 0 0; padding: 7px 7px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.win { position: relative; margin: 0; border-radius: 14px 14px 9px 9px; overflow: hidden; background: var(--glass); box-shadow: var(--rim); }
+.win img { width: 100%; height: 100%; object-fit: cover; }
+.windows .win { aspect-ratio: 1.06 / 1; }
+@media (max-width: 639px) { .windows .win { aspect-ratio: .78 / 1; } }
+
+.sticker { display: inline-block; background: var(--vinyl); color: var(--ink); font: 900 19px/1 var(--text); text-transform: uppercase;
+  letter-spacing: .04em; padding: 10px 12px 8px; border-radius: 7px; box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 14px rgba(0,0,0,.22); }
+.sticker b { color: var(--orange-ink); font-weight: 900; }
+.sticker-join { position: relative; margin-top: 18px; max-width: 300px; font-size: 17px; line-height: 1.15; transform: rotate(-2.5deg); }
+.sticker-fun { position: absolute; z-index: 2; right: 4px; bottom: -22px; transform: rotate(-5deg); }
+
+.slogan { margin: 32px 0 0; font: 400 clamp(19px, 5.3vw, 30px)/1.08 var(--display); text-transform: uppercase; color: var(--chrome);
+  text-shadow: .045em .045em 0 var(--ink); max-width: 22ch; text-wrap: balance; }
+.lede { margin-top: 16px; color: var(--mint); font-size: 16px; line-height: 1.45; max-width: 40ch; }
+
+.door-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 14px; }
+.door { position: relative; display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 9px 18px 9px 10px;
+  background: var(--orange); color: #fff; border-radius: 12px; text-decoration: none;
+  box-shadow: inset 0 -4px 0 #b83c0c, 0 2px 3px rgba(0,0,0,.25), 0 10px 20px rgba(0,0,0,.25);
+  transition: transform .14s var(--ease); -webkit-tap-highlight-color: transparent; }
+.door:active { transform: scale(.97); }
+.door-ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--vinyl); color: var(--ink); flex: none; }
+.door-ico .ico { width: 24px; height: 24px; }
+.door-txt { display: flex; flex-direction: column; gap: 3px; }
+.door-t { font: 400 24px/1 var(--display); text-transform: uppercase; text-shadow: .05em .05em 0 var(--ink), .09em .09em 0 rgba(13,17,14,.55); }
+.door-s { font: 800 15px/1.2 var(--text); color: #1c0c04; }
+.door-hero { flex: 1 1 100%; }
+.door-hero .door-t { font-size: clamp(25px, 7vw, 34px); }
+.call { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--mint); font: 700 16px/1 var(--text); text-decoration: none; padding: 0 2px; }
+.call:hover { color: var(--chrome); text-decoration: underline; }
+.call .ico { width: 18px; height: 18px; }
+
+.skirt { position: relative; height: 38px; margin: 22px -14px 0;
+  background: linear-gradient(180deg, #f2f5f2 0 3px, #8d9893 3px 5px, var(--body-deep) 5px); }
+.arch { position: absolute; bottom: 0; width: 88px; height: 44px; border-radius: 44px 44px 0 0; background: #090d0b; }
+.arch-f { left: 8%; } .arch-r { right: 8%; }
+.wheel { position: absolute; left: 8px; top: 8px; width: 72px; height: 72px; }
+.road { position: relative; height: 44px; background: linear-gradient(180deg, #0b0f0d 0 18px, #2a2c29 18px); }
+.road::after { content: ""; position: absolute; left: 0; right: 0; bottom: 10px; height: 3px;
+  background: repeating-linear-gradient(90deg, rgba(232,236,230,.75) 0 34px, transparent 34px 70px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .bus-in { animation: pull-in 1.15s var(--ease) both; }
+  .bus-in .wheel { animation: roll 1.15s var(--ease) both; }
+}
+@keyframes pull-in { 0% { transform: translateX(70px); } 64% { transform: translateX(-5px); } 84% { transform: translateX(1.5px); } 100% { transform: none; } }
+@keyframes roll { from { transform: rotate(210deg); } to { transform: none; } }
+
+/* ===== Route board (VIA) ===== */
+.via { padding: 26px 14px 8px; }
+.via-board { position: relative; max-width: 1180px; margin: 0 auto; background: var(--enamel); color: var(--ink); border-radius: 12px;
+  padding: 14px 14px 10px; box-shadow: 0 2px 3px rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.25);
+  background-image: radial-gradient(circle at 9px 9px, #8e9893 0 2.6px, transparent 3.2px), radial-gradient(circle at calc(100% - 9px) 9px, #8e9893 0 2.6px, transparent 3.2px),
+    radial-gradient(circle at 9px calc(100% - 9px), #8e9893 0 2.6px, transparent 3.2px), radial-gradient(circle at calc(100% - 9px) calc(100% - 9px), #8e9893 0 2.6px, transparent 3.2px); }
+.via-t { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px 8px; font: 900 15px/1.2 var(--text); text-transform: uppercase; letter-spacing: .06em; }
+.via-t span { color: var(--orange-ink); font: 400 24px/1 var(--display); letter-spacing: 0; }
+.via ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; column-gap: 2px; }
+.via li { display: flex; align-items: center; min-width: 0; }
+.via li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin: 0 0 0 6px; }
+.via a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px 0 7px; font: 800 16px/1.1 var(--text); text-transform: uppercase;
+  letter-spacing: .03em; text-decoration: none; border-radius: 6px; }
+.via a:hover { background: rgba(232,80,26,.12); }
+.via a:active { transform: scale(.97); }
+
+/* ===== Groups and stops: walking along the bus ===== */
+.trim { height: 6px; background: linear-gradient(180deg, #eef2ee 0 3px, #8d9893 3px 6px); }
+.group { position: relative; padding: 34px 14px 24px; overflow: hidden; overflow: clip; }
+.group-in { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; }
+.group-t { position: relative; z-index: 1; margin: 0; font: 400 clamp(46px, 15vw, 132px)/.9 var(--display); text-transform: uppercase; color: var(--chrome); text-shadow: var(--sign); }
+.group .swoosh { position: relative; display: block; top: auto; left: auto; width: calc(100% + 28px); height: clamp(54px, 14vw, 130px); margin: clamp(-60px, -10vw, -24px) -14px 0; }
+.group-d { margin-top: 12px; color: var(--chrome); font-size: 17px; max-width: 46ch; position: relative; text-wrap: pretty; }
+
+.stop { position: relative; padding: 22px 14px 30px; scroll-margin-top: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 30%); }
+.stop::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 9px;
+  background: linear-gradient(180deg, var(--orange) 0 3px, transparent 3px 6px, var(--marigold) 6px 9px); }
+.stop { padding-top: 34px; padding-bottom: 16px; }
+.stop-in { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px; }
+.stop-a, .stop-b { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-content: start; }
+
+.plate { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font: 800 14px/1.2 var(--text); letter-spacing: .07em;
+  text-transform: uppercase; color: var(--mint); border: 2px solid rgba(207,230,216,.38); border-radius: 8px; padding: 7px 10px 6px; }
+.plate-led { color: var(--led); background: var(--board); border: 0; padding: 9px 12px; font: 900 20px/1 var(--dot); letter-spacing: .02em;
+  text-shadow: var(--glow); box-shadow: 0 0 0 2px var(--chrome-mid), 0 0 0 3px var(--chrome-dark); }
+.plate-led small { font: inherit; font-size: 15px; color: #e09a10; text-shadow: none; }
+.is-past .plate-led { display: none; }
+.dated { display: grid; gap: 14px; }
+.past-note { display: none; }
+.is-past [data-dated] { display: none; }
+.is-past .past-note { display: block; }
+
+.dest { margin: 0; font: 400 clamp(40px, 12.6vw, 112px)/.92 var(--display); text-transform: uppercase; color: var(--chrome); text-shadow: var(--sign); }
+.dest .ln { display: block; white-space: nowrap; padding-right: .12em; }
+.dest .amp { color: var(--marigold); }
+.dest-sub { color: var(--mint); font: 700 17px/1.35 var(--text); margin-top: -6px; text-wrap: balance; }
+
+.wins { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 7px; }
+.wins .win { aspect-ratio: 1.12 / 1; }
+.wins .wide { grid-column: 1 / -1; aspect-ratio: 2.2 / 1; }
+.wins .tall { aspect-ratio: .95 / 1; }
+.wins-one { grid-template-columns: 1fr; max-width: 260px; }
+.wins-one .win { aspect-ratio: 1.7 / 1; }
+.wins-two .win { aspect-ratio: 1.25 / 1; }
+.fare-line { display: grid; gap: 4px; }
+.fare-line b { font: 400 clamp(22px, 6.4vw, 30px)/1.1 var(--display); color: var(--marigold); text-shadow: .05em .05em 0 var(--ink); }
+.fare-line b .r { font-family: var(--text); font-weight: 900; }
+.fare-line span { color: var(--mint); font: 700 16px/1.35 var(--text); }
+
+/* A trip without its own photos gets its name lettered on the window glass, never a stock picture */
+.panel { position: relative; margin: 7px; border-radius: 16px 16px 10px 10px; padding: 20px 16px 26px; overflow: hidden;
+  background: #12221d; box-shadow: var(--rim); }
+.panel .dest { position: relative; z-index: 1; text-shadow: .018em .018em 0 #b8380c, .036em .036em 0 #b8380c, .054em .054em 0 #8f2a08, .072em .072em 0 #8f2a08; }
+.decal { position: relative; z-index: 1; margin-top: 14px; color: var(--vinyl); font: 800 15px/1.35 var(--text); letter-spacing: .07em; text-transform: uppercase; }
+.decal span { color: var(--marigold); }
+
+.caveat { position: relative; z-index: 2; justify-self: start; display: flex; gap: 9px; align-items: flex-start; margin: -30px 0 0 16px; max-width: 34ch;
+  background: var(--vinyl); color: var(--ink); font: 700 15px/1.38 var(--text); padding: 10px 13px 9px 10px; border-radius: 8px; transform: rotate(-1.4deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 16px rgba(0,0,0,.2); }
+.stop.flip .caveat { justify-self: end; margin: -30px 16px 0 0; transform: rotate(1.6deg); background: #ffd66e; }
+.caveat .ico { width: 20px; height: 20px; color: var(--orange-ink); margin-top: 1px; }
+.ac { position: absolute; z-index: 2; right: 10px; top: -16px; transform: rotate(5deg); text-align: center; padding: 8px 10px 7px; }
+.panel-ac { overflow: visible; }
+.panel-ac .dest .ln { padding-right: 78px; }
+.ac small { display: block; font-size: 13px; letter-spacing: .06em; margin-top: 2px; color: var(--orange-ink); }
+
+.opt-t { margin: 0; font: 400 clamp(23px, 6.6vw, 32px)/1.05 var(--display); text-transform: uppercase; color: var(--marigold); text-shadow: .05em .05em 0 var(--ink); text-wrap: balance; }
+.copy { color: var(--chrome); max-width: 52ch; line-height: 1.5; }
+.note { color: var(--mint); font-size: 16px; max-width: 52ch; }
+
+.fare { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.fare-amt { font: 400 clamp(44px, 13vw, 64px)/1 var(--display); color: var(--marigold); text-shadow: var(--sign); }
+.fare-amt .r { font-family: var(--text); font-weight: 900; font-size: .78em; margin-right: .04em; }
+.fare-from { font: 800 15px/1 var(--text); text-transform: uppercase; letter-spacing: .08em; color: var(--mint); align-self: center; }
+.fare-per { font: 700 16px/1.3 var(--text); color: var(--mint); flex-basis: 100%; }
+.fare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fare-pair .fare-amt { font-size: clamp(36px, 11vw, 54px); }
+
+.stations { list-style: none; margin: 0; padding: 0 0 0 30px; position: relative; display: grid; gap: 10px; max-width: 56ch; }
+.stations::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 12px; width: 4px; border-radius: 2px; background: var(--marigold); }
+.stations li { position: relative; }
+.stations li::before { content: ""; position: absolute; left: -29px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--vinyl); border: 4px solid var(--ink); }
+.stations li.end::before { border-radius: 4px; background: var(--orange); border-color: var(--vinyl); }
+.stations b { display: block; font: 800 14px/1.3 var(--text); text-transform: uppercase; letter-spacing: .07em; color: var(--marigold-text); }
+.stations span { display: block; font-size: 16px; line-height: 1.4; }
+.stations .opt b { color: var(--mint); }
+.stations-time b { font-variant-numeric: tabular-nums; }
+
+/* Rate board: a screwed-on enamel plate */
+.rates { position: relative; background-color: var(--enamel); color: var(--ink); border-radius: 10px; padding: 0 0 6px; overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0,0,0,.25), 0 10px 22px rgba(0,0,0,.22); }
+.rates-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 9px 14px 7px; background: var(--orange); color: #fff;
+  font: 900 14px/1.2 var(--text); text-transform: uppercase; letter-spacing: .07em; }
+.rates table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.rates th, .rates td { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(13,17,14,.13); vertical-align: top; }
+.rates thead th { font: 800 13px/1.2 var(--text); text-transform: uppercase; letter-spacing: .06em; color: #4b5650; padding-top: 10px; padding-bottom: 6px; }
+.rates tbody th { font-weight: 800; }
+.rates tbody th small { display: block; font-weight: 600; font-size: 14px; color: #4b5650; margin-top: 2px; }
+.rates td { font-weight: 800; white-space: nowrap; text-align: right; }
+.rates thead th:not(:first-child) { text-align: right; }
+.rates tr:last-child th, .rates tr:last-child td { border-bottom: 0; }
+.rates-f { padding: 8px 14px 6px; font-size: 14px; font-weight: 700; color: #4b5650; }
+.rate-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 50px; padding: 5px 14px; text-decoration: none;
+  border-bottom: 1px solid rgba(13,17,14,.13); }
+.rate-link:last-of-type { border-bottom: 0; }
+.up-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: -4px; padding: 0 4px;
+  color: var(--mint); font: 700 15px/1 var(--text); text-decoration: none; }
+.up-link .ico { width: 16px; height: 16px; color: var(--marigold); }
+.up-link:hover { color: var(--chrome); text-decoration: underline; }
+.rate-link:hover { background: rgba(232,80,26,.08); }
+.rate-link:active { background: rgba(232,80,26,.14); }
+.rate-link b { display: block; font: 800 17px/1.2 var(--text); }
+.rate-link small { display: block; font: 600 14px/1.3 var(--text); color: #4b5650; margin-top: 2px; }
+.rate-link .p { font: 900 18px/1 var(--text); white-space: nowrap; text-align: right; }
+.rate-link .p small { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--orange-ink); }
+
+details { border-top: 2px solid rgba(207,230,216,.28); border-bottom: 2px solid rgba(207,230,216,.28); }
+details + details { border-top: 0; }
+summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 8px 2px;
+  font: 800 16px/1.25 var(--text); cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
+summary .ico { width: 20px; height: 20px; color: var(--marigold); transition: transform .22s var(--ease); }
+details[open] > summary .ico { transform: rotate(180deg); }
+summary:active { background: rgba(0,0,0,.14); }
+summary:hover { color: var(--marigold-text); }
+.det { display: grid; gap: 16px; padding: 4px 0 20px; }
+.det h4 { margin: 0; font: 800 14px/1.3 var(--text); text-transform: uppercase; letter-spacing: .07em; color: var(--marigold-text); }
+.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.list li { position: relative; padding-left: 20px; font-size: 16px; line-height: 1.45; }
+.list li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 9px; height: 3px; border-radius: 2px; background: var(--marigold); }
+.list.x li::before { background: var(--chrome-dark); }
+
+/* Team outings */
+.teams .wins { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.teams .wins .wide { aspect-ratio: 1.85 / 1; }
+.teams .wins .win:not(.wide) { aspect-ratio: 1 / 1; }
+.line-their { font: 400 clamp(26px, 7.6vw, 44px)/1.02 var(--display); text-transform: uppercase; color: var(--marigold); text-shadow: .05em .05em 0 var(--ink); max-width: 18ch; }
+
+/* ===== The rear: depot, tail lamps ===== */
+.rear { position: relative; background: var(--body-deep); padding: 40px 14px 30px; overflow: hidden; overflow: clip; }
+.rear-in { position: relative; max-width: 1180px; margin: 0 auto; display: grid; gap: 26px; }
+.lamps { display: flex; justify-content: space-between; margin: -22px 0 0; height: 30px; }
+.lamps i { display: flex; gap: 4px; padding: 4px; border-radius: 10px; background: #1a1d1b; box-shadow: 0 0 0 2px var(--chrome-mid); }
+.lamps i::before, .lamps i::after { content: ""; display: block; height: 18px; border-radius: 6px; }
+.lamps i::before { width: 46px; background: linear-gradient(180deg, #e0412a, #9c1d10); }
+.lamps i::after { width: 22px; background: linear-gradient(180deg, #f6b33a, #c9780d); }
+.lamps i:last-child { flex-direction: row-reverse; }
+.rear-t { margin: 0; font: 400 clamp(44px, 14vw, 120px)/.9 var(--display); text-transform: uppercase; color: var(--chrome); text-shadow: var(--sign); }
+.rear-t span { color: var(--marigold); }
+.rear-cta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.rear-cta .door { grid-column: 1 / -1; }
+.rear-cta .btn2 { flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 8px 6px; text-align: center; font-size: 15px; }
+.btn2 { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px; border-radius: 10px; text-decoration: none;
+  font: 800 16px/1.2 var(--text); color: var(--chrome); box-shadow: inset 0 0 0 2px rgba(207,230,216,.35); transition: transform .14s var(--ease); }
+.btn2:hover { box-shadow: inset 0 0 0 2px var(--marigold); }
+.btn2:active { transform: scale(.97); }
+.btn2 .ico { width: 20px; height: 20px; color: var(--marigold); }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+.facts .logo-plate, .facts .top-link { grid-column: 1 / -1; }
+.fact h3 { margin: 0 0 4px; font: 800 14px/1.3 var(--text); text-transform: uppercase; letter-spacing: .07em; color: var(--marigold-text); }
+.fact p { font-size: 16px; line-height: 1.5; }
+.fact .btn2 { margin-top: 6px; }
+.founder { display: grid; gap: 4px; justify-items: start; }
+.founder .win { width: 104px; aspect-ratio: 1.6 / 1; margin: 7px; }
+.ids { color: var(--mint); font-size: 14px; line-height: 1.5; font-weight: 600; }
+.logo-plate { display: flex; align-items: center; gap: 12px; }
+.logo-plate img { width: 64px; height: 64px; border-radius: 50%; box-shadow: 0 0 0 3px var(--marigold); }
+.logo-plate p { font: 700 15px/1.35 var(--text); color: var(--mint); }
+.top-link { justify-self: start; }
+
+/* ===== Wider screens: a longer flank, same bus ===== */
+@media (min-width: 640px) {
+  .bus-in, .via, .group, .stop, .rear { padding-left: 28px; padding-right: 28px; }
+  .flank-name, .skirt { margin-left: -28px; margin-right: -28px; padding-left: 28px; padding-right: 28px; }
+  .board { max-width: 560px; }
+  .windows { gap: 22px; }
+  .door-hero { flex: 0 1 auto; min-width: 360px; }
+  .wins { gap: 20px; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .facts .logo-plate { grid-column: auto; }
+}
+@media (min-width: 960px) {
+  .rear-cta { grid-template-columns: 1.7fr 1fr 1fr 1fr; }
+  .rear-cta .door { grid-column: auto; }
+}
+@media (min-width: 960px) {
+  body { font-size: 18px; }
+  .bus-in { padding: 22px 40px 0; display: grid; grid-template-columns: minmax(250px, 290px) 1fr; column-gap: 40px;
+    grid-template-areas: "board board" "name name" "door wins" "door words" "door lede" "skirt skirt"; }
+  .board { grid-area: board; --row: 84px; }
+  .dep-to { font-size: 30px; } .dep-meta { font-size: 20px; }
+  .flank-name { grid-area: name; margin: 18px 0 0; padding: 12px 0 16px; }
+  /* the livery runs the full length of the bus, past the content column */
+  .flank-name .swoosh { left: 50%; width: 100vw; margin-left: -50vw; }
+  .group .swoosh { width: 100vw; margin-left: calc(50% - 50vw); margin-right: 0; }
+  .lede { grid-area: lede; align-self: start; }
+  .name { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .22em; }
+  .name-1 { display: inline-block; font-size: clamp(84px, 8.4vw, 146px); }
+  .name-2 { font-size: clamp(42px, 4.1vw, 72px); }
+  .windows { grid-area: wins; margin-top: 22px; gap: 26px; }
+  .windows .win { aspect-ratio: 1.3 / 1; }
+  .sticker-fun { right: -6px; bottom: auto; top: -46px; font-size: 22px; transform: rotate(4deg); }
+  .hero-words { grid-area: words; }
+  .slogan { margin-top: 30px; }
+  .door-row { grid-area: door; margin: 22px 0 0; flex-direction: column; align-items: stretch; flex-wrap: nowrap; }
+  /* the door becomes a folding bus door: two glass panes over the orange panel */
+  .door-hero { flex: 1 1 auto; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 14px;
+    padding: 18px 18px 20px; border-radius: 16px 16px 8px 8px; }
+  .door-hero::before { content: ""; position: absolute; left: 14px; right: 14px; top: 14px; height: 26%; border-radius: 10px;
+    background: linear-gradient(90deg, #142520 0 calc(50% - 4px), transparent calc(50% - 4px) calc(50% + 4px), #142520 calc(50% + 4px));
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.35); }
+  .door-hero::after { content: ""; position: absolute; right: 16px; top: 49%; width: 5px; height: 18%; border-radius: 3px;
+    background: #e4e9e5; box-shadow: inset 1px 0 0 #8d9893, 0 2px 3px rgba(0,0,0,.3); }
+  .door-hero .door-t { font-size: 34px; }
+  .call { align-self: flex-start; }
+  .skirt { grid-area: skirt; height: 46px; margin: 26px calc(50% - 50vw) 0; }
+  .arch { width: 116px; height: 58px; border-radius: 58px 58px 0 0; }
+  .arch-f { left: 6%; } .arch-r { right: 9%; }
+  .wheel { left: 10px; top: 10px; width: 96px; height: 96px; }
+  .road { height: 62px; background: linear-gradient(180deg, #0b0f0d 0 26px, #2a2c29 26px); }
+
+  .via { padding-top: 34px; }
+  .group, .stop, .rear { padding-left: 40px; padding-right: 40px; }
+  .group { padding-top: 70px; }
+  .stop { padding-top: 56px; padding-bottom: 64px; }
+  .stop-in { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); column-gap: 56px; align-items: start; }
+  .stop.flip .stop-a { order: 2; }
+  .wins .wide { aspect-ratio: 2.3 / 1; }
+  .panel { padding: 38px 30px 44px; }
+  .rear-in { gap: 34px; }
+}
+@media (min-width: 1400px) {
+  .bus-in { grid-template-columns: 320px 1fr; }
+}
+@media (hover: hover) {
+  .door:hover { filter: brightness(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .board-strip, summary .ico, .door, .btn2 { transition: none; }
+  .door:active, .btn2:active, .via a:active { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+        <symbol id="wheel" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="50" fill="#121513"/>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#2a2f2c" stroke-width="5" stroke-dasharray="5 4"/>
+      <circle cx="50" cy="50" r="31" fill="#d3dad6"/>
+      <circle cx="50" cy="50" r="23" fill="#9aa59f"/>
+      <g fill="#3a423e"><circle cx="67" cy="50" r="2.8"/><circle cx="62" cy="62" r="2.8"/><circle cx="50" cy="67" r="2.8"/><circle cx="38" cy="62" r="2.8"/><circle cx="33" cy="50" r="2.8"/><circle cx="38" cy="38" r="2.8"/><circle cx="50" cy="33" r="2.8"/><circle cx="62" cy="38" r="2.8"/></g>
+      <circle cx="50" cy="50" r="9" fill="#eef2ee" stroke="#6f7a74" stroke-width="1.5"/>
+      <rect x="47.5" y="21" width="5" height="7" rx="1.5" fill="#f7b52a"/>
+    </symbol>
+    <symbol id="compass" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="31" fill="#f7b52a"/>
+      <circle cx="32" cy="32" r="31" fill="none" stroke="#0d110e" stroke-width="2"/>
+      <circle cx="32" cy="32" r="25" fill="#0d110e"/>
+      <path d="M32 18l2.6 11.4L46 32l-11.4 2.6L32 46l-2.6-11.4L18 32l11.4-2.6z" transform="rotate(45 32 32)" fill="#f7b52a"/>
+      <path d="M32 9l4 19 19 4-19 4-4 19-4-19-19-4 19-4z" fill="#eef2ee"/>
+      <path d="M32 9l4 19-4 4z" fill="#e8501a"/>
+      <circle cx="32" cy="32" r="2.6" fill="#0d110e"/>
+    </symbol>
+    <!-- dot-matrix glyphs for the LED board (the dot font has no rupee sign or arrow) -->
+    <symbol id="dm-rupee" viewBox="0 0 5 7"><g>
+      <rect x="0.07" y="0.07" width=".86" height=".86" rx=".18"/><rect x="1.07" y="0.07" width=".86" height=".86" rx=".18"/><rect x="2.07" y="0.07" width=".86" height=".86" rx=".18"/><rect x="3.07" y="0.07" width=".86" height=".86" rx=".18"/><rect x="4.07" y="0.07" width=".86" height=".86" rx=".18"/>
+      <rect x="3.07" y="1.07" width=".86" height=".86" rx=".18"/>
+      <rect x="0.07" y="2.07" width=".86" height=".86" rx=".18"/><rect x="1.07" y="2.07" width=".86" height=".86" rx=".18"/><rect x="2.07" y="2.07" width=".86" height=".86" rx=".18"/><rect x="3.07" y="2.07" width=".86" height=".86" rx=".18"/><rect x="4.07" y="2.07" width=".86" height=".86" rx=".18"/>
+      <rect x="3.07" y="3.07" width=".86" height=".86" rx=".18"/>
+      <rect x="0.07" y="4.07" width=".86" height=".86" rx=".18"/><rect x="1.07" y="4.07" width=".86" height=".86" rx=".18"/><rect x="2.07" y="4.07" width=".86" height=".86" rx=".18"/>
+      <rect x="2.07" y="5.07" width=".86" height=".86" rx=".18"/>
+      <rect x="3.07" y="6.07" width=".86" height=".86" rx=".18"/><rect x="4.07" y="6.07" width=".86" height=".86" rx=".18"/>
+    </g></symbol>
+    <symbol id="dm-arrow" viewBox="0 0 5 7"><g>
+      <rect x="2.07" y="1.07" width=".86" height=".86" rx=".18"/><rect x="3.07" y="2.07" width=".86" height=".86" rx=".18"/>
+      <rect x="0.07" y="3.07" width=".86" height=".86" rx=".18"/><rect x="1.07" y="3.07" width=".86" height=".86" rx=".18"/><rect x="2.07" y="3.07" width=".86" height=".86" rx=".18"/><rect x="3.07" y="3.07" width=".86" height=".86" rx=".18"/><rect x="4.07" y="3.07" width=".86" height=".86" rx=".18"/>
+      <rect x="3.07" y="4.07" width=".86" height=".86" rx=".18"/><rect x="2.07" y="5.07" width=".86" height=".86" rx=".18"/>
+    </g></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.88 9.88 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.4"/></symbol>
+    <symbol id="i-call" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h3.5l2 5-2.4 1.5a11 11 0 0 0 5.4 5.4L15 13.5l5 2V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.4a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.5"/></g></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5"/></g><circle cx="12" cy="17.2" r="1.25" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m-5-6 6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 19V6m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-channel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2.2"/><path d="M8.2 15.8a5.4 5.4 0 0 1 0-7.6m7.6 0a5.4 5.4 0 0 1 0 7.6M5.4 18.6a9.3 9.3 0 0 1 0-13.2m13.2 0a9.3 9.3 0 0 1 0 13.2"/></g></symbol>
+    <symbol id="swoosh" viewBox="0 0 1000 200" preserveAspectRatio="none">
+      <path d="M0 118C210 118 360 52 1000 14V58C430 80 260 158 0 158Z" fill="#e8501a"/>
+      <path d="M0 166C240 166 420 92 1000 70V104C470 116 300 196 0 196Z" fill="#f7b52a"/>
+      <path d="M0 106C200 106 340 42 1000 0V7C350 46 210 112 0 112Z" fill="#eef2ee"/>
+    </symbol>
+  </defs>
+</svg>
+
+<p class="concept" data-concept-banner>A website concept · not the official Peace &amp; Wild site</p>
+
+<header class="bus" id="top">
+  <div class="bus-in">
+    <div class="board" role="region" aria-label="Next departures">
+      <div class="board-glass">
+        <ol class="board-strip">
+          <li data-start="2026-11-14"><a class="dep" href="#meesapulimalai">
+            <span class="dep-to fit"><svg class="dm" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-arrow"/></svg><span class="fit-in">Meesapulimalai</span></span>
+            <span class="dep-meta fit"><span class="fit-in">14–15 Nov · <svg class="dm dm-r" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-rupee"/></svg><span class="sr">₹</span>4,500</span></span></a></li>
+          <li data-start="2026-11-18"><a class="dep" href="#himachal">
+            <span class="dep-to fit"><svg class="dm" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-arrow"/></svg><span class="fit-in">Shimla · Manali</span></span>
+            <span class="dep-meta fit"><span class="fit-in">18–23 Nov · <svg class="dm dm-r" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-rupee"/></svg><span class="sr">₹</span>16,000</span></span></a></li>
+          <li data-start="2026-11-21"><a class="dep" href="#gandikota">
+            <span class="dep-to fit"><svg class="dm" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-arrow"/></svg><span class="fit-in">Gandikota &amp; Belum</span></span>
+            <span class="dep-meta fit"><span class="fit-in">21–22 Nov · <svg class="dm dm-r" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-rupee"/></svg><span class="sr">₹</span>5,500</span></span></a></li>
+          <li data-start="2026-11-21"><a class="dep" href="#gokarna">
+            <span class="dep-to fit"><svg class="dm" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-arrow"/></svg><span class="fit-in">Gokarna</span></span>
+            <span class="dep-meta fit"><span class="fit-in">21–22 Nov · From <svg class="dm dm-r" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-rupee"/></svg><span class="sr">₹</span>6,000</span></span></a></li>
+          <li data-start="2026-11-26"><a class="dep" href="#kashmir">
+            <span class="dep-to fit"><svg class="dm" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-arrow"/></svg><span class="fit-in">Kashmir</span></span>
+            <span class="dep-meta fit"><span class="fit-in">26–30 Nov · <svg class="dm dm-r" viewBox="0 0 5 7" aria-hidden="true"><use href="#dm-rupee"/></svg><span class="sr">₹</span>17,500</span></span></a></li>
+        </ol>
+      </div>
+      <button class="board-btn" type="button" aria-pressed="false" aria-label="Pause the departures board">
+        <svg class="ico i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+        <svg class="ico i-play" aria-hidden="true"><use href="#i-play"/></svg>
+        <svg class="ico i-next" aria-hidden="true"><use href="#i-next"/></svg>
+      </button>
+    </div>
+
+    <div class="flank-name">
+      <svg class="swoosh" aria-hidden="true" focusable="false" preserveAspectRatio="none"><use href="#swoosh"/></svg>
+      <h1 class="name"><span class="name-1 fit"><span class="fit-in">Peace &amp; Wild</span></span>
+        <span class="name-2">Holidays <svg class="badge" viewBox="0 0 64 64" aria-hidden="true"><use href="#compass"/></svg></span></h1>
+    </div>
+
+    <ul class="windows" aria-label="Travellers on Peace &amp; Wild trips">
+      <li class="win"><img src="assets/win-waterfall.jpg" width="400" height="280" alt="A traveller with arms spread wide under a waterfall" style="object-position:46% 70%"></li>
+      <li class="win"><img src="assets/win-underwater-gang.jpg" width="361" height="320" alt="A strangers-trip group posing underwater in a waterfall pool"></li>
+      <li class="win"><img src="assets/win-jeep.jpg" width="450" height="410" alt="Friends grinning from the back of an off-road jeep" style="object-position:50% 40%"></li>
+      <li class="sticker sticker-fun" aria-hidden="true">We sell <b>fun</b></li>
+    </ul>
+
+    <div class="hero-words">
+      <p class="slogan">Come as strangers, leave as friends</p>
+    </div>
+
+    <div class="door-row">
+      <a class="door door-hero" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! Which trips are coming up next?">
+        <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+        <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s">Dates, prices, pickup points</span></span>
+      </a>
+      <a class="call" href="tel:+919043938491"><svg class="ico" aria-hidden="true"><use href="#i-call"/></svg>Call 90439 38491</a>
+    </div>
+    <p class="lede">Waterfall days near Chennai, weekend treks, Kashmir and Europe. Come solo, bring a friend or the whole family.</p>
+
+    <div class="skirt" aria-hidden="true">
+      <span class="arch arch-f"><svg class="wheel" viewBox="0 0 100 100"><use href="#wheel"/></svg></span>
+      <span class="arch arch-r"><svg class="wheel" viewBox="0 0 100 100"><use href="#wheel"/></svg></span>
+    </div>
+  </div>
+  <div class="road" aria-hidden="true"></div>
+</header>
+
+<main>
+  <nav class="via" id="trips" aria-label="Trips">
+    <div class="via-board">
+      <p class="via-t"><span>Via</span> Every trip on this bus</p>
+      <ul>
+        <li><a href="#aare">Aare Waterfalls</a></li>
+        <li><a href="#meesapulimalai">Meesapulimalai</a></li>
+        <li><a href="#kolukkumalai">Kolukkumalai</a></li>
+        <li><a href="#gandikota">Gandikota</a></li>
+        <li><a href="#gokarna">Gokarna</a></li>
+        <li><a href="#himachal">Shimla &amp; Manali</a></li>
+        <li><a href="#kashmir">Kashmir</a></li>
+        <li><a href="#europe">Europe</a></li>
+        <li><a href="#teams">Team outings</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="group" id="short">
+    <div class="group-in">
+      <h2 class="group-t">Short trips</h2>
+      <svg class="swoosh" aria-hidden="true" focusable="false" preserveAspectRatio="none"><use href="#swoosh"/></svg>
+      <p class="group-d">Waterfalls two hours from Chennai, treks in the Western Ghats, a canyon, caves and the Gokarna coast.</p>
+      <p class="sticker sticker-join">Join as strangers, <b>return with memories</b></p>
+    </div>
+  </div>
+  <div class="trim" aria-hidden="true"></div>
+
+  <!-- AARE WATERFALLS -->
+  <section class="stop" id="aare" aria-labelledby="t-aare">
+    <div class="stop-in">
+      <div class="stop-a">
+        <h3 class="dest" id="t-aare"><span class="ln fit"><span class="fit-in">Aare</span></span><span class="ln fit"><span class="fit-in">Waterfalls</span></span></h3>
+        <p class="dest-sub">Nagalapuram, 2 hours from Chennai</p>
+        <div class="wins wins-two">
+          <figure class="win"><img src="assets/win-lifejackets.jpg" width="361" height="162" loading="lazy" alt="Travellers in orange life jackets in the pool below a waterfall" style="object-position:62% 50%"></figure>
+          <figure class="win"><img src="assets/win-farmstay-gang.jpg" width="361" height="272" loading="lazy" alt="A group of travellers outside the farmstay" style="object-position:40% 72%"></figure>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Adventure activities depend on water levels, weather and guide approval.</p>
+      </div>
+      <div class="stop-b">
+        <h4 class="opt-t">One-day waterfalls trip</h4>
+        <div class="fare"><span class="fare-from">from</span><span class="fare-amt"><span class="r">₹</span>1,500</span><span class="fare-per">per adult · kids ₹750</span></div>
+        <p class="copy">Snorkelling, cliff jumps, natural water slides and swimming basics with guides. Life jackets and underwater goggles provided, with veg and non-veg homemade food.</p>
+
+        <h4 class="opt-t">Waterfalls + farmstay · 1 night</h4>
+        <p class="fare-line"><b><span class="r">₹</span>1,900 tent · <span class="r">₹</span>2,500 dorm · <span class="r">₹</span>3,000 AC room</b><span>Per adult. Kids 4–12 pay less.</span></p>
+        <details>
+          <summary>Farmstay plan, kids' rates, what's included<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+        <div class="rates">
+          <div class="rates-h"><span>Per person</span><span>Kids 4–12</span></div>
+          <table>
+            <thead><tr><th scope="col">Stay</th><th scope="col">Adult</th><th scope="col">Kid</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Tent</th><td>₹1,900</td><td>₹1,200</td></tr>
+              <tr><th scope="row">Dormitory</th><td>₹2,500</td><td>₹1,500</td></tr>
+              <tr><th scope="row">AC room</th><td>₹3,000</td><td>₹2,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ol class="stations">
+          <li><b>Day 1 · 3 PM</b><span>Check in. Pool, games and a tractor ride, evening tea, then campfire, music and dinner.</span></li>
+          <li><b>Day 2</b><span>Breakfast, then two waterfalls and a trek, 1 km from the stay. Lunch, check out at 2 PM, dam and temples on the way home.</span></li>
+          <li class="opt"><b>Day 3 · optional</b><span>Sadasivakona jeep safari, two more waterfalls and a trek, at extra cost.</span></li>
+        </ol>
+            <h4>Included</h4>
+            <ul class="list">
+              <li>Stay, breakfast, lunch and dinner, evening tea or coffee with biscuits</li>
+              <li>Pool, farm activities, two waterfalls and trekking, campfire</li>
+              <li>Dam and temple visits</li>
+            </ul>
+            <h4>Good to know</h4>
+            <ul class="list x">
+              <li>Come in your own vehicle, or ask for Chennai transport at extra cost</li>
+              <li>BBQ, paneer, fish and mutton at extra cost</li>
+            </ul>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like the next dates for the Aare Waterfalls trip (day trip or farmstay).">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s">Aare Waterfalls · next dates</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEESAPULIMALAI -->
+  <section class="stop flip" id="meesapulimalai" data-trip="Meesapulimalai" aria-labelledby="t-meesa" data-departs="2026-11-14">
+    <div class="stop-in">
+      <div class="stop-a">
+        <p class="plate plate-led">14–15 Nov 2026</p>
+        <div class="panel">
+          <h3 class="dest" id="t-meesa"><span class="ln fit"><span class="fit-in">Meesapulimalai</span></span></h3>
+          <p class="decal">Group trip <span>·</span> stay at Munnar <span>·</span> Silent Valley</p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Trekking closes in bad weather. Neelakurinji blooms are seasonal; Nilgiri tahr sightings are not guaranteed.</p>
+      </div>
+      <div class="stop-b">
+        <div class="dated" data-dated>
+        <div class="fare"><span class="fare-amt"><span class="r">₹</span>4,500</span><span class="fare-per">per person · Bodi to Bodi. Transport from Chennai, Bengaluru or another city costs extra.</span></div>
+        <ol class="stations">
+          <li class="end"><b>Pickup · Bodi</b><span>Saturday 14 Nov, 10 AM</span></li>
+          <li><b>Day 1</b><span>Lunch and dinner. Night stay at Munnar.</span></li>
+          <li><b>Day 2</b><span>Breakfast and lunch.</span></li>
+          <li class="end"><b>Drop · Bodi</b><span>Sunday 15 Nov, 7 PM</span></li>
+        </ol>
+        </div>
+        <p class="note past-note">Next dates and price on WhatsApp.</p>
+        <p class="copy">On this trip: the Silent Valley viewpoint and the Meesapulimalai trek.</p>
+        <details>
+          <summary>Or trek any day from Munnar<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <p>Munnar to Munnar, 4 AM to 5 PM, every day the weather allows.</p>
+            <div class="rates">
+              <div class="rates-h"><span>Per person</span><span>Daily</span></div>
+              <table>
+                <thead><tr><th scope="col">Package</th><th scope="col">Adult</th><th scope="col">Kid</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">One-day trek<small>Jeep, breakfast, lunch, trek</small></th><td>₹4,500</td><td>₹3,500</td></tr>
+                  <tr><th scope="row">Tent camping + trek</th><td>₹5,500</td><td>₹4,500</td></tr>
+                  <tr><th scope="row">Rhodo Mansion stay + trek</th><td>₹6,500</td><td>₹5,000</td></tr>
+                </tbody>
+              </table>
+              <p class="rates-f">Camping and room stays depend on availability.</p>
+            </div>
+            <ol class="stations stations-time">
+              <li class="end"><b>4:00 AM</b><span>Pickup at Munnar Bus Stand</span></li>
+              <li><b>5:30 AM</b><span>Base camp and breakfast, about 25 km of off-road jeep</span></li>
+              <li><b>6:00 AM</b><span>Jeep to Rhodo Mansion, about 10 km off-road</span></li>
+              <li><b>6:30 AM</b><span>Start the trek, about 4 km one way</span></li>
+              <li><b>10:00 AM</b><span>Meesapulimalai peak: views and photos</span></li>
+              <li><b>11:00 AM</b><span>Walk back by a different route through the grasslands</span></li>
+              <li><b>2:00 PM</b><span>Lunch at base camp, veg and non-veg</span></li>
+              <li><b>4:00 PM</b><span>Silent Valley viewpoint photo stop</span></li>
+              <li class="end"><b>5:00 PM</b><span>Drop at Munnar Bus Stand</span></li>
+            </ol>
+            <h4>Before you go</h4>
+            <ul class="list">
+              <li>Stay in Munnar the night before and be at the bus stand by 4 AM. That night is charged separately.</li>
+              <li>Carry a warm jacket, gloves, water, snacks, your medicines and trekking shoes with good grip.</li>
+              <li>Expect little or no mobile signal on most of the route.</li>
+            </ul>
+            <h4>How to book</h4>
+            <p>Pay the full amount by GPay to 90439 38491 and send the screenshot on WhatsApp with your Aadhaar card. Book one day to one month ahead, depending on availability.</p>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to join the Meesapulimalai trip on 14–15 Nov. Please share the details.">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s" data-past="Meesapulimalai · next dates">Meesapulimalai · 14–15 Nov</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOLUKKUMALAI -->
+  <section class="stop" id="kolukkumalai" aria-labelledby="t-kolu">
+    <div class="stop-in">
+      <div class="stop-a">
+        <h3 class="dest" id="t-kolu"><span class="ln fit"><span class="fit-in">Kolukkumalai</span></span><span class="ln fit"><span class="fit-in"><span class="amp">&amp;</span> Suryanelli</span></span></h3>
+        <p class="dest-sub">Misty mountains and tea plantations</p>
+        <div class="wins wins-one">
+          <figure class="win"><img src="assets/win-jaguar-rock.jpg" width="360" height="212" loading="lazy" alt="A traveller in red at Jaguar Rock" style="object-position:60% 50%"></figure>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Activities and views depend on weather and local permissions.</p>
+      </div>
+      <div class="stop-b">
+        <h4 class="opt-t">Quote on WhatsApp</h4>
+        <p class="note" style="margin-top:-6px">Prices depend on your dates, group size, stay and activities.</p>
+        <h4 class="opt-t">Pick your stay</h4>
+        <p class="copy">A luxury stay with cloud-bed views, a cosy A-frame, or a tent above the clouds.</p>
+        <h4 class="opt-t">On the hill</h4>
+        <p class="copy">Sunrise over the cloud beds, an off-road jeep safari through the tea estates, the Kolukkumalai tea factory, Jaguar Rock and the Bose Peak trek.</p>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like a quote for a Kolukkumalai & Suryanelli trip. Dates: ___ People: ___">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s">Kolukkumalai · get a quote</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GANDIKOTA -->
+  <section class="stop flip" id="gandikota" data-trip="Gandikota & Belum Caves" aria-labelledby="t-gandi" data-departs="2026-11-21">
+    <div class="stop-in">
+      <div class="stop-a">
+        <p class="plate plate-led">21–22 Nov 2026</p>
+        <div class="panel">
+          <h3 class="dest" id="t-gandi"><span class="ln fit"><span class="fit-in">Gandikota</span></span><span class="ln fit"><span class="fit-in"><span class="amp">&amp;</span> Belum Caves</span></span></h3>
+          <p class="decal">Canyon views <span>·</span> underground caves</p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Activities and views depend on weather and local permissions.</p>
+      </div>
+      <div class="stop-b">
+        <div class="dated" data-dated>
+        <div class="fare"><span class="fare-amt"><span class="r">₹</span>5,500</span><span class="fare-per">per person · from Chennai or Bengaluru</span></div>
+        </div>
+        <p class="note past-note">Next dates and price on WhatsApp.</p>
+        <p class="copy">A weekend of canyon views at Gandikota and the underground wonders of Belum Caves.</p>
+        <p class="note">Ask on WhatsApp for pickup times and points.</p>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to join the Gandikota & Belum Caves trip on 21–22 Nov. Please share the details.">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s" data-past="Gandikota · next dates">Gandikota · 21–22 Nov</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOKARNA -->
+  <section class="stop" id="gokarna" data-trip="Gokarna water games" aria-labelledby="t-goka" data-departs="2026-11-21">
+    <div class="stop-in">
+      <div class="stop-a">
+        <p class="plate plate-led">21–22 Nov 2026</p>
+        <div class="panel panel-ac">
+          <h3 class="dest" id="t-goka"><span class="ln fit"><span class="fit-in">Gokarna</span></span></h3>
+          <p class="decal">Every weekend <span>·</span> water&nbsp;games <span>·</span> beaches <span>·</span> backwaters</p>
+          <p class="sticker ac"><span aria-hidden="true">AC<small>travel<br>+ room</small></span><span class="sr">AC travel and AC room stay</span></p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Dolphin spotting depends on sightings.</p>
+      </div>
+      <div class="stop-b">
+        <div class="dated" data-dated>
+        <div class="fare-pair">
+          <div class="fare"><span class="fare-from">from Bengaluru</span><span class="fare-amt"><span class="r">₹</span>6,000</span></div>
+          <div class="fare"><span class="fare-from">from Chennai</span><span class="fare-amt"><span class="r">₹</span>8,000</span></div>
+        </div>
+        <p class="note" style="margin-top:-8px">Starting price, per person. Leaving from Chennai? Ask for the pickup details.</p>
+        <ol class="stations">
+          <li class="end"><b>Friday · 8 PM</b><span>Pickup at Majestic, Bengaluru</span></li>
+          <li><b>Day 1</b><span>Jog Falls, then boating, kayaking and a dive from the boat. Om, Paradise, Half Moon and Belekan beaches, dolphin watching, a campfire with music, a night in an AC room.</span></li>
+          <li><b>Day 2</b><span>An hour of backwater boating at Honnavara, the mangrove forest boardwalk and Murudeshwar temple, then the drive back.</span></li>
+          <li class="end"><b>Monday · 6 AM</b><span>Drop at Majestic, Bengaluru</span></li>
+        </ol>
+        </div>
+        <p class="note past-note">Next weekend's dates and price on WhatsApp.</p>
+        <details>
+          <summary>What's included<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <ul class="list">
+              <li>AC travel and 1 night in an AC room</li>
+              <li>Breakfast on day 1 and day 2, dinner on day 1</li>
+              <li>Premium boating and water games, Honnavara backwater boating</li>
+              <li>Sightseeing, temple visits, campfire with music</li>
+            </ul>
+            <h4>Not included</h4>
+            <ul class="list x">
+              <li>Lunch on day 1 and day 2, dinner on the way back</li>
+              <li>Personal expenses</li>
+            </ul>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to join the Gokarna water games trip on 21–22 Nov. I'm starting from ___ (Bengaluru / Chennai).">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s" data-past="Gokarna · next weekend">Gokarna · 21–22 Nov</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trim" aria-hidden="true"></div>
+  <div class="group" id="long">
+    <div class="group-in">
+      <h2 class="group-t">Long holidays</h2>
+      <svg class="swoosh" aria-hidden="true" focusable="false" preserveAspectRatio="none"><use href="#swoosh"/></svg>
+      <p class="group-d">Himachal and Kashmir in the snow season, and Europe tours that leave every month.</p>
+    </div>
+  </div>
+  <div class="trim" aria-hidden="true"></div>
+
+  <!-- HIMACHAL -->
+  <section class="stop" id="himachal" data-trip="Shimla, Kasol & Manali" aria-labelledby="t-hima" data-departs="2026-11-18">
+    <div class="stop-in">
+      <div class="stop-a">
+        <p class="plate plate-led">18–23 Nov 2026</p>
+        <div class="panel">
+          <h3 class="dest" id="t-hima"><span class="ln fit"><span class="fit-in">Shimla</span></span><span class="ln fit"><span class="fit-in">Kasol <span class="amp">·</span> Manali</span></span></h3>
+          <p class="decal">Himalayan winter getaway <span>·</span> 4&nbsp;nights,&nbsp;5&nbsp;days</p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Flights, pony and yak rides, ropeways and adventure activities are extra.</p>
+      </div>
+      <div class="stop-b">
+        <div class="dated" data-dated>
+        <div class="fare"><span class="fare-amt"><span class="r">₹</span>16,000</span><span class="fare-per">per person · Delhi to Delhi</span></div>
+        <ol class="stations">
+          <li class="end"><b>Pickup · Delhi</b><span>18 Nov, by tempo traveller</span></li>
+          <li><b>Shimla &amp; Kufri</b><span>Green Valley, Kufri Fun World, Mall Road and the Ridge</span></li>
+          <li><b>Kasol &amp; Parvati Valley</b><span>The riverside and the local market</span></li>
+          <li><b>Manali</b><span>Hadimba Temple, Vashisht and the Tibetan monastery</span></li>
+          <li><b>Solang &amp; Kullu valleys</b><span>Snow activities at Solang, Kullu on the way back</span></li>
+          <li class="end"><b>Drop · Delhi</b><span>23 Nov</span></li>
+        </ol>
+        </div>
+        <p class="note past-note">Next dates and price on WhatsApp.</p>
+        <details>
+          <summary>What's included<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <ul class="list">
+              <li>Delhi pickup and drop by tempo traveller</li>
+              <li>4 nights in hotels, 4 breakfasts and 4 dinners</li>
+              <li>All sightseeing on the itinerary</li>
+              <li>Vehicle, driver, tolls, taxes, fuel and parking</li>
+              <li>24×7 assistance during the tour</li>
+            </ul>
+            <h4>Not included</h4>
+            <ul class="list x">
+              <li>Flight or train tickets to Delhi</li>
+              <li>Horse, pony and yak rides, ropeway tickets</li>
+              <li>Heater charges at hotels, if any</li>
+              <li>Paragliding, river rafting, ATV, zipline and other adventure activities</li>
+              <li>Travel insurance and medical expenses</li>
+            </ul>
+            <p>Booking as a group? Ask about the group discount.</p>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to join the Shimla, Kasol & Manali trip on 18–23 Nov. Please share the details.">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s" data-past="Shimla, Kasol, Manali · next dates">Shimla, Kasol, Manali · 18–23 Nov</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KASHMIR -->
+  <section class="stop flip" id="kashmir" data-trip="Kashmir" aria-labelledby="t-kash" data-departs="2026-11-26">
+    <div class="stop-in">
+      <div class="stop-a">
+        <p class="plate plate-led">26–30 Nov 2026</p>
+        <div class="panel">
+          <h3 class="dest" id="t-kash"><span class="ln fit"><span class="fit-in">Kashmir</span></span></h3>
+          <p class="decal">Snow season package <span>·</span> 4&nbsp;nights,&nbsp;5&nbsp;days</p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Snow activities depend on the weather and availability.</p>
+      </div>
+      <div class="stop-b">
+        <div class="dated" data-dated>
+        <div class="fare"><span class="fare-amt"><span class="r">₹</span>17,500</span><span class="fare-per">per person · Srinagar to Srinagar</span></div>
+        <ol class="stations">
+          <li class="end"><b>Pickup · Srinagar airport</b><span>26 Nov</span></li>
+          <li><b>Srinagar</b><span>Dal Lake, a shikara ride, Mughal gardens, the local market</span></li>
+          <li><b>Gulmarg</b><span>Gondola ride (extra), snow activities, Strawberry Valley</span></li>
+          <li><b>Sonmarg</b><span>Thajiwas glacier, scenic drives, snow views</span></li>
+          <li><b>Pahalgam</b><span>Aru Valley, Betaab Valley, the Lidder river</span></li>
+          <li class="end"><b>Drop · Srinagar airport</b><span>30 Nov</span></li>
+        </ol>
+        </div>
+        <p class="note past-note">Next dates and price on WhatsApp.</p>
+        <details>
+          <summary>What's included<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <ul class="list">
+              <li>Srinagar airport pickup and drop</li>
+              <li>4 nights in a hotel or resort, daily breakfast and dinner</li>
+              <li>All transfers and sightseeing, a shikara ride on Dal Lake</li>
+              <li>Snow activities, as weather and availability allow</li>
+              <li>Tolls, parking and driver charges</li>
+            </ul>
+            <h4>Not included</h4>
+            <ul class="list x">
+              <li>Other meals, the gondola ride and personal expenses</li>
+              <li>Skiing and other adventure activities</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Other Kashmir packages<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <div class="rates">
+              <div class="rates-h"><span>Per person, from</span><span>2-star · 3-star hotel</span></div>
+              <table>
+                <thead><tr><th scope="col">Package</th><th scope="col">2-star</th><th scope="col">3-star</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">5 days, 4 nights<small>Srinagar 3 nights, houseboat 1</small></th><td>₹15,600</td><td>₹19,000</td></tr>
+                  <tr><th scope="row">6 days, 5 nights<small>Srinagar 3, Pahalgam 1, houseboat 1</small></th><td>₹17,850</td><td>₹22,400</td></tr>
+                  <tr><th scope="row">7 days, 6 nights<small>Srinagar 4, Pahalgam 1, houseboat 1</small></th><td>₹20,200</td><td>₹25,700</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="rates">
+              <div class="rates-h"><span>8 days, 7 nights</span><span>Per person, 2 guests</span></div>
+              <table>
+                <thead><tr><th scope="col">Hotel</th><th scope="col">From</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Standard<small>Srinagar 3, Pahalgam 2, Gulmarg 1, houseboat 1</small></th><td>₹32,300</td></tr>
+                  <tr><th scope="row">Deluxe</th><td>₹40,050</td></tr>
+                  <tr><th scope="row">Super deluxe</th><td>₹45,800</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="list">
+              <li>Hotel and houseboat stay, daily breakfast and dinner</li>
+              <li>Srinagar airport pickup and drop, transfers and sightseeing by private vehicle</li>
+              <li>One-hour shikara ride on Dal Lake</li>
+              <li>Driver allowance, parking and tolls, on-ground help 24×7</li>
+            </ul>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to join the Kashmir trip on 26–30 Nov. Please share the details.">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s" data-past="Kashmir · next dates">Kashmir · 26–30 Nov</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EUROPE -->
+  <section class="stop" id="europe" aria-labelledby="t-euro">
+    <div class="stop-in">
+      <div class="stop-a">
+        <div class="panel">
+          <h3 class="dest" id="t-euro"><span class="ln fit"><span class="fit-in">Europe</span></span></h3>
+          <p class="decal">Every month <span>·</span> fixed or customised<br>From Chennai <span>·</span> Bengaluru <span>·</span> Hyderabad <span>·</span> Delhi <span>·</span> Mumbai</p>
+        </div>
+        <p class="caveat"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Prices per person, on double sharing.</p>
+      </div>
+      <div class="stop-b">
+        <div class="rates">
+          <div class="rates-h"><span>Tap a tour to ask</span><span>Per person</span></div>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Greece tour (6 days, 5 nights)."><span><b>Greece</b><small>6 days, 5 nights</small></span><span class="p">₹2,10,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Paris & Swiss tour (8 days, 7 nights)."><span><b>Paris &amp; Swiss</b><small>8 days, 7 nights</small></span><span class="p">₹2,16,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Euro Wonders tour (9 days, 8 nights)."><span><b>Euro Wonders</b><small>9 days · 5 countries</small></span><span class="p">₹2,46,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Spain & Portugal tour (8 days, 7 nights)."><span><b>Spain &amp; Portugal</b><small>8 days, 7 nights</small></span><span class="p">₹2,63,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Euro Dreams tour (10 days, 9 nights)."><span><b>Euro Dreams</b><small>10 days · 5 countries</small></span><span class="p">₹2,63,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Northern Lights Finland tour (6 days, 5 nights)."><span><b>Northern Lights Finland</b><small>6 days, 5 nights</small></span><span class="p">₹2,95,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Euro Grand tour (13 days, 12 nights)."><span><b>Euro Grand</b><small>13 days · 5 countries</small></span><span class="p">₹3,05,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Scandinavia tour (9 days, 8 nights)."><span><b>Scandinavia</b><small>9 days · 4 countries</small></span><span class="p">₹3,05,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Fun Europa tour (14 days, 13 nights)."><span><b>Fun Europa</b><small>14 days · 8 cities</small></span><span class="p">₹3,20,000</span></a>
+          <a class="rate-link" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to know about the Magical Northern Lights Scandinavia tour (12 days, 11 nights)."><span><b>Northern Lights Scandinavia</b><small>12 days, 11 nights</small></span><span class="p">₹3,70,000</span></a>
+        </div>
+        <details>
+          <summary>What every tour includes<svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div class="det">
+            <ul class="list">
+              <li>Return flight tickets</li>
+              <li>Hotels of 3 stars and above, daily breakfast and dinner</li>
+              <li>Transfers and sightseeing on the itinerary</li>
+              <li>Visa assistance, as specified</li>
+              <li>Travel insurance for travellers aged 59 and above</li>
+              <li>A tour manager with the group</li>
+            </ul>
+          </div>
+        </details>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to plan a Europe trip. Month: ___ People: ___ Starting city: ___">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s">Europe · fixed or customised</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trim" aria-hidden="true"></div>
+
+  <!-- TEAM OUTINGS -->
+  <section class="stop teams flip" id="teams" aria-labelledby="t-teams">
+    <div class="stop-in">
+      <div class="stop-a">
+        <h2 class="dest" id="t-teams"><span class="ln fit"><span class="fit-in">Team outings</span></span></h2>
+        <div class="wins">
+          <figure class="win wide"><img src="assets/win-team.jpg" width="480" height="274" loading="lazy" alt="The team together in Chikmagalur" style="object-position:50% 62%"></figure>
+          <figure class="win"><img src="assets/win-forest.jpg" width="480" height="420" loading="lazy" alt="Colleagues giving thumbs up on a forest trail" style="object-position:50% 45%"></figure>
+          <figure class="win"><img src="assets/win-lake.jpg" width="480" height="410" loading="lazy" alt="Friends lined up at a lake view in the hills" style="object-position:50% 50%"></figure>
+          <figure class="win"><img src="assets/win-lunch.jpg" width="480" height="434" loading="lazy" alt="The team at lunch" style="object-position:50% 52%"></figure>
+        </div>
+      </div>
+      <div class="stop-b">
+        <p class="line-their">From office desks to mountain peaks</p>
+        <p class="copy">A corporate team outing to Chikmagalur, 2 days and 1 night: off-road jeep rides, Mullayanagiri peak, viewpoints, waterfalls, a coffee plantation and a resort stay.</p>
+        <p class="copy">We organise customised corporate trips, team-building activities, adventure outings and resort getaways across India.</p>
+        <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! We'd like to plan a team outing. Team size: ___ Dates: ___ Places in mind: ___">
+          <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+          <span class="door-txt"><span class="door-t">Plan an outing</span><span class="door-s">Team size, dates, places on WhatsApp</span></span>
+        </a>
+        <a class="up-link" href="#trips"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>All trips</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rear">
+  <div class="lamps" aria-hidden="true"><i></i><i></i></div>
+  <div class="rear-in">
+    <p class="rear-t">We sell <span>the fun!</span></p>
+    <div class="rear-cta">
+      <a class="door" href="https://wa.me/919043938491" data-wa="Hi Peace & Wild Holidays! I'd like to plan a trip.">
+        <span class="door-ico"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
+        <span class="door-txt"><span class="door-t">Ask on WhatsApp</span><span class="door-s">90439 38491</span></span>
+      </a>
+      <a class="btn2" href="tel:+919043938491"><svg class="ico" aria-hidden="true"><use href="#i-call"/></svg>Call</a>
+      <a class="btn2" href="https://whatsapp.com/channel/0029Vb9zCL14SpkBkAGUz22H" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-channel"/></svg>Trip channel</a>
+      <a class="btn2" href="https://instagram.com/peaceandwildholidays" rel="noopener" aria-label="Instagram @peaceandwildholidays"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Instagram</a>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <h3>Office</h3>
+        <p>No 100, LB Road, Adyar,<br>Chennai 600020</p>
+        <a class="btn2" href="https://www.google.com/maps/search/?api=1&amp;query=100%20LB%20Road%20Adyar%20Chennai%20600020" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Open in Maps</a>
+      </div>
+      <div class="fact">
+        <h3>Founder</h3>
+        <div class="founder">
+          <figure class="win"><img src="assets/win-founder.jpg" width="144" height="90" loading="lazy" alt="Founder Karthik in a red cap on a hilltop"></figure>
+          <p>Karthik<br><a class="btn2" style="margin-top:4px" href="https://instagram.com/kaarthikkks" rel="noopener">@kaarthikkks</a></p>
+        </div>
+      </div>
+      <div class="fact logo-plate">
+        <img src="assets/logo.jpg" width="150" height="150" loading="lazy" alt="Peace &amp; Wild Holidays compass badge">
+        <p>Peace &amp; Wild Holidays<br><span class="ids">GST 33AGKPN1466F1ZH<br>MSME UDYAM-TN-02-0414095</span></p>
+      </div>
+      <a class="btn2 top-link" href="#top"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>Back to the front of the bus</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var WA = 'https://wa.me/919043938491';
+  // WhatsApp doors: built here, so they work whatever else fails
+  [].forEach.call(document.querySelectorAll('a[data-wa]'), function (a) {
+    a.href = WA + '?text=' + encodeURIComponent(a.getAttribute('data-wa'));
+  });
+
+  // Today in India, as YYYY-MM-DD
+  var today;
+  try { today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+  catch (e) { today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10); }
+
+  // A departure that has left loses its amber plate (amber is only for dates still ahead)
+  [].forEach.call(document.querySelectorAll('[data-departs]'), function (s) {
+    if (s.getAttribute('data-departs') <= today) {
+      s.classList.add('is-past');
+      [].forEach.call(s.querySelectorAll('[data-past]'), function (p) { p.textContent = p.getAttribute('data-past'); });
+      var door = s.querySelector('a.door');
+      if (door) door.href = WA + '?text=' + encodeURIComponent('Hi Peace & Wild Holidays! When is the next ' + s.getAttribute('data-trip') + ' trip?');
+    }
+  });
+
+  // Fit monumental lettering to its line: shrink only, never grow
+  function fitAll() {
+    [].forEach.call(document.querySelectorAll('.fit'), function (box) {
+      var inner = box.querySelector('.fit-in');
+      if (!inner) return;
+      box.style.fontSize = '';
+      var room = box.clientWidth - (parseFloat(getComputedStyle(box).paddingRight) || 0) - (box.classList.contains('dep-to') ? box.firstElementChild.getBoundingClientRect().width + 6 : 0);
+      var need = inner.getBoundingClientRect().width;
+      if (need > room && room > 0) box.style.fontSize = (parseFloat(getComputedStyle(box).fontSize) * room / need * 0.98) + 'px';
+    });
+    [].forEach.call(document.querySelectorAll('.dest'), function (h) {
+      var lines = h.querySelectorAll('.ln.fit');
+      if (lines.length < 2) return;
+      var min = Infinity;
+      [].forEach.call(lines, function (l) { min = Math.min(min, parseFloat(getComputedStyle(l).fontSize)); });
+      [].forEach.call(lines, function (l) { l.style.fontSize = min + 'px'; });
+    });
+  }
+
+  // The LED destination board
+  var board = document.querySelector('.board');
+  var strip = board.querySelector('.board-strip');
+  var glass = board.querySelector('.board-glass');
+  var btn = board.querySelector('.board-btn');
+  var items = [].slice.call(strip.children).filter(function (li) {
+    if (li.getAttribute('data-start') <= today) { strip.removeChild(li); return false; }
+    return true;
+  });
+  if (!items.length) {
+    strip.innerHTML = '<li><a class="dep" href="' + WA + '?text=' + encodeURIComponent('Hi Peace & Wild Holidays! What are your next trip dates?') +
+      '"><span class="dep-to">New dates</span><span class="dep-meta">Ask on WhatsApp</span></a></li>';
+    items = [].slice.call(strip.children);
+  }
+  board.classList.add('is-live');
+  var reduce = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var idx = 0, timer = null, userPaused = false, held = false;
+
+  function show(n) {
+    idx = (n + items.length) % items.length;
+    strip.style.setProperty('--i', idx);
+    glass.scrollTop = 0;
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function run() {
+    stop();
+    if (!userPaused && !held && !reduce.matches && items.length > 1 && !document.hidden) timer = setInterval(function () { show(idx + 1); }, 3600);
+  }
+  function setMode() {
+    if (reduce.matches) {
+      board.setAttribute('data-mode', 'step');
+      btn.removeAttribute('aria-pressed');
+      btn.setAttribute('aria-label', 'Show the next departure');
+    } else {
+      board.removeAttribute('data-mode');
+      btn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+      btn.setAttribute('aria-label', userPaused ? 'Play the departures board' : 'Pause the departures board');
+    }
+    btn.hidden = items.length < 2;
+    run();
+  }
+  btn.addEventListener('click', function () {
+    if (reduce.matches) { show(idx + 1); return; }
+    userPaused = !userPaused;
+    setMode();
+  });
+  strip.addEventListener('focusin', function (e) {
+    var li = e.target.closest('li');
+    held = true; stop();
+    if (li) show(items.indexOf(li));
+  });
+  strip.addEventListener('focusout', function () { held = false; run(); });
+  if (window.matchMedia && matchMedia('(hover: hover)').matches) {
+    board.addEventListener('mouseenter', function () { held = true; stop(); });
+    board.addEventListener('mouseleave', function () { held = false; run(); });
+  }
+  document.addEventListener('visibilitychange', run);
+  if (reduce.addEventListener) reduce.addEventListener('change', setMode);
+  show(0);
+  setMode();
+
+  fitAll();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fitAll, 120); });
+})();
+</script>
+</body>
+</html>

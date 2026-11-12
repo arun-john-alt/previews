@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Peace &amp; Wild Holidays · Group trips from Chennai</title>
+<meta name="description" content="Group trips from Chennai: weekend treks, waterfall days, Himachal, Kashmir, Europe and team outings. Enquire on WhatsApp.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/logo-badge.jpg">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=panchang@500,600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap">
+<style>
+  /* Palette and type: all in one place so this page can be cloned. Yellow and black come from the compass logo. */
+  :root {
+    --paper: #ffffff;
+    --ink: #151515;
+    --ink-2: #3c3c38;
+    --muted: #5f5f59;
+    --line: #e4e2db;
+    --line-2: #cdcac1;
+    --compass: #f0d870;
+    --night: #121412;
+    --night-ink: #efeee8;
+    --night-muted: #b3b2a9;
+    --night-line: rgba(239, 238, 232, .16);
+    --font: "Switzer", "Helvetica Neue", Arial, sans-serif;
+    --wide: "Panchang", "Switzer", Arial, sans-serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    --gutter: 20px;
+    --wrap: 1200px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 72px; scroll-padding-bottom: 88px; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--font);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; caret-color: var(--ink); overflow-x: hidden; }
+  ::selection { background: var(--compass); color: var(--ink); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  button, input, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  svg { flex: none; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-left: max(var(--gutter), env(safe-area-inset-left)); padding-right: max(var(--gutter), env(safe-area-inset-right)); }
+  .num { font-variant-numeric: tabular-nums lining-nums; }
+  .nowrap { white-space: nowrap; }
+
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  h1, h2 { font-family: var(--wide); font-weight: 500; }
+  h2 { font-size: clamp(23px, 3.4vw + 11px, 40px); line-height: 1.12; letter-spacing: -.01em; }
+  h3 { font-family: var(--font); font-weight: 600; font-size: 21px; line-height: 1.2; letter-spacing: -.01em; }
+  p { margin: 0; }
+  .lede { color: var(--ink-2); max-width: 36em; }
+
+  /* Buttons: square, ink, press feedback */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px;
+    border: 0; border-radius: 2px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; letter-spacing: .01em;
+    text-decoration: none; transition: transform .14s var(--ease), background-color .2s; -webkit-tap-highlight-color: transparent; }
+  .btn:active { transform: scale(.97); }
+  .btn svg { width: 20px; height: 20px; }
+  .btn-line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .link-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 2px; border: 0; background: none;
+    font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+  @media (hover: hover) {
+    .btn:hover { background: #2e2e2b; }
+    .btn-line:hover { background: var(--ink); color: #fff; }
+  }
+
+  /* Concept banner: required on every mock */
+  .concept { background: var(--ink); color: #e9e8e2; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 16px; }
+
+  /* Header */
+  .top { position: sticky; top: 0; z-index: 30; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-height: 44px; min-width: 0; }
+  .brand img { width: 40px; height: 40px; border-radius: 50%; }
+  .brand span { font-weight: 600; font-size: 16px; white-space: nowrap; }
+  .top nav { display: none; }
+  .call { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px;
+    border-radius: 2px; text-decoration: none; font-weight: 600; }
+  .call svg { width: 20px; height: 20px; }
+  .call span { display: none; }
+
+  /* First screen: the line, then the working enquiry */
+  .hero h1 { font-size: clamp(26px, 5.6vw + 6px, 58px); line-height: 1.1; letter-spacing: -.01em; }
+  .hero .lede { margin-top: 12px; }
+
+  .plan { margin-top: 20px; background: var(--compass); padding: 18px 16px 16px; border-radius: 2px; }
+  .sentence { font-size: 20px; line-height: 1.75; font-weight: 500; letter-spacing: -.005em; }
+  .field { position: relative; display: inline-flex; align-items: center; vertical-align: middle; max-width: 100%; }
+  .field select, .field input { appearance: none; -webkit-appearance: none; border: 0; border-radius: 0; background: transparent;
+    border-bottom: 2px solid var(--ink); min-height: 44px; padding: 4px 26px 2px 0; font-weight: 600; font-size: 18px;
+    font-family: var(--font); line-height: 1.2; max-width: 100%; text-overflow: ellipsis; cursor: pointer; }
+  .field input { padding-right: 2px; cursor: text; width: 9.5em; }
+  .field select:focus-visible, .field input:focus-visible, .stepper button:focus-visible { outline: none; box-shadow: 0 3px 0 0 var(--ink); }
+  .stepper button:focus-visible { box-shadow: inset 0 0 0 2px var(--ink); }
+  .field input::placeholder { color: #4a4423; opacity: 1; font-weight: 500; }
+  .field svg { position: absolute; right: 2px; width: 18px; height: 18px; pointer-events: none; }
+  .field-trip { display: flex; width: 100%; margin: 2px 0 4px; }
+  .field-trip select { width: 100%; font-size: 19px; }
+  .stepper { display: inline-flex; align-items: center; vertical-align: middle; border-bottom: 2px solid var(--ink); }
+  .stepper button { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: none; padding: 0;
+    transition: transform .14s var(--ease); }
+  .stepper button:active { transform: scale(.88); }
+  .stepper button svg { width: 18px; height: 18px; }
+  .stepper output { min-width: 2ch; text-align: center; font-weight: 600; font-size: 19px; }
+  .trip-sum { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(21, 21, 21, .22); font-size: 16px; color: #2a2715; }
+  .trip-sum b { font-weight: 600; }
+  .plan .btn { width: 100%; margin-top: 14px; }
+  .plan .note { margin-top: 10px; font-size: 15px; color: #2a2715; }
+  .note-call { display: inline-flex; align-items: center; min-height: 44px; margin-top: 2px; font-size: 15px; font-weight: 600; color: var(--ink); text-underline-offset: 4px; }
+  .js .if-open[hidden] { display: none; }
+
+  .hero { padding-top: 0; }
+  .hero-grid { display: flex; flex-direction: column; }
+  .hero-photo { order: -1; margin: 0 calc(-1 * var(--gutter)) 22px; }
+  .hero-photo figcaption { padding: 0 var(--gutter); }
+  .hero-photo img { width: 100%; aspect-ratio: 480 / 284; object-fit: cover; }
+  figcaption { margin-top: 8px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+  .cap { font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+  /* Section rhythm */
+  .sec { padding: 56px 0 8px; }
+  .sec-head { display: grid; gap: 10px; margin-bottom: 24px; }
+
+  /* The programme: printed timetable rows */
+  .programme { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .dep { position: relative; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 4px 12px; padding: 20px 0 18px;
+    border-bottom: 1px solid var(--line); }
+  .dep::before { content: ""; position: absolute; left: 0; top: -1px; width: 100%; height: 3px; background: var(--compass);
+    transform: scaleX(0); transform-origin: left; transition: transform .36s var(--ease); }
+  .dep.is-chosen::before { transform: scaleX(1); }
+  .dep-when { grid-row: span 2; font-family: var(--wide); line-height: 1; padding-top: 3px; }
+  .dep-when .dd { display: block; font-size: 16px; font-weight: 600; white-space: nowrap; }
+  .dep-when .mm { display: block; margin-top: 6px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .dep-what p { margin-top: 6px; color: var(--ink-2); }
+  .dep-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin-top: 8px; }
+  .dep-price .amt { font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+  .dep-price .per { font-size: 15px; color: var(--muted); }
+  .dep-act { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+  .choose { min-height: 44px; padding: 0 18px; }
+  .choose .tick { display: none; }
+  .is-chosen .choose { background: var(--compass); color: var(--ink); box-shadow: none; }
+  .is-chosen .choose .tick { display: block; }
+  .more-panel { grid-column: 1 / -1; margin-top: 8px; padding: 16px 0 4px; border-top: 1px dashed var(--line-2); }
+  .more-panel:not([hidden]) { animation: rise .26s var(--ease); }
+  @keyframes rise { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .facts { display: grid; gap: 14px; margin: 0; }
+  .facts div { display: grid; gap: 2px; }
+  .facts dt { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .facts dd { margin: 0; color: var(--ink-2); }
+
+  /* On your dates */
+  .opens { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .open { display: grid; gap: 16px; padding: 24px 0 28px; border-bottom: 1px solid var(--line); }
+  .open-side figure { margin: 0; max-width: 360px; }
+  .open-side img { width: 100%; object-fit: cover; }
+  .open-side img.tall { aspect-ratio: 16 / 10; }
+  .open-side .big { font-size: 26px; font-weight: 500; font-family: var(--wide); line-height: 1.1; }
+  .open-side .big small { display: block; margin-top: 6px; font-size: 15px; font-weight: 500; font-family: var(--font); letter-spacing: 0; color: var(--muted); }
+  .open-main { display: grid; gap: 12px; }
+  .open-main > p { color: var(--ink-2); }
+  .rates { width: 100%; border-collapse: collapse; font-size: 16px; }
+  .rates th, .rates td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .rates thead th { font-size: 14px; font-weight: 500; color: var(--muted); padding-top: 0; }
+  .rates td.num, .rates th.num { text-align: right; padding-left: 12px; white-space: nowrap; }
+  .rates tbody th { font-weight: 500; }
+  .rates tbody td.num { font-weight: 600; }
+  .from { font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+  .from small { font-size: 15px; font-weight: 400; font-family: var(--font); color: var(--muted); }
+  .open .btn { justify-self: start; }
+
+  /* Night chapter: Kashmir and Europe, typographic only (no stock pictures) */
+  .night { background: var(--night); color: var(--night-ink); margin-top: 64px; padding: 56px 0 64px; }
+  .night ::selection { background: var(--compass); color: var(--ink); }
+  .night :focus-visible { outline-color: var(--compass); }
+  .night .lede { color: var(--night-muted); }
+  .night h3.block { font-size: clamp(22px, 3vw + 10px, 32px); margin: 48px 0 8px; }
+  .night .block-note { color: var(--night-muted); max-width: 40em; }
+  .tours { list-style: none; margin: 20px 0 0; padding: 0; border-top: 2px solid var(--night-ink); }
+  /* Each row is one tap target: tapping it chooses the trip, the ring on the right fills yellow */
+  .tour { position: relative; border-bottom: 1px solid var(--night-line); }
+  .tour::before { content: ""; position: absolute; left: 0; top: -1px; width: 100%; height: 3px; background: var(--compass);
+    transform: scaleX(0); transform-origin: left; transition: transform .36s var(--ease); }
+  .tour.is-chosen::before { transform: scaleX(1); }
+  .pick { display: grid; grid-template-columns: minmax(0, 1fr) auto 30px; align-items: baseline; gap: 4px 14px; width: 100%;
+    padding: 16px 0; border: 0; background: none; color: inherit; text-align: left; -webkit-tap-highlight-color: transparent;
+    transition: transform .14s var(--ease); }
+  .pick:active { transform: scale(.985); }
+  .t-name { font-size: 18px; font-weight: 600; line-height: 1.25; }
+  .t-sub { grid-column: 1 / span 2; grid-row: 2; color: var(--night-muted); font-size: 15px; line-height: 1.45; }
+  .t-amt { grid-column: 2; grid-row: 1; text-align: right; color: var(--compass); font-size: 17px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .t-rates { grid-column: 1 / span 2; grid-row: 3; display: flex; flex-wrap: wrap; gap: 2px 18px; font-size: 15px; color: var(--night-muted); }
+  .t-rates span { white-space: nowrap; }
+  .t-rates b { color: var(--compass); font-weight: 600; font-size: 16px; }
+  .t-mark { grid-column: 3; grid-row: 1 / span 3; align-self: center; width: 30px; height: 30px; border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px rgba(239, 238, 232, .55); display: grid; place-items: center; color: transparent;
+    transition: background-color .2s, box-shadow .2s, color .2s; }
+  .t-mark svg { width: 18px; height: 18px; transform: scale(.6); opacity: 0; transition: transform .26s var(--ease), opacity .2s; }
+  .is-chosen .t-mark { background: var(--compass); box-shadow: none; color: var(--ink); }
+  .is-chosen .t-mark svg { transform: none; opacity: 1; }
+  .incl { margin-top: 18px; color: var(--night-muted); font-size: 15px; max-width: 52em; }
+  @media (hover: hover) { .pick:hover .t-mark { box-shadow: inset 0 0 0 1.5px var(--compass); } }
+
+  /* Teams */
+  .team-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; max-width: 560px; }
+  .team-photos figure { margin: 0; }
+  .team-photos .wide { grid-column: 1 / -1; }
+  .team-photos img { width: 100%; aspect-ratio: 6 / 5; object-fit: cover; }
+  .team-photos .wide img { aspect-ratio: 3 / 2; }
+  .team-copy { display: grid; gap: 14px; margin-top: 22px; }
+  .team-copy p { color: var(--ink-2); max-width: 38em; }
+  .team-copy .btn { justify-self: start; }
+
+  /* Contact */
+  .contact { padding: 80px 0 40px; }
+  .contact h2 { font-size: clamp(38px, 10.5vw, 84px); font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+  .contact-grid { display: grid; gap: 0; margin-top: 32px; border-top: 2px solid var(--ink); }
+  .contact-grid > div { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .contact-grid dt { font-size: 15px; font-weight: 500; color: var(--muted); }
+  .contact-grid dd { margin: 0; font-size: 17px; }
+  .contact-grid a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  .foot { padding: 28px 0 calc(110px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+  /* Sticky enquiry bar (phones and desktop) */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--paper); border-top: 1px solid var(--line-2);
+    padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform .32s var(--ease); }
+  .bar.show { transform: none; }
+  .bar .wrap { display: flex; align-items: center; gap: 12px; }
+  .bar-trip { flex: 1; min-width: 0; min-height: 44px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; text-decoration: none; }
+  .bar-trip small { display: block; font-size: 13px; color: var(--muted); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-trip b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+  .bar-trip b.swap { animation: swap .3s var(--ease); }
+  @keyframes swap { from { opacity: 0; transform: translateY(60%); } to { opacity: 1; transform: none; } }
+  .bar .btn { min-height: 48px; padding: 0 18px; }
+
+  @media (max-width: 359px) {
+    .field-trip select { font-size: 16px; padding-right: 22px; }
+  }
+  @media (max-width: 699px) {
+    .field input { width: 7.5em; }
+  }
+  @media (max-width: 399px) {
+    .bar-from { display: none; }
+  }
+
+  @media (min-width: 400px) {
+    .sentence { font-size: 21px; }
+  }
+
+  @media (min-width: 700px) {
+    :root { --gutter: 32px; }
+    body { font-size: 17px; }
+    .call span { display: inline; }
+    .brand span { font-family: var(--wide); font-weight: 500; font-size: 14px; letter-spacing: .01em; }
+    .call { padding: 0 14px; box-shadow: inset 0 0 0 1.5px var(--ink); }
+    .dep { grid-template-columns: 128px minmax(0, 1fr) 220px auto; gap: 6px 24px; align-items: start; padding: 24px 0; }
+    .dep-when { grid-row: auto; }
+    .dep-when .dd { font-size: 22px; }
+    .dep-price { display: block; margin-top: 0; text-align: right; }
+    .dep-price .amt { display: block; font-size: 22px; }
+    .dep-price .per { display: block; margin-top: 4px; }
+    .dep-act { grid-column: auto; flex-direction: column; align-items: flex-end; justify-content: flex-start; margin-top: 0; gap: 2px; }
+    .more-panel { grid-column: 2 / -1; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+    .open { grid-template-columns: 5fr 7fr; gap: 32px; }
+    .open-side img.tall { aspect-ratio: auto; }
+    .pick { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) auto 30px; gap: 4px 28px; padding: 20px 0; }
+    .t-name { font-size: 19px; }
+    .t-sub { grid-column: 2; grid-row: 1; font-size: 16px; }
+    .t-amt { grid-column: 3; grid-row: 1; font-size: 18px; }
+    .t-rates { grid-column: 3; grid-row: 1; justify-content: flex-end; text-align: right; }
+    .t-mark { grid-column: 4; grid-row: 1; }
+    .team-photos { gap: 16px; }
+    .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+  }
+
+  @media (min-width: 700px) and (max-width: 999px) {
+    .hero-photo { margin: 24px 0 28px; max-width: 560px; }
+    .hero-photo figcaption { padding: 0; }
+  }
+
+  @media (min-width: 1000px) {
+    .top nav { display: flex; gap: 26px; font-size: 15px; font-weight: 500; }
+    .top nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+    .top nav a:hover { text-decoration: underline; }
+    .hero { padding-top: 56px; }
+    .hero-grid { display: grid; flex-direction: initial; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end; }
+    .hero-grid h1 { grid-column: 1 / span 8; }
+    .hero-grid .lede { grid-column: 1 / span 6; font-size: 19px; }
+    .hero-photo { grid-column: 9 / span 4; grid-row: 1 / span 2; margin: 0; order: 0; }
+    .hero-photo figcaption { padding: 0; }
+    .plan { grid-column: 1 / -1; margin-top: 36px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px 48px; padding: 28px 32px 26px; align-items: start; }
+    .sentence { font-size: 28px; line-height: 1.7; grid-column: 1; }
+    .field select, .field input { font-size: 24px; }
+    .field-trip { display: inline-flex; width: auto; margin: 0; }
+    .field-trip select { width: auto; font-size: 24px; }
+    .stepper output { font-size: 24px; }
+    .trip-sum { grid-column: 1; grid-row: 2; margin-top: 0; }
+    .plan .btn { grid-column: 2; grid-row: 1; margin-top: 0; align-self: center; }
+    .plan-foot { grid-column: 2; grid-row: 2; }
+    .plan .note { margin-top: 0; }
+    .sec { padding-top: 96px; }
+    .sec-head { grid-template-columns: 5fr 7fr; align-items: end; gap: 32px; margin-bottom: 32px; }
+    .night { margin-top: 96px; padding: 96px 0 104px; }
+    .team { display: grid; grid-template-columns: 7fr 5fr; gap: 40px; align-items: start; }
+    .team .sec-head { grid-template-columns: 1fr; }
+    .team-copy { margin-top: 0; }
+    .contact { padding-top: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="concept" data-concept-banner>Website concept for Peace &amp; Wild Holidays · not the live site</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#plan" aria-label="Peace &amp; Wild Holidays, back to the top">
+      <img src="assets/logo-badge.jpg" width="40" height="40" alt="">
+      <span>Peace &amp; Wild Holidays</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#november">November</a>
+      <a href="#your-dates">On your dates</a>
+      <a href="#further">Kashmir &amp; Europe</a>
+      <a href="#teams">Team outings</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="call" href="tel:+919043938491" aria-label="Call 90439 38491">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.5h2.6l1.5 4-2 1.3a11 11 0 0 0 6.5 6.5l1.3-2 4 1.5v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z"/></svg>
+      <span class="num">90439 38491</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="plan" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <h1 id="hero-title">Come as strangers, leave as friends.</h1>
+      <p class="lede">Group trips from Chennai: weekend treks in the Western Ghats, waterfall days, Himachal, Kashmir, Europe and team outings.</p>
+
+      <form class="plan" id="plan-form" action="https://wa.me/919043938491" aria-label="Plan your trip">
+        <p class="sentence">
+          I'd like to join
+          <span class="field field-trip">
+            <label class="sr" for="trip">Trip</label>
+            <select id="trip" name="trip">
+              <optgroup label="November departures">
+                <option value="mee-nov" data-start="2026-11-14" selected>Meesapulimalai · 14–15 Nov</option>
+                <option value="him-nov" data-start="2026-11-18">Shimla, Kasol &amp; Manali · 18–23 Nov</option>
+                <option value="gok-nov" data-start="2026-11-21">Gokarna · 21–22 Nov</option>
+                <option value="gan-nov" data-start="2026-11-21">Gandikota &amp; Belum · 21–22 Nov</option>
+                <option value="kas-nov" data-start="2026-11-26">the Kashmir snow season · 26–30 Nov</option>
+              </optgroup>
+              <optgroup label="On your dates">
+                <option value="falls-day">the waterfalls day trip</option>
+                <option value="farmstay">the Nagalapuram farmstay</option>
+                <option value="private-falls">the private waterfalls &amp; jeep safari</option>
+                <option value="mee-day">the Meesapulimalai one-day trek</option>
+                <option value="kolu">a Kolukkumalai &amp; Suryanelli trip</option>
+              </optgroup>
+              <optgroup label="Kashmir">
+                <option value="kas-5">the 5-day Kashmir trip</option>
+                <option value="kas-6">the 6-day Kashmir trip</option>
+                <option value="kas-7">the 7-day Kashmir trip</option>
+                <option value="kas-8">the 8-day Kashmir trip</option>
+              </optgroup>
+              <optgroup label="Europe">
+                <option value="eu-greece">the Greece tour · 6 days</option>
+                <option value="eu-finland">the Northern Lights Finland tour · 6 days</option>
+                <option value="eu-paris">the Paris &amp; Switzerland tour · 8 days</option>
+                <option value="eu-iberia">the Spain &amp; Portugal tour · 8 days</option>
+                <option value="eu-wonders">the Euro Wonders tour · 9 days</option>
+                <option value="eu-scandi">the Scandinavia tour · 9 days</option>
+                <option value="eu-dreams">the Euro Dreams tour · 10 days</option>
+                <option value="eu-lights">the Northern Lights Scandinavia tour · 12 days</option>
+                <option value="eu-grand">the Euro Grand tour · 13 days</option>
+                <option value="eu-fun">the Fun Europa tour · 14 days</option>
+              </optgroup>
+              <optgroup label="Teams">
+                <option value="team">a corporate team outing</option>
+              </optgroup>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <span class="if-open" hidden>around
+            <span class="field"><label class="sr" for="dates">Your dates</label><input id="dates" name="dates" type="text" placeholder="your dates" autocomplete="off" enterkeyhint="done"></span>
+          </span>
+          with
+          <span class="stepper" role="group" aria-label="Number of people">
+            <button type="button" data-step="-1" aria-label="One person fewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <output id="people" class="num" aria-live="polite">2</output>
+            <button type="button" data-step="1" aria-label="One person more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          </span>
+          <span id="people-word">people</span>, leaving from
+          <span class="field">
+            <label class="sr" for="from">Leaving from</label>
+            <select id="from" name="from">
+              <option>Chennai</option>
+              <option>Bengaluru</option>
+              <option>Hyderabad</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+              <option value="another city">another city</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </p>
+        <p class="trip-sum" id="trip-sum" aria-live="polite"><b>Meesapulimalai</b> · 14–15 Nov 2026 · <span class="num">₹4,500</span> per person</p>
+        <a class="btn" id="send" href="https://wa.me/919043938491?text=Hi%20Peace%20%26%20Wild%20Holidays%2C%20I%27d%20like%20to%20join%20the%20Meesapulimalai%20trip%20on%2014%E2%80%9315%20Nov%202026%20%28%E2%82%B94%2C500%20per%20person%29.%20We%27re%202%20people%2C%20leaving%20from%20Chennai.%20Could%20you%20share%20the%20details%20and%20confirm%20the%20dates%3F">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.37-.27.3-1.03 1.02-1.03 2.48s1.06 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+          Send on WhatsApp
+        </a>
+        <div class="plan-foot">
+          <p class="note">This only opens WhatsApp with your message. Nothing is booked or paid here.</p>
+          <a class="note-call num" href="tel:+919043938491">Or call 90439 38491</a>
+        </div>
+      </form>
+
+      <figure class="hero-photo">
+        <img src="assets/waterfall.jpg" width="480" height="284" fetchpriority="high" alt="A traveller with her arms spread wide below a waterfall, forest all around">
+        <figcaption>Chikmagalur, Karnataka.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec" id="november" aria-labelledby="nov-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="nov-title">November departures</h2>
+        <p class="lede">Fixed dates with a group. Every price here is per person.</p>
+      </div>
+      <ol class="programme">
+        <li class="dep" data-trip="mee-nov" data-start="2026-11-14">
+          <div class="dep-when num"><span class="dd">14–15</span><span class="mm">Nov</span></div>
+          <div class="dep-what">
+            <h3>Meesapulimalai</h3>
+            <p>A night in Munnar, the Silent Valley viewpoint and the trek to Meesapulimalai.</p>
+          </div>
+          <div class="dep-price"><span class="amt num">₹4,500</span><span class="per">per person</span></div>
+          <div class="dep-act">
+            <button class="link-btn more" type="button" aria-expanded="false" aria-controls="m-mee">Details</button>
+            <button class="btn btn-line choose" type="button" data-choose="mee-nov"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+          <div class="more-panel" id="m-mee" hidden>
+            <dl class="facts">
+              <div><dt>Meals</dt><dd>Day 1 lunch and dinner. Day 2 breakfast and lunch.</dd></div>
+              <div><dt>Pickup and drop</dt><dd>Pickup at Bodi on 14 Nov, 10 AM. Drop at Bodi on 15 Nov, 7 PM.</dd></div>
+              <div><dt>Getting to Bodi</dt><dd>Transport from Chennai, Bengaluru and other cities at extra cost.</dd></div>
+              <div><dt>Good to know</dt><dd>Neelakurinji blooms are seasonal, and Nilgiri tahr sightings aren't guaranteed. Activities depend on weather and permissions.</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="dep" data-trip="him-nov" data-start="2026-11-18">
+          <div class="dep-when num"><span class="dd">18–23</span><span class="mm">Nov</span></div>
+          <div class="dep-what">
+            <h3>Shimla, Kasol &amp; Manali</h3>
+            <p>4 nights, 5 days in Himachal. Delhi to Delhi by tempo traveller.</p>
+          </div>
+          <div class="dep-price"><span class="amt num">₹16,000</span><span class="per">per person</span></div>
+          <div class="dep-act">
+            <button class="link-btn more" type="button" aria-expanded="false" aria-controls="m-him">Details</button>
+            <button class="btn btn-line choose" type="button" data-choose="him-nov"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+          <div class="more-panel" id="m-him" hidden>
+            <dl class="facts">
+              <div><dt>Sightseeing</dt><dd>Shimla and Kufri, Kasol and the Parvati Valley, Manali, Solang Valley, and the Kullu Valley on the way back.</dd></div>
+              <div><dt>Included</dt><dd>Pickup and drop from Delhi, 4 nights in hotels, 4 breakfasts and 4 dinners, sightseeing as per the itinerary, the vehicle with driver, tolls, taxes, fuel and parking, and help any time during the tour.</dd></div>
+              <div><dt>Not included</dt><dd>Air or train tickets, pony and yak rides, ropeway tickets, heater charges at hotels, adventure activities, travel insurance and medical costs.</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="dep" data-trip="gok-nov" data-start="2026-11-21">
+          <div class="dep-when num"><span class="dd">21–22</span><span class="mm">Nov</span></div>
+          <div class="dep-what">
+            <h3>Gokarna water games</h3>
+            <p>A weekend on the Karnataka coast: boating, kayaking, beaches, Jog Falls and Murudeshwar. Departs every weekend.</p>
+          </div>
+          <div class="dep-price"><span class="amt num">₹6,000 onwards</span><span class="per">per person from Bengaluru, <span class="num">₹8,000</span> onwards from Chennai</span></div>
+          <div class="dep-act">
+            <button class="link-btn more" type="button" aria-expanded="false" aria-controls="m-gok">Details</button>
+            <button class="btn btn-line choose" type="button" data-choose="gok-nov"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+          <div class="more-panel" id="m-gok" hidden>
+            <dl class="facts">
+              <div><dt>Pickup and drop</dt><dd>Leaves Majestic, Bengaluru, on Friday at 8 PM. Back at Majestic on Monday at 6 AM.</dd></div>
+              <div><dt>Day 1</dt><dd>Jog Falls, then boating, kayaking and a dive from the boat. Belekan, Half Moon, Paradise and Om beaches, the lighthouse, dolphin spotting (subject to sightings), a campfire with music.</dd></div>
+              <div><dt>Day 2</dt><dd>An hour of backwater boating at Honnavara, the mangrove forest boardwalk and the Murudeshwar temple.</dd></div>
+              <div><dt>Included</dt><dd>AC travel, 1 night in an AC room, breakfast on both days, dinner on day 1, the boating and water games, the backwater boat ride, sightseeing and the campfire.</dd></div>
+              <div><dt>Not included</dt><dd>Lunch on both days, dinner on the way back, personal expenses, and anything not listed above.</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="dep" data-trip="gan-nov" data-start="2026-11-21">
+          <div class="dep-when num"><span class="dd">21–22</span><span class="mm">Nov</span></div>
+          <div class="dep-what">
+            <h3>Gandikota &amp; Belum Caves</h3>
+            <p>Canyon views at Gandikota and the caves under Belum. From Chennai or Bengaluru.</p>
+          </div>
+          <div class="dep-price"><span class="amt num">₹5,500</span><span class="per">per person</span></div>
+          <div class="dep-act">
+            <button class="link-btn more" type="button" aria-expanded="false" aria-controls="m-gan">Details</button>
+            <button class="btn btn-line choose" type="button" data-choose="gan-nov"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+          <div class="more-panel" id="m-gan" hidden>
+            <dl class="facts">
+              <div><dt>Who it's for</dt><dd>Come solo, with friends, as a group or with family.</dd></div>
+              <div><dt>Good to know</dt><dd>Activities and views depend on the weather and local permissions. Ask us on WhatsApp what's included.</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="dep" data-trip="kas-nov" data-start="2026-11-26">
+          <div class="dep-when num"><span class="dd">26–30</span><span class="mm">Nov</span></div>
+          <div class="dep-what">
+            <h3>Kashmir in the snow season</h3>
+            <p>4 nights, 5 days, Srinagar to Srinagar, with Gulmarg, Sonmarg and Pahalgam.</p>
+          </div>
+          <div class="dep-price"><span class="amt num">₹17,500</span><span class="per">per person</span></div>
+          <div class="dep-act">
+            <button class="link-btn more" type="button" aria-expanded="false" aria-controls="m-kas">Details</button>
+            <button class="btn btn-line choose" type="button" data-choose="kas-nov"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+          <div class="more-panel" id="m-kas" hidden>
+            <dl class="facts">
+              <div><dt>Where you go</dt><dd>Srinagar: Dal Lake, a shikara ride, the Mughal gardens. Gulmarg: the gondola, snow activities, skiing if you want it. Sonmarg: Thajiwas glacier. Pahalgam: Aru and Betaab valleys and the Lidder river.</dd></div>
+              <div><dt>Included</dt><dd>Pickup and drop at Srinagar airport, 4 nights in a hotel or resort, breakfast and dinner every day, transfers and sightseeing, the shikara ride on Dal Lake, snow activities (weather permitting), tolls, parking and driver charges.</dd></div>
+              <div><dt>Not included</dt><dd>Other meals, the gondola ride, adventure activities such as skiing, and personal expenses.</dd></div>
+            </dl>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="your-dates" aria-labelledby="dates-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="dates-title">On your dates</h2>
+        <p class="lede">Day trips and short stays near Chennai and in Munnar. Send us the dates you have in mind and we'll check them.</p>
+      </div>
+      <ul class="opens">
+        <li class="open" data-trip="falls-day">
+          <div class="open-side">
+            <figure>
+              <img class="tall" src="assets/underwater.jpg" width="360" height="320" loading="lazy" alt="A group of travellers photographed underwater in a clear forest pool">
+              <figcaption>Under the water at a waterfall near Chennai.</figcaption>
+            </figure>
+          </div>
+          <div class="open-main">
+            <h3>Waterfalls day trip from Chennai</h3>
+            <p>A day at Aare Waterfalls near Nagalapuram: snorkelling, cliff jumps, natural water slides and swimming lessons from the guides, who hand out life jackets and goggles. Homemade veg and non-veg food is included.</p>
+            <p>There's also a private-waterfalls day: a two-hour off-road jeep safari, two private waterfalls and farm activities. Ask for its price on WhatsApp.</p>
+            <p class="from num">From ₹1,500 <small>per adult, ₹750 per child</small></p>
+            <p class="cap">Water activities depend on water levels, the weather and the guide's call.</p>
+            <button class="btn btn-line choose" type="button" data-choose="falls-day"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+        </li>
+
+        <li class="open" data-trip="farmstay">
+          <div class="open-side">
+            <figure>
+              <img class="tall" src="assets/farmstay.jpg" width="360" height="276" loading="lazy" alt="Travellers, a child among them, standing together outside the farmstay under the trees">
+              <figcaption>Travellers at the farmstay near Nagalapuram.</figcaption>
+            </figure>
+          </div>
+          <div class="open-main">
+            <h3>Nagalapuram forest farmstay &amp; waterfalls</h3>
+            <p>One night, two days. Afternoon in the pool, games and a tractor ride, then a campfire and dinner. Next morning you walk to two waterfalls a kilometre from the stay, and stop at the dam and temples on the way home.</p>
+            <table class="rates">
+              <thead><tr><th scope="col">Stay</th><th scope="col" class="num">Adult</th><th scope="col" class="num">Child, 4–12</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Tent</th><td class="num">₹1,900</td><td class="num">₹1,200</td></tr>
+                <tr><th scope="row">Dormitory</th><td class="num">₹2,500</td><td class="num">₹1,500</td></tr>
+                <tr><th scope="row">AC room</th><td class="num">₹3,000</td><td class="num">₹2,000</td></tr>
+              </tbody>
+            </table>
+            <p class="cap">Includes the stay, breakfast, lunch and dinner, evening tea, the pool, farm activities, the waterfall trek and the campfire. Check in 3 PM, check out 2 PM. BBQ costs extra. Come in your own vehicle or ask for transport from Chennai (extra).</p>
+            <button class="btn btn-line choose" type="button" data-choose="farmstay"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+        </li>
+
+        <li class="open" data-trip="mee-day">
+          <div class="open-side">
+            <p class="big num">Daily<small>4 AM to 5 PM, Munnar to Munnar, weather permitting</small></p>
+          </div>
+          <div class="open-main">
+            <h3>Meesapulimalai one-day trek</h3>
+            <p>A jeep up via Base Camp and Rhodo Mansion, then about 4 km on foot through shola forest and grassland to the peak. Meet at Munnar bus stand by 4 AM.</p>
+            <table class="rates">
+              <thead><tr><th scope="col">Package</th><th scope="col" class="num">Adult</th><th scope="col" class="num">Child</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">One-day trek</th><td class="num">₹4,500</td><td class="num">₹3,500</td></tr>
+                <tr><th scope="row">Tent camping + trek</th><td class="num">₹5,500</td><td class="num">₹4,500</td></tr>
+                <tr><th scope="row">Rhodo Mansion stay + trek</th><td class="num">₹6,500</td><td class="num">₹5,000</td></tr>
+              </tbody>
+            </table>
+            <p class="cap">The one-day trek includes the jeep, breakfast and lunch. A room in Munnar the night before costs extra. Stay options are subject to availability. Expect little or no phone signal on the trail.</p>
+            <button class="btn btn-line choose" type="button" data-choose="mee-day"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+        </li>
+
+        <li class="open" data-trip="kolu">
+          <div class="open-side">
+            <figure>
+              <img src="assets/jaguar-rock.jpg" width="360" height="214" loading="lazy" alt="A traveller in a maroon dress poses beside an overhanging rock above the clouds">
+              <figcaption>Jaguar Rock, Kolukkumalai.</figcaption>
+            </figure>
+          </div>
+          <div class="open-main">
+            <h3>Kolukkumalai &amp; Suryanelli</h3>
+            <p>Sunrise over the cloud beds at Kolukkumalai, an off-road jeep through the tea estates, the tea factory, Jaguar Rock and a trek up Bose Peak. Stay in a luxury room, an A-frame or a tent.</p>
+            <p class="from">Quoted for your group</p>
+            <p class="cap">The price depends on your dates, group size, stay and activities. Meal plans and activity inclusions are confirmed while booking.</p>
+            <button class="btn btn-line choose" type="button" data-choose="kolu"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Choose</span></button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="night" id="further" aria-labelledby="further-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="further-title">Kashmir and Europe</h2>
+        <p class="lede">Longer holidays, priced per person. Choose one to add it to your enquiry.</p>
+      </div>
+
+      <h3 class="block">Kashmir</h3>
+      <p class="block-note">Srinagar, Gulmarg, Pahalgam, Sonmarg and a night on a houseboat.</p>
+      <ul class="tours">
+        <li class="tour kas" data-trip="kas-5"><button class="pick" type="button" data-choose="kas-5" aria-pressed="false"><span class="t-name">5 days, 4 nights</span><span class="t-sub">Srinagar 3 nights, houseboat&nbsp;1</span><span class="t-rates num"><span>2-star hotels <b>₹15,600</b></span><span>3-star hotels <b>₹19,000</b></span></span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour kas" data-trip="kas-6"><button class="pick" type="button" data-choose="kas-6" aria-pressed="false"><span class="t-name">6 days, 5 nights</span><span class="t-sub">Srinagar 3, Pahalgam 1, houseboat&nbsp;1</span><span class="t-rates num"><span>2-star hotels <b>₹17,850</b></span><span>3-star hotels <b>₹22,400</b></span></span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour kas" data-trip="kas-7"><button class="pick" type="button" data-choose="kas-7" aria-pressed="false"><span class="t-name">7 days, 6 nights</span><span class="t-sub">Srinagar 4, Pahalgam 1, houseboat&nbsp;1</span><span class="t-rates num"><span>2-star hotels <b>₹20,200</b></span><span>3-star hotels <b>₹25,700</b></span></span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour kas" data-trip="kas-8"><button class="pick" type="button" data-choose="kas-8" aria-pressed="false"><span class="t-name">8 days, 7 nights</span><span class="t-sub">Srinagar 3, Pahalgam 2, Gulmarg 1, houseboat&nbsp;1, with the tulip garden</span><span class="t-rates num"><span>Standard <b>₹32,300</b></span><span>Deluxe <b>₹40,050</b></span><span>Super deluxe <b>₹45,800</b></span></span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+      </ul>
+      <p class="incl">Prices are per person and start from the figure shown (the 8-day plan is priced for 2 guests). Every plan includes hotel and houseboat stays, breakfast and dinner daily, airport pickup and drop at Srinagar, transfers and sightseeing by private vehicle, a shikara ride on Dal Lake, driver allowance, parking and tolls, and help on the ground any time.</p>
+
+      <h3 class="block">Europe</h3>
+      <p class="block-note">Fixed departures and made-to-order trips every month, from Chennai, Bengaluru, Hyderabad, Delhi, Mumbai and other cities.</p>
+      <ul class="tours">
+        <li class="tour" data-trip="eu-greece"><button class="pick" type="button" data-choose="eu-greece" aria-pressed="false"><span class="t-name">Greece</span><span class="t-sub"><span class="num">6 days, 5 nights</span> · Athens, Santorini, Mykonos</span><span class="t-amt num">₹2,10,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-finland"><button class="pick" type="button" data-choose="eu-finland" aria-pressed="false"><span class="t-name">Northern Lights Finland</span><span class="t-sub"><span class="num">6 days, 5 nights</span> · Helsinki, Jyväskylä, Rovaniemi</span><span class="t-amt num">₹2,95,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-paris"><button class="pick" type="button" data-choose="eu-paris" aria-pressed="false"><span class="t-name">Paris &amp; Switzerland</span><span class="t-sub"><span class="num">8 days, 7 nights</span> · Paris, Lucerne, Interlaken, Jungfrau</span><span class="t-amt num">₹2,16,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-iberia"><button class="pick" type="button" data-choose="eu-iberia" aria-pressed="false"><span class="t-name">Spain &amp; Portugal</span><span class="t-sub"><span class="num">8 days, 7 nights</span> · Barcelona, Madrid, Seville, Lisbon, Sintra</span><span class="t-amt num">₹2,63,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-wonders"><button class="pick" type="button" data-choose="eu-wonders" aria-pressed="false"><span class="t-name">Euro Wonders</span><span class="t-sub"><span class="num">9 days, 8 nights</span> · France, Switzerland, the Netherlands, Germany, Belgium</span><span class="t-amt num">₹2,46,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-scandi"><button class="pick" type="button" data-choose="eu-scandi" aria-pressed="false"><span class="t-name">Scandinavia</span><span class="t-sub"><span class="num">9 days, 8 nights</span> · Copenhagen, Oslo, Stockholm, an overnight cruise, Helsinki</span><span class="t-amt num">₹3,05,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-dreams"><button class="pick" type="button" data-choose="eu-dreams" aria-pressed="false"><span class="t-name">Euro Dreams</span><span class="t-sub"><span class="num">10 days, 9 nights</span> · France, Switzerland, Italy, the Vatican, Austria</span><span class="t-amt num">₹2,63,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-lights"><button class="pick" type="button" data-choose="eu-lights" aria-pressed="false"><span class="t-name">Northern Lights Scandinavia</span><span class="t-sub"><span class="num">12 days, 11 nights</span> · Copenhagen, Oslo, Stockholm, Jyväskylä, Kemi, Rovaniemi, Helsinki</span><span class="t-amt num">₹3,70,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-grand"><button class="pick" type="button" data-choose="eu-grand" aria-pressed="false"><span class="t-name">Euro Grand</span><span class="t-sub"><span class="num">13 days, 12 nights</span> · Paris, Lucerne, Interlaken, Venice, Innsbruck, Munich</span><span class="t-amt num">₹3,05,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+        <li class="tour" data-trip="eu-fun"><button class="pick" type="button" data-choose="eu-fun" aria-pressed="false"><span class="t-name">Fun Europa</span><span class="t-sub"><span class="num">14 days, 13 nights</span> · Prague, Vienna, Budapest, Split, Dubrovnik, Athens, Santorini, Mykonos</span><span class="t-amt num">₹3,20,000</span><span class="t-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 12.5 4 4L18.5 7.5"/></svg></span></button></li>
+      </ul>
+      <p class="incl">Prices are per person on double sharing. Each tour includes return flights, 3-star or better hotels, breakfast and dinner daily, transfers and sightseeing as per the itinerary, visa assistance, travel insurance (applicable for age 59+) and a tour manager.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="teams" aria-labelledby="teams-title">
+    <div class="wrap team">
+      <div class="team-photos">
+        <figure class="wide">
+          <img src="assets/group.jpg" width="480" height="320" loading="lazy" alt="A large group of colleagues pose together on a paved garden path under tall trees">
+          <figcaption>The team in Chikmagalur.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/jeep.jpg" width="480" height="400" loading="lazy" alt="Travellers smiling from the back of an open off-road jeep">
+          <figcaption>Off-road jeep.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/lakeside.jpg" width="480" height="400" loading="lazy" alt="Seven travellers stand by a lake with green hills behind them">
+          <figcaption>By the lake.</figcaption>
+        </figure>
+      </div>
+      <div class="team-copy">
+        <h2 id="teams-title">Team outings</h2>
+        <p>On 31 October and 1 November 2026 we took a corporate team to Chikmagalur for two days and a night: off-road jeep rides, Mullayanagiri Peak, waterfalls, a coffee plantation and a resort stay.</p>
+        <p>We plan corporate trips, team-building days, adventure outings and resort getaways across India. Tell us how many of you there are and roughly when.</p>
+        <button class="btn choose team-choose" type="button" data-choose="team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg><span>Plan a team outing</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">We sell fun.</h2>
+      <dl class="contact-grid">
+        <div><dt>Call or WhatsApp</dt><dd><a class="num" href="tel:+919043938491">90439 38491</a></dd></div>
+        <div><dt>Office</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=No%20100%2C%20LB%20Road%2C%20Adyar%2C%20Chennai%20600020" target="_blank" rel="noopener">No 100, LB Road, Adyar, Chennai 600020</a></dd></div>
+        <div><dt>WhatsApp channel</dt><dd><a href="https://whatsapp.com/channel/0029Vb9zCL14SpkBkAGUz22H" target="_blank" rel="noopener">Follow our WhatsApp channel</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://instagram.com/peaceandwildholidays" target="_blank" rel="noopener">@peaceandwildholidays</a></dd></div>
+        <div><dt>Founder</dt><dd><a href="https://instagram.com/kaarthikkks" target="_blank" rel="noopener">@kaarthikkks</a></dd></div>
+        <div><dt>Registered</dt><dd class="num"><span class="nowrap">GST 33AGKPN1466F1ZH</span> · <span class="nowrap">MSME UDYAM-TN-02-0414095</span></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Peace &amp; Wild Holidays · Travel, discover, repeat. Trips, dates and prices on this page are taken from the company's Instagram posts of October and November 2026.</p>
+  </div>
+</footer>
+
+<div class="bar" id="bar" role="region" aria-label="Your enquiry">
+  <div class="wrap">
+    <a class="bar-trip" href="#plan"><small id="bar-who">14–15 Nov · 2 people<span class="bar-from"> · from Chennai</span></small><b id="bar-name">Meesapulimalai</b></a>
+    <a class="btn" id="bar-send" href="https://wa.me/919043938491">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.37-.27.3-1.03 1.02-1.03 2.48s1.06 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+      Enquire
+    </a>
+  </div>
+</div>
+
+<script>
+  /* The enquiry: plain script, no libraries, so the WhatsApp links always work. */
+  (function () {
+    var WA = "919043938491";
+    // Every trip the sentence can carry, with its posted date and price (from their Instagram posts, Nov 2026).
+    var TRIPS = {
+      "mee-nov": { say: "the Meesapulimalai trip", name: "Meesapulimalai", when: "14–15 Nov 2026", price: "₹4,500 per person", dated: true },
+      "him-nov": { say: "the Shimla, Kasol & Manali trip", name: "Shimla, Kasol & Manali", when: "18–23 Nov 2026", price: "₹16,000 per person, Delhi to Delhi", dated: true },
+      "gok-nov": { say: "the Gokarna water games weekend", name: "Gokarna water games", when: "21–22 Nov 2026", price: "₹6,000 onwards per person from Bengaluru, ₹8,000 onwards from Chennai", dated: true },
+      "gan-nov": { say: "the Gandikota & Belum Caves trip", name: "Gandikota & Belum Caves", when: "21–22 Nov 2026", price: "₹5,500 per person", dated: true },
+      "kas-nov": { say: "the Kashmir snow-season trip", name: "Kashmir in the snow season", when: "26–30 Nov 2026", price: "₹17,500 per person, Srinagar to Srinagar", dated: true },
+      "falls-day": { say: "a waterfalls day trip from Chennai", name: "Waterfalls day trip from Chennai", price: "from ₹1,500 per adult, ₹750 per child" },
+      "farmstay": { say: "the Nagalapuram farmstay and waterfalls", name: "Nagalapuram farmstay & waterfalls", price: "from ₹1,900 per adult in a tent" },
+      "private-falls": { say: "the private waterfalls and jeep safari", name: "Private waterfalls & jeep safari", price: "price on WhatsApp" },
+      "mee-day": { say: "the Meesapulimalai one-day trek", name: "Meesapulimalai one-day trek", price: "from ₹4,500 per adult" },
+      "kolu": { say: "a Kolukkumalai and Suryanelli getaway", name: "Kolukkumalai & Suryanelli getaway", price: "quoted for your group" },
+      "kas-5": { say: "the 5-day Kashmir package", name: "Kashmir, 5 days / 4 nights", price: "from ₹15,600 per person" },
+      "kas-6": { say: "the 6-day Kashmir package", name: "Kashmir, 6 days / 5 nights", price: "from ₹17,850 per person" },
+      "kas-7": { say: "the 7-day Kashmir package", name: "Kashmir, 7 days / 6 nights", price: "from ₹20,200 per person" },
+      "kas-8": { say: "the 8-day Kashmir package", name: "Kashmir, 8 days / 7 nights", price: "from ₹32,300 per person" },
+      "eu-greece": { say: "the Greece tour (6 days)", name: "Greece, 6 days", price: "₹2,10,000 per person" },
+      "eu-finland": { say: "the Northern Lights Finland tour (6 days)", name: "Northern Lights Finland, 6 days", price: "₹2,95,000 per person" },
+      "eu-paris": { say: "the Paris and Switzerland tour (8 days)", name: "Paris & Switzerland, 8 days", price: "₹2,16,000 per person" },
+      "eu-iberia": { say: "the Spain and Portugal tour (8 days)", name: "Spain & Portugal, 8 days", price: "₹2,63,000 per person" },
+      "eu-wonders": { say: "the Euro Wonders tour (9 days)", name: "Euro Wonders, 9 days", price: "₹2,46,000 per person" },
+      "eu-scandi": { say: "the Scandinavia tour (9 days)", name: "Scandinavia, 9 days", price: "₹3,05,000 per person" },
+      "eu-dreams": { say: "the Euro Dreams tour (10 days)", name: "Euro Dreams, 10 days", price: "₹2,63,000 per person" },
+      "eu-lights": { say: "the Northern Lights Scandinavia tour (12 days)", name: "Northern Lights Scandinavia, 12 days", price: "₹3,70,000 per person" },
+      "eu-grand": { say: "the Euro Grand tour (13 days)", name: "Euro Grand, 13 days", price: "₹3,05,000 per person" },
+      "eu-fun": { say: "the Fun Europa tour (14 days)", name: "Fun Europa, 14 days", price: "₹3,20,000 per person" },
+      "team": { name: "Corporate team outing", price: "planned for your team", team: true }
+    };
+
+    document.documentElement.classList.add("js");
+    var trip = document.getElementById("trip");
+    var from = document.getElementById("from");
+    var dates = document.getElementById("dates");
+    var open = document.querySelector(".if-open");
+    var peopleOut = document.getElementById("people");
+    var peopleWord = document.getElementById("people-word");
+    var sum = document.getElementById("trip-sum");
+    var send = document.getElementById("send");
+    var bar = document.getElementById("bar");
+    var barName = document.getElementById("bar-name");
+    var barWho = document.getElementById("bar-who");
+    var barSend = document.getElementById("bar-send");
+    var people = 2;
+    var wide = window.matchMedia("(min-width: 1000px)");
+    var ctx = document.createElement("canvas").getContext("2d");
+
+    // A select is as wide as its longest option; size it to the chosen one so the sentence reads as a sentence.
+    function fit(sel, always) {
+      if (!ctx || !sel.options.length) return;
+      if (!always && !wide.matches) { sel.style.width = ""; return; }
+      var cs = getComputedStyle(sel);
+      ctx.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+      var w = ctx.measureText(sel.options[sel.selectedIndex].text).width;
+      sel.style.width = Math.ceil(w + parseFloat(cs.paddingRight) + parseFloat(cs.paddingLeft) + 6) + "px";
+    }
+    function fitAll() { fit(trip, false); fit(from, true); }
+
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+    function message() {
+      var t = TRIPS[trip.value] || TRIPS["mee-nov"];
+      var when = t.dated ? t.when : dates.value.trim();
+      var who = t.team ? "We're a team of " + people : (people === 1 ? "I'm travelling alone" : "We're " + people + " people");
+      var line = t.team
+        ? "Hi Peace & Wild Holidays, I'd like to plan a corporate team outing" + (when ? ", around " + when : "") + "."
+        : "Hi Peace & Wild Holidays, I'd like to join " + t.say + (when ? (t.dated ? " on " : ", around ") + when : "") + (/₹/.test(t.price) ? " (" + t.price + ")" : "") + ".";
+      return line + " " + who + ", leaving from " + from.value + ". Could you share the details and confirm the dates?";
+    }
+
+    function update(swap) {
+      var t = TRIPS[trip.value] || TRIPS["mee-nov"];
+      var opt = trip.options[trip.selectedIndex];
+      if (open) open.hidden = !!t.dated;
+      peopleOut.textContent = people;
+      peopleWord.textContent = people === 1 ? "person" : "people";
+      var whenTxt = t.dated ? t.when : (dates.value.trim() ? "around " + dates.value.trim() : "your dates");
+      sum.innerHTML = "<b>" + esc(t.name) + "</b> · " + esc(whenTxt) + " · <span class=\"num\">" + esc(t.price) + "</span>";
+      var href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(message());
+      send.href = href;
+      barSend.href = href;
+      // The city is dropped on narrow phones (CSS hides .bar-from) so the date and head count never get cut off.
+      barWho.innerHTML = esc((t.dated ? t.when.replace(" 2026", "") + " · " : "") + people + (people === 1 ? " person" : " people")) +
+        '<span class="bar-from"> · from ' + esc(from.value) + "</span>";
+      barName.textContent = t.name;
+      if (swap) { barName.classList.remove("swap"); void barName.offsetWidth; barName.classList.add("swap"); }
+      fitAll();
+      document.querySelectorAll("[data-trip]").forEach(function (row) {
+        var on = row.getAttribute("data-trip") === trip.value;
+        row.classList.toggle("is-chosen", on);
+        var b = row.querySelector(".choose span");
+        if (b && !row.querySelector(".team-choose")) b.textContent = on ? "Chosen" : "Choose";
+        var btn = row.querySelector("[data-choose]");
+        if (btn) btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+
+    trip.addEventListener("change", function () { update(true); });
+    from.addEventListener("change", function () { update(false); });
+    dates.addEventListener("input", function () { update(false); });
+    document.querySelectorAll(".stepper button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        people = Math.max(1, Math.min(99, people + Number(b.getAttribute("data-step"))));
+        update(false);
+      });
+    });
+    document.getElementById("plan-form").addEventListener("submit", function (e) { e.preventDefault(); window.open(send.href, "_blank"); });
+
+    // "Choose" anywhere on the page writes that trip into the sentence and the bar.
+    document.querySelectorAll("[data-choose]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        trip.value = b.getAttribute("data-choose");
+        update(true);
+        // A team needs its head count, so go back up to the sentence.
+        if (b.classList.contains("team-choose")) document.getElementById("plan").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // Details open and close in place.
+    document.querySelectorAll(".more").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        var isOpen = b.getAttribute("aria-expanded") === "true";
+        b.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        b.textContent = isOpen ? "Details" : "Close details";
+        panel.hidden = isOpen;
+      });
+    });
+
+    // The bar shows once the sentence has scrolled away, and steps aside at the contact block.
+    var sendEl = document.getElementById("send");
+    var contact = document.getElementById("contact");
+    var formVisible = true, contactVisible = false;
+    function showBar() { bar.classList.toggle("show", !formVisible && !contactVisible); }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { formVisible = e.isIntersecting; }); showBar(); }).observe(sendEl);
+      new IntersectionObserver(function (es) { es.forEach(function (e) { contactVisible = e.isIntersecting; }); showBar(); }).observe(contact);
+    } else {
+      bar.classList.add("show");
+    }
+
+    // Departed trips drop off by themselves: a dated row or option whose start date has passed is removed,
+    // and the sentence falls back to the next departure (or to the first "on your dates" trip).
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    document.querySelectorAll("[data-start]").forEach(function (el) {
+      if (new Date(el.getAttribute("data-start") + "T00:00:00") <= today) el.remove();
+    });
+    if (!document.querySelector(".dep")) {
+      var nov = document.getElementById("november");
+      if (nov) nov.remove();
+      var link = document.querySelector('.top nav a[href="#november"]');
+      if (link) link.remove();
+      var group = trip.querySelector("optgroup");
+      if (group && !group.children.length) group.remove();
+    }
+    if (!TRIPS[trip.value]) trip.selectedIndex = 0;
+
+    update(false);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+    window.addEventListener("resize", fitAll);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Keep this: mock sites must never show up in Google -->
+<meta name="robots" content="noindex, nofollow">
+<title>Peace &amp; Wild Holidays · Website concept</title>
+<meta name="description" content="Group trips, treks and holidays from Chennai by Peace &amp; Wild Holidays. A website concept.">
+<meta name="theme-color" content="#0e1a14">
+<link rel="icon" href="assets/logo-badge.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette from Peace & Wild: the forest-black of the logo, the yellow of their "We sell the fun"
+     poster banners and logo ring, the deep green of their poster footers, and their cream. */
+  :root {
+    --night: #0e1a14;
+    --night-2: #15261d;
+    --ink: #14231b;
+    --muted: #4f5e55;
+    --sun: #ffc83d;
+    --sun-press: #f2b51d;
+    --leaf: #8fd8b5;
+    --moss: #1b4430;
+    --moss-2: #22543b;
+    --sand: #f2ecdd;
+    --sand-2: #e5dbc3;
+    --card: #ffffff;
+    --line: #ddd3bd;
+    --on-dark: rgba(255, 255, 255, .8);
+    --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --body: "Figtree", "Segoe UI", Roboto, Arial, sans-serif;
+    --r: 14px;
+    --wrap: 1240px;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { margin: 0; background: var(--sand); color: var(--ink); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html.locked, html.locked body { overflow: hidden; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button, input, select { font: inherit; color: inherit; }
+  button { background: none; border: 0; padding: 0; cursor: pointer; }
+  ::selection { background: var(--sun); color: var(--night); }
+  :focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+  .ic { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3, .h { font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: .9; letter-spacing: .005em; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(48px, 13.5vw, 88px); color: var(--ink); }
+  .lead { font-size: 17px; color: var(--muted); max-width: 34em; margin: 14px 0 0; }
+  .sec { padding: 56px 0; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Buttons: pills in Peace & Wild yellow */
+  /* unslop-ignore: pill buttons and filter chips are a deliberate choice for this design */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 999px; /* unslop-ignore */ font-weight: 700; font-size: 17px; text-decoration: none; text-align: center; line-height: 1.2; transition: transform .14s var(--ease), background-color .2s; -webkit-tap-highlight-color: transparent; }
+  .btn:active { transform: scale(.97); }
+  .btn.sun { background: var(--sun); color: var(--night); }
+  .btn.sun:hover { background: var(--sun-press); }
+  .btn.line { border: 2px solid rgba(255,255,255,.85); color: #fff; }
+  .btn.line:hover { background: rgba(255,255,255,.08); }
+  .btn.dark { background: var(--night); color: #fff; }
+  .btn .ic { width: 22px; height: 22px; }
+  .btn svg.wa { width: 21px; height: 21px; fill: currentColor; stroke: none; }
+
+  /* Concept banner: required on every mock */
+  .concept { background: #000; color: #d9e0dc; text-align: center; font-size: 12px; line-height: 1.4; padding: 7px 14px; }
+
+  /* Header */
+  .top { position: sticky; top: 0; z-index: 30; background: var(--night); border-bottom: 1px solid rgba(255,255,255,.08); }
+  .bar { display: flex; align-items: center; gap: 10px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin-right: auto; min-height: 44px; }
+  .brand img { width: 44px; height: 44px; border-radius: 50%; background: #fff; }
+  .brand b { display: none; font-family: var(--display); font-weight: 800; font-size: 23px; letter-spacing: .01em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  .brand small { display: none; font-size: 12px; font-weight: 600; letter-spacing: .28em; color: var(--leaf); margin-left: 4px; }
+  .nav { display: none; }
+  .enq { min-height: 44px; padding: 0 12px; font-size: 16px; gap: 6px; flex: none; }
+  .menu-btn { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.35); color: #fff; display: grid; place-items: center; }
+  .menu-btn .ic { width: 22px; height: 22px; }
+  .drawer { display: grid; background: var(--night); border-top: 1px solid rgba(255,255,255,.08); padding: 6px 16px 18px; }
+  .drawer[hidden] { display: none; }
+  .drawer a { color: #fff; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 30px; text-transform: uppercase; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .brand { gap: 8px; min-width: 0; }
+  @media (min-width: 360px) { .brand b { display: block; font-size: 19px; } }
+  @media (min-width: 390px) { .brand b { font-size: 22px; } .brand { gap: 10px; } }
+
+  /* Hero */
+  .hero { background: var(--night) url("assets/contours.svg") right -120px top -60px / 520px no-repeat; color: #fff; padding-bottom: 40px; overflow: hidden; }
+  .hero-pic { position: relative; height: clamp(190px, 34svh, 340px); margin: 0 -16px; }
+  .hero-pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .hero-pic::after { content: ""; position: absolute; inset: auto 0 0 0; height: 22%; background: linear-gradient(to bottom, rgba(14,26,20,0), var(--night)); }
+  .pill-tag { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 14px; border-radius: 6px; background: rgba(14,26,20,.82); color: var(--leaf); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .hero-pic .pill-tag { position: absolute; left: 16px; top: 12px; z-index: 1; }
+  .hero-copy { padding-top: 14px; }
+  .hero h1 { font-size: clamp(66px, 22vw, 150px); line-height: .86; }
+  .hero h1 span { display: block; }
+  .hero p { font-size: 17px; line-height: 1.55; color: var(--on-dark); margin: 14px 0 20px; max-width: 32em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cta .btn { flex: 1 1 150px; padding: 0 12px; font-size: 16px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.16); }
+  .stats b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(34px, 10vw, 54px); line-height: 1; color: var(--leaf); }
+  .stats span { display: block; font-size: 14px; line-height: 1.35; color: var(--on-dark); margin-top: 6px; }
+
+  /* Filter chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { min-height: 44px; padding: 0 18px; border-radius: 999px; /* unslop-ignore */ border: 1.5px solid var(--line); background: transparent; font-weight: 600; font-size: 15px; white-space: nowrap; transition: transform .14s var(--ease), background-color .2s; }
+  .chip:active { transform: scale(.96); }
+  .chip[aria-pressed="true"], .chip[aria-selected="true"] { background: var(--night); border-color: var(--night); color: #fff; }
+  .tabs { margin: 24px 0 20px; }
+  .tabs .chip { background: var(--sand-2); border-color: var(--sand-2); }
+  .tabs .chip[aria-selected="true"] { background: var(--night); border-color: var(--night); }
+
+  /* Swipe rows */
+  .rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; padding: 0 16px 10px; margin: 0 -16px; scrollbar-width: thin; scrollbar-color: var(--sand-2) transparent; overscroll-behavior-x: contain; }
+  .rail > * { scroll-snap-align: start; flex: none; }
+  .rail-wrap { position: relative; }
+  #where { overflow: hidden; }
+  .rail-btns { display: none; }
+
+  /* Place cards: dark photo or graphic cards with a count pill */
+  .place { position: relative; width: min(78vw, 300px); height: 250px; border-radius: var(--r); overflow: hidden; background: var(--night); color: #fff; text-align: left; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; isolation: isolate; transition: transform .16s var(--ease); }
+  .place:active { transform: scale(.98); }
+  .place img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .place::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(14,26,20,0) 25%, rgba(14,26,20,.9)); }
+  .place .count { position: absolute; top: 14px; left: 14px; }
+  .h { display: block; }
+  .place .h { font-size: 40px; }
+  .place .p { display: block; margin: 8px 0 0; font-size: 15px; line-height: 1.4; color: var(--on-dark); }
+  .count { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 6px; background: var(--night); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+  .act { width: 190px; height: 190px; padding: 16px; justify-content: space-between; background: var(--night); }
+  .act::before { display: none; }
+  .act .ic { width: 34px; height: 34px; color: var(--leaf); stroke-width: 1.6; }
+  .act .h { font-size: 30px; }
+  .act .count { position: static; align-self: flex-start; background: rgba(255,255,255,.12); }
+
+  /* Poster tiles for trips without their own photos: a flat colour over map contours, the date in yellow, the place in cream */
+  .tile { position: relative; background-color: var(--tile, #24433a); background-image: url("assets/contours.svg"); background-size: 420px; background-position: 30% 40%; overflow: hidden; }
+  .poster { position: absolute; left: 16px; right: 16px; bottom: 12px; font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: .88; }
+  .poster .when { display: block; font-size: 30px; color: var(--sun); margin-bottom: 4px; }
+  .poster .where { display: block; font-size: 60px; color: rgba(242,236,221,.94); letter-spacing: .01em; }
+  .place.tile::before { display: none; }
+  .place.tile .dests { display: block; font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1; text-transform: uppercase; color: var(--sun); margin-bottom: 6px; }
+  .place.tile .h { font-size: 50px; color: rgba(242,236,221,.96); }
+  .t-sea { --tile: #0f4b57; }
+  .t-snow { --tile: #31475c; }
+  .t-euro { --tile: #233149; }
+  .t-hill { --tile: #2b5537; }
+  .t-rust { --tile: #7c4224; }
+  .t-ice { --tile: #3a5871; }
+
+  /* Signature band: the November departures */
+  .band { background: var(--moss); color: #fff; padding: 56px 0 0; overflow: hidden; }
+  .band h2 { color: #fff; }
+  .band .lead { color: var(--on-dark); }
+  .band .pill-tag { background: rgba(0,0,0,.22); margin-bottom: 18px; }
+  .deps { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid rgba(255,255,255,.16); }
+  .dep { display: grid; grid-template-columns: 1fr 44px; grid-template-areas: "date go" "main go"; align-items: center; gap: 4px 14px; width: 100%; text-align: left; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: #fff; transition: background-color .2s; }
+  .dep:active .dep-go { transform: scale(.92); }
+  .dep-date { grid-area: date; display: flex; align-items: baseline; gap: 6px; }
+  .dep-main { grid-area: main; }
+  .dep-go { grid-area: go; }
+  .dep-date b { display: block; font-family: var(--display); font-weight: 800; font-size: 26px; line-height: .95; color: var(--sun); }
+  .dep-date small { display: block; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--on-dark); }
+  .dep-main strong { display: block; font-family: var(--display); font-weight: 800; font-size: 27px; line-height: 1; text-transform: uppercase; }
+  .dep-main span { display: block; font-size: 15px; line-height: 1.4; color: var(--on-dark); margin-top: 4px; }
+  .dep-main .dep-price { color: #fff; font-weight: 700; }
+  .dep-go { width: 44px; height: 44px; border-radius: 50%; background: var(--sun); color: var(--night); display: grid; place-items: center; transition: transform .14s var(--ease); }
+  .band .after { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 24px 0 0; }
+  .band .note { font-size: 15px; color: var(--on-dark); margin: 0; }
+  .band-pic { margin: 40px -16px 0; position: relative; }
+  .band-pic img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 70%; }
+  .band-pic figcaption { position: absolute; left: 16px; bottom: 14px; }
+  .band .band-pic .pill-tag { background: rgba(14,26,20,.86); margin: 0; }
+
+  /* How long have you got */
+  .lens { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
+  .len { position: relative; display: flex; flex-direction: column; text-align: left; min-height: 200px; padding: 18px; border-radius: var(--r); background: var(--night); color: #fff; transition: transform .16s var(--ease); }
+  .len:active { transform: scale(.98); }
+  .meter { display: flex; gap: 5px; margin-bottom: 16px; }
+  .meter i { width: 22px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.22); }
+  .meter i.on { background: var(--leaf); }
+  .len .h { font-size: 36px; }
+  .len .p { display: block; margin: 8px 0 18px; font-size: 15px; line-height: 1.45; color: var(--on-dark); }
+  .len .count { margin-top: auto; align-self: flex-start; background: rgba(255,255,255,.12); }
+  @media (min-width: 360px) { .lens { grid-template-columns: 1fr 1fr; } .len { padding: 16px; } .len .h { font-size: 30px; } }
+
+  /* All trips */
+  .trips-sec { background: #fff; }
+  .filter { margin-top: 24px; }
+  @media (max-width: 599px) {
+    .filter { flex-wrap: nowrap; overflow-x: auto; margin: 24px -16px 0; padding: 0 16px 6px; scroll-padding: 0 16px; scrollbar-width: none; overscroll-behavior-x: contain; }
+    .filter::-webkit-scrollbar { display: none; }
+    .filter .chip { flex: none; }
+  }
+  .showing { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 18px 0 20px; font-size: 15px; color: var(--muted); min-height: 44px; }
+  .showing button { min-height: 44px; font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .more-trips { display: none; }
+  @media (max-width: 599px) {
+    .grid.collapsed .trip:nth-child(n+7) { display: none; }
+    .grid.collapsed + .more-trips { display: block; margin-top: 20px; }
+    .more-trips .btn { width: 100%; }
+  }
+  .trip { position: relative; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: transform .16s var(--ease), box-shadow .2s; }
+  .trip[hidden] { display: none; }
+  .trip:active { transform: scale(.985); }
+  .trip-media { position: relative; aspect-ratio: 2 / 1; }
+  .trip-media img { width: 100%; height: 100%; object-fit: cover; }
+  .trip-media .pill-tag { position: absolute; top: 12px; left: 12px; min-height: 28px; padding: 0 12px; font-size: 12.5px; color: #fff; background: rgba(14,26,20,.88); letter-spacing: .12em; }
+  .date-tag { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 6px; background: var(--sun); color: var(--night); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+  .trip-body { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 16px; }
+  .trip h3 { font-size: 32px; line-height: .95; }
+  .meta { list-style: none; margin: 10px 0 16px; padding: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.35; color: var(--muted); }
+  .meta li { display: flex; gap: 8px; align-items: flex-start; }
+  .meta .ic { width: 18px; height: 18px; margin-top: 1px; }
+  .trip-foot { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .price small { display: block; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .price b { display: block; font-size: 26px; font-weight: 700; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .price span { display: block; font-size: 14px; color: var(--muted); }
+  .price.quote b { font-size: 20px; }
+  .go { width: 44px; height: 44px; border-radius: 50%; background: var(--night); color: #fff; display: grid; place-items: center; flex: none; }
+  .stretch { position: absolute; inset: 0; z-index: 2; border-radius: var(--r); }
+
+  /* Team outings */
+  .team-grid { display: flex; gap: 14px; margin: 28px -16px 0; padding: 0 16px 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; scrollbar-width: thin; scrollbar-color: var(--sand-2) transparent; overscroll-behavior-x: contain; }
+  .team-card { flex: none; width: min(80vw, 300px); scroll-snap-align: start; background: var(--card); border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); }
+  .team-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .team-card div { padding: 16px 18px 20px; }
+  .team-card h3 { font-size: 32px; }
+  .team-card p { margin: 8px 0 0; color: var(--muted); font-size: 16px; }
+  .team-cta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 28px; }
+
+  /* How we travel */
+  .how { background: var(--night); color: #fff; }
+  .how h2 { color: #fff; }
+  .how .lead { color: var(--on-dark); }
+  .ways { list-style: none; margin: 30px 0 0; padding: 0; }
+  .ways li { display: grid; gap: 8px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.14); }
+  .ways h3 { font-size: 44px; margin: 0; color: var(--sun); }
+  .ways p { margin: 0; color: var(--on-dark); max-width: 34em; font-size: 17px; }
+
+  /* Enquiry */
+  .enquire { background: var(--moss); color: #fff; }
+  .enquire h2 { color: #fff; font-size: clamp(54px, 16vw, 112px); }
+  .enquire .lead { color: var(--on-dark); }
+  .ask { margin-top: 28px; background: var(--night); border-radius: 18px; padding: 20px 16px; display: grid; gap: 16px; max-width: 640px; }
+  .field { display: grid; gap: 6px; }
+  .field > span, .field legend { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--leaf); padding: 0; }
+  .field select, .field input { width: 100%; min-height: 52px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.22); background: var(--night-2); color: #fff; padding: 0 14px; font-size: 17px; }
+  .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238fd8b5' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 20px; padding-right: 44px; }
+  .field input::placeholder { color: rgba(255,255,255,.5); }
+  .field select:focus, .field input:focus { border-color: var(--sun); outline: none; }
+  fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .stepper { display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid rgba(255,255,255,.22); border-radius: 999px; /* unslop-ignore */ padding: 3px; align-self: start; width: max-content; }
+  .stepper button { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); transition: transform .14s var(--ease); }
+  .stepper button:active { transform: scale(.92); }
+  .stepper output { min-width: 64px; text-align: center; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .two { display: grid; gap: 16px; }
+  .preview { margin: 0; padding: 14px 16px; border-radius: 12px; background: #e9f7ee; color: #12261b; font-size: 16px; line-height: 1.5; position: relative; }
+  .preview small { display: block; font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #3d6b52; margin-bottom: 4px; }
+  .ask .btn { width: 100%; }
+  .alt { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 4px; }
+  .alt a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.4); }
+  .alt .ic { color: var(--leaf); }
+
+  /* Footer */
+  footer { background: var(--night); color: var(--on-dark); padding: 40px 0 calc(32px + env(safe-area-inset-bottom)); font-size: 15px; }
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+  .foot > div:first-child { grid-column: 1 / -1; }
+  .foot img { width: 64px; height: 64px; border-radius: 50%; background: #fff; }
+  .foot h3 { color: #fff; font-size: 34px; margin: 14px 0 8px; }
+  .foot p { margin: 0 0 6px; }
+  .foot h4 { margin: 0 0 8px; color: var(--leaf); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+  .foot ul { list-style: none; margin: 0; padding: 0; }
+  .foot li a { display: inline-flex; align-items: center; min-height: 44px; color: #fff; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.35); }
+  .legal { margin-top: 32px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.12); font-size: 13px; line-height: 1.6; color: rgba(255,255,255,.62); }
+
+  /* Trip sheet */
+  dialog.sheet { margin: 0; padding: 0; border: 0; width: 100%; max-width: 100%; max-height: 92svh; top: auto; bottom: 0; border-radius: 20px 20px 0 0; background: #fff; color: var(--ink); display: none; flex-direction: column; overflow: hidden; }
+  dialog.sheet[open] { display: flex; animation: sheet-up .32s var(--ease); }
+  dialog.sheet.closing { animation: sheet-down .22s var(--ease) forwards; }
+  dialog.sheet::backdrop { background: rgba(8,14,11,.6); }
+  @keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+  @keyframes sheet-down { from { transform: none; } to { transform: translateY(100%); } }
+  .sheet-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px 16px 14px; border-bottom: 1px solid var(--line); }
+  .sheet-head .pill-tag { min-height: 26px; padding: 0 10px; font-size: 12px; background: var(--night); color: #fff; margin-bottom: 8px; }
+  .sheet-head h3 { font-size: 36px; }
+  .sheet-head h3:focus { outline: none; }
+  .sheet-close { margin-left: auto; width: 44px; height: 44px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; flex: none; }
+  .sheet-body { overflow-y: auto; padding: 4px 16px 20px; overscroll-behavior: contain; }
+  .sheet-body > p:first-child { font-size: 17px; margin: 14px 0 0; }
+  .sheet-body h4 { margin: 22px 0 8px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .sheet-body p { margin: 8px 0 0; }
+  .sheet-body ul { margin: 0; padding: 0 0 0 20px; display: grid; gap: 4px; }
+  .sheet-body li::marker { color: var(--moss-2); }
+  .prices { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .prices th, .prices td { text-align: left; padding: 9px 8px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; font-weight: 400; }
+  .prices th { font-weight: 600; }
+  .prices td { white-space: nowrap; text-align: right; padding-right: 0; }
+  .prices td + td { padding-left: 12px; color: var(--muted); }
+  .prices caption { caption-side: bottom; text-align: left; font-size: 14px; color: var(--muted); padding-top: 8px; }
+  .sheet-foot { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: #fff; display: grid; gap: 6px; }
+  .sheet-foot .btn { width: 100%; }
+  .sheet-foot p { margin: 0; font-size: 14px; color: var(--muted); text-align: center; }
+
+  /* One authored moment: the headline climbs in, once */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 span { animation: rise .7s var(--ease) both; }
+    .hero h1 span + span { animation-delay: .08s; }
+    .hero-pic img { animation: settle 1.1s var(--ease) both; }
+    @keyframes rise { from { transform: translateY(40%); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
+    .trip.in { animation: fade .22s var(--ease); }
+    @keyframes fade { from { opacity: .3; } to { opacity: 1; } }
+  }
+  @media (prefers-reduced-motion: reduce) { dialog.sheet[open], dialog.sheet.closing { animation: none; } }
+
+  /* Tablet and up */
+  @media (min-width: 600px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; margin: 28px 0 0; padding: 0; overflow: visible; gap: 18px; }
+    .team-card { width: auto; }
+    .two { grid-template-columns: 1fr auto; align-items: end; }
+    .cta .btn { flex: 0 0 auto; padding: 0 28px; }
+    .ask { padding: 24px; }
+    .foot { grid-template-columns: 1.4fr 1fr 1fr; }
+    .foot > div:first-child { grid-column: auto; }
+    .dep { grid-template-columns: 88px 1fr 44px; grid-template-areas: "date main go"; }
+    /* the photos are 480px at most: from tablets up they sit in a frame instead of spanning the screen */
+    .hero-pic { margin: 24px 0 0; height: auto; max-width: 560px; border-radius: var(--r); overflow: hidden; }
+    .hero-pic img { aspect-ratio: 480 / 282; height: auto; }
+    .hero-pic::after { display: none; }
+    .band-pic { margin: 36px 0 0; max-width: 440px; border-radius: var(--r); overflow: hidden; }
+    .band-pic img { aspect-ratio: 361 / 322; object-position: 50% 50%; }
+    .dep-date { display: block; }
+    .dep-date b { font-size: 34px; }
+  }
+  @media (min-width: 760px) {
+    dialog.sheet { top: 50%; bottom: auto; left: 50%; transform: translate(-50%, -50%); width: min(640px, 92vw); max-height: 86vh; border-radius: 20px; }
+    dialog.sheet[open] { animation: sheet-in .26s var(--ease); }
+    dialog.sheet.closing { animation: sheet-out .18s var(--ease) forwards; }
+    @keyframes sheet-in { from { opacity: 0; transform: translate(-50%, -46%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+    @keyframes sheet-out { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(-50%, -46%); } }
+    .sheet-head, .sheet-body, .sheet-foot { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (min-width: 1000px) {
+    .wrap { padding: 0 32px; }
+    .rail { margin: 0 min(-32px, calc(-32px - (100vw - 1240px) / 2)) 0 -32px; padding: 0 32px 12px; scroll-padding: 0 32px; }
+    .bar { height: 72px; }
+    .brand b { font-size: 32px; }
+    .brand small { display: inline; }
+    .nav { display: flex; gap: 4px; margin-right: 12px; }
+    .nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 0 12px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 8px; }
+    .nav a:hover { background: rgba(255,255,255,.08); }
+    .menu-btn, .drawer { display: none !important; }
+    .enq { padding: 0 22px; }
+    .sec { padding: 104px 0; }
+    .lead { font-size: 19px; }
+    .hero { padding: 0; background-size: 760px; background-position: left -220px bottom -260px; }
+    .hero-in { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; min-height: min(780px, calc(100svh - 104px)); padding-top: 56px; padding-bottom: 56px; }
+    .hero-pic { order: 2; height: auto; margin: 0; border-radius: var(--r); overflow: hidden; }
+    .hero-pic img { aspect-ratio: 480 / 282; height: auto; }
+    .hero-pic::after { display: none; }
+    .hero-pic .pill-tag { left: 14px; top: 14px; }
+    .hero-copy { padding: 0; }
+    .hero h1 { font-size: clamp(110px, 10.5vw, 150px); }
+    .hero p { font-size: 20px; margin: 22px 0 28px; }
+    .stats { margin-top: 44px; gap: 24px; }
+    .stats span { font-size: 15px; }
+    .place { width: 320px; height: 270px; }
+    .act { width: 210px; height: 210px; }
+    .rail-btns { display: flex; gap: 8px; position: absolute; right: 0; top: -66px; }
+    .rail-btns button { width: 48px; height: 48px; border-radius: 50%; background: var(--night); color: #fff; display: grid; place-items: center; transition: transform .14s var(--ease), opacity .2s; }
+    .rail-btns button:active { transform: scale(.94); }
+    .rail-btns button:disabled { opacity: .3; cursor: default; }
+    .band { padding: 104px 0; }
+    .band-in { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: start; }
+    .band-pic { margin: 0; border-radius: var(--r); overflow: hidden; position: sticky; top: 104px; max-width: 440px; }
+    .dep { grid-template-columns: 96px 1fr auto 48px; grid-template-areas: "date main side go"; gap: 20px; padding: 18px 8px; border-radius: 10px; }
+    .dep-side { grid-area: side; }
+    .dep:hover { background: rgba(255,255,255,.05); }
+    .dep-date b { font-size: 40px; }
+    .dep-main strong { font-size: 32px; }
+    .dep-main .dep-price { display: none; }
+    .dep-side { display: block !important; text-align: right; font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; }
+    .dep-side small { display: block; font-weight: 400; font-size: 14px; color: var(--on-dark); }
+    .lens { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .len { min-height: 280px; padding: 22px; }
+    .len .h { font-size: 38px; }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .trip-media { aspect-ratio: 16 / 9; }
+    .band-pic img { aspect-ratio: 361 / 322; object-position: 50% 50%; }
+    .trip:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(14,26,20,.45); }
+    .team-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .ways li { grid-template-columns: minmax(280px, 5fr) 7fr; align-items: center; gap: 40px; padding: 30px 0; }
+    .ways h3 { font-size: 64px; }
+    .ways p { font-size: 19px; }
+    .enquire-in { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .ask { margin-top: 0; padding: 28px; }
+    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+  }
+  .dep-side { display: none; }
+  @media (min-width: 1000px) and (max-height: 760px) { .hero-in { min-height: 0; } }
+</style>
+</head>
+<body>
+
+<div class="concept" data-concept-banner>Concept preview &middot; not the official Peace &amp; Wild site</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.6 14.1c2.5-.2 4.3 1.4 4.9 4.4"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.6 3-3.6 4.7-3.6 8.6a3.6 3.6 0 0 0 7.2 0c0-1.7-.8-2.9-1.6-3.8.1 1.3-.4 2.3-1.3 2.6.6-2.9-.1-5.3-.7-7.4Z"/><path d="M5 20.5l14-3.2M5 17.3l14 3.2"/></symbol>
+  <symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15.5a4 4 0 0 1-.4-8A5.5 5.5 0 0 1 17 8.6a3.5 3.5 0 0 1 .5 6.9H7Z"/><path d="M8.5 18.5l-1 2M12.5 18.5l-1 2M16.5 18.5l-1 2"/></symbol>
+  <symbol id="i-mask" viewBox="0 0 24 24"><path d="M3 10c0-1.4 1.1-2.5 2.5-2.5h9c1.4 0 2.5 1.1 2.5 2.5v1.6c0 1.7-1.3 3-3 3h-1.5c-.9 0-1.4-1-2.5-1s-1.6 1-2.5 1H6c-1.7 0-3-1.3-3-3V10Z"/><path d="M20.5 4v9.5a4 4 0 0 1-4 4H13"/></symbol>
+  <symbol id="i-falls" viewBox="0 0 24 24"><path d="M4 4h16"/><path d="M8 4v9M12 4v12M16 4v8"/><path d="M3 19c1.4 0 1.4-1 2.8-1s1.4 1 2.8 1 1.4-1 2.8-1 1.4 1 2.8 1 1.4-1 2.8-1 1.4 1 2.8 1"/></symbol>
+  <symbol id="i-jeep" viewBox="0 0 24 24"><path d="M3 15v-3.5L5 7h9l2.5 4.5H21V15"/><path d="M3 15h2M9 15h6M19 15h2"/><circle cx="7" cy="15.5" r="2"/><circle cx="17" cy="15.5" r="2"/><path d="M8.5 7v4.5h8"/></symbol>
+  <symbol id="i-peak" viewBox="0 0 24 24"><path d="M2.5 19.5 9.5 7.5l3.6 6.2 2.1-3.2 6.3 9H2.5Z"/><path d="M7.6 10.8 9.5 12l1.9-1.2"/></symbol>
+  <symbol id="i-kayak" viewBox="0 0 24 24"><path d="M2.5 15.5c4.2 2.4 14.8 2.4 19 0-4.2-1.9-14.8-1.9-19 0Z"/><path d="M6.5 21 17.5 4"/><path d="M16.2 3.6 18.6 2.4l1 .7-.6 2.6"/><path d="M7.8 21.4 5.4 22.6l-1-.7.6-2.6"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.6 4.6 12 7l2.4-2.4M9.6 19.4 12 17l2.4 2.4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.5l1.5 4-2 1.3a11 11 0 0 0 6.7 6.7L16 14l4 1.5V19a1.5 1.5 0 0 1-1.6 1.5C10.9 20 4 13.1 3.5 5.6A1.5 1.5 0 0 1 5 4Z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></symbol>
+  <symbol id="i-cast" viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6l-6 4H4Z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Peace &amp; Wild Holidays, back to top">
+      <img src="assets/logo-badge.png" width="142" height="142" alt="">
+      <b>Peace &amp; Wild</b><small>HOLIDAYS</small>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#where">Places</a>
+      <a href="#november" data-needs-deps>November trips</a>
+      <a href="#length">Trip length</a>
+      <a href="#trips">All trips</a>
+      <a href="#teams">Team outings</a>
+    </nav>
+    <a class="btn sun enq" data-wa="Hi Peace &amp; Wild Holidays, I'd like to know about your upcoming trips." href="https://wa.me/919043938491"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Enquire</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><svg class="ic"><use href="#i-menu"/></svg></button>
+  </div>
+  <nav class="drawer" id="drawer" aria-label="Menu" hidden>
+    <a href="#where">Places</a>
+    <a href="#november" data-needs-deps>November trips</a>
+    <a href="#length">Trip length</a>
+    <a href="#trips">All trips</a>
+    <a href="#teams">Team outings</a>
+    <a href="#enquire">Enquire</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-in wrap">
+    <figure class="hero-pic">
+      <img src="assets/team-falls.jpg" width="480" height="282" alt="A traveller stands in a waterfall pool with her arms wide open">
+      <figcaption class="pill-tag">Team outing, Chikmagalur</figcaption>
+    </figure>
+    <div class="hero-copy">
+      <h1><span>We sell</span><span>fun.</span></h1>
+      <p>Waterfall days near Chennai, Munnar treks, Gokarna water games and Kashmir in the snow. Come as strangers, leave as friends.</p>
+      <div class="cta">
+        <a class="btn sun" href="#where">Find your trip</a>
+        <a class="btn line" href="#november" data-needs-deps>November dates</a>
+      </div>
+      <div class="stats">
+        <div><b class="num">₹1,500</b><span>from, per adult, for a waterfall day near Chennai</span></div>
+        <div data-needs-deps><b class="num" data-dep-count>5</b><span data-dep-label>dated group trips this November</span></div>
+        <div><b class="num">1–14</b><span>days, from a day trip to Europe</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="where">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Where do you want to go?</h2>
+        <p class="lead">Pick a place or an activity, and the trips below narrow down to match.</p>
+      </div>
+    </div>
+    <div class="tabs chips" role="tablist" aria-label="Browse by">
+      <button class="chip" type="button" role="tab" id="tab-places" aria-selected="true" aria-controls="panel-places">Places</button>
+      <button class="chip" type="button" role="tab" id="tab-acts" aria-selected="false" aria-controls="panel-acts" tabindex="-1">Activities</button>
+    </div>
+    <div class="rail-wrap" role="tabpanel" id="panel-places" aria-labelledby="tab-places">
+      <div class="rail-btns"><button type="button" data-dir="-1" aria-label="Scroll back"><svg class="ic"><use href="#i-left"/></svg></button><button type="button" data-dir="1" aria-label="Scroll on"><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="rail">
+        <button class="place" type="button" data-filter="place" data-value="chennai">
+          <img src="assets/falls-gang.jpg" width="361" height="278" alt="" loading="lazy">
+          <span class="count" data-count="place:chennai">3 trips</span>
+          <span class="h">Near Chennai</span>
+          <span class="p">Waterfall days, snorkelling, farmstays and a jeep safari.</span>
+        </button>
+        <button class="place" type="button" data-filter="place" data-value="munnar">
+          <img src="assets/jaguar-rock.jpg" width="360" height="218" alt="" loading="lazy" style="object-position:72% 50%">
+          <span class="count" data-count="place:munnar">2 trips</span>
+          <span class="h">Munnar hills</span>
+          <span class="p">Meesapulimalai, Kolukkumalai, cloud beds and jeep tracks.</span>
+        </button>
+        <button class="place tile t-sea" type="button" data-filter="place" data-value="coast">
+          <span class="count" data-count="place:coast">2 trips</span>
+          <span class="dests">Gokarna<span data-end="2026-11-22"> · Gandikota · Belum</span></span>
+          <span class="h">Coast &amp; canyons</span>
+          <span class="p">Water games at Gokarna<span data-end="2026-11-22">, the Gandikota canyon and Belum Caves</span>.</span>
+        </button>
+        <button class="place tile t-snow" type="button" data-filter="place" data-value="himalaya">
+          <span class="count" data-count="place:himalaya">3 trips</span>
+          <span class="dests"><span data-end="2026-11-23">Shimla · Manali · </span>Kashmir</span>
+          <span class="h">Himalaya &amp; Kashmir</span>
+          <span class="p"><span data-end="2026-11-23">Shimla to Manali, and </span>Kashmir<span data-end="2026-11-30"> in the snow season</span>.</span>
+        </button>
+        <button class="place tile t-euro" type="button" data-filter="place" data-value="europe">
+          <span class="count">10 packages</span>
+          <span class="dests">Paris · Greece · Scandinavia</span>
+          <span class="h">Europe</span>
+          <span class="p">From Greece in six days to fourteen across the continent.</span>
+        </button>
+        <button class="place" type="button" data-filter="place" data-value="teams">
+          <img src="assets/team-jhari.jpg" width="480" height="420" alt="" loading="lazy">
+          <span class="count">Custom</span>
+          <span class="h">Team outings</span>
+          <span class="p">Corporate trips and adventure outings across India.</span>
+        </button>
+      </div>
+    </div>
+    <div class="rail-wrap" role="tabpanel" id="panel-acts" aria-labelledby="tab-acts" hidden>
+      <div class="rail-btns"><button type="button" data-dir="-1" aria-label="Scroll back"><svg class="ic"><use href="#i-left"/></svg></button><button type="button" data-dir="1" aria-label="Scroll on"><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="rail">
+        <button class="place act" type="button" data-filter="act" data-value="snorkel"><svg class="ic" aria-hidden="true"><use href="#i-mask"/></svg><span class="h">Snorkel &amp; cliff jump</span><span class="count" data-count="act:snorkel">1 trip</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="falls"><svg class="ic" aria-hidden="true"><use href="#i-falls"/></svg><span class="h">Waterfalls</span><span class="count" data-count="act:falls">4 trips</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="jeep"><svg class="ic" aria-hidden="true"><use href="#i-jeep"/></svg><span class="h">Off-road jeep</span><span class="count" data-count="act:jeep">3 trips</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="trek"><svg class="ic" aria-hidden="true"><use href="#i-peak"/></svg><span class="h">Trekking</span><span class="count" data-count="act:trek">3 trips</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="water"><svg class="ic" aria-hidden="true"><use href="#i-kayak"/></svg><span class="h">Kayak &amp; water games</span><span class="count" data-count="act:water">1 trip</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="snow"><svg class="ic" aria-hidden="true"><use href="#i-snow"/></svg><span class="h">Snow</span><span class="count" data-count="act:snow">2 trips</span></button>
+        <button class="place act" type="button" data-filter="act" data-value="campfire"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span class="h">Campfire</span><span class="count" data-count="act:campfire">3 trips</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="november" data-needs-deps>
+  <div class="wrap band-in">
+    <div>
+      <span class="pill-tag">November strangers' trips</span>
+      <h2>Join solo. Make new friends.</h2>
+      <p class="lead">Group trips with fixed dates this month. Prices are per person, as posted. Check the dates with us on WhatsApp before you book leave.</p>
+      <ol class="deps">
+        <li data-end="2026-11-15"><button class="dep" type="button" data-open="meesapulimalai" data-wa-label="the Meesapulimalai group trip on 14–15 Nov">
+          <span class="dep-date"><b class="num">14–15</b><small>Nov</small></span>
+          <span class="dep-main"><strong>Meesapulimalai trek</strong><span>Stay at Munnar, Silent Valley viewpoint. Pickup and drop at Bodi.</span><span class="dep-price">₹4,500 per person</span></span>
+          <span class="dep-side num">₹4,500<small>per person</small></span>
+          <span class="dep-go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+        </button></li>
+        <li data-end="2026-11-23"><button class="dep" type="button" data-open="shimla" data-wa-label="the Shimla, Kasol &amp; Manali trip on 18–23 Nov">
+          <span class="dep-date"><b class="num">18–23</b><small>Nov</small></span>
+          <span class="dep-main"><strong>Shimla · Kasol · Manali</strong><span>4 nights, 5 days, Delhi to Delhi by tempo traveller.</span><span class="dep-price">₹16,000 per person</span></span>
+          <span class="dep-side num">₹16,000<small>per person</small></span>
+          <span class="dep-go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+        </button></li>
+        <li data-end="2026-11-22"><button class="dep" type="button" data-open="gokarna" data-wa-label="the Gokarna Water Games trip on 21–22 Nov">
+          <span class="dep-date"><b class="num">21–22</b><small>Nov</small></span>
+          <span class="dep-main"><strong>Gokarna Water Games</strong><span>Boating, kayaking, beaches and Jog Falls. Runs every weekend.</span><span class="dep-price">From ₹6,000 per person</span></span>
+          <span class="dep-side num">₹6,000<small>from, per person</small></span>
+          <span class="dep-go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+        </button></li>
+        <li data-end="2026-11-22"><button class="dep" type="button" data-open="gandikota" data-wa-label="the Gandikota &amp; Belum Caves trip on 21–22 Nov">
+          <span class="dep-date"><b class="num">21–22</b><small>Nov</small></span>
+          <span class="dep-main"><strong>Gandikota &amp; Belum Caves</strong><span>Canyon views and the caves, from Chennai or Bengaluru.</span><span class="dep-price">₹5,500 per person</span></span>
+          <span class="dep-side num">₹5,500<small>per person</small></span>
+          <span class="dep-go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+        </button></li>
+        <li data-end="2026-11-30"><button class="dep" type="button" data-open="kashmir-snow" data-wa-label="the Kashmir snow season trip on 26–30 Nov">
+          <span class="dep-date"><b class="num">26–30</b><small>Nov</small></span>
+          <span class="dep-main"><strong>Kashmir, snow season</strong><span>4 nights, 5 days, Srinagar to Srinagar. Gulmarg, Sonmarg, Pahalgam.</span><span class="dep-price">₹17,500 per person</span></span>
+          <span class="dep-side num">₹17,500<small>per person</small></span>
+          <span class="dep-go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+        </button></li>
+      </ol>
+      <div class="after">
+        <a class="btn sun" data-wa="Hi Peace &amp; Wild Holidays, please share the November trip dates and details." href="https://wa.me/919043938491"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Check dates on WhatsApp</a>
+      </div>
+    </div>
+    <figure class="band-pic">
+      <img src="assets/underwater-gang.jpg" width="361" height="322" alt="A group of travellers posing underwater in a clear waterfall pool" loading="lazy">
+      <figcaption class="pill-tag">Strangers' trip near Chennai</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="length">
+  <div class="wrap">
+    <h2>How long have you got?</h2>
+    <p class="lead">From one day off to two weeks away. Pick a length.</p>
+    <div class="lens">
+      <button class="len" type="button" data-filter="len" data-value="day">
+        <span class="meter" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+        <span class="h">One day</span>
+        <span class="p">Waterfalls near Chennai, or the Meesapulimalai trek.</span>
+        <span class="count" data-count="len:day">3 trips</span>
+      </button>
+      <button class="len" type="button" data-filter="len" data-value="night">
+        <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span>
+        <span class="h">One or two nights</span>
+        <span class="p">Farmstays, Munnar stays, Gokarna<span data-end="2026-11-22">, Gandikota</span>.</span>
+        <span class="count" data-count="len:night">6 trips</span>
+      </button>
+      <button class="len" type="button" data-filter="len" data-value="week">
+        <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+        <span class="h">Four to seven nights</span>
+        <span class="p"><span data-end="2026-11-23">Shimla to Manali, and </span>Kashmir.</span>
+        <span class="count" data-count="len:week">3 trips</span>
+      </button>
+      <button class="len" type="button" data-filter="len" data-value="abroad">
+        <span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        <span class="h">6 to 14 days abroad</span>
+        <span class="p">Europe, from Paris to the Northern Lights.</span>
+        <span class="count">10 packages</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="sec trips-sec" id="trips">
+  <div class="wrap">
+    <h2>All trips</h2>
+    <div class="filter chips" role="group" aria-label="Filter trips by place">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="place" data-value="chennai" aria-pressed="false">Near Chennai</button>
+      <button class="chip" type="button" data-filter="place" data-value="munnar" aria-pressed="false">Munnar hills</button>
+      <button class="chip" type="button" data-filter="place" data-value="coast" aria-pressed="false">Coast &amp; canyons</button>
+      <button class="chip" type="button" data-filter="place" data-value="himalaya" aria-pressed="false">Himalaya &amp; Kashmir</button>
+      <button class="chip" type="button" data-filter="place" data-value="europe" aria-pressed="false">Europe</button>
+      <button class="chip" type="button" data-filter="place" data-value="teams" aria-pressed="false">Teams</button>
+    </div>
+    <p class="showing" aria-live="polite"><span id="showing">Showing all 12 trips</span><button type="button" id="show-all" hidden>Show all trips</button></p>
+
+    <div class="grid collapsed" id="grid">
+
+      <article class="trip" id="trip-aare" data-place="chennai" data-len="day" data-act="snorkel falls campfire" data-wa-label="the Aare Waterfalls trip">
+        <div class="trip-media"><img src="assets/aare-underwater.jpg" width="360" height="242" alt="Snorkellers in life jackets, seen through an underwater camera at Aare Waterfalls" loading="lazy"><span class="pill-tag">Nagalapuram</span></div>
+        <div class="trip-body">
+          <h3>Aare Waterfalls</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>One day, or stay at the farm</li><li><svg class="ic"><use href="#i-mask"/></svg>Snorkelling, cliff jumps, waterfall slides</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹1,500</b><span>per adult · kids ₹750</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Aare Waterfalls: see details"></button>
+        <div class="more" hidden>
+          <p>Go beneath the surface, take the leap, slide into the splash. Snorkelling, cliff jumps and natural waterfall slides at Aare Waterfalls, with life jackets and guides who teach you to swim.</p>
+          <h4>Prices</h4>
+          <table class="prices"><tr><th>Day trip, adults</th><td>from ₹1,500</td></tr><tr><th>Day trip, kids</th><td>from ₹750</td></tr><tr><th>Waterfalls + farmstay</th><td>from ₹1,900</td></tr></table>
+          <h4>On the day</h4>
+          <ul><li>Underwater moments, natural water slides and cliff jumping</li><li>Snorkelling and guided swimming basics</li><li>Life jackets and underwater goggles provided</li><li>Veg and non-veg homemade food</li></ul>
+          <h4>Stay the night</h4>
+          <p>Farmstay in an AC mud house, AC hut house, tent or dormitory, with a campfire, music, BBQ and an off-road tractor ride.</p>
+          <h4>Good to know</h4>
+          <p>Adventure activities depend on water levels, weather and the guide's call.</p>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-nagalapuram" data-place="chennai" data-len="night" data-act="falls trek campfire" data-wa-label="the Nagalapuram farmstay &amp; waterfalls trip">
+        <div class="trip-media"><img src="assets/falls-gang.jpg" width="361" height="278" alt="A group of Peace &amp; Wild travellers outside the farmstay" loading="lazy"><span class="pill-tag">Nagalapuram</span></div>
+        <div class="trip-body">
+          <h3>Forest farmstay &amp; waterfalls</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>1 night, 2 days</li><li><svg class="ic"><use href="#i-pin"/></svg>About 2 hours from Chennai</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹1,900</b><span>per person, in a tent</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Forest farmstay and waterfalls: see details"></button>
+        <div class="more" hidden>
+          <p>A farmstay with a swimming pool, easy trekking, two waterfalls, farm activities, a campfire and music. Just 2 hours from Chennai.</p>
+          <h4>Prices, per person</h4>
+          <table class="prices"><tr><th>Tent</th><td>₹1,900</td><td>kids ₹1,200</td></tr><tr><th>Dormitory</th><td>₹2,500</td><td>kids ₹1,500</td></tr><tr><th>AC room</th><td>₹3,000</td><td>kids ₹2,000</td></tr><caption>Kids' rates are for ages 4 to 12.</caption></table>
+          <h4>Included</h4>
+          <ul><li>Stay, breakfast, lunch and dinner</li><li>Evening tea or coffee with biscuits</li><li>Pool and farm activities</li><li>Two waterfalls and trekking</li><li>Campfire, plus dam and temple visits</li></ul>
+          <h4>The two days</h4>
+          <p>Day 1: check in at 3 PM, pool, games and a tractor ride, then campfire and dinner. Day 2: breakfast, waterfalls and trekking 1 km from the stay, lunch, check out at 2 PM.</p>
+          <h4>Good to know</h4>
+          <ul><li>Come in your own transport. Transport from Chennai is available on request, at extra cost.</li><li>Optional day 3: Sadasivakona jeep safari, two more waterfalls and trekking, at extra cost.</li><li>BBQ, paneer, fish and mutton at extra cost.</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-private-falls" data-place="chennai" data-len="day night" data-act="falls jeep" data-wa-label="the private waterfalls &amp; jeep safari trip">
+        <div class="trip-media"><img src="assets/private-falls.jpg" width="361" height="162" alt="Travellers in orange life jackets in the pool below a private waterfall" loading="lazy"><span class="pill-tag">Near Chennai</span></div>
+        <div class="trip-body">
+          <h3>Private waterfalls &amp; jeep safari</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>Farmstay, or a one-day trip</li><li><svg class="ic"><use href="#i-jeep"/></svg>2-hour off-road jeep safari</li></ul>
+          <div class="trip-foot"><div class="price quote"><small>Price</small><b>On WhatsApp</b><span>ask for the package</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Private waterfalls and jeep safari: see details"></button>
+        <div class="more" hidden>
+          <p>Escape the city for an adventure near Chennai: a 2-hour off-road jeep safari, two private waterfalls and a farmstay with farm activities. A one-day trip is also available.</p>
+          <h4>Who it suits</h4>
+          <p>Families, friends, couples and corporate teams.</p>
+          <h4>Price</h4>
+          <p>Message us for the package details.</p>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-meesapulimalai" data-place="munnar" data-len="day night" data-act="trek jeep" data-wa-label="the Meesapulimalai trek">
+        <div class="trip-media tile t-hill"><span class="pill-tag">Munnar</span><span class="poster"><span class="when" data-end="2026-11-15">Group trip 14–15 Nov</span><span class="where" aria-hidden="true">Munnar</span></span></div>
+        <div class="trip-body">
+          <h3>Meesapulimalai trek</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>Daily one-day trek, or stay a night</li><li><svg class="ic"><use href="#i-peak"/></svg>About 4 km one way to the peak</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹4,500</b><span>per adult · kids ₹3,500</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Meesapulimalai trek: see details"></button>
+        <div class="more" hidden>
+          <p>Walk through the clouds at Meesapulimalai: grasslands, Shola forests and mountain trails, with an off-road jeep ride to the start.</p>
+          <div data-end="2026-11-15">
+          <h4>Group trip, 14–15 Nov 2026</h4>
+          <table class="prices"><tr><th>Per person</th><td>₹4,500</td></tr></table>
+          <ul><li>Stay at Munnar, Silent Valley viewpoint, Meesapulimalai trek</li><li>Day 1 lunch and dinner, day 2 breakfast and lunch</li><li>Pickup at Bodi, 14 Nov, 10 AM. Drop at Bodi, 15 Nov, 7 PM.</li><li>Transport from Chennai, Bengaluru and other cities at extra cost</li></ul>
+          </div>
+          <h4>Any day: Munnar to Munnar, 4 AM to 5 PM</h4>
+          <table class="prices"><tr><th>One-day trek</th><td>₹4,500</td><td>kids ₹3,500</td></tr><tr><th>Tent camping + trek</th><td>₹5,500</td><td>kids ₹4,500</td></tr><tr><th>Rhodo Mansion stay + trek</th><td>₹6,500</td><td>kids ₹5,000</td></tr><caption>Per person. The one-day trek includes jeep transfers, breakfast, lunch and the trek.</caption></table>
+          <h4>The trail</h4>
+          <ul><li>Off-road jeep via Base Camp and Rhodo Mansion</li><li>About 4 km one way to the peak</li><li>Shola forests, waterfalls and grasslands</li><li>Meesapulimalai peak, Kolukkumalai and Silent Valley viewpoints</li></ul>
+          <h4>Good to know</h4>
+          <ul><li>Runs daily, weather permitting. Trekking closes in bad weather.</li><li>On the one-day trek, stay in Munnar the night before and reach Munnar Bus Stand by 4 AM. That night is charged separately.</li><li>Carry warm clothes, gloves, water, snacks, your medicines and shoes with good grip.</li><li>Stay options are subject to availability.</li><li>Expect little or no mobile signal on most of the route.</li><li>Neelakurinji blooms, Nilgiri tahr and cloud beds depend on nature. Nothing is promised.</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-kolukkumalai" data-place="munnar" data-len="night" data-act="trek jeep" data-wa-label="the Kolukkumalai &amp; Suryanelli getaway">
+        <div class="trip-media"><img src="assets/jaguar-rock.jpg" width="360" height="218" alt="A traveller beside the overhanging Jaguar Rock, with the hills behind" loading="lazy"><span class="pill-tag">Kolukkumalai</span></div>
+        <div class="trip-body">
+          <h3>Kolukkumalai &amp; Suryanelli</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>Luxury, A-frame or tent stay</li><li><svg class="ic"><use href="#i-peak"/></svg>Sunrise, jeep safari, Bose Peak trek</li></ul>
+          <div class="trip-foot"><div class="price quote"><small>Price</small><b>Custom quote</b><span>by dates, group and stay</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Kolukkumalai and Suryanelli: see details"></button>
+        <div class="more" hidden>
+          <p>Misty mountains, rolling tea plantations and sunrise over the cloud beds, with your favourite people.</p>
+          <h4>Choose your stay</h4>
+          <ul><li>Luxury stay with cloud-bed views</li><li>A-frame stay, a cosy mountain escape</li><li>Tent camping, a night above the clouds</li></ul>
+          <h4>Adventures and sightseeing</h4>
+          <ul><li>Kolukkumalai sunrise over the cloud beds</li><li>Off-road jeep safari through mountain trails and tea plantations</li><li>Kolukkumalai tea factory visit</li><li>Jaguar Rock viewpoint</li><li>Bose Peak trek</li></ul>
+          <h4>Price</h4>
+          <p>A customised quotation, priced for your dates, group size, stay and activities. Confirm meals and activities while booking.</p>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-gokarna" data-place="coast" data-len="night" data-act="water falls campfire" data-wa-label="the Gokarna Water Games trip">
+        <div class="trip-media tile t-sea"><span class="pill-tag">Karnataka coast</span><span class="poster"><span class="when">Every weekend</span><span class="where" aria-hidden="true">Gokarna</span></span></div>
+        <div class="trip-body">
+          <h3>Gokarna Water Games</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>2 days, 2 nights. Every weekend.</li><li><svg class="ic"><use href="#i-kayak"/></svg>Boating, kayaking, dive from the boat</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹6,000</b><span>from Bengaluru · ₹8,000 from Chennai</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Gokarna Water Games: see details"></button>
+        <div class="more" hidden>
+          <p>Beaches, water sports, waterfalls, backwaters and a campfire. Fixed departures every weekend<span data-end="2026-11-22">; the posted date is 21–22 Nov 2026</span>.</p>
+          <h4>Prices, per person</h4>
+          <table class="prices"><tr><th>From Bengaluru</th><td>from ₹6,000</td></tr><tr><th>From Chennai</th><td>from ₹8,000</td></tr></table>
+          <h4>Highlights</h4>
+          <ul><li>Gokarna premium water games, boat ride, kayaking, dive from the boat</li><li>Om, Paradise, Half Moon and Belekan beaches</li><li>Dolphin spotting, subject to sightings</li><li>Jog Falls</li><li>Honnavara backwater boating, 1 hour, and the mangrove boardwalk</li><li>Murudeshwar temple visit</li><li>Campfire with music</li></ul>
+          <h4>Included</h4>
+          <ul><li>AC travel</li><li>1 night in an AC room</li><li>Breakfast on day 1 and day 2, dinner on day 1</li><li>Premium boating, water games and Honnavara backwater boating</li><li>Sightseeing and temple visits</li></ul>
+          <h4>Not included</h4>
+          <ul><li>Lunch on day 1 and day 2</li><li>Dinner on the return journey, the last day</li><li>Personal expenses</li><li>Any activity not listed above</li></ul>
+          <h4>Pickup and drop</h4>
+          <p>Pickup Friday 8 PM at Majestic, Bengaluru. Drop Monday 6 AM at Majestic.</p>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-gandikota" data-end="2026-11-22" data-place="coast" data-len="night" data-act="" data-wa-label="the Gandikota &amp; Belum Caves trip on 21–22 Nov">
+        <div class="trip-media tile t-rust"><span class="pill-tag">Andhra Pradesh</span><span class="poster"><span class="when">21–22 Nov</span><span class="where" aria-hidden="true">Gandikota</span></span></div>
+        <div class="trip-body">
+          <h3>Gandikota &amp; Belum Caves</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>21–22 Nov 2026</li><li><svg class="ic"><use href="#i-pin"/></svg>From Chennai or Bengaluru</li></ul>
+          <div class="trip-foot"><div class="price"><small>Per person</small><b>₹5,500</b><span>for the 21–22 Nov trip</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Gandikota and Belum Caves: see details"></button>
+        <div class="more" hidden>
+          <p>Canyon views at Gandikota and the underground wonders of Belum Caves. Come solo, as a group, with family or with a friend.</p>
+          <h4>Price</h4>
+          <table class="prices"><tr><th>Per person, 21–22 Nov 2026</th><td>₹5,500</td></tr></table>
+          <h4>Good to know</h4>
+          <p>Activities and views depend on the weather and local permissions. Ask us on WhatsApp for what the price covers.</p>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-shimla" data-end="2026-11-23" data-place="himalaya" data-len="week" data-act="snow" data-wa-label="the Shimla, Kasol &amp; Manali trip on 18–23 Nov">
+        <div class="trip-media tile t-snow"><span class="pill-tag">Himachal</span><span class="poster"><span class="when">18–23 Nov</span><span class="where" aria-hidden="true">Manali</span></span></div>
+        <div class="trip-body">
+          <h3>Shimla · Kasol · Manali</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>4 nights, 5 days</li><li><svg class="ic"><use href="#i-pin"/></svg>Delhi to Delhi</li></ul>
+          <div class="trip-foot"><div class="price"><small>Per person</small><b>₹16,000</b><span>hotel, breakfast and dinner</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Shimla, Kasol, Manali: see details"></button>
+        <div class="more" hidden>
+          <p>A Himalayan winter getaway, 18–23 Nov 2026: snowy peaks, valleys and scenic drives.</p>
+          <h4>Price</h4>
+          <table class="prices"><tr><th>Per person</th><td>₹16,000</td></tr></table>
+          <h4>Trip highlights</h4>
+          <ul><li>Shimla and Kufri: Green Valley, Himalayan Nature Park, Kufri Fun World, Mall Road, the Ridge, Christ Church, Lakkar Bazaar</li><li>Kasol and Parvati Valley</li><li>Manali: Hadimba Temple, Manu Temple, Vashisht, the Tibetan monastery, Van Vihar</li><li>Solang Valley, snow activities and views</li><li>Kullu Valley on the way back</li></ul>
+          <h4>Included</h4>
+          <ul><li>Pickup and drop from Delhi by tempo traveller</li><li>4 nights in hotels</li><li>4 breakfasts and 4 dinners</li><li>All sightseeing on the plan</li><li>Driver, tolls, taxes, fuel and parking</li><li>Help on call, 24x7, during the tour</li></ul>
+          <h4>Not included</h4>
+          <ul><li>Flights or trains to Delhi</li><li>Horse, pony and yak rides, ropeway tickets</li><li>Heater charges at the hotel, if any</li><li>Paragliding, river rafting, ATV, ropeway and zipline</li><li>Travel insurance and medical costs</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-kashmir-snow" data-end="2026-11-30" data-place="himalaya" data-len="week" data-act="snow" data-wa-label="the Kashmir snow season trip on 26–30 Nov">
+        <div class="trip-media tile t-ice"><span class="pill-tag">Kashmir</span><span class="poster"><span class="when">26–30 Nov</span><span class="where" aria-hidden="true">Kashmir</span></span></div>
+        <div class="trip-body">
+          <h3>Kashmir, snow season</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>4 nights, 5 days</li><li><svg class="ic"><use href="#i-pin"/></svg>Srinagar to Srinagar</li></ul>
+          <div class="trip-foot"><div class="price"><small>Per person</small><b>₹17,500</b><span>stay, breakfast and dinner</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Kashmir snow season: see details"></button>
+        <div class="more" hidden>
+          <p>Snow-covered valleys in Kashmir, 26–30 Nov 2026.</p>
+          <h4>Price</h4>
+          <table class="prices"><tr><th>Per person</th><td>₹17,500</td></tr></table>
+          <h4>Where you go</h4>
+          <ul><li>Srinagar: Dal Lake, shikara ride, Mughal gardens, local market</li><li>Gulmarg: gondola ride, snow activities, skiing (optional), Strawberry Valley</li><li>Sonmarg: Thajiwas glacier, scenic drives, snow views</li><li>Pahalgam: Aru Valley, Betaab Valley, Lidder river</li></ul>
+          <h4>Included</h4>
+          <ul><li>Pickup and drop at Srinagar airport</li><li>4 nights in a hotel or resort</li><li>Daily breakfast and dinner</li><li>All transfers and sightseeing</li><li>Shikara ride on Dal Lake</li><li>Snow activities, as weather and availability allow</li><li>Tolls, parking and driver charges</li></ul>
+          <h4>Not included</h4>
+          <ul><li>Other meals</li><li>Gondola ride</li><li>Personal expenses</li><li>Adventure activities such as skiing</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-kashmir" data-place="himalaya" data-len="week" data-act="" data-wa-label="a Kashmir package">
+        <div class="trip-media tile t-snow"><span class="pill-tag">Kashmir</span><span class="poster"><span class="when">Your dates</span><span class="where" aria-hidden="true">Dal Lake</span></span></div>
+        <div class="trip-body">
+          <h3>Kashmir packages</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>5 days, 4 nights to 8 days, 7 nights</li><li><svg class="ic"><use href="#i-pin"/></svg>Hotel and houseboat, airport pickup</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹15,600</b><span>per person, 2-star hotel</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Kashmir packages: see details"></button>
+        <div class="more" hidden>
+          <p>Srinagar, Gulmarg, Pahalgam, Sonmarg and Dal Lake, on your own dates.</p>
+          <h4>Prices, per person</h4>
+          <table class="prices">
+            <tr><th>5 days, 4 nights</th><td>from ₹15,600</td><td>3-star ₹19,000</td></tr>
+            <tr><th>6 days, 5 nights</th><td>from ₹17,850</td><td>3-star ₹22,400</td></tr>
+            <tr><th>7 days, 6 nights</th><td>from ₹20,200</td><td>3-star ₹25,700</td></tr>
+            <caption>Starting prices. The first is with a 2-star hotel, the second with a 3-star hotel.</caption>
+          </table>
+          <table class="prices" style="margin-top:14px">
+            <tr><th>8 days, 7 nights, standard</th><td>from ₹32,300</td></tr>
+            <tr><th>8 days, 7 nights, deluxe</th><td>from ₹40,050</td></tr>
+            <tr><th>8 days, 7 nights, super deluxe</th><td>from ₹45,800</td></tr>
+            <caption>Starting prices per person, for 2 guests.</caption>
+          </table>
+          <h4>Included</h4>
+          <ul><li>Hotel and houseboat stay</li><li>Daily breakfast and dinner</li><li>Airport pickup and drop at Srinagar</li><li>All transfers and sightseeing by private vehicle</li><li>One-hour shikara ride on Dal Lake</li><li>Driver allowance, parking and tolls</li><li>On-ground help, 24x7</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-europe" data-place="europe" data-len="abroad" data-act="" data-wa-label="a Europe package">
+        <div class="trip-media tile t-euro"><span class="pill-tag">10 packages</span><span class="poster"><span class="when">Every month</span><span class="where" aria-hidden="true">Europe</span></span></div>
+        <div class="trip-body">
+          <h3>Europe</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-clock"/></svg>6 to 14 days</li><li><svg class="ic"><use href="#i-pin"/></svg>From Chennai, Bengaluru, Hyderabad, Delhi, Mumbai</li></ul>
+          <div class="trip-foot"><div class="price"><small>From</small><b>₹2,10,000</b><span>per person, double sharing</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Europe packages: see details"></button>
+        <div class="more" hidden>
+          <p>Fixed departures and customised trips every month, from Chennai, Bengaluru, Hyderabad, Delhi, Mumbai and other cities in India.</p>
+          <h4>Packages, per person, double sharing</h4>
+          <table class="prices">
+            <tr><th>Greece · 6 days</th><td>₹2,10,000</td></tr>
+            <tr><th>Paris &amp; Swiss · 8 days</th><td>₹2,16,000</td></tr>
+            <tr><th>Euro Wonders · 9 days</th><td>₹2,46,000</td></tr>
+            <tr><th>Spain &amp; Portugal · 8 days</th><td>₹2,63,000</td></tr>
+            <tr><th>Euro Dreams · 10 days</th><td>₹2,63,000</td></tr>
+            <tr><th>Northern Lights Finland · 6 days</th><td>₹2,95,000</td></tr>
+            <tr><th>Euro Grand · 13 days</th><td>₹3,05,000</td></tr>
+            <tr><th>Scandinavia · 9 days</th><td>₹3,05,000</td></tr>
+            <tr><th>Fun Europa · 14 days</th><td>₹3,20,000</td></tr>
+            <tr><th>Northern Lights Scandinavia · 12 days</th><td>₹3,70,000</td></tr>
+          </table>
+          <h4>Included</h4>
+          <ul><li>Flights both ways</li><li>3-star and above hotels</li><li>Daily breakfast and dinner</li><li>Transfers and sightseeing on the plan</li><li>Visa help, as specified</li><li>Travel insurance, for ages 59 and above</li><li>A tour manager</li></ul>
+        </div>
+      </article>
+
+      <article class="trip" id="trip-teams" data-place="teams" data-len="" data-act="" data-wa-label="a team outing for our office">
+        <div class="trip-media"><img src="assets/team-group.jpg" width="480" height="314" alt="A large office team photographed together on a team outing" loading="lazy" style="object-position:50% 70%"><span class="pill-tag">Across India</span></div>
+        <div class="trip-body">
+          <h3>Team outings</h3>
+          <ul class="meta"><li><svg class="ic"><use href="#i-people"/></svg>Corporate trips and team-building</li><li><svg class="ic"><use href="#i-jeep"/></svg>Adventure outings, resort getaways</li></ul>
+          <div class="trip-foot"><div class="price quote"><small>Price</small><b>Custom quote</b><span>planned for your team</span></div><span class="go" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span></div>
+        </div>
+        <button class="stretch" type="button" aria-label="Team outings: see details"></button>
+        <div class="more" hidden>
+          <p>Customised corporate trips, team-building activities, adventure outings and resort getaways across India.</p>
+          <h4>A recent one</h4>
+          <p>A corporate team outing to Chikmagalur, Karnataka: 2 days, 1 night, 31 Oct to 1 Nov 2026.</p>
+          <ul><li>Off-road jeep rides</li><li>Mullayanagiri Peak and the viewpoints</li><li>Waterfalls and a coffee plantation</li><li>Resort stay and food for the whole team</li></ul>
+        </div>
+      </article>
+
+    </div>
+    <div class="more-trips"><button class="btn dark" type="button" id="more-trips">Show all trips</button></div>
+  </div>
+</section>
+
+<section class="sec" id="teams">
+  <div class="wrap">
+    <h2>Taking the team out?</h2>
+    <p class="lead">We plan corporate trips, team-building and adventure outings across India. A recent one: a corporate team outing to Chikmagalur, two days and one night.</p>
+    <div class="team-grid">
+      <div class="team-card"><img src="assets/team-jeep.jpg" width="480" height="414" alt="Team members packed into the back of an off-road jeep" loading="lazy"><div><h3>Off-road jeep</h3><p>Jeep rides, Mullayanagiri Peak and the viewpoints.</p></div></div>
+      <div class="team-card"><img src="assets/team-jhari.jpg" width="480" height="420" alt="Team members on the forest trail to Jhari Waterfalls" loading="lazy"><div><h3>Jhari Waterfalls</h3><p>The waterfall trail, and a stop at a coffee plantation.</p></div></div>
+      <div class="team-card"><img src="assets/team-table.jpg" width="480" height="474" alt="Team members sharing lunch at a long table" loading="lazy"><div><h3>Lunch together</h3><p>Resort stay and meals for the whole team.</p></div></div>
+    </div>
+    <div class="team-cta">
+      <a class="btn dark" data-wa="Hi Peace &amp; Wild Holidays, I'd like to plan a team outing for our office. Can we talk about dates, team size and what we'd like to do?" href="https://wa.me/919043938491"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Plan a team outing</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec how" id="how">
+  <div class="wrap">
+    <h2>How we travel</h2>
+    <p class="lead">From a waterfall day to a Kashmir winter.</p>
+    <ul class="ways">
+      <li><h3>Come solo</h3><p>Solo travellers, friends, couples and families join the same group trips. Bring a friend, or don't.</p></li>
+      <li><h3>Leave as friends</h3><p>The farmstay and Gokarna trips end the day around a campfire with music. You go home with a new travel gang.</p></li>
+      <li><h3>Nature decides</h3><p>Treks, jeep rides and water activities run when the weather, water levels and guides allow. Blooms and sightings are never promised.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec enquire" id="enquire">
+  <div class="wrap enquire-in">
+    <div>
+      <h2>Say where. We'll send the details.</h2>
+      <p class="lead">Pick a trip and how many of you are coming. WhatsApp opens with the message written; confirm the dates with us there.</p>
+    </div>
+    <form class="ask" id="ask" onsubmit="return false">
+      <label class="field"><span>Trip</span>
+        <select id="ask-trip">
+          <option data-end="2026-11-15" value="the Meesapulimalai group trip on 14–15 Nov">Meesapulimalai trek, 14–15 Nov</option>
+          <option data-end="2026-11-23" value="the Shimla, Kasol &amp; Manali trip on 18–23 Nov">Shimla · Kasol · Manali, 18–23 Nov</option>
+          <option data-end="2026-11-22" value="the Gokarna Water Games trip on 21–22 Nov">Gokarna Water Games, 21–22 Nov</option>
+          <option data-end="2026-11-22" value="the Gandikota &amp; Belum Caves trip on 21–22 Nov">Gandikota &amp; Belum Caves, 21–22 Nov</option>
+          <option data-end="2026-11-30" value="the Kashmir snow season trip on 26–30 Nov">Kashmir snow season, 26–30 Nov</option>
+          <option value="the Gokarna Water Games trip">Gokarna Water Games, any weekend</option>
+          <option value="the Aare Waterfalls trip">Aare Waterfalls day</option>
+          <option value="the Nagalapuram farmstay &amp; waterfalls trip">Forest farmstay &amp; waterfalls</option>
+          <option value="the private waterfalls &amp; jeep safari trip">Private waterfalls &amp; jeep safari</option>
+          <option value="the Meesapulimalai trek">Meesapulimalai trek, any day</option>
+          <option value="the Kolukkumalai &amp; Suryanelli getaway">Kolukkumalai &amp; Suryanelli</option>
+          <option value="a Kashmir package">Kashmir, my own dates</option>
+          <option value="a Europe package">Europe</option>
+          <option value="a team outing for our office">A team outing</option>
+          <option value="your upcoming trips">Not sure yet</option>
+        </select>
+      </label>
+      <div class="two">
+        <label class="field"><span>When</span><input id="ask-when" type="text" maxlength="40" placeholder="Any weekend in December" autocomplete="off"></label>
+        <fieldset class="field"><legend>How many</legend>
+          <div class="stepper"><button type="button" id="ask-minus" aria-label="One fewer person"><svg class="ic"><use href="#i-minus"/></svg></button><output id="ask-n" aria-live="polite">2</output><button type="button" id="ask-plus" aria-label="One more person"><svg class="ic"><use href="#i-plus"/></svg></button></div>
+        </fieldset>
+      </div>
+      <p class="preview"><small>Your message</small><span id="ask-text">Hi Peace &amp; Wild Holidays, I'm interested in the Meesapulimalai group trip on 14–15 Nov. We're 2 people. Please share the details.</span></p>
+      <a class="btn sun" id="ask-send" href="https://wa.me/919043938491"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
+      <div class="alt">
+        <a href="tel:+919043938491"><svg class="ic"><use href="#i-phone"/></svg>Call 90439 38491</a>
+        <a href="https://whatsapp.com/channel/0029Vb9zCL14SpkBkAGUz22H" target="_blank" rel="noopener"><svg class="ic"><use href="#i-cast"/></svg>New trips on our WhatsApp channel</a>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="assets/logo-badge.png" width="142" height="142" alt="Peace &amp; Wild Holidays logo" loading="lazy">
+        <h3>Peace &amp; Wild Holidays</h3>
+        <p>Group trips, treks and holidays from Chennai. We sell fun.</p>
+        <p>S#4, 100 LB Road, Adyar, Chennai 600020</p>
+      </div>
+      <div>
+        <h4>Talk to us</h4>
+        <ul>
+          <li><a data-wa="Hi Peace &amp; Wild Holidays, I'd like to know about your upcoming trips." href="https://wa.me/919043938491">WhatsApp</a></li>
+          <li><a href="tel:+919043938491">Call 90439 38491</a></li>
+          <li><a href="https://whatsapp.com/channel/0029Vb9zCL14SpkBkAGUz22H" target="_blank" rel="noopener">WhatsApp channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://instagram.com/peaceandwildholidays" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://instagram.com/kaarthikkks" target="_blank" rel="noopener">Founder @kaarthikkks</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">GST 33AGKPN1466F1ZH · MSME UDYAM-TN-02-0414095<br>Prices are per person, as posted on Instagram. Dates and inclusions are confirmed on WhatsApp.</p>
+  </div>
+</footer>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet-head">
+    <div><span class="pill-tag" id="sheet-place"></span><h3 id="sheet-title" tabindex="-1" autofocus></h3></div>
+    <button class="sheet-close" type="button" id="sheet-close" aria-label="Close"><svg class="ic"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="sheet-body" id="sheet-body"></div>
+  <div class="sheet-foot">
+    <a class="btn sun" id="sheet-wa" data-wa="Hi Peace &amp; Wild Holidays, I'd like to know about your upcoming trips." href="https://wa.me/919043938491"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Ask on WhatsApp</a>
+    <p>Opens WhatsApp with this trip named.</p>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var WA = '919043938491';
+  var wa = function (text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); };
+  var ask = function (label) { return "Hi Peace & Wild Holidays, I'm interested in " + label + '. Please share the dates and details.'; };
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  // Dated trips remove themselves the day after they end, so the page never offers a departure that has gone.
+  var today = (function (d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); })(new Date());
+  $$('[data-end]').forEach(function (el) { if (el.getAttribute('data-end') < today) el.parentNode.removeChild(el); });
+  var depCount = $$('.dep').length;
+  $$('[data-dep-count]').forEach(function (el) { el.textContent = depCount; });
+  if (depCount === 1) $$('[data-dep-label]').forEach(function (el) { el.textContent = 'dated group trip this November'; });
+  if (!depCount) $$('[data-needs-deps]').forEach(function (el) { el.parentNode.removeChild(el); });
+
+  // Every WhatsApp link gets its prefilled message here; the plain wa.me link in the HTML is the fallback.
+  $$('[data-wa]').forEach(function (a) { a.href = wa(a.getAttribute('data-wa')); });
+
+  // Menu
+  var menuBtn = $('.menu-btn'), drawer = $('#drawer');
+  function setMenu(open) {
+    drawer.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
+  }
+  menuBtn.addEventListener('click', function () { setMenu(drawer.hidden); });
+  $$('#drawer a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !drawer.hidden) setMenu(false); });
+
+  // Places / Activities tabs
+  var tabs = $$('[role=tab]');
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      $('#' + t.getAttribute('aria-controls')).hidden = !on;
+    });
+    updateRails();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { selectTab(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus(); selectTab(next);
+    });
+  });
+
+  // Desktop arrows for the swipe rows
+  function updateRails() {
+    $$('.rail-wrap').forEach(function (w) {
+      var rail = $('.rail', w), btns = $$('.rail-btns button', w);
+      if (!btns.length) return;
+      btns[0].disabled = rail.scrollLeft < 8;
+      btns[1].disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 8;
+    });
+  }
+  $$('.rail-wrap').forEach(function (w) {
+    var rail = $('.rail', w);
+    $$('.rail-btns button', w).forEach(function (b) {
+      b.addEventListener('click', function () {
+        rail.scrollBy({ left: Number(b.getAttribute('data-dir')) * rail.clientWidth * 0.8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+    });
+    rail.addEventListener('scroll', updateRails, { passive: true });
+  });
+  addEventListener('resize', updateRails);
+  updateRails();
+
+  // Filters: places, activities and lengths all narrow the trip grid
+  var trips = $$('.trip');
+  var names = { chennai: 'near Chennai', munnar: 'in the Munnar hills', coast: 'on the coast and canyons', himalaya: 'in the Himalaya and Kashmir', europe: 'in Europe', teams: 'for teams',
+    snorkel: 'with snorkelling and cliff jumps', falls: 'with waterfalls', jeep: 'with an off-road jeep', trek: 'with trekking', water: 'with kayaking and water games', snow: 'with snow', campfire: 'with a campfire',
+    day: 'that fit in one day', night: 'with one or two nights', week: 'of four to seven nights', abroad: 'abroad' };
+  function matches(trip, key, value) {
+    if (key === 'all') return true;
+    return (' ' + (trip.getAttribute('data-' + key) || '') + ' ').indexOf(' ' + value + ' ') > -1;
+  }
+  function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+  $$('[data-count]').forEach(function (el) {
+    var kv = el.getAttribute('data-count').split(':');
+    var count = trips.filter(function (t) { return matches(t, kv[0], kv[1]); }).length;
+    // a place, activity or length with no trips left (after dated trips end) is removed rather than opening an empty grid
+    if (!count) { var card = el.closest('.place, .len'); if (card) card.parentNode.removeChild(card); return; }
+    el.textContent = plural(count, 'trip');
+  });
+  updateRails();
+  var grid = $('#grid'), phone = matchMedia('(max-width: 599px)'), current = 'all';
+  if (trips.length <= 6) grid.classList.remove('collapsed');
+  $('#more-trips').textContent = 'Show all ' + trips.length + ' trips';
+  function showingAll() {
+    $('#showing').textContent = grid.classList.contains('collapsed') && phone.matches
+      ? 'Showing 6 of ' + trips.length + ' trips' : 'Showing all ' + trips.length + ' trips';
+  }
+  function applyFilter(key, value, scroll) {
+    var shown = 0;
+    current = key;
+    grid.classList.remove('collapsed');
+    trips.forEach(function (t) {
+      var on = matches(t, key, value);
+      t.hidden = !on;
+      if (on) { shown++; t.classList.remove('in'); void t.offsetWidth; t.classList.add('in'); }
+    });
+    $$('.filter .chip').forEach(function (c) {
+      var on = c.getAttribute('data-filter') === key && (key === 'all' || c.getAttribute('data-value') === value);
+      c.setAttribute('aria-pressed', String(on));
+    });
+    if (key === 'all') showingAll(); else $('#showing').textContent = 'Showing ' + plural(shown, 'trip') + ' ' + names[value];
+    $('#show-all').hidden = key === 'all';
+    if (scroll) $('#trips').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  $$('[data-filter]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      applyFilter(b.getAttribute('data-filter'), b.getAttribute('data-value'), !b.closest('.filter'));
+    });
+  });
+  $('#show-all').addEventListener('click', function () { applyFilter('all', null, false); });
+  $('#more-trips').addEventListener('click', function () {
+    grid.classList.remove('collapsed');
+    showingAll();
+    var seventh = $$('.trip')[6];
+    if (seventh) seventh.querySelector('.stretch').focus({ preventScroll: true });
+  });
+  if (phone.addEventListener) phone.addEventListener('change', function () { if (current === 'all') showingAll(); });
+  showingAll();
+
+  // Trip sheet
+  var sheet = $('#sheet'), lastFocus = null;
+  function openTrip(id, label) {
+    var trip = $('#trip-' + id);
+    if (!trip) return;
+    lastFocus = document.activeElement;
+    $('#sheet-title').textContent = $('h3', trip).textContent;
+    $('#sheet-place').textContent = $('.pill-tag', trip).textContent;
+    $('#sheet-body').innerHTML = $('.more', trip).innerHTML;
+    $('#sheet-body').scrollTop = 0;
+    $('#sheet-wa').href = wa(ask(label || trip.getAttribute('data-wa-label')));
+    sheet.classList.remove('closing');
+    if (sheet.showModal) sheet.showModal(); else sheet.setAttribute('open', '');
+    document.documentElement.classList.add('locked');
+    // A history entry, so the phone's Back button closes the sheet instead of leaving the page
+    try { history.pushState({ sheet: id }, ''); } catch (e) {}
+  }
+  function closeTrip(fromPop) {
+    if (!sheet.open || sheet.classList.contains('closing')) return;
+    if (fromPop !== true && history.state && history.state.sheet) { history.back(); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    sheet.classList.add('closing');
+    setTimeout(function () {
+      sheet.classList.remove('closing');
+      if (sheet.close) sheet.close(); else sheet.removeAttribute('open');
+      document.documentElement.classList.remove('locked');
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }, reduce ? 0 : 200);
+  }
+  $$('.trip .stretch').forEach(function (b) {
+    b.addEventListener('click', function () { openTrip(b.closest('.trip').id.replace('trip-', '')); });
+  });
+  $$('[data-open]').forEach(function (b) {
+    b.addEventListener('click', function () { openTrip(b.getAttribute('data-open'), b.getAttribute('data-wa-label')); });
+  });
+  addEventListener('popstate', function () { if (sheet.open) closeTrip(true); });
+  // However the dialog closes, the page must scroll again
+  sheet.addEventListener('close', function () { sheet.classList.remove('closing'); document.documentElement.classList.remove('locked'); });
+  $('#sheet-close').addEventListener('click', closeTrip);
+  sheet.addEventListener('cancel', function (e) { e.preventDefault(); closeTrip(); });
+  sheet.addEventListener('click', function (e) { if (e.target === sheet) closeTrip(); });
+
+  // Enquiry sentence: the visitor picks the trip, the dates and the head count; we only assemble it
+  var n = 2, tripSel = $('#ask-trip'), when = $('#ask-when');
+  function message() {
+    var who = n === 1 ? "I'm coming solo" : "We're " + n + ' people';
+    var dates = when.value.trim();
+    return 'Hi Peace & Wild Holidays, I\'m interested in ' + tripSel.value + '. ' + who + '.' + (dates ? ' Dates: ' + dates.replace(/[.\s]+$/, '') + '.' : '') + ' Please share the details.';
+  }
+  function updateAsk() {
+    $('#ask-n').textContent = n;
+    $('#ask-minus').disabled = n <= 1;
+    $('#ask-text').textContent = message();
+    $('#ask-send').href = wa(message());
+  }
+  $('#ask-minus').addEventListener('click', function () { if (n > 1) { n--; updateAsk(); } });
+  $('#ask-plus').addEventListener('click', function () { if (n < 60) { n++; updateAsk(); } });
+  tripSel.addEventListener('change', updateAsk);
+  when.addEventListener('input', updateAsk);
+  updateAsk();
+})();
+</script>
+</body>
+</html>
