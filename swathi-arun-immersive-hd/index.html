@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#161013">
-  <meta name="video-quality" content="immersive-1080x2340-frame-processed">
+  <meta name="video-quality" content="ai-upscaled-1080x2340">
   <meta name="description" content="The wedding of Swathi & Arun — 11 November 2027, Chennai. Immersive HD scroll-controlled invitation.">
   <meta property="og:title" content="Swathi & Arun — Wedding Invitation">
   <meta property="og:description" content="11 November 2027 · Chennai">
@@ -40,7 +40,7 @@
     .icon-play{fill:currentColor!important;stroke:none!important}
     .journey{height:calc(100svh * 9.75);position:relative;isolation:isolate}
     .stage{height:100svh;position:sticky;top:0;overflow:hidden;display:grid;place-items:center;background:#170f16;isolation:isolate}
-    .ambient{position:absolute;inset:-45px;background:center/cover no-repeat url('assets/poster-portrait.jpg');filter:blur(30px) brightness(.35) saturate(.9);opacity:.5;transform:scale(1.12)}
+    .ambient{position:absolute;inset:-45px;background:center/cover no-repeat url('assets/poster-portrait.jpg?v=ai-sr-20261119');filter:blur(30px) brightness(.35) saturate(.9);opacity:.5;transform:scale(1.12)}
     .ambient:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#120d13bb,#24131a44 45%,#120d13aa)}
     .film{z-index:1;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:contrast(1.01) saturate(1.02);pointer-events:none}
     .stage.framing-full .film{object-fit:contain}
@@ -175,7 +175,7 @@
         <div class="framing-menu-header">How to view the film</div>
         <button class="frame-choice active" type="button" data-framing="clarity"><strong>Clarity · Default</strong><small>Wider view of the original film</small></button>
         <button class="frame-choice" type="button" data-framing="full"><strong>Original frame</strong><small>Entire 16:9 picture, without zooming</small></button>
-        <button class="frame-choice" type="button" data-framing="zoom"><strong>Immersive HD</strong><small>Full-height, frame-enhanced portrait master</small></button>
+        <button class="frame-choice" type="button" data-framing="zoom"><strong>Immersive HD</strong><small>AI-upscaled portrait film</small></button>
       </div>
     </div>
   </header>
@@ -183,9 +183,9 @@
     <section class="journey" id="journey" aria-label="Scroll-controlled wedding invitation film">
       <div class="stage framing-clarity" id="stage">
         <div class="ambient" aria-hidden="true"></div>
-        <video class="film film-portrait" id="film" muted playsinline webkit-playsinline preload="none" poster="assets/poster-portrait.jpg" aria-label="Immersive portrait royal wedding invitation film of Swathi and Arun">
-          <source data-src="assets/royal-film-immersive-HD.mp4" type="video/mp4">
-          Your browser cannot display the invitation film. <a href="assets/royal-film-immersive-HD.mp4">Download the film.</a>
+        <video class="film film-portrait" id="film" muted playsinline webkit-playsinline preload="none" poster="assets/poster-portrait.jpg?v=ai-sr-20261119" aria-label="Immersive portrait royal wedding invitation film of Swathi and Arun">
+          <source data-src="assets/royal-film-immersive-HD.mp4?v=ai-sr-20261119" type="video/mp4">
+          Your browser cannot display the invitation film. <a href="assets/royal-film-immersive-HD.mp4?v=ai-sr-20261119">Download the film.</a>
         </video>
         <video class="film film-wide" id="wideFilm" muted playsinline webkit-playsinline preload="none" poster="assets/poster-wide.jpg" aria-label="Original landscape framing of the invitation"></video>
         <div class="vignette" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
@@ -215,7 +215,7 @@
   <dialog class="watch-dialog" id="watchDialog" aria-label="Watch the invitation with sound">
     <div class="watch-shell">
       <div class="watch-head"><strong>Swathi & Arun · The Film</strong><button class="chrome-btn" type="button" id="closeDialog" aria-label="Close film player"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Close</button></div>
-      <video id="watchFilm" playsinline controls preload="none" poster="assets/poster-portrait.jpg"></video>
+      <video id="watchFilm" playsinline controls preload="none" poster="assets/poster-portrait.jpg?v=ai-sr-20261119"></video>
     </div>
   </dialog>
   <div class="notice" id="toast" role="status" aria-live="polite"></div>
@@ -315,7 +315,7 @@
       byId('replayBtn').addEventListener('click',restart);byId('replayFilmBtn').addEventListener('click',restart);
       function openWatch(){
         pauseScrub=true;
-        const src=activeFilm.currentSrc || (activeFilm===film?'assets/royal-film-immersive-HD.mp4':'assets/royal-film-enhanced-1080p.mp4');
+        const src=activeFilm.currentSrc || (activeFilm===film?'assets/royal-film-immersive-HD.mp4?v=ai-sr-20261119':'assets/royal-film-enhanced-1080p.mp4');
         const seek=clamp(desired,0,Math.max(0,duration-.2));
         const play=()=>{try{watchFilm.currentTime=seek;}catch(_){} const p=watchFilm.play();if(p&&p.catch)p.catch(()=>{});};
         if(watchFilm.getAttribute('src')!==src){watchFilm.src=src;watchFilm.load();watchFilm.addEventListener('loadedmetadata',play,{once:true});}

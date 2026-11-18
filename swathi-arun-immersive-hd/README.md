@@ -2,15 +2,15 @@
 
 ## Start here
 
-This is a static, **mobile-first, scroll-scrubbed wedding film website**. The default mode is **Immersive**. On compatible phones, the pre-rendered portrait master fills the display with no browser-time 16:9 zoom or crop. Scrolling up/down advances or reverses the film. Open **Play with sound** for normal playback and audio. The chapter rail, replay, date details, and calendar download are included.
+This is a static, **mobile-first, scroll-scrubbed wedding film website**. The default mode is **Clarity**, which shows a wider view of the film. Immersive is available from the framing menu and loads an AI-upscaled portrait film only when selected. Scrolling up/down advances or reverses the film. Open **Play with sound** for normal playback and audio. The chapter rail, replay, date details, and calendar download are included.
 
 Open `index.html` on a browser, ideally served from a web server, or publish this whole folder to GitHub Pages.
 
 ## Site files
 
 - `index.html` — complete HTML/CSS/JavaScript; zero build tooling and no icon library.
-- `assets/royal-film-immersive-HD.mp4` — default 1080 × 2340 portrait film, 24 fps, 940 frames, ~64.4 MiB. H.264, frequent 0.25 s keyframes for scroll seeking.
-- `assets/royal-film-enhanced-1080p.mp4` — previous 1920 × 1080 landscape version, loaded **only when Clarity or Original is selected**.
+- `assets/royal-film-immersive-HD.mp4` — AI-upscaled 1080 × 2340 portrait film, 24 fps, 940 frames, about 53 MiB. H.264, frequent 0.25 s keyframes for scroll seeking.
+- `assets/royal-film-enhanced-1080p.mp4` — 1920 × 1080 wide version used by Clarity and Original; loaded on entry in Clarity mode.
 - `assets/poster-portrait.jpg`, `assets/poster-wide.jpg` — first-load posters.
 - `assets/mark.svg`, `assets/noise.svg` — lightweight branded vector assets.
 - `docs/QA_REPORT.md` — tested checks, measurements and limitations.
@@ -36,12 +36,10 @@ To update an existing version of the immersive website intentionally, add
 `--replace`. Do not upload the original ZIP as the website; publish these
 extracted files and retain their `assets/` directory.
 
-### Prefer the maximum-quality master?
-
-If your hosting provider permits a single video larger than 100 MiB, replace `assets/royal-film-immersive-HD.mp4` with the separately supplied `Swathi_Arun_Immersive_HD_Master.mp4` **renamed to** `royal-film-immersive-HD.mp4`. Both video variants have identical dimensions, frame count, duration and seek-keyframe layout, so no HTML changes are required. For GitHub Pages, retain the included ~64 MiB web version.
-
 ## Quality notes
 
-The Gemini source is **1280 × 720 landscape**. Immersive framing retains only about 333 source pixels across the 720-pixel height. Every frame was cropped, lightly denoised, resized using a high-quality filter and contrast-adaptively sharpened, and then individually encoded into a portrait video. This improves encoding fidelity, presentation and perceptual edge quality but **does not invent genuine fine detail**. True native-resolution immersive footage requires generating the scene in portrait (9:19.5 or 9:16 with safe crop) using Gemini or another AI video tool.
+The Gemini source is 1280 × 720. Immersive framing retains roughly 333 source pixels across the original 720-pixel height. The portrait film uses Real-ESRGAN's `realesr-general-x4v3` model to upscale a center crop of the wide encode, then fits it to 1080 × 2340. This reduces visible pixelation, but generated details can differ from the source. It is not native 4K footage. The original audio and 24 fps timing are preserved.
+
+Model and architecture: https://github.com/xinntao/Real-ESRGAN
 
 See `docs/QA_REPORT.md` for tested browser sizes and remaining mobile playback verification.

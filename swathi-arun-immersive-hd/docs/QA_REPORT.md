@@ -1,5 +1,22 @@
 # Mobile-first website QA — Immersive HD edition
 
+## AI upscale update, 19 November 2026
+
+Clarity is the default on every page load. Immersive remains optional and its portrait file loads only when selected.
+
+The portrait film now uses Real-ESRGAN `realesr-general-x4v3` on all 940 frames. The input is a 498 × 1080 center crop of the wide encode, reduced to 332 × 720 (near the original source resolution), then upscaled 4× with the model and fitted to 1080 × 2340 with Lanczos.
+
+- Output: 1080 × 2340, 24 fps, 940 frames; 39.167 seconds of picture and 39.213 seconds in the audio/video container.
+- H.264 High level 5.1, 0.25-second keyframes, fast-start MP4, and about 53 MiB.
+- BT.709 primaries/matrix and the source sRGB transfer tag are retained.
+- Full video/audio decode completed without errors. Original and output audio have identical SHA-256 hashes when extracted as ADTS.
+- Matching frames and a six-second comparison show clearer lettering and ornament edges. This uses a frame-by-frame model; subtle temporal artifacts remain possible.
+- This is AI-upscaled detail, not native 4K capture. Existing source transitions and framing remain.
+
+Model and architecture: https://github.com/xinntao/Real-ESRGAN
+
+## Original package QA, 17 November 2026
+
 **Date:** 17 November 2026
 **Source:** `gemini_generated_video_27589263.mp4`, 1280 × 720, 24 fps, 40.04 s.
 **Previous re-edit:** two abrupt cuts softened; 940 frames and 39.213 s.
