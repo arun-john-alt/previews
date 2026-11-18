@@ -166,25 +166,25 @@
     </div>
     <div class="top-actions">
       <button type="button" id="fitToggle" class="chrome-btn framing-trigger" title="Choose video framing" aria-label="Choose video framing" aria-expanded="false" aria-haspopup="true" aria-controls="framingMenu">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2-2v-3"/></svg><span class="framing-label" id="fitText">Immersive</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2-2v-3"/></svg><span class="framing-label" id="fitText">Clarity</span>
       </button>
       <button type="button" id="watchBtn" class="chrome-btn" title="Watch the film with sound" aria-label="Play film with sound">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="icon-play"><path d="M8.5 5.75a1.1 1.1 0 0 1 1.65-.95l9.15 6.26a1.12 1.12 0 0 1 0 1.88L10.15 19.2a1.1 1.1 0 0 1-1.65-.95z"/></svg><span class="hide-mobile">Play with sound</span>
       </button>
       <div class="framing-menu" id="framingMenu" hidden aria-label="Video framing options">
         <div class="framing-menu-header">How to view the film</div>
-        <button class="frame-choice" type="button" data-framing="clarity"><strong>Clarity</strong><small>Wider view of the original film</small></button>
+        <button class="frame-choice active" type="button" data-framing="clarity"><strong>Clarity · Default</strong><small>Wider view of the original film</small></button>
         <button class="frame-choice" type="button" data-framing="full"><strong>Original frame</strong><small>Entire 16:9 picture, without zooming</small></button>
-        <button class="frame-choice active" type="button" data-framing="zoom"><strong>Immersive HD · Default</strong><small>Full-height, frame-enhanced portrait master</small></button>
+        <button class="frame-choice" type="button" data-framing="zoom"><strong>Immersive HD</strong><small>Full-height, frame-enhanced portrait master</small></button>
       </div>
     </div>
   </header>
   <main>
     <section class="journey" id="journey" aria-label="Scroll-controlled wedding invitation film">
-      <div class="stage framing-zoom" id="stage">
+      <div class="stage framing-clarity" id="stage">
         <div class="ambient" aria-hidden="true"></div>
-        <video class="film film-portrait" id="film" muted playsinline webkit-playsinline preload="auto" poster="assets/poster-portrait.jpg" aria-label="Immersive portrait royal wedding invitation film of Swathi and Arun">
-          <source src="assets/royal-film-immersive-HD.mp4" type="video/mp4">
+        <video class="film film-portrait" id="film" muted playsinline webkit-playsinline preload="none" poster="assets/poster-portrait.jpg" aria-label="Immersive portrait royal wedding invitation film of Swathi and Arun">
+          <source data-src="assets/royal-film-immersive-HD.mp4" type="video/mp4">
           Your browser cannot display the invitation film. <a href="assets/royal-film-immersive-HD.mp4">Download the film.</a>
         </video>
         <video class="film film-wide" id="wideFilm" muted playsinline webkit-playsinline preload="none" poster="assets/poster-wide.jpg" aria-label="Original landscape framing of the invitation"></video>
@@ -257,24 +257,27 @@
         }
         window.requestAnimationFrame(render);
       }
-      function ready(){if(live)return;live=true;loading.classList.add('ready');duration=Number.isFinite(film.duration)&&film.duration>1?film.duration:39.15;readGeometry();updateGoal();displayTime=desired;forceSeek=true;}
+      function ready(){if(live)return;live=true;loading.classList.add('ready');duration=Number.isFinite(activeFilm.duration)&&activeFilm.duration>1?activeFilm.duration:39.15;readGeometry();updateGoal();displayTime=desired;forceSeek=true;}
       film.addEventListener('loadedmetadata',ready);
       film.addEventListener('loadeddata',ready);
       film.addEventListener('error',()=>{loading.classList.add('ready');toast('Unable to load the film. Check the assets folder.');});
       film.addEventListener('seeked',()=>{});
-      wideFilm.addEventListener('loadedmetadata',()=>{forceSeek=true;lastSeek=0;});
+      wideFilm.addEventListener('loadedmetadata',()=>{ready();forceSeek=true;lastSeek=0;});
       wideFilm.addEventListener('error',()=>{toast('Wide view could not load; returning to Immersive HD.');setFraming('zoom');});
       if(film.readyState>=1)ready();
       window.addEventListener('scroll',updateGoal,{passive:true});window.addEventListener('resize',()=>{readGeometry();updateGoal();},{passive:true});
       window.addEventListener('pageshow',()=>{readGeometry();updateGoal();forceSeek=true;});
       let activated=false;
-      const prime=()=>{if(activated)return;activated=true; if(film.paused){const p=film.play();if(p && typeof p.then==='function')p.then(()=>film.pause()).catch(()=>{});}};
+      const prime=()=>{if(activated)return;activated=true; if(activeFilm.paused){const playingFilm=activeFilm;const p=playingFilm.play();if(p && typeof p.then==='function')p.then(()=>playingFilm.pause()).catch(()=>{});}};
       window.addEventListener('touchstart',prime,{once:true,passive:true}); window.addEventListener('pointerdown',prime,{once:true,passive:true});
       const framingNames={clarity:'Clarity',full:'Original',zoom:'Immersive'};
       function setFraming(mode){
         if(!framingNames[mode])return;
-        // The primary portrait video is always initialized first. Load the wide view on demand.
-        if(mode==='zoom') {activeFilm=film;}
+        if(mode==='zoom') {
+          activeFilm=film;
+          const source=film.querySelector('source');
+          if(!source.getAttribute('src')){source.src=source.dataset.src;film.load();}
+        }
         else {
           activeFilm=wideFilm;
           if(!wideFilm.getAttribute('src')){
@@ -293,7 +296,6 @@
         });
         framingMenu.hidden=true;
         fitToggle.setAttribute('aria-expanded','false');
-        try{localStorage.setItem('swathi-arun-framing-hd-v1',mode);}catch(_){}
       }
       fitToggle.addEventListener('click',()=>{
         framingMenu.hidden=!framingMenu.hidden;
@@ -308,8 +310,7 @@
       document.addEventListener('keydown',event=>{
         if(event.key==='Escape'&&!framingMenu.hidden){framingMenu.hidden=true;fitToggle.setAttribute('aria-expanded','false');fitToggle.focus();}
       });
-      let restoredMode='zoom';try{const saved=localStorage.getItem('swathi-arun-framing-hd-v1');if(framingNames[saved])restoredMode=saved;}catch(_){}
-      setFraming(restoredMode);
+      setFraming('clarity');
       function restart(){window.scrollTo({top:Math.max(0,scrollOffset),behavior:reduced?'auto':'smooth'});desired=0;displayTime=0;forceSeek=true;}
       byId('replayBtn').addEventListener('click',restart);byId('replayFilmBtn').addEventListener('click',restart);
       function openWatch(){
@@ -334,8 +335,6 @@
         try{if(navigator.share){await navigator.share(content);return;}if(navigator.clipboard && location.protocol.startsWith('http')){await navigator.clipboard.writeText(content.url);toast('Invitation link copied');return;}toast('Publish the website to share its link');}catch(e){if(e.name!=='AbortError')toast('Sharing unavailable in this browser');}
       });
       readGeometry();updateGoal();window.requestAnimationFrame(render);
-      // Make the reference video load immediately without requiring autoplay.
-      film.load();
     })();
   </script>
 </body>
