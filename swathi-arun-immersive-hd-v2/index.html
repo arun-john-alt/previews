@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#161013">
+  <meta name="description" content="Swathi and Arun invite you to celebrate their wedding. 11 November 2027, Chennai.">
+  <title>Swathi & Arun · Invitation V2</title>
+  <link rel="icon" href="../swathi-arun-immersive-hd/assets/mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="invitation.js"></script>
+</head>
+<body class="locked">
+  <main>
+    <section class="stage" id="stage" aria-label="Wedding invitation film" data-framing="wide">
+      <video id="film" playsinline webkit-playsinline preload="metadata" poster="../swathi-arun-immersive-hd/assets/poster-wide.jpg" aria-label="Wedding film of Swathi and Arun"></video>
+      <div class="shade" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Swathi and Arun wedding invitation"><span class="monogram" aria-hidden="true">S·A</span><span>SWATHI & ARUN</span></a>
+        <label class="framing">Framing<select id="framing" aria-label="Video framing"><option value="auto">Auto</option><option value="wide">Clarity</option><option value="portrait">Immersive</option></select></label>
+      </header>
+      <div class="welcome" id="welcome">
+        <div class="welcome-content">
+          <h1>Swathi <span>&</span> Arun</h1>
+          <p class="date">11 November 2027 · Chennai</p>
+          <button class="play-invitation" id="start" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z"/></svg><span>Play invitation</span></button>
+          <p class="welcome-note">A 39-second film, with sound.</p>
+          <p class="status" id="openingStatus" role="status"></p>
+        </div>
+      </div>
+      <div class="playback" id="playback" hidden>
+        <div class="playback-row">
+          <button id="togglePlay" type="button" class="control">Pause</button>
+          <span id="scene" class="scene">An invitation unfolds</span>
+          <button id="sound" type="button" class="control" aria-pressed="false" aria-label="Mute sound">Sound on</button>
+        </div>
+        <label class="timeline"><span class="sr-only">Film position</span><input id="timeline" type="range" min="0" max="39.213" step="0.01" value="0" aria-valuetext="0 seconds of 39 seconds"></label>
+        <div class="playback-meta"><span id="elapsed">0:00</span><span id="playbackStatus" role="status"></span><span id="total">0:39</span></div>
+      </div>
+      <a class="continue" href="#details" id="continue" hidden>Scroll to the wedding card<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
+    </section>
+    <section class="ending" id="details" aria-labelledby="detailsTitle" hidden>
+      <div class="ending-monogram" aria-hidden="true">S·A</div>
+      <h2 id="detailsTitle">Swathi <span>&</span> Arun</h2>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="wedding-date">Thursday, 11 November 2027<br><span>Chennai</span></p>
+      <div class="end-actions"><button class="primary" id="calendar" type="button">Save the date</button><button class="secondary" id="share" type="button">Share invitation</button><button class="secondary" id="replay" type="button">Play again</button></div>
+      <p class="fine-print">Venue and ceremony time to be confirmed.</p>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <noscript><p class="no-script">Enable JavaScript to play the invitation, or <a href="../swathi-arun-immersive-hd/assets/royal-film-enhanced-1080p.mp4">open the film directly</a>. Swathi & Arun · 11 November 2027 · Chennai.</p></noscript>
+</body>
+</html>
