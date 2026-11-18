@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#161013">
+  <meta name="video-quality" content="immersive-1080x2340-frame-processed">
+  <meta name="description" content="The wedding of Swathi & Arun — 11 November 2027, Chennai. Immersive HD scroll-controlled invitation.">
+  <meta property="og:title" content="Swathi & Arun — Wedding Invitation">
+  <meta property="og:description" content="11 November 2027 · Chennai">
+  <meta property="og:type" content="website">
+  <title>Swathi & Arun — The Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
+  <style>
+    :root{color-scheme:dark;--wine:#471b28;--gold:#d9b67d;--ivory:#f8eedb;--muted:#d6c7b6;--ink:#151015;--ease:cubic-bezier(.23,.72,.24,1)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:auto;background:var(--ink)}
+    body{margin:0;color:var(--ivory);background:var(--ink);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit;cursor:pointer}
+    a{color:inherit}
+    button:focus-visible,a:focus-visible{outline:2px solid #f0cd92;outline-offset:4px}
+    ::selection{background:var(--gold);color:#1d1118}
+    .scroll-progress{position:fixed;z-index:40;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#7e354c,#eac58a,#fff1cc);box-shadow:0 0 8px #cfa76c8c;pointer-events:none}
+    .topbar{z-index:30;position:fixed;left:0;top:0;width:100%;padding:calc(18px + env(safe-area-inset-top)) clamp(18px,3.1vw,48px) 0;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none;transition:opacity .45s ease}
+    .brand{display:flex;gap:10px;align-items:center;letter-spacing:.15em;font-size:10px;text-transform:uppercase;text-shadow:0 2px 12px #0009;pointer-events:auto}
+    .brand-mark{flex:0 0 auto;height:36px;width:36px;border:1px solid #dabd8b9c;border-radius:50%;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:-.1em;color:#e6cc9b;background:#20121a99}
+    .monogram-letters{display:inline-flex;align-items:baseline;justify-content:center;gap:1px;white-space:nowrap;letter-spacing:0;line-height:1}
+    .monogram-dot{font-size:.73em;transform:translateY(-1px)}
+    .brand-name{line-height:1.4;color:#fff7ec;white-space:nowrap}
+    .brand-name small{display:block;font-size:9px;letter-spacing:.23em;color:#e0c8a9b8;font-weight:400}
+    .top-actions{display:flex;gap:8px;align-items:center;pointer-events:auto}
+    .chrome-btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#f6ecdf;background:#160f15ab;border:1px solid #efceae66;border-radius:999px;min-height:40px;padding:0 15px;font-size:11px;font-weight:500;letter-spacing:.03em;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:background .2s,border-color .2s,transform .2s}
+    .chrome-btn:hover{background:#492938d6;border-color:#edc88d;transform:translateY(-1px)}
+    .chrome-btn svg{width:17px;height:17px;flex:0 0 17px;display:block;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .topbar .chrome-btn{min-width:44px;min-height:44px}
+    .icon-play{fill:currentColor!important;stroke:none!important}
+    .journey{height:calc(100svh * 9.75);position:relative;isolation:isolate}
+    .stage{height:100svh;position:sticky;top:0;overflow:hidden;display:grid;place-items:center;background:#170f16;isolation:isolate}
+    .ambient{position:absolute;inset:-45px;background:center/cover no-repeat url('assets/poster-portrait.jpg');filter:blur(30px) brightness(.35) saturate(.9);opacity:.5;transform:scale(1.12)}
+    .ambient:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#120d13bb,#24131a44 45%,#120d13aa)}
+    .film{z-index:1;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:contrast(1.01) saturate(1.02);pointer-events:none}
+    .stage.framing-full .film{object-fit:contain}
+    .stage.framing-full .ambient{opacity:1}
+    .vignette{pointer-events:none;position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,#0a070bbb 0%,transparent 20%,transparent 74%,#0b080d88 100%);opacity:.72}
+    .stage.framing-full .vignette{background:linear-gradient(180deg,#0b080caf,transparent 24%,transparent 70%,#0b080ccf)}
+    .grain{position:absolute;z-index:3;pointer-events:none;inset:0;opacity:.035;background-image:url('assets/noise.svg');background-size:190px 190px;mix-blend-mode:screen}
+    .stage-foot{position:absolute;z-index:6;left:clamp(18px,3.1vw,48px);right:clamp(18px,3.1vw,48px);bottom:calc(22px + env(safe-area-inset-bottom));display:flex;align-items:flex-end;justify-content:space-between;gap:15px;pointer-events:none}
+    .scene-info{pointer-events:none;max-width:60%;text-shadow:0 2px 18px #000b;transition:opacity .3s}
+    .scene-kicker{display:block;font-size:9px;letter-spacing:.26em;color:#e8caa1;font-weight:500;text-transform:uppercase;margin-bottom:6px}
+    .scene-title{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,4vw,38px);line-height:1.0;font-weight:500;letter-spacing:.01em}
+    .stage-foot-actions{display:flex;align-items:center;gap:8px;pointer-events:auto}
+    .foot-btn{min-height:44px;padding:0 12px;white-space:nowrap}
+    .scroll-tip{position:absolute;z-index:7;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:13px;pointer-events:none;opacity:1;transition:opacity .6s}
+    .scroll-tip.hidden{opacity:0}
+    .scroll-tip span{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:#f5e4ce;text-shadow:0 2px 14px #000b;white-space:nowrap}
+    .scroll-tip i{width:1px;height:33px;background:linear-gradient(#dfbd87,#dfbd8700);display:block;animation:scrollline 2.4s ease-in-out infinite}
+    @keyframes scrollline{0%,100%{transform:scaleY(.62);transform-origin:top;opacity:.5}50%{transform:scaleY(1);opacity:1}}
+    .scene-rail{position:absolute;z-index:8;right:clamp(12px,2vw,32px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;align-items:center;pointer-events:none;opacity:.75}
+    .scene-rail span{display:block;width:3px;height:3px;border-radius:50%;background:#fff5dd99;transition:height .25s,background .25s}
+    .scene-rail span.active{width:3px;height:23px;border-radius:3px;background:#f0cf99}
+    .loading{position:absolute;inset:0;z-index:9;display:grid;place-items:center;background:#1d1019ee;transition:opacity .6s,visibility .6s}
+    .loading.ready{opacity:0;visibility:hidden;pointer-events:none}
+    .loading-inner{display:grid;justify-items:center;gap:15px;color:#eed7b2}
+    .loading-emblem{width:49px;height:49px;border:1px solid #caa775;border-radius:50%;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:25px}
+    .loading p{margin:0;letter-spacing:.25em;font-size:10px;text-transform:uppercase}
+    .loading-line{height:1px;background:#84654b;width:88px;overflow:hidden}
+    .loading-line:after{content:"";display:block;background:#ffdb9c;height:1px;width:28px;animation:loading 1.7s infinite ease-in-out}
+    @keyframes loading{from{transform:translateX(-35px)}to{transform:translateX(110px)}}
+    .ending{position:relative;z-index:4;min-height:90svh;padding:clamp(80px,12svh,160px) 22px max(70px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at 50% 15%,#4d293b 0%,#24131e 48%,#160f18 100%);isolation:isolate}
+    .ending:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;background:repeating-linear-gradient(45deg,transparent 0 15px,#cdaa7717 15px 16px)}
+    .ending>*{position:relative}
+    .ending-monogram{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;color:#dbbd8e;border:1px solid #bc905f99;outline:1px solid #bc905f55;outline-offset:6px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin-bottom:44px}
+    .eyebrow{font-size:10px;letter-spacing:.34em;font-weight:500;color:#d8b785;text-transform:uppercase}
+    .ending h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:clamp(64px,12vw,138px);margin:14px 0 8px;letter-spacing:-.035em;line-height:.92;text-wrap:balance}
+    .ending h1 em{font-weight:400;font-style:italic;font-size:.7em;color:#e0bd8b}
+    .divider{margin:32px auto;width:100px;height:1px;background:linear-gradient(90deg,transparent,#cfa978,transparent)}
+    .details{font-family:'Cormorant Garamond',Georgia,serif;color:#f3e4cf;letter-spacing:.08em;font-size:clamp(24px,4vw,31px);line-height:1.3}
+    .details small{font-size:19px;color:#d5b98e;letter-spacing:.12em}
+    .end-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+    .primary{border:1px solid #e2bc84;background:linear-gradient(130deg,#e8c58a,#d0a46c);color:#27131b;border-radius:999px;min-height:49px;padding:0 22px;font-size:12px;font-weight:600;letter-spacing:.02em;transition:filter .2s,transform .2s}
+    .primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
+    .secondary{background:transparent;border:1px solid #c8a57388;color:#f4e8d8;min-height:49px;padding:0 22px;border-radius:999px;font-size:12px;font-weight:500;transition:background .2s}
+    .secondary:hover{background:#fff1de16}
+    .fine-print{font-size:12px;color:#cbb6a4;max-width:380px;line-height:1.6;margin-top:40px}
+    .watch-dialog{max-width:min(96vw,1140px);max-height:95dvh;padding:0;overflow:hidden;background:#0c090e;color:white;border:1px solid #aa845d99;border-radius:14px;box-shadow:0 24px 90px #000c}
+    .watch-dialog::backdrop{background:#050305ef;backdrop-filter:blur(8px)}
+    .watch-shell{width:min(96vw,1100px);padding:clamp(12px,2vw,25px)}
+    .watch-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:12px}
+    .watch-head strong{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(20px,3vw,28px)}
+    .watch-dialog video{width:100%;max-height:75dvh;display:block;background:#080708;outline:none}
+    .watch-head .chrome-btn{white-space:nowrap}
+    .notice{position:fixed;z-index:80;bottom:30px;max-width:calc(100vw - 32px);text-align:center;line-height:1.4;left:50%;transform:translate(-50%,16px);border:1px solid #ab8c67;border-radius:999px;padding:11px 18px;background:#281b24ed;color:#fff1db;font-size:12px;opacity:0;pointer-events:none;transition:transform .25s,opacity .25s;white-space:normal}
+    .notice.visible{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:650px){
+      .topbar{padding-left:18px;padding-right:18px}.brand-name{font-size:9px}.brand-mark{width:33px;height:33px;font-size:15px}
+      .top-actions .chrome-btn{min-height:44px;padding:0 11px}.chrome-btn .hide-mobile{display:none}
+      .scene-rail{right:9px;gap:10px}.scene-info{max-width:48%}
+      .scene-title{font-size:27px}.scene-kicker{font-size:9px;letter-spacing:.18em}
+      .stage-foot{left:18px;right:17px;bottom:calc(16px + env(safe-area-inset-bottom))}
+      .foot-btn{min-height:44px;padding:0 10px;font-size:11px}
+      .scroll-tip{bottom:calc(92px + env(safe-area-inset-bottom))}
+      .ending h1{font-size:clamp(58px,15vw,86px)}
+    }
+
+    /* Framing is part of video fidelity, not a cosmetic zoom. The optional original framing is 16:9; the default portrait film is baked frame by frame. */
+    .top-actions{position:relative}
+    .framing-trigger{gap:7px}
+    .framing-trigger .framing-label{font-size:11px;white-space:nowrap}
+    .framing-menu{position:absolute;top:calc(100% + 12px);right:48px;width:min(270px,calc(100vw - 34px));padding:7px;background:#241720f5;border:1px solid #c7a1738c;border-radius:15px;box-shadow:0 18px 50px #0009;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);z-index:50}
+    .framing-menu[hidden]{display:none}
+    .framing-menu-header{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#d6b783;padding:10px 12px 8px}
+    .frame-choice{display:flex;flex-direction:column;gap:3px;border:1px solid transparent;border-radius:9px;padding:10px 12px;width:100%;color:#f7e9d6;background:transparent;text-align:left;font-family:inherit}
+    .frame-choice:hover,.frame-choice:focus-visible{background:#6a43502e}
+    .frame-choice.active{background:#d2b07621;border-color:#dab78388}
+    .frame-choice strong{font-weight:600;font-size:13px}
+    .frame-choice small{font-size:11px;line-height:1.4;color:#cab9af}
+    .stage.framing-clarity .film{will-change:opacity}
+    @media(max-width:650px){
+      .stage.framing-clarity .film{
+        top:50%;bottom:auto;left:0;right:0;
+        width:100%;height:clamp(330px,62svh,620px);
+        object-fit:cover;object-position:50% 50%;transform:translateY(-50%);
+        -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+        mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+      }
+      .stage.framing-clarity .ambient{opacity:.92;filter:blur(38px) brightness(.33) saturate(.95)}
+      .stage.framing-full .ambient{opacity:.96}
+      .stage.framing-zoom .film{object-fit:cover}
+      .stage.framing-full .film,.stage.framing-zoom .film{top:0;left:0;right:0;bottom:0;transform:none;width:100%;height:100%;-webkit-mask-image:none;mask-image:none}
+      .stage.framing-clarity .vignette{background:linear-gradient(180deg,#0a070be8,transparent 30%,transparent 74%,#0b080ddd)}
+      .framing-menu{right:0}
+    }
+    @media(max-width:365px){.brand-name small{display:none}.brand-mark{width:32px;height:32px;font-size:15px}.brand{gap:7px}.brand-name{font-size:9px;letter-spacing:.10em}.framing-trigger .framing-label{font-size:10px}.top-actions{gap:6px}.top-actions .chrome-btn{padding:0 9px}.framing-menu{right:0}.scene-title{font-size:24px}}
+    @media(max-width:390px){.ending{padding-top:58px;padding-bottom:max(50px,env(safe-area-inset-bottom))}.ending-monogram{width:70px;height:70px;font-size:29px;margin-bottom:30px}.ending h1{font-size:clamp(51px,13.8vw,68px)}.divider{margin:23px auto}.end-actions{margin-top:30px;gap:10px}.fine-print{margin-top:26px}.scene-info{max-width:54%}}
+    body.on-details .topbar{opacity:0;visibility:hidden;pointer-events:none}
+    .watch-head .chrome-btn{min-width:44px;min-height:44px}
+    .topbar{transition:opacity .35s ease,visibility .35s ease}
+
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+    /* Immersive HD is a separately rendered portrait film. No runtime 16:9-to-9:20 crop. */
+    .film-portrait{display:block;object-fit:cover;object-position:center center;transform:none;filter:none}
+    .film-wide{display:none}
+    .stage.framing-zoom .film-portrait{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform:none;mask-image:none;-webkit-mask-image:none}
+    .stage.framing-zoom .film-wide{display:none}
+    .stage.framing-clarity .film-portrait,.stage.framing-full .film-portrait{display:none}
+    .stage.framing-clarity .film-wide,.stage.framing-full .film-wide{display:block}
+    .stage.framing-clarity .film-wide{will-change:opacity}
+    @media(max-width:365px){.framing-trigger .framing-label{display:none}.topbar{gap:6px}.chrome-btn{min-width:44px}}
+    .watch-dialog video{object-fit:contain}
+
+    /* The popup is viewport-anchored so it cannot run off narrow phones. */
+    .framing-menu{position:fixed;top:calc(72px + env(safe-area-inset-top));right:14px;left:auto;width:min(270px,calc(100vw - 28px));max-width:calc(100vw - 28px)}
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="topProgress" aria-hidden="true"></div>
+  <header class="topbar" id="topbar">
+    <div class="brand" aria-label="Wedding of Swathi and Arun">
+      <div class="brand-mark" aria-hidden="true"><span class="monogram-letters">S<span class="monogram-dot">·</span>A</span></div>
+      <div class="brand-name">SWATHI & ARUN<small>THE WEDDING INVITATION</small></div>
+    </div>
+    <div class="top-actions">
+      <button type="button" id="fitToggle" class="chrome-btn framing-trigger" title="Choose video framing" aria-label="Choose video framing" aria-expanded="false" aria-haspopup="true" aria-controls="framingMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2-2v-3"/></svg><span class="framing-label" id="fitText">Immersive</span>
+      </button>
+      <button type="button" id="watchBtn" class="chrome-btn" title="Watch the film with sound" aria-label="Play film with sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="icon-play"><path d="M8.5 5.75a1.1 1.1 0 0 1 1.65-.95l9.15 6.26a1.12 1.12 0 0 1 0 1.88L10.15 19.2a1.1 1.1 0 0 1-1.65-.95z"/></svg><span class="hide-mobile">Play with sound</span>
+      </button>
+      <div class="framing-menu" id="framingMenu" hidden aria-label="Video framing options">
+        <div class="framing-menu-header">How to view the film</div>
+        <button class="frame-choice" type="button" data-framing="clarity"><strong>Clarity</strong><small>Wider view of the original film</small></button>
+        <button class="frame-choice" type="button" data-framing="full"><strong>Original frame</strong><small>Entire 16:9 picture, without zooming</small></button>
+        <button class="frame-choice active" type="button" data-framing="zoom"><strong>Immersive HD · Default</strong><small>Full-height, frame-enhanced portrait master</small></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="journey" id="journey" aria-label="Scroll-controlled wedding invitation film">
+      <div class="stage framing-zoom" id="stage">
+        <div class="ambient" aria-hidden="true"></div>
+        <video class="film film-portrait" id="film" muted playsinline webkit-playsinline preload="auto" poster="assets/poster-portrait.jpg" aria-label="Immersive portrait royal wedding invitation film of Swathi and Arun">
+          <source src="assets/royal-film-immersive-HD.mp4" type="video/mp4">
+          Your browser cannot display the invitation film. <a href="assets/royal-film-immersive-HD.mp4">Download the film.</a>
+        </video>
+        <video class="film film-wide" id="wideFilm" muted playsinline webkit-playsinline preload="none" poster="assets/poster-wide.jpg" aria-label="Original landscape framing of the invitation"></video>
+        <div class="vignette" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
+        <div class="scroll-tip" id="scrollTip" aria-hidden="true"><span>Scroll to unfold the story</span><i></i></div>
+        <div class="stage-foot">
+          <div class="scene-info" aria-live="off"><span class="scene-kicker" id="sceneNumber">CHAPTER 01 / 06</span><span class="scene-title" id="sceneTitle">An invitation unfolds</span></div>
+          <div class="stage-foot-actions"><button type="button" id="replayFilmBtn" class="chrome-btn foot-btn" title="Restart the scroll invitation"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9c-2.7 0-5.11 1.2-6.75 3.08L3 8"/><path d="M3 3v5h5"/></svg>Replay</button></div>
+        </div>
+        <div class="scene-rail" id="sceneRail" aria-hidden="true"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="loading" id="loading"><div class="loading-inner"><div class="loading-emblem">S·A</div><p>Unfolding your invitation</p><div class="loading-line"></div></div></div>
+      </div>
+    </section>
+    <section class="ending" id="details" aria-label="Wedding details">
+      <div class="ending-monogram" aria-hidden="true">S·A</div>
+      <span class="eyebrow">Together with love</span>
+      <h1>Swathi <em>&</em> Arun</h1>
+      <div class="divider"></div>
+      <div class="details">Thursday, 11 November 2027<br><small>Chennai</small></div>
+      <div class="end-actions">
+        <button class="primary" type="button" id="calendarBtn">Save the date</button>
+        <button class="secondary" type="button" id="shareBtn">Share invitation</button>
+        <button class="secondary" type="button" id="replayBtn">Experience again</button>
+      </div>
+      <p class="fine-print">Venue and ceremony time to be confirmed.</p>
+    </section>
+  </main>
+  <dialog class="watch-dialog" id="watchDialog" aria-label="Watch the invitation with sound">
+    <div class="watch-shell">
+      <div class="watch-head"><strong>Swathi & Arun · The Film</strong><button class="chrome-btn" type="button" id="closeDialog" aria-label="Close film player"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>Close</button></div>
+      <video id="watchFilm" playsinline controls preload="none" poster="assets/poster-portrait.jpg"></video>
+    </div>
+  </dialog>
+  <div class="notice" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    (() => {
+      'use strict';
+      const byId = id => document.getElementById(id);
+      const film = byId('film'), wideFilm=byId('wideFilm'), journey = byId('journey'), stage=byId('stage'), tip=byId('scrollTip'), loading=byId('loading'), rail=byId('sceneRail');
+      const progressBar=byId('topProgress'), sceneNumber=byId('sceneNumber'), sceneTitle=byId('sceneTitle'), ending=byId('details');
+      const fitToggle=byId('fitToggle'), fitText=byId('fitText'), framingMenu=byId('framingMenu');
+      const dialog=byId('watchDialog'), watchFilm=byId('watchFilm');
+      const scenes=[
+        {at:0,label:'An invitation unfolds'},
+        {at:2.1,label:'The palace awaits'},
+        {at:10.15,label:'Swathi & Arun'},
+        {at:20.0,label:'A royal celebration'},
+        {at:29.65,label:'Save the date'},
+        {at:33.79,label:'A royal finale'}
+      ];
+      const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let duration=39.15, desired=0, displayTime=0, lastFrame=0, lastSeek=0, live=false, forceSeek=false, activeScene=-1;
+      let scrollOffset=0,scrollRange=1, pauseScrub=false, toastTimeout=0, activeFilm=film;
+      function readGeometry(){const r=journey.getBoundingClientRect();scrollOffset=window.scrollY+r.top;scrollRange=Math.max(1,journey.offsetHeight-window.innerHeight);}
+      function updateGoal(){const p=clamp((window.scrollY-scrollOffset)/scrollRange,0,1);desired=p*Math.max(.1,duration-.07); progressBar.style.transform=`scaleX(${p})`;tip.classList.toggle('hidden',p>.025);document.body.classList.toggle('on-details',ending.getBoundingClientRect().top<window.innerHeight*.5);const current=desired;
+        let ix=0;for(let i=0;i<scenes.length;i++){if(current>=scenes[i].at)ix=i;}
+        if(ix!==activeScene){activeScene=ix;sceneNumber.textContent=`CHAPTER ${String(ix+1).padStart(2,'0')} / 06`;sceneTitle.textContent=scenes[ix].label; [...rail.children].forEach((n,i)=>n.classList.toggle('active',i===ix));}
+      }
+      function render(t){
+        if(!lastFrame)lastFrame=t;
+        const dt=Math.min(80,t-lastFrame||16.7);lastFrame=t;
+        if(!pauseScrub){
+          const blend=reduced ? 1 : 1-Math.exp(-dt/125);
+          displayTime+=(desired-displayTime)*blend;
+          if(Math.abs(displayTime-desired)<.025)displayTime=desired;
+          if(live && activeFilm.readyState>=1 && !activeFilm.seeking && t-lastSeek>(reduced?85:42) && (forceSeek||Math.abs(displayTime-activeFilm.currentTime)>.034)){
+            try{activeFilm.currentTime=clamp(displayTime,0,Math.max(.1,duration-.055));lastSeek=t;forceSeek=false;}catch(_){}
+          }
+        }
+        window.requestAnimationFrame(render);
+      }
+      function ready(){if(live)return;live=true;loading.classList.add('ready');duration=Number.isFinite(film.duration)&&film.duration>1?film.duration:39.15;readGeometry();updateGoal();displayTime=desired;forceSeek=true;}
+      film.addEventListener('loadedmetadata',ready);
+      film.addEventListener('loadeddata',ready);
+      film.addEventListener('error',()=>{loading.classList.add('ready');toast('Unable to load the film. Check the assets folder.');});
+      film.addEventListener('seeked',()=>{});
+      wideFilm.addEventListener('loadedmetadata',()=>{forceSeek=true;lastSeek=0;});
+      wideFilm.addEventListener('error',()=>{toast('Wide view could not load; returning to Immersive HD.');setFraming('zoom');});
+      if(film.readyState>=1)ready();
+      window.addEventListener('scroll',updateGoal,{passive:true});window.addEventListener('resize',()=>{readGeometry();updateGoal();},{passive:true});
+      window.addEventListener('pageshow',()=>{readGeometry();updateGoal();forceSeek=true;});
+      let activated=false;
+      const prime=()=>{if(activated)return;activated=true; if(film.paused){const p=film.play();if(p && typeof p.then==='function')p.then(()=>film.pause()).catch(()=>{});}};
+      window.addEventListener('touchstart',prime,{once:true,passive:true}); window.addEventListener('pointerdown',prime,{once:true,passive:true});
+      const framingNames={clarity:'Clarity',full:'Original',zoom:'Immersive'};
+      function setFraming(mode){
+        if(!framingNames[mode])return;
+        // The primary portrait video is always initialized first. Load the wide view on demand.
+        if(mode==='zoom') {activeFilm=film;}
+        else {
+          activeFilm=wideFilm;
+          if(!wideFilm.getAttribute('src')){
+            wideFilm.src='assets/royal-film-enhanced-1080p.mp4';
+            wideFilm.load();
+          }
+        }
+        lastSeek=0;forceSeek=true;
+        stage.classList.remove('framing-clarity','framing-full','framing-zoom');
+        stage.classList.add('framing-'+mode);
+        fitText.textContent=framingNames[mode];
+        [...framingMenu.querySelectorAll('[data-framing]')].forEach(button=>{
+          const selected=button.dataset.framing===mode;
+          button.classList.toggle('active',selected);
+          button.setAttribute('aria-pressed',String(selected));
+        });
+        framingMenu.hidden=true;
+        fitToggle.setAttribute('aria-expanded','false');
+        try{localStorage.setItem('swathi-arun-framing-hd-v1',mode);}catch(_){}
+      }
+      fitToggle.addEventListener('click',()=>{
+        framingMenu.hidden=!framingMenu.hidden;
+        fitToggle.setAttribute('aria-expanded',String(!framingMenu.hidden));
+      });
+      [...framingMenu.querySelectorAll('[data-framing]')].forEach(button=>button.addEventListener('click',()=>setFraming(button.dataset.framing)));
+      document.addEventListener('pointerdown',event=>{
+        if(!framingMenu.hidden&&!fitToggle.contains(event.target)&&!framingMenu.contains(event.target)){
+          framingMenu.hidden=true;fitToggle.setAttribute('aria-expanded','false');
+        }
+      });
+      document.addEventListener('keydown',event=>{
+        if(event.key==='Escape'&&!framingMenu.hidden){framingMenu.hidden=true;fitToggle.setAttribute('aria-expanded','false');fitToggle.focus();}
+      });
+      let restoredMode='zoom';try{const saved=localStorage.getItem('swathi-arun-framing-hd-v1');if(framingNames[saved])restoredMode=saved;}catch(_){}
+      setFraming(restoredMode);
+      function restart(){window.scrollTo({top:Math.max(0,scrollOffset),behavior:reduced?'auto':'smooth'});desired=0;displayTime=0;forceSeek=true;}
+      byId('replayBtn').addEventListener('click',restart);byId('replayFilmBtn').addEventListener('click',restart);
+      function openWatch(){
+        pauseScrub=true;
+        const src=activeFilm.currentSrc || (activeFilm===film?'assets/royal-film-immersive-HD.mp4':'assets/royal-film-enhanced-1080p.mp4');
+        const seek=clamp(desired,0,Math.max(0,duration-.2));
+        const play=()=>{try{watchFilm.currentTime=seek;}catch(_){} const p=watchFilm.play();if(p&&p.catch)p.catch(()=>{});};
+        if(watchFilm.getAttribute('src')!==src){watchFilm.src=src;watchFilm.load();watchFilm.addEventListener('loadedmetadata',play,{once:true});}
+        else if(watchFilm.readyState>=1)play();else watchFilm.addEventListener('loadedmetadata',play,{once:true});
+        dialog.showModal();
+      }
+      function closeWatch(){watchFilm.pause();if(dialog.open)dialog.close();pauseScrub=false;forceSeek=true;}
+      byId('watchBtn').addEventListener('click',openWatch);byId('closeDialog').addEventListener('click',closeWatch);
+      dialog.addEventListener('click',e=>{if(e.target===dialog)closeWatch();});dialog.addEventListener('close',()=>{watchFilm.pause();pauseScrub=false;forceSeek=true;});
+      function toast(s){let el=byId('toast');clearTimeout(toastTimeout);el.textContent=s;el.classList.add('visible');toastTimeout=setTimeout(()=>el.classList.remove('visible'),2500);}
+      byId('calendarBtn').addEventListener('click',()=>{
+        const str=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Swathi and Arun//Wedding Invitation//EN','BEGIN:VEVENT','UID:swathi-arun-wedding-20271111@example.invalid','DTSTAMP:20261117T000000Z','DTSTART;VALUE=DATE:20271111','DTEND;VALUE=DATE:20271112','SUMMARY:Swathi & Arun — Wedding','LOCATION:Chennai','DESCRIPTION:Wedding of Swathi and Arun. Ceremony time and venue to be confirmed.','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const url=URL.createObjectURL(new Blob([str],{type:'text/calendar;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Swathi-and-Arun-Wedding.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),6000);toast('Date saved as a calendar file');
+      });
+      byId('shareBtn').addEventListener('click',async()=>{
+        const content={title:'Swathi & Arun — Wedding Invitation',text:'Swathi & Arun · 11 November 2027 · Chennai',url:location.href};
+        try{if(navigator.share){await navigator.share(content);return;}if(navigator.clipboard && location.protocol.startsWith('http')){await navigator.clipboard.writeText(content.url);toast('Invitation link copied');return;}toast('Publish the website to share its link');}catch(e){if(e.name!=='AbortError')toast('Sharing unavailable in this browser');}
+      });
+      readGeometry();updateGoal();window.requestAnimationFrame(render);
+      // Make the reference video load immediately without requiring autoplay.
+      film.load();
+    })();
+  </script>
+</body>
+</html>
