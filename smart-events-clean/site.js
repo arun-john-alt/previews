@@ -304,7 +304,9 @@
       if (stages) stages.centerOn(idx, true);
       if (RM || !dlg.animate) { dlg.close(); return; }
       var a = dlg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-out', fill: 'forwards' });
-      a.onfinish = function () { dlg.close(); a.cancel(); };
+      var done = function () { if (dlg.open) dlg.close(); a.cancel(); };
+      a.onfinish = done;
+      setTimeout(done, 350);   // a slow or throttled engine still closes it (and brings the name bar back)
     }
     dlg.addEventListener('close', function () {
       root.classList.remove('v-open');

@@ -8,6 +8,7 @@
   var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
   var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var WIDE = matchMedia('(min-width: 1024px)');
+  var SCENE = matchMedia('(min-width: 1024px) and (pointer: fine)');   // the pinned desktop scene; touch tablets keep the phone's programme
   var WA = '919159966611';
   var hasIO = 'IntersectionObserver' in window;
 
@@ -334,8 +335,21 @@
     ], { duration: 1300, easing: 'ease-in-out' });
   }
 
+  // the three last pages skip layout until they come near (content-visibility: auto); once the opening is done, lay
+  // them out one per idle moment while the visitor reads the first screen, so it never lands mid-scroll
+  function layOutLater() {
+    var secs = $$('.venue, .comp, .back'), i = 0;
+    var next = function () {
+      if (i >= secs.length) return;
+      secs[i++].style.contentVisibility = 'visible';
+      if (window.requestIdleCallback) requestIdleCallback(next, { timeout: 1500 }); else setTimeout(next, 200);
+    };
+    if (window.requestIdleCallback) requestIdleCallback(next, { timeout: 1500 }); else setTimeout(next, 200);
+  }
+
   function after() {
     petals();
+    layOutLater();
     var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 300); };
     if (RM) return;
     idle(function () {
@@ -364,26 +378,31 @@
     el.classList.add('in');
     $$('[data-count]', el).forEach(countUp);
   }
-  var io = null, pending = $$('.rv');
+  var io = null, pending = $$('.rv'), openFold = null;
   if (!hasIO || RM) pending.forEach(show);
   else {
     io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
     pending.forEach(function (el) { io.observe(el); });
-    // a second net: sections below the first screen are laid out only as they come near (content-visibility), and
-    // WebKit can miss the first intersection there, so a light scroll check shows anything already on screen
+    // a second net: sections below the first screen are laid out only as they come near (content-visibility), and a
+    // slow renderer (or a fast flick) can scroll past a line before its first intersection is reported, so a light
+    // scroll check shows anything on screen or already scrolled past
     var sweepT = 0;
     var sweep = function () {
       sweepT = 0;
       pending = pending.filter(function (el) {
         if (el.classList.contains('in')) return false;
-        if (el.hasAttribute('data-scene')) return true;   // a desktop scene prints this one by scroll position
         // measure the section first: measuring inside a far-off content-visibility section forces its whole layout
         var sec = el.closest('section'), sr = sec && sec.getBoundingClientRect();
-        if (sr && (sr.top > innerHeight * 2 || sr.bottom < -innerHeight)) return true;
+        if (el.hasAttribute('data-scene')) {               // a scene (desktop gatefold, phone fold) prints this one
+          if (openFold && el.hasAttribute('data-fold-reveal') && sr && sr.top < innerHeight * 0.5) openFold();
+          return true;
+        }
+        if (sr && sr.top > innerHeight * 2) return true;
+        if (sr && sr.bottom < 0) { show(el); io.unobserve(el); return false; }   // the whole section is behind us
         var r = el.getBoundingClientRect();
-        if (r.height && r.top < innerHeight * 0.9 && r.bottom > 0) { show(el); io.unobserve(el); return false; }
+        if (r.height && r.top < innerHeight * 0.9) { show(el); io.unobserve(el); return false; }
         return true;
       });
       if (!pending.length) removeEventListener('scroll', onScroll);
@@ -392,6 +411,25 @@
     addEventListener('scroll', onScroll, { passive: true });
   }
   window.__seReveal = { show: show, unobserve: function (el) { if (io) io.unobserve(el); el.setAttribute('data-scene', ''); } };
+
+  /* phones: the programme's front cover swings open on its hinge as the page arrives, once, and
+     the first stages rise into place behind it. Not scrubbed, not pinned. The desktop gets its pinned gatefold. */
+  var prog = $('[data-prog]'), fold = $('[data-fold]');
+  if (prog && fold && io && matchMedia('(max-width: 767px)').matches && !root.classList.contains('rv-fail')) {
+    var held = $$('[data-fold-reveal]', prog);
+    held.forEach(function (el) { io.unobserve(el); el.setAttribute('data-scene', ''); });
+    var release = function () { held.forEach(function (el) { el.removeAttribute('data-scene'); show(el); }); };
+    var foldIO = new IntersectionObserver(function (es) { if (es[0].isIntersecting) openFold(); },
+      { rootMargin: '0px 0px -52% 0px' });   // opens once the cover fills the lower half of the screen
+    openFold = function () {
+      if (prog.classList.contains('open')) return;
+      foldIO.disconnect();
+      prog.classList.add('open');
+      setTimeout(release, 420);                       // the stages print as the cover clears them
+      setTimeout(function () { fold.hidden = true; }, 1400);   // gone for good (WebKit can draw a back face)
+    };
+    foldIO.observe(prog);
+  } else if (fold) fold.hidden = true;
 
   /* today's opening hours get underlined */
   var today = new Date().getDay();
@@ -425,67 +463,37 @@
     addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(watchCorner, 250); });
   }
 
-  /* ---------------- marigold petals drifting through the red field ---------------- */
+  /* ---------------- marigold petals drifting through the red field ----------------
+     A CSS loop per petal, built once after the opening: the compositor moves them, so they cost no script per frame.
+     A watchdog thins them (to 60%, then 20%) when frames run slow; they are never switched off. */
   function petals() {
-    var cv = $('[data-petals]');
-    if (!cv || !cv.getContext || petals.on) return;
+    var box = $('[data-petals]');
+    if (!box || petals.on) return;
     petals.on = 1;
-    var ctx = cv.getContext('2d'), small = matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-    var MAX = small ? 28 : 70, SCALE = [1, 0.6, 0.36, 0.2], level = 0, lowest = 0, ps = [], W = 0, H = 0;
-    var COLS = ['#F7A51C', '#EE8A10', '#FFC53D', '#E2650E'];
-    function size() { var w = cv.clientWidth, h = cv.clientHeight; if (w === W && h === H) return; W = w; H = h; cv.width = W; cv.height = H; }
-    function spawn(p, any) {
-      p.x = Math.random() * W; p.y = any ? Math.random() * H : -16 - Math.random() * 60;
-      p.vy = 16 + Math.random() * 22; p.sw = 8 + Math.random() * 22; p.ph = Math.random() * 6.283; p.fr = 0.35 + Math.random() * 0.6;
-      p.r = Math.random() * 6.283; p.vr = (Math.random() - 0.5) * 1.4; p.a = 3.4 + Math.random() * 2.6; p.b = p.a * (1.6 + Math.random() * 0.4);
-      p.c = (Math.random() * COLS.length) | 0; p.x0 = p.x; p.t = 0;
-      return p;
+    var small = matchMedia('(max-width: 767px), (pointer: coarse)').matches, n = small ? 10 : 36;
+    var COLS = ['#F7A51C', '#EE8A10', '#FFC53D', '#E2650E'], html = '';
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    for (var i = 0; i < n; i++) {
+      var d = rnd(11, 19);
+      html += '<span class="pt" style="--x:' + rnd(0, 98).toFixed(1) + '%;--w:' + rnd(6, 10).toFixed(1) + 'px;--d:' + d.toFixed(1) +
+        's;--dl:-' + rnd(0, d).toFixed(1) + 's;--f:' + rnd(1.4, 2.6).toFixed(2) + 's;--y0:' + rnd(0, 100).toFixed(0) + 'vh;--c:' + COLS[i % 4] + '"><i></i></span>';
     }
-    function fill() { var n = Math.max(8, Math.round(MAX * SCALE[level])); if (ps.length > n) ps.length = n; while (ps.length < n) ps.push(spawn({}, true)); }
-    function step(dt) {
-      for (var i = 0; i < ps.length; i++) {
-        var p = ps[i]; p.t += dt;
-        p.y += p.vy * dt; p.x = p.x0 + Math.sin(p.ph + p.t * p.fr) * p.sw; p.r += p.vr * dt;
-        if (p.y > H + 20) spawn(p, false);
-      }
-    }
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.globalAlpha = 0.92;
-      for (var c = 0; c < COLS.length; c++) {
-        ctx.fillStyle = COLS[c]; ctx.beginPath();
-        for (var i = 0; i < ps.length; i++) {
-          var p = ps[i]; if (p.c !== c) continue;
-          var squash = Math.abs(Math.cos(p.ph + p.t * p.fr * 1.6)) * 0.6 + 0.4;
-          ctx.moveTo(p.x + p.a * squash * Math.cos(p.r), p.y + p.a * squash * Math.sin(p.r));
-          ctx.ellipse(p.x, p.y, p.a * squash, p.b, p.r, 0, 6.2832);
-        }
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-    }
-    size(); fill();
-    if (RM) { draw(); addEventListener('resize', function () { size(); draw(); }); return; }
-    var raf = 0, last = 0, lastWork = 0, frames = 0, slow = 0, good = 0, odd = 0;
-    window.__petals = { level: function () { return level; }, lowest: function () { return lowest; }, count: function () { return ps.length; } };
+    box.innerHTML = html;
+    if (RM) return;
+    var level = 0, raf = 0, last = 0, frames = 0, slow = 0;
+    window.__petals = { level: function () { return level; }, count: function () { return box.querySelectorAll('.pt').length; } };
     function frame(now) {
       raf = 0;
       var gap = last ? now - last : 16.7; last = now;
       frames++; if (gap > 24) slow++;
       if (frames >= 90) {
-        if (slow > 45) { good = 0; if (level < 3) { level++; lowest = Math.max(lowest, level); fill(); } }
-        else if (slow < 9) { good += frames; if (good >= 600 && level > 0) { level--; fill(); good = 0; } }
-        else good = 0;
+        if (slow > 45 && level < 2) { level++; box.classList.toggle('thin', level >= 1); box.classList.toggle('thinner', level >= 2); }
         frames = 0; slow = 0;
       }
-      if ((odd ^= 1)) { run(); return; }   // 30 updates a second: petals drift slowly
-      var dt = Math.min(0.08, (lastWork ? now - lastWork : 33) / 1000); lastWork = now;
-      step(dt); draw(); run();
+      if (level < 2) raf = requestAnimationFrame(frame);   // at the lowest level there is nothing left to step down to
     }
-    function run() { if (!raf && !D.hidden) raf = requestAnimationFrame(frame); }
-    D.addEventListener('visibilitychange', function () { if (D.hidden) { cancelAnimationFrame(raf); raf = 0; } else { last = 0; lastWork = 0; frames = 0; slow = 0; run(); } });
-    addEventListener('resize', function () { size(); });
-    run();
+    D.addEventListener('visibilitychange', function () { if (!D.hidden && !raf && level < 2) { last = 0; frames = 0; slow = 0; raf = requestAnimationFrame(frame); } });
+    raf = requestAnimationFrame(frame);
   }
 
   /* ---------------- sending throws a handful of turmeric rice (the link opens at once) ---------------- */
@@ -518,7 +526,6 @@
     ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js', 'sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh'],
     ['scenes.js', '']
   ];
-  var SCENE = matchMedia('(min-width: 1024px) and (pointer: fine)');   // touch tablets keep the phone's programme
   function loadScenes() {
     if (loadScenes.on || RM || !SCENE.matches) return;
     loadScenes.on = 1;
