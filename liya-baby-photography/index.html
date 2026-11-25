@@ -8,10 +8,48 @@
 <title>Liya Baby Photography Studio · Website concept</title>
 <meta name="description" content="Baby and toddler photoshoots in Thoraipakkam, Chennai. Make a booking card and send it on WhatsApp.">
 <meta name="theme-color" content="#1fafca">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@600;700;800&family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* Motion fallbacks: scene states only hide things under .js:not(.rv-fail). If the page script has not started
+   within 2.5 s (or motion is reduced), everything is shown and stays shown. */
+(function () {
+  var h = document.documentElement;
+  h.classList.add('js');
+  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('rv-fail'); } catch (e) {}
+  setTimeout(function () { if (!window.__lv) h.classList.add('rv-fail'); }, 2500);
+  // The opening is CSS keyframes from first paint; the timer starts here so a slow script never delays the mark.
+  var rm = h.classList.contains('rv-fail');
+  // Counted from the first painted frame, so a slow load never ends the opening before it has played.
+  if (rm) h.dataset.opening = 'done';
+  else (function () {
+    var fin = function () { setTimeout(function () { h.dataset.opening = 'done'; }, 1700); }, once = false;
+    var go = function () { if (!once) { once = true; fin(); } };
+    try { new PerformanceObserver(function (l) { if (l.getEntriesByName('first-contentful-paint').length) go(); }).observe({ type: 'paint', buffered: true }); } catch (e) {}
+    setTimeout(go, 1100); // never later than 2.8 s from the start, whatever the browser reports
+  })();
+})();
+</script>
+<link rel="preload" href="assets/fonts/baloo-thambi-2-latin-800.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Display face self-hosted as three static weights (WebKit ignores the variable axis), so iPhones never land on a thin fallback. */
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/baloo-thambi-2-tamil-600.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 700; font-display: swap; src: url(assets/fonts/baloo-thambi-2-tamil-700.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 800; font-display: swap; src: url(assets/fonts/baloo-thambi-2-tamil-800.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-ext-600.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 700; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-ext-700.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 800; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-ext-800.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-600.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 700; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-700.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Baloo Thambi 2"; font-style: normal; font-weight: 800; font-display: swap; src: url(assets/fonts/baloo-thambi-2-latin-800.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  /* Body face self-hosted too: no third-party request holds up the first paint. */
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/hind-madurai-tamil-400.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/hind-madurai-latin-ext-400.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/hind-madurai-latin-400.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/hind-madurai-tamil-500.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/hind-madurai-latin-ext-500.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/hind-madurai-latin-500.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/hind-madurai-tamil-600.woff2) format("woff2"); unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/hind-madurai-latin-ext-600.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Hind Madurai"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/hind-madurai-latin-600.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   /* Palette from her own sets: ship-wheel turquoise (the sticker backing), oar navy (ink),
      starfish coral (kept for what is chosen right now). */
   :root {
@@ -45,16 +83,25 @@
   svg { width: 22px; height: 22px; flex: none; }
 
   /* Required concept banner */
-  .concept { background: var(--ink); color: #dfe7f4; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
+  .concept { position: relative; z-index: 2; background: var(--ink); color: #dfe7f4; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
 
-  /* Top bar: the logo as a round sticker */
-  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: 4px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-height: 48px; }
-  .logo-stk { width: 48px; height: 48px; border-radius: 50%; background: var(--paper); box-shadow: var(--flat); display: grid; place-items: center; overflow: hidden; flex: none; }
+  /* Top bar: the logo as a round sticker. Solid and sticky, so the name stays with the visitor while scrolling. */
+  .bar { position: sticky; top: 0; z-index: 30; background: var(--sheet); transition: box-shadow .2s var(--ease); }
+  .bar.stuck { box-shadow: 0 8px 14px -10px rgba(20, 28, 58, .6); }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; padding-bottom: 8px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-height: 48px; transition: transform .14s var(--ease); }
+  .brand:active { transform: scale(.97); }
+  .logo-stk { width: 48px; height: 48px; border-radius: 50%; background: var(--paper); box-shadow: var(--flat); display: grid; place-items: center; overflow: hidden; flex: none; animation: stamp .5s var(--ease) .05s both; }
   .logo-stk img { width: 44px; height: 44px; object-fit: cover; }
+  main, .visit { position: relative; z-index: 1; }
+  #top, #book, #work { scroll-margin-top: 72px; }
+  /* Ambient: bubbles rising behind the page, drawn on one low-cost canvas (script below). */
+  .amb { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
   .brand b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: .01em; display: block; }
   .brand small { display: block; font-size: 13px; font-weight: 500; line-height: 1.2; }
   .top-actions { display: flex; gap: 10px; }
+  /* On a 320 px phone the subtitle would wrap and grow the bar past the first screen. */
+  @media (max-width: 359px) { .brand small { display: none; } }
   .icon-stk { width: 46px; height: 46px; border-radius: 50%; background: var(--paper); box-shadow: var(--flat); display: grid; place-items: center; text-decoration: none; transition: transform .14s var(--ease); }
   .icon-stk svg { width: 20px; height: 20px; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -68,7 +115,7 @@
   .hero-sub { margin-top: 8px; font-size: 17px; font-weight: 500; max-width: 30ch; }
   .hero-art { position: relative; margin: -10px -6px -8px auto; width: min(68%, 380px); }
   .cut { width: 100%; transform: rotate(-4deg); filter: drop-shadow(0 1px 1px rgba(20,28,58,.18)) drop-shadow(0 10px 12px rgba(20,28,58,.3)); animation: peel .7s var(--ease) both; transform-origin: 70% 90%; }
-  @keyframes peel { from { transform: rotate(-11deg) translateY(10px); } to { transform: rotate(-4deg); } }
+  @keyframes peel { from { transform: translate(10px, -28px) rotate(-16deg) scale(1.12); } to { transform: rotate(-4deg); } }
   .rating-stk { position: absolute; left: -26%; bottom: 2%; width: 96px; height: 96px; border-radius: 50%; background: var(--paper); box-shadow: var(--lift); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; transform: rotate(-8deg); text-align: center; transition: transform .14s var(--ease); }
   .rating-stk b { font-family: var(--display); font-size: 30px; line-height: .9; display: flex; align-items: center; gap: 2px; }
   .rating-stk b svg { width: 18px; height: 18px; fill: var(--coral); }
@@ -119,8 +166,8 @@
   .card-top span { font-size: 14px; font-weight: 600; }
   .card-lines { display: grid; gap: 12px; font-family: var(--display); font-weight: 600; font-size: 21px; line-height: 1.35; }
   .slot { display: inline-block; min-width: 92px; padding: 3px 10px 0; margin: 0 2px; border-radius: 9px; border: 2px dashed rgba(32,38,63,.45); color: var(--ink); text-align: center; vertical-align: baseline; font-weight: 700; }
-  .slot.filled { border: 2px solid transparent; background: var(--coral); color: var(--ink); box-shadow: 0 0 0 3px var(--paper), var(--flat); transform: rotate(-1.5deg); animation: stick .32s var(--ease); }
-  @keyframes stick { 0% { transform: scale(1.14) rotate(-6deg); box-shadow: 0 0 0 3px var(--paper), 0 14px 20px -8px rgba(20,28,58,.5); } 100% { transform: scale(1) rotate(-1.5deg); } }
+  .slot.filled { border: 2px solid transparent; background: var(--coral); color: var(--ink); box-shadow: 0 0 0 3px var(--paper), var(--flat); transform: rotate(-1.5deg); animation: stick .32s var(--ease) both; }
+  @keyframes stick { 0% { opacity: 0; transform: scale(1.14) rotate(-6deg); box-shadow: 0 0 0 3px var(--paper), 0 14px 20px -8px rgba(20,28,58,.5); } 30% { opacity: 1; } 100% { opacity: 1; transform: scale(1) rotate(-1.5deg); } }
 
   .trays { display: grid; gap: 16px; }
   .tray { display: grid; gap: 10px; }
@@ -198,16 +245,78 @@
     .hero-cta { align-self: start; }
     .rating-stk { left: -14%; width: 112px; height: 112px; }
     .set { padding: 40px 0 56px; }
-    .card { position: sticky; top: 24px; }
+    .card { position: sticky; top: 72px; }
     .photos { grid-template-columns: repeat(4, 1fr); }
     /* Wide, tall / tall, wide: four photos fill two rows of three with no hole. */
     .photos.three { grid-template-columns: repeat(3, 1fr); }
     .ph.wide { grid-column: span 2; }
   }
 
+  /* ---------- Motion. Base styles above are every element's END state; keyframes only play from the start. ---------- */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  /* "from"-only keyframes: each element lands on its own resting rotation. */
+  @keyframes stamp { from { opacity: 0; transform: scale(1.5) rotate(-22deg); } }
+
+  /* 1. Opening: the headline is peeled onto the sheet word by word, the photo sticker follows, then the rating and the buttons land (done by ~2 s). */
+  .hero h1 .w { display: inline-block; animation: wordpeel .72s var(--out) calc(.1s + var(--i) * .06s) both; }
+  @keyframes wordpeel {
+    from { opacity: 0; transform: translateY(.55em) rotate(-9deg); clip-path: inset(-.3em -.3em 100% -.3em); }
+    to { opacity: 1; transform: none; clip-path: inset(-.3em); }
+  }
+  .hero-sub { animation: wordpeel .7s var(--out) .62s both; }
+  .cut { animation: peel .75s var(--out) .05s both; }
+  .rating-stk { animation: stamp .55s var(--out) .95s both; }
+  .hero-cta > * { animation: landing .6s var(--out) .72s both; }
+  .hero-cta > :last-child { animation-delay: .86s; }
+  @keyframes land { from { transform: translateY(16px) rotate(2.5deg); } }
+  @keyframes stampin { from { transform: scale(1.5) rotate(-22deg); } }
+  @keyframes landing { from { opacity: 0; transform: translateY(16px) rotate(2.5deg); } }
+
+  /* 3. Scroll scenes, one idea per section. The boat set: stickers are slapped down one after another. */
+  .js:not(.rv-fail) .boat .ph:not(.in) { transform: translateY(-30px) rotate(-10deg) scale(1.13); }
+  .js:not(.rv-fail) .boat .ph.in { animation: slap .62s var(--out) calc(var(--k, 0) * 90ms) both; }
+  @keyframes slap { from { transform: translateY(-30px) rotate(-10deg) scale(1.13); box-shadow: 0 1px 1px rgba(20,28,58,.14), 0 26px 30px -10px rgba(20,28,58,.55); } }
+  /* The glasses set: each photo opens like a round lens, from the middle outwards. */
+  .js:not(.rv-fail) .specs .ph img { transition: clip-path .95s var(--out); clip-path: circle(110% at 50% 40%); }
+  .js:not(.rv-fail) .specs .ph:not(.in) img { clip-path: circle(0% at 50% 40%); }
+  .js:not(.rv-fail) .specs .ph.in .cap { animation: capin .6s var(--out) .45s backwards; }
+  @keyframes capin { from { transform: translateY(14px) rotate(3deg); } }
+  /* Each section's title sticker is peeled off left to right. */
+  .js:not(.rv-fail) .set-head .word-stk { transition: clip-path .7s var(--out); clip-path: inset(-26px); }
+  .js:not(.rv-fail) .set-head:not(.in) .word-stk { clip-path: inset(-26px 100% -26px -26px); }
+  /* Booking: the card is printed from above, the word stickers come off the sheet in turn, the price is stamped. */
+  /* Pre-state moves things, never fades them: a card is always readable, even mid-scroll. */
+  .js:not(.rv-fail) .book:not(.in) .card { transform: translateY(-46px) rotate(-5deg); }
+  .js:not(.rv-fail) .book:not(.in) :is(.word, .step, .date-stk) { transform: translateY(16px) rotate(2.5deg); }
+  .js:not(.rv-fail) .book:not(.in) .price-stk { transform: scale(1.5) rotate(-22deg); }
+  .js:not(.rv-fail) .book.in .card { animation: print .8s var(--out) both; }
+  @keyframes print { from { transform: translateY(-46px) rotate(-5deg); } }
+  .js:not(.rv-fail) .book.in .word { animation: land .55s var(--out) calc(.25s + var(--k, 0) * 80ms) both; }
+  .js:not(.rv-fail) .book.in :is(.step, .date-stk) { animation: land .55s var(--out) .55s both; }
+  .js:not(.rv-fail) .book.in .price-stk { animation: stampin .55s var(--out) .95s both; }
+  /* Visit: the links roll in like a tide, one wave after another. */
+  .js:not(.rv-fail) .visit:not(.in) .visit-links a { opacity: 0; }
+  .js:not(.rv-fail) .visit.in .visit-links a { animation: tide .7s var(--out) calc(var(--k, 0) * 70ms) both; }
+  @keyframes tide { from { opacity: 0; clip-path: inset(0 100% 0 0 round 14px); } to { opacity: 1; clip-path: inset(0 round 14px); } }
+
+  /* 5. Response: every control answers a press within 100 ms. */
+  .text-link, .fab, .rating-stk { -webkit-tap-highlight-color: transparent; }
+  .text-link { transition: transform .14s var(--ease), opacity .14s var(--ease); }
+  .text-link:active { transform: scale(.96); opacity: .7; }
+  .rating-stk:active { transform: rotate(-8deg) scale(.95); }
+  .age-bump { animation: bump .28s var(--ease); }
+  @keyframes bump { from { transform: scale(1.1); } to { transform: none; } }
+  .nudge { animation: nudge .6s var(--ease); }
+  @keyframes nudge { 0%, 100% { transform: none; } 30% { transform: rotate(-2.5deg) scale(1.04); } 60% { transform: rotate(1.5deg) scale(1.02); } }
+  /* Signature interaction: the chosen sticker flies from the tray onto the card. */
+  .fly { position: fixed; z-index: 60; margin: 0; pointer-events: none; will-change: transform; }
+  .spark { position: fixed; z-index: 60; width: 14px; height: 14px; pointer-events: none; background: var(--coral); clip-path: polygon(50% 0, 62% 36%, 100% 38%, 70% 60%, 80% 100%, 50% 76%, 20% 100%, 30% 60%, 0 38%, 38% 36%); }
+  .spark.w { background: var(--paper); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
+    .amb { display: none; }
   }
 </style>
 </head>
@@ -215,22 +324,22 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42z"/></symbol></svg>
 <div class="concept" data-concept-banner>Website concept preview made for Liya Baby Photography Studio · not the official site</div>
 
-<header class="wrap top">
+<header class="bar" id="bar"><div class="wrap top">
   <a class="brand" href="#top" aria-label="Liya Baby Photography Studio, top of page">
     <span class="logo-stk"><img src="assets/logo.jpg" alt="" width="150" height="150"></span>
-    <span><b>Liya</b><small>baby photography</small></span>
+    <span><b>Liya</b><small>Baby Photography Studio</small></span>
   </a>
   <nav class="top-actions" aria-label="Contact">
     <a class="icon-stk" href="tel:+918939466336" aria-label="Call 89394 66336"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
     <a class="icon-stk" href="https://instagram.com/liya_the_studio" target="_blank" rel="noopener" aria-label="Instagram @liya_the_studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
   </nav>
-</header>
+</div></header>
 
 <main id="top">
   <section class="hero sheet">
     <div class="wrap hero-grid">
       <div>
-        <h1>Baby and toddler photoshoots in Chennai</h1>
+        <h1><span class="w" style="--i:0">Baby</span> <span class="w" style="--i:1">and</span> <span class="w" style="--i:2">toddler</span> <span class="w" style="--i:3">photoshoots</span> <span class="w" style="--i:4">in</span> <span class="w" style="--i:5">Chennai</span></h1>
         <p class="hero-sub">Certified baby photographer and baby stylist in Thoraipakkam.</p>
       </div>
       <div class="hero-art">
@@ -247,26 +356,26 @@
     </div>
   </section>
 
-  <section class="set sheet" id="work" aria-labelledby="set-boat">
+  <section class="set sheet boat" id="work" aria-labelledby="set-boat">
     <div class="wrap">
       <div class="set-head">
         <h2 class="word-stk" id="set-boat">Welcome aboard</h2>
         <p>A wooden boat in a sea of shells, and one toddler running the show.</p>
       </div>
       <div class="photos three">
-        <figure class="ph wide r1">
+        <figure class="ph wide r1" style="--k:0">
           <img src="assets/post-06.jpg" width="640" height="427" loading="lazy" alt="A toddler laughing in a wooden boat, with a ship's wheel and a fishing net behind">
           <figcaption class="cap">Little by little, they grow into their own kind of wonderful.</figcaption>
         </figure>
-        <figure class="ph tall r2">
+        <figure class="ph tall r2" style="--k:1">
           <img src="assets/post-07.jpg" width="475" height="640" loading="lazy" alt="A toddler in the boat holding up a seashell and smiling">
           <figcaption class="cap">Keep calm and let the toddler run the show.</figcaption>
         </figure>
-        <figure class="ph tall r3">
+        <figure class="ph tall r3" style="--k:2">
           <img src="assets/post-04.jpg" width="475" height="640" loading="lazy" alt="A toddler in patchwork dungarees smiling in the boat, an oar in front">
           <figcaption class="cap">One step, one giggle, one memory at a time.</figcaption>
         </figure>
-        <figure class="ph wide r4">
+        <figure class="ph wide r4" style="--k:3">
           <img src="assets/post-08.jpg" width="640" height="427" loading="lazy" alt="A toddler leaning out of the boat to reach a red starfish">
           <figcaption class="cap right under">Cuteness overload, proceed with caution!</figcaption>
         </figure>
@@ -274,22 +383,22 @@
     </div>
   </section>
 
-  <section class="set sheet" aria-labelledby="set-books">
+  <section class="set sheet specs" aria-labelledby="set-books">
     <div class="wrap">
       <div class="set-head">
         <h2 class="word-stk" id="set-books">Round glasses</h2>
         <p>Round glasses, old books and wooden date blocks.</p>
       </div>
       <div class="photos">
-        <figure class="ph wide r4">
+        <figure class="ph wide r4" style="--k:0">
           <img src="assets/post-11.jpg" width="640" height="427" loading="lazy" alt="A baby in round glasses lying on the tummy and looking up, old books and wooden blocks beside">
           <figcaption class="cap">Little feet, big adventures ahead</figcaption>
         </figure>
-        <figure class="ph tall r1">
+        <figure class="ph tall r1" style="--k:1">
           <img src="assets/post-12.jpg" width="475" height="640" loading="lazy" alt="A baby in round glasses looking up, behind the wooden date blocks">
           <figcaption class="cap">Freshly baked and ready to steal hearts</figcaption>
         </figure>
-        <figure class="ph tall r2">
+        <figure class="ph tall r2" style="--k:2">
           <img src="assets/post-10.jpg" width="640" height="427" loading="lazy" alt="A baby in round glasses with a wide open smile">
           <figcaption class="cap right">Too cool for nap time, too cute for words</figcaption>
         </figure>
@@ -317,9 +426,9 @@
           <div class="tray" role="group" aria-labelledby="t-type">
             <p class="tray-label" id="t-type">1. The shoot</p>
             <div class="tray-row">
-              <button type="button" class="word" data-type="newborn" aria-pressed="false">Newborn</button>
-              <button type="button" class="word" data-type="baby" aria-pressed="false">Baby</button>
-              <button type="button" class="word" data-type="toddler" aria-pressed="false">Toddler</button>
+              <button type="button" class="word" style="--k:0" data-type="newborn" aria-pressed="false">Newborn</button>
+              <button type="button" class="word" style="--k:1" data-type="baby" aria-pressed="false">Baby</button>
+              <button type="button" class="word" style="--k:2" data-type="toddler" aria-pressed="false">Toddler</button>
             </div>
           </div>
           <div class="tray" role="group" aria-labelledby="t-age">
@@ -356,25 +465,25 @@
   <div class="wrap">
     <h2 id="visit-title">Find the studio</h2>
     <address>Netaji Nagar New Colony, Nehru Nagar, Thoraipakkam, Chennai, Tamil Nadu 600097</address>
-    <p class="stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4.8 on Google, from 240 reviews</p>
+    <p class="stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><span><span>4.8</span> on Google, from <span data-count="240">240</span> reviews</span></p>
     <div class="visit-links">
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Liya%20Baby%20Photography%20Studio&amp;query_place_id=ChIJwT2Ox8ddUjoRWk_g6VLWbHU" target="_blank" rel="noopener">
+      <a style="--k:0" href="https://www.google.com/maps/search/?api=1&amp;query=Liya%20Baby%20Photography%20Studio&amp;query_place_id=ChIJwT2Ox8ddUjoRWk_g6VLWbHU" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         <span>Open in Google Maps<small>Directions to Thoraipakkam</small></span>
       </a>
-      <a href="tel:+918939466336">
+      <a style="--k:1" href="tel:+918939466336">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span>Call 89394 66336<small>Bookings also on 99405 44421</small></span>
       </a>
-      <a data-wa href="https://wa.me/918939466336" target="_blank" rel="noopener">
+      <a style="--k:2" data-wa href="https://wa.me/918939466336" target="_blank" rel="noopener">
         <svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
         <span>WhatsApp<small>89394 66336</small></span>
       </a>
-      <a href="https://instagram.com/liya_the_studio" target="_blank" rel="noopener">
+      <a style="--k:3" href="https://instagram.com/liya_the_studio" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
         <span>Instagram<small>@liya_the_studio</small></span>
       </a>
-      <a href="https://instagram.com/liya_maternity_photoshoot" target="_blank" rel="noopener">
+      <a style="--k:4" href="https://instagram.com/liya_maternity_photoshoot" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
         <span>Expecting? Maternity shoots<small>@liya_maternity_photoshoot</small></span>
       </a>
@@ -490,6 +599,161 @@
   }
 
   render();
+})();
+</script>
+<script>
+// Motion layer, plain JS on every device (no library): opening end, scenes, counters, the sticker flight, bubbles.
+(function () {
+  window.__lv = 1;
+  var root = document.documentElement;
+  var reduced = false;
+  try { reduced = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  var desktop = false;
+  try { desktop = matchMedia("(min-width: 1024px) and (pointer: fine)").matches; } catch (e) {}
+
+  // 1. The opening is CSS keyframes from first paint; this only marks when it has finished.
+
+  // Solid name bar gets a shadow once the page has moved under it.
+  var bar = document.getElementById("bar");
+  var scrolled = false;
+  addEventListener("scroll", function () {
+    var s = (window.pageYOffset || 0) > 8;
+    if (s !== scrolled) { scrolled = s; bar.classList.toggle("stuck", s); }
+  }, { passive: true });
+
+  // 3. Scenes: each block gets .in once, when it is near the viewport; nothing hides again.
+  function count(el) {
+    var to = parseFloat(el.getAttribute("data-count")), dec = +el.getAttribute("data-dec") || 0, from = to * 0.35, t0 = null;
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 1900), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (from + (to - from) * e).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = to.toFixed(dec);
+    }
+    requestAnimationFrame(step);
+  }
+  if (!reduced && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (list) {
+      list.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        en.target.querySelectorAll("[data-count]").forEach(count);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    document.querySelectorAll(".ph, .set-head, .book, .visit").forEach(function (el) { io.observe(el); });
+  } else {
+    root.classList.add("rv-fail");
+  }
+
+  // 5. Closing moment on the main actions: a handful of stars, 0.6 s. It starts on press and never touches the link.
+  var lastBurst = 0;
+  function burst(x, y) {
+    var now = Date.now();
+    if (reduced || now - lastBurst < 700 || !Element.prototype.animate) return;
+    lastBurst = now;
+    for (var i = 0; i < 9; i++) {
+      var d = document.createElement("i");
+      d.className = "spark" + (i % 2 ? " w" : "");
+      d.style.left = (x - 7) + "px"; d.style.top = (y - 7) + "px";
+      document.body.appendChild(d);
+      var a = (i / 9) * Math.PI * 2 + Math.random() * 0.5, r = 46 + Math.random() * 34;
+      var an = d.animate([
+        { transform: "translate(0,0) scale(.4) rotate(0deg)", opacity: 1 },
+        { transform: "translate(" + Math.cos(a) * r + "px," + Math.sin(a) * r + "px) scale(1) rotate(" + (i % 2 ? 90 : -90) + "deg)", opacity: 0 }
+      ], { duration: 560, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+      an.onfinish = (function (n) { return function () { n.remove(); }; })(d);
+    }
+  }
+  document.querySelectorAll("[data-wa], .btn-stk").forEach(function (a) {
+    a.addEventListener("pointerdown", function (e) { burst(e.clientX, e.clientY); });
+  });
+
+  // 2. Signature interaction: the sticker you pick flies from the tray onto its slot on the booking card.
+  function fly(from, slot) {
+    if (reduced || !from.animate) return;
+    var a = from.getBoundingClientRect(), b = slot.getBoundingClientRect();
+    if (b.bottom < 0 || b.top > innerHeight) return;
+    var g = from.cloneNode(true);
+    g.removeAttribute("id"); g.removeAttribute("aria-pressed"); g.tabIndex = -1; g.setAttribute("aria-hidden", "true");
+    g.className = "word fly";
+    g.style.left = a.left + "px"; g.style.top = a.top + "px"; g.style.width = a.width + "px"; g.style.height = a.height + "px";
+    g.style.background = "var(--paper)"; g.style.boxShadow = "var(--lift)"; g.style.outline = "0";
+    document.body.appendChild(g);
+    var dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2), k = Math.min(1, b.width / a.width + .15);
+    slot.style.animationDelay = ".3s";
+    var an = g.animate([
+      { transform: "translate(0,0) rotate(-2deg) scale(1)", opacity: 1 },
+      { transform: "translate(" + dx * .55 + "px," + (dy * .55 - 34) + "px) rotate(7deg) scale(1.08)", opacity: 1, offset: .5 },
+      { transform: "translate(" + dx + "px," + dy + "px) rotate(-3deg) scale(" + k + ")", opacity: .0 }
+    ], { duration: 340, easing: "cubic-bezier(.23,1,.32,1)", fill: "forwards" });
+    an.onfinish = function () { g.remove(); };
+  }
+  var slots = { newborn: "slot-type", baby: "slot-type", toddler: "slot-type" };
+  document.querySelectorAll(".word").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (b.getAttribute("aria-pressed") === "true") fly(b, document.getElementById(slots[b.dataset.type]));
+    });
+  });
+  var ageOut = document.getElementById("age-out"), dateLabel = document.getElementById("date-label");
+  function bump(el) { el.classList.remove("age-bump"); void el.offsetWidth; el.classList.add("age-bump"); }
+  ["age-up", "age-down"].forEach(function (id) {
+    document.getElementById(id).addEventListener("click", function () { bump(ageOut); var s = document.getElementById("slot-age"); s.style.animationDelay = "0s"; });
+  });
+  document.getElementById("date-in").addEventListener("change", function () { bump(dateLabel); });
+  // When all three stickers are on, the send button gives one small wiggle.
+  var send = document.getElementById("send"), nudged = false;
+  document.querySelector(".card").addEventListener("animationend", function () {
+    var all = document.querySelectorAll(".slot.filled").length === 3;
+    if (all && !nudged) { nudged = true; send.classList.remove("nudge"); void send.offsetWidth; send.classList.add("nudge"); }
+    if (!all) nudged = false;
+  });
+
+  // 4. Ambient: bubbles rising behind everything. DPR 1, 30 fps, 22 on phones and 48 on desktop, paused when hidden,
+  // thinned (never switched off) when frames run slow.
+  if (reduced) return;
+  function startBubbles() {
+    var cv = document.createElement("canvas");
+    cv.className = "amb"; cv.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(cv, document.body.firstChild);
+    var cx = cv.getContext("2d");
+    if (!cx) return;
+    var W = 0, H = 0, N = desktop ? 48 : 22, density = 1, bubbles = [], i;
+    function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+    size();
+    var rt; addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(size, 200); });
+    for (i = 0; i < N; i++) bubbles.push({ x: Math.random(), y: Math.random(), r: 3 + Math.random() * 8, v: .018 + Math.random() * .03, ph: Math.random() * 6.28 });
+    var running = true, last = 0, prev = 0, slow = 0, frames = 0, levels = [1, .6, .36, .2], lv = 0;
+    function draw(t) {
+      cx.clearRect(0, 0, W, H);
+      var n = Math.max(4, Math.round(N * density));
+      cx.lineWidth = 1.5;
+      for (var j = 0; j < n; j++) {
+        var b = bubbles[j];
+        b.y -= b.v * 0.033; if (b.y < -0.05) { b.y = 1.05; b.x = Math.random(); }
+        var x = b.x * W + Math.sin(t / 1800 + b.ph) * 10, y = b.y * H;
+        cx.beginPath(); cx.arc(x, y, b.r, 0, 6.2832);
+        cx.fillStyle = "rgba(255,255,255,.07)"; cx.fill();
+        cx.strokeStyle = "rgba(255,255,255,.2)"; cx.stroke();
+      }
+    }
+    function loop(t) {
+      if (!running) return;
+      requestAnimationFrame(loop);
+      if (prev) { frames++; if (t - prev > 24) slow++; if (frames >= 90) { if (slow > 45 && lv < 3) { lv++; density = levels[lv]; } frames = 0; slow = 0; } }
+      prev = t;
+      if (t - last < 32) return;
+      last = t; draw(t);
+    }
+    function go() { if (!running) { running = true; prev = 0; requestAnimationFrame(loop); } }
+    function stop() { running = false; }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else go(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) go(); else stop(); }).observe(cv);
+    requestAnimationFrame(loop);
+  }
+  // Started once the opening has played, so nothing competes with it for the main thread.
+  function later() { setTimeout(function () { (window.requestIdleCallback || function (f) { setTimeout(f, 50); })(startBubbles); }, 1800); }
+  if (document.readyState === "complete") later(); else addEventListener("load", later);
 })();
 </script>
 </body>

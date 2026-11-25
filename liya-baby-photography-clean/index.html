@@ -10,8 +10,25 @@
 <meta name="theme-color" content="#e6f2f6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/albert-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* Motion fallbacks: scene states only hide things under .js:not(.rv-fail). If the page script has not started
+   within 2.5 s (or motion is reduced), everything is shown and stays shown. */
+(function () {
+  var h = document.documentElement;
+  h.classList.add('js');
+  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('rv-fail'); } catch (e) {}
+  setTimeout(function () { if (!window.__lv) h.classList.add('rv-fail'); }, 2500);
+})();
+</script>
 <style>
+  /* Albert Sans is self-hosted. Until it arrives the text is set in a local face stretched to Albert Sans's width,
+     so the swap does not re-wrap a headline (measured: Arial is 2% narrower, Roboto 10%). */
+  @font-face { font-family: "Albert Fallback"; src: local("Arial"), local("Helvetica"); size-adjust: 102.5%; }
+  @font-face { font-family: "Albert Fallback R"; src: local("Roboto"); size-adjust: 111.5%; }
+  @font-face { font-family: "Albert Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/albert-sans-latin-italic.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Albert Sans"; font-style: normal; font-weight: 300 500; font-display: swap; src: url(assets/fonts/albert-sans-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Albert Sans"; font-style: normal; font-weight: 300 500; font-display: swap; src: url(assets/fonts/albert-sans-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   /* The sky of her own backdrops (#aed3e0), tinted for the page, deepening band by band;
      one horizon line that every photo sits on, one face at two weights. */
   :root {
@@ -24,7 +41,7 @@
     --horizon: #5a7581;
     --on-deep: #e8f0f0;
     --on-deep-2: #a8cad1;
-    --face: "Albert Sans", system-ui, sans-serif;
+    --face: "Albert Sans", "Albert Fallback", "Albert Fallback R", system-ui, sans-serif;
     --ease: cubic-bezier(.23, 1, .32, 1);
     --wrap: 1080px;
   }
@@ -41,13 +58,22 @@
   svg { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
   svg.solid { fill: currentColor; stroke: none; }
 
-  .concept { background: var(--ink); color: #dfe8e8; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
+  .concept { position: relative; z-index: 2; background: var(--ink); color: #dfe8e8; text-align: center; font-size: 13px; line-height: 1.4; padding: 7px 12px; }
 
-  /* Header */
-  .top { display: flex; align-items: center; justify-content: space-between; min-height: 60px; }
-  .mark { display: flex; align-items: center; min-height: 44px; }
-  .mark img { width: auto; height: 46px; }
-  .call { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 2px 0 10px; text-decoration: none; font-size: 15px; font-weight: 500; }
+  /* Header: a solid, sticky bar with her round logo and the name, so the name stays with the visitor. */
+  .bar { position: sticky; top: 0; z-index: 30; background: var(--water); border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
+  .bar.stuck { border-bottom-color: var(--line); }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
+  .mark { display: flex; align-items: center; gap: 11px; min-height: 52px; text-decoration: none; transition: transform .14s var(--ease); }
+  .mark:active { transform: scale(.97); }
+  .badge { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex: none; background: #fff; box-shadow: 0 0 0 1px var(--line); animation: badge .6s var(--out) .05s both; }
+  .badge img { width: 44px; height: 44px; object-fit: cover; }
+  .nm { font-size: 16px; font-weight: 500; line-height: 1.2; letter-spacing: -.005em; }
+  main, .close { position: relative; z-index: 1; }
+  #top, #close { scroll-margin-top: 64px; }
+  .amb { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .call { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 2px 0 10px; text-decoration: none; font-size: 15px; font-weight: 500; transition: opacity .14s var(--ease), transform .14s var(--ease); }
+  .call:active { opacity: .6; transform: scale(.96); }
 
   /* The horizon: a line photos sit on, run past both screen edges (each section clips it), whatever column the photo is in */
   .horizon { position: relative; }
@@ -61,6 +87,8 @@
   /* Sized so logo, photo, headline, rating and button all fit the first screen of a 393x659 iPhone as well as a 375x667 one. */
   .hero-text { padding: 14px 0 44px; }
   .hero h1 { font-size: clamp(30px, 8.6vw, 58px); }
+  /* Three lines on a phone once the web font arrives; reserved so the rating and button never jump. */
+  @media (max-width: 759px) { .hero h1 { min-height: 3.24em; } }
   .rating { margin-top: 8px; font-size: 16px; color: var(--ink-2); }
   .btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 24px; border-radius: 3px; background: var(--deep); color: var(--on-deep); text-decoration: none; font-weight: 500; font-size: 17px; letter-spacing: .01em; margin-top: 16px; transition: transform .14s var(--ease), background-color .2s var(--ease); }
   .btn:active { transform: scale(.97); }
@@ -69,6 +97,8 @@
   /* Work */
   .work { padding: 8px 0 24px; overflow: hidden; overflow: clip; }
   .work h2, .facts h2 { font-size: clamp(26px, 7vw, 40px); padding: 28px 0 8px; }
+  /* The title wraps to two lines on a phone once the web font arrives; reserve them so nothing below jumps. */
+  @media (max-width: 759px) { .work h2 { min-height: calc(2.16em + 36px); } }
   .shot { margin: 0; padding-top: 44px; }
   .shot .horizon img { width: 100%; object-fit: cover; }
   .shot.wide img { aspect-ratio: 3 / 2; }
@@ -78,16 +108,17 @@
   .shot figcaption { padding-top: 12px; font-style: italic; color: var(--ink-2); font-size: 16px; max-width: 30ch; }
   .shot.right figcaption { margin-left: auto; text-align: right; }
 
-  /* Reveal: photos settle onto the horizon. Visible by default; only nudged when JS runs. */
-  .js .settle { transform: translateY(14px); opacity: .6; transition: transform .7s var(--ease), opacity .7s var(--ease); }
-  .js .settle.in { transform: none; opacity: 1; }
 
   /* Facts: the next band down */
   .facts { background: var(--water-2); padding: 12px 0 48px; margin-top: 40px; }
   .fact-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--line); }
-  .fact-list li { padding: 16px 0 15px; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+  .fact-list li { position: relative; padding: 16px 0 15px; display: grid; gap: 2px; }
+  .fact-list li::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); transform-origin: left; }
   .fact-list b { font-weight: 400; font-size: 21px; line-height: 1.3; letter-spacing: -.01em; }
   .fact-list span { color: var(--ink-2); font-size: 16px; }
+  .fact-list b span { font-size: inherit; color: inherit; }
+  .fact-list a { transition: transform .14s var(--ease), opacity .14s var(--ease); -webkit-tap-highlight-color: transparent; }
+  .fact-list a:active { transform: scale(.97); opacity: .7; }
   .fact-list a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-underline-offset: 4px; text-decoration-thickness: 1px; color: var(--ink); font-size: 16px; }
 
   /* Close: deep water */
@@ -96,7 +127,9 @@
   .close p { margin-top: 12px; color: var(--on-deep-2); max-width: 34ch; }
   .close .btn { background: var(--water); color: var(--ink); }
   .close-links { display: grid; margin-top: 26px; border-top: 1px solid rgba(232,240,240,.22); }
-  .close-links a, .close-links address { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 10px 0; border-bottom: 1px solid rgba(232,240,240,.22); text-decoration: none; font-style: normal; color: var(--on-deep); }
+  .close-links a, .close-links address { position: relative; display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 10px 0; text-decoration: none; font-style: normal; color: var(--on-deep); transition: transform .14s var(--ease), color .2s var(--ease); }
+  .close-links a:active { transform: scale(.985); }
+  .close-links a::after, .close-links address::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(232,240,240,.22); transform-origin: left; }
   .close-links svg { width: 20px; height: 20px; color: var(--on-deep-2); }
   .close-links small { display: block; color: var(--on-deep-2); font-size: 15px; }
   .foot { margin-top: 30px; font-size: 14px; color: var(--on-deep-2); padding-bottom: 76px; }
@@ -124,7 +157,7 @@
     .shot.tall.left { grid-column: 2 / span 5; }
     .shot.wide.right { grid-column: 5 / span 8; }
     .fact-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; }
-    .fact-list li { border-top: 1px solid var(--line); border-bottom: 0; }
+    .fact-list li::after { top: 0; bottom: auto; }
     .close-links { grid-template-columns: 1fr 1fr; column-gap: 48px; }
     .dock { display: none; }
     .foot { padding-bottom: 0; }
@@ -132,8 +165,82 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .js .settle { transform: none; opacity: 1; transition: none; }
     .btn, .dock { transition: none; }
+  }
+
+  /* ---------- Motion. Base styles are every element's END state; these keyframes only play from the start. ---------- */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  @keyframes badge { from { opacity: 0; transform: scale(.7) rotate(-30deg); } }
+
+  /* 1. Opening: the horizon is drawn from the middle outwards, the photo rises out of it like a water level,
+     the headline words rise out of their masks, then the rating and the button are drawn in (done by ~1.9 s). */
+  .hero-photo.horizon::after { animation: draw 1s var(--out) .05s both; }
+  @keyframes draw { from { transform: scaleX(0); } }
+  .hero-photo img { animation: level 1.15s var(--out) .12s both; }
+  @keyframes level { from { clip-path: inset(58% 0 0 0); transform: scale(1.08); } to { clip-path: inset(0); transform: none; } }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .04em .14em 0; margin-bottom: -.14em; }
+  .w > span { display: inline-block; animation: rise .8s var(--out) calc(.2s + var(--i) * .07s) both; }
+  @keyframes rise { from { transform: translateY(108%); } }
+  .rating { animation: wipe .5s var(--out) .55s both; }
+  .hero-text .btn { position: relative; overflow: hidden; }
+  .hero-text .btn::after { content: ""; position: absolute; inset: 0; background: var(--water); pointer-events: none; transform-origin: right center; transform: scaleX(0); animation: unwipe .5s var(--out) .65s both; }
+  @keyframes unwipe { from { transform: none; } }
+  .rating [data-count] { font-variant-numeric: tabular-nums; }
+  /* Second beat: one light runs along the horizon once, while the review count climbs (both transform / text only). */
+  .hero-photo.horizon::before { content: ""; position: absolute; z-index: 2; left: 0; bottom: 0; width: 30%; height: 1px; background: linear-gradient(90deg, transparent, #fff, transparent); animation: glint 1.2s var(--out) 1.3s both; pointer-events: none; }
+  @keyframes glint { from { transform: translateX(-100%); } to { transform: translateX(340%); opacity: 0; } }
+  @keyframes wipe { from { clip-path: inset(0 100% 0 0); opacity: .4; } to { clip-path: inset(0); opacity: 1; } }
+
+  /* 3. Scenes. Work: each photograph is uncovered across the horizon it stands on, and the line is drawn under it. */
+  .js:not(.rv-fail) .shot .horizon img { transition: clip-path 1.05s var(--out), transform 1.5s var(--out); clip-path: inset(0); }
+  .js:not(.rv-fail) .shot:not(.in) .horizon img { clip-path: inset(0 100% 0 0); transform: scale(1.08); }
+  .js:not(.rv-fail) .shot.tall:not(.in) .horizon img { clip-path: inset(100% 0 0 0); }
+  .js:not(.rv-fail) .shot .horizon::after { transition: transform 1s var(--out) .15s; }
+  .js:not(.rv-fail) .shot:not(.in) .horizon::after { transform: scaleX(0); }
+  .js:not(.rv-fail) .shot figcaption { transition: clip-path .8s var(--out) .55s; clip-path: inset(0 0 -.3em 0); }
+  .js:not(.rv-fail) .shot:not(.in) figcaption { clip-path: inset(0 100% -.3em 0); }
+  /* Section titles: words rise out of their masks (the same hand as the opening, played on scroll). */
+  .js:not(.rv-fail) h2.split .w > span { animation: none; transition: transform .8s var(--out) calc(var(--i) * 60ms); }
+  .js:not(.rv-fail) h2.split:not(.in) .w > span { transform: translateY(108%); }
+  /* Facts: each line is read out of the water by a wipe from the left, one after another; the price counts up.
+     (The drawn rule belongs to the Close band.) */
+  .js:not(.rv-fail) .fact-list li > * { clip-path: inset(0 0 -.3em 0); transition: clip-path .9s var(--out) calc(var(--k, 0) * 130ms + .1s), transform .14s var(--ease), opacity .14s var(--ease); }
+  .js:not(.rv-fail) .facts:not(.in) .fact-list li > * { clip-path: inset(0 100% -.3em 0); }
+  /* Close: the deep water takes its lines one by one. */
+  .js:not(.rv-fail) .close-links > *::after { transition: transform .9s var(--out) calc(.2s + var(--k, 0) * 120ms); }
+  .js:not(.rv-fail) .close:not(.in) .close-links > *::after { transform: scaleX(0); }
+  .js:not(.rv-fail) .close:not(.in) .close-links svg { opacity: 0; }
+  .close-links svg { transition: opacity .6s var(--ease) .5s; }
+
+  /* 2. Signature interaction: set the little one's age by dragging along a horizon. */
+  .age { margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(232,240,240,.22); }
+  .age-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .age-q { font-size: 17px; font-weight: 400; color: #fff; }
+  .age-o { font-size: 22px; font-weight: 300; letter-spacing: -.01em; color: #fff; display: inline-block; transform-origin: right center; }
+  .age.untouched .age-o { color: var(--on-deep-2); font-size: 16px; }
+  .age-o.bump { animation: bump .26s var(--ease); }
+  @keyframes bump { from { transform: scale(1.12); } }
+  .age input { --p: 0%; display: block; width: 100%; height: 48px; margin: 6px 0 0; background: none; -webkit-appearance: none; appearance: none; touch-action: pan-y; cursor: pointer; }
+  .age input:focus-visible { outline: 2px solid var(--on-deep); outline-offset: 2px; border-radius: 4px; }
+  .age input::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--water) var(--p), rgba(232,240,240,.3) var(--p)); border-radius: 2px; }
+  .age input::-moz-range-track { height: 2px; background: rgba(232,240,240,.3); border-radius: 2px; }
+  .age input::-moz-range-progress { height: 2px; background: var(--water); }
+  .age input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 34px; height: 34px; margin-top: -16px; border-radius: 50%; border: 0; background: var(--water); box-shadow: 0 0 0 5px rgba(232,240,240,.18); transition: transform .12s var(--ease), box-shadow .2s var(--ease); }
+  .age input::-moz-range-thumb { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--water); box-shadow: 0 0 0 5px rgba(232,240,240,.18); }
+  .age input:active::-webkit-slider-thumb { transform: scale(1.14); box-shadow: 0 0 0 11px rgba(232,240,240,.14); }
+  .age-ends { display: flex; justify-content: space-between; font-size: 14px; color: var(--on-deep-2); margin-top: -4px; }
+  .age .age-hint { margin-top: 6px; font-size: 15px; }
+  /* A ghost of the thumb slides out and back once, so the slider reads as movable. It never takes a touch. */
+  .age-track { position: relative; }
+  .age-ghost { position: absolute; left: 0; top: 50%; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%; background: var(--water); opacity: 0; pointer-events: none; }
+
+  /* 5. Response: a calm ring leaves the press point of the main button. It starts on press and never delays the link. */
+  .ring { position: fixed; z-index: 60; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 1.5px solid var(--horizon); pointer-events: none; }
+  .btn { -webkit-tap-highlight-color: transparent; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .amb { display: none; }
   }
 </style>
 </head>
@@ -141,10 +248,10 @@
 <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42z"/></symbol></svg>
 <div class="concept" data-concept-banner>Website concept preview made for Liya Baby Photography Studio · not the official site</div>
 
-<header class="wrap top">
-  <a class="mark" href="#top" aria-label="Liya Baby Photography Studio, top of page"><img src="assets/logo-mark.webp" width="321" height="189" alt=""></a>
+<header class="bar" id="bar"><div class="wrap top">
+  <a class="mark" href="#top" aria-label="Liya Baby Photography Studio, top of page"><span class="badge"><img src="assets/logo.jpg" width="150" height="150" alt=""></span><span class="nm">Liya Baby Photography Studio</span></a>
   <a class="call" href="tel:+918939466336" aria-label="Call 89394 66336"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
-</header>
+</div></header>
 
 <main id="top">
   <section class="hero">
@@ -153,8 +260,8 @@
         <img src="assets/post-07.jpg" width="475" height="640" fetchpriority="high" alt="A toddler in a wooden boat holding up a seashell and laughing">
       </div>
       <div class="hero-text">
-        <h1>Newborn, baby and toddler photoshoots in Chennai</h1>
-        <p class="rating">4.8 on Google · 240 reviews</p>
+        <h1><span class="w"><span style="--i:0">Newborn,</span></span> <span class="w"><span style="--i:1">baby</span></span> <span class="w"><span style="--i:2">and</span></span> <span class="w"><span style="--i:3">toddler</span></span> <span class="w"><span style="--i:4">photoshoots</span></span> <span class="w"><span style="--i:5">in</span></span> <span class="w"><span style="--i:6">Chennai</span></span></h1>
+        <p class="rating">4.8 on Google · <span data-count="240">240</span> reviews</p>
         <a class="btn" id="hero-btn" data-wa href="https://wa.me/918939466336" target="_blank" rel="noopener"><svg class="solid" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Book on WhatsApp</a>
       </div>
     </div>
@@ -162,21 +269,21 @@
 
   <section class="work" aria-labelledby="work-title">
     <div class="wrap">
-      <h2 id="work-title">Blink, and you’ll miss the magic.</h2>
+      <h2 id="work-title" class="split"><span class="w"><span style="--i:0">Blink,</span></span> <span class="w"><span style="--i:1">and</span></span> <span class="w"><span style="--i:2">you’ll</span></span> <span class="w"><span style="--i:3">miss</span></span> <span class="w"><span style="--i:4">the</span></span> <span class="w"><span style="--i:5">magic.</span></span></h2>
       <div class="gallery">
-        <figure class="shot wide settle">
+        <figure class="shot wide">
           <div class="horizon"><img src="assets/post-10.jpg" width="640" height="427" loading="lazy" alt="A baby in round glasses with a wide open smile"></div>
           <figcaption>Too cool for nap time, too cute for words.</figcaption>
         </figure>
-        <figure class="shot tall right settle">
+        <figure class="shot tall right">
           <div class="horizon"><img src="assets/post-04.jpg" width="475" height="640" loading="lazy" alt="A toddler in patchwork dungarees smiling in the boat"></div>
           <figcaption>One step, one giggle, one memory at a time.</figcaption>
         </figure>
-        <figure class="shot wide right settle">
+        <figure class="shot wide right">
           <div class="horizon"><img src="assets/post-06.jpg" width="640" height="427" loading="lazy" alt="A toddler laughing in a wooden boat, a ship's wheel and a net behind"></div>
           <figcaption>Little by little, they grow into their own kind of wonderful.</figcaption>
         </figure>
-        <figure class="shot tall left settle">
+        <figure class="shot tall left">
           <div class="horizon"><img src="assets/post-12.jpg" width="475" height="640" loading="lazy" alt="A baby in round glasses looking up, wooden date blocks in front"></div>
           <figcaption>Freshly baked and ready to steal hearts.</figcaption>
         </figure>
@@ -186,12 +293,12 @@
 
   <section class="facts" aria-labelledby="facts-title">
     <div class="wrap">
-      <h2 id="facts-title">Before you book</h2>
+      <h2 id="facts-title" class="split"><span class="w"><span style="--i:0">Before</span></span> <span class="w"><span style="--i:1">you</span></span> <span class="w"><span style="--i:2">book</span></span></h2>
       <ul class="fact-list">
-        <li><b>Certified baby photographer and baby stylist</b><span>Newborn, baby and toddler shoots</span></li>
-        <li><b>Packages start from ₹2,999</b><span>Ask the studio what each package includes</span></li>
-        <li><b>Thoraipakkam, Chennai</b><a href="https://www.google.com/maps/search/?api=1&amp;query=Liya%20Baby%20Photography%20Studio&amp;query_place_id=ChIJwT2Ox8ddUjoRWk_g6VLWbHU" target="_blank" rel="noopener">Open in Google Maps</a></li>
-        <li><b>Maternity shoots</b><a href="https://instagram.com/liya_maternity_photoshoot" target="_blank" rel="noopener">@liya_maternity_photoshoot</a></li>
+        <li style="--k:0"><b>Certified baby photographer and baby stylist</b><span>Newborn, baby and toddler shoots</span></li>
+        <li style="--k:1"><b>Packages start from ₹<span data-count="2999" data-group>2,999</span></b><span>Ask the studio what each package includes</span></li>
+        <li style="--k:2"><b>Thoraipakkam, Chennai</b><a href="https://www.google.com/maps/search/?api=1&amp;query=Liya%20Baby%20Photography%20Studio&amp;query_place_id=ChIJwT2Ox8ddUjoRWk_g6VLWbHU" target="_blank" rel="noopener">Open in Google Maps</a></li>
+        <li style="--k:3"><b>Maternity shoots</b><a href="https://instagram.com/liya_maternity_photoshoot" target="_blank" rel="noopener">@liya_maternity_photoshoot</a></li>
       </ul>
     </div>
   </section>
@@ -199,13 +306,19 @@
 
 <footer class="close" id="close" aria-labelledby="close-title">
   <div class="wrap">
-    <h2 id="close-title">Book a shoot</h2>
+    <h2 id="close-title" class="split"><span class="w"><span style="--i:0">Book</span></span> <span class="w"><span style="--i:1">a</span></span> <span class="w"><span style="--i:2">shoot</span></span></h2>
     <p>Send the studio your little one's age and a date you'd like. The WhatsApp message comes ready for you to fill in.</p>
+    <div class="age untouched" id="age">
+      <div class="age-row"><label class="age-q" for="age-r">How old is your little one?</label><output class="age-o" id="age-o" for="age-r">Drag to set</output></div>
+      <div class="age-track"><input type="range" id="age-r" min="0" max="16" step="1" value="0" aria-describedby="age-hint"><span class="age-ghost" id="age-ghost" aria-hidden="true"></span></div>
+      <div class="age-ends" aria-hidden="true"><span>Under 1 month</span><span>3 years</span></div>
+      <p class="age-hint" id="age-hint">The age goes into your WhatsApp message.</p>
+    </div>
     <a class="btn" data-wa href="https://wa.me/918939466336" target="_blank" rel="noopener"><svg class="solid" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Book on WhatsApp</a>
     <div class="close-links">
-      <a href="tel:+918939466336"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call 89394 66336</span></a>
-      <a href="https://instagram.com/liya_the_studio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg><span>@liya_the_studio</span></a>
-      <address><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Netaji Nagar New Colony, Nehru Nagar, Thoraipakkam, Chennai 600097</span></address>
+      <a href="tel:+918939466336" style="--k:0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call 89394 66336</span></a>
+      <a href="https://instagram.com/liya_the_studio" target="_blank" rel="noopener" style="--k:1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg><span>@liya_the_studio</span></a>
+      <address style="--k:2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Netaji Nagar New Colony, Nehru Nagar, Thoraipakkam, Chennai 600097</span></address>
     </div>
     <p class="foot">Liya Baby Photography Studio</p>
   </div>
@@ -216,30 +329,178 @@
 </div>
 
 <script>
-// Plain script: one prefilled WhatsApp message, the sticky button, and photos settling onto the horizon.
+// Plain JS on every device, no library: one prefilled WhatsApp message (with the age set on the horizon),
+// the sticky button, scenes, counters, a calm ambient layer.
 (function () {
-  var msg = "Hi! I'd like to book a baby photoshoot.\nMy little one's age: \nA date we'd like: ";
-  var href = "https://wa.me/918939466336?text=" + encodeURIComponent(msg);
-  document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
+  window.__lv = 1;
+  var root = document.documentElement;
+  var reduced = false, desktop = false;
+  try { reduced = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  try { desktop = matchMedia("(min-width: 1024px) and (pointer: fine)").matches; } catch (e) {}
 
-  var dock = document.getElementById("dock");
-  var heroBtn = document.getElementById("hero-btn");
-  var close = document.getElementById("close");
-  var shots = Array.prototype.slice.call(document.querySelectorAll(".settle"));
+  var AGES = ["under 1 month", "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "7 months",
+    "8 months", "9 months", "10 months", "11 months", "1 year", "1½ years", "2 years", "2½ years", "3 years"];
+  var age = -1;
+  var links = document.querySelectorAll("[data-wa]");
+  function sync() {
+    var msg = "Hi! I'd like to book a baby photoshoot.\nMy little one's age: " + (age >= 0 ? AGES[age] : "") + "\nA date we'd like: ";
+    var href = "https://wa.me/918939466336?text=" + encodeURIComponent(msg);
+    links.forEach(function (a) { a.href = href; });
+  }
+  sync();
 
-  if (!("IntersectionObserver" in window)) { dock.classList.remove("away"); return; }
+  // 1. The opening is CSS from first paint; this marks when it is over.
+  setTimeout(function () { root.dataset.opening = "done"; }, reduced ? 0 : 2100);
 
-  var heroIn = true, closeIn = false;
-  var sync = function () { dock.classList.toggle("away", heroIn || closeIn); };
-  new IntersectionObserver(function (e) { heroIn = e[0].isIntersecting || e[0].boundingClientRect.top > 0; sync(); }).observe(heroBtn);
-  new IntersectionObserver(function (e) { closeIn = e[0].isIntersecting; sync(); }).observe(close);
+  // Second beat of the opening: the review count climbs once the headline is in.
+  if (!reduced) setTimeout(function () { document.querySelectorAll(".rating [data-count]").forEach(count); }, 900);
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  document.documentElement.classList.add("js");
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-  }, { rootMargin: "0px 0px -8% 0px" });
-  shots.forEach(function (s) { io.observe(s); });
+  // Name bar: a thin rule appears once the page is moving under it.
+  var bar = document.getElementById("bar"), scrolled = false;
+  addEventListener("scroll", function () {
+    var s = (window.pageYOffset || 0) > 8;
+    if (s !== scrolled) { scrolled = s; bar.classList.toggle("stuck", s); }
+  }, { passive: true });
+
+  // Sticky action, once the hero button has scrolled away.
+  var dock = document.getElementById("dock"), heroBtn = document.getElementById("hero-btn"), closeEl = document.getElementById("close");
+  var hasIO = "IntersectionObserver" in window;
+  if (hasIO) {
+    var heroIn = true, closeIn = false;
+    var dsync = function () { dock.classList.toggle("away", heroIn || closeIn); };
+    new IntersectionObserver(function (e) { heroIn = e[0].isIntersecting || e[0].boundingClientRect.top > 0; dsync(); }).observe(heroBtn);
+    new IntersectionObserver(function (e) { closeIn = e[0].isIntersecting; dsync(); }).observe(closeEl.querySelector(".btn"));
+  } else { dock.classList.remove("away"); }
+
+  // 2. Signature interaction: drag along the horizon to set the age; the WhatsApp message follows.
+  var rng = document.getElementById("age-r"), out = document.getElementById("age-o"), box = document.getElementById("age");
+  function setAge() {
+    age = +rng.value;
+    box.classList.remove("untouched");
+    rng.style.setProperty("--p", (age / (AGES.length - 1) * 100) + "%");
+    out.textContent = AGES[age];
+    rng.setAttribute("aria-valuetext", AGES[age]);
+    out.classList.remove("bump"); void out.offsetWidth; out.classList.add("bump");
+    sync();
+  }
+  rng.addEventListener("input", setAge);
+  rng.addEventListener("change", setAge);
+  rng.addEventListener("keyup", function (e) { if (/^(Arrow|Home|End|Page)/.test(e.key)) setAge(); });
+  // A vertical pan that starts on the slider is the browser taking the gesture: put back what was there.
+  var before = null;
+  rng.addEventListener("pointerdown", function () { before = { v: rng.value, a: age, u: box.classList.contains("untouched") }; });
+  rng.addEventListener("pointercancel", function () {
+    if (!before) return;
+    rng.value = before.v; age = before.a;
+    if (before.u) {
+      box.classList.add("untouched"); out.textContent = "Drag to set";
+      rng.style.setProperty("--p", "0%"); rng.removeAttribute("aria-valuetext");
+    } else { setAge(); }
+    sync(); before = null;
+  });
+  rng.addEventListener("pointerup", function () { if (before && box.classList.contains("untouched")) setAge(); before = null; });
+
+  // The ghost thumb: 0 to about 25% of the track and back over 900 ms, once, only while the slider is untouched.
+  var ghost = document.getElementById("age-ghost"), ghostDone = false;
+  function ghostHint() {
+    if (ghostDone || reduced || !ghost.animate || !box.classList.contains("untouched")) return;
+    ghostDone = true;
+    var dx = Math.max(0, (rng.offsetWidth - 34) * 0.25);
+    var an = ghost.animate([
+      { transform: "translateX(0)", opacity: 0, offset: 0 },
+      { transform: "translateX(0)", opacity: .5, offset: .15 },
+      { transform: "translateX(" + dx + "px)", opacity: .5, offset: .55, easing: "cubic-bezier(.65,0,.35,1)" },
+      { transform: "translateX(0)", opacity: 0, offset: 1 }
+    ], { duration: 900, delay: 500, easing: "cubic-bezier(.65,0,.35,1)" });
+    rng.addEventListener("pointerdown", function () { an.cancel(); }, { once: true });
+  }
+
+  // 3. Scenes: .in is added once when a block comes near the viewport; nothing hides again.
+  function count(el) {
+    var to = parseFloat(el.getAttribute("data-count")), from = to * 0.35, t0 = null, grp = el.hasAttribute("data-group");
+    function txt(v) { v = Math.round(v); return grp ? v.toLocaleString("en-IN") : String(v); }
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 1900), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = txt(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = txt(to);
+    }
+    requestAnimationFrame(step);
+  }
+  if (!reduced && hasIO) {
+    var io = new IntersectionObserver(function (list) {
+      list.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        en.target.querySelectorAll("[data-count]").forEach(count);
+        if (en.target === closeEl) ghostHint();
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    document.querySelectorAll(".shot, h2.split, .facts, .close").forEach(function (el) { io.observe(el); });
+  } else { root.classList.add("rv-fail"); }
+
+  // 5. Press: two calm rings leave the press point of a main button. Starts on press, never touches the link.
+  var lastRing = 0;
+  document.querySelectorAll(".btn").forEach(function (b) {
+    b.addEventListener("pointerdown", function (e) {
+      var now = Date.now();
+      if (reduced || now - lastRing < 700 || !Element.prototype.animate) return;
+      lastRing = now;
+      [0, 120].forEach(function (d) {
+        var r = document.createElement("i");
+        r.className = "ring"; r.style.left = e.clientX + "px"; r.style.top = e.clientY + "px";
+        document.body.appendChild(r);
+        var an = r.animate([{ transform: "scale(.3)", opacity: .9 }, { transform: "scale(3.2)", opacity: 0 }],
+          { duration: 700, delay: d, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" });
+        an.onfinish = function () { r.remove(); };
+      });
+    });
+  });
+
+  // 4. Ambient: specks of light drifting up through the water behind the page. DPR 1, 30 fps, 26 on phones,
+  // 56 on desktop, paused when hidden, thinned (never switched off) when frames run slow.
+  if (reduced) return;
+  function start() {
+    var cv = document.createElement("canvas");
+    cv.className = "amb"; cv.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(cv, document.body.firstChild);
+    var cx = cv.getContext("2d");
+    if (!cx) return;
+    var W = 0, H = 0, N = desktop ? 56 : 26, density = 1, pts = [], i;
+    function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+    size();
+    var rt; addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(size, 200); });
+    for (i = 0; i < N; i++) pts.push({ x: Math.random(), y: Math.random(), r: 1.2 + Math.random() * 2.6, v: .01 + Math.random() * .02, ph: Math.random() * 6.28 });
+    var running = true, last = 0, prev = 0, slow = 0, frames = 0, levels = [1, .6, .36, .2], lv = 0;
+    function draw(t) {
+      cx.clearRect(0, 0, W, H);
+      var n = Math.max(4, Math.round(N * density));
+      for (var j = 0; j < n; j++) {
+        var p = pts[j];
+        p.y -= p.v * 0.033; if (p.y < -0.03) { p.y = 1.03; p.x = Math.random(); }
+        var x = p.x * W + Math.sin(t / 2600 + p.ph) * 14, y = p.y * H;
+        cx.globalAlpha = .1 + .08 * Math.sin(t / 1700 + p.ph);
+        cx.fillStyle = "#5a7581";
+        cx.beginPath(); cx.arc(x, y, p.r, 0, 6.2832); cx.fill();
+      }
+      cx.globalAlpha = 1;
+    }
+    function loop(t) {
+      if (!running) return;
+      requestAnimationFrame(loop);
+      if (prev) { frames++; if (t - prev > 24) slow++; if (frames >= 90) { if (slow > 45 && lv < 3) { lv++; density = levels[lv]; } frames = 0; slow = 0; } }
+      prev = t;
+      if (t - last < 32) return;
+      last = t; draw(t);
+    }
+    function go() { if (!running) { running = true; prev = 0; requestAnimationFrame(loop); } }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) running = false; else go(); });
+    if (hasIO) new IntersectionObserver(function (e) { if (e[0].isIntersecting) go(); else running = false; }).observe(cv);
+    requestAnimationFrame(loop);
+  }
+  function later() { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(start); }
+  if (document.readyState === "complete") later(); else addEventListener("load", later);
 })();
 </script>
 </body>
