@@ -10,8 +10,7 @@
 <meta name="theme-color" content="#fafbf9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
   /* A kolam at the doorstep: rice-flour white, one ink line, the logo's teal for the one action.
      --teal is sampled from the lens at the centre of their logo (assets/logo.jpg), deep enough for white text. */
@@ -43,11 +42,13 @@
 
   .concept { background: var(--ink); color: #dfe5e2; text-align: center; font-size: 13px; line-height: 1.35; padding: 6px 12px; }
 
-  /* Header */
-  .top { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 12px; }
+  /* Name bar: solid, sticky, logo + name always top-left */
+  html { scroll-padding-top: 66px; }
+  .namebar { position: sticky; top: 0; z-index: 30; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .top { display: flex; align-items: center; justify-content: space-between; padding-top: 6px; padding-bottom: 6px; }
   .mark { text-decoration: none; display: flex; align-items: center; gap: 10px; min-height: 44px; }
-  /* Their logo is a white square: multiply lets the white fall away into the page */
-  .mark img { width: 40px; height: 40px; flex: none; border-radius: 50%; mix-blend-mode: multiply; }
+  /* Their logo sits on white: kept as their round badge, ringed by a hairline, in the solid bar */
+  .mark img { width: 40px; height: 40px; flex: none; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--rule); }
   .mark b { display: block; font-family: var(--head); font-weight: 400; font-size: 20px; letter-spacing: .06em; line-height: 1.2; }
   .mark small { display: block; font-size: 14px; color: var(--muted); letter-spacing: .01em; }
   .call { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 2px 0 10px; text-decoration: none; font-weight: 500; font-size: 16px; }
@@ -128,6 +129,7 @@
   .facts li { padding: 18px 0 16px; border-bottom: 1px solid var(--rule); }
   .facts b { display: block; font-family: var(--head); font-weight: 400; font-size: 22px; line-height: 1.25; font-variant-numeric: tabular-nums; }
   .facts span { display: block; color: var(--muted); font-size: 16px; line-height: 1.5; margin-top: 3px; }
+  .facts span [data-count], .facts span > span { display: inline; margin: 0; }
   .facts a { display: inline-flex; align-items: center; min-height: 44px; color: var(--teal); font-weight: 600; text-decoration: none; }
   /* The bar steps aside while the footer is on screen, so the end needs only the safe area */
   footer { padding: 56px 0 calc(24px + env(safe-area-inset-bottom)); color: var(--muted); font-size: 14px; }
@@ -136,8 +138,7 @@
 
   /* The action on its own plane */
   .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: grid; grid-template-columns: 1fr auto; gap: 8px;
-         padding: 10px var(--gut) calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 251, 249, .88);
-         -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-top: 1px solid var(--rule);
+         padding: 10px var(--gut) calc(10px + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--rule);
          transform: translateY(110%); transition: transform .32s var(--ease); }
   .bar.on { transform: none; }
   .bar a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; text-decoration: none; font-weight: 600; font-size: 16px; }
@@ -183,11 +184,95 @@
   }
   @media (prefers-reduced-transparency: reduce) { .bar { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 
-  .js .reveal { opacity: 0; }
+/* ================= Motion (inline CSS + plain JS; GSAP only on desktop, after load) ================= */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  .hero { position: relative; }
+  .hero-in { position: relative; z-index: 1; }
+  #amb { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+  .w > span { display: inline-block; }
+
+  /* 1. Opening: the plate is printed from left to right, the ruled caption is drawn under it, the headline
+        rises word by word out of its lines, and the teal action is wiped in. CSS from first paint; it always
+        ends on the visible page (no JS, blocked CDN, reduced motion). */
+  @keyframes o-shutter { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0); } }
+  @keyframes o-flash { from { opacity: .6; } to { opacity: 0; } }
+  @keyframes o-heart { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes o-zoom { from { scale: 1.12; } to { scale: 1; } }
+  @keyframes o-rule { from { transform: scaleX(0); } to { transform: none; } }
+  @keyframes o-word { from { transform: translateY(112%); } to { transform: none; } }
+  @keyframes o-write { from { clip-path: inset(-10px 100% -4px 0); } to { clip-path: inset(-10px -4px -4px 0); } }
+  @keyframes o-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes o-in { from { opacity: 0; } to { opacity: 1; } }
+  .hero figure { overflow: hidden; }
+  /* Opening: the shutter opens on the photo, one flash goes off over the photo only, the caption ends on a drawn heart */
+  .ph { position: relative; }
+  .ph img { display: block; }
+  .hero figure > .ph > img { animation: o-shutter .55s cubic-bezier(.7, 0, .2, 1) 0s backwards; }
+  .ph::after { content: ""; position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; animation: o-flash .35s ease-out .5s; }
+  .cap .hh { display: inline-block; width: 15px; height: 15px; margin-left: 7px; vertical-align: -2px; color: var(--teal); }
+  .cap .hh path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; animation: o-heart .7s ease-in-out 1.5s backwards; }
+  .cap { position: relative; border-top: 0; margin-top: 8px; padding-top: 7px; }
+  .cap::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; animation: o-rule .9s var(--out) .35s backwards; }
+  .cap > span { display: block; animation: o-write .7s var(--out) .5s backwards; }
+  .hero h1 .w > span { animation: o-word .7s var(--out) backwards; }
+  .hero h1 .w:nth-child(1) > span { animation-delay: .25s; } .hero h1 .w:nth-child(2) > span { animation-delay: .33s; }
+  .hero h1 .w:nth-child(3) > span { animation-delay: .41s; } .hero h1 .w:nth-child(4) > span { animation-delay: .49s; }
+  .hero .sub { animation: o-write .7s var(--out) .6s backwards; }
+  .hero .btn { animation: o-wipe .65s var(--out) .75s backwards; }
+  .namebar .mark { animation: o-in .5s var(--out) backwards; }
+
+  /* 3. Scroll scenes, one way per section. Hidden only while the script is expected; text is never left hidden. */
+  .plate img { transition: clip-path 1s var(--out), scale 1.4s var(--out); clip-path: inset(0); }
+  .plate figcaption { position: relative; border-top: 0; }
+  .plate figcaption::before, .gifts li::after, .facts li::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; transition: transform .9s var(--out); }
+  .plate figcaption::before { top: 0; transition-delay: .35s; }
+  .js:not(.rv-fail) .plate.rv:not(.in) img { clip-path: inset(100% 0 0 0); scale: 1.12; }
+  .js:not(.rv-fail) .plate.rv:not(.in) figcaption::before { transform: scaleX(0); }
+  .plate figcaption > * { transition: clip-path .8s var(--out) .5s; clip-path: inset(-10px); }
+  .js:not(.rv-fail) .plate.rv:not(.in) figcaption > * { clip-path: inset(-10px 100% -4px 0); }
+  .gifts li, .facts li { position: relative; }
+  .gifts li { border-bottom-color: transparent; }
+  .facts li { border-bottom-color: transparent; }
+  .gifts li::after, .facts li::after { bottom: -1px; background: var(--rule); transition-delay: calc(var(--i, 0) * 80ms); }
+  .gifts img { transition: transform .9s var(--out), opacity .5s linear; }
+  .gifts li > div { transition: clip-path .8s var(--out) .25s; clip-path: inset(-10px); }
+  .js:not(.rv-fail) .gifts li.rv:not(.in)::after, .js:not(.rv-fail) .facts li.rv:not(.in)::after { transform: scaleX(0); }
+  /* gifts: each thumbnail is laid down like a print, tilting the other way on every row */
+  .js:not(.rv-fail) .gifts li.rv:not(.in) img { transform: translateY(-14px) rotate(-3deg); opacity: 0; }
+  .js:not(.rv-fail) .gifts li.rv:not(.in):nth-child(even) img { transform: translateY(-14px) rotate(3deg); }
+  .js:not(.rv-fail) .gifts li.rv:not(.in) > div { clip-path: inset(-10px 100% -4px 0); }
+  /* facts: the numbers rise out of their own masks, the small print fades in behind them */
+  .facts b { overflow: hidden; padding-bottom: .15em; margin-bottom: -.15em; }
+  .facts b .m { display: block; font-style: normal; transition: transform .8s var(--out); transition-delay: calc(var(--i, 0) * 80ms + .15s); }
+  .facts li > span, .facts li > a { transition: opacity .7s linear; transition-delay: calc(var(--i, 0) * 80ms + .4s); }
+  .js:not(.rv-fail) .facts li.rv:not(.in) b .m { transform: translateY(110%); }
+  .js:not(.rv-fail) .facts li.rv:not(.in) > span, .js:not(.rv-fail) .facts li.rv:not(.in) > a { opacity: 0; }
+  /* form: the kolam itself is drawn, then its dots set down */
+  .form svg.k path:first-child { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s var(--out); }
+  .js:not(.rv-fail) .form.rv:not(.in) svg.k path:first-child { stroke-dashoffset: 1; }
+  .form svg.k circle { transform-box: fill-box; transform-origin: center; transition: fill .25s, stroke .25s, transform .6s var(--out) .5s; }
+  .js:not(.rv-fail) .form.rv:not(.in) svg.k circle { transform: scale(0); }
+  .field { transition: clip-path .8s var(--out); transition-delay: calc(var(--i, 0) * 90ms + .2s); clip-path: inset(-10px); }
+  .js:not(.rv-fail) .form.rv:not(.in) .field { clip-path: inset(-10px 100% -4px 0); }
+
+  /* 5. Response */
+  .mark, .bar a, .more, .gifts a, .call, .or a, footer a { transition: transform .14s var(--ease); }
+  .mark:active, .bar a:active, .more:active, .gifts a:active, .call:active, .or a:active, .facts a:active, footer a:active { transform: scale(.97); }
+  .ring { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; border-radius: 50%; border: 2px solid var(--teal); width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero figure > .ph > img, .cap .hh path, .cap::before, .cap > span, .hero h1 .w > span, .hero .sub, .hero .btn, .namebar .mark { animation: none !important; }
+    .plate img, .plate figcaption::before, .plate figcaption > *, .gifts li::after, .facts li::after, .gifts img, .gifts li > div, .facts b .m, .facts li > span, .facts li > a, .form svg.k path, .form svg.k circle, .field { transition: none !important; }
+    #amb { display: none; }
+    .ph::after { display: none; }
+  }
 </style>
 <script>
   document.documentElement.classList.add('js');
-  setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('js'); }, 2500);
+  setTimeout(function () { if (!window.__cc) document.documentElement.classList.add('rv-fail'); }, 2500);
+  // The opening is designed to end inside 2.5 s; mark it done at 2.4 s even on a slow phone
+  setTimeout(function () { var r = document.documentElement; if (!r.getAttribute('data-opening')) r.setAttribute('data-opening', 'done'); }, 2400);
 </script>
 </head>
 <body>
@@ -200,20 +285,25 @@
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor"/></symbol>
 </svg>
 
-<header class="wrap top">
-  <a class="mark" href="#top" aria-label="Candid Clicz, back to top"><img src="assets/logo.jpg" alt="" width="40" height="40"><span><b>Candid Clicz</b><small>Photography · Coimbatore</small></span></a>
-  <a class="call" href="tel:+917708730302"><svg aria-hidden="true"><use href="#i-call"/></svg>Call</a>
+<header class="namebar">
+  <div class="wrap top">
+    <a class="mark" href="#top" aria-label="Candid Clicz, back to top"><img src="assets/logo.jpg" alt="" width="40" height="40"><span><b>Candid Clicz</b><small>Photography · Coimbatore</small></span></a>
+    <a class="call" href="tel:+917708730302"><svg aria-hidden="true"><use href="#i-call"/></svg>Call</a>
+  </div>
 </header>
 
 <main id="top">
   <div class="wrap hero">
     <div class="hero-in">
       <figure>
-        <img src="assets/post-06.jpg" alt="A couple in navy smiling at each other under a tree, photographed by Candid Clicz" width="640" height="640" fetchpriority="high">
-        <figcaption class="cap">One love, two hearts, one forever.</figcaption>
+        <div class="ph">
+          <canvas id="amb" aria-hidden="true"></canvas>
+          <img src="assets/post-06.jpg" alt="A couple in navy smiling at each other under a tree, photographed by Candid Clicz" width="640" height="640" fetchpriority="high">
+        </div>
+        <figcaption class="cap"><span>One love, two hearts, one forever.<svg class="hh" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.6 4.5c2.2 0 3.7 1.3 5.4 3.2 1.7-1.9 3.2-3.2 5.4-3.2 3.6 0 5.7 3.8 4.2 7.2C19.5 16.4 12 21 12 21Z"/></svg></span></figcaption>
       </figure>
       <div>
-        <h1>We capture your memories.</h1>
+        <h1><span class="w"><span>We</span></span> <span class="w"><span>capture</span></span> <span class="w"><span>your</span></span> <span class="w"><span>memories.</span></span></h1>
         <p class="sub">Wedding photographer in Udayampalayam, Coimbatore. Photo gifts too.</p>
         <a class="btn" id="wa1" href="https://wa.me/917708730302" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Check your date on WhatsApp</a>
       </div>
@@ -223,15 +313,15 @@
   <section class="wrap" aria-labelledby="work-h">
     <h2 class="sec-h" id="work-h">Recent shoots</h2>
     <div class="plates">
-      <figure class="plate a reveal">
+      <figure class="plate a rv">
         <img src="assets/post-12.jpg" alt="Mathew and Nisha walking hand in hand on a beach, both in white" width="360" height="560" loading="lazy">
         <figcaption><b>Mathew<svg aria-hidden="true"><use href="#i-heart"/></svg><span class="sr"> and </span>Nisha</b><span>Pre-wedding story, save the date 27.08.2026</span></figcaption>
       </figure>
-      <figure class="plate b reveal">
+      <figure class="plate b rv">
         <img src="assets/post-01.jpg" alt="A bride in a silk saree with a green border and her groom in a maroon shirt, at night" width="361" height="525" loading="lazy">
         <figcaption><b>Wedding ceremony</b></figcaption>
       </figure>
-      <figure class="plate c reveal">
+      <figure class="plate c rv">
         <img src="assets/post-08.jpg" alt="A couple leaning close against a pink, yellow and blue painted wall" width="480" height="640" loading="lazy">
         <figcaption><b>Couple shoot</b></figcaption>
       </figure>
@@ -243,22 +333,22 @@
     <h2 class="sec-h" id="gifts-h">Gifts from your photos</h2>
     <p class="sec-p">1000+ models. Design and theme can be customised, and shipping is free.</p>
     <ul class="gifts">
-      <li class="reveal">
+      <li class="rv" style="--i:0">
         <img src="assets/post-02.jpg" alt="A wooden plaque engraved with a portrait and a birthday message" width="361" height="640" loading="lazy">
         <div><h3>Wooden engraving</h3><p>12x8 inch shown; all sizes available.</p>
           <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wooden engraving" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
       </li>
-      <li class="reveal">
+      <li class="rv" style="--i:1">
         <img src="assets/post-07.jpg" alt="A round wall clock ringed with small photo frames of a couple" width="360" height="485" loading="lazy">
         <div><h3>Wall photo clock</h3><p>Wooden wall clock, glossy finish.</p>
           <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wall photo clock" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
       </li>
-      <li class="reveal">
+      <li class="rv" style="--i:0">
         <img src="assets/post-11.jpg" alt="A white and gold acrylic stand with a wedding couple's photo and spaces for thumb impressions" width="360" height="472" loading="lazy">
         <div><h3>Thumb impression frame</h3><p>A wedding gift, with the couple's names.</p>
           <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Wedding thumb impression frame" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
       </li>
-      <li class="reveal">
+      <li class="rv" style="--i:1">
         <img src="assets/post-10.jpg" alt="Dozens of small framed portraits laid out on a floor as farewell gifts" width="360" height="640" loading="lazy">
         <div><h3>Farewell photo frames</h3><p>Trending frames; designs customised.</p>
           <div class="row-end"><span class="price">Price on request</span><a href="https://wa.me/917708730302" data-gift="Farewell photo frames" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Ask</a></div></div>
@@ -270,19 +360,19 @@
     <section class="ask" id="ask" aria-labelledby="ask-h">
       <h2 class="sec-h" id="ask-h">Tell us the day</h2>
       <p class="sec-p">Occasion, date and place, sent to us on WhatsApp.</p>
-      <form class="form" id="form" onsubmit="return false">
+      <form class="form rv" id="form" onsubmit="return false">
         <svg class="k" viewBox="0 -2 40 256" aria-hidden="true">
-          <path d="M20 0C0 0 2 76 20 84C38 92 38 160 20 168C2 176 0 252 20 252C40 252 38 176 20 168C2 160 2 92 20 84C38 76 40 0 20 0Z"/>
+          <path pathLength="1" d="M20 0C0 0 2 76 20 84C38 92 38 160 20 168C2 176 0 252 20 252C40 252 38 176 20 168C2 160 2 92 20 84C38 76 40 0 20 0Z"/>
           <!-- One lobe of the line per answer, so each closes around its own dot -->
           <path class="ink" id="k1" pathLength="1" d="M20 0C0 0 2 76 20 84C38 76 40 0 20 0Z"/>
           <path class="ink" id="k2" pathLength="1" d="M20 84C38 92 38 160 20 168C2 160 2 92 20 84Z"/>
           <path class="ink" id="k3" pathLength="1" d="M20 168C2 176 0 252 20 252C40 252 38 176 20 168Z"/>
           <circle id="d1" cx="20" cy="42" r="4"/><circle id="d2" cx="20" cy="126" r="4"/><circle id="d3" cx="20" cy="210" r="4"/>
         </svg>
-        <div class="field"><label for="occasion">Occasion</label>
+        <div class="field" style="--i:0"><label for="occasion">Occasion</label>
           <select id="occasion"><option value="">Choose one</option><option>Wedding</option><option>Pre-wedding shoot</option><option>Puberty ceremony</option></select></div>
-        <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
-        <div class="field"><label for="place">Place</label><input id="place" type="text" placeholder="Town or venue" autocomplete="off" maxlength="60" enterkeyhint="done"></div>
+        <div class="field" style="--i:1"><label for="date">Date</label><input id="date" type="date"></div>
+        <div class="field" style="--i:2"><label for="place">Place</label><input id="place" type="text" placeholder="Town or venue" autocomplete="off" maxlength="60" enterkeyhint="done"></div>
       </form>
       <p class="msg" aria-live="polite"><span>Your message</span><q id="msg"></q></p>
       <a class="btn" id="wa2" href="https://wa.me/917708730302" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
@@ -292,9 +382,9 @@
     <section aria-labelledby="visit-h">
       <h2 class="sec-h" id="visit-h">Find us</h2>
       <ul class="facts">
-        <li><b>5.0 on Google</b><span>from 237 reviews</span></li>
-        <li><b>8 AM to 10 PM</b><span>open every day</span></li>
-        <li><b>Udayampalayam, Coimbatore</b><span>28, Kannapiran Mills Rd, Chinna Ayyavu Thevar Layout, 641028</span>
+        <li class="rv" style="--i:0"><b><em class="m">5.0 on Google</em></b><span>from <span data-count="237">237</span> reviews</span></li>
+        <li class="rv" style="--i:1"><b><em class="m">8 AM to 10 PM</em></b><span>open every day</span></li>
+        <li class="rv" style="--i:2"><b><em class="m">Udayampalayam, Coimbatore</em></b><span>28, Kannapiran Mills Rd, Chinna Ayyavu Thevar Layout, 641028</span>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=Candid%20Clicz%20Coimbatore&amp;query_place_id=ChIJCXgJG0tZqDsR7s_RtyVTGaE" target="_blank" rel="noopener">Directions</a></li>
       </ul>
     </section>
@@ -365,27 +455,191 @@
   })();
 </script>
 
-<script type="module">
-  // Motion (motion.dev), pinned: plates settle in once as they arrive.
-  import { animate } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
-  const late = !document.documentElement.classList.contains("js");
-  window.__motionReady = true;
-  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Reveal anything that has reached the screen, including whatever a fast scroll skipped past
-  try {
-    const pending = new Set(late ? [] : document.querySelectorAll(".reveal"));
-    const show = (el) => {
-      pending.delete(el);
-      if (calm) { animate(el, { opacity: 1 }, { duration: 0.25 }); return; }
-      animate(el, { opacity: [0, 1], y: [14, 0] }, { type: "spring", bounce: 0, duration: 0.7 });
-    };
-    const sweep = () => { for (const el of [...pending]) if (el.getBoundingClientRect().top < innerHeight * 0.92) show(el); };
-    let queued = false;
-    const onScroll = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; sweep(); if (!pending.size) removeEventListener("scroll", onScroll); }, 60); };
-    addEventListener("scroll", onScroll, { passive: true });
-    addEventListener("resize", onScroll);
-    sweep();
-  } catch (err) { document.documentElement.classList.remove("js"); }
+<script>
+  // Motion, plain JS (works with no library). Opening is CSS; this marks it done, runs scenes, ambient, response.
+  (function () {
+    'use strict';
+    window.__cc = 1;
+    var D = document, root = D.documentElement;
+    var $ = function (s, c) { return (c || D).querySelector(s); };
+    var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
+    var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SCENE = matchMedia('(min-width: 1024px) and (pointer: fine)');
+    var hasIO = 'IntersectionObserver' in window;
+    var EASE = 'cubic-bezier(.16,1,.3,1)';
+    var small = function () { return matchMedia('(max-width: 767px), (pointer: coarse)').matches; };
+
+    /* ---- the opening hands over: data-opening="done" once every finite animation has ended ---- */
+    function opened() {
+      if (opened.ran) return;
+      opened.ran = 1;
+      root.setAttribute('data-opening', 'done');
+      (window.requestIdleCallback || function (f) { return setTimeout(f, 200); })(specks);
+    }
+    if (RM) opened();
+    else {
+      var fb = setTimeout(opened, 2800);
+      requestAnimationFrame(function () {
+        var list = (D.getAnimations ? D.getAnimations() : []).filter(function (a) {
+          try { return a.effect.getComputedTiming().iterations !== Infinity; } catch (e) { return true; }
+        });
+        if (!list.length) { clearTimeout(fb); opened(); return; }
+        Promise.all(list.map(function (a) { return a.finished.catch(function () {}); })).then(function () { clearTimeout(fb); opened(); });
+      });
+    }
+
+    /* ---- scroll scenes: each section's own way (CSS), triggered once ---- */
+    function countUp(el) {
+      var to = +el.getAttribute('data-count'), from = Math.floor(to * 0.35), t0 = 0;
+      if (RM || !to) return;
+      el.textContent = from;
+      var step = function (now) {
+        if (!t0) t0 = now;
+        var p = Math.min(1, (now - t0) / 1900), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * e);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = to;
+      };
+      requestAnimationFrame(step);
+    }
+    function show(el) {
+      if (el.classList.contains('in')) return;
+      el.classList.add('in');
+      $$('[data-count]', el).forEach(countUp);
+    }
+    var pending = $$('.rv');
+    if (!hasIO || RM) pending.forEach(show);
+    else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      pending.forEach(function (el) { io.observe(el); });
+      // second net for a fast flick that skips a line before its first intersection is reported
+      var sweepT = 0;
+      var sweep = function () {
+        sweepT = 0;
+        pending = pending.filter(function (el) {
+          if (el.classList.contains('in')) return false;
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || (r.height && r.top < innerHeight * 0.9)) { show(el); io.unobserve(el); return false; }
+          return true;
+        });
+        if (!pending.length) removeEventListener('scroll', onScroll);
+      };
+      var onScroll = function () { if (!sweepT) sweepT = setTimeout(sweep, 160); };
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    /* ---- ambient: soft light flecks drifting over the photo's green bokeh, canvas at DPR 1, 30 fps,
+            paused off screen and in a hidden tab, thinned (never switched off) when frames run slow ---- */
+    function specks() {
+      var cv = $('#amb');
+      if (!cv || specks.on || RM || !cv.getContext) return;
+      specks.on = 1;
+      var ctx = cv.getContext('2d');
+      var N = small() ? 26 : 60, DENS = [1, 0.6, 0.36, 0.2], lv = 0;
+      var W = 1, H = 1, ps = [], vis = true, raf = 0, last = 0, prev = 0, frames = 0, slow = 0;
+      function size() {
+        var r = cv.parentNode.getBoundingClientRect();
+        W = cv.width = Math.max(1, Math.round(r.width)); H = cv.height = Math.max(1, Math.round(r.height));
+      }
+      function spawn(p, any) {
+        p.x = Math.random() * W; p.y = any ? Math.random() * H : -6;
+        p.r = 1.5 + Math.random() * 2; p.v = 0.006 + Math.random() * 0.016; p.o = Math.random() * 6; p.s = 2000 + Math.random() * 3000;
+        p.a = 0.15 + Math.random() * 0.15;
+      }
+      size();
+      for (var i = 0; i < N; i++) { var p = {}; spawn(p, true); ps.push(p); }
+      function draw(now) {
+        raf = requestAnimationFrame(draw);
+        var gap = prev ? now - prev : 16.7; prev = now;
+        frames++; if (gap > 24) slow++;
+        if (frames >= 90) { if (slow > 45 && lv < DENS.length - 1) lv++; frames = 0; slow = 0; }
+        if (now - last < 32) return;
+        var dt = last ? now - last : 33; last = now;
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#fff';
+        var n = Math.floor(N * DENS[lv]);
+        for (var i = 0; i < n; i++) {
+          var p = ps[i];
+          p.y += p.v * dt; p.x += Math.sin(now / p.s + p.o) * 0.07;
+          if (p.y > H + 6) spawn(p, false);
+          ctx.globalAlpha = p.a * (0.6 + 0.4 * Math.sin(now / 1700 + p.o));
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+        }
+      }
+      function run() { if (!raf && vis && !D.hidden) { prev = 0; last = 0; raf = requestAnimationFrame(draw); } }
+      function halt() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+      if (hasIO) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; vis ? run() : halt(); }).observe(cv.parentNode);
+      D.addEventListener('visibilitychange', function () { D.hidden ? halt() : run(); });
+      var rz = 0; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(size, 250); });
+      window.__motes = { level: function () { return lv; }, count: function () { return Math.floor(N * DENS[lv]); } };
+      run();
+    }
+
+    /* ---- signature: the kolam answers each thing you write: the dot pulses as its lobe closes ---- */
+    var occ = $('#occasion'), date = $('#date'), place = $('#place');
+    var dots = [$('#d1'), $('#d2'), $('#d3')], had = [false, false, false];
+    function pulse() {
+      var now = [!!occ.value, !!date.value, !!place.value.trim()];
+      now.forEach(function (f, i) {
+        if (f && !had[i] && !RM && dots[i] && dots[i].animate) dots[i].animate([{ transform: 'scale(1)' }, { transform: 'scale(2.1)', offset: 0.4 }, { transform: 'scale(1)' }], { duration: 520, easing: EASE });
+      });
+      had = now;
+    }
+    occ.addEventListener('change', pulse); date.addEventListener('change', pulse); date.addEventListener('input', pulse); place.addEventListener('input', pulse);
+    var msg = $('#msg');
+    var last = '';
+    function msgIn() {
+      if (RM || !msg.animate || msg.textContent === last) return;
+      last = msg.textContent;
+      msg.animate([{ opacity: 0.2, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: EASE });
+    }
+    [occ, date, place].forEach(function (el) { el.addEventListener('input', msgIn); el.addEventListener('change', msgIn); });
+
+    /* ---- response: the main actions end with an ink ring spreading out (the link opens at once) ---- */
+    function ring(btn) {
+      if (RM || !btn.animate) return;
+      var r = btn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      [0, 110].forEach(function (delay) {
+        var g = D.createElement('i'); g.className = 'ring'; g.setAttribute('aria-hidden', 'true'); D.body.appendChild(g);
+        var a = g.animate([
+          { transform: 'translate(' + cx + 'px,' + cy + 'px) scale(.3)', opacity: 0.9 },
+          { transform: 'translate(' + cx + 'px,' + cy + 'px) scale(' + Math.min(7, r.width / 40 + 1.5).toFixed(1) + ')', opacity: 0 }
+        ], { duration: 640, delay: delay, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'both' });
+        a.onfinish = function () { g.remove(); };
+      });
+    }
+    ['wa1', 'wa2', 'wa3'].forEach(function (id) { var a = D.getElementById(id); if (a) a.addEventListener('click', function () { ring(a); }); });
+
+    /* ---- desktop only, after load: GSAP + ScrollTrigger drift the plates at their own speeds ---- */
+    var LIBS = [
+      ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js', 'sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc'],
+      ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js', 'sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh']
+    ];
+    function drift() {
+      try {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.matchMedia().add('(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)', function () {
+          [['.plate.a', -3], ['.plate.b', -8], ['.plate.c', -5]].forEach(function (c) {
+            var el = $(c[0]); if (!el) return;
+            gsap.to(el, { yPercent: c[1], ease: 'none', scrollTrigger: { trigger: '.plates', start: 'top bottom', end: 'bottom top', scrub: true } });
+          });
+        });
+      } catch (e) { /* the page is complete without it */ }
+    }
+    function loadLibs() {
+      if (loadLibs.on || RM || !SCENE.matches) return;
+      loadLibs.on = 1;
+      (function next(i) {
+        if (i >= LIBS.length) { drift(); return; }
+        var s = D.createElement('script');
+        s.src = LIBS[i][0]; s.integrity = LIBS[i][1]; s.crossOrigin = 'anonymous';
+        s.onload = function () { next(i + 1); };
+        D.body.appendChild(s);
+      })(0);
+    }
+    if (D.readyState === 'complete') loadLibs(); else addEventListener('load', loadLibs);
+  })();
 </script>
 </body>
 </html>
