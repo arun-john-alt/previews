@@ -8,6 +8,11 @@
 <title>Surprise Cakes · Tatabad, Coimbatore</title>
 <meta name="description" content="Custom cakes for birthdays, weddings and anniversaries. Tatabad, Coimbatore. Open 24 hours.">
 <meta name="theme-color" content="#3a1d12">
+<script>
+/* Below-the-fold bubbles start hidden only while the script that reveals them is expected; a 2.5 s failsafe shows everything. */
+document.documentElement.classList.add("js");
+setTimeout(function () { if (!window.__rv) document.documentElement.classList.add("rv-fail"); }, 2500);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@800&family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -122,7 +127,7 @@
   .tile[aria-pressed=true] .tick { opacity: 1; }
 
   /* The visitor's unsent message */
-  .draft { width: min(90%, 460px); background: transparent !important; color: var(--cocoa) !important; border: 2px dashed var(--cocoa); box-shadow: none; padding: 12px 14px 14px; }
+  .draft { width: min(90%, 460px); background: var(--sun) !important; color: var(--cocoa) !important; border: 2px dashed var(--cocoa); box-shadow: none; padding: 12px 14px 14px; }
   .draft .lbl { display: block; font: 800 16px/1.2 var(--name); margin-bottom: 6px; }
   .draft .text { font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; }
   .draft .text q { quotes: none; font-weight: 700; }
@@ -176,14 +181,85 @@
     .profile a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 3px; }
   }
 
-  /* Bubbles arrive from their own side. The first screen's arrive in plain CSS, so they never wait on the
-     network; the rest wait for Motion and show at once if it never loads. */
-  @keyframes arrive-l { from { opacity: 0; transform: translateX(-10px) scale(.96); } }
-  @keyframes arrive-r { from { opacity: 0; transform: translateX(10px) scale(.96); } }
-  .js .msg.now > * { transform-origin: 0 100%; animation: arrive-l .32s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
-  .js .msg.me.now > * { transform-origin: 100% 100%; animation-name: arrive-r; }
-  .js .msg.later > * { opacity: 0; }
-  @media (prefers-reduced-motion: reduce) { .js .msg > * { opacity: 1; animation: none; } * { transition: none !important; } }
+  /* ---------- Motion. The base styles above are the end state; these keyframes only play from the start,
+     so with scripts off, reduced motion, or a failed load everything is simply there. No library, no CDN. ---------- */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  a, button, label { -webkit-tap-highlight-color: transparent; }
+  .preview { transition: transform .14s var(--ease); }
+  .preview:active { transform: scale(.98); }
+  .end a:active, .profile a:active { opacity: .6; }
+
+  @keyframes arrive-l { from { opacity: 0; transform: translateX(-12px) scale(.96); } }
+  @keyframes arrive-r { from { opacity: 0; transform: translateX(12px) scale(.96); } }
+  @keyframes badge { from { opacity: 0; transform: rotate(-120deg) scale(.5); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes unwrap { from { clip-path: inset(88% 0 0 0 round 18px); } to { clip-path: inset(0 0 0 0 round 18px); } }
+  @keyframes settle { from { transform: scale(1.18); } }
+  @keyframes pop { from { opacity: 0; transform: scale(.82); } }
+  @keyframes dock { from { transform: translateY(110%); } }
+  @keyframes deal { from { opacity: 0; transform: translateY(18px) rotate(var(--r, -3deg)) scale(.94); } }
+  @keyframes stick { from { opacity: 0; transform: rotate(-7deg) scale(1.3); } }
+  @keyframes typing { 0% { opacity: 0; transform: scale(.8); } 14%, 78% { opacity: 1; transform: none; } 100% { opacity: 0; transform: scale(.92); } }
+  @keyframes dot { 0%, 100% { transform: none; } 35% { transform: translateY(-5px); } }
+  @keyframes bump { 40% { transform: scale(1.018); } }
+  @keyframes roll { from { opacity: 0; transform: translateY(7px); } }
+  @keyframes ring { from { opacity: .7; transform: scale(.7); } to { opacity: 0; transform: scale(2.1); } }
+
+  /* The opening (about 2.2 s): the logo spins into the header, the KitKat cake is unwrapped, the shop "types", the
+     greeting lands, the occasion chips pop in one by one and the send bar docks. Plain CSS from first paint. */
+  .top .avatar { animation: badge .75s var(--out) backwards; }
+  .top h1 { animation: rise .6s var(--out) .12s backwards; }
+  .top .status { animation: rise .6s var(--out) .22s backwards; }
+  .top .round { animation: pop .5s var(--out) .35s backwards; }
+  #g1 .photo { animation: unwrap .95s var(--out) .15s backwards; }
+  #g1 .photo img { animation: settle 1.5s var(--out) .15s backwards; }
+  #g1 .photo figcaption { animation: rise .5s var(--out) .9s backwards; }
+  .stack { display: grid; justify-items: start; }
+  .stack > * { grid-area: 1 / 1; }
+  .typing { align-self: start; display: flex; gap: 5px; padding: 15px 16px; border-radius: 18px; background: var(--paper); box-shadow: 0 1px 2px rgba(58, 29, 18, .18); opacity: 0; pointer-events: none; animation: typing .7s var(--out) .4s backwards; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-soft); animation: dot .5s ease-in-out .45s 2; }
+  .typing i:nth-child(2) { animation-delay: .55s; }
+  .typing i:nth-child(3) { animation-delay: .65s; }
+  #g1 .greet { transform-origin: 0 100%; animation: arrive-l .45s var(--out) 1.0s backwards; }
+  #g2 .chip { animation: pop .45s var(--out) calc(1.1s + var(--k, 0) * 60ms) backwards; }
+  #g2 .chip:nth-child(2) { --k: 1; } #g2 .chip:nth-child(3) { --k: 2; }
+  .composer { animation: dock .55s var(--out) .6s backwards; }
+  /* Any other bubble already on the first screen waits for the opening, then arrives from its own side */
+  .msg.now > * { transform-origin: 0 100%; animation: arrive-l .45s var(--out) var(--d, 1.9s) backwards; }
+  .msg.me.now > * { transform-origin: 100% 100%; animation-name: arrive-r; }
+
+  /* The status dot is the one ambient bit in the header: a slow ring, off when the tab is hidden */
+  .dot { position: relative; }
+  .dot::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--leaf); opacity: 0; animation: ring 2.8s ease-out 2.4s infinite; }
+
+  /* Scroll scenes, one way for each kind of thing. Hidden only once the script has set up (.rv) and never again. */
+  .js:not(.rv-fail) .msg:not(#g1):not(#g2):not(.now):not(.in) > *, .js:not(.rv-fail) .stamp:not(.in) { opacity: 0; }
+  .msg.later.in > * { transform-origin: 0 100%; animation: arrive-l .5s var(--out) calc(var(--i, 0) * 70ms) backwards; }
+  .msg.me.later.in > * { transform-origin: 100% 100%; animation-name: arrive-r; }
+  .msg.later.in > .photo { animation: unwrap .9s var(--out) backwards; }
+  .msg.later.in .photo img { animation: settle 1.3s var(--out) backwards; }
+  .msg.later.in > .chips { animation: none; }
+  .msg.later.in .chip { animation: pop .4s var(--out) calc(var(--k, 0) * 70ms) backwards; }
+  .msg.later.in .chip:nth-child(2) { --k: 1; } .msg.later.in .chip:nth-child(3) { --k: 2; }
+  .msg.later.in .tile { animation: deal .6s var(--out) calc(.2s + var(--k, 0) * 90ms) backwards; }
+  .tile:nth-child(1) { --k: 0; --r: -3deg; } .tile:nth-child(2) { --k: 1; --r: 3deg; } .tile:nth-child(3) { --k: 2; --r: 3deg; } .tile:nth-child(4) { --k: 3; --r: -3deg; }
+  .stamp.later.in { animation: stick .6s var(--out) backwards; }
+  .instant, .instant * { animation: none !important; }
+  .cnt { display: inline-block; text-align: left; font-variant-numeric: tabular-nums; }
+
+  /* Replies you make: the name bumps as you type, the draft and the bar roll, a picked cake ticks */
+  .field.name.hit { animation: bump .2s var(--ease); }
+  .draft.flash { animation: bump .3s var(--ease); }
+  #preview-text.roll { display: block; animation: roll .22s var(--ease); }
+  .tile[aria-pressed=true] .tick { animation: pop .3s var(--ease); }
+
+  /* The sprinkles falling behind the conversation: one canvas, 30 fps, faint */
+  #sprinkles { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s linear; }
+  #sprinkles.on { opacity: .2; }
+  .app { position: relative; z-index: 1; }
+  .sp { position: fixed; z-index: 60; width: 7px; height: 11px; border-radius: 3px; pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .typing, #sprinkles { display: none; } }
 </style>
 </head>
 <body>
@@ -202,6 +278,8 @@
   </div>
 </header>
 
+<canvas id="sprinkles" aria-hidden="true"></canvas>
+
 <div class="app">
   <aside class="profile" aria-label="About the shop">
     <img src="assets/logo.jpg" alt="" width="132" height="132">
@@ -216,15 +294,18 @@
   </aside>
 
   <main id="order">
-    <div class="msg">
+    <div class="msg" id="g1">
       <figure class="b photo wide">
-        <img src="assets/cake-kitkat-wide.jpg" alt="Round chocolate cake walled with KitKat bars and a red ribbon, topped with gems, chocolate balls, wafer rolls, a gold Happy Birthday topper and the name Aiya" width="800" height="640">
+        <img src="assets/cake-kitkat-wide.jpg" srcset="assets/cake-kitkat-wide-560.jpg 560w, assets/cake-kitkat-wide.jpg 800w" sizes="(max-width: 700px) 300px, 400px" alt="Round chocolate cake walled with KitKat bars and a red ribbon, topped with gems, chocolate balls, wafer rolls, a gold Happy Birthday topper and the name Aiya" width="800" height="640" fetchpriority="high">
         <figcaption>Aiya's cake: a KitKat wall, gems, and the name right on top.</figcaption>
       </figure>
-      <div class="b"><p>Hi! Custom cakes for birthdays, weddings and anniversaries. What's yours for?</p></div>
+      <div class="stack">
+        <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="b greet"><p>Hi! Custom cakes for birthdays, weddings and anniversaries. What's yours for?</p></div>
+      </div>
     </div>
 
-    <div class="msg me">
+    <div class="msg me" id="g2">
       <div class="chips" role="radiogroup" aria-label="What's the cake for?">
         <label class="chip"><input type="radio" name="occ" value="birthday"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Birthday</label>
         <label class="chip"><input type="radio" name="occ" value="wedding"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Wedding</label>
@@ -321,8 +402,8 @@
       </div>
       <div class="b"><p>We're open 24 hours, every day of the week. Right now it's <time id="now">late</time> in Coimbatore.</p></div>
       <div class="b">
-        <p class="big"><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8L12 2.8Z"/></svg>5.0 on Google</p>
-        <p>From 142 reviews.</p>
+        <p class="big"><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8L12 2.8Z"/></svg><span class="cnt" data-to="5" data-dec="1">5.0</span> on Google</p>
+        <p>From <span class="cnt" data-to="142">142</span> reviews.</p>
         <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&amp;query=Surprise%20Cakes%20Tatabad%20Coimbatore&amp;query_place_id=ChIJ51dmOsJYqDsR2P064RbSaa0" target="_blank" rel="noopener">Read the reviews</a></div>
       </div>
       <div class="b">
@@ -367,6 +448,9 @@
     var n = nameEl.value.length;
     nameEl.style.fontSize = n > 26 ? "18px" : n > 18 ? "22px" : n > 12 ? "27px" : "";
   }
+  // A small answer to every edit: replay a one-shot CSS animation (the CSS switches it off for reduced motion)
+  var ready = false;
+  function kick(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
   function build() {
     var occ = picked("occ"), get = picked("get");
     var name = nameEl.value.trim(), day = niceDate(dateEl.value), theme = themeEl.value.trim();
@@ -395,13 +479,14 @@
     $("f-name").classList.toggle("done", !!name);
     $("f-date").classList.toggle("done", !!day);
     $("f-theme").classList.toggle("done", !!theme);
+    if (ready) { kick($("draft"), "flash"); kick(pv, "roll"); }
   }
 
   // No cake can be ordered for a day that has passed
   var t = new Date(), pad = function (n) { return (n < 10 ? "0" : "") + n; };
   dateEl.min = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
 
-  nameEl.addEventListener("input", function () { fitName(); build(); });
+  nameEl.addEventListener("input", function () { fitName(); build(); kick($("f-name"), "hit"); });
   [dateEl, themeEl].forEach(function (el) { el.addEventListener("input", build); el.addEventListener("change", build); });
   document.querySelectorAll('input[type=radio]').forEach(function (r) { r.addEventListener("change", build); });
   themeEl.addEventListener("input", function () {
@@ -427,60 +512,163 @@
   }
   tick(); setInterval(tick, 30000);
   build();
+  ready = true;
 })();
 </script>
 
 <script>
-/* Bubbles already on the first screen arrive in CSS, one after another. Bubbles further down are hidden
-   only while Motion is expected; a 2.5 s failsafe shows everything if it never loads. */
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  (function () {
-    var root = document.documentElement, k = 0;
-    root.classList.add("js");
-    document.querySelectorAll(".msg").forEach(function (g) {
-      if (g.getBoundingClientRect().top < innerHeight) {
-        g.classList.add("now");
-        Array.prototype.forEach.call(g.children, function (c) { c.style.setProperty("--i", Math.min(k++, 8)); });
+/* Motion, in plain script: no library, no CDN. The opening itself is CSS; this marks when it ends, sets up the
+   scroll scenes, the count-ups and the closing burst. If anything throws, everything is shown. */
+(function () {
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function done() {
+    root.dataset.opening = "done";
+    document.dispatchEvent(new Event("opening-done"));
+  }
+  if (reduce) { root.classList.add("rv-fail"); done(); return; }
+  try {
+    setTimeout(done, 2300);
+
+    // Bubbles already on the first screen arrive after the opening; the rest wait to be scrolled to.
+    var k = 0;
+    Array.prototype.forEach.call(document.querySelectorAll(".msg, .stamp"), function (g) {
+      if (g.id === "g1" || g.id === "g2") return;
+      if (g.classList.contains("msg") && g.getBoundingClientRect().top < innerHeight) {
+        g.classList.add("now"); g.style.setProperty("--d", (1.2 + 0.08 * k++).toFixed(2) + "s");
       } else {
         g.classList.add("later");
       }
     });
-    setTimeout(function () { if (!window.__motionReady) root.classList.remove("js"); }, 2500);
-  })();
-}
+
+    function count(el) {
+      el.style.minWidth = el.getBoundingClientRect().width + "px";
+      var to = +el.getAttribute("data-to"), dec = +el.getAttribute("data-dec") || 0;
+      var from = to * 0.35, t0 = performance.now(), dur = 1900;
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = (from + (to - from) * e).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = to.toFixed(dec);
+      })(t0);
+    }
+    function show(el, instant) {
+      if (el.classList.contains("in")) return;
+      var i = 0;
+      Array.prototype.forEach.call(el.children, function (c) { c.style.setProperty("--i", i++); });
+      if (instant) el.classList.add("instant");
+      el.classList.add("in");
+    }
+    var pending = Array.prototype.slice.call(document.querySelectorAll(".later"));
+    // each count-up plays when its own bubble is reached, not when the long group it sits in first shows
+    if ("IntersectionObserver" in window) {
+      var cio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.querySelectorAll('.cnt').forEach(count); cio.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      document.querySelectorAll('.cnt').forEach(function (c) { cio.observe(c.closest('.b') || c); });
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { show(e.target, false); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      pending.forEach(function (el) { io.observe(el); });
+    }
+    // A fast fling can skip a group; one already scrolled past is shown at once. Without the observer, all of them.
+    var queued = false;
+    function sweep() {
+      queued = false;
+      pending.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom < 0) show(el, true);
+        else if (!("IntersectionObserver" in window) && r.top < innerHeight * 0.92) show(el, false);
+      });
+    }
+    addEventListener("scroll", function () { if (!queued) { queued = true; requestAnimationFrame(sweep); } }, { passive: true });
+    window.__rv = 1;
+
+    // The closing moment on the send buttons: a few sprinkles fly from the button. The link opens as usual.
+    var COL = ["#ff9ebb", "#a8355d", "#ffffff", "#3fa34d", "#3a1d12", "#ffde59"];
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest(".go, .send") : null;
+      if (!b || !b.animate) return;
+      var r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      for (var n = 0; n < 14; n++) {
+        var s = document.createElement("span");
+        s.className = "sp";
+        s.style.left = cx + "px"; s.style.top = cy + "px";
+        s.style.background = COL[n % COL.length];
+        document.body.appendChild(s);
+        var a = (Math.PI * 2 * n) / 14 + Math.random() * 0.4, d = 50 + Math.random() * 60;
+        var an = s.animate([
+          { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+          { transform: "translate(" + Math.cos(a) * d + "px," + (Math.sin(a) * d - 20) + "px) rotate(" + (n * 70) + "deg)", opacity: 1, offset: 0.55 },
+          { transform: "translate(" + Math.cos(a) * d * 1.15 + "px," + (Math.sin(a) * d + 50) + "px) rotate(" + (n * 120) + "deg)", opacity: 0 }
+        ], { duration: 800, easing: "cubic-bezier(.23,1,.32,1)" });
+        an.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+      }
+    }, { passive: true });
+  } catch (err) {
+    root.classList.add("rv-fail");
+  }
+})();
 </script>
-<script type="module">
-import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
-const root = document.documentElement;
-if (root.classList.contains("js")) {
-  window.__motionReady = true;
-  const pending = new Set(document.querySelectorAll(".msg.later"));
-  // A group arrives from its own side; one already scrolled past (a fast fling, the jump to the draft)
-  // is shown at once, so nothing can stay hidden.
-  const reveal = (g, instant) => {
-    if (!pending.delete(g)) return;
-    const mine = g.classList.contains("me");
-    const kids = Array.from(g.children);
-    if (instant) { kids.forEach((k) => { k.style.opacity = "1"; }); return; }
-    kids.forEach((k) => { k.style.transformOrigin = mine ? "100% 100%" : "0% 100%"; });
-    animate(kids, { opacity: [0, 1], x: [mine ? 10 : -10, 0], scale: [0.96, 1] },
-      { duration: 0.32, delay: stagger(0.07), ease: [0.23, 1, 0.32, 1] });
-  };
-  const sweep = () => {
-    pending.forEach((g) => {
-      const r = g.getBoundingClientRect();
-      if (r.top < innerHeight * 0.92) reveal(g, r.bottom < 0);
-    });
-  };
-  pending.forEach((g) => inView(g, () => reveal(g, false), { amount: 0.15 }));
-  let queued = false;
-  addEventListener("scroll", () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => { queued = false; sweep(); });
-  }, { passive: true });
-  sweep();
-}
+<script>
+/* The ambient layer: sprinkles drifting behind the conversation. One canvas at device-pixel-ratio 1, 30 frames a
+   second, 28 pieces on a phone (60 on a laptop), paused when the tab is hidden or the canvas is off screen, and a
+   watchdog that thins it (never switches it off) if frames get slow. Starts after the opening. */
+(function () {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var cv = document.getElementById("sprinkles"), ctx = cv && cv.getContext && cv.getContext("2d");
+  if (!ctx) return;
+  var big = matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+  var MAX = big ? 60 : 28, STEPS = [1, 0.6, 0.36, 0.2], step = 0;
+  var COL = ["#ff9ebb", "#a8355d", "#ffffff", "#3fa34d", "#3a1d12"];
+  var W = 0, H = 0, ps = [], running = false, onScreen = true, last = 0, work = [], slow = 0;
+  function size() {
+    var w = Math.min(innerWidth, 1600), h = Math.min(innerHeight, 1000);
+    if (Math.abs(w - W) > 1 || Math.abs(h - H) > 150) { W = cv.width = w; H = cv.height = h; }
+  }
+  for (var i = 0; i < MAX; i++) {
+    ps.push({ x: Math.random(), y: Math.random(), v: 0.06 + Math.random() * 0.08, dx: (Math.random() - 0.5) * 0.02,
+      w: 4 + Math.random() * 3, h: 8 + Math.random() * 5, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 1.6,
+      c: COL[i % COL.length] });
+  }
+  function frame(now) {
+    if (!running) return;
+    requestAnimationFrame(frame);
+    if (now - last < 33) return;
+    var dt = Math.min(0.1, (now - last) / 1000); last = now;
+    var t0 = performance.now(), n = Math.floor(MAX * STEPS[step]);
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < n; i++) {
+      var p = ps[i];
+      p.y += p.v * dt; p.x += p.dx * dt; p.r += p.vr * dt;
+      if (p.y > 1.05) { p.y = -0.05; p.x = Math.random(); }
+      ctx.save();
+      ctx.translate(p.x * W, p.y * H); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    // Watchdog: if more than 45 of the last 90 frames were slow, use fewer pieces
+    work.push(performance.now() - t0 > 24 || dt > 0.066 ? 1 : 0); slow += work[work.length - 1];
+    if (work.length > 90) slow -= work.shift();
+    if (work.length === 90 && slow > 45 && step < STEPS.length - 1) { step++; work = []; slow = 0; }
+  }
+  function sync() {
+    var want = onScreen && !document.hidden;
+    if (want && !running) { running = true; last = 0; requestAnimationFrame(frame); }
+    else if (!want) running = false;
+  }
+  function start() {
+    size(); cv.classList.add("on");
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; sync(); }).observe(cv);
+    document.addEventListener("visibilitychange", sync);
+    addEventListener("resize", size);
+    sync();
+  }
+  function go() { if (window.requestIdleCallback) requestIdleCallback(function () { start(); }); else setTimeout(start, 200); }
+  if (document.documentElement.dataset.opening === "done") go();
+  else document.addEventListener("opening-done", go, { once: true });
+})();
 </script>
 </body>
 </html>
