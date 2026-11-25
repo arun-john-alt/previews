@@ -10,11 +10,8 @@
 <meta name="theme-color" content="#8a3325">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Forum&family=Proza+Libre:wght@400;500;700&display=swap" rel="stylesheet">
-<script>
-document.documentElement.classList.add('js');
-setTimeout(function () { if (!window.__nc) document.documentElement.classList.add('rv-fail'); }, 2500);
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   /* A red-oxide floor at a Chennai doorway with one sikku kolam drawn on it in rice flour.
      Rice-white for line and type; turmeric only on the one live action. */
@@ -90,78 +87,13 @@ setTimeout(function () { if (!window.__nc) document.documentElement.classList.ad
 
   footer { background: var(--oxide-deep); border-top: 1px solid var(--rule); padding: 18px 20px calc(24px + env(safe-area-inset-bottom)); text-align: center; font-size: 14px; color: var(--rice-2); }
 
-  /* ================= Motion (25 Nov 2026) =================
-     The opening, about 2 s from first paint, all CSS: the kolam is drawn (dots first, then the line, the way it is done at
-     dawn), the name rises from its mask, then the place, rating and the one action. */
-  :root { --out: cubic-bezier(.16, 1, .3, 1); }
-  html { scroll-padding-top: 60px; }
-
-  /* The name bar: solid, always top-left. No logo file exists for this business (the Instagram match is a different
-     company), so the round badge is a plain N monogram in rice-white on the oxide floor. */
-  .namebar { position: sticky; top: 0; z-index: 30; background: var(--oxide-deep); border-bottom: 1px solid var(--rule); }
-  .namebar .in { display: flex; align-items: center; max-width: 760px; margin: 0 auto; padding: 4px 14px; min-height: 52px; }
-  .brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding-right: 8px; text-decoration: none; color: var(--rice); -webkit-tap-highlight-color: transparent; transition: transform .14s var(--ease); }
-  .brand:active { transform: scale(.97); }
-  .badge { width: 38px; height: 38px; flex: none; border-radius: 50%; background: var(--rice); color: var(--oxide-deep); display: grid; place-items: center; font: 400 24px/1 var(--name); padding-bottom: 2px; box-shadow: 0 0 0 2px var(--oxide-deep), 0 0 0 3.5px var(--rice-2); }
-  .brand-n { font: 400 21px/1 var(--name); letter-spacing: .12em; }
-  .brand-s { display: none; font: 500 14px/1 var(--text); letter-spacing: .04em; color: var(--rice-2); padding-left: 12px; border-left: 1px solid var(--rule); }
-  @media (min-width: 640px) { .brand-s { display: inline; } }
-
-  .kolam-btn { display: block; margin: 0 auto calc(var(--u) * 3); padding: 0; border: 0; background: none; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; transition: transform .14s var(--ease); }
-  .kolam-btn:active { transform: scale(.98); }
-  .kolam-btn .kolam { margin: 0 auto; }
-  .kolam .dots circle { transform-box: fill-box; transform-origin: center; }
-  .tapnote { margin: calc(var(--u) * -2) 0 calc(var(--u) * 2); font-size: 14px; letter-spacing: .08em; color: var(--rice-2); }
-
-  .mk { display: inline-block; overflow: hidden; vertical-align: top; padding: .08em .02em 0; margin: -.08em -.02em 0; }
-  .mk i { display: block; font-style: normal; }
-  .call:active, dd a:active { transform: scale(.97); }
-  .call, dd a { transition: transform .14s var(--ease); -webkit-tap-highlight-color: transparent; }
-
-  /* One ambient layer: grains of rice flour drifting up the page, faint and behind the reading */
-  .flour { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: .17; contain: strict; }
-  .gr { position: absolute; left: var(--x); bottom: -12px; width: var(--w); height: var(--w); border-radius: 50%; background: var(--rice); animation: rise var(--d) linear var(--dl) infinite; will-change: transform; }
-  .flour.thin .gr:nth-child(2n), .flour.thinner .gr:nth-child(n + 4) { display: none; }
-  .hid .gr { animation-play-state: paused; }
-  @keyframes rise { from { transform: translate3d(0, 4vh, 0); } to { transform: translate3d(var(--dx), -108vh, 0); } }
-
-  /* Scroll scenes, each its own: the heading is written, the rows are ruled in and each read-out arrives from its own side,
-     the closing line is chalked, the button is stamped. Text is hidden only until JS says go (never if it fails). */
-  .band dl { border-top-color: transparent; position: relative; }
-  .band dl::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--rule); transform-origin: 0 50%; transition: transform 1s var(--out); }
-  .band h2, .row-hours dd, .row-addr dd, .row-phone dd, .lead { transition: clip-path .9s var(--out); }
-  .js:not(.rv-fail) .sc-band:not(.in) h2 { clip-path: inset(-.2em 100% -.3em -.1em); }
-  .js:not(.rv-fail) .sc-band:not(.in) dl::before { transform: scaleX(0); }
-  .row-hours dd { transition-delay: .15s; } .row-addr dd { transition-delay: .3s; } .row-phone dd { transition-delay: .45s; } .lead { transition-delay: .6s; }
-  .js:not(.rv-fail) .sc-band:not(.in) .row-hours dd { clip-path: inset(-.2em 100% -.2em -.1em); }
-  .js:not(.rv-fail) .sc-band:not(.in) .row-addr dd { clip-path: inset(0 -.1em 100% -.1em); }
-  .js:not(.rv-fail) .sc-band:not(.in) .row-phone dd { clip-path: inset(-.2em -.1em -.2em 100%); }
-  .js:not(.rv-fail) .sc-band:not(.in) .lead { clip-path: inset(-.2em 100% -.3em -.1em); }
-  .band .cta { transition: transform .14s var(--ease), background-color .14s var(--ease), box-shadow .9s var(--out), opacity .5s var(--out); }
-  .js:not(.rv-fail) .sc-band:not(.in) .band-cta, .js:not(.rv-fail) .sc-band:not(.in) .src { opacity: 0; }
-  .js:not(.rv-fail) .sc-band:not(.in) .band-cta { transform: scale(1.06); }
-  .ring { position: fixed; left: 0; top: 0; z-index: 60; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--rice); pointer-events: none; will-change: transform, opacity; }
-
+  /* The kolam is drawn once, dots first, the way it is done at dawn */
   @media (prefers-reduced-motion: no-preference) {
-    .namebar .badge { animation: badgeIn .6s var(--out) .05s backwards; }
-    .namebar .brand-n, .namebar .brand-s { animation: slideR .6s var(--out) .22s backwards; }
-    .kolam .dots circle { animation: dot .45s var(--out) both; }
-    .kolam .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.35s cubic-bezier(.45, .05, .35, 1) .3s forwards; }
-    h1 .n i { animation: up .7s var(--out) .55s backwards; }
-    h1 .e i { animation: up .6s var(--out) .65s backwards; }
-    .place { animation: slideR .6s var(--out) .72s backwards; }
-    .rating { animation: slideR .6s var(--out) .8s backwards; }
-    .hero .cta { animation: stamp .6s var(--out) .88s backwards; }
-    .hero .call { animation: slideR .5s var(--out) .95s backwards; }
-    .tapnote { animation: slideR .5s var(--out) 1s backwards; }
+    .kolam .dots circle { animation: dot .5s var(--ease) both; }
+    .kolam .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s cubic-bezier(.45, .05, .35, 1) .55s forwards; }
   }
-  @keyframes dot { from { opacity: 0; transform: scale(.4); } }
+  @keyframes dot { from { opacity: 0; } }
   @keyframes draw { to { stroke-dashoffset: 0; } }
-  @keyframes badgeIn { from { opacity: 0; transform: rotate(-120deg) scale(.5); } }
-  @keyframes slideR { from { opacity: 0; transform: translateX(-14px); } }
-  @keyframes up { from { transform: translateY(105%); } }
-  @keyframes stamp { from { opacity: 0; transform: scale(1.08); } }
-  @media (prefers-reduced-motion: reduce) { .flour, .ring { display: none; } }
 
   @media (hover: hover) {
     .cta:hover { background: var(--turmeric-press); }
@@ -175,26 +107,14 @@ setTimeout(function () { if (!window.__nc) document.documentElement.classList.ad
     dl > div { display: block; border-bottom: 0; }
     dt { margin-bottom: 4px; }
   }
-  @media (max-height: 600px) { .hero { padding-top: 16px; } .kolam { width: 150px; } .kolam-btn { margin-bottom: 16px; } }
 </style>
 </head>
-<body id="top">
+<body>
 
 <div class="concept" data-concept-banner>Website concept for NANA Events · not the official site</div>
 
-<header class="namebar" data-namebar>
-  <div class="in">
-    <a class="brand" href="#top" aria-label="NANA Events, back to the top">
-      <span class="badge" aria-hidden="true">N</span>
-      <span class="brand-n">NANA EVENTS</span><span class="brand-s">Padi, Chennai</span>
-    </a>
-  </div>
-</header>
-<div class="flour" data-flour aria-hidden="true"></div>
-
-<main id="main">
+<main>
   <header class="hero">
-    <div class="kolam-btn" data-kolam>
     <svg class="kolam" viewBox="0 0 240 200" width="240" height="200" aria-hidden="true">
       <g class="dots">
         <circle cx="40" cy="40" r="3.4"/><circle cx="40" cy="80" r="3.4" style="animation-delay:.03s"/><circle cx="40" cy="120" r="3.4" style="animation-delay:.06s"/><circle cx="40" cy="160" r="3.4" style="animation-delay:.09s"/>
@@ -205,30 +125,28 @@ setTimeout(function () { if (!window.__nc) document.documentElement.classList.ad
       </g>
       <path class="line" pathLength="1" d="M40 60L60 80L80 100L100 120L120 140L140 160L150 170A14.14 14.14 0 0 0 170 170L180 160L200 140L210 130A14.14 14.14 0 0 0 210 110L200 100L180 80L160 60L140 40L130 30A14.14 14.14 0 0 0 110 30L100 40L80 60L60 80L40 100L30 110A14.14 14.14 0 0 0 30 130L40 140L60 160L70 170A14.14 14.14 0 0 0 90 170L100 160L120 140L140 120L160 100L180 80L200 60L210 50A14.14 14.14 0 1 0 190 30L180 40L160 60L140 80L120 100L100 120L80 140L60 160L50 170A14.14 14.14 0 1 1 30 150L40 140L60 120L80 100L100 80L120 60L140 40L150 30A14.14 14.14 0 0 1 170 30L180 40L200 60L210 70A14.14 14.14 0 0 1 210 90L200 100L180 120L160 140L140 160L130 170A14.14 14.14 0 0 1 110 170L100 160L80 140L60 120L40 100L30 90A14.14 14.14 0 0 1 30 70L40 60L60 40L70 30A14.14 14.14 0 0 1 90 30L100 40L120 60L140 80L160 100L180 120L200 140L210 150A14.14 14.14 0 1 1 190 170L180 160L160 140L140 120L120 100L100 80L80 60L60 40L50 30A14.14 14.14 0 1 0 30 50Z"/>
     </svg>
-    </div>
-    <p class="tapnote" aria-hidden="true" hidden>Tap the kolam to draw it again</p>
 
-    <h1><span class="n"><span class="mk"><i>NANA</i></span></span><span class="e"><span class="mk"><i>EVENTS</i></span></span></h1>
+    <h1><span class="n">NANA</span><span class="e">EVENTS</span></h1>
     <p class="place">Event management in Padi,&nbsp;Chennai</p>
     <p class="rating"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.6 2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.3l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8z"/></svg><b>4.8</b> on Google · 273 reviews</p>
 
-    <a class="cta" data-main-action href="https://wa.me/919345052030?text=Hi%20NANA%20Events%2C%20I%27d%20like%20to%20plan%20a%20function.%0ADate%3A%20%0AOccasion%3A%20%0APlace%3A%20%0AGuests%3A%20" target="_blank" rel="noopener" data-wa>
+    <a class="cta" href="https://wa.me/919345052030?text=Hi%20NANA%20Events%2C%20I%27d%20like%20to%20plan%20a%20function.%0ADate%3A%20%0AOccasion%3A%20%0APlace%3A%20%0AGuests%3A%20" target="_blank" rel="noopener" data-wa>
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
       Plan your function on WhatsApp
     </a>
     <a class="call" href="tel:+919345052030">or call&nbsp;<b>+91 93450 52030</b></a>
   </header>
 
-  <section class="band sc-band rv" aria-labelledby="visit">
+  <section class="band" aria-labelledby="visit">
     <div class="in">
       <h2 id="visit">Visit or call</h2>
       <dl>
-        <div class="row-hours"><dt>Hours</dt><dd>Monday to Sunday,<br>9 AM to 5 PM</dd></div>
-        <div class="row-addr"><dt>Address</dt><dd>12/47, 1st St, Elango Nagar, Padi, Chennai, Tamil Nadu 600050<br><a href="https://www.google.com/maps/search/?api=1&amp;query=NANA%20EVENTS%2C%20Elango%20Nagar%2C%20Padi%2C%20Chennai&amp;query_place_id=ChIJbZgwkd1jUjoRJIReXcAg9GI" target="_blank" rel="noopener">Open in Google Maps</a></dd></div>
-        <div class="row-phone"><dt>Phone</dt><dd><a href="tel:+919345052030">+91 93450 52030</a></dd></div>
+        <div><dt>Hours</dt><dd>Monday to Sunday,<br>9 AM to 5 PM</dd></div>
+        <div><dt>Address</dt><dd>12/47, 1st St, Elango Nagar, Padi, Chennai, Tamil Nadu 600050<br><a href="https://www.google.com/maps/search/?api=1&amp;query=NANA%20EVENTS%2C%20Elango%20Nagar%2C%20Padi%2C%20Chennai&amp;query_place_id=ChIJbZgwkd1jUjoRJIReXcAg9GI" target="_blank" rel="noopener">Open in Google Maps</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+919345052030">+91 93450 52030</a></dd></div>
       </dl>
       <p class="lead">Send the date, occasion, place and guest count on WhatsApp.</p>
-      <a class="cta band-cta" href="https://wa.me/919345052030?text=Hi%20NANA%20Events%2C%20I%27d%20like%20to%20plan%20a%20function.%0ADate%3A%20%0AOccasion%3A%20%0APlace%3A%20%0AGuests%3A%20" target="_blank" rel="noopener" data-wa>
+      <a class="cta" href="https://wa.me/919345052030?text=Hi%20NANA%20Events%2C%20I%27d%20like%20to%20plan%20a%20function.%0ADate%3A%20%0AOccasion%3A%20%0APlace%3A%20%0AGuests%3A%20" target="_blank" rel="noopener" data-wa>
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
         Plan your function on WhatsApp
       </a>
@@ -238,129 +156,5 @@ setTimeout(function () { if (!window.__nc) document.documentElement.classList.ad
 </main>
 
 <footer>Website concept for NANA Events · not the official site</footer>
-
-<script>
-  // Plain script, no library. Without it every link works and the page is complete; under reduced motion it only marks the opening done.
-  (function () {
-    "use strict";
-    window.__nc = 1;
-    var D = document, root = D.documentElement;
-    var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
-    var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var small = matchMedia("(max-width: 767px), (pointer: coarse)").matches;
-    var hasIO = "IntersectionObserver" in window;
-
-    /* ---- the opening hands over when its CSS animations have all finished ---- */
-    var done = false, held = [];
-    function opened() {
-      if (done) return;
-      done = true;
-      root.setAttribute("data-opening", "done");
-      flour();
-      held.splice(0).forEach(show);
-    }
-    if (RM) opened();
-    else {
-      var fallback = setTimeout(opened, 2600);
-      requestAnimationFrame(function () {
-        var list = (D.getAnimations ? D.getAnimations() : []).filter(function (a) {
-          var t = a.effect && a.effect.getTiming && a.effect.getTiming();
-          return t && t.iterations !== Infinity;
-        });
-        if (!list.length) { clearTimeout(fallback); opened(); return; }
-        Promise.all(list.map(function (a) { return a.finished.catch(function () {}); })).then(function () { clearTimeout(fallback); opened(); });
-      });
-    }
-
-    /* ---- ambient: rice flour drifting up, one CSS loop per grain; a watchdog thins it, never stops it ---- */
-    function flour() {
-      var box = D.querySelector("[data-flour]");
-      if (!box || flour.on || RM) return;
-      flour.on = 1;
-      var n = small ? 12 : 40, html = "";
-      var rnd = function (a, b) { return a + Math.random() * (b - a); };
-      for (var i = 0; i < n; i++) {
-        var d = rnd(14, 24);
-        html += '<span class="gr" style="--x:' + rnd(0, 99).toFixed(1) + '%;--w:' + rnd(2.5, 5.5).toFixed(1) + 'px;--d:' + d.toFixed(1) +
-          's;--dl:-' + rnd(0, d).toFixed(1) + 's;--dx:' + rnd(-40, 40).toFixed(0) + 'px"></span>';
-      }
-      box.innerHTML = html;
-      var level = 0, raf = 0, last = 0, frames = 0, slow = 0;
-      function frame(now) {
-        raf = 0;
-        var gap = last ? now - last : 16.7; last = now;
-        frames++; if (gap > 24) slow++;
-        if (frames >= 90) {
-          if (slow > 45 && level < 2) { level++; box.classList.toggle("thin", level >= 1); box.classList.toggle("thinner", level >= 2); }
-          frames = 0; slow = 0;
-        }
-        if (level < 2) raf = requestAnimationFrame(frame);
-      }
-      raf = requestAnimationFrame(frame);
-      D.addEventListener("visibilitychange", function () {
-        root.classList.toggle("hid", D.hidden);
-        if (!D.hidden && !raf && level < 2) { last = 0; frames = 0; slow = 0; raf = requestAnimationFrame(frame); }
-      });
-    }
-
-    /* ---- scroll scene: the visit band is written in once, when it comes into view ---- */
-    function show(el) {
-      if (!done && !RM) { held.push(el); return; }
-      el.classList.add("in");
-    }
-    var scenes = $$(".rv");
-    if (!hasIO || RM) scenes.forEach(show);
-    else {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
-      }, { rootMargin: "0px 0px -15% 0px", threshold: 0.1 });
-      scenes.forEach(function (el) { io.observe(el); });
-    }
-
-    /* ---- signature: tap the kolam and it is drawn again, a ripple of dots spreading from the touch ---- */
-    var btn = D.querySelector("[data-kolam]"), svg = btn && btn.querySelector("svg"), line = svg && svg.querySelector(".line");
-    var tapnote = D.querySelector(".tapnote"), busy = 0;
-    if (btn && svg && line && !RM) {
-      // only now is the kolam a live control: without script or under reduced motion it is just a picture
-      btn.setAttribute("role", "button"); btn.tabIndex = 0; btn.setAttribute("aria-label", "Draw the kolam again");
-      if (tapnote) tapnote.hidden = false;
-      btn.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); btn.click(); } });
-    }
-    if (btn && svg && line && !RM) btn.addEventListener("click", function (e) {
-      if (!line.animate || busy) return;
-      busy = 1; setTimeout(function () { busy = 0; }, 900);
-      try { if (navigator.vibrate) navigator.vibrate(10); } catch (x) {}
-      var r = svg.getBoundingClientRect(), k = 240 / r.width;
-      var px = e.clientX ? (e.clientX - r.left) * k : 120, py = e.clientX ? (e.clientY - r.top) * k : 100;
-      $$(".dots circle", svg).forEach(function (c) {
-        var d = Math.hypot(+c.getAttribute("cx") - px, +c.getAttribute("cy") - py);
-        c.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(2.4)", opacity: 1, offset: 0.35 }, { transform: "scale(1)", opacity: 1 }],
-          { duration: 700, delay: Math.min(500, d * 3.2), easing: "cubic-bezier(.23,1,.32,1)" });
-      });
-      line.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 1500, easing: "cubic-bezier(.45,.05,.35,1)" });
-      if (tapnote && !tapnote.hasAttribute("data-used")) { tapnote.setAttribute("data-used", ""); tapnote.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: "forwards" }); }
-    });
-
-    /* ---- the main action's closing moment: a ring of rice-white dots leaves the button as the link opens ---- */
-    $$("[data-wa]").forEach(function (a) {
-      if (RM) return;
-      a.addEventListener("click", function () {
-        var r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-        for (var i = 0; i < 14; i++) {
-          var p = D.createElement("i");
-          p.className = "ring"; p.setAttribute("aria-hidden", "true");
-          D.body.appendChild(p);
-          if (!p.animate) { p.remove(); continue; }
-          var ang = i / 14 * Math.PI * 2, dist = Math.min(r.width * 0.5, 150) + 20, x1 = cx + Math.cos(ang) * dist * 1.1, y1 = cy + Math.sin(ang) * (dist * 0.6);
-          var an = p.animate([
-            { transform: "translate(" + cx + "px," + cy + "px) scale(1)", opacity: 0.95 },
-            { transform: "translate(" + x1 + "px," + y1 + "px) scale(.35)", opacity: 0 }
-          ], { duration: 650, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
-          an.onfinish = (function (el) { return function () { el.remove(); }; })(p);
-        }
-      });
-    });
-  })();
-</script>
 </body>
 </html>
