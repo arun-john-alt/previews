@@ -10,9 +10,12 @@
 <meta name="theme-color" content="#e7ecf2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+document.documentElement.classList.add('js');
+addEventListener('DOMContentLoaded', function () { setTimeout(function () { if (!window.__ne) document.documentElement.classList.add('rv-fail'); }, 2500); });
+(function () { var fit = function () { var h = document.querySelector('h1'); if (h && h.scrollWidth > h.clientWidth + 1) document.documentElement.classList.add('nofit'); }; addEventListener('load', fit); addEventListener('DOMContentLoaded', function () { setTimeout(fit, 3000); }); })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow+Semi+Condensed:wght@500;700&family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* The front door of a Tamil home on function day: neelam-blued limewash, a mango-leaf thoranam
      on the lintel, the open doorway holding the enquiry, and the turmeric threshold as the step that sends it. */
@@ -80,6 +83,7 @@
     font-size: clamp(48px, 15.8vw, 124px); line-height: .86; font-weight: 800; font-family: var(--sign);
     letter-spacing: -.01em; margin: 2px 0 10px; white-space: nowrap;
   }
+  .nofit h1 { white-space: normal; }
   .what { font-size: 17px; line-height: 1.35; color: var(--ink-2); }
   .what b { color: var(--ink); font-weight: 600; }
 
@@ -179,11 +183,103 @@
   @media (prefers-reduced-motion: reduce) {
     .knot .flower, .step a, .threshold { transition: none; }
   }
+
+  /* ================= Motion (25 Nov 2026): the door is dressed as the page opens ================= */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  html { scroll-padding-top: 60px; }
+
+  /* The name bar: solid, always top-left. No logo file exists for this business (the Instagram match is a different
+     company), so the round badge is a plain N monogram in the page's own ink and turmeric. */
+  .namebar { position: sticky; top: 0; z-index: 30; background: var(--lime-deep); border-bottom: 1.5px solid var(--ink); }
+  .namebar .in { display: flex; align-items: center; max-width: 940px; margin: 0 auto; padding: 4px 12px 4px 10px; min-height: 52px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding-right: 8px; text-decoration: none; color: var(--ink); -webkit-tap-highlight-color: transparent; transition: transform .14s var(--ease); }
+  .brand:active { transform: scale(.97); }
+  .badge { width: 38px; height: 38px; flex: none; border-radius: 50%; background: var(--ink); color: var(--turmeric); display: grid; place-items: center; font: 800 25px/1 var(--sign); padding-bottom: 2px; box-shadow: 0 0 0 2px var(--lime-deep), 0 0 0 3.5px var(--turmeric); }
+  .brand-n { font: 800 24px/1 var(--sign); letter-spacing: .03em; }
+  .brand-s { display: none; font: 500 15px/1 var(--say); color: var(--ink-2); padding-left: 12px; margin-left: 2px; border-left: 1px solid var(--rule); }
+  @media (min-width: 640px) { .brand-s { display: inline; } }
+
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em .03em 0; margin: -.06em -.03em 0; }
+  .w i { display: block; font-style: normal; }
+  .lintel { overflow-x: clip; }
+  .leaves { inset: 0 -10px auto -10px; }
+  .knot .bud { transition: opacity .2s var(--ease); }
+  .knot.tied .bud { opacity: 0; }
+  .knot .bud path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .knot svg { transform-origin: 17px 0; }
+
+  /* One layer of marigold petals drifting down the page, faint and behind the reading */
+  .petals { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: .18; contain: strict; }
+  .petals { z-index: -1; }
+  .pt { position: absolute; left: var(--x); top: -24px; width: var(--w); height: calc(var(--w) * 1.5); border-radius: 62% 38% 62% 38%; background: var(--c); animation: fall var(--d) linear var(--dl) infinite; will-change: transform; }
+  .petals.thin .pt:nth-child(2n), .petals.thinner .pt:nth-child(n + 4) { display: none; }
+  .hid .pt, .off .leaves { animation-play-state: paused; }
+  @keyframes fall { from { transform: translate3d(0, -4vh, 0) rotate(0); } to { transform: translate3d(var(--dx), 108vh, 0) rotate(380deg); } }
+  @keyframes sway { from { transform: translateX(-5px) skewX(-1.2deg); } to { transform: translateX(5px) skewX(1.2deg); } }
+
+  /* Scroll scenes: each fact arrives its own way, once. Text is hidden only until JS says go (and never if it fails). */
+  .fact h2 span[data-count] { font-variant-numeric: tabular-nums; }
+  .blooms > * { transition: opacity .5s var(--out), transform .9s var(--out); }
+  .blooms > :nth-child(2) { transition-delay: .09s; } .blooms > :nth-child(3) { transition-delay: .18s; }
+  .blooms > :nth-child(4) { transition-delay: .27s; } .blooms > :nth-child(5) { transition-delay: .36s; }
+  .js:not(.rv-fail) .sc-rate:not(.in) .blooms > * { opacity: 0; transform: rotate(-70deg) scale(.55); }
+  .week li { transform-origin: 50% 0; transition: transform .7s var(--out), opacity .4s var(--out); transition-delay: calc(var(--i, 0) * 70ms); }
+  .js:not(.rv-fail) .sc-hours:not(.in) .week li { transform: perspective(260px) rotateX(-88deg); opacity: 0; }
+  .sc-addr h2, .sc-addr address { transition: clip-path .95s var(--out); }
+  .sc-addr address { transition-delay: .18s; }
+  .links a { transition: transform .14s var(--ease); -webkit-tap-highlight-color: transparent; }
+  .links a:active, .slot:active { transform: scale(.97); }
+  .js:not(.rv-fail) .sc-addr:not(.in) h2, .js:not(.rv-fail) .sc-addr:not(.in) address { clip-path: inset(-.2em 100% -.3em -.1em); }
+
+  /* The send step: a light passes over it once every blank is filled */
+  .step .send { position: relative; overflow: hidden; }
+  .threshold.ready .send::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent); animation: glint .9s var(--out) both; pointer-events: none; }
+  @keyframes glint { from { transform: translateX(-120%); } to { transform: translateX(300%); } }
+  .burst { position: fixed; left: 0; top: 0; z-index: 60; width: 9px; height: 13px; margin: -6px 0 0 -4px; border-radius: 62% 38% 62% 38%; pointer-events: none; will-change: transform, opacity; }
+
+  /* The opening (first paint, CSS only, about 1.9 s): the thoranam unrolls, the strings drop, the doorposts are drawn,
+     the name rises from its mask, the sentence is written, the yellow step comes up. */
+  @media (prefers-reduced-motion: no-preference) {
+    .namebar .badge { animation: badgeIn .6s var(--out) .05s backwards; }
+    .namebar .brand-n, .namebar .brand-s { animation: slideR .6s var(--out) .22s backwards; }
+    .leaves { animation: unroll .75s cubic-bezier(.45, .05, .2, 1) .05s backwards, sway 8s ease-in-out 1.1s infinite alternate; }
+    .knot .bud path { animation: string .5s var(--out) calc(.4s + var(--k, 0) * .07s) backwards; }
+    .knot .bud circle { animation: budIn .45s var(--out) calc(.7s + var(--k, 0) * .07s) backwards; }
+    .door::before, .door::after { transform-origin: 50% 0; animation: post .75s var(--out) .2s backwards; }
+    .welcome { animation: slideR .45s var(--out) .25s backwards; }
+    .w i { animation: rise .6s var(--out) .3s backwards; }
+    .w + .w i { animation-delay: .38s; }
+    .what { animation: slideR .5s var(--out) .4s backwards; }
+    .sentence { animation: slideR .6s var(--out) .45s backwards; }
+    .hint { animation: slideR .45s var(--out) .6s backwards; }
+    .threshold { animation: stepUp .5s var(--out) .4s backwards; }
+    .measure { animation: none !important; }
+  }
+  @keyframes badgeIn { from { opacity: 0; transform: rotate(-120deg) scale(.5); } }
+  @keyframes slideR { from { opacity: 0; transform: translateX(-14px); } }
+  @keyframes unroll { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes string { from { stroke-dashoffset: 1; } }
+  @keyframes budIn { from { opacity: 0; transform: translateY(-8px); } }
+  @keyframes post { from { transform: scaleY(0); } }
+  @keyframes rise { from { transform: translateY(105%); } }
+  @keyframes wipe { from { clip-path: inset(-.3em 100% -.3em -.1em); } to { clip-path: inset(-.3em -.1em -.3em -.1em); } }
+  @keyframes stepUp { from { transform: translateY(100%); } }
+  @media (prefers-reduced-motion: reduce) { .petals, .burst { display: none; } }
 </style>
 </head>
-<body>
+<body id="top">
 
 <div class="concept" data-concept-banner>Website concept for NANA Events · not the official site</div>
+
+<header class="namebar" data-namebar>
+  <div class="in">
+    <a class="brand" href="#top" aria-label="NANA Events, back to the top">
+      <span class="badge" aria-hidden="true">N</span>
+      <span class="brand-n">NANA EVENTS</span><span class="brand-s">Event management · Padi, Chennai</span>
+    </a>
+  </div>
+</header>
+<div class="petals" data-petals aria-hidden="true"></div>
 
 <div class="lintel" aria-hidden="true">
   <div class="leaves"></div>
@@ -198,16 +294,16 @@
       </g>
     </defs>
   </svg>
-  <div class="knot" data-for="occasion" style="--x:13%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
-  <div class="knot" data-for="date" style="--x:37.6%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
-  <div class="knot" data-for="place" style="--x:62.4%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
-  <div class="knot" data-for="guests" style="--x:87%"><svg viewBox="0 0 34 62"><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="occasion" style="--x:13%;--k:0"><svg viewBox="0 0 34 62"><g class="bud"><path pathLength="1" d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><circle cx="17" cy="20" r="3.4" fill="#5b8f2e"/></g><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="date" style="--x:37.6%;--k:1"><svg viewBox="0 0 34 62"><g class="bud"><path pathLength="1" d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><circle cx="17" cy="20" r="3.4" fill="#5b8f2e"/></g><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="place" style="--x:62.4%;--k:2"><svg viewBox="0 0 34 62"><g class="bud"><path pathLength="1" d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><circle cx="17" cy="20" r="3.4" fill="#5b8f2e"/></g><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
+  <div class="knot" data-for="guests" style="--x:87%;--k:3"><svg viewBox="0 0 34 62"><g class="bud"><path pathLength="1" d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><circle cx="17" cy="20" r="3.4" fill="#5b8f2e"/></g><g class="flower"><path d="M17 3.5v14" stroke="#1b1d36" stroke-width="1.1"/><use href="#marigold" x="17" y="32"/></g></svg></div>
 </div>
 
 <main>
   <section class="door" aria-labelledby="name">
     <p class="welcome"><span lang="ta">நல்வரவு</span> · welcome</p>
-    <h1 id="name">NANA EVENTS</h1>
+    <h1 id="name"><span class="w"><i>NANA</i></span> <span class="w"><i>EVENTS</i></span></h1>
     <p class="what">Event management in Padi, Chennai<br><b>4.8 on Google</b> from 273 reviews</p>
 
     <form class="ask" id="ask" action="https://wa.me/919345052030" method="get" target="_blank" novalidate>
@@ -223,8 +319,8 @@
   </section>
 
   <section class="facts" aria-label="From the Google Maps listing">
-    <div class="fact">
-      <h2>4.8 on Google, from 273 reviews.</h2>
+    <div class="fact rv sc-rate">
+      <h2>4.8 on Google, from <span data-count="273">273</span> reviews.</h2>
       <div class="blooms" role="img" aria-label="4.8 out of 5">
         <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
         <svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#marigold"/></svg>
@@ -233,7 +329,7 @@
         <span style="position:relative;width:30px;height:30px"><svg class="empty" viewBox="-16 -16 32 32" aria-hidden="true" style="position:absolute"><use href="#marigold"/></svg><svg class="part" viewBox="-16 -16 32 32" aria-hidden="true" style="position:absolute"><use href="#marigold"/></svg></span>
       </div>
     </div>
-    <div class="fact">
+    <div class="fact rv sc-hours">
       <h2>Open every day, 9 AM to 5 PM.</h2>
       <p class="now" id="now" aria-live="polite"></p>
       <ol class="week" aria-label="Hours by day">
@@ -246,7 +342,7 @@
         <li data-d="Sun">Sun<b>9–5</b></li>
       </ol>
     </div>
-    <div class="fact">
+    <div class="fact rv sc-addr">
       <h2>Elango Nagar, Padi.</h2>
       <address>12/47, 1st St, Elango Nagar, Padi, Chennai, Tamil Nadu 600050</address>
       <p class="links">
@@ -262,7 +358,7 @@
 
 <nav class="threshold" aria-label="Contact NANA Events">
   <div class="step">
-    <a class="send" id="send" data-wa href="https://wa.me/919345052030" target="_blank" rel="noopener">
+    <a class="send" id="send" data-wa data-main-action href="https://wa.me/919345052030" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
       Send on WhatsApp
     </a>
@@ -336,7 +432,11 @@
       dateText.textContent = date.value ? dayLabel(date.value) : "which date?";
       dateText.className = date.value ? "" : "ph";
       var filled = { occasion: !!occ, date: !!date.value, place: !!place.value.trim(), guests: +guests.value.replace(/\D/g, "") > 0 };
-      document.querySelectorAll(".knot").forEach(function (k) { k.classList.toggle("tied", filled[k.getAttribute("data-for")]); });
+      document.querySelectorAll(".knot").forEach(function (k) {
+        var on = !!filled[k.getAttribute("data-for")];
+        if (on && !k.classList.contains("tied") && window.__swing) window.__swing(k);
+        k.classList.toggle("tied", on);
+      });
       var href = WA + "?text=" + encodeURIComponent(message());
       document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = href; });
       [occasion, place, guests].forEach(fit);
@@ -389,7 +489,8 @@
       if (!allFilled()) { shown = false; return; }
       if (shown || kbUp()) return;
       shown = true;
-      if (lintel.getBoundingClientRect().bottom < 0) {
+      var bar = document.querySelector("[data-namebar]");
+      if (lintel.getBoundingClientRect().top < (bar ? bar.getBoundingClientRect().bottom : 0)) {
         var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
         window.scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
       }
@@ -413,8 +514,145 @@
       $("now").textContent = h >= 9 && h < 17 ? "Open now, until 5 PM." : h < 9 ? "Closed now. Opens at 9 AM today." : "Closed now. Opens at 9 AM tomorrow.";
     } catch (e) {}
 
+    requestAnimationFrame(function () { setTimeout(sync, 0); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
-    sync();
+  })();
+</script>
+<script>
+  // Motion: plain script, no library. Everything above works without it; under reduced motion it only marks the opening done.
+  (function () {
+    "use strict";
+    window.__ne = 1;
+    var D = document, root = D.documentElement;
+    var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
+    var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var small = matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    var hasIO = "IntersectionObserver" in window;
+
+    $$(".week li").forEach(function (li, i) { li.style.setProperty("--i", i); });
+
+    /* ---- the opening hands over: done when its CSS animations have all finished ---- */
+    var done = false;
+    function opened() {
+      if (done) return;
+      done = true;
+      root.setAttribute("data-opening", "done");
+      petals();
+      if (held) held.splice(0).forEach(function (el) { show(el, true); });
+    }
+    if (RM) opened();
+    else {
+      var fallback = setTimeout(opened, 2600);
+      requestAnimationFrame(function () {
+        var list = (D.getAnimations ? D.getAnimations() : []).filter(function (a) {
+          var t = a.effect && a.effect.getTiming && a.effect.getTiming();
+          return t && t.iterations !== Infinity;
+        });
+        if (!list.length) { clearTimeout(fallback); opened(); return; }
+        Promise.all(list.map(function (a) { return a.finished.catch(function () {}); })).then(function () { clearTimeout(fallback); opened(); });
+      });
+    }
+
+    /* ---- ambient: marigold petals, one CSS loop each (the compositor moves them); a watchdog thins them, never stops them ---- */
+    function petals() {
+      var box = D.querySelector("[data-petals]");
+      if (!box || petals.on || RM) return;
+      petals.on = 1;
+      var n = small ? 10 : 36, COLS = ["#f2a31b", "#e79512", "#edb714", "#c1132f", "#5b8f2e"], html = "";
+      var rnd = function (a, b) { return a + Math.random() * (b - a); };
+      for (var i = 0; i < n; i++) {
+        var d = rnd(12, 20);
+        html += '<span class="pt" style="--x:' + rnd(0, 98).toFixed(1) + '%;--w:' + rnd(6, 10).toFixed(1) + 'px;--d:' + d.toFixed(1) +
+          's;--dl:-' + rnd(0, d).toFixed(1) + 's;--dx:' + rnd(-70, 70).toFixed(0) + 'px;--c:' + COLS[i % 5] + '"></span>';
+      }
+      box.innerHTML = html;
+      var level = 0, raf = 0, last = 0, frames = 0, slow = 0;
+      function frame(now) {
+        raf = 0;
+        var gap = last ? now - last : 16.7; last = now;
+        frames++; if (gap > 24) slow++;
+        if (frames >= 90) {
+          if (slow > 45 && level < 2) { level++; box.classList.toggle("thin", level >= 1); box.classList.toggle("thinner", level >= 2); }
+          frames = 0; slow = 0;
+        }
+        if (level < 2) raf = requestAnimationFrame(frame);
+      }
+      raf = requestAnimationFrame(frame);
+      D.addEventListener("visibilitychange", function () {
+        root.classList.toggle("hid", D.hidden);
+        if (!D.hidden && !raf && level < 2) { last = 0; frames = 0; slow = 0; raf = requestAnimationFrame(frame); }
+      });
+    }
+    // the thoranam only sways while it is on screen
+    var lintel = D.querySelector(".lintel");
+    if (hasIO && lintel) new IntersectionObserver(function (es) { root.classList.toggle("off", !es[0].isIntersecting); }).observe(lintel);
+
+    /* ---- scroll scenes: each fact has its own, and they run once ---- */
+    function countUp(el) {
+      var to = parseFloat(el.getAttribute("data-count")), dec = +el.getAttribute("data-dec") || 0;
+      if (RM || !to) return;
+      var from = to * 0.35, t0 = 0;
+      var step = function (now) {
+        if (!t0) t0 = now;
+        var p = Math.min(1, (now - t0) / 1900), e = 1 - Math.pow(1 - p, 3), v = from + (to - from) * e;
+        el.textContent = dec ? v.toFixed(dec) : Math.round(v);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = dec ? to.toFixed(dec) : to;
+      };
+      el.textContent = dec ? from.toFixed(dec) : Math.round(from);
+      requestAnimationFrame(step);
+    }
+    var held = [];
+    function show(el, seen) {
+      if (!done && !RM) { held.push(el); return; }   // the first screen is busy with the opening: scenes start after it
+      if (el.classList.contains("in")) return;
+      el.classList.add("in");
+      if (!seen) $$("[data-count]", el).forEach(countUp);
+    }
+    var scenes = $$(".rv");
+    if (!hasIO || RM) scenes.forEach(function (el) { show(el); });
+    else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+      scenes.forEach(function (el) { io.observe(el); });
+    }
+
+    /* ---- signature: a tied marigold swings on its string, and a light crosses the step when all four are tied ---- */
+    window.__swing = function (knot) {
+      if (RM) return;
+      try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {}
+      var svg = knot.querySelector("svg");
+      if (svg && svg.animate) svg.animate([
+        { transform: "rotate(0deg)" }, { transform: "rotate(11deg)", offset: 0.22 }, { transform: "rotate(-8deg)", offset: 0.48 },
+        { transform: "rotate(4deg)", offset: 0.72 }, { transform: "rotate(0deg)" }
+      ], { duration: 1000, easing: "cubic-bezier(.3,.1,.3,1)" });
+      setTimeout(function () {
+        if ($$(".knot.tied").length === 4) {
+          var th = D.querySelector(".threshold");
+          th.classList.remove("ready"); void th.offsetWidth; th.classList.add("ready");
+          setTimeout(function () { th.classList.remove("ready"); }, 1000);
+        }
+      }, 0);
+    };
+
+    /* ---- the main action's closing moment: petals leave the step as the link opens (it is never delayed) ---- */
+    var send = D.getElementById("send");
+    if (send && !RM) send.addEventListener("click", function () {
+      var r = send.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 8, COLS = ["#c1132f", "#f2a31b", "#2e6a2b", "#9f4600"];
+      for (var i = 0; i < 16; i++) {
+        var p = D.createElement("i");
+        p.className = "burst"; p.setAttribute("aria-hidden", "true"); p.style.background = COLS[i % 4];
+        D.body.appendChild(p);
+        var dx = (Math.random() - 0.5) * Math.min(300, innerWidth * 0.85), up = 70 + Math.random() * 130, rot = (Math.random() - 0.5) * 600, x0 = cx + (Math.random() - 0.5) * r.width * 0.5;
+        if (!p.animate) { p.remove(); continue; }
+        var a = p.animate([
+          { transform: "translate(" + x0 + "px," + cy + "px) rotate(0deg)", opacity: 1 },
+          { transform: "translate(" + (x0 + dx * 0.55) + "px," + (cy - up) + "px) rotate(" + rot * 0.5 + "deg)", opacity: 1, offset: 0.42 },
+          { transform: "translate(" + (x0 + dx) + "px," + (cy - up * 0.3 + 70) + "px) rotate(" + rot + "deg)", opacity: 0 }
+        ], { duration: 700 + Math.random() * 250, easing: "cubic-bezier(.15,.6,.35,1)", fill: "forwards" });
+        a.onfinish = (function (el) { return function () { el.remove(); }; })(p);
+      }
+    });
   })();
 </script>
 </body>
