@@ -7,21 +7,34 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Website concept preview for Prisha's Patisserie, theme cakes made to your brief in Anna Nagar, Chennai.">
 <meta name="theme-color" content="#fbf3e6">
-<link rel="preconnect" href="https://api.fontshare.com">
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=pilcrow-rounded@700&display=swap">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
+<link rel="preload" href="assets/pilcrow-rounded-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/satoshi-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/sorting-hat-sm.webp" as="image" type="image/webp" fetchpriority="high">
+<script>
+  /* Scene CSS hides things only while this script is expected to run; if it never does, everything shows after 2.5 s */
+  document.documentElement.className += ' js' + (navigator.userAgentData ? ' cv' : '');
+  setTimeout(function () { if (!window.__gp) document.documentElement.className += ' rv-fail'; }, 2500);
+</script>
 <style>
+  /* Both faces are self-hosted and the display face is preloaded: the name pill and the headline have their letters at first paint.
+     'swap' keeps text visible in the fallback if a file is ever slow, and the fallbacks are close in width. */
+  @font-face { font-family: "Pilcrow Rounded"; src: url(assets/pilcrow-rounded-700.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Satoshi"; src: url(assets/satoshi-400.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Satoshi"; src: url(assets/satoshi-500.woff2) format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Satoshi"; src: url(assets/satoshi-700.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
   :root {
     --paper: #fbf3e6; --card: #fffaf2; --ink: #1c1a17; --soft: #675e53; --line: #e6dccb;
     --tomato: #b83f25;        /* the blanks and the one accent; 5.2:1 on paper */
     --display: "Pilcrow Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
     --body: "Satoshi", system-ui, sans-serif;
     --ease-out: cubic-bezier(.23, 1, .32, 1);
+    --out: cubic-bezier(.16, 1, .3, 1);
     --pad: clamp(16px, 4vw, 56px);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 76px; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.55 var(--body); }
   img { display: block; max-width: 100%; height: auto; }
   a, button { color: inherit; -webkit-tap-highlight-color: transparent; }
@@ -32,28 +45,44 @@
   :focus-visible { outline: 2.5px solid var(--tomato); outline-offset: 3px; border-radius: 6px; }
 
   .concept { font-size: 12px; letter-spacing: .01em; text-align: center; padding: 8px 16px; color: var(--soft); }
-  .top { display: flex; align-items: center; justify-content: space-between; padding: 12px var(--pad); }
-  .logo { font: 700 21px/1 var(--display); background: var(--ink); color: var(--paper); padding: 10px 14px 8px; border-radius: 10px;
-          transform: rotate(-3deg); text-decoration: none; letter-spacing: .01em; }
-  .pill { display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: var(--ink); color: var(--paper); text-decoration: none;
+  /* The name bar: solid paper, sticky, her badge and name; the order button stays in the dock / its own corner */
+  .top { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px var(--pad);
+         background: var(--paper); box-shadow: 0 1px 0 var(--line); min-height: 60px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font: 700 20px/1 var(--display); background: var(--ink); color: var(--paper); padding: 6px 16px 6px 6px; border-radius: 999px;
+          text-decoration: none; letter-spacing: .01em; min-height: 44px; transition: transform 140ms var(--ease-out); white-space: nowrap; }
+  .logo:active { transform: scale(.97); }
+  .logo .mk { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--paper); color: var(--ink); display: grid; place-items: center; font: 700 20px/1 var(--display); padding-top: 2px; }
+  .pill { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: var(--ink); color: var(--paper); text-decoration: none;
           font-weight: 700; letter-spacing: .005em; padding: 14px 24px; border-radius: 999px; transition: transform 140ms var(--ease-out); }
   .pill:active { transform: scale(.97); }
   .pill svg { width: 19px; height: 19px; fill: currentColor; }
-  .pill.small { padding: 10px 18px; font-size: 15px; }
+  .pill.small { padding: 13px 18px; font-size: 15px; }
+  .spark { position: fixed; z-index: 70; width: 9px; height: 9px; border-radius: 50%; pointer-events: none; }
 
   /* ---------- Hero: the sentence is the order form, the table is her work ---------- */
-  .hero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 28px; padding: 20px var(--pad) 40px; min-height: calc(100svh - 120px); }
+  .hero { position: relative; isolation: isolate; display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 28px; padding: 20px var(--pad) 40px; min-height: calc(100svh - 150px); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: .19; }
   .brief { font: 700 clamp(40px, 5.2vw, 84px)/1.08 var(--display); letter-spacing: -.025em; }
-  .blank { font: inherit; letter-spacing: inherit; color: var(--tomato); border-bottom: 3px dashed currentColor; padding: 0 .06em; line-height: 1;
+  .brief .ln { display: block; clip-path: inset(-.25em -1em -.25em -1em); }   /* a mask the line rises from; roomy so focus rings aren't cut */
+  .brief .ln > span { display: block; animation: rise .85s var(--out) both; }
+  .brief .ln:nth-child(2) > span { animation-delay: .12s; } .brief .ln:nth-child(3) > span { animation-delay: .24s; }
+  @keyframes rise { from { transform: translateY(140%); } }
+  @keyframes write { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% -10% -20% 0); } }
+  @keyframes up { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes drop { from { transform: translateY(-46px) rotate(-3deg); opacity: .15; } 60% { opacity: 1; } }
+  @keyframes dockin { from { transform: translateY(130%); } to { transform: none; } }
+  .blank { font: inherit; letter-spacing: inherit; color: var(--tomato); border-bottom: 3px dashed currentColor; padding: 5px .06em; line-height: 1; min-height: 44px;
            transition: transform 140ms var(--ease-out); display: inline-block; }
+  .blank > span:first-child { display: inline-block; animation: write .6s steps(14, end) .55s backwards; }
+  .brief .ln:nth-child(3) .blank > span:first-child { animation-delay: .85s; }
   .blank:active { transform: scale(.97); }
   .blank.unset { color: #b8735e; border-bottom-style: dotted; }   /* still empty: lighter (3.4:1, large text) so it reads as a blank */
   .blank .cue { font-size: .38em; vertical-align: .35em; margin-left: .12em; }
-  .people { width: 2.4ch; text-align: center; background: transparent; border: 0; border-bottom: 3px dashed currentColor; border-radius: 0; outline-offset: 4px; -moz-appearance: textfield; appearance: textfield; }
+  .people { min-width: 44px; width: 2.4ch; text-align: center; background: transparent; border: 0; border-bottom: 3px dashed currentColor; border-radius: 0; outline-offset: 4px; -moz-appearance: textfield; appearance: textfield; }
   .people::-webkit-inner-spin-button, .people::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-  .actions { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+  .actions { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; animation: up .6s var(--out) 1s both; }
   .actions .note { font-size: 15px; color: var(--soft); }
-  .proof { margin-top: 26px; font-size: 15px; color: var(--soft); }
+  .proof { margin-top: 26px; font-size: 15px; color: var(--soft); animation: up .6s var(--out) 1.15s both; }
   .proof b { color: var(--ink); font-weight: 700; }
 
   /* Popover sheets for the two choice blanks; they grow out of the blank you tapped */
@@ -73,7 +102,8 @@
   /* The table keeps one shape on every desktop, so the cakes (sized by width) never run into each other or the hint */
   .table { position: relative; width: 100%; max-width: 660px; margin-left: auto; aspect-ratio: 1 / .95; }
   .toy { position: absolute; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; cursor: grab; user-select: none; -webkit-user-select: none;
-         touch-action: pan-y; /* vertical swipes still scroll the page on phones */ }
+         touch-action: pan-y; /* vertical swipes still scroll the page on phones */
+         animation: drop .7s var(--out) calc(.1s + var(--i, 0) * .09s) backwards; }   /* released at the end, so a drag's own transform takes over */
   .toy img { width: 100%; pointer-events: none; filter: drop-shadow(0 18px 16px rgba(60, 40, 20, .22)); }
   .tag { margin-top: -10px; font: 700 14px/1 var(--body); letter-spacing: .01em; background: var(--card); padding: 7px 12px; border-radius: 999px;
          border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); white-space: nowrap; position: relative; z-index: 1; }
@@ -84,16 +114,34 @@
   .t3 { width: 23%; left: 71%; top: 0; rotate: 5deg; }
   .t4 { width: 19%; left: 77%; top: 47%; rotate: -3deg; }
   .t5 { width: 17%; left: 52%; top: 70%; rotate: 3deg; z-index: 4; }
-  .hint { margin: 10px 0 0; font-size: 14px; color: var(--soft); text-align: right; }
+  .hint .short { display: none; }
+  .hint { margin: 10px 0 0; font-size: 14px; color: var(--soft); text-align: right; animation: up .6s var(--out) 1.1s both; }
 
   section { padding: clamp(64px, 9vw, 120px) var(--pad); }
+  /* Everything under the first screen is laid out when it nears the viewport instead of all at once before first paint (that one
+     layout was the page's whole blocking time on a phone). The only in-page links go to #top (the hero, never skipped), so jumps are safe;
+     the sizes are the real ones at phone and desktop widths, remembered ("auto") once a section has shown. */
+  .cv #themes, .cv .story, .cv .flavours, .cv .jars, .cv .reviews, .cv .order, .cv .visit { content-visibility: auto; }   /* Chromium only (Android Chrome); Safari lays everything out as before */
+  #themes { contain-intrinsic-block-size: auto 1450px; } .story { contain-intrinsic-block-size: auto 560px; } .flavours { contain-intrinsic-block-size: auto 315px; }
+  .jars { contain-intrinsic-block-size: auto 1090px; } .reviews { contain-intrinsic-block-size: auto 900px; } .order { contain-intrinsic-block-size: auto 1050px; }
+  .visit { contain-intrinsic-block-size: auto 580px; }
+  @media (min-width: 861px) {
+    #themes { contain-intrinsic-block-size: auto 1580px; } .story { contain-intrinsic-block-size: auto 830px; } .flavours { contain-intrinsic-block-size: auto 200px; }
+    .jars { contain-intrinsic-block-size: auto 1020px; } .reviews { contain-intrinsic-block-size: auto 600px; } .order { contain-intrinsic-block-size: auto 830px; }
+    .visit { contain-intrinsic-block-size: auto 370px; }
+  }
   .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 40px; margin-bottom: clamp(28px, 4vw, 48px); }
   .head p { max-width: 42ch; color: var(--soft); }
+  .mk2 { display: block; clip-path: inset(-.2em -1em -.2em -1em); }
+  .mk2 > span { display: block; }
+  .js:not(.rv-fail) .mk2 > span { transform: translateY(140%); }
+  .js:not(.rv-fail) .in .mk2 > span, .js:not(.rv-fail) .mk2.in > span { transform: none; transition: transform .8s var(--out) var(--d, 0s); }
 
-  /* ---------- Theme wall ---------- */
+  /* ---------- Theme wall: each tile opens like an iris from the base of its cake ---------- */
   .wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 22px); }
   .tile { position: relative; display: grid; grid-template-rows: 1fr auto; border-radius: 26px; padding: 22px 18px 20px; min-height: clamp(300px, 30vw, 430px);
-          background: var(--tint); text-align: left; transition: transform 160ms var(--ease-out); overflow: hidden; }
+          text-align: left; transition: transform 160ms var(--ease-out); overflow: hidden; isolation: isolate; }
+  .tile::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--tint); }
   .tile:active { transform: scale(.985); }
   .tile img { justify-self: center; align-self: end; max-height: clamp(220px, 23vw, 330px); width: auto; filter: drop-shadow(0 16px 14px rgba(60, 40, 20, .2));
               transition: transform 300ms var(--ease-out); }
@@ -105,14 +153,28 @@
   .tile.chosen { box-shadow: inset 0 0 0 2.5px var(--tomato); }
   .tile.chosen::after { content: "✓ In your brief"; position: absolute; top: 14px; right: 14px; font-size: 13px; font-weight: 700; color: var(--card);
                         background: var(--tomato); padding: 6px 10px; border-radius: 999px; }
+  .js:not(.rv-fail) .tile::before { clip-path: circle(0% at 50% 78%); }
+  .js:not(.rv-fail) .tile > * { opacity: 0; }
+  .js:not(.rv-fail) .tile.in::before { clip-path: circle(150% at 50% 78%); transition: clip-path .75s var(--out) var(--d, 0s); }
+  .js:not(.rv-fail) .tile.in > * { opacity: 1; transition: opacity .3s ease-out .1s, transform 300ms var(--ease-out); }
 
-  /* ---------- T-rex story ---------- */
+  /* ---------- T-rex story: the dinosaur stomps in ---------- */
   .story { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(28px, 5vw, 80px); background: #dfe6cf; }
   .story img { width: 100%; max-width: 560px; justify-self: center; filter: drop-shadow(0 26px 22px rgba(30, 40, 20, .25)); }
-  .story blockquote { margin: 0; font: 700 clamp(30px, 3.6vw, 54px)/1.08 var(--display); letter-spacing: -.02em; }
+  .story .big { margin: 0; font: 700 clamp(30px, 3.6vw, 54px)/1.08 var(--display); letter-spacing: -.02em; }
   .story cite { display: block; margin-top: 18px; font: 500 15px/1.4 var(--body); font-style: normal; color: #3f4a35; }
+  .js:not(.rv-fail) .story img { opacity: 0; }
+  .js:not(.rv-fail) .story.in img { animation: stomp 1s linear both; }
+  @keyframes stomp {
+    0% { transform: translateY(-80px) rotate(-3deg); opacity: 0; animation-timing-function: cubic-bezier(.5, 0, 1, .6); }
+    42% { transform: none; opacity: 1; animation-timing-function: cubic-bezier(0, .5, .5, 1); }
+    60% { transform: translateY(-12px); animation-timing-function: cubic-bezier(.5, 0, 1, .6); }
+    76% { transform: none; animation-timing-function: cubic-bezier(0, .5, .5, 1); }
+    88% { transform: translateY(-4px); animation-timing-function: cubic-bezier(.5, 0, 1, .6); }
+    100% { transform: none; opacity: 1; }
+  }
 
-  /* ---------- Flavours ---------- */
+  /* ---------- Flavours: dealt onto the page like cards ---------- */
   .flavours { text-align: center; padding-top: clamp(44px, 5vw, 72px); padding-bottom: clamp(44px, 5vw, 72px); }
   .flavours p.k { color: var(--soft); font-size: 15px; }
   .flavours ul { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -120,34 +182,45 @@
                  border-radius: 999px; background: var(--card); }
   .flavours li:nth-child(2) { rotate: -2deg; background: #f9d7e3; }
   .flavours li:nth-child(3) { rotate: 1.5deg; background: #f4d9c6; }
+  .js:not(.rv-fail) .flavours li { opacity: 0; }
+  .js:not(.rv-fail) .flavours.in li { animation: deal .75s var(--out) calc(var(--i, 0) * .13s) both; }
+  @keyframes deal { from { translate: 0 -44px; rotate: 11deg; opacity: 0; } to { opacity: 1; } }
 
   /* ---------- Jars & cupcakes ---------- */
   .jars { background: var(--card); border-block: 1.5px solid var(--line); }
   .jarrow { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: center; }
   .jarlist { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
-  .jarlist h3 { font-size: 22px; letter-spacing: -.01em; }
-  .jarlist p { color: var(--soft); font-size: 15px; margin-top: 4px; }
+  .jarlist h3 { font-size: 22px; letter-spacing: -.01em; position: relative; display: inline-block; }
+  .jarlist h3::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; border-radius: 2px; background: var(--tomato); transform-origin: left; }
+  .jarlist p { color: var(--soft); font-size: 15px; margin-top: 8px; }
+  .js:not(.rv-fail) .jarrow > img { clip-path: inset(0 0 0 100%); }
+  .js:not(.rv-fail) .jarrow.in > img { clip-path: inset(0); transition: clip-path 1.1s var(--out); }
+  .js:not(.rv-fail) .jarlist h3::after { transform: scaleX(0); }
+  .js:not(.rv-fail) .jarrow.in .jarlist h3::after { transform: none; transition: transform .8s var(--out) calc(.5s + var(--i, 0) * .14s); }
   .shelf { margin-top: clamp(40px, 5vw, 64px); }
   .shelf .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 10px 30px; margin-bottom: 18px; }
-  .shelf blockquote { margin: 0; font: 700 clamp(24px, 2.6vw, 36px)/1.1 var(--display); letter-spacing: -.015em; max-width: 24ch; }
-  .shelf cite { display: block; font: 500 14px/1.4 var(--body); font-style: normal; color: var(--soft); margin-top: 8px; }
+  .shelf .shelfh { margin: 0; font: 700 clamp(24px, 2.6vw, 36px)/1.1 var(--display); letter-spacing: -.015em; max-width: 24ch; }
   .shelf .hint2 { font-size: 14px; color: var(--soft); }
   /* A real scroll container: touch and trackpads keep native momentum; a mouse can drag it too (script) */
   .smalls { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 32%, 420px); gap: 22px; overflow-x: auto;
             scroll-snap-type: x mandatory; scroll-padding: 0 var(--pad); overscroll-behavior-x: contain;
             margin: 0 calc(var(--pad) * -1); padding: 4px var(--pad) 10px; scrollbar-width: none; }
   .smalls::-webkit-scrollbar { display: none; }
-  .smalls figure { margin: 0; scroll-snap-align: start; background: var(--tint); border-radius: 22px; padding: 18px 14px 14px; }
+  .smalls figure { margin: 0; scroll-snap-align: start; background: var(--tint); border-radius: 22px; padding: 18px 14px 14px; transition: transform 160ms var(--ease-out); }
+  .smalls figure:active { transform: scale(.98); }
   .smalls img { height: clamp(170px, 18vw, 250px); width: 100%; object-fit: contain; -webkit-user-drag: none; user-select: none; }
   .smalls figcaption { font-weight: 700; margin-top: 10px; user-select: none; }
   @media (hover: hover) and (pointer: fine) { .smalls { cursor: grab; } }
   .smalls.dragging { cursor: grabbing; scroll-snap-type: none; }
+  .js:not(.rv-fail) .smalls figure { opacity: 0; }
+  .js:not(.rv-fail) .shelf.in .smalls figure { animation: slidein .7s var(--out) calc(var(--i, 0) * .1s) both; }
+  @keyframes slidein { from { translate: 70px 0; opacity: 0; } to { opacity: 1; } }
 
-  /* ---------- Reviews: a sticker, and quotes pinned beside her cakes ---------- */
+  /* ---------- Reviews: a sticker that stamps on, counted numbers, notes pinned beside her cakes ---------- */
   .reviews { display: grid; grid-template-columns: .8fr 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
   .badge { justify-self: center; width: clamp(200px, 20vw, 260px); aspect-ratio: 1; border-radius: 50%; background: var(--tomato); color: var(--card);
            display: grid; place-content: center; text-align: center; rotate: -8deg; box-shadow: 0 4px 0 #7d2915; }
-  .badge b { font: 700 clamp(64px, 7vw, 92px)/.9 var(--display); letter-spacing: -.04em; }
+  .badge b { font: 700 clamp(64px, 7vw, 92px)/.9 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
   .badge span { font-weight: 700; font-size: 17px; }
   .badge small { font-size: 13.5px; margin-top: 8px; line-height: 1.3; }
   .pin { margin: 0; display: grid; justify-items: center; }
@@ -158,6 +231,11 @@
   .pin blockquote::before { content: ""; position: absolute; top: -8px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%;
                             background: var(--tomato); box-shadow: 0 2px 0 #7d2915; }   /* the pin */
   .pin cite { display: block; margin-top: 10px; font: 500 14px/1.4 var(--body); font-style: normal; color: var(--soft); }
+  .js:not(.rv-fail) .badge, .js:not(.rv-fail) .pin { opacity: 0; }
+  .js:not(.rv-fail) .badge.in { animation: stampon .8s var(--out) both; }
+  .js:not(.rv-fail) .pin.in { animation: pinned .75s var(--out) both; }
+  @keyframes stampon { from { rotate: -70deg; translate: 0 -34px; opacity: 0; } 50% { opacity: 1; } to { opacity: 1; } }
+  @keyframes pinned { from { translate: 0 -54px; rotate: -7deg; opacity: 0; } 50% { opacity: 1; } to { opacity: 1; } }
 
   /* ---------- How to order ---------- */
   .order { background: var(--ink); color: var(--paper); }
@@ -169,6 +247,11 @@
                       background: var(--paper); color: var(--ink); font: 700 20px/1 var(--display); }
   .steps h3 { font-size: 24px; letter-spacing: -.01em; }
   .steps p { color: #c9bfb1; margin-top: 4px; font-size: 16px; }
+  .js:not(.rv-fail) .steps li > * { clip-path: inset(-10px 100% -10px -10px); }
+  .js:not(.rv-fail) .steps li::before { opacity: 0; }
+  .js:not(.rv-fail) .steps li.in > * { clip-path: inset(-10px); transition: clip-path .9s var(--out) var(--d, 0s); }
+  .js:not(.rv-fail) .steps li.in::before { animation: spinon .8s var(--out) var(--d, 0s) both; opacity: 1; }
+  @keyframes spinon { from { rotate: -200deg; } }
   /* A WhatsApp-style chat: your live brief, then the reference photo of the cake you picked */
   .chat { justify-self: center; width: min(100%, 380px); border-radius: 26px; overflow: hidden; background: #efe7dd; color: #111; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); }
   .chat-top { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: #075e54; color: #fff; }
@@ -181,30 +264,47 @@
   .bubble.photo img { width: 170px; height: 170px; object-fit: contain; background: #fff; border-radius: 10px; }
   .bubble.photo span { display: block; font-size: 13px; color: #4b5b4a; padding: 6px 4px 2px; }
   .order .pill { background: var(--paper); color: var(--ink); margin-top: 34px; }
+  .js:not(.rv-fail) .chat .bubble { opacity: 0; }
+  .js:not(.rv-fail) .chat.in .bubble { animation: bubble .6s var(--out) both; }
+  .js:not(.rv-fail) .chat.in .bubble.photo { animation-delay: .5s; }
+  .js:not(.rv-fail) .chat.in .bubble:first-child { animation-delay: .15s; }
+  @keyframes bubble { from { translate: 36px 0; opacity: 0; } to { opacity: 1; } }
 
   /* ---------- Visit ---------- */
   .visit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .visit > div { position: relative; padding-top: 18px; }
+  .visit > div::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink); transform-origin: left; }
+  .js:not(.rv-fail) .visit > div::before { transform: scaleX(0); }
+  .js:not(.rv-fail) .visit > div.in::before { transform: none; transition: transform .9s var(--out) var(--d, 0s); }
   .visit h3 { font: 700 14px/1 var(--body); letter-spacing: .02em; color: var(--soft); margin-bottom: 10px; }
-  .visit a { text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; }
+  .visit a { text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; transition: transform 140ms var(--ease-out); }
+  .visit a:active { transform: scale(.97); }
   .hours { display: grid; grid-template-columns: auto auto; gap: 2px 22px; justify-content: start; font-variant-numeric: tabular-nums; }
   footer { padding: 0 var(--pad) 40px; color: var(--soft); font-size: 13px; }
 
-  /* Phones: a frosted order bar the page scrolls under */
+  /* Phones: an order bar the page scrolls under */
   .dock { display: none; }
   @media (max-width: 860px) {
     body { padding-bottom: 84px; }
+    .top { min-height: 56px; }
+    .logo { font-size: 18px; }
     .top .pill { display: none; }
     .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 4px; gap: 18px; }
     .brief { font-size: clamp(34px, 10.4vw, 52px); }
+    .hero > * { min-width: 0; }
+    .brief .ln { white-space: nowrap; min-height: 1.45em; }   /* one line each so the web font arriving can't re-wrap the hero; .wrap lets a long pick wrap instead of running off */
+    .brief.wrap .ln { white-space: normal; }
     .actions { margin-top: 22px; }
     .actions .pill { display: none; }                /* the dock does this job on phones */
     .proof { margin-top: 14px; }
-    .tablewrap { min-width: 0; }
+    .tablewrap { min-width: 0; position: relative; }
     .table { height: 110vw; max-height: 600px; aspect-ratio: auto; }   /* a set height plus the desktop shape would force the width wider than the phone */
     .t1 { width: 42%; left: 28%; top: 0; } .t2 { width: 33%; left: -1%; top: 34%; } .t3 { width: 29%; left: 71%; top: 0; }
     .t4 { width: 25%; left: 73%; top: 50%; } .t5 { width: 22%; left: 39%; top: 70%; }
     .t3 { left: auto; right: 3%; z-index: 4; } .t3 .tag { justify-self: end; }
-    .hint { text-align: center; margin-top: 22px; }
+    /* the cue sits in the table's empty top-left corner, above the dock on the first screen and clear of the vintage-car tag */
+    .hint { position: absolute; left: 0; top: 0; width: 28%; margin: 0; text-align: left; font-size: 13px; line-height: 1.35; }
+    .hint .long { display: none; } .hint .short { display: inline; }
     .wall { grid-template-columns: 1fr 1fr; }
     .tile { min-height: 0; padding: 14px 12px 14px; border-radius: 20px; }
     .tile img { max-height: 42vw; }
@@ -220,43 +320,49 @@
     .reviews { grid-template-columns: 1fr; justify-items: center; }
     .badge { width: 200px; }
     .dock { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-            background: rgba(251, 243, 230, .72); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);
-            border-top: 1px solid rgba(28, 26, 23, .08); }
+            background: rgba(251, 243, 230, .96); border-top: 1px solid rgba(28, 26, 23, .08); animation: dockin .45s var(--out) .15s backwards; transition: transform 250ms var(--ease-out), visibility 0s; }
+    .dock.away { transform: translateY(130%); visibility: hidden; transition: transform 250ms var(--ease-out), visibility 0s 250ms; }   /* the page's own order button is on screen */
     .dock .pill { width: 100%; }
   }
-  @media (max-width: 360px) { .wall { gap: 8px; } .tile .tt { font-size: 18px; } }
+  @media (max-width: 360px) { .wall { gap: 8px; } .tile .tt { font-size: 18px; } .logo { font-size: 16px; } }
+
+  /* Reduced motion: everything complete and still */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .pill:active, .blank:active, .tile:active, .sheet button:active { transform: none; }
-    .tile img { transition: none; }
+    .brief .ln > span, .blank > span:first-child, .actions, .proof, .toy, .hint, .dock, .js .story.in img, .js .flavours.in li, .js .shelf.in .smalls figure,
+    .js .badge.in, .js .pin.in, .js .steps li.in::before, .js .chat.in .bubble { animation: none !important; }
+    .js .tile::before, .js .steps li > *, .js .jarrow > img { clip-path: none !important; }
+    .js .tile > *, .js .steps li::before { opacity: 1 !important; }
+    .js .mk2 > span { transform: none !important; }
+    .js .story img, .js .flavours li, .js .smalls figure, .js .badge, .js .pin, .js .chat .bubble { opacity: 1 !important; }
+    .js .jarlist h3::after, .js .visit > div::before { transform: none !important; }
+    .pill:active, .blank:active, .tile:active, .sheet button:active, .logo:active, .smalls figure:active, .visit a:active { transform: none; }
+    .tile img, .logo, .pill { transition: none; }
+    .hero canvas { display: none; }
   }
-  @media (prefers-reduced-transparency: reduce) { .dock { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; } }
-
-  /* Reveal-on-scroll is owned by Motion; hidden only while the script is expected (failsafe below) */
-  .js .reveal { opacity: 0; }
+  @media (prefers-reduced-transparency: reduce) { .dock { background: var(--paper); } }
 </style>
-<script>
-  document.documentElement.classList.add('js');
-  setTimeout(() => { if (!window.__motionReady) document.documentElement.classList.remove('js'); }, 2500);
-</script>
 </head>
 <body>
 <div class="concept" data-concept-banner>Website concept preview made for Prisha's Patisserie · not the official site</div>
 
 <header class="top">
-  <a class="logo" href="#top" aria-label="Prisha's Patisserie, back to top">Prisha's Patisserie</a>
+  <a class="logo" href="#top" aria-label="Prisha's Patisserie, back to top"><span class="mk" aria-hidden="true">P</span>Prisha's Patisserie</a>
   <a class="pill small" data-wa href="https://wa.me/918754297315" target="_blank" rel="noopener">Order on WhatsApp</a>
 </header>
 
 <main id="top">
 <section class="hero">
+  <canvas id="amb" aria-hidden="true"></canvas>
   <div>
-    <h1 class="brief">I'd like a
-      <button class="blank" id="themeBlank" aria-haspopup="dialog" aria-controls="themeSheet" aria-expanded="false"><span id="themeText">Harry Potter</span><span class="cue" aria-hidden="true">▾</span></button><br>
-      cake for
+    <h1 class="brief">
+      <span class="ln"><span>I'd like a
+      <button class="blank" id="themeBlank" aria-haspopup="dialog" aria-controls="themeSheet" aria-expanded="false"><span id="themeText">Harry Potter</span><span class="cue" aria-hidden="true">▾</span></button></span></span>
+      <span class="ln"><span>cake for
       <input class="blank people" id="people" type="number" inputmode="numeric" min="1" max="300" value="15" aria-label="How many people">
-      people,<br> on
-      <button class="blank unset" id="dayBlank" aria-haspopup="dialog" aria-controls="daySheet" aria-expanded="false" aria-label="Day: which day? Choose a day"><span id="dayText">which day?</span><span class="cue" aria-hidden="true">▾</span></button>.
+      people,</span></span>
+      <span class="ln"><span>on
+      <button class="blank unset" id="dayBlank" aria-haspopup="dialog" aria-controls="daySheet" aria-expanded="false" aria-label="Day: which day? Choose a day"><span id="dayText">which day?</span><span class="cue" aria-hidden="true">▾</span></button>.</span></span>
     </h1>
     <div class="actions">
       <a class="pill" data-wa href="https://wa.me/918754297315" target="_blank" rel="noopener">
@@ -268,13 +374,13 @@
   </div>
   <div class="tablewrap">
   <div class="table" role="group" aria-label="Some of her cakes. Tap one to pick its theme.">
-    <button class="toy t1 picked" data-theme="Harry Potter"><img src="assets/sorting-hat-sm.webp" width="600" height="939" alt="Harry Potter sorting hat cake"><span class="tag">Harry Potter</span></button>
-    <button class="toy t2" data-theme="Vintage car"><img src="assets/vintage-car-sm.webp" width="600" height="782" alt="Chocolate cake with a sculpted vintage car"><span class="tag">Vintage car</span></button>
-    <button class="toy t3" data-theme="Bath-time duck"><img src="assets/duck-sm.webp" width="600" height="865" alt="Duck in a tub cake"><span class="tag">Bath-time duck</span></button>
-    <button class="toy t4" data-theme="Unicorn"><img src="assets/unicorn-sm.webp" width="600" height="1098" alt="Unicorn cake"><span class="tag">Unicorn</span></button>
-    <button class="toy t5" data-theme="Lollipop"><img src="assets/lollipop-sm.webp" width="600" height="852" alt="Lollipop drip cake"><span class="tag">Lollipop</span></button>
+    <button class="toy t1 picked" style="--i:0" data-theme="Harry Potter"><img src="assets/sorting-hat-sm.webp" fetchpriority="high" decoding="async" width="600" height="939" alt="Harry Potter sorting hat cake"><span class="tag">Harry Potter</span></button>
+    <button class="toy t2" style="--i:1" data-theme="Vintage car"><img src="assets/vintage-car-sm.webp" width="600" height="782" alt="Chocolate cake with a sculpted vintage car"><span class="tag">Vintage car</span></button>
+    <button class="toy t3" style="--i:2" data-theme="Bath-time duck"><img src="assets/duck-sm.webp" width="600" height="865" alt="Duck in a tub cake"><span class="tag">Bath-time duck</span></button>
+    <button class="toy t4" style="--i:3" data-theme="Unicorn"><img src="assets/unicorn-sm.webp" width="600" height="1098" alt="Unicorn cake"><span class="tag">Unicorn</span></button>
+    <button class="toy t5" style="--i:4" data-theme="Lollipop"><img src="assets/lollipop-sm.webp" width="600" height="852" alt="Lollipop drip cake"><span class="tag">Lollipop</span></button>
   </div>
-  <p class="hint">Tap a cake to pick it, or pick one up and toss it</p>
+  <p class="hint"><span class="long">Tap a cake to pick it, or pick one up and toss it</span><span class="short">Tap a cake to pick it. Or toss one.</span></p>
   </div>
 </section>
 
@@ -282,75 +388,75 @@
 <div class="sheet" id="daySheet" role="dialog" aria-label="Choose a day" hidden><div class="grid days" id="dayList"></div></div>
 
 <section id="themes">
-  <div class="head reveal"><h2>Themes she's sculpted</h2><p>Tap one to put it in your brief. Yours doesn't have to be on this wall: send any idea.</p></div>
+  <div class="head"><h2 data-mk><span class="mk2"><span>Themes she's sculpted</span></span></h2><p>Tap one to put it in your brief. Yours doesn't have to be on this wall: send any idea.</p></div>
   <div class="wall">
-    <button class="tile reveal" style="--tint:#f4d9c6" data-theme="Harry Potter" aria-label="Use the Harry Potter theme"><img src="assets/sorting-hat-sm.webp" alt="Sorting hat cake" loading="lazy" width="600" height="939"><span class="meta"><span><span class="tt">Harry Potter</span><span class="tp">Sorting hat and house colours.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#dfe6cf" data-theme="Jurassic" aria-label="Use the Jurassic theme"><img src="assets/t-rex-sm.webp" alt="T-rex cake" loading="lazy" width="600" height="646"><span class="meta"><span><span class="tt">Jurassic</span><span class="tp">A T-rex on top.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#f6d2bf" data-theme="F.R.I.E.N.D.S." aria-label="Use the F.R.I.E.N.D.S. theme"><img src="assets/central-perk-sm.webp" alt="Central Perk cake" loading="lazy" width="600" height="953"><span class="meta"><span><span class="tt">F.R.I.E.N.D.S.</span><span class="tp">Two tiers of Central Perk.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#d6e7f2" data-theme="Bath-time duck" aria-label="Use the Bath-time duck theme"><img src="assets/duck-sm.webp" alt="Duck in a tub cake" loading="lazy" width="600" height="865"><span class="meta"><span><span class="tt">Bath-time duck</span><span class="tp">A duck in a tub.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#e3e8d5" data-theme="Vintage car" aria-label="Use the Vintage car theme"><img src="assets/vintage-car-sm.webp" alt="Vintage car cake" loading="lazy" width="600" height="782"><span class="meta"><span><span class="tt">Vintage car</span><span class="tp">A sculpted car on top.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#ebe0f3" data-theme="Unicorn" aria-label="Use the Unicorn theme"><img src="assets/unicorn-sm.webp" alt="Unicorn cake" loading="lazy" width="600" height="1098"><span class="meta"><span><span class="tt">Unicorn</span><span class="tp">A gold horn.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#f9d7e3" data-theme="Lollipop" aria-label="Use the Lollipop theme"><img src="assets/lollipop-sm.webp" alt="Lollipop drip cake" loading="lazy" width="600" height="852"><span class="meta"><span><span class="tt">Lollipop</span><span class="tp">Drip icing and lollipops.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#e0eef0" data-theme="Rainbow" aria-label="Use the Rainbow theme"><img src="assets/rainbow-sm.webp" alt="Rainbow drip cake with macarons" loading="lazy" width="600" height="892"><span class="meta"><span><span class="tt">Rainbow</span><span class="tp">Drip, shards and macarons.</span></span></span></button>
-    <button class="tile reveal" style="--tint:#d9deef" data-theme="Starry night" aria-label="Use the Starry night theme"><img src="assets/starry-sm.webp" alt="Starry night three-tier cake" loading="lazy" width="561" height="1100"><span class="meta"><span><span class="tt">Starry night</span><span class="tp">Three tiers of navy and gold.</span></span></span></button>
+    <button class="tile" style="--tint:#f4d9c6" data-theme="Harry Potter" aria-label="Use the Harry Potter theme"><img src="assets/sorting-hat-sm.webp" alt="Sorting hat cake" loading="lazy" width="600" height="939"><span class="meta"><span><span class="tt">Harry Potter</span><span class="tp">Sorting hat and house colours.</span></span></span></button>
+    <button class="tile" style="--tint:#dfe6cf" data-theme="Jurassic" aria-label="Use the Jurassic theme"><img src="assets/t-rex-sm.webp" alt="T-rex cake" loading="lazy" width="600" height="646"><span class="meta"><span><span class="tt">Jurassic</span><span class="tp">A T-rex on top.</span></span></span></button>
+    <button class="tile" style="--tint:#f6d2bf" data-theme="F.R.I.E.N.D.S." aria-label="Use the F.R.I.E.N.D.S. theme"><img src="assets/central-perk-sm.webp" alt="Central Perk cake" loading="lazy" width="600" height="953"><span class="meta"><span><span class="tt">F.R.I.E.N.D.S.</span><span class="tp">Two tiers of Central Perk.</span></span></span></button>
+    <button class="tile" style="--tint:#d6e7f2" data-theme="Bath-time duck" aria-label="Use the Bath-time duck theme"><img src="assets/duck-sm.webp" alt="Duck in a tub cake" loading="lazy" width="600" height="865"><span class="meta"><span><span class="tt">Bath-time duck</span><span class="tp">A duck in a tub.</span></span></span></button>
+    <button class="tile" style="--tint:#e3e8d5" data-theme="Vintage car" aria-label="Use the Vintage car theme"><img src="assets/vintage-car-sm.webp" alt="Vintage car cake" loading="lazy" width="600" height="782"><span class="meta"><span><span class="tt">Vintage car</span><span class="tp">A sculpted car on top.</span></span></span></button>
+    <button class="tile" style="--tint:#ebe0f3" data-theme="Unicorn" aria-label="Use the Unicorn theme"><img src="assets/unicorn-sm.webp" alt="Unicorn cake" loading="lazy" width="600" height="1098"><span class="meta"><span><span class="tt">Unicorn</span><span class="tp">A gold horn.</span></span></span></button>
+    <button class="tile" style="--tint:#f9d7e3" data-theme="Lollipop" aria-label="Use the Lollipop theme"><img src="assets/lollipop-sm.webp" alt="Lollipop drip cake" loading="lazy" width="600" height="852"><span class="meta"><span><span class="tt">Lollipop</span><span class="tp">Drip icing and lollipops.</span></span></span></button>
+    <button class="tile" style="--tint:#e0eef0" data-theme="Rainbow" aria-label="Use the Rainbow theme"><img src="assets/rainbow-sm.webp" alt="Rainbow drip cake with macarons" loading="lazy" width="600" height="892"><span class="meta"><span><span class="tt">Rainbow</span><span class="tp">Drip, shards and macarons.</span></span></span></button>
+    <button class="tile" style="--tint:#d9deef" data-theme="Starry night" aria-label="Use the Starry night theme"><img src="assets/starry-sm.webp" alt="Starry night three-tier cake" loading="lazy" width="561" height="1100"><span class="meta"><span><span class="tt">Starry night</span><span class="tp">Three tiers of navy and gold.</span></span></span></button>
   </div>
 </section>
 
 <section class="story">
-  <img class="reveal" src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 600w, assets/t-rex.webp 1022w" sizes="(max-width: 860px) 78vw, 45vw" width="1022" height="1100" alt="Jurassic World cake with a sculpted T-rex" loading="lazy">
-  <div class="reveal">
-    <blockquote>“The Trex model was so realistic my son was very excited and happy to see it.”</blockquote>
-    <cite>A parent, in a Google review</cite>
+  <img src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 557w, assets/t-rex.webp 1022w" sizes="(max-width: 860px) 78vw, 45vw" width="1022" height="1100" alt="Jurassic World cake with a sculpted T-rex" loading="lazy">
+  <div>
+    <p class="big"><span class="mk2"><span>Jurassic World,</span></span><span class="mk2"><span style="--d:.12s">T&#8209;rex on top.</span></span></p>
+    
   </div>
 </section>
 
-<section class="flavours reveal">
+<section class="flavours">
   <p class="k">Flavours people mention in their reviews</p>
-  <ul><li>Belgian chocolate</li><li>White chocolate raspberry</li><li>Chocolate truffle</li></ul>
+  <ul><li style="--i:0">Belgian chocolate</li><li style="--i:1">White chocolate raspberry</li><li style="--i:2">Chocolate truffle</li></ul>
 </section>
 
 <section class="jars" id="jars">
-  <div class="head reveal"><h2>Jars &amp; cupcakes</h2><p>For smaller days.</p></div>
+  <div class="head"><h2 data-mk><span class="mk2"><span>Jars &amp; cupcakes</span></span></h2><p>For smaller days.</p></div>
   <div class="jarrow">
-    <img class="reveal" src="assets/dessert-jars.webp" srcset="assets/dessert-jars-sm.webp 600w, assets/dessert-jars.webp 1100w" sizes="(max-width: 860px) 92vw, 52vw" width="1100" height="427" alt="Dessert jars by Prisha's" loading="lazy">
-    <div class="jarlist reveal">
-      <div><h3>Berrylicious</h3><p>Strawberry cake layered with mixed berry coulis.</p></div>
-      <div><h3>Chocolate Lovers</h3><p>Chocolate cake layered with ganache and roasted hazelnuts.</p></div>
-      <div><h3>Lady in Red</h3><p>Red velvet, layered.</p></div>
-      <div><h3>Boston Cream</h3><p>Topped with toasted almonds.</p></div>
+    <img src="assets/dessert-jars.webp" srcset="assets/dessert-jars-sm.webp 600w, assets/dessert-jars.webp 1100w" sizes="(max-width: 860px) 92vw, 52vw" width="1100" height="427" alt="Dessert jars by Prisha's" loading="lazy">
+    <div class="jarlist">
+      <div><h3 style="--i:0">Berrylicious</h3><p>Strawberry cake layered with mixed berry coulis.</p></div>
+      <div><h3 style="--i:1">Chocolate Lovers</h3><p>Chocolate cake layered with ganache.</p></div>
+      <div><h3 style="--i:2">Lady in Red</h3><p>Moist red velvet cake topped with cream cheese frosting.</p></div>
+      <div><h3 style="--i:3">Boston Cream</h3><p>Yellow butter cake filled with custard &amp; ganache.</p></div>
     </div>
   </div>
   <div class="shelf">
-    <div class="bar reveal">
-      <blockquote>“Her cupcakes are really the best in town.”<cite>Google review</cite></blockquote>
+    <div class="bar">
+      <p class="shelfh">Cupcakes &amp; brownies</p>
       <span class="hint2">Swipe or drag the shelf →</span>
     </div>
     <div class="smalls" role="group" tabindex="0" aria-label="Cupcakes and brownies, scrolls sideways">
-      <figure style="--tint:#f4d9c6"><img src="assets/wizard-cupcakes-sm.webp" width="600" height="584" alt="Wizard birthday cupcakes" loading="lazy" draggable="false"><figcaption>Wizard cupcakes</figcaption></figure>
-      <figure style="--tint:#f9d7e3"><img src="assets/anniversary-cupcakes-sm.webp" width="600" height="642" alt="First anniversary cupcakes" loading="lazy" draggable="false"><figcaption>A first-anniversary set</figcaption></figure>
-      <figure style="--tint:#e6d7c6"><img src="assets/brownies-sm.webp" width="563" height="777" alt="Stack of nut-topped brownies" loading="lazy" draggable="false"><figcaption>Brownies</figcaption></figure>
-      <figure style="--tint:#d9deef"><img src="assets/hogwarts-cupcakes-sm.webp" width="600" height="545" alt="Hogwarts house cupcakes" loading="lazy" draggable="false"><figcaption>Hogwarts cupcakes</figcaption></figure>
+      <figure style="--tint:#f4d9c6;--i:0"><img src="assets/wizard-cupcakes-sm.webp" width="600" height="584" alt="Wizard birthday cupcakes" loading="lazy" draggable="false"><figcaption>Wizard cupcakes</figcaption></figure>
+      <figure style="--tint:#f9d7e3;--i:1"><img src="assets/anniversary-cupcakes-sm.webp" width="600" height="642" alt="First anniversary cupcakes" loading="lazy" draggable="false"><figcaption>A first-anniversary set</figcaption></figure>
+      <figure style="--tint:#e6d7c6;--i:2"><img src="assets/brownies-sm.webp" width="563" height="777" alt="Stack of nut-topped brownies" loading="lazy" draggable="false"><figcaption>Brownies</figcaption></figure>
+      <figure style="--tint:#d9deef;--i:3"><img src="assets/hogwarts-cupcakes-sm.webp" width="600" height="545" alt="Hogwarts house cupcakes" loading="lazy" draggable="false"><figcaption>Hogwarts cupcakes</figcaption></figure>
     </div>
   </div>
 </section>
 
 <section class="reviews">
-  <div class="badge reveal" role="img" aria-label="Rated 4.8 on Google; 61 of 67 reviews are five stars"><b>4.8</b><span>on Google</span><small>61 of 67 reviews<br>are five stars</small></div>
-  <figure class="pin reveal" style="--tint:#ebe0f3"><img src="assets/unicorn-sm.webp" alt="" loading="lazy" width="600" height="1098">
-    <blockquote>“Sharon brought the look of the cake just as I wanted.”<cite>Google review</cite></blockquote></figure>
-  <figure class="pin reveal" style="--tint:#e0eef0"><img src="assets/rainbow-sm.webp" alt="" loading="lazy" width="600" height="892">
-    <blockquote>“She delivered the cake neatly packed and in timely manner.”<cite>Google review</cite></blockquote></figure>
+  <div class="badge" role="img" aria-label="Rated 4.8 on Google; 61 of 67 reviews are five stars"><b data-count="4.8" data-dec="1">4.8</b><span>on Google</span><small><span data-count="61" style="font-size:inherit">61</span> of 67 reviews<br>are five stars</small></div>
+  <figure class="pin" style="--tint:#ebe0f3"><img src="assets/unicorn-sm.webp" alt="" loading="lazy" width="600" height="1098">
+    <blockquote>Sharon · the baker</blockquote></figure>
+  <figure class="pin" style="--tint:#e0eef0"><img src="assets/rainbow-sm.webp" alt="" loading="lazy" width="600" height="892">
+    <blockquote>Buttercream<cite>Mentioned in Google reviews</cite></blockquote></figure>
 </section>
 
 <section class="order" id="order">
-  <div class="head reveal"><h2>How ordering works</h2><p>It all happens in one WhatsApp chat.</p></div>
+  <div class="head"><h2 data-mk><span class="mk2"><span>How ordering works</span></span></h2><p>It starts with one WhatsApp message.</p></div>
   <div class="chatrow">
     <ol class="steps">
-      <li class="reveal"><h3>Send the brief</h3><p>The theme, the date, how many people. A photo of your idea helps.</p></li>
-      <li class="reveal"><h3>Talk it through</h3><p>Design, flavour and price, in the same chat.</p></li>
-      <li class="reveal"><h3>On the day</h3><p>Your cake, as you agreed together.</p></li>
+      <li style="--d:0s"><h3>Send the brief</h3><p>The theme, the date, how many people. A photo of your idea helps.</p></li>
+      <li style="--d:.15s"><h3>Talk it through</h3><p>Carry on in the same WhatsApp chat.</p></li>
+      <li style="--d:.3s"><h3>Check the hours</h3><p>Mon–Fri 10 am–7 pm, Saturday 10 am–3 pm. Sunday is closed.</p></li>
     </ol>
-    <div class="chat reveal" role="group" aria-label="Your brief, as it will look in WhatsApp">
+    <div class="chat" role="group" aria-label="Your brief, as it will look in WhatsApp">
       <div class="chat-top"><span class="dot" aria-hidden="true">P</span><b>Prisha's Patisserie</b></div>
       <div class="chat-body">
         <p class="bubble" id="chatMsg"></p>
@@ -358,13 +464,13 @@
       </div>
     </div>
   </div>
-  <a class="pill reveal" data-wa href="https://wa.me/918754297315" target="_blank" rel="noopener">Send your brief on WhatsApp</a>
+  <a class="pill" data-wa href="https://wa.me/918754297315" target="_blank" rel="noopener">Send your brief on WhatsApp</a>
 </section>
 
 <section class="visit">
-  <div><h3>Address</h3><p>R-25/1, 4th Main Road, 12th Street,<br>Anna Nagar, Chennai 600040</p><a href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Open in Google Maps</a></div>
-  <div><h3>Hours</h3><div class="hours"><span>Mon–Fri</span><span>10 am – 7 pm</span><span>Saturday</span><span>10 am – 3 pm</span><span>Sunday</span><span>Closed</span></div></div>
-  <div><h3>Talk to her</h3><a href="tel:+918754297315">+91 87542 97315</a><br><a href="https://www.facebook.com/Prishas.patisserie/" target="_blank" rel="noopener">Facebook</a></div>
+  <div style="--d:0s"><h3>Address</h3><p>R-25/1, 4th Main Road, 12th Street,<br>Anna Nagar, Chennai 600040</p><a href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Open in Google Maps</a></div>
+  <div style="--d:.12s"><h3>Hours</h3><div class="hours"><span>Mon–Fri</span><span>10 am – 7 pm</span><span>Saturday</span><span>10 am – 3 pm</span><span>Sunday</span><span>Closed</span></div></div>
+  <div style="--d:.24s"><h3>Talk to her</h3><a href="tel:+918754297315">+91 87542 97315</a><br><a href="https://www.facebook.com/Prishas.patisserie/" target="_blank" rel="noopener">Facebook</a></div>
 </section>
 </main>
 <footer>Website concept preview made for Prisha's Patisserie · not the official site</footer>
@@ -372,7 +478,7 @@
 <div class="dock"><a class="pill" data-wa href="https://wa.me/918754297315" target="_blank" rel="noopener">Send your brief on WhatsApp</a></div>
 
 <script>
-  // ---- The brief: plain JS, so ordering works even if the motion library never loads ----
+  // ---- The brief: plain JS, so ordering works whatever else loads ----
   const ASSETS = "assets/";
   const THEMES = [
     ["Harry Potter", "sorting-hat"], ["Jurassic", "t-rex"], ["F.R.I.E.N.D.S.", "central-perk"], ["Bath-time duck", "duck"],
@@ -381,7 +487,8 @@
   const brief = { theme: "Harry Potter", people: "15", day: null };
   const $ = (id) => document.getElementById(id);
 
-  const dayLabel = (d) => d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  let dayFmt = null;   // one formatter, made the first time a day is shown (building one per date was the slowest part of start-up)
+  const dayLabel = (d) => (dayFmt || (dayFmt = new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short" }))).format(d);
   const message = () => {
     const cake = brief.theme === "Something else" ? "a cake in my own theme" : `a ${brief.theme} cake`;
     const n = parseInt(brief.people, 10);
@@ -389,7 +496,18 @@
     const when = brief.day ? dayLabel(brief.day) : "(date)";
     return `Hi Prisha's Patisserie! I'd like ${cake} for ${who}, on ${when}. I'll send a photo of my idea too.`;
   };
+  const wrapFit = () => {
+    const h = document.querySelector(".brief"); if (!h) return;
+    h.classList.remove("wrap");
+    if ([...h.querySelectorAll(".ln")].some((l) => l.scrollWidth > l.clientWidth + 1)) h.classList.add("wrap");
+  };
+  addEventListener("resize", wrapFit);
+  /* The font files are preloaded, so `load` comes after they arrive; checking then (not by asking document.fonts, which lays the page out
+     in the middle of the script) keeps the page to one layout before first paint. */
+  addEventListener("load", () => setTimeout(wrapFit, 0));
+  let booting = true;   // no layout reads during start-up: wrapFit runs once after the closing sync()
   const sync = () => {
+    if (!booting) wrapFit();
     const chat = $("chatMsg"); if (chat) chat.textContent = message();
     const href = "https://wa.me/918754297315?text=" + encodeURIComponent(message());
     document.querySelectorAll("[data-wa]").forEach((a) => { a.href = href; });
@@ -407,13 +525,18 @@
     window.dispatchEvent(new CustomEvent("themechange", { detail: { name, ...opts } }));
   };
 
-  // Theme sheet
-  $("themeList").innerHTML = THEMES.map(([name, img]) =>
-    `<button data-theme="${name}" aria-pressed="${name === brief.theme}">${img ? `<img src="${ASSETS}${img}-sm.webp" alt="" loading="lazy">` : `<span style="width:34px;text-align:center">✎</span>`}${name}</button>`).join("");
-  // Day sheet: the next 14 days (what's possible is settled in the chat)
+  // The two sheets are filled the first time they open, so none of it runs before first paint
+  let sheetsBuilt = false;
+  const buildSheets = () => {
+    if (sheetsBuilt) return; sheetsBuilt = true;
+    $("themeList").innerHTML = THEMES.map(([name, img]) =>
+      `<button data-theme="${name}" aria-pressed="${name === brief.theme}">${img ? `<img src="${ASSETS}${img}-sm.webp" alt="" loading="lazy">` : `<span style="width:34px;text-align:center">✎</span>`}${name}</button>`).join("");
+    // Day sheet: the next 14 days (what's possible is settled in the chat)
+    days.length = 0;
+    for (let i = 1; i <= 14; i++) { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() + i); days.push(d); }
+    $("dayList").innerHTML = days.map((d, i) => `<button data-day="${i}">${dayLabel(d)}</button>`).join("");
+  };
   const days = [];
-  for (let i = 1; i <= 14; i++) { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() + i); days.push(d); }
-  $("dayList").innerHTML = days.map((d, i) => `<button data-day="${i}">${dayLabel(d)}</button>`).join("");
 
   let openSheet = null, openFrom = null;
   const place = (sheet, from) => {
@@ -432,11 +555,11 @@
   };
   const open = (sheet, from) => {
     if (openSheet === sheet) return close();
-    close(false);
+    close(false); buildSheets();
     place(sheet, from); from.setAttribute("aria-expanded", "true");
     openSheet = sheet; openFrom = from;
     window.dispatchEvent(new CustomEvent("sheetopen", { detail: sheet }));
-    (sheet.querySelector('[aria-pressed="true"]') || sheet.querySelector("button:not(:disabled)")).focus();
+    (sheet.querySelector('[aria-pressed="true"]') || sheet.querySelector("button:not(:disabled)")).focus({ preventScroll: true });
   };
   $("themeBlank").addEventListener("click", () => open($("themeSheet"), $("themeBlank")));
   $("dayBlank").addEventListener("click", () => open($("daySheet"), $("dayBlank")));
@@ -472,113 +595,261 @@
     document.querySelector(".hero").scrollIntoView({ block: "start" });
   }));
   sync();
+  booting = false;
+  requestAnimationFrame(() => setTimeout(wrapFit, 0));   // after first paint: the page was laid out once, not twice, before anything showed
 </script>
 
-<script type="module">
-  // Motion (motion.dev), pinned. Springs settle by physics, so anything can be grabbed mid-motion.
-  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@14.0.0/+esm";
-  const late = !document.documentElement.classList.contains("js");   // the failsafe already showed everything
-  window.__motionReady = true;
-  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+<script>
+/* Motion, in plain JS (no library, so nothing waits on a CDN and phones stay light): the opening hand-over, the cake
+   drag with its spring, the shelf fling, scroll scenes, counters, ambient bubbles, the order button's burst. */
+(function () {
+  'use strict';
+  window.__gp = 1;
+  var D = document, root = D.documentElement;
+  var $ = function (s, c) { return (c || D).querySelector(s); };
+  var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DESK = matchMedia('(min-width: 1024px) and (pointer: fine)');
+  var OUT = 'cubic-bezier(.23,1,.32,1)';
+  var hasIO = 'IntersectionObserver' in window;
 
-  // Reveals: settle in once, no bounce (nothing was thrown)
-  try {
-    if (!late) inView(".reveal", (el) => {
-      if (calm) { animate(el, { opacity: 1 }, { duration: 0.3 }); return; }
-      animate(el, { opacity: [0, 1], y: [24, 0] }, { type: "spring", bounce: 0, duration: 0.65 });
-    }, { amount: 0.2 });
-  } catch (err) { document.documentElement.classList.remove("js"); }
-
-  // The hero table arrives as one set: each cake drops onto the table in turn
-  const toys = [...document.querySelectorAll(".toy")];
-  if (!calm && !late) animate(toys, { opacity: [0, 1], y: [-30, 0] }, { type: "spring", bounce: 0.2, duration: 0.7, delay: stagger(0.07, { startDelay: 0.15 }) });
-
-  // Sheets grow out of their blank (scale from the trigger, never from 0)
-  addEventListener("sheetopen", (e) => { if (!calm) animate(e.detail, { opacity: [0, 1], scale: [0.96, 1] }, { type: "spring", bounce: 0, duration: 0.25 }); });
-
-  // The blank pops when the theme changes, the matching cake hops
-  addEventListener("themechange", (e) => {
-    if (calm) return;
-    animate(document.getElementById("themeText"), { scale: [1.12, 1] }, { type: "spring", bounce: 0.35, duration: 0.45 });
-    const toy = toys.find((t) => t.dataset.theme === e.detail.name);
-    if (toy && !e.detail.fromToy) animate(toy, { y: [0, -16, 0] }, { duration: 0.45, ease: [0.23, 1, 0.32, 1] });
-  });
-
-  // Pick up a cake: 1:1 with the pointer from where it was grabbed; let go and it springs home with the throw's speed.
-  // A tap (barely moved) picks its theme instead. On touch, a vertical swipe still scrolls the page (touch-action: pan-y).
-  for (const toy of toys) {
-    let start = null, trail = [], spring = null, dragging = false;
-    toy.addEventListener("pointerdown", (e) => {
-      if (e.button !== 0) return;
-      spring?.stop();
-      const m = new DOMMatrixReadOnly(getComputedStyle(toy).transform);
-      start = { x: e.clientX - m.m41, y: e.clientY - m.m42, cx: e.clientX, cy: e.clientY };
-      trail = [[e.clientX, e.clientY, e.timeStamp]]; dragging = false;
-    });
-    toy.addEventListener("pointermove", (e) => {
-      if (!start) return;
-      if (e.pointerType === "mouse" && e.buttons === 0) return drop(e);   // released outside before the drag began
-      if (!dragging) {
-        if (Math.hypot(e.clientX - start.cx, e.clientY - start.cy) < 8) return;   // hysteresis before it counts as a drag
-        dragging = true; toy.setPointerCapture(e.pointerId); toy.style.zIndex = 9;
-        animate(toy, { scale: 1.06 }, { type: "spring", bounce: 0, duration: 0.2 });
-      }
-      animate(toy, { x: e.clientX - start.x, y: e.clientY - start.y }, { duration: 0 });
-      trail.push([e.clientX, e.clientY, e.timeStamp]); if (trail.length > 5) trail.shift();
-    });
-    let flight = 0;
-    const drop = (e) => {
-      if (!start) return;
-      start = null;
-      if (!dragging) {   // a tap: if it was caught mid-spring, send it home
-        const m = new DOMMatrixReadOnly(getComputedStyle(toy).transform);
-        if (m.m41 || m.m42 || m.a !== 1) animate(toy, { x: 0, y: 0, scale: 1 }, { type: "spring", bounce: 0, duration: 0.4 });
-        return;
-      }
-      toy.dataset.dragged = Date.now();
-      if (e) trail.push([e.clientX, e.clientY, e.timeStamp]);   // holding still before letting go means no throw
-      const recent = trail.filter(([, , t]) => trail[trail.length - 1][2] - t < 100);
-      const [x0, y0, t0] = recent[0], [x1, y1, t1] = recent[recent.length - 1];
-      const dt = Math.max(16, t1 - t0) / 1000;
-      const spec = { type: "spring", bounce: 0.3, duration: 0.6 };
-      const mine = ++flight;
-      spring = animate(toy, { x: 0, y: 0, scale: 1 },
-                       { ...spec, x: { ...spec, velocity: (x1 - x0) / dt }, y: { ...spec, velocity: (y1 - y0) / dt } });
-      spring.finished?.then(() => { if (mine === flight && !start) toy.style.zIndex = ""; });
-    };
-    toy.addEventListener("pointerup", drop);
-    toy.addEventListener("pointercancel", () => drop());
+  /* ---- the opening is over: the sentence, the order button and the table are all in ---- */
+  var startAmbient = function () {};
+  function done() {
+    if (root.getAttribute('data-opening') === 'done') return;
+    root.setAttribute('data-opening', 'done');
+    (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(function () { startAmbient(); }, { timeout: 1200 });
+  }
+  var proof = $('.proof');
+  if (RM) done();
+  else {
+    if (proof) proof.addEventListener('animationend', function (e) { if (e.target === proof) done(); });
+    setTimeout(done, 2400);
   }
 
-  // Cupcake shelf: a mouse can drag it; a fling lands on the nearest card (Apple's deceleration projection)
-  const shelf = document.querySelector(".smalls");
-  let drag = null, glide = null, moved = 0;
-  const project = (v, rate = 0.998) => (v / 1000) * rate / (1 - rate);
-  const stops = () => [...shelf.children].map((c) => Math.min(c.offsetLeft - shelf.firstElementChild.offsetLeft, shelf.scrollWidth - shelf.clientWidth));
-  shelf.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse" || e.button !== 0) return;
-    glide?.stop(); shelf.setPointerCapture(e.pointerId); shelf.classList.add("dragging");
+  /* ---- a small spring: used for letting go of a cake and for the shelf fling ---- */
+  function spring(from, to, v0, upd, fin, k, c) {
+    k = k || 170; c = c || 17;
+    var x = from.slice(), v = v0.slice(), t0 = performance.now(), id = 0, live = true;
+    function f(t) {
+      if (!live) return;
+      var dt = Math.min(0.032, (t - t0) / 1000); t0 = t;
+      var rest = true;
+      for (var i = 0; i < x.length; i++) {
+        v[i] += (-k * (x[i] - to[i]) - c * v[i]) * dt; x[i] += v[i] * dt;
+        if (Math.abs(v[i]) > 0.5 || Math.abs(x[i] - to[i]) > 0.3) rest = false;
+      }
+      if (rest) { upd(to.slice()); live = false; if (fin) fin(); return; }
+      upd(x.slice()); id = requestAnimationFrame(f);
+    }
+    id = requestAnimationFrame(f);
+    return { stop: function () { live = false; cancelAnimationFrame(id); } };
+  }
+
+  /* ---- sheets grow out of their blank; the picked blank pops; the matching cake hops ---- */
+  var toys = $$('.toy');
+  addEventListener('sheetopen', function (e) {
+    if (!RM && e.detail.animate) e.detail.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 220, easing: OUT });
+  });
+  addEventListener('themechange', function (e) {
+    if (RM) return;
+    var tt = $('#themeText'); if (tt.animate) tt.animate([{ transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 380, easing: OUT });
+    var toy = toys.filter(function (t) { return t.dataset.theme === e.detail.name; })[0];
+    if (toy && !e.detail.fromToy && toy.animate && !toy.__drag) toy.animate([{ transform: 'none' }, { transform: 'translateY(-16px)' }, { transform: 'none' }], { duration: 450, easing: OUT });
+  });
+
+  /* ---- signature: pick a cake up and toss it. 1:1 with the finger, a spring with the throw's speed on release.
+          A tap (barely moved) picks its theme instead; vertical swipes still scroll (touch-action: pan-y) ---- */
+  toys.forEach(function (toy) {
+    var pos = { x: 0, y: 0, s: 1 }, sp = null, start = null, trail = [], dragging = false;
+    function put() { toy.style.transform = (pos.x || pos.y || pos.s !== 1) ? 'translate3d(' + pos.x.toFixed(1) + 'px,' + pos.y.toFixed(1) + 'px,0) scale(' + pos.s.toFixed(3) + ')' : ''; }
+    function home(vx, vy) {
+      if (RM) { pos.x = pos.y = 0; pos.s = 1; put(); toy.style.zIndex = ''; toy.__drag = false; return; }
+      sp = spring([pos.x, pos.y, pos.s], [0, 0, 1], [vx, vy, 0], function (a) { pos.x = a[0]; pos.y = a[1]; pos.s = a[2]; put(); },
+        function () { toy.style.zIndex = ''; sp = null; toy.__drag = false; }, 170, 15);
+    }
+    toy.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      if (sp) { sp.stop(); sp = null; }
+      start = { x: e.clientX - pos.x, y: e.clientY - pos.y, cx: e.clientX, cy: e.clientY };
+      trail = [[e.clientX, e.clientY, e.timeStamp]]; dragging = false;
+    });
+    toy.addEventListener('pointermove', function (e) {
+      if (!start) return;
+      if (e.pointerType === 'mouse' && e.buttons === 0) return drop(e);
+      if (!dragging) {
+        if (Math.hypot(e.clientX - start.cx, e.clientY - start.cy) < 8) return;
+        dragging = true; toy.__drag = true; toy.setPointerCapture(e.pointerId); toy.style.zIndex = 9; pos.s = 1.06;
+      }
+      pos.x = e.clientX - start.x; pos.y = e.clientY - start.y; put();
+      trail.push([e.clientX, e.clientY, e.timeStamp]); if (trail.length > 5) trail.shift();
+    });
+    function drop(e) {
+      if (!start) return;
+      start = null;
+      if (!dragging) { if (pos.x || pos.y || pos.s !== 1) home(0, 0); return; }
+      toy.dataset.dragged = Date.now();
+      if (e && e.clientX !== undefined) trail.push([e.clientX, e.clientY, e.timeStamp]);
+      var last = trail[trail.length - 1], recent = trail.filter(function (p) { return last[2] - p[2] < 100; });
+      var a = recent[0], b = recent[recent.length - 1], dt = Math.max(16, b[2] - a[2]) / 1000;
+      var cl = function (n) { return Math.max(-3000, Math.min(3000, n)); };
+      dragging = false;
+      home(cl((b[0] - a[0]) / dt), cl((b[1] - a[1]) / dt));
+    }
+    toy.addEventListener('pointerup', drop);
+    toy.addEventListener('pointercancel', function () { drop(); });
+  });
+
+  /* ---- cupcake shelf: a mouse can drag it; a fling lands on the nearest card ---- */
+  var shelf = $('.smalls');
+  var drag = null, glide = null, moved = 0;
+  var stops = function () { return $$('figure', shelf).map(function (c) { return Math.min(c.offsetLeft - shelf.firstElementChild.offsetLeft, shelf.scrollWidth - shelf.clientWidth); }); };
+  shelf.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    if (glide) glide.stop(); shelf.setPointerCapture(e.pointerId); shelf.classList.add('dragging');
     drag = { x: e.clientX, left: shelf.scrollLeft, trail: [[e.clientX, e.timeStamp]] }; moved = 0;
   });
-  shelf.addEventListener("pointermove", (e) => {
+  shelf.addEventListener('pointermove', function (e) {
     if (!drag) return;
-    const dx = e.clientX - drag.x; moved = Math.max(moved, Math.abs(dx));
+    var dx = e.clientX - drag.x; moved = Math.max(moved, Math.abs(dx));
     shelf.scrollLeft = drag.left - dx;
     drag.trail.push([e.clientX, e.timeStamp]); if (drag.trail.length > 6) drag.trail.shift();
   });
-  const release = () => {
+  function release() {
     if (!drag) return;
-    const [x0, t0] = drag.trail[0], [x1, t1] = drag.trail[drag.trail.length - 1];
-    const v = t1 > t0 ? -((x1 - x0) / (t1 - t0)) * 1000 : 0;
+    var a = drag.trail[0], b = drag.trail[drag.trail.length - 1];
+    var v = b[1] > a[1] ? -((b[0] - a[0]) / (b[1] - a[1])) * 1000 : 0;
     drag = null;
-    const from = shelf.scrollLeft, aim = from + (calm ? 0 : project(v));
-    const s = stops(), to = s.reduce((b, x) => Math.abs(x - aim) < Math.abs(b - aim) ? x : b, s[0]);
-    const done = () => shelf.classList.remove("dragging");
-    if (calm) { shelf.scrollLeft = to; done(); return; }
-    glide = animate(from, to, { type: "spring", bounce: 0.15, duration: 0.5, velocity: v, onUpdate: (x) => { shelf.scrollLeft = x; }, onComplete: done });
-  };
-  shelf.addEventListener("pointerup", release); shelf.addEventListener("pointercancel", release);
-  shelf.addEventListener("click", (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+    var from = shelf.scrollLeft, aim = from + (RM ? 0 : (v / 1000) * 0.998 / 0.002);
+    var s = stops(), to = s.reduce(function (m, x) { return Math.abs(x - aim) < Math.abs(m - aim) ? x : m; }, s[0]);
+    var fin = function () { shelf.classList.remove('dragging'); };
+    if (RM) { shelf.scrollLeft = to; fin(); return; }
+    glide = spring([from], [to], [v], function (a2) { shelf.scrollLeft = a2[0]; }, fin, 170, 20);
+  }
+  shelf.addEventListener('pointerup', release); shelf.addEventListener('pointercancel', release);
+  shelf.addEventListener('click', function (e) { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+  /* ---- scroll scenes: each section has its own, played once; text is never hidden again ---- */
+  if (!hasIO) root.className += ' rv-fail';
+  else if (!RM) {
+    $$('.wall .tile').forEach(function (t, i) { t.style.setProperty('--d', ((i % 3) * 0.09) + 's'); });
+    var SEL = '.head, .tile, .story, .flavours, .jarrow, .shelf, .badge, .pin, .steps li, .chat, .visit > div';
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) reveal(e.target); });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    function reveal(el) {
+      if (el.classList.contains('in')) return;
+      el.classList.add('in'); io.unobserve(el);
+      if (el === $('.shelf')) setTimeout(nudge, 900);
+    }
+    $$(SEL).forEach(function (el) { io.observe(el); });
+    /* a fast jump can pass a block before the observer reports it: check by position as well */
+    var pend = $$(SEL), sweepT = 0;
+    /* measure the section first: asking for a child's box inside a section that hasn't been laid out yet would lay it out early */
+    function sweep() { sweepT = 0; pend = pend.filter(function (el) { if (el.classList.contains('in')) return false; var sec = el.closest('section') || el, sr = sec.getBoundingClientRect(); if (sr.top > innerHeight * 1.1) return true; var r = el.getBoundingClientRect(); if (r.height && r.top < innerHeight * 0.9) { reveal(el); return false; } return true; }); if (!pend.length) removeEventListener('scroll', onScroll); }
+    function onScroll() { if (!sweepT) sweepT = requestAnimationFrame(sweep); }
+    addEventListener('scroll', onScroll, { passive: true });
+  }
+  /* a first nudge tells the shelf it moves: it slides a little and springs back */
+  function nudge() {
+    if (RM || !shelf || shelf.scrollLeft > 2 || drag) return;
+    shelf.classList.add('dragging');
+    glide = spring([0], [0], [380], function (a) { shelf.scrollLeft = Math.max(0, a[0]); }, function () { shelf.classList.remove('dragging'); }, 150, 11);
+  }
+
+  /* ---- counters: from 35% of the value over 1.9 s, power3.out ---- */
+  function count(el) {
+    var v = parseFloat(el.getAttribute('data-count')), dec = +(el.getAttribute('data-dec') || 0), t0 = null;
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 1900), k = 1 - Math.pow(1 - p, 3);
+      el.textContent = (v * (0.35 + 0.65 * k)).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = v.toFixed(dec);
+    }
+    el.textContent = (v * 0.35).toFixed(dec);
+    requestAnimationFrame(step);
+  }
+  if (hasIO && !RM) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { $$('[data-count]', e.target).forEach(count); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    $$('.badge').forEach(function (n) { cio.observe(n); });
+  }
+
+  /* ---- ambient: sugar pearls gathered around the cake table, floating slowly. DPR 1, 30 fps, 30 on phones (never over 40),
+          paused off screen, steps down if slow. Small (3-6 px), warm cream and gold, each with a highlight; the canvas sits at .19 opacity behind the text ---- */
+  var cv = $('#amb'), hero = $('.hero');
+  function ambient() {
+    if (!cv || RM || !cv.getContext) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, parts = [], seen = true, running = false, last = 0, density = 1, slow = 0, frames = 0, wlast = 0;
+    var COLS = ['#d9a441', '#e9c46a', '#f3dcae', '#c98f3c', '#f6e8c8'];
+    var MAX = DESK.matches ? 40 : 30;
+    var box = { x: 0, y: 0, w: 0, h: 0 };   /* the table, in the hero's own coordinates, with a margin: the pearls stay in here */
+    function size() {
+      W = cv.width = hero.clientWidth; H = cv.height = hero.clientHeight;
+      var h = hero.getBoundingClientRect(), t = $('.table').getBoundingClientRect();
+      box.x = Math.max(0, t.left - h.left - 28); box.y = Math.max(0, t.top - h.top - 24);
+      box.w = Math.min(W - box.x, t.width + 56); box.h = Math.min(H - box.y, t.height + 48);
+    }
+    function mk() {
+      return { x: box.x + Math.random() * box.w, y: box.y + Math.random() * box.h, vy: -(3 + Math.random() * 7), ph: Math.random() * 6.28, sp: .4 + Math.random() * .6,
+               r: 1.5 + Math.random() * 1.5, c: COLS[(Math.random() * COLS.length) | 0] };
+    }
+    size(); for (var i = 0; i < MAX; i++) parts.push(mk());
+    function frame(t) {
+      running = false;
+      if (!seen || D.hidden) return;
+      running = true; requestAnimationFrame(frame);
+      /* watchdog: count slow frames from the gap between rAF timestamps (any cause), 90 frames, never off */
+      var gap = wlast ? t - wlast : 16.7; wlast = t;
+      if (gap > 24) slow++;
+      if (++frames >= 90) { if (slow > 45) density = density > .6 ? .6 : density > .36 ? .36 : .2; frames = 0; slow = 0; }
+      if (t - last < 33) return;
+      var dt = Math.min(0.1, (t - last) / 1000); last = t;
+      ctx.clearRect(0, 0, W, H);
+      var n = Math.round(MAX * density);
+      for (var i = 0; i < n; i++) {
+        var p = parts[i];
+        p.y += p.vy * dt; p.ph += dt * p.sp;
+        if (p.y < box.y - 6) { p.y = box.y + box.h + 6; p.x = box.x + Math.random() * box.w; }
+        var x = p.x + Math.sin(p.ph) * 5;
+        ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(x, p.y, p.r, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = '#fffdf6'; ctx.beginPath(); ctx.arc(x - p.r * .3, p.y - p.r * .3, p.r * .35, 0, 6.2832); ctx.fill();
+      }
+    }
+    function go() { if (!running && seen && !D.hidden) { last = performance.now(); wlast = 0; frames = 0; slow = 0; running = true; requestAnimationFrame(frame); } }
+    if (hasIO) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) go(); }, { threshold: 0 }).observe(hero);
+    D.addEventListener('visibilitychange', go);
+    if ('ResizeObserver' in window) new ResizeObserver(function () { if (hero.clientWidth !== W || hero.clientHeight !== H) size(); }).observe(hero); else addEventListener('resize', size);
+    go();
+  }
+  startAmbient = ambient;
+
+  /* ---- response: the order buttons answer the press and let off a burst; the link opens as normal ---- */
+  $$('.pill').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (RM || !a.animate) return;
+      var r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var COL = ['#b83f25', '#e58aa8', '#e3a57a', '#fffaf2', '#1c1a17'];
+      for (var i = 0; i < 12; i++) {
+        var s = D.createElement('span'); s.className = 'spark';
+        s.style.left = cx + 'px'; s.style.top = cy + 'px'; s.style.background = COL[i % COL.length];
+        D.body.appendChild(s);
+        var ang = (i / 12) * 6.283 + Math.random() * .4, d = 48 + Math.random() * 40;
+        var an = s.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * d).toFixed(0) + 'px), calc(-50% + ' + (Math.sin(ang) * d - 14).toFixed(0) + 'px)) scale(.5)', opacity: 0 }],
+          { duration: 650, easing: OUT });
+        an.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+      }
+    });
+  });
+
+  /* ---- the dock steps aside while the page's own order button is on screen (its bottom 84px is the dock's own strip) ---- */
+  var dock = $('.dock'), own = $('.order > .pill');
+  if (dock && own && hasIO) {
+    new IntersectionObserver(function (es) { dock.classList.toggle('away', es[es.length - 1].isIntersecting); }, { rootMargin: '0px 0px -84px 0px' }).observe(own);
+  }
+})();
 </script>
 </body>
 </html>

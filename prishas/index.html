@@ -9,8 +9,19 @@
 <meta name="theme-color" content="#0d2f73">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/bricolage-cond-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/sorting-hat-sm.webp 383w, assets/sorting-hat.webp 703w" imagesizes="(max-width: 760px) 80vw, 40vw" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;650&family=Fragment+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;650&family=Fragment+Mono&display=swap" rel="stylesheet"></noscript>
+<script>
+  /* Reveal CSS hides things only while this script is expected to run; if it never does, everything shows after 2.5 s */
+  document.documentElement.className += ' js';
+  setTimeout(function () { if (!window.__pp) document.documentElement.className += ' rv-fail'; }, 2500);
+</script>
 <style>
+  /* The condensed display cut is a static file (weight 800, 75% width, latin), so nothing is stretched at run time and the
+     headline is set once. It is preloaded; 'block' means the lines never show in a wider fallback and re-wrap. */
+  @font-face { font-family: "Bricolage Cond"; src: url(assets/bricolage-cond-800.woff2) format("woff2"); font-weight: 800; font-style: normal; font-display: block; }
   :root {
     --navy: #0d2f73;       /* her starry cake */
     --cream: #f6ead0;      /* buttercream */
@@ -18,70 +29,112 @@
     --ink: #14130f;
     --moss: #2c4a32;       /* T-rex jungle */
     --sky: #9bcde8;        /* duck's bath */
-    --brick: #c9532d;      /* Central Perk orange */
+    --brick: #bb4a26;      /* Central Perk orange */
     --teal: #6fb4b0;       /* the vintage car */
     --candy: #f2a9c4;      /* lollipops */
     --lilac: #cdbbe6;      /* unicorn mane */
     --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --cond: "Bricolage Cond", Impact, "Arial Narrow", sans-serif-condensed, system-ui, sans-serif;
     --mono: "Fragment Mono", ui-monospace, monospace;
     --pad: clamp(16px, 4vw, 48px);
+    --out: cubic-bezier(.16, 1, .3, 1);      /* entrances */
+    --ui: cubic-bezier(.23, 1, .32, 1);      /* presses */
   }
   * { box-sizing: border-box; }
-  html { overflow-x: clip; }
+  html { overflow-x: clip; scroll-padding-top: 72px; }
   body { margin: 0; font: 400 16px/1.5 var(--display); color: var(--cream); background: var(--navy); }
   img { display: block; max-width: 100%; }
   a { color: inherit; }
-  h1, h2, h3 { margin: 0; font-weight: 800; font-stretch: 76%; text-transform: uppercase; letter-spacing: -.01em; line-height: .86; }
+  h1, h2, h3 { margin: 0; font-family: var(--cond); font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: .86; }
   p { margin: 0; }
   .mono { font-family: var(--mono); }
   /* Phones: comfortable tap targets, no grey tap flash, room for the sticky button */
   html { -webkit-text-size-adjust: 100%; }
   a, button { -webkit-tap-highlight-color: transparent; }
   img { height: auto; }
-
+  :focus-visible { outline: 2.5px solid var(--butter); outline-offset: 3px; }
 
   .concept { background: var(--ink); color: #cfc7b5; font: 12px/1.3 var(--mono); padding: 8px 16px; text-align: center; }
-  .top { display: flex; justify-content: space-between; align-items: center; padding: 18px var(--pad); position: relative; z-index: 4; }
-  .top b { font: 800 22px/1 var(--display); font-stretch: 80%; text-transform: uppercase; }
+
+  /* The name bar: solid, sticky, her badge and name, never over the order button */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 8px var(--pad); position: sticky; top: 0; z-index: 30;
+         background: var(--navy); box-shadow: 0 1px 0 rgba(246, 234, 208, .14); min-height: 58px; }
+  .brandlink { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; min-height: 44px; }
+  .mark { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--butter); color: var(--navy); display: grid; place-items: center;
+          font: 800 23px/1 var(--cond); box-shadow: 0 0 0 2px var(--navy), 0 0 0 3.5px rgba(245, 207, 63, .55); }
+  .top b { font: 800 21px/1 var(--cond); text-transform: uppercase; white-space: nowrap; }
   .top nav { display: none; gap: 26px; font: 13px/1 var(--mono); }
-  .top nav a { text-decoration: none; }
-  .wa { display: inline-flex; align-items: center; gap: 10px; background: var(--butter); color: var(--ink); text-decoration: none; padding: 14px 20px;
-        border-radius: 999px; font: 650 15px/1 var(--display); transition: transform .12s ease-out; }
-  .wa:hover { transform: rotate(-2deg) scale(1.03); }
-  .wa:active { transform: translateY(1px); }
+  .top nav a { text-decoration: none; padding: 16px 4px; display: inline-block; }
+  .brandlink, .info a, .top nav a { transition: transform 140ms var(--ui); }
+  .brandlink:active, .info a:active, .top nav a:active { transform: scale(.97); }
+  .wa { position: relative; display: inline-flex; align-items: center; gap: 10px; background: var(--butter); color: var(--ink); text-decoration: none; padding: 14px 20px;
+        border-radius: 999px; font: 650 15px/1 var(--display); transition: transform 140ms var(--ui); min-height: 44px; }
+  @media (hover: hover) and (pointer: fine) { .wa:hover { transform: rotate(-2deg) scale(1.03); } }
+  .wa:active { transform: scale(.97); }
   .wa svg { width: 18px; height: 18px; fill: currentColor; }
+  .spark { position: fixed; z-index: 60; width: 9px; height: 4px; border-radius: 2px; pointer-events: none; }
 
   /* Hero */
-  .hero { position: relative; min-height: calc(100svh - 92px); padding: 0 var(--pad) 40px; display: grid; align-content: end; }
+  .hero { position: relative; min-height: calc(100svh - 150px); padding: 0 var(--pad) 40px; display: grid; align-content: end; }
   .hero h1 { font-size: clamp(56px, 9.4vw, 168px); max-width: 66vw; position: relative; z-index: 1; }
-  .hero h1 span { display: block; color: var(--butter); }
+  .hero h1 .ln { display: block; overflow: hidden; padding: .05em 0 .07em; margin: -.05em 0 -.07em; }
+  .hero h1 .ln > span { display: block; animation: rise .85s var(--out) both; }
+  .hero h1 .ln:nth-child(1) > span { animation-delay: .05s; }
+  .hero h1 .ln:nth-child(2) > span { color: var(--butter); animation-delay: .17s; }
   .hero .cake { position: absolute; z-index: 2; right: 2vw; bottom: 0; height: min(84%, 720px); width: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35));
-                animation: drop .9s cubic-bezier(.2, .8, .2, 1) both; }
-  @keyframes drop { from { transform: translateY(-24px) rotate(2deg); opacity: 0; } to { transform: none; opacity: 1; } }
-  .note { background: var(--cream); color: var(--ink); font: 13.5px/1.45 var(--mono); padding: 14px 16px 16px; width: 230px; box-shadow: 0 10px 0 rgba(0,0,0,.18); }
-  .note b { display: block; font: 700 11px/1 var(--mono); letter-spacing: .08em; margin-bottom: 8px; color: #6b6352; }
-  .hero .note { position: absolute; z-index: 3; right: 3vw; top: 7%; transform: rotate(3deg); }
-  .hero .sub { position: relative; z-index: 3; display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font: 14px/1.4 var(--mono); }
+                animation: sculpt 1.05s var(--out) .12s both; touch-action: pan-y; cursor: pointer; -webkit-user-drag: none; user-select: none; }
+  @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+  @keyframes sculpt { from { clip-path: inset(100% 0 0 0); transform: translateY(14px); } to { clip-path: inset(-60px); transform: none; } }
+  @keyframes pin { from { transform: rotate(14deg) translateY(-18px); opacity: 0; } to { transform: rotate(3deg); opacity: 1; } }
+  @keyframes typed { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+  @keyframes up { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes dockin { from { transform: translateY(130%); } to { transform: none; } }
+  @keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(20, 19, 15, .35); } 100% { box-shadow: 0 0 0 14px rgba(20, 19, 15, 0); } }
+  .note { background: var(--cream); color: var(--ink); font: 13.5px/1.45 var(--mono); padding: 14px 16px 12px; width: 230px; box-shadow: 0 10px 0 rgba(0,0,0,.18); }
+  .note b { display: block; font: 700 12px/1 var(--mono); letter-spacing: .08em; margin-bottom: 8px; color: #6b6352; }
+  .note .t { display: block; min-height: 4.4em; animation: typed .9s steps(26, end) .85s both; }
+  .note .next { margin-top: 4px; min-height: 44px; display: flex; align-items: center; gap: 8px; width: 100%; border: 0; border-top: 1.5px dashed #b8ad92; background: none; color: var(--ink);
+                font: 700 12px/1 var(--mono); letter-spacing: .04em; text-align: left; cursor: pointer; transition: transform 140ms var(--ui); }
+  .note .next:active { transform: scale(.97); }
+  .note .next.nudge { animation: ring .9s ease-out 2; border-radius: 6px; }
+  .hero .note { position: absolute; z-index: 3; right: 3vw; top: 7%; transform: rotate(3deg); animation: pin .6s var(--out) .5s both; }
+  .hero .sub { position: relative; z-index: 3; display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font: 14px/1.4 var(--mono); animation: up .6s var(--out) 1.05s both; }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .19; }
 
-  /* Briefs */
+  /* Briefs: each colour panel wipes up like frosting, then its cake builds from the base */
   .briefs { display: grid; }
-  .pair { position: relative; display: grid; gap: 18px; padding: 56px var(--pad) 0; overflow: hidden; min-height: 560px; align-content: space-between; }
+  .pair { position: relative; isolation: isolate; display: grid; gap: 18px; padding: 56px var(--pad) 0; overflow: hidden; min-height: 560px; align-content: space-between; }
   .pair h2 { font-size: clamp(42px, 5.4vw, 80px); }
   .pair p { font: 14px/1.5 var(--mono); max-width: 32ch; margin-top: 14px; }
-  .pair img { height: clamp(300px, 34vw, 470px); width: auto; justify-self: center; margin-bottom: -4px; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-  .pair:hover img { transform: translateY(-10px) rotate(-1.5deg); }
-  .moss { background: var(--moss); color: #e9efd9; } .sky { background: var(--sky); color: var(--ink); } .brick { background: var(--brick); color: #fff3e6; }
-  .teal { background: var(--teal); color: var(--ink); } .candy { background: var(--candy); color: var(--ink); } .lilac { background: var(--lilac); color: var(--ink); }
+  .pair img { height: clamp(300px, 34vw, 470px); width: auto; justify-self: center; margin-bottom: -4px; transition: transform .5s var(--out); }
+  @media (hover: hover) and (pointer: fine) { .pair:hover img { transform: translateY(-10px) rotate(-1.5deg); } }
+  .pair:active img { transform: scale(.98); }
+  .gs .pair img, .gs .pair:hover img, .gs .pair:active img { transition: none; }
+  .pair::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--bg); }   /* the colour is a layer, so it can wipe in while the panel itself stays observable */
+  .moss { --bg: var(--moss); color: #e9efd9; } .sky { --bg: var(--sky); color: var(--ink); } .brick { --bg: var(--brick); color: #fff3e6; }
+  .teal { --bg: var(--teal); color: var(--ink); } .candy { --bg: var(--candy); color: var(--ink); } .lilac { --bg: var(--lilac); color: var(--ink); }
+  .js:not(.rv-fail) .pair::before { clip-path: inset(100% 0 0 0); }
+  .js:not(.rv-fail) .pair > div { opacity: 0; }
+  .js:not(.rv-fail) .pair img { clip-path: inset(100% 0 0 0); }
+  .js:not(.rv-fail) .pair.in::before { clip-path: inset(0); transition: clip-path .75s var(--out); }
+  .js:not(.rv-fail) .pair.in > div { opacity: 1; transition: opacity .35s ease-out .25s; }
+  .js:not(.rv-fail) .pair.in img { clip-path: inset(-40px); transition: clip-path 1s var(--out) .3s, transform .5s var(--out); }
 
-  /* How it works */
+  /* How it works: the numbers are stamped, a rule is drawn above each step */
   .how { background: var(--butter); color: var(--ink); padding: 80px var(--pad); display: grid; gap: 40px; }
   .how h2 { font-size: clamp(48px, 8vw, 130px); }
   .steps { display: grid; gap: 28px; counter-reset: s; }
-  .steps div { font: 15px/1.5 var(--mono); max-width: 34ch; }
-  .steps div::before { counter-increment: s; content: counter(s); display: block; font: 800 64px/1 var(--display); font-stretch: 76%; margin-bottom: 6px; }
-  .steps b { display: block; font: 800 26px/1 var(--display); font-stretch: 80%; text-transform: uppercase; margin-bottom: 6px; }
+  .steps div { position: relative; padding-top: 16px; font: 15px/1.5 var(--mono); max-width: 34ch; }
+  .steps div::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--ink); transform-origin: left; }
+  .steps div::before { counter-increment: s; content: counter(s); display: block; font: 800 64px/1 var(--cond); margin-bottom: 6px; transform-origin: 20% 70%; }
+  .steps b { display: block; font: 800 26px/1 var(--cond); text-transform: uppercase; margin-bottom: 6px; }
+  .js:not(.rv-fail) .steps div::after { transform: scaleX(0); }
+  .js:not(.rv-fail) .steps div::before { opacity: 0; }
+  .js:not(.rv-fail) .steps div.in::after { transform: none; transition: transform .9s var(--out) var(--d, 0s); }
+  .js:not(.rv-fail) .steps div.in::before { animation: stamp .5s var(--out) calc(.35s + var(--d, 0s)) both; }
+  @keyframes stamp { from { transform: scale(1.55) rotate(-9deg); opacity: 0; } 60% { opacity: 1; } to { transform: none; opacity: 1; } }
 
-  /* Small bakes */
+  /* Small bakes: the jar photo wipes in, treats are set down one by one */
   .small { background: var(--cream); color: var(--ink); padding: 80px var(--pad) 90px; display: grid; gap: 48px; }
   .small h2 { font-size: clamp(48px, 7vw, 110px); }
   .jars img { width: 100%; max-width: 900px; }
@@ -92,29 +145,62 @@
   .treats figure { margin: 0; }
   .treats img { height: clamp(160px, 24vw, 320px); width: 100%; object-fit: contain; object-position: bottom; }
   .treats figcaption { font: 13px/1.4 var(--mono); margin-top: 10px; }
+  .js:not(.rv-fail) .jars > img { clip-path: inset(0 100% 0 0); }
+  .js:not(.rv-fail) .jars.in > img { clip-path: inset(0); transition: clip-path 1.1s var(--out); }
+  .js:not(.rv-fail) .jarlist > * { clip-path: inset(0 100% 0 0); }
+  .js:not(.rv-fail) .jars.in .jarlist > * { clip-path: inset(0); transition: clip-path .7s var(--out); }
+  .jars.in .jarlist > :nth-child(2) { transition-delay: .25s; } .jars.in .jarlist > :nth-child(3) { transition-delay: .35s; }
+  .jars.in .jarlist > :nth-child(4) { transition-delay: .45s; } .jars.in .jarlist > :nth-child(5) { transition-delay: .55s; }
+  .js:not(.rv-fail) .treats figure img { clip-path: inset(100% 0 0 0); }
+  .js:not(.rv-fail) .treats figure.in img { clip-path: inset(0); transition: clip-path .8s var(--out); }
 
-  /* Reviews */
+  /* Reviews: the numbers count up */
   .voices { padding: 90px var(--pad); display: grid; gap: 34px; }
-  .voices blockquote { margin: 0; font-weight: 800; font-stretch: 76%; text-transform: uppercase; line-height: .92; font-size: clamp(36px, 5.6vw, 92px); max-width: 16ch; }
-  .voices blockquote:nth-child(2) { color: var(--butter); justify-self: end; text-align: right; }
-  .voices .src { display: block; margin-top: 12px; font: 400 13px/1 var(--mono); text-transform: none; letter-spacing: 0; color: #b9c3dd; }
-  .voices .score { font: 14px/1.5 var(--mono); color: #b9c3dd; }
+  .big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; }
+  .big .num { font: 800 clamp(96px, 17vw, 260px)/.8 var(--cond); text-transform: uppercase; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .big .of { font: 800 clamp(44px, 7vw, 110px)/.86 var(--cond); text-transform: uppercase; }
+  .big .lab { font: 14px/1.4 var(--mono); color: #b9c3dd; }
+  .big.two { color: var(--butter); justify-self: end; }
+  .voices .score { font: 14px/1.5 var(--mono); color: #b9c3dd; max-width: 56ch; }
 
   /* Order */
   .order { background: var(--ink); color: var(--cream); padding: 80px var(--pad) 110px; display: grid; gap: 40px; }
   .order h2 { font-size: clamp(56px, 10vw, 170px); color: var(--butter); }
+  .order h2 .mk { display: block; overflow: hidden; padding: .05em 0 .08em; margin: -.05em 0 -.08em; }
+  .order h2 .mk > span { display: block; }
+  .js:not(.rv-fail) .order h2 .mk > span { transform: translateY(105%); }
+  .js:not(.rv-fail) .order h2.in .mk > span { transform: none; transition: transform .85s var(--out); }
   .order .wa { font-size: 18px; padding: 18px 26px; }
   .info { display: grid; gap: 28px; font: 14px/1.6 var(--mono); }
   .info b { display: block; color: #8f8a7c; font-weight: 400; margin-bottom: 4px; }
-  .info a { display: inline-block; padding: 10px 0; text-underline-offset: 4px; }
+  .info a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 0; text-underline-offset: 4px; }
   .hours { display: grid; grid-template-columns: auto auto; gap: 0 22px; justify-content: start; }
   footer { background: var(--ink); color: #8f8a7c; font: 12px/1 var(--mono); padding: 0 var(--pad) 110px; }
 
-  .dock { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10; }
+  .dock { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10; animation: dockin .45s var(--out) .3s backwards; transition: transform 250ms var(--ui), visibility 0s; }
+  /* While the page's own order button is on screen the dock slides away (a script toggles .away); backwards-only fill so the class can move it */
+  .dock.away { transform: translateY(130%); visibility: hidden; transition: transform 250ms var(--ui), visibility 0s 250ms; }
   .dock .wa { width: 100%; justify-content: center; padding: 16px; font-size: 16px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
 
-  @media (prefers-reduced-motion: reduce) { .hero .cake { animation: none; } .pair img, .wa { transition: none; } }
+  /* Reduced motion: everything complete and still */
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1 .ln > span, .hero .cake, .note, .note .t, .hero .sub, .dock, .note .next.nudge { animation: none !important; }
+    .pair img, .wa, .note .next { transition: none; }
+    .hero canvas { display: none; }
+    .js .pair > div { opacity: 1 !important; }
+    .js .pair::before, .js .pair img, .js .jars > img, .js .jarlist > *, .js .treats figure img { clip-path: none !important; }
+    .js .steps div::after { transform: none !important; } .js .steps div::before { opacity: 1 !important; animation: none !important; }
+    .js .order h2 .mk > span { transform: none !important; }
+  }
 
+  @media (min-width: 760px) { .hero .cake { aspect-ratio: 703 / 1100; object-fit: contain; object-position: 50% 100%; } }
+  @media (min-width: 760px) and (max-width: 1023px) {
+    .hero { display: flex; flex-direction: column; min-height: auto; }
+    .hero .cake { position: relative; right: auto; height: 46svh; width: auto; margin: 4px auto 0; order: 1; }
+    .hero .note { position: relative; top: auto; right: auto; order: 2; align-self: flex-end; }
+    .hero h1 { order: 3; max-width: none; }
+    .hero .sub { order: 4; }
+  }
   @media (min-width: 760px) {
     .briefs { grid-template-columns: repeat(2, 1fr); }
     .steps { grid-template-columns: repeat(3, 1fr); }
@@ -135,13 +221,15 @@
   }
   @media (max-width: 759px) {
     footer { padding-bottom: 96px !important; }          /* room for the sticky button, in the footer's own colour */
-    .top { padding-top: 14px; padding-bottom: 6px; }
+    .top { min-height: 54px; padding-top: 6px; padding-bottom: 6px; }
+    .top b { font-size: 19px; }
     .top .wa { display: none; }
     .hero { min-height: auto; padding-bottom: 32px; display: flex; flex-direction: column; }
-    .hero .cake { position: relative; right: auto; height: auto; width: 74vw; max-height: 46svh; object-fit: contain; margin: 4px auto 0; order: 1; }
-    .hero .note { position: relative; top: auto; right: auto; order: 2; align-self: flex-end; margin: -6px 6px 18px 0; width: 196px; font-size: 12.5px; }
+    .hero .cake { position: relative; right: auto; height: 38svh; width: 74vw; object-fit: contain; margin: 4px auto 0; order: 1; }
+    .hero .note { position: relative; top: auto; right: auto; order: 2; align-self: flex-end; margin: -6px 6px 10px 0; width: 196px; font-size: 12.5px; }
     .hero h1 { order: 3; max-width: none; font-size: clamp(46px, 13.6vw, 64px); }
     .hero .sub { order: 4; margin-top: 18px; gap: 6px 18px; font-size: 13px; }
+    .hero canvas { order: 0; }
     .pair { min-height: 0; padding-top: 44px; gap: 6px; }
     .pair h2 { font-size: clamp(38px, 11vw, 52px); }
     .pair img { height: auto; width: 78vw; max-height: 330px; object-fit: contain; margin-top: 8px; }
@@ -156,16 +244,17 @@
     .treats figure { scroll-snap-align: start; }
     .treats img { height: 240px; }
     .voices { padding-top: 64px; padding-bottom: 64px; gap: 28px; }
-    .voices blockquote { font-size: clamp(34px, 10vw, 46px); }
-    .voices blockquote:nth-child(2) { justify-self: start; text-align: left; }
+    .big.two { justify-self: start; }
     .order { padding-top: 64px; padding-bottom: 40px; }
     .order h2 { font-size: clamp(56px, 16vw, 76px); }
     .order .wa { width: 100%; justify-content: center; }
     .dock { left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); }
   }
+  @media (max-width: 759px) and (max-height: 860px) { .hero .cake { height: 37svh; } }
   @media (max-width: 370px) {
     .hero h1 { font-size: 44px; }
     .treats { grid-auto-columns: 72vw; }
+    .top b { font-size: 17px; }
   }
 </style>
 </head>
@@ -173,33 +262,34 @@
 <div class="concept" data-concept-banner>Website concept preview made for Prisha's Patisserie · not the official site</div>
 
 <header class="top">
-  <b>Prisha's Patisserie</b>
+  <a class="brandlink" href="#top" aria-label="Prisha's Patisserie, back to the top"><span class="mark" aria-hidden="true">P</span><b>Prisha's Patisserie</b></a>
   <nav><a href="#cakes">Cakes</a><a href="#how">How it works</a><a href="#small">Jars &amp; cupcakes</a><a href="#order">Find us</a></nav>
   <a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">Order on WhatsApp</a>
 </header>
 
-<section class="hero">
-  <img class="cake" src="assets/sorting-hat.webp" srcset="assets/sorting-hat-sm.webp 600w, assets/sorting-hat.webp 703w" sizes="(max-width: 760px) 80vw, 40vw" width="703" height="1100" decoding="async" alt="Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board" fetchpriority="high">
-  <div class="note"><b>THE BRIEF</b>Sorting hat. House colours. Write “Mitul” on it.</div>
-  <h1>You send the idea. <span>She makes it cake.</span></h1>
+<section class="hero" id="top">
+  <canvas id="spr" aria-hidden="true"></canvas>
+  <img class="cake" id="heroCake" src="assets/sorting-hat.webp" srcset="assets/sorting-hat-sm.webp 383w, assets/sorting-hat.webp 703w" sizes="(max-width: 760px) 80vw, 40vw" width="703" height="1100" decoding="async" alt="Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board" fetchpriority="high">
+  <div class="note"><b>THE BRIEF</b><span class="t" id="briefText" aria-live="polite">Sorting hat. House colours. Write “Mitul” on it.</span><button class="next" id="nextBrief" type="button">NEXT BRIEF &rarr;</button></div>
+  <h1><span class="ln"><span>You send the idea.</span></span><span class="ln"><span>She makes it cake.</span></span></h1>
   <div class="sub"><span>Sculpted theme cakes · Anna Nagar, Chennai</span><span>4.8 on Google · 67 reviews</span></div>
 </section>
 
 <section class="briefs" id="cakes">
-  <article class="pair moss"><div><h2>A T&#8209;rex that looks real</h2><p>Jurassic World, dinosaur on top, crushed-cookie earth.</p></div><img src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 600w, assets/t-rex.webp 1022w" sizes="(max-width: 760px) 80vw, 40vw" width="1022" height="1100" decoding="async" alt="Jurassic World cake with a sculpted T-rex" loading="lazy"></article>
-  <article class="pair sky"><div><h2>A duck in a tub</h2><p>Turning one. Bubbles, a checked mat, a little rubber duck.</p></div><img src="assets/duck.webp" srcset="assets/duck-sm.webp 600w, assets/duck.webp 763w" sizes="(max-width: 760px) 80vw, 40vw" width="763" height="1100" decoding="async" alt="Duck in a bathtub first birthday cake" loading="lazy"></article>
-  <article class="pair brick"><div><h2>Central Perk</h2><p>Two tiers of F.R.I.E.N.D.S., “How you doin’?” included.</p></div><img src="assets/central-perk.webp" srcset="assets/central-perk-sm.webp 600w, assets/central-perk.webp 686w" sizes="(max-width: 760px) 80vw, 40vw" width="686" height="1090" decoding="async" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></article>
-  <article class="pair teal"><div><h2>A first car, for a 60th</h2><p>Chocolate drum, a sculpted vintage car on the grass.</p></div><img src="assets/vintage-car.webp" srcset="assets/vintage-car-sm.webp 600w, assets/vintage-car.webp 844w" sizes="(max-width: 760px) 80vw, 40vw" width="844" height="1100" decoding="async" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></article>
-  <article class="pair candy"><div><h2>Lollipops for turning one</h2><p>Drip icing, gummies, giant swirl lollipops.</p></div><img src="assets/lollipop.webp" srcset="assets/lollipop-sm.webp 600w, assets/lollipop.webp 775w" sizes="(max-width: 760px) 80vw, 40vw" width="775" height="1100" decoding="async" alt="Drip cake with lollipops for a first birthday" loading="lazy"></article>
-  <article class="pair lilac"><div><h2>A unicorn, gold horn</h2><p>Sleepy eyes, buttercream flowers for a mane.</p></div><img src="assets/unicorn.webp" srcset="assets/unicorn-sm.webp 600w, assets/unicorn.webp 601w" sizes="(max-width: 760px) 80vw, 40vw" width="601" height="1100" decoding="async" alt="Unicorn cake with a gold horn" loading="lazy"></article>
+  <article class="pair moss"><div><h2>A sculpted T&#8209;rex</h2><p>Jurassic World, dinosaur on top.</p></div><img src="assets/t-rex.webp" srcset="assets/t-rex-sm.webp 557w, assets/t-rex.webp 1022w" sizes="(max-width: 760px) 80vw, 40vw" width="1022" height="1100" decoding="async" alt="Jurassic World cake with a sculpted T-rex" loading="lazy"></article>
+  <article class="pair sky"><div><h2>A duck in a tub</h2><p>Turning one. Bubbles, a checked mat, a little rubber duck.</p></div><img src="assets/duck.webp" srcset="assets/duck-sm.webp 416w, assets/duck.webp 763w" sizes="(max-width: 760px) 80vw, 40vw" width="763" height="1100" decoding="async" alt="Duck in a bathtub first birthday cake" loading="lazy"></article>
+  <article class="pair brick"><div><h2>Central Perk</h2><p>Two tiers of F.R.I.E.N.D.S., “How you doin’?” included.</p></div><img src="assets/central-perk.webp" srcset="assets/central-perk-sm.webp 378w, assets/central-perk.webp 686w" sizes="(max-width: 760px) 80vw, 40vw" width="686" height="1090" decoding="async" alt="Two-tier F.R.I.E.N.D.S. Central Perk cake" loading="lazy"></article>
+  <article class="pair teal"><div><h2>A vintage car, for a 60th</h2><p>Chocolate drum, a sculpted vintage car on the grass.</p></div><img src="assets/vintage-car.webp" srcset="assets/vintage-car-sm.webp 460w, assets/vintage-car.webp 844w" sizes="(max-width: 760px) 80vw, 40vw" width="844" height="1100" decoding="async" alt="Chocolate cake with a sculpted vintage car" loading="lazy"></article>
+  <article class="pair candy"><div><h2>Lollipops for turning one</h2><p>Drip icing, gummies, giant swirl lollipops.</p></div><img src="assets/lollipop.webp" srcset="assets/lollipop-sm.webp 423w, assets/lollipop.webp 775w" sizes="(max-width: 760px) 80vw, 40vw" width="775" height="1100" decoding="async" alt="Drip cake with lollipops for a first birthday" loading="lazy"></article>
+  <article class="pair lilac"><div><h2>A unicorn, gold horn</h2><p>Sleepy eyes, buttercream flowers for a mane.</p></div><img src="assets/unicorn.webp" srcset="assets/unicorn-sm.webp 328w, assets/unicorn.webp 601w" sizes="(max-width: 760px) 80vw, 40vw" width="601" height="1100" decoding="async" alt="Unicorn cake with a gold horn" loading="lazy"></article>
 </section>
 
 <section class="how" id="how">
   <h2>How it works</h2>
   <div class="steps">
-    <div><b>Send the idea</b>A theme, a photo, a name to pipe. Plus the date and how many people.</div>
-    <div><b>Settle it on WhatsApp</b>Design, flavour and price are agreed in the chat before anything is baked.</div>
-    <div><b>Delivered on the day</b>“She delivered the cake neatly packed and in timely manner.” Google review</div>
+    <div><b>Send the idea</b>A theme, a name to pipe on it, and how many people it is for.</div>
+    <div><b>Chat on WhatsApp</b>+91 87542 97315. Send the photo and the date.</div>
+    <div><b>Come by</b>Anna Nagar, Chennai: Mon–Fri 10 am–7 pm, Sat 10 am–3 pm, Sun closed.</div>
   </div>
 </section>
 
@@ -210,34 +300,34 @@
     <div class="jarlist">
       <p class="brand">Delectable · dessert jars by Prisha's</p>
       <div><h3>Berrylicious</h3>Strawberry cake layered with mixed berry coulis.</div>
-      <div><h3>Chocolate Lovers</h3>Chocolate cake layered with ganache and roasted hazelnuts.</div>
-      <div><h3>Lady in Red</h3>Red velvet, layered.</div>
-      <div><h3>Boston Cream</h3>Topped with toasted almonds.</div>
+      <div><h3>Chocolate Lovers</h3>Chocolate cake layered with ganache.</div>
+      <div><h3>Lady in Red</h3>Moist red velvet cake topped with cream cheese frosting.</div>
+      <div><h3>Boston Cream</h3>Yellow butter cake filled with custard &amp; ganache.</div>
     </div>
   </div>
   <div class="treats">
     <figure><img src="assets/wizard-cupcakes.webp" srcset="assets/wizard-cupcakes-sm.webp 600w, assets/wizard-cupcakes.webp 1100w" sizes="(max-width: 760px) 80vw, 40vw" width="1100" height="1071" decoding="async" alt="Wizard-themed birthday cupcakes" loading="lazy"><figcaption>Wizard cupcakes</figcaption></figure>
-    <figure><img src="assets/anniversary-cupcakes.webp" srcset="assets/anniversary-cupcakes-sm.webp 600w, assets/anniversary-cupcakes.webp 1029w" sizes="(max-width: 760px) 80vw, 40vw" width="1029" height="1100" decoding="async" alt="First anniversary cupcake toppers" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
-    <figure><img src="assets/brownies.webp" srcset="assets/brownies-sm.webp 600w, assets/brownies.webp 563w" sizes="(max-width: 760px) 80vw, 40vw" width="563" height="777" decoding="async" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
+    <figure><img src="assets/anniversary-cupcakes.webp" srcset="assets/anniversary-cupcakes-sm.webp 561w, assets/anniversary-cupcakes.webp 1029w" sizes="(max-width: 760px) 80vw, 40vw" width="1029" height="1100" decoding="async" alt="First anniversary cupcake toppers" loading="lazy"><figcaption>A first-anniversary set</figcaption></figure>
+    <figure><img src="assets/brownies.webp" srcset="assets/brownies-sm.webp 435w, assets/brownies.webp 563w" sizes="(max-width: 760px) 80vw, 40vw" width="563" height="777" decoding="async" alt="Stack of nut-topped brownies" loading="lazy"><figcaption>Brownies</figcaption></figure>
   </div>
 </section>
 
-<section class="voices">
-  <blockquote>“Her cupcakes are really the best in town.”<span class="src">Google review</span></blockquote>
-  <blockquote>“Sharon brought the look of the cake just as I wanted.”<span class="src">Google review</span></blockquote>
-  <p class="score">61 of 67 Google reviews give five stars. Flavours people mention: Belgian chocolate, white chocolate raspberry, chocolate truffle.</p>
+<section class="voices" id="voices">
+  <div class="big"><span class="num" data-count="4.8" data-dec="1">4.8</span><span class="lab">rating on Google</span></div>
+  <div class="big two"><span class="num" data-count="61">61</span><span class="of">of 67</span><span class="lab">Google reviews give five stars</span></div>
+  <p class="score"><b style="color:var(--butter);font-weight:650">Sharon · the baker.</b> Flavours people mention in their reviews: Belgian chocolate, white chocolate raspberry, chocolate truffle.</p>
 </section>
 
 <section class="order" id="order">
   <div>
-    <h2>Got an idea?</h2>
+    <h2 id="orderH"><span class="mk"><span>Got</span></span><span class="mk"><span>an idea?</span></span></h2>
     <p class="mono" style="margin:18px 0 28px;max-width:40ch;font-size:15px">Send it on WhatsApp with the date. That's the whole form.</p>
     <a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
       Order on WhatsApp</a>
   </div>
   <div class="info">
-    <div><b>Kitchen</b>R-25/1, 4th Main Road, 12th Street, Anna Nagar, Chennai 600040<br><a href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Open in Maps</a></div>
+    <div><b>Address</b>R-25/1, 4th Main Road, 12th Street, Anna Nagar, Chennai 600040<br><a href="https://www.google.com/maps?cid=6960660794144527846" target="_blank" rel="noopener">Open in Maps</a></div>
     <div><b>Hours</b><span class="hours"><span>Mon–Fri</span><span>10 am–7 pm</span><span>Sat</span><span>10 am–3 pm</span><span>Sun</span><span>Closed</span></span></div>
     <div><b>Elsewhere</b><a href="tel:+918754297315">+91 87542 97315</a><br><a href="https://www.facebook.com/Prishas.patisserie/" target="_blank" rel="noopener">Facebook</a></div>
   </div>
@@ -245,5 +335,200 @@
 <footer>Prisha's Patisserie · Anna Nagar, Chennai</footer>
 
 <div class="dock"><a class="wa" href="https://wa.me/918754297315?text=Hi%20Prisha%27s%20Patisserie%2C%20I%20have%20a%20cake%20idea" target="_blank" rel="noopener">Order on WhatsApp</a></div>
+
+<script>
+/* Plain JS: the opening hand-over, the brief switcher, scroll scenes, sprinkles, counters, the WhatsApp burst.
+   Nothing here needs a library; GSAP is added after load, on a fine-pointer desktop only. */
+(function () {
+  'use strict';
+  window.__pp = 1;
+  var D = document, root = D.documentElement;
+  var $ = function (s, c) { return (c || D).querySelector(s); };
+  var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DESK = matchMedia('(min-width: 1024px) and (pointer: fine)');
+  var EASE = 'cubic-bezier(.16,1,.3,1)';
+
+  /* ---- the opening ends: name, line and order button are all readable ---- */
+  var sub = $('.hero .sub'), nextBtn = $('#nextBrief');
+  var startAmbient = function () {};   /* the sprinkles start once the opening is over, so first paint never waits for them */
+  function done() {
+    if (root.getAttribute('data-opening') === 'done') return;
+    root.setAttribute('data-opening', 'done');
+    (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(function () { startAmbient(); }, { timeout: 1200 });
+    if (!RM && nextBtn) setTimeout(function () { nextBtn.classList.add('nudge'); }, 700);
+  }
+  if (RM) done();
+  else {
+    if (sub) sub.addEventListener('animationend', function (e) { if (e.target === sub) done(); });
+    setTimeout(done, 2400);
+  }
+
+  /* ---- signature: tap the cake, swipe it, or press the note for the next brief ---- */
+  var BR = [
+    { n: 'sorting-hat', sm: 383, w: 703, h: 1100, big: 703, t: 'Sorting hat. House colours. Write “Mitul” on it.', a: 'Harry Potter sorting hat cake in Gryffindor colours, with “Mitul” piped on the board' },
+    { n: 't-rex', sm: 557, w: 1022, h: 1100, big: 1022, t: 'A T‑rex on top. Jurassic World.', a: 'Jurassic World cake with a sculpted T-rex' },
+    { n: 'duck', sm: 416, w: 763, h: 1100, big: 763, t: 'Turning one. A duck in a tub, the name on the front.', a: 'Duck in a bathtub first birthday cake' },
+    { n: 'vintage-car', sm: 460, w: 844, h: 1100, big: 844, t: 'A vintage car on top. It’s a 60th birthday.', a: 'Chocolate cake with a sculpted vintage car' },
+    { n: 'lollipop', sm: 423, w: 775, h: 1100, big: 775, t: 'Lollipops and gummies. “Turning 1” on the plaque.', a: 'Drip cake with lollipops for a first birthday' },
+    { n: 'central-perk', sm: 378, w: 686, h: 1090, big: 686, t: 'Two tiers of F.R.I.E.N.D.S. “How you doin’?”', a: 'Two-tier F.R.I.E.N.D.S. Central Perk cake' },
+    { n: 'unicorn', sm: 328, w: 601, h: 1100, big: 601, t: 'A unicorn with a gold horn.', a: 'Unicorn cake with a gold horn' }
+  ];
+  var cake = $('#heroCake'), txt = $('#briefText'), cur = 0, busy = false;
+  function setsrc(el, b) { el.srcset = 'assets/' + b.n + '-sm.webp ' + b.sm + 'w, assets/' + b.n + '.webp ' + b.big + 'w'; el.src = 'assets/' + b.n + '.webp'; }
+  function show(i) {
+    if (busy) return; busy = true;
+    cur = (i + BR.length) % BR.length;
+    var b = BR[cur], pre = new Image();
+    pre.sizes = cake.sizes; setsrc(pre, b);
+    (pre.decode ? pre.decode() : Promise.resolve()).catch(function () {}).then(function () {
+      var out = (!RM && cake.animate) ? cake.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(-8%) rotate(-3deg)' }], { duration: 170, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'forwards' }) : null;
+      var go = function () {
+        setsrc(cake, b); cake.alt = b.a; cake.width = b.w; cake.height = b.h; txt.textContent = b.t;
+        if (out) out.cancel();
+        if (RM || !cake.animate) { busy = false; return; }
+        cake.animate([{ clipPath: 'inset(100% 0 0 0)', transform: 'translateY(14px)' }, { clipPath: 'inset(-60px)', transform: 'none' }], { duration: 620, easing: EASE });
+        txt.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 560, easing: 'steps(22,end)' });
+        setTimeout(function () { busy = false; }, 420);
+      };
+      if (out) out.finished.then(go, go); else go();
+    });
+  }
+  if (nextBtn) nextBtn.addEventListener('click', function () { nextBtn.classList.remove('nudge'); show(cur + 1); });
+  var sx = 0, sy = 0, sid = null;
+  cake.addEventListener('pointerdown', function (e) { sx = e.clientX; sy = e.clientY; sid = e.pointerId; });
+  cake.addEventListener('pointerup', function (e) {
+    if (e.pointerId !== sid) return; sid = null;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1));
+    else if (Math.abs(dx) < 8 && Math.abs(dy) < 8) show(cur + 1);
+  });
+  cake.addEventListener('pointercancel', function () { sid = null; });
+
+  /* ---- scroll scenes: each section has its own, played once ---- */
+  var hasIO = 'IntersectionObserver' in window;
+  if (!hasIO) root.className += ' rv-fail';
+  else if (!RM) {
+    var SEL = '.pair, .steps div, .jars, .treats figure, #orderH';
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) reveal(e.target); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    function reveal(el) { el.classList.add('in'); io.unobserve(el); }
+    $$(SEL).forEach(function (el) { io.observe(el); });
+    /* a fast jump can pass a block before the observer reports it: check by position as well */
+    var pend = $$(SEL), sweepT = 0;
+    function sweep() { sweepT = 0; pend = pend.filter(function (el) { if (el.classList.contains('in')) return false; var r = el.getBoundingClientRect(); if (r.height && r.top < innerHeight * 0.9) { reveal(el); return false; } return true; }); if (!pend.length) removeEventListener('scroll', onScroll); }
+    function onScroll() { if (!sweepT) sweepT = requestAnimationFrame(sweep); }
+    addEventListener('scroll', onScroll, { passive: true });
+    $$('.treats figure').forEach(function (f, i) { f.querySelector('img').style.transitionDelay = (i * 120) + 'ms'; });
+    $$('.steps div').forEach(function (s, i) { s.style.setProperty('--d', (i * 140) + 'ms'); });
+  }
+
+  /* ---- counters: from 35% of the value over 1.9 s, power3.out ---- */
+  function count(el) {
+    var v = parseFloat(el.getAttribute('data-count')), dec = +(el.getAttribute('data-dec') || 0), t0 = null;
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 1900), k = 1 - Math.pow(1 - p, 3);
+      el.textContent = (v * (0.35 + 0.65 * k)).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = v.toFixed(dec);
+    }
+    el.textContent = (v * 0.35).toFixed(dec);
+    requestAnimationFrame(step);
+  }
+  if (hasIO && !RM) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { count(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    $$('[data-count]').forEach(function (n) { cio.observe(n); });
+  }
+
+  /* ---- ambient: sprinkles drifting down the hero. DPR 1, 30 fps, paused off screen, steps down if slow ---- */
+  var cv = $('#spr'), hero = $('.hero');
+  function ambient() {
+    if (!cv || RM || !cv.getContext) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, parts = [], seen = true, running = false, last = 0, density = 1, slow = 0, frames = 0, wlast = 0;
+    var COLS = ['#f5cf3f', '#f2a9c4', '#9bcde8', '#cdbbe6', '#f6ead0', '#6fb4b0'];
+    var MAX = DESK.matches ? 90 : 36;
+    function size() { W = cv.width = hero.clientWidth; H = cv.height = hero.clientHeight; }
+    function mk(top) {
+      return { x: Math.random() * W, y: top ? -10 : Math.random() * H, vy: 14 + Math.random() * 26, vx: (Math.random() - .5) * 8,
+               r: Math.random() * 6.28, vr: (Math.random() - .5) * 1.6, l: 6 + Math.random() * 6, c: COLS[(Math.random() * COLS.length) | 0] };
+    }
+    size(); for (var i = 0; i < MAX; i++) parts.push(mk(false));
+    function frame(t) {
+      running = false;
+      if (!seen || D.hidden) return;
+      running = true; requestAnimationFrame(frame);
+      /* watchdog: count slow frames from the gap between rAF timestamps (any cause), 90 frames, never off */
+      var gap = wlast ? t - wlast : 16.7; wlast = t;
+      if (gap > 24) slow++;
+      if (++frames >= 90) { if (slow > 45) density = density > .6 ? .6 : density > .36 ? .36 : .2; frames = 0; slow = 0; }
+      if (t - last < 33) return;
+      var dt = Math.min(0.1, (t - last) / 1000); last = t;
+      ctx.clearRect(0, 0, W, H);
+      var n = Math.round(MAX * density);
+      for (var i = 0; i < n; i++) {
+        var p = parts[i];
+        p.y += p.vy * dt; p.x += p.vx * dt + Math.sin(p.y / 60 + i) * 0.25; p.r += p.vr * dt;
+        if (p.y > H + 10) { parts[i] = p = mk(true); }
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.l / 2, -2, p.l, 4); ctx.restore();
+      }
+    }
+    function go() { if (!running && seen && !D.hidden) { last = performance.now(); wlast = 0; frames = 0; slow = 0; running = true; requestAnimationFrame(frame); } }
+    if (hasIO) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) go(); }, { threshold: 0 }).observe(hero);
+    D.addEventListener('visibilitychange', go);
+    if ('ResizeObserver' in window) new ResizeObserver(function () { if (hero.clientWidth !== W || hero.clientHeight !== H) size(); }).observe(hero); else addEventListener('resize', size);
+    go();
+  }
+  startAmbient = ambient;
+
+  /* ---- response: the order button answers the press, and lets off sprinkles; the link opens as normal ---- */
+  $$('.wa').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (RM || !a.animate) return;
+      var r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var COL = ['#f5cf3f', '#f2a9c4', '#9bcde8', '#cdbbe6', '#f6ead0'];
+      for (var i = 0; i < 14; i++) {
+        var s = D.createElement('span'); s.className = 'spark';
+        s.style.left = cx + 'px'; s.style.top = cy + 'px'; s.style.background = COL[i % COL.length];
+        D.body.appendChild(s);
+        var ang = (i / 14) * 6.283 + Math.random() * .4, d = 46 + Math.random() * 40;
+        var an = s.animate([{ transform: 'translate(-50%,-50%) rotate(0deg)', opacity: 1 },
+          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * d).toFixed(0) + 'px), calc(-50% + ' + (Math.sin(ang) * d - 14).toFixed(0) + 'px)) rotate(' + (i * 70) + 'deg)', opacity: 0 }],
+          { duration: 650, easing: 'cubic-bezier(.23,1,.32,1)' });
+        an.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+      }
+    });
+  });
+
+  /* ---- the dock steps aside while the page's own order button is on screen (the bottom 84px is the dock's own strip) ---- */
+  var dock = $('.dock'), own = $('.order .wa');
+  if (dock && own && hasIO) {
+    new IntersectionObserver(function (es) { dock.classList.toggle('away', es[es.length - 1].isIntersecting); }, { rootMargin: '0px 0px -84px 0px' }).observe(own);
+  }
+
+  /* ---- desktop only: GSAP arrives after load and adds a gentle parallax to the panel cakes ---- */
+  function gsapLoad(src, integrity) {
+    return new Promise(function (ok, bad) {
+      var s = D.createElement('script'); s.src = src; s.integrity = integrity; s.crossOrigin = 'anonymous'; s.onload = ok; s.onerror = bad; D.head.appendChild(s);
+    });
+  }
+  addEventListener('load', function () {
+    if (RM || !DESK.matches) return;
+    gsapLoad('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js', 'sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc')
+      .then(function () { return gsapLoad('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js', 'sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh'); })
+      .then(function () {
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger); root.className += ' gs';
+        gsap.matchMedia().add('(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)', function () {
+          $$('.pair img').forEach(function (img) {
+            gsap.fromTo(img, { yPercent: 7 }, { yPercent: -4, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
+          });
+        });
+      }).catch(function () { /* blocked: the page is already complete without it */ });
+  });
+})();
+</script>
 </body>
 </html>
