@@ -10,7 +10,22 @@
 <meta name="theme-color" content="#0e1620">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  /* js class for the reveal CSS; if the page script never starts, a timer shows everything */
+  document.documentElement.className += " js";
+  setTimeout(function () { if (!window.__rvOK) document.documentElement.classList.add("rv-fail"); }, 2500);
+  /* the opening is CSS and starts at first paint; this stamps its end (reduced motion: at once) */
+  (function () {
+    var r = document.documentElement, once = 0, fin = function () { if (once) return; once = 1; r.dataset.opening = "done"; document.dispatchEvent(new Event("openingdone")); };
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) fin();
+    else {
+      /* ends when the last piece of the opening has played, so a late first paint never cuts it short; timer is the failsafe */
+      document.addEventListener("animationend", function (e) { if (e.target.classList && e.target.classList.contains("send")) fin(); }, true);
+      setTimeout(fin, 4500);
+    }
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
   /* The villa at night with the campfire lit: Kodaikanal night blue, warm-white type,
      firelight amber only on the live control. */
@@ -22,7 +37,7 @@
     --line: rgba(238, 232, 221, .17);
     --fire: #f2a43c;
     --fire-ink: #1b1206;
-    --display: "Marcellus", "Trajan Pro", Georgia, serif;
+    --display: "Marcellus", Georgia, "Noto Serif", serif;
     --body: "Albert Sans", "Segoe UI", Roboto, sans-serif;
     --ease: cubic-bezier(.23, 1, .32, 1);
     --gut: 20px;
@@ -154,8 +169,87 @@
     .links a:hover, .alt a:hover { text-decoration: underline; }
     .links a:hover svg { stroke: var(--text); }
   }
+
+  /* ================= Motion: the lights come on, then each section has its own entrance ================= */
+  :root { --out: cubic-bezier(.16, 1, .3, 1); }
+  .hero { overflow: hidden; }
+  .photos, .fire, .facts, .close { overflow-x: clip; }
+  main { position: relative; z-index: 1; }
+
+  /* 1. Opening (first paint, CSS only): the night villa is dark, its windows light up, the name rises out of
+        a mask, then the sentence and its blanks light one by one and the amber button arrives. */
+  @keyframes dusk { from { opacity: .9; } to { opacity: 0; } }
+  @keyframes glow { 0% { opacity: 0; } 40% { opacity: .9; } 100% { opacity: 0; } }
+  @keyframes name-up { from { clip-path: inset(0 0 100% 0); transform: translateY(.45em); } to { clip-path: inset(-10px -10px -10px -10px); transform: none; } }
+  @keyframes fade { from { opacity: 0; } }
+  @keyframes arrive { from { transform: translateY(14px); opacity: 0; } }
+  @keyframes lit { from { color: var(--fire); border-color: var(--fire); } }
+  @keyframes flash { from { color: var(--fire); transform: translateY(5px); } }
+  @keyframes flare { from { box-shadow: 0 0 0 0 rgba(242, 164, 60, .6); } to { box-shadow: 0 0 0 20px rgba(242, 164, 60, 0); } }
+  .dusk, .glow { position: absolute; inset: 0; pointer-events: none; }
+  .dusk { background: var(--night); opacity: 0; animation: dusk 1.7s cubic-bezier(.3, 0, .2, 1) .1s backwards; }
+  .glow { opacity: 0; background: radial-gradient(ellipse 34% 30% at 56% 46%, rgba(242, 164, 60, .55), rgba(242, 164, 60, 0) 70%); animation: glow 2s ease-out .5s; }
+  .hero h1 { animation: name-up .95s var(--out) .45s backwards; }
+  .hero .place { animation: fade .6s ease-out .95s backwards; }
+  .sentence { animation: fade .6s ease-out .85s backwards; }
+  .sentence .blank { animation: arrive .6s var(--out) calc(.95s + var(--k, 0) * 90ms) backwards; }
+  .send { animation: arrive .5s var(--out) 1.1s backwards; }
+  .alt { animation: fade .5s ease-out 1.3s backwards; }
+  .proof { animation: fade .5s ease-out 1.45s backwards; }
+  .send.lit, .links a.lit { animation: flare .8s var(--ease); }
+
+  /* 6. Name bar: solid, logo and name, top left, from the first scroll */
+  .bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 52px; background: #0b121a;
+    border-bottom: 1px solid var(--line); visibility: hidden; transform: translateY(-101%);
+    transition: transform .3s var(--ease), visibility 0s linear .3s;
+  }
+  .bar.show { visibility: visible; transform: none; transition: transform .3s var(--ease), visibility 0s; }
+  .bar a {
+    display: inline-flex; align-items: center; gap: 10px; height: 100%; padding: 0 var(--gut);
+    color: var(--text); text-decoration: none; font: 400 18px/1 var(--display); white-space: nowrap;
+  }
+  .bar img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(238, 232, 221, .4); }
+  .bar a:active { opacity: .7; }
+
+  /* 3. Scroll scenes. Photos open like lit windows: each from its own edge, and come up out of the dark. */
+  html.js:not(.rv-fail) [data-r]:not(.done) {
+    transition: transform .8s var(--out) calc(var(--i, 0) * 80ms), opacity .7s ease calc(var(--i, 0) * 80ms),
+      clip-path 1s cubic-bezier(.5, 0, .2, 1) calc(var(--i, 0) * 80ms);
+  }
+  html.js:not(.rv-fail) [data-r="wipe-d"]:not(.in) { clip-path: inset(0 0 100% 0); }
+  html.js:not(.rv-fail) [data-r="wipe-r"]:not(.in) { clip-path: inset(0 100% 0 0); }
+  html.js:not(.rv-fail) [data-r="wipe-l"]:not(.in) { clip-path: inset(0 0 0 100%); }
+  html.js:not(.rv-fail) [data-r^="wipe"].in { clip-path: inset(0 0 0 0); }
+  html.js:not(.rv-fail) [data-r^="wipe"] img, html.js:not(.rv-fail) [data-r="dark"] img { filter: brightness(.3) saturate(.5); transition: filter 1.6s ease .2s; }
+  html.js:not(.rv-fail) [data-r^="wipe"].in img, html.js:not(.rv-fail) [data-r="dark"].in img { filter: none; }
+  /* the campfire catches: the print comes up from black */
+  html.js:not(.rv-fail) [data-r="dark"]:not(.in) { transform: translateY(18px); }
+  /* headings inked up from the baseline; lines and the quote are written left to right */
+  html.js:not(.rv-fail) [data-r="mask"]:not(.in) { clip-path: inset(0 0 100% 0); transform: translateY(.4em); }
+  html.js:not(.rv-fail) [data-r="mask"].in, html.js:not(.rv-fail) [data-r="write"].in { clip-path: inset(-30px -30px -30px -30px); }
+  html.js:not(.rv-fail) [data-r="write"]:not(.in) { clip-path: inset(0 100% 0 0); }
+  html.js:not(.rv-fail) [data-r="rise"]:not(.in) { opacity: 0; transform: translateY(14px); }
+  .board .n { font-style: normal; font-variant-numeric: tabular-nums; }
+
+  /* 4. Ambient: a few fireflies drift up the page behind everything (fixed, faint) */
+  #flies { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: .2; }
+  .concept, footer { position: relative; z-index: 1; }
+
+  /* 5. Press feedback on every control */
+  .links a, .alt a { transition: transform .14s var(--ease); }
+  .links a:active, .alt a:active { transform: scale(.98); }
+  .blank:active { transform: scale(.97); }
+  .blank.flash { animation: flash .6s var(--ease); }
+
+  /* Desktop with a mouse: the hero photo drifts slowly as you scroll (set by the script after the opening) */
+  .hero.par img { transform: translate3d(0, var(--py, 0px), 0) scale(1.08); will-change: transform; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
+    [data-r] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+    [data-r] img { filter: none !important; }
+    #flies { display: none; }
   }
 </style>
 </head>
@@ -163,11 +257,15 @@
 
 <div class="concept" data-concept-banner>Website concept for <strong>Tree Top Villa</strong> &middot; not the official site</div>
 
+<div class="bar" id="bar"><a href="#top"><img src="assets/logo.jpg" width="34" height="34" alt="" class="logo"><span>Tree Top Villa</span></a></div>
+<canvas id="flies" aria-hidden="true"></canvas>
+
 <main>
-<div class="top">
+<div class="top" id="top">
   <header class="hero">
     <img src="assets/villa-night.jpg" width="780" height="570" fetchpriority="high"
       alt="Tree Top Villa at night: the cream house with its porch and stair lights on, behind the gate">
+    <i class="dusk" aria-hidden="true"></i><i class="glow" aria-hidden="true"></i>
     <div class="name">
       <h1>Tree Top Villa</h1>
       <p class="place">Homestay &middot; Kodaikanal</p>
@@ -177,14 +275,14 @@
   <section class="ask" id="ask" aria-label="Ask about a stay">
     <p class="sentence">
       I'd like to stay
-      <span class="blank"><span id="nightsShown">2 nights</span><select id="nights" aria-label="How many nights">
+      <span class="blank" style="--k:0"><span id="nightsShown">2 nights</span><select id="nights" aria-label="How many nights">
         <option value="1">1 night</option><option value="2" selected>2 nights</option><option value="3">3 nights</option>
         <option value="4">4 nights</option><option value="5">5 nights</option><option value="6">6 nights</option>
         <option value="7">7 nights</option><option value="8">8 nights</option><option value="9">9 nights</option>
         <option value="10">10 nights</option>
       </select></span>
-      <span class="nowrap">from <input class="blank" id="date" type="text" placeholder="your date" aria-label="From which date" autocomplete="off" enterkeyhint="done" maxlength="40">,</span>
-      <span class="blank"><span id="guestsShown">4 guests</span><select id="guests" aria-label="How many guests">
+      <span class="nowrap">from <input class="blank" style="--k:1" id="date" type="text" placeholder="your date" aria-label="From which date" autocomplete="off" enterkeyhint="done" maxlength="40">,</span>
+      <span class="blank" style="--k:2"><span id="guestsShown">4 guests</span><select id="guests" aria-label="How many guests">
         <option value="2">2 guests</option><option value="3">3 guests</option><option value="4" selected>4 guests</option>
         <option value="5">5 guests</option><option value="6">6 guests</option><option value="7">7 guests</option>
         <option value="8">8 guests</option><option value="9">9 guests</option><option value="10">10 guests</option>
@@ -192,7 +290,7 @@
         <option value="20+">20+ guests</option>
       </select></span>,
       in the
-      <span class="blank"><span id="houseShown">3 BHK</span><select id="house" aria-label="Which size (BHK)">
+      <span class="blank" style="--k:3"><span id="houseShown">3 BHK</span><select id="house" aria-label="Which size (BHK)">
         <option value="2 BHK">2 BHK</option><option value="3 BHK" selected>3 BHK</option>
         <option value="5 BHK">5 BHK</option><option value="8 BHK">8 BHK</option>
         <option value="">size you suggest</option>
@@ -207,51 +305,51 @@
 </div>
 
 <section class="photos" aria-label="Photos of the villa">
-  <figure class="ph-day">
+  <figure class="ph-day" data-r="wipe-d">
     <img src="assets/villa-day.jpg" width="1440" height="809" loading="lazy" alt="The villa by day: a cream two-storey house with a curved balcony, pots on the ledges and red and blue umbrellas in the courtyard">
     <figcaption>By day, Naidupuram</figcaption>
   </figure>
-  <figure class="ph-stairs">
+  <figure class="ph-stairs" data-r="wipe-l">
     <img src="assets/stairs.jpg" width="1100" height="951" loading="lazy" alt="The outside staircase with black railings, potted palms and hanging pots, against a green wall">
     <figcaption>The stairs, lined with pots</figcaption>
   </figure>
-  <figure class="ph-room">
+  <figure class="ph-room" data-r="wipe-r">
     <img src="assets/bedroom.jpg" width="612" height="968" loading="lazy" alt="A bedroom with a double bed, red pillows, a patterned blanket and a window with purple curtains">
     <figcaption>One of the bedrooms</figcaption>
   </figure>
 </section>
 
 <section class="fire" aria-label="Campfire nights">
-  <figure>
+  <figure data-r="dark">
     <img src="assets/campfire.jpg" width="570" height="428" loading="lazy" alt="Guests on chairs round a fire pit at night, the fire burning high under string lights">
     <figcaption>Campfire Night @ Tree Top Villa</figcaption>
   </figure>
-  <p>Campfire and food are charged extra. Ask Mydeen when you write.</p>
+  <p data-r="rise" style="--i:2">Campfire and food are charged extra. Ask Mydeen when you write.</p>
 </section>
 
 <section class="facts" aria-labelledby="factsTitle">
-  <h2 id="factsTitle">Four sizes, by the day</h2>
+  <h2 id="factsTitle" data-r="mask">Four sizes, by the day</h2>
   <dl class="board">
-    <div><dt>Sizes</dt><dd>2, 3, 5 and 8 BHK</dd></div>
-    <div><dt>For</dt><dd>Families and bachelor groups</dd></div>
-    <div><dt>Rented</dt><dd>By the day</dd></div>
-    <div><dt>Campfire, food</dt><dd>Charged extra</dd></div>
-    <div><dt>The lake</dt><dd>1 km away</dd></div>
-    <div><dt>Google</dt><dd>4.7, from 475 reviews</dd></div>
-    <div><dt>Address</dt><dd>1/154, Rifle Range Road, Naidupuram, Kodaikanal, Tamil Nadu 624101</dd></div>
+    <div data-r="write" style="--i:0"><dt>Sizes</dt><dd>2, 3, 5 and 8 BHK</dd></div>
+    <div data-r="write" style="--i:1"><dt>For</dt><dd>Families and bachelor groups</dd></div>
+    <div data-r="write" style="--i:2"><dt>Rented</dt><dd>By the day</dd></div>
+    <div data-r="write" style="--i:3"><dt>Campfire, food</dt><dd>Charged extra</dd></div>
+    <div data-r="write" style="--i:4"><dt>The lake</dt><dd>1 km away</dd></div>
+    <div data-r="write" style="--i:5"><dt>Google</dt><dd><i class="n" data-count="4.7" data-dec="1">4.7</i>, from <i class="n" data-count="475">475</i> reviews</dd></div>
+    <div data-r="write" style="--i:6"><dt>Address</dt><dd>1/154, Rifle Range Road, Naidupuram, Kodaikanal, Tamil Nadu 624101</dd></div>
   </dl>
 </section>
 
 <section class="close" aria-labelledby="closeTitle">
-  <h2 id="closeTitle">Ask Mydeen</h2>
-  <p class="quote" id="quote">I'd like to stay 2 nights, 4 guests, in the 3 BHK.</p>
+  <h2 id="closeTitle" data-r="mask">Ask Mydeen</h2>
+  <p class="quote" id="quote" data-r="write">I'd like to stay 2 nights, 4 guests, in the 3 BHK.</p>
   <div class="links">
-    <a data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener">
+    <a data-r="write" style="--i:0" data-wa href="https://wa.me/919994734286?text=Hello%20Mydeen%2C%20I%27d%20like%20to%20ask%20about%20a%20stay%20at%20Tree%20Top%20Villa." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7Z"/></svg>WhatsApp <span>send this message</span></a>
-    <a href="tel:+919994734286"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call <span>+91 99947 34286</span></a>
-    <a href="tel:+917695980756"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call (2nd number) <span>+91 76959 80756</span></a>
-    <a href="https://www.google.com/maps/search/?api=1&amp;query=Tree%20Top%20Villa%20Kodaikanal&amp;query_place_id=ChIJY7Vm38pnBzsRvI6RaI5iAts" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Directions <span>Google Maps</span></a>
-    <a href="https://instagram.com/tree_topvilla_homestay" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>Instagram <span>@tree_topvilla_<wbr>homestay</span></a>
+    <a data-r="write" style="--i:1" href="tel:+919994734286"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call <span>+91 99947 34286</span></a>
+    <a data-r="write" style="--i:2" href="tel:+917695980756"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call (2nd number) <span>+91 76959 80756</span></a>
+    <a data-r="write" style="--i:3" href="https://www.google.com/maps/search/?api=1&amp;query=Tree%20Top%20Villa%20Kodaikanal&amp;query_place_id=ChIJY7Vm38pnBzsRvI6RaI5iAts" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Directions <span>Google Maps</span></a>
+    <a data-r="write" style="--i:4" href="https://instagram.com/tree_topvilla_homestay" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>Instagram <span>@tree_topvilla_<wbr>homestay</span></a>
   </div>
 </section>
 </main>
@@ -292,6 +390,131 @@
     date.addEventListener("input", update);
     date.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); date.blur(); } });
     update();
+  })();
+</script>
+<script>
+  /* Motion: plain script, no library. Without it (or with reduced motion) the page is complete and still. */
+  (function () {
+    var D = document, root = D.documentElement, RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.__rvOK = 1;
+    var $ = function (s) { return D.querySelector(s); };
+    var buzz = function () { try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {} };
+    var DESK = matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+
+    /* 1. The opening is CSS; this only says when it has finished (about 1.8 s after first paint). */
+    var finished = function () { if (DESK && !RM) startParallax(); };
+    if (root.dataset.opening === "done") finished(); else document.addEventListener("openingdone", finished);
+
+    /* 6. The name bar shows from the first scroll */
+    var bar = D.getElementById("bar"), barOn = false;
+    function barCheck() {
+      var on = (window.pageYOffset || root.scrollTop) > 80;
+      if (on !== barOn) { barOn = on; bar.classList.toggle("show", on); }
+    }
+    /* reading the scroll position forces a full layout, so the first read waits until after first paint */
+    addEventListener("scroll", barCheck, { passive: true }); requestAnimationFrame(function () { setTimeout(barCheck, 0); });
+
+    /* 3. Scroll scenes: each [data-r] gets class "in" once, by observer, and again by a scroll check that also
+          catches anything a fast flick skipped. */
+    function count(el) {
+      var to = parseFloat(el.getAttribute("data-count")), dec = +el.getAttribute("data-dec") || 0, t0 = 0;
+      function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / 1900), e = 1 - Math.pow(1 - p, 3), v = to * .35 + (to - to * .35) * e;
+        el.textContent = (p < 1 ? v : to).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    function show(el) {
+      if (el.classList.contains("in")) return;
+      el.classList.add("in");
+      setTimeout(function () { el.classList.add("done"); }, 1800);
+      if (!RM) [].forEach.call(el.querySelectorAll("[data-count]"), count);
+    }
+    var items = [].slice.call(D.querySelectorAll("[data-r]"));
+    if (RM || !("IntersectionObserver" in window)) items.forEach(show);
+    else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      items.forEach(function (el) { io.observe(el); });
+      var queued = 0;
+      var sweep = function () {
+        queued = 0;
+        var h = innerHeight;
+        items.forEach(function (el) { if (!el.classList.contains("in") && el.getBoundingClientRect().top < h * .92) show(el); });
+      };
+      addEventListener("scroll", function () { if (!queued) queued = requestAnimationFrame(sweep); }, { passive: true });
+      setTimeout(sweep, 600);
+    }
+
+    /* 2. The sentence: a blank you change lights up amber and settles, with a buzz */
+    [].forEach.call(D.querySelectorAll(".sentence select, .sentence input"), function (el) {
+      var blank = el.classList.contains("blank") ? el : el.parentNode;
+      el.addEventListener(el.tagName === "INPUT" ? "change" : "change", function () {
+        buzz();
+        if (RM) return;
+        blank.classList.remove("flash"); void blank.offsetWidth; blank.classList.add("flash");
+      });
+    });
+
+    /* 5. Closing moment on the main action: an amber ring; the link opens at once, never delayed */
+    [].forEach.call(D.querySelectorAll("[data-wa]"), function (a) {
+      a.addEventListener("click", function () {
+        buzz();
+        if (RM) return;
+        a.classList.remove("lit"); void a.offsetWidth; a.classList.add("lit");
+      });
+    });
+
+    /* Desktop with a mouse: the hero photo drifts slowly as you scroll */
+    function startParallax() {
+      var hero = $(".hero"), q = 0;
+      hero.classList.add("par");
+      var move = function () { q = 0; var y = window.pageYOffset; if (y < 900) hero.style.setProperty("--py", (y * .1).toFixed(1) + "px"); };
+      addEventListener("scroll", function () { if (!q) q = requestAnimationFrame(move); }, { passive: true });
+    }
+
+    /* 4. Ambient: fireflies drift up behind the page. DPR 1, 30 fps, 20 on phones / 60 on desktop, paused in a
+          hidden tab, thinned by a frame watchdog, never switched off. */
+    var cv = $("#flies");
+    if (cv && !RM && cv.getContext) setTimeout(function () {
+      var ctx = cv.getContext("2d"), W = 0, H = 0, ps = [], STEPS = [1, .6, .36, .2], step = 0;
+      var base = matchMedia("(pointer: coarse)").matches ? 20 : 60;
+      var raf = 0, last = 0, slow = 0, frames = 0, T = 0;
+      var fit = function () { W = cv.width = innerWidth; H = cv.height = innerHeight; };
+      var spawn = function (p, fresh) {
+        p.x = Math.random() * W; p.y = fresh ? Math.random() * H : H + 10; p.r = 1.6 + Math.random() * 1.4;
+        p.v = 8 + Math.random() * 16; p.ph = Math.random() * 6.3; p.a = .7 + Math.random() * .3; return p;
+      };
+      var grow = function () { var n = Math.round(base * STEPS[step]); while (ps.length < n) ps.push(spawn({}, true)); ps.length = n; };
+      var draw = function (dt) {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < ps.length; i++) {
+          var p = ps[i]; p.y -= p.v * dt; p.x += Math.sin(T * .6 + p.ph) * 12 * dt;
+          if (p.y < -10) spawn(p, false);
+          var a = p.a * (.7 + .3 * Math.sin(T * 1.6 + p.ph));
+          ctx.fillStyle = "rgba(242,164,60," + (a * .45).toFixed(3) + ")"; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3.4, 0, 6.283); ctx.fill();
+          ctx.fillStyle = "rgba(255,226,160," + a.toFixed(3) + ")"; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+        }
+      };
+      var loop = function (t) {
+        raf = requestAnimationFrame(loop);
+        if (t - last < 32) return;
+        var dt = Math.min(.1, (t - last) / 1000); last = t; T += dt;
+        var t0 = performance.now(); draw(dt);
+        if (performance.now() - t0 > 24) slow++;
+        if (++frames === 90) { if (slow > 45 && step < STEPS.length - 1) { step++; grow(); } frames = 0; slow = 0; }
+      };
+      var go = function () { if (!D.hidden && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); } };
+      var stop = function () { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+      fit(); grow();
+      var rs = 0;
+      addEventListener("resize", function () { clearTimeout(rs); rs = setTimeout(function () { fit(); grow(); }, 200); });
+      D.addEventListener("visibilitychange", function () { D.hidden ? stop() : go(); });
+      go();
+    }, 2200); /* created after the opening, so the first seconds are all spent on the opening itself */
   })();
 </script>
 </body>
