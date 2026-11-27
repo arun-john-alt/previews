@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-entrance="engine">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,12 +9,13 @@
 <meta name="description" content="THEARA (Label Theara), Erode: ready-to-wear semi tussar silk suits and a satin maxi, sizes XS to XL.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" media="print, screen"></noscript>
 <link rel="preload" as="image" href="assets/post-09.webp">
 <style>
-  :root { --ease: cubic-bezier(.23, 1, .32, 1); --head: 56px; --nav: 60px; --bg: #2e2420; --ink: #f2ece6; --brand: #f1d3cb; --on-brand: #2e2420; --accent: #ebc3b8; --muted: #c6b8b0; --soft: #3b2e29; --surface: #372b26; --line: #56453e; --field: #9a8880; --head-bg: #2e2420; --head-fg: #f2ece6; --concept-bg: #1f1714; --concept-fg: #d8cec7; --foot-bg: #1f1714; --foot-fg: #e9e1db; --tag-bg: #f2ece6; --tag-fg: #2e2420; --radius: 0px; --card-ratio: 4 / 5; --card-pos: 50% 24%; --pdp-ratio: 4 / 5; --pdp-fit: cover; --body-font: Jost, system-ui, sans-serif; --h2-font: 400 clamp(34px, 10vw, 54px)/1.05 Italiana, Georgia, serif; --pdp-title-font: 400 clamp(30px, 8.6vw, 44px)/1.08 Italiana, Georgia, serif; --line-font: italic 300 17px/1.45 Jost, system-ui, sans-serif; }
+  :root { --ease: cubic-bezier(.23, 1, .32, 1); --sx-out: cubic-bezier(.16, 1, .3, 1); --head: 56px; --nav: 60px; --bg: #2e2420; --ink: #f2ece6; --brand: #f1d3cb; --on-brand: #2e2420; --accent: #ebc3b8; --muted: #c6b8b0; --soft: #3b2e29; --surface: #372b26; --line: #56453e; --field: #9a8880; --head-bg: #2e2420; --head-fg: #f2ece6; --concept-bg: #1f1714; --concept-fg: #d8cec7; --foot-bg: #1f1714; --foot-fg: #e9e1db; --tag-bg: #f2ece6; --tag-fg: #2e2420; --radius: 0px; --card-ratio: 4 / 5; --card-pos: 50% 24%; --pdp-ratio: 4 / 5; --pdp-fit: cover; --body-font: Jost, system-ui, sans-serif; --h2-font: 400 clamp(34px, 10vw, 54px)/1.05 Italiana, Georgia, serif; --pdp-title-font: 400 clamp(30px, 8.6vw, 44px)/1.08 Italiana, Georgia, serif; --line-font: italic 300 17px/1.45 Jost, system-ui, sans-serif; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: calc(var(--head) + 8px); }
+  /* Colours below that aren't brand tokens still have a var() so a dark shop can override them (see shop.DARK). */
+  html { color-scheme: var(--color-scheme, light); -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: calc(var(--head) + 8px); }
   html.locked { overflow: hidden; }
   body { font: 400 16px/1.55 var(--body-font); color: var(--ink); background: var(--bg); padding-bottom: calc(var(--nav) + env(safe-area-inset-bottom)); }
   img, video { display: block; max-width: 100%; height: auto; }
@@ -23,12 +24,17 @@
   :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
   [tabindex="-1"]:focus { outline: none; }
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .concept { font-size: 11px; line-height: 1.3; text-align: center; padding: 7px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: var(--concept-bg); color: var(--concept-fg); }
+  .concept { font-size: 12px; line-height: 1.3; text-align: center; padding: 7px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: var(--concept-bg); color: var(--concept-fg); }
   .strip { font-size: 15px; text-align: center; padding: 8px 12px; background: var(--soft); color: var(--ink); }
 
+  /* The name bar is solid on every shop (owner, 24 Nov 2026): a translucent --head-bg is laid over the page colour. */
   header.top { position: sticky; top: 0; z-index: 20; height: var(--head); display: flex; align-items: center; justify-content: space-between; padding: 0 6px 0 16px;
-    background: var(--head-bg); color: var(--head-fg); border-bottom: 1px solid var(--line); }
+    background-color: var(--bg); background-image: linear-gradient(var(--head-bg, var(--bg)), var(--head-bg, var(--bg))); color: var(--head-fg); border-bottom: 1px solid var(--line); }
   .mark { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+  /* Their real logo (the Instagram picture) as a round badge before the name; LOGO_SRC, or assets/logo.* found by build(). */
+  .logo-badge { flex: none; width: 34px; height: 34px; margin-right: 10px; border-radius: 50%; object-fit: cover; background: var(--soft);
+    box-shadow: 0 0 0 1.5px var(--badge-ring, currentColor); }
+  :where(.mark > img:first-child) { flex: none; border-radius: 50%; object-fit: cover; }
   .head-nav { display: none; gap: 4px; }
   .head-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 12px; text-decoration: none; font-size: 15px; }
   .icon-btn { position: relative; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; background: none; cursor: pointer; text-decoration: none; }
@@ -61,7 +67,7 @@
   .card-img video { opacity: 0; transition: opacity .4s var(--ease); }
   .card-img video.ready { opacity: 1; }
   .tag { position: absolute; left: 8px; top: 8px; z-index: 1; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--tag-bg); color: var(--tag-fg); }
-  .count { position: absolute; left: 8px; bottom: 8px; z-index: 1; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,.92); color: var(--ink); }
+  .count { position: absolute; left: 8px; bottom: 8px; z-index: 1; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--count-bg, rgba(255,255,255,.92)); color: var(--count-fg, var(--ink)); }
   .card h3 { font: 600 16px/1.3 var(--body-font); margin-top: 10px; }
   .card .sub { font-size: 15px; color: var(--muted); }
   .price { font-size: 16px; font-weight: 700; margin-top: 2px; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
@@ -81,7 +87,10 @@
   .bnav .badge { top: 6px; right: calc(50% - 22px); }
 
   .wa { position: fixed; right: 14px; bottom: calc(var(--nav) + 14px + env(safe-area-inset-bottom)); z-index: 25; width: 56px; height: 56px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; background: #1f7a4d; color: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.22); transition: transform .14s var(--ease); }
+    display: flex; align-items: center; justify-content: center; background: var(--float-bg, var(--float-default-bg, #1f7a4d)); color: var(--float-fg, var(--float-default-fg, #fff)); box-shadow: 0 6px 18px rgba(0,0,0,.22); transition: transform .14s var(--ease); }
+  /* With no WhatsApp number the button opens an Instagram DM, so it drops WhatsApp green for the brand colour.
+     Only the defaults change here: a shop's own `.wa { background }` in BRAND_CSS must still win. */
+  .wa[data-kind="dm"] { --float-default-bg: var(--brand); --float-default-fg: var(--on-brand); }
   .wa:active { transform: scale(.94); }
   .wa.away { opacity: 0; visibility: hidden; transform: translateY(12px); }
   .wa { transition: transform .2s var(--ease), opacity .2s var(--ease), visibility .2s; }
@@ -92,10 +101,15 @@
   /* Product page, checkout, done */
   .view { position: fixed; inset: 0; z-index: 50; overflow-y: auto; overscroll-behavior: contain; background: var(--bg); padding-bottom: calc(96px + env(safe-area-inset-bottom)); scroll-padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
   .view[hidden] { display: none; }
-  .view.enter { animation: rise .28s var(--ease); }
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .vbar { position: sticky; top: 0; z-index: 3; height: var(--head); display: flex; align-items: center; justify-content: space-between; padding: 0 6px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .view.enter { animation: sx-view .28s var(--ease); }
+  .view.sx-leaving { pointer-events: none; }
+  @keyframes sx-view { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .vbar { position: sticky; top: 0; z-index: 3; height: var(--head); display: flex; align-items: center; justify-content: space-between; gap: 2px; padding: 0 6px; background: var(--surface); border-bottom: 1px solid var(--line); }
   .vbar .title { font-weight: 700; font-size: 16px; }
+  /* Product, checkout and done pages keep the name top-left, just after Back. */
+  .vbar .mark { margin-right: auto; min-width: 0; overflow: hidden; padding-left: 3px; white-space: nowrap; }
+  .vbar > .mark:first-child { padding-left: 10px; overflow: visible; }
+  .vbar .mark + .title { flex: none; padding-right: 10px; }
   .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--soft); }
   .gallery::-webkit-scrollbar { display: none; }
   .slide { position: relative; flex: 0 0 100%; aspect-ratio: var(--pdp-ratio); scroll-snap-align: start; overflow: hidden; }
@@ -128,7 +142,7 @@
   .size[aria-checked="true"] { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
   .guide { min-height: 44px; padding: 0 2px; border: 0; background: none; font-size: 15px; text-decoration: underline; cursor: pointer; color: var(--muted); }
   .guide-text { font-size: 15px; color: var(--muted); margin: -2px 0 10px; }
-  .err { color: #a3123a; font-size: 15px; margin-top: 8px; }
+  .err { color: var(--err, #a3123a); font-size: 15px; margin-top: 8px; }
   .qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); }
   .qty button { width: 44px; height: 44px; border: 0; background: none; font-size: 20px; cursor: pointer; }
   .qty output { min-width: 32px; text-align: center; font-weight: 700; }
@@ -144,7 +158,10 @@
   .drawer[hidden], .backdrop[hidden] { display: none; }
   .drawer .vbar { border-radius: 16px 16px 0 0; position: static; }
   .lines { overflow-y: auto; padding: 0 16px; flex: 1; }
-  .ln { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .ln { position: relative; display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  /* The line just added lands with a brief wash of the brand colour (an opacity-only layer). */
+  .ln.sx-landed::before { content: ""; position: absolute; inset: 0 -16px; background: var(--brand); opacity: 0; pointer-events: none; animation: sx-landed .9s var(--ease) .18s backwards; }
+  @keyframes sx-landed { from { opacity: .16; } to { opacity: 0; } }
   .ln img { width: 72px; height: 96px; object-fit: cover; border-radius: 6px; background: var(--soft); }
   .ln b { display: block; font-weight: 700; }
   .ln small { color: var(--muted); font-size: 14px; display: block; }
@@ -155,7 +172,7 @@
   .sum { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 4px; }
   .sum span:last-child { white-space: nowrap; }
   .sum-note { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-  .added { margin-left: 8px; font-size: 14px; font-weight: 600; color: #2e7d4f; }
+  .added { margin-left: 8px; font-size: 14px; font-weight: 600; color: var(--ok, #2e7d4f); }
   .continue { width: 100%; justify-content: center; border: 0; background: none; cursor: pointer; }
   .empty { padding: 30px 4px; text-align: center; color: var(--muted); }
 
@@ -164,6 +181,8 @@
   .field { display: grid; gap: 6px; margin-bottom: 12px; }
   .field label { font-weight: 600; font-size: 15px; }
   .field input, .field select { width: 100%; min-width: 0; min-height: 48px; padding: 0 12px; border: 1px solid var(--field); border-radius: 6px; background: var(--surface); font-size: 16px; }
+  /* The open list is drawn by the phone, not the page: give it its own readable colours on any ground. */
+  .field option { color: var(--option-fg, #1e1a19); background: var(--option-bg, #fff); }
   .two { display: grid; grid-template-columns: 1fr; gap: 0 10px; }
   .two > * { min-width: 0; }
   .pay { display: grid; gap: 8px; }
@@ -179,8 +198,55 @@
   .done h1 { font: var(--pdp-title-font); margin-top: 10px; }
   .done p { color: var(--muted); margin-top: 10px; }
 
-  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-  .js .reveal.in { opacity: 1; transform: none; }
+  /* ---------- Response: every control answers the press within 100 ms ----------
+     Individual `scale` (not `transform`) so a shop's own transform on the same element still applies. */
+  .icon-btn, .size, .qty button, .remove, .guide, .text-link, .mark, .pay label, .bnav a, .head-nav a, .card-link,
+  main a[href^="#/p/"] { -webkit-tap-highlight-color: transparent; }
+  .icon-btn, .size, .qty button, .remove, .guide, .text-link, .mark, .pay label, .card-link, main a[href^="#/p/"], .bnav svg { transition: scale .14s var(--ease); }
+  .icon-btn:active { scale: .9; }
+  .size:active, .qty button:active { scale: .94; }
+  .remove:active, .guide:active, .text-link:active, .mark:active { scale: .97; }
+  .pay label:active { scale: .985; }
+  /* Product links get a light press; many shops add their own on the photo inside, and the two multiply. */
+  .card-link:active, main a[href^="#/p/"]:active { scale: .985; }
+  .bnav a:active svg { scale: .86; }
+  .head-nav a { transition: opacity .14s var(--ease); }
+  .head-nav a:active { opacity: .6; }
+
+  /* ---------- Motion: the engine's own vocabulary, "unfold" ----------
+     A shop is cloth and labels, so the engine moves like them: photos unroll from the top like cloth off a bolt, lines
+     rise from their hem, eyebrows and the name are written in from the left, pieces in a swipe row slide along the
+     rail, chips thread on, the badge is pressed on like a seal, prices and trust marks are stamped.
+     All sx- names are the engine's; shops keep their own keyframe names.
+     1. The name bar plays on every shop at first paint. 2. The default opening (html[data-entrance="engine"], chosen
+     by shop.render() when the home page has no data-opening of its own) moves the first section of <main>; the engine
+     sets data-opening="done" when it ends. 3. Scroll reveals (JS, IntersectionObserver) run once per piece. Nothing
+     is hidden without JavaScript, and if the engine script never runs, the head timer adds rv-fail and shows it all. */
+  @keyframes sx-op-seal { 0% { opacity: 0; scale: 1.5; } 60% { opacity: 1; scale: .94; } 100% { opacity: 1; scale: 1; } }
+  @keyframes sx-op-write { from { clip-path: inset(-20% 100% -20% -6px); } to { clip-path: inset(-20% -6px -20% -6px); } }
+  @keyframes sx-op-hem { from { translate: 0 100%; clip-path: inset(-.3em -.3em 100% -.3em); } to { translate: 0 0; clip-path: inset(-.3em -.3em -.3em -.3em); } }
+  @keyframes sx-op-unroll { from { clip-path: inset(0 3% 42% 3%); scale: 1.06; } to { clip-path: inset(0 0 0 0); scale: 1; } }
+  @keyframes sx-op-rise { from { opacity: 0; translate: 0 14px; } }
+  @keyframes sx-op-stamp { from { opacity: 0; scale: 1.12; } }
+  @keyframes sx-op-thread { from { opacity: 0; translate: -16px 0; } }
+  @media (prefers-reduced-motion: no-preference) {
+    :where(header.top) .mark { animation: sx-op-write .75s var(--sx-out) .1s backwards; }
+    :where(header.top .mark > img:first-child) { animation: sx-op-seal .55s var(--sx-out) .04s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.eyebrow) { animation: sx-op-write .7s var(--sx-out) .08s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(h1) { animation: sx-op-hem .8s var(--sx-out) .16s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(img:not(button img, .logo-badge)) { animation: sx-op-unroll 1s var(--sx-out) .02s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(p:not(.eyebrow, .price, .trust)) { animation: sx-op-rise .6s var(--sx-out) .4s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size) { animation: sx-op-thread .45s var(--sx-out) .5s backwards; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(2) { animation-delay: .55s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(3) { animation-delay: .6s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(4) { animation-delay: .65s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(5) { animation-delay: .7s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(6) { animation-delay: .75s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.sw, .chip, .size):nth-child(n+7) { animation-delay: .8s; }
+    :where(html[data-entrance="engine"] main > :first-child) :where(.btn, .price, .text-link, .count, .tag) { animation: sx-op-stamp .5s var(--sx-out) .62s backwards; }
+    /* Scroll reveals: hidden only until the engine shows them (the list matches ITEM, SET and SKIP in the script). */
+    .js:not(.rv-fail) :is(main section h2:not(.visually-hidden), main section .eyebrow, main :is(.grid, #all, .row, .chips, .trust) > *, main .reveal, main [data-rv]):not(.in, [data-rv="none"], [data-rv="none"] *, [data-scene], [data-scene] *, main [data-opening], main [data-opening] *, main > :first-child, main > :first-child *) { opacity: 0; }
+  }
 
   @media (min-width: 480px) { .two { grid-template-columns: 1fr 1fr; } }
   @media (max-height: 700px) and (max-width: 899px) { .slide { aspect-ratio: auto; height: 52svh; } }
@@ -197,6 +263,7 @@
     .grid { grid-template-columns: repeat(4, 1fr); }
     .chips { margin: 0 0 18px; padding: 0; }
     .view { padding-bottom: 40px; }
+    .logo-badge { width: 38px; height: 38px; }
     .pdp { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 40px; max-width: 1140px; margin: 0 auto; padding: 24px 32px; }
     .gallery { border-radius: 10px; }
     .pdp-body { padding: 0; }
@@ -208,8 +275,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .card-img video, .slide video, .hero video { display: none; }
-    .js .reveal { opacity: 1; transform: none; transition: none; }
-    .view.enter { animation: none; }
+    .view.enter, .ln.sx-landed::before { animation: none; }
     .btn, .chip, .drawer, .backdrop { transition: none; }
   }
 
@@ -221,14 +287,50 @@
   .kolam { display: block; overflow: visible; }
   .kolam .kline { fill: none; stroke: #efe7df; stroke-width: 1.6; stroke-linejoin: round; stroke-dasharray: 1 1; }
   .kolam .kdots { fill: #efe7df; }
-  .js .hero .kolam .kline { animation: draw 2.2s cubic-bezier(.33, 1, .68, 1) .3s both; }
+  /* Opening: the dots are set one by one, then the line is drawn around them; done by about 1.6 s. */
+  .js .hero .kolam .kline { animation: draw 1.3s cubic-bezier(.33, 1, .68, 1) .25s backwards; }
+  .js .hero .kdots circle { transform-box: fill-box; transform-origin: center; animation: dotset .45s var(--ease) backwards; }
+  .js .hero .kdots circle:nth-child(2) { animation-delay: .08s; } .js .hero .kdots circle:nth-child(3) { animation-delay: .16s; } .js .hero .kdots circle:nth-child(4) { animation-delay: .24s; }
   @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-  .hero { padding: 22px 20px 20px; }
-  .hero h1 { font: 400 clamp(33px, 9.6vw, 44px)/1.06 Italiana, Georgia, serif; letter-spacing: .005em; max-width: 13ch; text-wrap: balance; }
+  @keyframes dotset { from { opacity: 0; transform: scale(.4); } }
+  /* overflow-x: clip keeps the opening's stamped button (it starts at scale 1.12) inside the screen. */
+  .hero { position: relative; isolation: isolate; overflow-x: clip; padding: 22px 20px 20px; }
+  /* Ambient: rice flour drifting in the light, behind the text, under 20% opacity. */
+  .flour { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: .5; }
+  /* Signature: four tap targets sit over the kolam's four dots. */
+  .kwrap { position: relative; width: 38px; flex: none; }
+  .kwrap .kolam { width: 100%; height: auto; }
+  .kdot { position: absolute; left: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; background: none; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: scale .14s var(--ease); }
+  .kdot::after { content: ""; position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 1px solid #efe7df; border-radius: 50%; opacity: 0; scale: .5; transition: opacity .25s var(--ease), scale .35s var(--ease); }
+  .kdot[aria-pressed="true"]::after { opacity: 1; scale: 1; }
+  .kdot:active { scale: .9; }
+  .kdot:focus-visible { outline: 2px solid var(--brand); outline-offset: -4px; border-radius: 50%; }
+  .hero-frame { touch-action: pan-y; overflow: hidden; }
+  .hero-frame .swap { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%; }
+  /* Closing moment on the main action: one pass of light, never delaying the link. */
+  .hero-btn { position: relative; overflow: hidden; }
+  .hero-btn::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); translate: -120% 0; }
+  .hero-btn.lit::after { animation: pass .8s var(--ease); }
+  @keyframes pass { from { translate: -120% 0; } to { translate: 120% 0; } }
+  /* Scroll scenes: the rule is drawn, each piece's kolam is drawn and its photo is swept clear from its own side. */
+  .kmini { width: 84px; height: auto; margin-bottom: 14px; }
+  .js:not(.rv-fail) .rule { transform-origin: left; transition: transform 1s cubic-bezier(.16, 1, .3, 1); }
+  .js:not(.rv-fail) .rule:not(.in) { transform: scaleX(0); }
+  .js:not(.rv-fail) .look .frame { transition: clip-path .95s cubic-bezier(.16, 1, .3, 1), transform .18s var(--ease); }
+  .js:not(.rv-fail) .look.l:not(.in) .frame { clip-path: inset(0 100% 0 0); }
+  .js:not(.rv-fail) .look.r:not(.in) .frame { clip-path: inset(0 0 0 100%); }
+  .js:not(.rv-fail) .look .kmini .kline { transition: stroke-dashoffset 1.2s cubic-bezier(.33, 1, .68, 1) .25s; }
+  .js:not(.rv-fail) .look:not(.in) .kmini .kline { stroke-dashoffset: 1; }
+  .js:not(.rv-fail) .look .kmini .kdots { transition: opacity .5s var(--ease) .1s; }
+  .js:not(.rv-fail) .look:not(.in) .kmini .kdots { opacity: 0; }
+  /* Fallback face sized to Italiana so the headline wraps the same before and after the font swap. */
+  @font-face { font-family: 'Display Fallback'; src: local('Georgia'); size-adjust: 88%; ascent-override: 98%; descent-override: 26%; line-gap-override: 0%; }
+  footer .links a { -webkit-tap-highlight-color: transparent; transition: scale .14s var(--ease); }
+  footer .links a:active { scale: .96; }
+  .hero h1 { font: 400 clamp(33px, 9.6vw, 44px)/1.06 Italiana, 'Display Fallback', Georgia, serif; letter-spacing: .005em; max-width: 13ch; text-wrap: balance; }
   .hero-sub { margin-top: 8px; color: var(--muted); font-weight: 300; font-size: 17px; }
   .stage { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 18px 0 20px; }
   .stage-side { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 6px 0 2px; }
-  .stage-side .kolam { width: 38px; height: auto; }
   .stage-cap { font-size: 15px; line-height: 1.4; color: var(--muted); }
   .stage-cap a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-weight: 500; letter-spacing: .14em; text-decoration: none; white-space: nowrap; }
   .stage-cap span { display: block; }
@@ -279,9 +381,11 @@
   /* Phones: the photo takes the width, so the side column (about 54px) keeps only the LT code under the kolam;
      the frame's link label still names the piece. */
   @media (max-width: 599px) { .stage-cap span { display: none; } }
+  /* Short phones: the dots keep their 44 px spacing, so the LT code under them steps aside (the photo's link names the piece). */
+  @media (max-height: 600px) and (max-width: 599px) { .stage-cap { display: none; } }
   /* Room under the footer's concept note for the floating DM button at the end of the page. */
   @media (max-width: 899px) { footer { padding-bottom: 96px; } }
-  @media (max-height: 700px) and (max-width: 899px) { .stage-side .kolam { width: 30px; } .hero { padding-top: 16px; } .stage { margin: 14px 0 16px; } .hero-frame { height: min(38svh, calc((100vw - 40px - 76px) * 1.25)); } }
+  @media (max-height: 700px) and (max-width: 899px) { .hero { padding-top: 16px; } .stage { margin: 14px 0 16px; } .hero-frame { height: min(38svh, calc((100vw - 40px - 76px) * 1.25)); } }
   /* iPhone SE 1st gen (320x568): a shorter photo keeps the button above the bottom nav. */
   @media (max-height: 600px) and (max-width: 599px) { .hero-frame { height: min(32svh, calc((100vw - 40px - 76px) * 1.25)); } }
   @media (min-width: 600px) and (max-width: 899px) { .hero-frame { height: min(56svh, 560px); } }
@@ -297,7 +401,7 @@
     .hero-btn { grid-column: 1; grid-row: 3; width: auto; justify-self: start; padding: 0 34px; margin-top: 28px; }
     .stage { grid-column: 2; grid-row: 1 / 5; margin: 0; gap: 36px; }
     .hero-frame { height: min(70vh, 600px); }
-    .stage-side .kolam { width: 46px; }
+    .kwrap { width: 46px; }
     .looks-wrap { padding: 80px 6vw 40px; max-width: 1160px; margin: 0 auto; }
     .looks-wrap h2 { max-width: none; }
     .looks { column-gap: 72px; }
@@ -306,11 +410,12 @@
     .order h2 { grid-row: span 2; }
     .order ul { margin-top: 8px; }
   }
-  @media (prefers-reduced-motion: reduce) { .js .hero .kolam .kline { animation: none; } .frame, .look-go svg { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .js .hero .kolam .kline, .js .hero .kdots circle, .hero-btn.lit::after { animation: none; } .frame, .look-go svg, .kdot, .kdot::after { transition: none; } .flour { display: none; } }
 </style>
 <script>
+  /* The failsafe: if the engine's script has not run 2.5 s from now, rv-fail shows everything a reveal would hide. */
   document.documentElement.classList.add('js');
-  setTimeout(function () { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }, 2500);
+  setTimeout(function () { if (!window.__shop) document.documentElement.classList.add('rv-fail'); }, 2500);
 </script>
 </head>
 <body>
@@ -318,7 +423,7 @@
 <div class="concept" data-concept-banner>Concept for @label_theara · not the official site</div>
 
 <header class="top">
-  <a class="mark" href="#top" aria-label="THEARA, home">LABEL THEARA</a>
+  <a class="mark" href="#top" aria-label="THEARA, home"><img class="logo-badge" src="assets/logo-badge.webp" alt="" width="34" height="34" decoding="async">LABEL THEARA</a>
   <nav class="head-nav" aria-label="Main"><a href="#shop">Collection</a><a href="#order-title">Ordering</a><a href="https://instagram.com/label_theara">Instagram</a></nav>
   <a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a>
 </header>
@@ -326,13 +431,14 @@
 <main id="top">
 
 <section class="hero" aria-labelledby="hero-title">
+  <canvas class="flour" aria-hidden="true"></canvas>
   <div class="hero-copy">
     <h1 id="hero-title">Kurtis, maxis, <span class="nw">co-ords</span> &amp; dresses.</h1>
     <p class="hero-sub">Ready to wear, from Erode. Sizes XS to XL.</p>
   </div>
   <div class="stage">
-    <div class="stage-side"><svg class="kolam" viewBox="0 0 38 146" width="38" height="146" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="19.0" cy="19.0" r="2.6"/><circle cx="19.0" cy="55.0" r="2.6"/><circle cx="19.0" cy="91.0" r="2.6"/><circle cx="19.0" cy="127.0" r="2.6"/></g><path class="kline" pathLength="1" d="M34.0 19.0L33.9 20.5L33.5 22.0L32.9 23.4L32.0 24.9L31.0 26.4L29.7 27.9L28.3 29.4L26.7 30.8L25.0 32.3L23.1 33.8L21.3 35.3L19.3 36.8L17.4 38.2L15.5 39.7L13.6 41.2L11.9 42.7L10.2 44.2L8.7 45.6L7.4 47.1L6.3 48.6L5.4 50.1L4.7 51.5L4.2 53.0L4.0 54.5L4.1 56.0L4.3 57.5L4.9 58.9L5.6 60.4L6.6 61.9L7.8 63.4L9.2 64.9L10.8 66.3L12.5 67.8L14.2 69.3L16.1 70.8L18.0 72.3L20.0 73.7L21.9 75.2L23.8 76.7L25.5 78.2L27.2 79.7L28.8 81.1L30.2 82.6L31.4 84.1L32.4 85.6L33.1 87.1L33.7 88.5L33.9 90.0L34.0 91.5L33.8 93.0L33.3 94.5L32.6 95.9L31.7 97.4L30.6 98.9L29.3 100.4L27.8 101.8L26.1 103.3L24.4 104.8L22.5 106.3L20.6 107.8L18.7 109.2L16.7 110.7L14.9 112.2L13.0 113.7L11.3 115.2L9.7 116.6L8.3 118.1L7.0 119.6L6.0 121.1L5.1 122.6L4.5 124.0L4.1 125.5L4.0 127.0A15 15 0 0 0 34.0 127.0L33.9 125.5L33.5 124.0L32.9 122.6L32.0 121.1L31.0 119.6L29.7 118.1L28.3 116.6L26.7 115.2L25.0 113.7L23.1 112.2L21.3 110.7L19.3 109.2L17.4 107.8L15.5 106.3L13.6 104.8L11.9 103.3L10.2 101.8L8.7 100.4L7.4 98.9L6.3 97.4L5.4 95.9L4.7 94.5L4.2 93.0L4.0 91.5L4.1 90.0L4.3 88.5L4.9 87.1L5.6 85.6L6.6 84.1L7.8 82.6L9.2 81.1L10.8 79.7L12.5 78.2L14.2 76.7L16.1 75.2L18.0 73.7L20.0 72.3L21.9 70.8L23.8 69.3L25.5 67.8L27.2 66.3L28.8 64.9L30.2 63.4L31.4 61.9L32.4 60.4L33.1 58.9L33.7 57.5L33.9 56.0L34.0 54.5L33.8 53.0L33.3 51.5L32.6 50.1L31.7 48.6L30.6 47.1L29.3 45.6L27.8 44.2L26.1 42.7L24.4 41.2L22.5 39.7L20.6 38.2L18.7 36.8L16.7 35.3L14.9 33.8L13.0 32.3L11.3 30.8L9.7 29.4L8.3 27.9L7.0 26.4L6.0 24.9L5.1 23.4L4.5 22.0L4.1 20.5L4.0 19.0A15 15 0 0 1 34.0 19.0Z"/></svg><p class="stage-cap"><a href="#/p/lt-177">LT-177</a><span>Greenish yellow suit set</span></p></div>
-    <a class="frame hero-frame" href="#/p/lt-177" aria-label="LT-177: Semi tussar silk printed salwar suit set, greenish yellow, parallel pants. See details"><img src="assets/post-09.webp" alt="Model in a greenish yellow semi tussar silk suit set, holding out the printed dupatta, marigolds behind" width="480" height="640" fetchpriority="high"></a>
+    <div class="stage-side"><div class="kwrap" role="group" aria-label="The four pieces: tap a dot to see one"><svg class="kolam" viewBox="0 0 38 170" width="38" height="170" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="19.0" cy="19.0" r="2.6"/><circle cx="19.0" cy="63.0" r="2.6"/><circle cx="19.0" cy="107.0" r="2.6"/><circle cx="19.0" cy="151.0" r="2.6"/></g><path class="kline" pathLength="1" d="M34.0 19.0L33.9 20.5L33.7 22.0L33.2 23.4L32.7 24.9L31.9 26.4L31.1 27.9L30.1 29.4L28.9 30.9L27.7 32.3L26.3 33.8L24.9 35.3L23.4 36.8L21.9 38.3L20.3 39.8L18.7 41.2L17.2 42.7L15.6 44.2L14.1 45.7L12.6 47.2L11.2 48.7L9.9 50.1L8.7 51.6L7.6 53.1L6.6 54.6L5.8 56.1L5.1 57.6L4.6 59.0L4.2 60.5L4.0 62.0L4.0 63.5L4.1 65.0L4.5 66.5L4.9 67.9L5.6 69.4L6.3 70.9L7.2 72.4L8.3 73.9L9.5 75.4L10.7 76.8L12.1 78.3L13.6 79.8L15.1 81.3L16.6 82.8L18.2 84.3L19.8 85.7L21.4 87.2L22.9 88.7L24.4 90.2L25.9 91.7L27.3 93.2L28.5 94.6L29.7 96.1L30.8 97.6L31.7 99.1L32.4 100.6L33.1 102.1L33.5 103.5L33.9 105.0L34.0 106.5L34.0 108.0L33.8 109.5L33.4 111.0L32.9 112.4L32.2 113.9L31.4 115.4L30.4 116.9L29.3 118.4L28.1 119.9L26.8 121.3L25.4 122.8L23.9 124.3L22.4 125.8L20.8 127.3L19.3 128.8L17.7 130.2L16.1 131.7L14.6 133.2L13.1 134.7L11.7 136.2L10.3 137.7L9.1 139.1L7.9 140.6L6.9 142.1L6.1 143.6L5.3 145.1L4.8 146.6L4.3 148.0L4.1 149.5L4.0 151.0A15 15 0 0 0 34.0 151.0L33.9 149.5L33.7 148.0L33.2 146.6L32.7 145.1L31.9 143.6L31.1 142.1L30.1 140.6L28.9 139.1L27.7 137.7L26.3 136.2L24.9 134.7L23.4 133.2L21.9 131.7L20.3 130.2L18.7 128.8L17.2 127.3L15.6 125.8L14.1 124.3L12.6 122.8L11.2 121.3L9.9 119.9L8.7 118.4L7.6 116.9L6.6 115.4L5.8 113.9L5.1 112.4L4.6 111.0L4.2 109.5L4.0 108.0L4.0 106.5L4.1 105.0L4.5 103.5L4.9 102.1L5.6 100.6L6.3 99.1L7.2 97.6L8.3 96.1L9.5 94.6L10.7 93.2L12.1 91.7L13.6 90.2L15.1 88.7L16.6 87.2L18.2 85.7L19.8 84.3L21.4 82.8L22.9 81.3L24.4 79.8L25.9 78.3L27.3 76.8L28.5 75.4L29.7 73.9L30.8 72.4L31.7 70.9L32.4 69.4L33.1 67.9L33.5 66.5L33.9 65.0L34.0 63.5L34.0 62.0L33.8 60.5L33.4 59.0L32.9 57.6L32.2 56.1L31.4 54.6L30.4 53.1L29.3 51.6L28.1 50.1L26.8 48.7L25.4 47.2L23.9 45.7L22.4 44.2L20.8 42.7L19.3 41.2L17.7 39.8L16.1 38.3L14.6 36.8L13.1 35.3L11.7 33.8L10.3 32.3L9.1 30.9L7.9 29.4L6.9 27.9L6.1 26.4L5.3 24.9L4.8 23.4L4.3 22.0L4.1 20.5L4.0 19.0A15 15 0 0 1 34.0 19.0Z"/></svg><button type="button" class="kdot" data-i="0" style="top:11.18%" aria-pressed="false" aria-label="LT-179, purple, ikkat dupatta"></button><button type="button" class="kdot" data-i="1" style="top:37.06%" aria-pressed="false" aria-label="LT-178, dark green, printed dupatta"></button><button type="button" class="kdot" data-i="2" style="top:62.94%" aria-pressed="true" aria-label="LT-177, greenish yellow, parallel pants"></button><button type="button" class="kdot" data-i="3" style="top:88.82%" aria-pressed="false" aria-label="LT-176, black with white florals"></button></div><p class="stage-cap"><a href="#/p/lt-177">LT-177</a><span>Greenish yellow</span></p></div>
+    <a class="frame hero-frame" href="#/p/lt-177" aria-label="LT-177: Semi tussar silk printed salwar suit set, greenish yellow, parallel pants. See details"><img id="hero-img" src="assets/post-09.webp" alt="Model in a greenish yellow semi tussar silk suit set, holding out the printed dupatta, marigolds behind" width="480" height="640" fetchpriority="high"></a>
   </div>
   <a class="btn hero-btn" href="#shop">Shop the collection</a>
 </section>
@@ -340,18 +446,17 @@
 <section class="looks-wrap" id="shop" aria-labelledby="shop-title">
   <hr class="rule">
   <h2 id="shop-title">Four pieces, <em><span class="nw">LT-176</span> to <span class="nw">LT-179.</span></em></h2>
-  <ol class="looks"><li class="look l"><a class="frame" href="#/p/lt-179" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-01.webp" alt="" width="480" height="640"></a><div class="look-text"><h3><a href="#/p/lt-179">Semi tussar silk printed salwar suit</a></h3><p class="look-sub">LT-179 · Purple, ikkat dupatta</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-179">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look r"><a class="frame" href="#/p/lt-178" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-04.webp" alt="" width="480" height="640"></a><div class="look-text"><h3><a href="#/p/lt-178">Semi tussar silk printed top &amp; dupatta set</a></h3><p class="look-sub">LT-178 · Dark green, printed dupatta</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-178">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look l"><a class="frame" href="#/p/lt-177" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-07.webp" alt="" width="480" height="640"></a><div class="look-text"><h3><a href="#/p/lt-177">Semi tussar silk printed salwar suit set</a></h3><p class="look-sub">LT-177 · Greenish yellow, parallel pants</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-177">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look r"><a class="frame" href="#/p/lt-176" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-12.webp" alt="" width="480" height="640"></a><div class="look-text"><h3><a href="#/p/lt-176">Satin printed maxi</a></h3><p class="look-sub">LT-176 · Black with white florals</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-176">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li></ol>
+  <ol class="looks"><li class="look l"><a class="frame" href="#/p/lt-179" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-01.webp" alt="" width="480" height="640"></a><div class="look-text"><svg class="kolam kmini" viewBox="0 0 84 28" width="84" height="28" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="14.0" cy="14.0" r="2.6"/><circle cx="42.0" cy="14.0" r="2.6"/><circle cx="70.0" cy="14.0" r="2.6"/></g><path class="kline" pathLength="1" d="M14.0 24.0L15.5 23.9L16.9 23.5L18.4 22.8L19.9 21.9L21.4 20.8L22.8 19.5L24.3 18.0L25.8 16.5L27.3 14.8L28.7 13.2L30.2 11.5L31.7 10.0L33.2 8.5L34.6 7.2L36.1 6.1L37.6 5.2L39.1 4.5L40.5 4.1L42.0 4.0L43.5 4.1L44.9 4.5L46.4 5.2L47.9 6.1L49.4 7.2L50.8 8.5L52.3 10.0L53.8 11.5L55.3 13.2L56.7 14.8L58.2 16.5L59.7 18.0L61.2 19.5L62.6 20.8L64.1 21.9L65.6 22.8L67.1 23.5L68.5 23.9L70.0 24.0A10 10 0 0 0 70.0 4.0L68.5 4.1L67.1 4.5L65.6 5.2L64.1 6.1L62.6 7.2L61.2 8.5L59.7 10.0L58.2 11.5L56.7 13.2L55.3 14.8L53.8 16.5L52.3 18.0L50.8 19.5L49.4 20.8L47.9 21.9L46.4 22.8L44.9 23.5L43.5 23.9L42.0 24.0L40.5 23.9L39.1 23.5L37.6 22.8L36.1 21.9L34.6 20.8L33.2 19.5L31.7 18.0L30.2 16.5L28.7 14.8L27.3 13.2L25.8 11.5L24.3 10.0L22.8 8.5L21.4 7.2L19.9 6.1L18.4 5.2L16.9 4.5L15.5 4.1L14.0 4.0A10 10 0 0 0 14.0 24.0Z"/></svg><h3><a href="#/p/lt-179">Semi tussar silk printed salwar suit</a></h3><p class="look-sub">LT-179 · Purple, ikkat dupatta</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-179">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look r"><a class="frame" href="#/p/lt-178" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-04.webp" alt="" width="480" height="640"></a><div class="look-text"><svg class="kolam kmini" viewBox="0 0 84 28" width="84" height="28" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="14.0" cy="14.0" r="2.6"/><circle cx="42.0" cy="14.0" r="2.6"/><circle cx="70.0" cy="14.0" r="2.6"/></g><path class="kline" pathLength="1" d="M14.0 24.0L15.5 23.9L16.9 23.5L18.4 22.8L19.9 21.9L21.4 20.8L22.8 19.5L24.3 18.0L25.8 16.5L27.3 14.8L28.7 13.2L30.2 11.5L31.7 10.0L33.2 8.5L34.6 7.2L36.1 6.1L37.6 5.2L39.1 4.5L40.5 4.1L42.0 4.0L43.5 4.1L44.9 4.5L46.4 5.2L47.9 6.1L49.4 7.2L50.8 8.5L52.3 10.0L53.8 11.5L55.3 13.2L56.7 14.8L58.2 16.5L59.7 18.0L61.2 19.5L62.6 20.8L64.1 21.9L65.6 22.8L67.1 23.5L68.5 23.9L70.0 24.0A10 10 0 0 0 70.0 4.0L68.5 4.1L67.1 4.5L65.6 5.2L64.1 6.1L62.6 7.2L61.2 8.5L59.7 10.0L58.2 11.5L56.7 13.2L55.3 14.8L53.8 16.5L52.3 18.0L50.8 19.5L49.4 20.8L47.9 21.9L46.4 22.8L44.9 23.5L43.5 23.9L42.0 24.0L40.5 23.9L39.1 23.5L37.6 22.8L36.1 21.9L34.6 20.8L33.2 19.5L31.7 18.0L30.2 16.5L28.7 14.8L27.3 13.2L25.8 11.5L24.3 10.0L22.8 8.5L21.4 7.2L19.9 6.1L18.4 5.2L16.9 4.5L15.5 4.1L14.0 4.0A10 10 0 0 0 14.0 24.0Z"/></svg><h3><a href="#/p/lt-178">Semi tussar silk printed top &amp; dupatta set</a></h3><p class="look-sub">LT-178 · Dark green, printed dupatta</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-178">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look l"><a class="frame" href="#/p/lt-177" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-07.webp" alt="" width="480" height="640"></a><div class="look-text"><svg class="kolam kmini" viewBox="0 0 84 28" width="84" height="28" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="14.0" cy="14.0" r="2.6"/><circle cx="42.0" cy="14.0" r="2.6"/><circle cx="70.0" cy="14.0" r="2.6"/></g><path class="kline" pathLength="1" d="M14.0 24.0L15.5 23.9L16.9 23.5L18.4 22.8L19.9 21.9L21.4 20.8L22.8 19.5L24.3 18.0L25.8 16.5L27.3 14.8L28.7 13.2L30.2 11.5L31.7 10.0L33.2 8.5L34.6 7.2L36.1 6.1L37.6 5.2L39.1 4.5L40.5 4.1L42.0 4.0L43.5 4.1L44.9 4.5L46.4 5.2L47.9 6.1L49.4 7.2L50.8 8.5L52.3 10.0L53.8 11.5L55.3 13.2L56.7 14.8L58.2 16.5L59.7 18.0L61.2 19.5L62.6 20.8L64.1 21.9L65.6 22.8L67.1 23.5L68.5 23.9L70.0 24.0A10 10 0 0 0 70.0 4.0L68.5 4.1L67.1 4.5L65.6 5.2L64.1 6.1L62.6 7.2L61.2 8.5L59.7 10.0L58.2 11.5L56.7 13.2L55.3 14.8L53.8 16.5L52.3 18.0L50.8 19.5L49.4 20.8L47.9 21.9L46.4 22.8L44.9 23.5L43.5 23.9L42.0 24.0L40.5 23.9L39.1 23.5L37.6 22.8L36.1 21.9L34.6 20.8L33.2 19.5L31.7 18.0L30.2 16.5L28.7 14.8L27.3 13.2L25.8 11.5L24.3 10.0L22.8 8.5L21.4 7.2L19.9 6.1L18.4 5.2L16.9 4.5L15.5 4.1L14.0 4.0A10 10 0 0 0 14.0 24.0Z"/></svg><h3><a href="#/p/lt-177">Semi tussar silk printed salwar suit set</a></h3><p class="look-sub">LT-177 · Greenish yellow, parallel pants</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-177">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li><li class="look r"><a class="frame" href="#/p/lt-176" tabindex="-1" aria-hidden="true"><img loading="lazy" src="assets/post-12.webp" alt="" width="480" height="640"></a><div class="look-text"><svg class="kolam kmini" viewBox="0 0 84 28" width="84" height="28" aria-hidden="true" focusable="false"><g class="kdots"><circle cx="14.0" cy="14.0" r="2.6"/><circle cx="42.0" cy="14.0" r="2.6"/><circle cx="70.0" cy="14.0" r="2.6"/></g><path class="kline" pathLength="1" d="M14.0 24.0L15.5 23.9L16.9 23.5L18.4 22.8L19.9 21.9L21.4 20.8L22.8 19.5L24.3 18.0L25.8 16.5L27.3 14.8L28.7 13.2L30.2 11.5L31.7 10.0L33.2 8.5L34.6 7.2L36.1 6.1L37.6 5.2L39.1 4.5L40.5 4.1L42.0 4.0L43.5 4.1L44.9 4.5L46.4 5.2L47.9 6.1L49.4 7.2L50.8 8.5L52.3 10.0L53.8 11.5L55.3 13.2L56.7 14.8L58.2 16.5L59.7 18.0L61.2 19.5L62.6 20.8L64.1 21.9L65.6 22.8L67.1 23.5L68.5 23.9L70.0 24.0A10 10 0 0 0 70.0 4.0L68.5 4.1L67.1 4.5L65.6 5.2L64.1 6.1L62.6 7.2L61.2 8.5L59.7 10.0L58.2 11.5L56.7 13.2L55.3 14.8L53.8 16.5L52.3 18.0L50.8 19.5L49.4 20.8L47.9 21.9L46.4 22.8L44.9 23.5L43.5 23.9L42.0 24.0L40.5 23.9L39.1 23.5L37.6 22.8L36.1 21.9L34.6 20.8L33.2 19.5L31.7 18.0L30.2 16.5L28.7 14.8L27.3 13.2L25.8 11.5L24.3 10.0L22.8 8.5L21.4 7.2L19.9 6.1L18.4 5.2L16.9 4.5L15.5 4.1L14.0 4.0A10 10 0 0 0 14.0 24.0Z"/></svg><h3><a href="#/p/lt-176">Satin printed maxi</a></h3><p class="look-sub">LT-176 · Black with white florals</p><p class="look-price">₹ — <span>price added at launch</span></p><a class="look-go" href="#/p/lt-176">Choose your size<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></li></ol>
 </section>
 
 <section class="order" aria-labelledby="order-title">
   <h2 id="order-title">Ordering</h2>
   <ul>
-    <li>Choose a piece and your size, XS to XL. The model in every photo wears S.</li>
-    <li>Check out right here on the site, no DM needed.</li>
-    <li>We ship as soon as you order.</li>
-    <li>Colour may slightly vary due to lighting.</li>
+    <li data-rv="write">Choose a piece and your size, XS to XL. The model in every photo wears S.</li>
+    <li data-rv="write">We ship as soon as you order.</li>
+    <li data-rv="write">Colour may slightly vary due to lighting.</li>
   </ul>
-  <a class="text-link ask" href="https://ig.me/m/label_theara">Questions? Message THEARA on Instagram</a>
+  <a class="text-link ask" data-rv="rise" href="https://ig.me/m/label_theara">Questions? Message THEARA on Instagram</a>
 </section>
 
 </main>
@@ -373,7 +478,7 @@
 
 <section class="view" id="pdp" hidden role="dialog" aria-modal="true" aria-labelledby="pdp-title">
   <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <span class="mark" aria-hidden="true">LABEL THEARA</span><a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a></div>
+    <span class="mark" aria-hidden="true"><img class="logo-badge" src="assets/logo-badge.webp" alt="" width="34" height="34" decoding="async">LABEL THEARA</span><a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a></div>
   <div class="pdp">
     <div><div class="gallery" id="gallery"></div><div class="dots" id="dots" aria-hidden="true"></div></div>
     <div class="pdp-body">
@@ -407,7 +512,7 @@
 </aside>
 
 <section class="view" id="checkout" hidden role="dialog" aria-modal="true" aria-labelledby="co-title">
-  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="title" id="co-title" tabindex="-1">Checkout</span><span style="width:44px"></span></div>
+  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="mark" aria-hidden="true"><img class="logo-badge" src="assets/logo-badge.webp" alt="" width="34" height="34" decoding="async">LABEL THEARA</span><span class="title" id="co-title" tabindex="-1">Checkout</span></div>
   <form class="co" id="co-form" novalidate>
     <h2>Your order</h2>
     <div class="summary" id="co-summary"></div>
@@ -428,9 +533,7 @@
     <p class="policy"><b>From THEARA:</b> We ship as soon as you order. Colour may slightly vary due to lighting.</p>
     <h2>Payment</h2>
     <div class="pay" role="radiogroup" aria-label="Payment method">
-      <label><input type="radio" name="pay" value="upi" checked><span>UPI<small>Google Pay, PhonePe, Paytm</small></span></label>
-      <label><input type="radio" name="pay" value="card"><span>Debit or credit card<small>Visa, Mastercard, RuPay</small></span></label>
-      <label><input type="radio" name="pay" value="netbanking"><span>Net banking<small>All major Indian banks</small></span></label>
+      <label><input type="radio" name="pay" value="upi" checked><span>UPI<small></small></span></label>
     </div>
     <p class="demo-note">This is a website concept: placing the order shows the confirmation screen only. No order is sent and no payment is taken.</p>
     <p class="err" id="co-empty" role="alert" hidden>Your cart is empty. Add something before placing an order.</p>
@@ -439,6 +542,7 @@
 </section>
 
 <section class="view" id="done" hidden role="dialog" aria-modal="true" aria-labelledby="done-title">
+  <div class="vbar"><span class="mark" aria-hidden="true"><img class="logo-badge" src="assets/logo-badge.webp" alt="" width="34" height="34" decoding="async">LABEL THEARA</span></div>
   <div class="done">
     <h1 id="done-title" tabindex="-1">Order confirmed (demo)</h1>
     <p>In the real shop, your order confirmation and payment receipt would appear here.</p>
@@ -469,10 +573,13 @@
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem(CFG.key) || '[]').filter(function (l) { return byId[l.id]; }); } catch (e) { cart = []; }
   function save() { try { localStorage.setItem(CFG.key, JSON.stringify(cart)); } catch (e) {} counts(); }
+  var counted = null;
   function counts() {
     var n = cart.reduce(function (s, l) { return s + l.qty; }, 0);
     document.querySelectorAll('[data-count]').forEach(function (b) { b.textContent = n; b.setAttribute('data-n', n); });
     document.querySelectorAll('a[href="#/cart"]').forEach(function (a) { a.setAttribute('aria-label', 'Cart, ' + n + (n === 1 ? ' item' : ' items')); });
+    if (SX && counted !== null && n > counted) SX.bump();
+    counted = n;
   }
   function total() {
     var known = cart.every(function (l) { return byId[l.id].price != null; });
@@ -492,6 +599,270 @@
     var go = function () { setTimeout(function () { watch(document.querySelector('main')); }, 800); };
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
   }
+
+  /* ---------- Motion engine ("unfold", see the CSS) ----------
+     Its own closure, so a shop's BRAND_JS can't overwrite its names; shops reach it through `shop` (below).
+     Everything here is transforms, opacity and clip-path, started once, and skipped under reduced motion. */
+  var SX = (function () {
+    var D = document, root = D.documentElement, RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var OUT = 'cubic-bezier(.16, 1, .3, 1)', UI = 'cubic-bezier(.23, 1, .32, 1)';
+    var slice = function (l) { return Array.prototype.slice.call(l || []); };
+    var KF = {
+      unroll: [{ clipPath: 'inset(0 0 100% 0)', translate: '0 18px' }, { clipPath: 'inset(0 0 0% 0)', translate: '0 0' }],  // a photo unrolls like cloth off a bolt
+      rail: [{ opacity: 0, translate: '56px 0' }, { opacity: 1, translate: '0 0' }],                                     // a piece slides along the rail
+      hem: [{ translate: '0 100%', clipPath: 'inset(-.3em -.3em 100% -.3em)' }, { translate: '0 0', clipPath: 'inset(-.3em -.3em -.3em -.3em)' }],  // a line rises from its hem
+      write: [{ clipPath: 'inset(-20% 100% -20% -6px)' }, { clipPath: 'inset(-20% -6px -20% -6px)' }],                 // written in from the left
+      thread: [{ opacity: 0, translate: '24px 0' }, { opacity: 1, translate: '0 0' }],                                   // chips thread on
+      stamp: [{ opacity: 0, scale: '1.25' }, { opacity: 1, scale: '1' }],                                                // stamped
+      rise: [{ opacity: 0, translate: '0 18px' }, { opacity: 1, translate: '0 0' }]
+    };
+    var DUR = { unroll: 820, rail: 680, hem: 760, write: 640, thread: 420, stamp: 380, rise: 600 };
+    // Keep these three in step with the reveal rule in the CSS: anything it hides, these find and show.
+    var ITEM = 'main section h2:not(.visually-hidden), main section .eyebrow, main :is(.grid, #all) > *, main .reveal, main [data-rv]';
+    var SET = 'main :is(.row, .chips, .trust)';   // revealed as one, so pieces scrolled off sideways never stay hidden
+    var SKIP = '.in, [data-rv="none"], [data-rv="none"] *, [data-scene], [data-scene] *, main [data-opening], main [data-opening] *, main > :first-child, main > :first-child *';
+    var HID = ITEM + ', ' + SET + ' > *';
+    var io = null, pending = [], t0 = 0, sweepT = 0, landedKey = null;
+
+    function key(l) { return l.id + '|' + (l.size || '') + '|' + l.colour; }
+    function onScreen(r) { return r.height > 0 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth; }
+    function play(el, kf, ms, delay, ease) {
+      if (RM || !el || !el.animate) return null;
+      try {
+        if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === 'sx') a.cancel(); });
+        var a = el.animate(kf, { duration: ms, delay: delay || 0, easing: ease || UI, fill: 'backwards' });
+        a.id = 'sx';
+        return a;
+      } catch (e) { return null; }
+    }
+    function kindOf(el) {
+      var k = el.getAttribute('data-rv'), p = el.parentElement;
+      if (k && KF[k]) return k;
+      if (p && p.matches('.row')) return 'rail';
+      if (p && p.matches('.chips')) return 'thread';
+      if (p && p.matches('.trust')) return 'stamp';
+      if (p && p.matches('.grid, #all')) return 'unroll';
+      if (el.matches('h2')) return 'hem';
+      if (el.matches('.eyebrow')) return 'write';
+      return 'rise';
+    }
+    function done(el) { el.classList.add('in'); slice(el.querySelectorAll(HID)).forEach(function (n) { n.classList.add('in'); }); }
+
+    /* One wave: the pieces that came into view together, in reading order, each a beat after the last. Those not on
+       screen (scrolled past, or off sideways in a row) are simply shown. The first wave waits for the opening. */
+    function wave(units) {
+      var items = [];
+      units.forEach(function (u) {
+        if (u.matches(SET)) slice(u.children).forEach(function (c) { if (!c.matches(SKIP)) items.push(c); });
+        else if (!u.classList.contains('in')) items.push(u);
+      });
+      var rects = items.map(function (el) { return el.getBoundingClientRect(); });
+      var order = items.map(function (el, i) { return i; }).sort(function (a, b) { return (rects[a].top - rects[b].top) || (rects[a].left - rects[b].left); });
+      var off = root.classList.contains('rv-fail'), base = performance.now() - t0 < 900 ? 380 : 0, n = 0;
+      order.forEach(function (i) {
+        var el = items[i];
+        done(el);
+        if (off || !onScreen(rects[i])) return;
+        var k = kindOf(el);
+        play(el, KF[k], DUR[k], base + Math.min(n++, 8) * 70, OUT);
+      });
+    }
+    function drop(list) {
+      pending = pending.filter(function (u) { return list.indexOf(u) === -1; });
+      if (io) list.forEach(function (u) { io.unobserve(u); });
+    }
+    /* A second net: a fast flick can pass a piece between two observer reports, so a light scroll check shows
+       anything on screen or already scrolled past. */
+    function sweep() {
+      sweepT = 0;
+      var due = pending.filter(function (u) { var r = u.getBoundingClientRect(); return r.height > 0 && r.top < innerHeight * 0.94; });
+      if (due.length) { drop(due); wave(due); }
+      if (!pending.length) removeEventListener('scroll', onScroll);
+    }
+    function onScroll() { if (!sweepT) sweepT = setTimeout(sweep, 140); }
+    function collect(scope) {
+      var out = [], add = function (el) { if (out.indexOf(el) === -1 && !el.matches(SKIP)) out.push(el); };
+      var sets = slice(scope.querySelectorAll(SET)), items = slice(scope.querySelectorAll(ITEM));
+      if (scope.matches(SET)) sets.unshift(scope);
+      if (scope.matches(ITEM)) items.unshift(scope);
+      sets.forEach(add);
+      items.forEach(function (el) {
+        var p = el.parentElement;
+        if (p && p.closest(ITEM + ', ' + SET)) return;   // shown with the row or the piece around it
+        add(el);
+      });
+      return out;
+    }
+    function watch(units) {
+      units.forEach(function (u) {
+        if (pending.indexOf(u) > -1) return;
+        if (!io || getComputedStyle(u).display === 'contents') { done(u); return; }   // no box: an observer never reports it
+        pending.push(u); io.observe(u);
+      });
+      if (pending.length) addEventListener('scroll', onScroll, { passive: true });
+    }
+    /* For shops: shop.reveal(el or selector, 'unroll' | 'rail' | 'hem' | 'write' | 'thread' | 'stamp' | 'rise').
+       Inside <main> only. The markup way (data-rv="hem") avoids a flash for pieces in the first screen. */
+    function reveal(target, kind) {
+      var els = typeof target === 'string' ? slice(D.querySelectorAll(target)) : target && target.length != null ? slice(target) : [target];
+      els = els.filter(function (el) { return el && el.closest && el.closest('main'); });
+      els.forEach(function (el) { if (kind) el.setAttribute('data-rv', kind); });
+      if (RM || !io) { els.forEach(done); return; }
+      watch(els.filter(function (el) { return !el.matches(SKIP); }));
+    }
+
+    /* The main action mock-motion looks for: a shop's own [data-main-action], else the first button of the first
+       section, else the first button or product link fully on the first screen. */
+    function mainAction() {
+      if (D.querySelector('[data-main-action]')) return;
+      var first = D.querySelector('main > :first-child'), el = first && first.querySelector('.btn');
+      if (!el) el = slice(D.querySelectorAll('main .btn, main a[href^="#/p/"]')).filter(function (a) {
+        var r = a.getBoundingClientRect(); return r.height > 0 && r.top >= 0 && r.bottom <= innerHeight;
+      })[0];
+      if (el) el.setAttribute('data-main-action', '');
+    }
+    function opened() { if (root.getAttribute('data-opening') !== 'done') root.setAttribute('data-opening', 'done'); }
+    /* The engine's opening ends when its sx-op- animations have; a shop running its own sets the flag itself
+       (shop.opened()), and 2.8 s is only a backstop. */
+    function opening() {
+      if (root.getAttribute('data-opening') === 'done') return;
+      if (RM) { opened(); return; }
+      if (root.getAttribute('data-entrance') === 'own') { setTimeout(opened, 2800); return; }
+      var fallback = setTimeout(opened, 2600);
+      requestAnimationFrame(function () {
+        var list = [];
+        try { list = D.getAnimations().filter(function (a) { return /^sx-op-/.test(a.animationName || ''); }); } catch (e) {}
+        if (!list.length) { clearTimeout(fallback); opened(); return; }
+        Promise.all(list.map(function (a) { return a.finished.catch(function () {}); })).then(function () { clearTimeout(fallback); opened(); });
+      });
+    }
+    /* A checkout title a shop rewrote into its own name would say it twice beside the name bar: it steps aside
+       (still the page's label and focus target, read by screen readers). */
+    function oneName() {
+      var ct = D.getElementById('co-title'), cm = ct && ct.parentNode.querySelector('.mark'), name = cm && cm.textContent.trim();
+      if (name && ct.textContent.indexOf(name) > -1) ct.classList.add('visually-hidden');
+    }
+    function start() {
+      t0 = performance.now();
+      var main = D.querySelector('main');
+      try {
+        oneName();
+        mainAction();
+        if (!main) return;
+        if (RM || root.classList.contains('rv-fail') || !('IntersectionObserver' in window)) { done(main); return; }
+        io = new IntersectionObserver(function (entries) {
+          var hit = entries.filter(function (en) { return en.isIntersecting; }).map(function (en) { return en.target; });
+          if (hit.length) { drop(hit); wave(hit); }
+          if (!pending.length) removeEventListener('scroll', onScroll);
+        }, { rootMargin: '0px 0px -6% 0px' });
+        watch(collect(main));
+        // pieces a shop adds later (or a "load more") are hidden by the CSS too, so they are watched as they arrive
+        new MutationObserver(function (ms) {
+          var found = [];
+          ms.forEach(function (m) {
+            slice(m.addedNodes).forEach(function (n) {
+              if (n.nodeType !== 1) return;
+              found = found.concat(collect(n));
+              if (n.parentElement && n.parentElement.matches(SET) && !n.matches(SKIP)) found.push(n);
+            });
+          });
+          if (found.length) watch(found);
+        }).observe(main, { childList: true, subtree: true });
+      } catch (e) { root.classList.add('rv-fail'); }   // a browser without :is() or IntersectionObserver: everything shows
+      finally { opening(); }
+    }
+
+    /* ---- Pages (product, checkout, done): each part settles in as the page opens, about half a second in all ---- */
+    function seq(list, from, step, speed) {
+      var n = 0;
+      list.forEach(function (it) {
+        var el = it[0], k = it[1];
+        if (!el || !el.getClientRects().length) return;
+        play(el, KF[k], DUR[k] * speed, from + Math.min(n++, 10) * step, OUT);
+      });
+    }
+    function enter(view) {
+      if (RM || !view) return;
+      var q = function (s) { return slice(view.querySelectorAll(s)); };
+      if (view.id === 'pdp') {
+        var slide = D.getElementById('gallery').firstElementChild, im = slide && slide.querySelector('img');
+        play(slide, [{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }], 560, 40, OUT);
+        play(im, [{ scale: '1.08' }, { scale: '1' }], 900, 40, OUT);
+        var list = [['#pdp-tag', 'write'], ['#pdp-title', 'hem'], ['#pdp-line', 'rise'], ['#pdp-sub', 'rise'], ['#pdp-price', 'stamp']]
+          .map(function (p) { return [view.querySelector(p[0]), p[1]]; });
+        q('#swatches .sw, #sizes .size').forEach(function (el) { list.push([el, 'thread']); });
+        seq(list, 90, 45, 0.6);
+        var bar = view.querySelector('.buybar');
+        if (bar && getComputedStyle(bar).position === 'fixed') play(bar, [{ translate: '0 100%' }, { translate: '0 0' }], 300, 120, UI);
+      } else if (view.id === 'checkout') {
+        seq(q('.co > *').slice(0, 8).map(function (el) { return [el, 'rise']; }), 60, 35, 0.5);
+      } else if (view.id === 'done') {
+        // the order's closing moment: the badge is pressed on again and the confirmation is stamped
+        play(view.querySelector('.vbar .logo-badge, .vbar .mark > img:first-child'),
+          [{ opacity: 0, scale: '1.5' }, { opacity: 1, scale: '.94', offset: 0.6 }, { opacity: 1, scale: '1' }], 550, 60, OUT);
+        seq([[view.querySelector('.done h1'), 'stamp']].concat(q('.done > :not(h1)').map(function (el) { return [el, 'rise']; })), 120, 70, 1);
+      }
+    }
+    function leave(el, then) {
+      if (RM || !el.animate) { then(); return; }
+      el.classList.add('sx-leaving'); el.inert = true;
+      var a = el.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 12px' }], { duration: 200, easing: UI, fill: 'forwards' });
+      el._sxLeave = a;
+      a.onfinish = function () {
+        if (el._sxLeave !== a) return;
+        el._sxLeave = null; el.classList.remove('sx-leaving'); then(); a.cancel();
+      };
+    }
+    function stay(el) {   // a page on its way out is asked back: it simply stays
+      if (!el._sxLeave) return false;
+      el._sxLeave.cancel(); el._sxLeave = null; el.classList.remove('sx-leaving');
+      return true;
+    }
+
+    /* ---- Cart: the drawer's lines slide in, the added one lands, the count jumps, lines close up when one goes ---- */
+    function cartIn(added) {
+      var lines = D.getElementById('lines'), rows = slice(lines.children).filter(function (r) { return r.classList.contains('ln'); });
+      if (!RM) {
+        rows.slice(0, 6).forEach(function (r, i) { play(r, KF.thread, 260, 90 + i * 35, UI); });
+        if (added) {
+          play(D.getElementById('added'), KF.stamp, 260, 220, OUT);
+          var r = rows[cart.map(key).indexOf(landedKey)];
+          if (r) { r.classList.remove('sx-landed'); void r.offsetWidth; r.classList.add('sx-landed'); }
+        }
+      }
+      landedKey = null;
+    }
+    function bump() {
+      slice(D.querySelectorAll('[data-count]')).forEach(function (b) {
+        play(b, [{ scale: '1' }, { scale: '1.35', offset: 0.4 }, { scale: '1' }], 300, 0, OUT);
+      });
+    }
+    function tick(o, from) { play(o, [{ opacity: 0.2, translate: '0 ' + from + 'px' }, { opacity: 1, translate: '0 0' }], 180, 0, UI); }
+    function settle(tops, k, from) {
+      slice(D.querySelectorAll('#lines .ln')).forEach(function (row, j) {
+        var l = cart[j]; if (!l) return;
+        var was = tops[key(l)], d = was == null ? 0 : was - row.getBoundingClientRect().top;
+        if (Math.abs(d) > 1) play(row, [{ translate: '0 ' + d + 'px' }, { translate: '0 0' }], 220, 0, UI);
+        if (key(l) === k) tick(row.querySelector('output'), from);
+      });
+    }
+    function swap() {   // another colour: its photo settles into the frame
+      var s = D.getElementById('gallery').firstElementChild;
+      play(s && s.querySelector('img'), [{ opacity: 0.35, scale: '1.04' }, { opacity: 1, scale: '1' }], 280, 0, UI);
+    }
+    function deal() {   // a filter: the pieces left are dealt back onto the table
+      var n = 0;
+      slice(D.querySelectorAll('#all > :not([hidden])')).forEach(function (c) {
+        if (!c.classList.contains('in') || n > 9 || !onScreen(c.getBoundingClientRect())) return;
+        play(c, [{ opacity: 0, translate: '0 10px' }, { opacity: 1, translate: '0 0' }], 260, n++ * 28, UI);
+      });
+    }
+    return { start: start, opened: opened, reveal: reveal, play: play, kf: KF, enter: enter, leave: leave, stay: stay,
+      cartIn: cartIn, bump: bump, tick: tick, settle: settle, swap: swap, deal: deal, key: key,
+      landed: function (k) { landedKey = k; } };
+  })();
+  // iOS Safari applies :active (the press feedback) only when the page listens for touches.
+  document.addEventListener('touchstart', function () {}, { passive: true });
 
   /* ---------- Product page ---------- */
   var current = null, size = null, colour = 0, qty = 1, justAdded = false, ordered = false;
@@ -551,8 +922,11 @@
     this.querySelectorAll('.size').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
   });
   $('guide-btn').addEventListener('click', function () { var open = $('guide').hidden; $('guide').hidden = !open; this.setAttribute('aria-expanded', String(open)); });
-  $('qminus').addEventListener('click', function () { qty = Math.max(1, qty - 1); $('qty').textContent = qty; });
-  $('qplus').addEventListener('click', function () { qty = Math.min(9, qty + 1); $('qty').textContent = qty; });
+  $('qminus').addEventListener('click', function () { qty = Math.max(1, qty - 1); $('qty').textContent = qty; SX.tick($('qty'), -8); });
+  $('qplus').addEventListener('click', function () { qty = Math.min(9, qty + 1); $('qty').textContent = qty; SX.tick($('qty'), 8); });
+  /* A new colour settles into the frame; a chosen size is stamped. */
+  $('swatches').addEventListener('click', function (e) { if (e.target.closest('.sw')) SX.swap(); });
+  $('sizes').addEventListener('click', function (e) { var b = e.target.closest('.size'); if (b) SX.play(b, [{ scale: '1.1' }, { scale: '1' }], 200); });
   $('add').addEventListener('click', function () {
     if (!current) return;
     var sizes = current.sizes || CFG.sizes || [];
@@ -564,6 +938,7 @@
     var key = id + '|' + (sz || '') + '|' + c;
     var line = cart.filter(function (l) { return l.id + '|' + (l.size || '') + '|' + l.colour === key; })[0];
     if (line) line.qty = Math.min(9, line.qty + n); else cart.push({ id: id, size: sz, colour: c, qty: n });
+    SX.landed(key);
     save(); justAdded = true; ordered = false;
     location.hash = '#/cart';
   }
@@ -599,6 +974,16 @@
     else return;
     save(); renderCart();
   });
+  /* Before a line changes, note where every line is, so the engine can slide the rest into place (FLIP). */
+  $('lines').addEventListener('click', function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    var i = t.getAttribute('data-inc') || t.getAttribute('data-dec') || t.getAttribute('data-rm');
+    if (i === null || !cart[i]) return;
+    var tops = {};
+    Array.prototype.forEach.call(this.querySelectorAll('.ln'), function (row, j) { if (cart[j]) tops[SX.key(cart[j])] = row.getBoundingClientRect().top; });
+    var k = SX.key(cart[i]), from = t.hasAttribute('data-inc') ? 8 : -8;
+    setTimeout(function () { SX.settle(tops, k, from); }, 0);
+  }, true);
 
   /* ---------- Checkout ---------- */
   function renderSummary() {
@@ -624,7 +1009,13 @@
   /* ---------- Routing ---------- */
   var views = { pdp: $('pdp'), checkout: $('checkout'), done: $('done') };
   var drawer = $('cart'), backdrop = $('backdrop'), lastFocus = null, depth = 0;
-  function show(el) { if (el.hidden) { el.hidden = false; el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); el.scrollTop = 0; } }
+  function show(el) {
+    var back = SX.stay(el);
+    if (el.hidden) { el.hidden = false; el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); el.scrollTop = 0; SX.enter(el); }
+    else if (back) SX.enter(el);
+  }
+  /* A page that closes fades down for 200 ms (inert meanwhile); opening it again in that time keeps it. */
+  function hide(el) { if (!el.hidden && !el.classList.contains('sx-leaving')) SX.leave(el, function () { el.hidden = true; }); }
   function home() { history.replaceState(null, '', location.pathname + location.search); depth = 0; route(); }
   function route() {
     var h = location.hash;
@@ -635,11 +1026,12 @@
     if (want === 'checkout') renderSummary();
     Object.keys(views).forEach(function (k) {
       if (k === want) show(views[k]);
-      else if (!(want === 'cart' && k === 'pdp' && !views.pdp.hidden)) views[k].hidden = true;
+      else if (!(want === 'cart' && k === 'pdp' && !views.pdp.hidden && !views.pdp.classList.contains('sx-leaving'))) hide(views[k]);
     });
     if (want === 'cart') {
       renderCart(); drawer.hidden = false; backdrop.hidden = false;
-      $('added').hidden = !justAdded; if (justAdded) setTimeout(function () { $('added').hidden = true; }, 1800); justAdded = false;
+      $('added').hidden = !justAdded; if (justAdded) setTimeout(function () { $('added').hidden = true; }, 1800);
+      SX.cartIn(justAdded); justAdded = false;
       requestAnimationFrame(function () { drawer.classList.add('on'); backdrop.classList.add('on'); });
     } else if (!drawer.hidden) {
       drawer.classList.remove('on'); backdrop.classList.remove('on');
@@ -648,7 +1040,7 @@
     document.documentElement.classList.toggle('locked', !!want);
     var under = want === 'cart' && !views.pdp.hidden ? [views.pdp] : [];
     document.querySelectorAll('body > main, body > header, body > footer, body > .bnav, body > .concept, body > .wa').forEach(function (el) { el.inert = !!want; });
-    Object.keys(views).forEach(function (k) { views[k].inert = under.indexOf(views[k]) !== -1; });
+    Object.keys(views).forEach(function (k) { views[k].inert = under.indexOf(views[k]) !== -1 || views[k].classList.contains('sx-leaving'); });
     if (want) {
       var t = want === 'pdp' ? $('pdp-title') : want === 'cart' ? $('cart-title') : want === 'checkout' ? $('co-title') : $('done-title');
       setTimeout(function () { t.focus({ preventScroll: true }); }, 30);
@@ -669,20 +1061,159 @@
       var k = f.getAttribute('data-filter');
       document.querySelectorAll('.chip[data-filter]').forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-filter') === k)); });
       document.querySelectorAll('#all .card').forEach(function (c) { c.hidden = k !== 'all' && (' ' + c.getAttribute('data-tags') + ' ').indexOf(' ' + k + ' ') === -1; });
+      SX.deal();
     }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && /^#\//.test(location.hash)) close(); });
 
-  if ('IntersectionObserver' in window) {
-    var rio = new IntersectionObserver(function (entries) { entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.reveal').forEach(function (el) { rio.observe(el); });
-  } else document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-
-  var shop = { name: colourName, add: addLine, money: money, pic: pic, byId: byId };
+  /* For BRAND_JS: shop.reveal(el, kind) and shop.play(el, keyframes, ms) use the engine's motion; a shop running its
+     own opening calls shop.opened() when it ends; shop.reduce is true when the visitor asked for less motion. */
+  var shop = { name: colourName, add: addLine, money: money, pic: pic, byId: byId,
+    reveal: SX.reveal, play: SX.play, kf: SX.kf, opened: SX.opened, reduce: reduce };
   /* WhatsApp floats in only once the first screen's buttons have scrolled away, so it never covers them. */
   var wa = document.querySelector('.wa');
   function waShow() { wa.classList.toggle('away', window.scrollY < innerHeight * 0.6); }
   window.addEventListener('scroll', waShow, { passive: true }); waShow();
+
+(function () {
+  var D = document, root = D.documentElement, META = {"lt-179": {"alt": "Model in a purple semi tussar silk salwar suit, holding out the printed ikkat dupatta", "short": "Purple"}, "lt-178": {"alt": "Model in a dark green semi tussar silk top, holding out the printed dupatta", "short": "Dark green"}, "lt-177": {"alt": "Model in a greenish yellow semi tussar silk suit set, holding out the printed dupatta, marigolds behind", "short": "Greenish yellow"}, "lt-176": {"alt": "Model in a black satin maxi with white florals, in a garden", "short": "Black"}}, ids = Object.keys(shop.byId);
+  var slice = function (l) { return Array.prototype.slice.call(l); };
+
+  /* Signature: the kolam's four dots are the four pieces; tap one, or swipe the photo, and the next piece is swept in. */
+  var img = D.getElementById('hero-img'), frame = D.querySelector('.hero-frame'), capA = D.querySelector('.stage-cap a'),
+      capS = D.querySelector('.stage-cap span'), dots = slice(D.querySelectorAll('.kdot')), cur = 0, ending = null;
+  if (img && frame && dots.length === ids.length) {
+    dots.forEach(function (d, i) { if (d.getAttribute('aria-pressed') === 'true') cur = i; });
+    var n = ids.length, src = function (id) { return 'assets/' + shop.byId[id].images[0] + '.webp'; };
+    var paint = function (i) {
+      var id = ids[i], p = shop.byId[id];
+      frame.setAttribute('href', '#/p/' + id);
+      frame.setAttribute('aria-label', p.tag + ': ' + p.name + ', ' + p.sub.toLowerCase() + '. See details');
+      capA.setAttribute('href', '#/p/' + id); capA.textContent = p.tag; capS.textContent = META[id].short;
+      img.alt = META[id].alt;
+      dots.forEach(function (d, k) { d.setAttribute('aria-pressed', String(k === i)); });
+    };
+    var go = function (i, dir) {
+      i = (i + n) % n;
+      if (i === cur) return;
+      if (ending) ending();
+      cur = i; paint(i);
+      var o = new Image();
+      o.className = 'swap'; o.alt = ''; o.width = 480; o.height = 640; o.decoding = 'async';
+      var over = false;
+      ending = function () { if (over) return; over = true; img.src = o.src; if (o.parentNode) o.parentNode.removeChild(o); ending = null; };
+      var show = function () {
+        if (over) return;
+        frame.appendChild(o);
+        if (shop.reduce || !o.animate) { ending(); return; }
+        var a = o.animate([{ clipPath: dir > 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }],
+          { duration: 520, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+        a.onfinish = ending;
+      };
+      o.src = src(ids[i]);
+      if (o.decode) o.decode().then(show, show); else o.onload = show;
+    };
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i, i > cur ? 1 : -1); }); });
+    var x0 = 0, y0 = 0, down = false, moved = false;
+    frame.addEventListener('pointerdown', function (e) { down = true; moved = false; x0 = e.clientX; y0 = e.clientY; });
+    frame.addEventListener('pointerup', function (e) {
+      if (!down) return; down = false;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) { moved = true; go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); }
+    });
+    frame.addEventListener('pointercancel', function () { down = false; });
+    frame.addEventListener('click', function (e) { if (moved) { e.preventDefault(); moved = false; } });
+    frame.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    var warm = function () { ids.forEach(function (id) { var w = new Image(); w.src = src(id); }); };
+    addEventListener('load', function () { (window.requestIdleCallback || function (f) { setTimeout(f, 700); })(warm); });
+  }
+
+  /* Closing moment on the main action: one pass of light after the opening, and again on every press. It never
+     delays the link: the click goes straight through. */
+  var btn = D.querySelector('.hero-btn');
+  if (btn && !shop.reduce) {
+    var lit = function () { btn.classList.remove('lit'); void btn.offsetWidth; btn.classList.add('lit'); };
+    btn.addEventListener('animationend', function () { btn.classList.remove('lit'); });
+    btn.addEventListener('pointerdown', lit);
+  }
+  var ready = function (fn) {
+    var once = false, run = function () { if (!once) { once = true; fn(); } };
+    if (root.getAttribute('data-opening') === 'done') { run(); return; }
+    var mo = new MutationObserver(function () { if (root.getAttribute('data-opening') === 'done') { mo.disconnect(); run(); } });
+    mo.observe(root, { attributes: true, attributeFilter: ['data-opening'] });
+    setTimeout(function () { mo.disconnect(); run(); }, 3000);
+  };
+  var fired = false;
+  if (btn && !shop.reduce) ready(function () { if (!fired) { fired = true; setTimeout(function () { btn.classList.add('lit'); }, 250); } });
+
+  /* Scroll scenes: the rule is drawn, then each piece's kolam is drawn and its photo swept clear from its own side.
+     An observer plus a light scroll check, so a fast flick never leaves a photo hidden. */
+  var scenes = slice(D.querySelectorAll('.rule, .look'));
+  if (scenes.length) {
+    var show = function (el) { el.classList.add('in'); }, pend = scenes.slice();
+    if (shop.reduce || !('IntersectionObserver' in window)) { scenes.forEach(show); }
+    else {
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (x) { if (x.isIntersecting) { show(x.target); io.unobserve(x.target); pend.splice(pend.indexOf(x.target), 1); } });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      scenes.forEach(function (el) { io.observe(el); });
+      var tick = 0;
+      addEventListener('scroll', function () {
+        if (tick || !pend.length) return;
+        tick = setTimeout(function () {
+          tick = 0;
+          pend = pend.filter(function (el) {
+            if (el.getBoundingClientRect().top < innerHeight * 0.92) { show(el); io.unobserve(el); return false; }
+            return true;
+          });
+        }, 120);
+      }, { passive: true });
+    }
+  }
+
+  /* Ambient: rice flour drifting behind the hero. DPR 1, 30 fps, 36 specks on phones (90 on desktop), paused off
+     screen and in a hidden tab, and a watchdog that thins it out (never off) when frames run long. */
+  var cv = D.querySelector('.flour');
+  if (cv && !shop.reduce && cv.getContext) {
+    var ctx = cv.getContext('2d'), hero = cv.parentNode, W = 1, H = 1, MAX = innerWidth < 900 ? 36 : 90, dens = [1, .6, .36, .2],
+        lvl = 0, ps = [], vis = true, on = false, raf = 0, last = 0, prev = 0, slow = 0, seen = 0;
+    var size = function () {
+      var r = hero.getBoundingClientRect();
+      W = cv.width = Math.max(1, Math.round(r.width)); H = cv.height = Math.max(1, Math.round(r.height));
+    };
+    for (var i = 0; i < MAX; i++) ps.push({ x: Math.random(), y: Math.random(), r: .6 + Math.random() * 1.1, v: 5 + Math.random() * 9,
+      a: .2 + Math.random() * .15, ph: Math.random() * 6.28, s: .5 + Math.random() * .6 });
+    var frameFn = function (t) {
+      raf = 0;
+      if (!on) return;
+      raf = requestAnimationFrame(frameFn);
+      if (prev) { seen++; if (t - prev > 24) slow++; if (seen === 90) { if (slow > 45 && lvl < dens.length - 1) lvl++; seen = slow = 0; } }
+      prev = t;
+      if (t - last < 32) return;
+      var dt = Math.min(64, t - last) / 1000; last = t;
+      ctx.clearRect(0, 0, W, H);
+      var k = Math.ceil(MAX * dens[lvl]);
+      for (var j = 0; j < k; j++) {
+        var p = ps[j];
+        p.y += p.v * dt / H; p.ph += p.s * dt;
+        if (p.y > 1.02) { p.y = -.02; p.x = Math.random(); }
+        ctx.fillStyle = 'rgba(239,231,223,' + p.a + ')';
+        ctx.beginPath(); ctx.arc(p.x * W + Math.sin(p.ph) * 9, p.y * H, p.r, 0, 6.2832); ctx.fill();
+      }
+    };
+    var sync = function () {
+      var want = vis && !D.hidden;
+      if (want && !on) { on = true; prev = 0; last = 0; if (!raf) raf = requestAnimationFrame(frameFn); }
+      else if (!want && on) { on = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+    };
+    ready(function () {
+      size(); sync();
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; sync(); }).observe(hero);
+      D.addEventListener('visibilitychange', sync);
+      if ('ResizeObserver' in window) new ResizeObserver(size).observe(hero); else addEventListener('resize', size);
+    });
+  }
+})();
 
   /* Each radio group is one tab stop; arrow keys move between options. */
   function rove(g) {
@@ -702,6 +1233,8 @@
     });
   });
   counts(); route();
+  SX.start();
+  window.__shop = 1;   // the head's failsafe stands down
 })();
 </script>
 </body>
