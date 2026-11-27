@@ -9,33 +9,8 @@
 <meta name="theme-color" content="#fff3e3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><style>@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Mrs+Saint+Delafield&display=swap");</style></noscript>
-<link rel="preload" as="image" href="assets/cut-mermaid.webp" fetchpriority="high">
-<script>
-/* First paint: marks the page as scripted, ends the opening at about 2.3 s, and shows everything if the page script never arrives. */
-(function () {
-  var R = document.documentElement, fp = 0, done = 0;
-  R.classList.add('js');
-  var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  window.__openDone = function () { if (!done) { done = 1; R.dataset.opening = 'done'; } };
-  if (rm) { R.classList.add('rv-fail'); window.__openDone(); }
-  else {
-    var painted = function (t) { if (fp) return; fp = t || performance.now(); setTimeout(window.__openDone, Math.max(0, fp + 2300 - performance.now())); };
-    var api = false;
-    try {
-      api = (PerformanceObserver.supportedEntryTypes || []).indexOf('paint') >= 0;
-      if (api) new PerformanceObserver(function (l) { l.getEntries().forEach(function (e) { painted(e.startTime); }); }).observe({ type: 'paint', buffered: true });
-    } catch (e) { api = false; }
-    if (!api) document.addEventListener('DOMContentLoaded', function () { painted(); });
-    setTimeout(window.__openDone, 4000);
-  }
-  setTimeout(function () { if (!window.__hoc) R.classList.add('rv-fail'); }, 2500);
-})();
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 <style>
-  @font-face { font-family: "Anton"; font-style: normal; font-weight: 400; font-display: swap; src: url(data:font/woff2;base64,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) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: "Anton-fb"; src: local("Arial Narrow"), local("Arial"); size-adjust: 88%; ascent-override: 134%; descent-override: 37%; line-gap-override: 0%; }
   :root {
     --ink: #1b1320;
     --cream: #fff3e3;
@@ -47,12 +22,11 @@
     --sage: #c3cf96;      /* Just Married sprinkles */
     --cobalt: #2346c8;    /* the blue butterfly */
     --mint: #9fdcc8;      /* mermaid buttercream */
-    --display: "Anton", "Anton-fb", "Arial Narrow", sans-serif;
+    --display: "Anton", "Arial Narrow", sans-serif;
     --mono: "DM Mono", ui-monospace, monospace;
     --script: "Mrs Saint Delafield", cursive;
     --pad: clamp(16px, 4vw, 48px);
     --ease: cubic-bezier(.23, 1, .32, 1);
-    --out: cubic-bezier(.16, 1, .3, 1);
   }
   * { box-sizing: border-box; }
   html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
@@ -73,45 +47,20 @@
   .top { position: sticky; top: 0; z-index: 30; display: flex; justify-content: space-between; align-items: center; gap: 12px;
          height: 56px; padding: 0 var(--pad); background: var(--cream); border-bottom: 2px solid var(--ink); }
   .logo { font: 400 23px/1 var(--display); text-transform: uppercase; text-decoration: none; display: inline-flex;
-          align-items: center; gap: .28em; min-height: 44px; white-space: nowrap; min-width: 0; overflow: hidden; flex: 0 1 auto; transition: transform .12s var(--ease); }
-  #top { scroll-margin-top: 56px; }
+          align-items: center; gap: .28em; min-height: 44px; white-space: nowrap; }
   .logo span { color: #c81f6e; }
-  .logo .badge { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink); object-fit: cover; flex: none; margin-right: .32em; background: var(--cream); }
-  .wa { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
+  .wa { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
         border-radius: 999px; background: var(--butter); color: var(--ink); text-decoration: none; border: 2px solid var(--ink);
         font: 400 17px/1 var(--display); letter-spacing: .03em; transition: transform .12s var(--ease); }
-  .wa:active, .ask:active, .logo:active, .cake-link:active img { transform: scale(.97); }
+  .wa:active, .ask:active, .cake-link:active img { transform: scale(.97); }
   .wa svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
 
   /* Hero */
   .hero { background: var(--pink); padding: 14px var(--pad) 92px; display: grid; position: relative; overflow: hidden; }
   .cake-link { display: block; justify-self: center; position: relative; }
   .hero .cake { height: min(40svh, 340px); width: auto; filter: drop-shadow(0 24px 26px rgba(90,0,45,.35));
-                animation: drop .9s var(--out) .05s backwards; }
-  @keyframes drop { from { transform: translateY(-70px) rotate(3deg); opacity: 0; } to { transform: none; opacity: 1; } }
-  /* Opening: the cake is set down, the line rises from its mask, the black label wipes in, the topper stamps on, a ring shows where to tap. */
-  @keyframes rise { from { opacity: 0; transform: translateY(.5em); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(-10% -10% -10% -10%); } }
-  @keyframes rise2 { from { opacity: 0; transform: translateY(10px); } }
-  @keyframes wipe { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% -10% -20% -10%); } }
-  @keyframes stamp { from { opacity: 0; transform: rotate(-5deg) scale(1.08); } to { opacity: 1; transform: rotate(6deg) scale(1); } }
-  @keyframes ring { from { opacity: .95; transform: scale(.5); } to { opacity: 0; transform: scale(1.8); } }
-  @keyframes dockin { from { transform: translateY(140%); } }
-  .hero .l1 { display: block; font-style: normal; animation: rise .8s var(--out) .15s backwards; }
-  .hero h1 span { animation: wipe .7s var(--out) .55s backwards; }
-  .hero .topper { animation: stamp .35s var(--out) 1s backwards; }
-  .hero .sub span:nth-child(1) { animation: rise2 .6s var(--out) 1.05s backwards; }
-  .hero .sub span:nth-child(2) { animation: rise2 .6s var(--out) 1.18s backwards; }
-  .hero .cake-link::after { content: ""; position: absolute; left: 50%; top: 46%; width: 58px; height: 58px; margin: -29px 0 0 -29px;
-                            border-radius: 50%; border: 3px solid var(--cream); pointer-events: none; opacity: 0;
-                            animation: ring .65s var(--out) 1s 2; }
-  .dock .wa { animation: dockin .5s var(--out) .9s backwards; }
-  .hero > .cake-link, .hero h1, .hero .sub { position: relative; z-index: 1; }
-  /* Ambient: sprinkles fall behind the hero (canvas, DPR 1, about 30 fps, paused off screen) */
-  .sprk { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; }
-  .sprk.live { opacity: 1; transition: opacity .8s linear; }
-  .cake-link { touch-action: pan-y; }
-  @media (hover: hover) { .cake-link:hover img { transform: translateY(-6px) rotate(-1deg); transition: transform .3s var(--ease); } }
-  .cake-link.drag img { transition: none !important; }
+                animation: drop .7s var(--ease) both; }
+  @keyframes drop { from { transform: translateY(-16px) rotate(2deg); opacity: 0; } to { transform: none; opacity: 1; } }
   /* A gold "topper" tag like the acrylic ones on their cakes */
   .topper { position: absolute; top: 17%; right: var(--pad); z-index: 2; transform: rotate(6deg); background: var(--cream); color: var(--ink);
             border: 3px double var(--gold); border-radius: 10px; padding: 8px 12px; font: 400 17px/1.05 var(--display);
@@ -119,11 +68,11 @@
   .topper small { display: block; font: 500 12px/1.3 var(--mono); text-transform: none; letter-spacing: 0; margin-top: 4px; }
   .hero h1 { font-size: clamp(42px, 12.6vw, 132px); line-height: 1.04; margin-top: 14px; }
   .hero h1 span { display: table; background: var(--ink); color: var(--cream); padding: .06em .14em .03em; margin-top: .1em; line-height: 1; }
-  @media (min-width: 1024px) { .hero .sub span:nth-child(2)::before { content: "·"; margin-right: 16px; } }
   .hero .sub { margin-top: 14px; font-size: 15px; display: flex; flex-wrap: wrap; gap: 2px 16px; }
 
   /* Cook with Comali */
   .tv { background: var(--ink); color: var(--cream); padding: 48px var(--pad) 52px; display: grid; gap: 22px; scroll-margin-top: 70px; }
+  .tv .logo-cwc { width: 70%; max-width: 300px; }
   .tv h2 { font-size: clamp(42px, 12vw, 96px); color: var(--butter); }
   .tv p { font-size: 16px; max-width: 34ch; margin-top: 14px; }
   .tv a.reel { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
@@ -154,7 +103,7 @@
   .how h2 { font-size: clamp(50px, 15vw, 120px); }
   .steps { display: grid; gap: 22px; counter-reset: s; }
   .steps div { font-size: 16px; max-width: 34ch; }
-  .steps div::before { counter-increment: s; content: counter(s); display: block; width: max-content; font: 400 54px/1 var(--display); margin-bottom: 4px; }
+  .steps div::before { counter-increment: s; content: counter(s); display: block; font: 400 54px/1 var(--display); margin-bottom: 4px; }
   .steps b { display: block; font: 400 26px/1 var(--display); text-transform: uppercase; margin-bottom: 6px; }
 
   /* Workshops + bakers */
@@ -177,55 +126,11 @@
   .dock { position: fixed; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 25; }
   .dock .wa { width: 100%; min-height: 54px; font-size: 20px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
 
-
-  /* Scroll scenes: each section enters its own way, once. Content is hidden only while the page script is alive (.js:not(.rv-fail)). */
-  @keyframes crt { from { clip-path: inset(49.5% 0 49.5% 0); } to { clip-path: inset(0 0 0 0); } }
-  @keyframes setdown { from { opacity: 0; transform: translateY(90px) rotate(-4deg); } }
-  @keyframes pin { from { opacity: 0; transform: translateY(-60px) rotate(14deg); transform-origin: 50% 0; } to { transform-origin: 50% 50%; } }
-  @keyframes numstamp { from { opacity: 0; transform: scale(1.8) rotate(-12deg); } to { opacity: 1; transform: none; } }
-  .js:not(.rv-fail) .tv[data-rv]:not(.in) :is(h2, p, .reel),
-  .js:not(.rv-fail) .block[data-rv]:not(.in) :is(.cake-link, .print, h2, p, .ask),
-  .js:not(.rv-fail) .how[data-rv]:not(.in) :is(h2, .steps div),
-  .js:not(.rv-fail) .people[data-rv]:not(.in) > h2,
-  .js:not(.rv-fail) .pair[data-rv]:not(.in) :is(.print, h3, p),
-  .js:not(.rv-fail) .order[data-rv]:not(.in) :is(h2, p, .wa, .info > div) { opacity: 0; }
-  [data-rv].in h2 { animation: rise .8s var(--out) .05s backwards; }
-  /* TV: the screen opens from a line, like a set switching on */
-  .tv.in h2 { animation-delay: .25s; }
-  .tv.in p { animation: rise2 .7s var(--out) .45s backwards; }
-  .tv.in .reel { animation: wipe .6s var(--out) .65s backwards; }
-  /* Cakes: set down on the counter, the pill unrolls; photo prints are pinned up and swing */
-  .block.in .cut { animation: setdown 1s var(--out) .05s backwards; }
-  .block.in .print { animation: pin 1s var(--out) .05s backwards; }
-  .block.in .print .cap { animation: wipe .9s var(--out) .8s backwards; }
-  .block.in h2 { animation-delay: .25s; }
-  .block.in p { animation: rise2 .6s var(--out) .4s backwards; }
-  .block.in .ask { animation: wipe .6s var(--out) .55s backwards; }
-  /* How to order: the numbers are stamped one by one, each step's words write on */
-  .how.in .steps div { animation: wipe .7s var(--out) calc(.3s + var(--i, 0) * .2s) backwards; }
-  .how.in .steps div::before { transform-origin: 0 50%; animation: numstamp .45s var(--out) calc(.2s + var(--i, 0) * .2s) backwards; }
-  /* Bakers: the prints are pinned up at the top edge and swing down */
-  .people.in > h2 { animation-delay: .05s; }
-  .pair.in .print { animation: pin 1s var(--out) .05s backwards; }
-  .pair.in .print .cap { animation: wipe .9s var(--out) .7s backwards; }
-  .pair.in h3 { animation: rise .7s var(--out) .3s backwards; }
-  .pair.in p { animation: rise2 .6s var(--out) .45s backwards; }
-  /* Order: the button and the details write on */
-  .order.in p { animation: rise2 .6s var(--out) .3s backwards; }
-  .order.in .wa { animation: wipe .7s var(--out) .45s backwards; }
-  .order.in .info > div { animation: wipe .7s var(--out) calc(.4s + var(--i, 0) * .14s) backwards; }
-  /* Response: every control answers the press */
-  .call-fab:active, .print:active img { transform: scale(.95); }
-  a.reel, .handle, .info a { transition: opacity .12s var(--ease); }
-  a.reel:active, .handle:active, .info a:active { opacity: .6; }
-  .dock .wa, .order .wa { transition: transform .12s var(--ease); }
-  .order .wa:active, .dock .wa:active { transform: scale(.96); }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .sprk { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero .cake { animation: none; } .wa, .ask { transition: none; } }
 
   @media (max-width: 370px) {
     .logo { font-size: 20px; }
     .top .wa { padding: 0 12px; font-size: 16px; }
-    .top{gap:8px} .logo{font-size:19px;gap:.22em} .logo .badge{width:34px;height:34px;margin-right:.12em} .top .wa{padding:0 10px;gap:6px}
     .hero .cake { height: min(30svh, 300px); }
     .hero h1 { font-size: 42px; }
     .topper { max-width: 100px; font-size: 14px; padding: 6px 8px; right: 10px; }
@@ -239,7 +144,7 @@
     .block { align-content: start; }
     .block .cut { height: min(46vh, 400px); max-width: 100%; }
     .block h2 { font-size: clamp(42px, 6vw, 84px); }
-    .tv { align-items: center; }
+    .tv { grid-template-columns: auto 1fr; align-items: center; column-gap: 48px; }
     .steps { grid-template-columns: repeat(3, 1fr); }
     .people .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .info { grid-template-columns: repeat(3, 1fr); }
@@ -269,24 +174,24 @@
 <div class="concept" data-concept-banner><span class="long">Concept site for High On Cakes · </span><span class="short">Concept site · </span>not official</div>
 
 <header class="top">
-  <a class="logo" href="#top" aria-label="High On Cakes, back to top"><img class="badge" src="assets/logo.jpg" width="40" height="40" alt=""><b style="font-weight:inherit">High</b><b style="font-weight:inherit">On</b><span>Cakes</span></a>
+  <a class="logo" href="#top" aria-label="High On Cakes, back to top"><b style="font-weight:inherit">High</b><b style="font-weight:inherit">On</b><span>Cakes</span></a>
   <a class="wa" data-wa href="https://wa.me/918939973535" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
     WhatsApp</a>
 </header>
 
 <main id="top">
-<section class="hero" data-hero>
-  <canvas class="sprk" data-glint aria-hidden="true"></canvas>
-  <a class="cake-link" draggable="false" data-cake="Mermaid tail cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a mermaid cake like this one">
-    <img draggable="false" class="cake" src="assets/cut-mermaid.webp" width="398" height="601" fetchpriority="high" alt="Two-tier mermaid cake with a pink tail on top">
+<section class="hero">
+  <a class="cake-link" data-cake="Mermaid tail cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a mermaid cake like this one">
+    <img class="cake" src="assets/cut-mermaid.webp" width="398" height="601" fetchpriority="high" alt="Two-tier mermaid cake with a pink tail on top">
     </a>
   <span class="topper" aria-hidden="true">Tap a cake → WhatsApp<small>with that cake in the message</small></span>
-  <h1><em class="l1">Point at a cake.</em> <span>We'll make yours.</span></h1>
+  <h1>Point at a cake. <span>We'll make yours.</span></h1>
   <div class="sub"><span>Custom cakes · pre-orders only</span><span>Nungambakkam, Chennai</span></div>
 </section>
 
-<section class="tv" data-rv aria-labelledby="tv-h">
+<section class="tv" aria-labelledby="tv-h">
+  <img class="logo-cwc" src="assets/cwc-logo.webp" width="587" height="458" loading="lazy" alt="Cooku with Comali logo">
   <div>
     <h2 id="tv-h">We made cakes for Cook with Comali.</h2>
     <p>On Vijay TV, for season 5, and then once again: “We made it cook with comali once again”.</p>
@@ -295,73 +200,73 @@
 </section>
 
 <section class="cakes" aria-label="Cakes we've made">
-  <article data-rv class="block lilac">
-    <a class="cake-link" draggable="false" data-cake="Petal ruffles cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Petal ruffles cake like this one">
-      <img draggable="false" class="cut" src="assets/cut-petals.webp" width="369" height="467" loading="lazy" alt="Pastel petal-ruffle cake with lilies and a Mridhya topper"></a>
+  <article class="block lilac">
+    <a class="cake-link" data-cake="Petal ruffles cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Petal ruffles cake like this one">
+      <img class="cut" src="assets/cut-petals.webp" width="369" height="467" loading="lazy" alt="Pastel petal-ruffle cake with lilies and a Mridhya topper"></a>
     <h2>Petal ruffles</h2><p>“Ruffles on ruffles, because one layer of sweetness isn't enough!”</p>
     <a class="ask" data-cake="Petal ruffles cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Petal ruffles →</a>
   </article>
-  <article data-rv class="block rose">
-    <a class="cake-link" draggable="false" data-cake="Party teddy cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Party teddy cake like this one">
-      <img draggable="false" class="cut" src="assets/cut-teddy.webp" width="247" height="445" loading="lazy" alt="Cream cake with a party teddy in a pink hat"></a>
+  <article class="block rose">
+    <a class="cake-link" data-cake="Party teddy cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Party teddy cake like this one">
+      <img class="cut" src="assets/cut-teddy.webp" width="247" height="445" loading="lazy" alt="Cream cake with a party teddy in a pink hat"></a>
     <h2>Party teddy</h2><p>“A cake you just want to hug.”</p>
     <a class="ask" data-cake="Party teddy cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Party teddy →</a>
   </article>
-  <article data-rv class="block butter">
-    <a class="cake-link" draggable="false" data-cake="7-layer chocolate cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a 7-layer chocolate cake like this one">
-      <img draggable="false" class="cut" src="assets/cut-chocolate.webp" width="293" height="309" loading="lazy" alt="Slice of seven-layer chocolate cake"></a>
-    <h2>7-layer chocolate</h2><p>A seven-layer chocolate cake, with the full recipe on our Instagram.</p>
+  <article class="block butter">
+    <a class="cake-link" data-cake="7-layer chocolate cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a 7-layer chocolate cake like this one">
+      <img class="cut" src="assets/cut-chocolate.webp" width="293" height="309" loading="lazy" alt="Slice of seven-layer chocolate cake"></a>
+    <h2>7-layer chocolate</h2><p>“Say goodbye to normal chocolate cakes.”</p>
     <a class="ask" data-cake="7-layer chocolate cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the 7-layer chocolate →</a>
   </article>
-  <article data-rv class="block sage">
+  <article class="block sage">
     <a class="print r" data-cake="Just Married cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Just Married cake like this one">
-      <img src="assets/post-05.jpg" width="543" height="640" loading="lazy" alt="Long Just Married cake"><span class="cap">just married</span></a>
+      <img src="assets/post-05.jpg" width="543" height="640" loading="lazy" alt="Long Just Married cake with gold sprinkles"><span class="cap">just married</span></a>
     <h2>Just married</h2><p>An Italian-style wedding cake.</p>
     <a class="ask" data-cake="Just Married cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Just Married →</a>
   </article>
-  <article data-rv class="block cobalt wide">
+  <article class="block cobalt wide">
     <a class="print" data-cake="Blue Butterfly cake" href="https://wa.me/918939973535" target="_blank" rel="noopener" aria-label="WhatsApp us a Blue Butterfly cake like this one">
-      <img src="assets/post-08.jpg" width="478" height="640" loading="lazy" alt="Blue butterfly cake"><span class="cap">edible art</span></a>
-    <h2>The blue butterfly</h2><p>“Turning dreams into edible art, one beautiful detail at a time.”</p>
+      <img src="assets/post-08.jpg" width="478" height="640" loading="lazy" alt="Blue butterfly birthday cake for Archana"><span class="cap">for Archana</span></a>
+    <h2>The blue butterfly</h2><p>Made for Archana's birthday: butterfly wings around a figure in a flowing gown.</p>
     <a class="ask" data-cake="Blue Butterfly cake" href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp us one like the Blue Butterfly →</a>
   </article>
 </section>
 
-<section class="how" data-rv aria-labelledby="how-h">
+<section class="how" aria-labelledby="how-h">
   <h2 id="how-h">How to order</h2>
   <div class="steps">
-    <div style="--i:0"><b>Pick a cake</b>Any cake here, or bring your own idea.</div>
-    <div style="--i:1"><b>Message us</b>WhatsApp or call 89399 73535, or DM @high.on.cakes.</div>
-    <div style="--i:2"><b>Book ahead</b>We take cakes on pre-order only, so message us before the day.</div>
+    <div><b>Pick a cake</b>Any cake here, or bring your own idea: a name, a theme, a colour.</div>
+    <div><b>Message us</b>WhatsApp or call 89399 73535, or DM @high.on.cakes.</div>
+    <div><b>Book ahead</b>We take cakes on pre-order only, so message us before the day.</div>
   </div>
 </section>
 
-<section class="people" data-rv aria-labelledby="ppl-h">
+<section class="people" aria-labelledby="ppl-h">
   <h2 id="ppl-h">Bake with us</h2>
   <div class="pairs">
-    <div class="pair" data-rv>
-      <figure class="print" style="margin-left:auto;margin-right:auto"><img src="assets/post-09.jpg" width="360" height="640" loading="lazy" style="aspect-ratio:4/5;object-fit:cover;object-position:50% 95%" alt="Two guests making a heart sign at a High On Cakes workshop"><figcaption class="cap">cake workshop</figcaption></figure>
+    <div class="pair">
+      <figure class="print" style="margin-left:auto;margin-right:auto"><img src="assets/post-09.jpg" width="360" height="640" loading="lazy" style="aspect-ratio:4/5;object-fit:cover;object-position:50% 95%" alt="Two guests making a heart sign at a High On Cakes workshop"><figcaption class="cap">cake picnic</figcaption></figure>
       <h3>Bento-cake workshops</h3>
-      <p>Our very first Cake Picnic – Bento Cake Workshop, at Café Dua, Nungambakkam. More from the workshops on <a class="handle" href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes</a>.</p>
+      <p>Our first Cake Picnic was at Café Dua, Nungambakkam. Workshops are announced on <a class="handle" href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes</a>.</p>
     </div>
-    <div class="pair" data-rv>
-      <figure class="print r" style="margin-left:auto;margin-right:auto"><img src="assets/post-04.jpg" width="359" height="640" loading="lazy" style="aspect-ratio:1/1;object-fit:cover;object-position:50% 0" alt="A baker in an apron taking a bite of chocolate cake"><figcaption class="cap">never tired of it</figcaption></figure>
+    <div class="pair">
+      <figure class="print r" style="margin-left:auto;margin-right:auto"><img src="assets/post-04.jpg" width="359" height="640" loading="lazy" style="aspect-ratio:1/1;object-fit:cover;object-position:50% 0" alt="A baker in an apron taking a bite of chocolate cake"><figcaption class="cap">for the 10,000th time</figcaption></figure>
       <h3>By Ashwin &amp; Shashi Kala</h3>
       <p>High On Cakes is by <a class="handle" href="https://instagram.com/ashboy.pk" target="_blank" rel="noopener">@ashboy.pk</a> &amp; <a class="handle" href="https://instagram.com/shashi_kala_" target="_blank" rel="noopener">@shashi_kala_</a>. “POV: You're a baker and somehow still never get tired of your own cake.”</p>
     </div>
   </div>
 </section>
 
-<section class="order" data-rv aria-labelledby="ord-h">
+<section class="order" aria-labelledby="ord-h">
   <div>
     <h2 id="ord-h">Got a cake in mind?</h2>
     <p style="margin:16px 0 24px;max-width:40ch">Send it on WhatsApp with the date. Pre-orders only.</p>
     <a class="wa" data-wa href="https://wa.me/918939973535" target="_blank" rel="noopener">WhatsApp 89399 73535</a>
   </div>
   <div class="info">
-    <div style="--i:0"><b>Based in</b>Nungambakkam, Chennai</div>
-    <div style="--i:1"><b>Call</b><a href="tel:+918939973535">+91 89399 73535</a></div>
-    <div style="--i:2"><b>Instagram</b><a href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes · 9.8K followers</a></div>
+    <div><b>Based in</b>Nungambakkam, Chennai</div>
+    <div><b>Call</b><a href="tel:+918939973535">+91 89399 73535</a></div>
+    <div><b>Instagram</b><a href="https://instagram.com/high.on.cakes" target="_blank" rel="noopener">@high.on.cakes · 9.8K followers</a></div>
   </div>
 </section>
 </main>
@@ -372,219 +277,10 @@
   WhatsApp</a></div>
 
 <script>
-(function () {
-  'use strict';
-  /* High On Cakes: behaviour. Plain script. GSAP is optional and loads only on a wide screen with a mouse, after the page has loaded:
-     without it (phones, blocked CDN, reduced motion) every section stays visible and every WhatsApp link still works. */
-  window.__hoc = 1;
-  var D = document, R = D.documentElement;
-  var $ = function (s, c) { return (c || D).querySelector(s); };
-  var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
-  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var hasIO = 'IntersectionObserver' in window;
-  var wa = function (text) { return 'https://wa.me/918939973535?text=' + encodeURIComponent(text); };
-  var watch = function (el, fn, opt) {
-    if (!el) return;
-    if (!hasIO) { fn(true); return; }
-    new IntersectionObserver(function (es) { es.forEach(function (e) { fn(e.isIntersecting); }); }, opt).observe(el);
-  };
-  var later = function (ms, fn) { setTimeout(fn, Math.max(0, ms - performance.now())); };
-
-  // every WhatsApp link gets its message
-  $$('[data-wa]').forEach(function (a) { a.href = wa("Hi High On Cakes! I'd like to order a custom cake. (Saw your website)"); });
-  $$('[data-cake]').forEach(function (a) { a.href = wa('Hi High On Cakes! I\'d like a cake like your ' + a.dataset.cake + '. (Saw it on your website)'); });
-
-  /* ---------- scroll scenes: each section adds .in once, and is never hidden again ---------- */
-  var rvs = $$('[data-rv]');
-  if (RM || !hasIO) rvs.forEach(function (e) { e.classList.add('in'); });
-  else {
-    var rio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
-    rvs.forEach(function (e) { rio.observe(e); });
-    // a fast fling can carry a section past the viewport between two checks: anything now above the fold is revealed too
-    var q = 0;
-    var sweep = function () {
-      q = 0;
-      rvs.forEach(function (e) {
-        if (e.classList.contains('in')) return;
-        if (e.getBoundingClientRect().top < innerHeight * 0.92) { e.classList.add('in'); rio.unobserve(e); }
-      });
-    };
-    addEventListener('scroll', function () { if (!q) q = requestAnimationFrame(sweep); }, { passive: true });
-  }
-
-  /* ---------- the sprinkles that burst when a cake is tapped (the link opens at the same moment, never later) ---------- */
-  var BC = ['#ff7eb6', '#ffd23f', '#c9b2ea', '#9fdcc8', '#2346c8', '#fff3e3'];
-  function burst(x, y) {
-    if (RM || !D.body.animate) return;
-    var box = D.createElement('div');
-    box.setAttribute('aria-hidden', 'true');
-    box.style.cssText = 'position:fixed;left:' + x + 'px;top:' + y + 'px;width:0;height:0;pointer-events:none;z-index:60';
-    for (var i = 0; i < 16; i++) {
-      var s = D.createElement('i'), a = i / 16 * Math.PI * 2 + Math.random() * 0.4, d = 60 + Math.random() * 90;
-      s.style.cssText = 'position:absolute;left:-3px;top:-6px;width:6px;height:12px;border-radius:3px;background:' + BC[i % BC.length];
-      s.animate([
-        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
-        { transform: 'translate(' + (Math.cos(a) * d).toFixed(1) + 'px,' + (Math.sin(a) * d * 0.8).toFixed(1) + 'px) rotate(' + Math.round(Math.random() * 360 - 180) + 'deg)', opacity: 0 }
-      ], { duration: 600 + Math.random() * 300, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
-      box.appendChild(s);
-    }
-    D.body.appendChild(box);
-    setTimeout(function () { box.remove(); }, 1000);
-  }
-  var moved = false;
-  D.addEventListener('click', function (e) {
-    var t = e.target.closest && e.target.closest('.wa, .ask, .cake-link, .print[data-cake]');
-    if (!t) return;
-    if (moved && t.classList.contains('cake-link')) { e.preventDefault(); moved = false; return; }   // a drag is not a tap
-    var x = e.clientX, y = e.clientY;
-    if (!x && !y) { var r = t.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2; }
-    burst(x, y);
-  }, true);
-
-  /* ---------- signature: drag a cake sideways and it tilts under your thumb, then rocks back (a plain tap opens WhatsApp) ---------- */
-  $$('.cake-link').forEach(function (el) {
-    var img = $('img', el), st = null;
-    if (!img) return;
-    el.addEventListener('dragstart', function (e) { e.preventDefault(); });
-    el.addEventListener('pointerdown', function (e) { if (e.button) return; moved = false; st = { x: e.clientX, id: e.pointerId, on: false }; });
-    el.addEventListener('pointermove', function (e) {
-      if (!st || e.pointerId !== st.id) return;
-      var dx = e.clientX - st.x;
-      if (!st.on) { if (Math.abs(dx) < 8) return; st.on = true; moved = true; el.classList.add('drag'); try { el.setPointerCapture(e.pointerId); } catch (x) { /* fine */ } }
-      var k = Math.max(-1, Math.min(1, dx / 160));
-      img.style.transform = 'rotate(' + (k * 12).toFixed(1) + 'deg) translateX(' + (k * 14).toFixed(1) + 'px)';
-    });
-    function end() {
-      var s = st; st = null; el.classList.remove('drag');
-      if (!s || !s.on) return;
-      var from = img.style.transform; img.style.transform = '';
-      if (!RM && img.animate && from) img.animate([{ transform: from }, { transform: 'none' }], { duration: 560, easing: 'cubic-bezier(.34,1.56,.64,1)' });
-      setTimeout(function () { moved = false; }, 60);
-    }
-    el.addEventListener('pointerup', end);
-    el.addEventListener('pointercancel', end);
-  });
-
-  /* ---------- ambient: sprinkles falling behind the hero ---------- */
-  // DPR 1, about 30 fps, at most 24 on a phone (60 on desktop), paused off screen and in a hidden tab. Over the headline and the cake they
-  // dim to under 20%. A frame watchdog steps the density down (1, .6, .36, .2) when frames run slow, and never switches it off.
-  (function () {
-    var cv = $('canvas[data-glint]'), hero = $('[data-hero]');
-    if (!cv || !cv.getContext || !hero || RM) return;
-    var ctx = cv.getContext('2d');
-    var small = matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-    var N = small ? 24 : 60, SCALE = [1, 0.6, 0.36, 0.2], level = 0;
-    var COLS = ['#fff3e3', '#ffd23f', '#c9b2ea', '#9fdcc8', '#2346c8', '#c3cf96'];
-    var ps = [], W = 0, H = 0, rects = [], on = false, raf = 0, last = 0, odd = 0, frames = 0, slow = 0, good = 0;
-    function spawn(p, anywhere) {
-      p.x = Math.random() * W; p.y = anywhere ? Math.random() * H : -12;
-      p.l = 4 + Math.random() * 4; p.a = Math.random() * 3.14; p.va = (Math.random() - 0.5) * 1.6;
-      p.vy = 24 + Math.random() * 30; p.sw = Math.random() * 6.28; p.c = (Math.random() * COLS.length) | 0;
-    }
-    function fill() {
-      var n = Math.max(6, Math.round(N * SCALE[level]));
-      if (ps.length > n) ps.length = n;
-      while (W && ps.length < n) { var p = {}; spawn(p, true); ps.push(p); }
-    }
-    function measure() {
-      var hr = hero.getBoundingClientRect();
-      rects = $$('h1, .sub, .hero .cake').map(function (e) {
-        var r = e.getBoundingClientRect();
-        return [r.left - hr.left - 6, r.top - hr.top - 6, r.right - hr.left + 6, r.bottom - hr.top + 6];
-      });
-    }
-    function size() {
-      var w = cv.clientWidth, h = cv.clientHeight;
-      if (!w || !h) return;
-      if (w !== W || Math.abs(h - H) > 2) { W = w; H = h; cv.width = w; cv.height = h; ps = []; fill(); }
-      measure();
-    }
-    var over = function (p) {
-      for (var i = 0; i < rects.length; i++) { var r = rects[i]; if (p.x > r[0] && p.x < r[2] && p.y > r[1] && p.y < r[3]) return true; }
-      return false;
-    };
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.lineWidth = 3.2; ctx.lineCap = 'round';
-      for (var pass = 0; pass < 2; pass++) {
-        ctx.globalAlpha = pass ? 0.17 : 0.9;
-        for (var c = 0; c < COLS.length; c++) {
-          ctx.beginPath();
-          for (var i = 0; i < ps.length; i++) {
-            var p = ps[i];
-            if (p.c !== c || over(p) !== !!pass) continue;
-            var dx = Math.cos(p.a) * p.l * 0.5, dy = Math.sin(p.a) * p.l * 0.5;
-            ctx.moveTo(p.x - dx, p.y - dy); ctx.lineTo(p.x + dx, p.y + dy);
-          }
-          ctx.strokeStyle = COLS[c]; ctx.stroke();
-        }
-      }
-      ctx.globalAlpha = 1;
-    }
-    function step(dt) {
-      for (var i = 0; i < ps.length; i++) {
-        var p = ps[i];
-        p.y += p.vy * dt; p.x += Math.sin(p.y * 0.02 + p.sw) * 8 * dt; p.a += p.va * dt;
-        if (p.y > H + 12) spawn(p, false);
-      }
-    }
-    function frame(now) {
-      raf = 0;
-      var gap = last ? now - last : 16.7; last = now;
-      frames++; if (gap > 24) slow++;
-      if (frames >= 90) {
-        if (slow > 45) { good = 0; if (level < 3) { level++; fill(); } }
-        else if (slow < 9) { good += frames; if (good >= 600 && level > 0) { level--; fill(); good = 0; } }
-        else good = 0;
-        frames = 0; slow = 0; measure();
-      }
-      if ((odd ^= 1)) { run(); return; }   // draw every second frame: about 30 fps
-      step(Math.min(0.08, gap * 2 / 1000)); draw(); run();
-    }
-    function run() { if (!raf && on && !D.hidden) raf = requestAnimationFrame(frame); }
-    function set(v) {
-      on = v;
-      if (v) { size(); cv.classList.add('live'); last = 0; run(); }
-      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    }
-    later(900, function () { watch(hero, set); });
-    D.addEventListener('visibilitychange', function () { if (D.hidden) { cancelAnimationFrame(raf); raf = 0; } else { last = 0; frames = 0; slow = 0; run(); } });
-    addEventListener('resize', function () { if (on) size(); });
-    window.__glint = { level: function () { return level; }, count: function () { return ps.length; } };
-  })();
-
-  /* ---------- GSAP layer (wide screen with a mouse only): the cakes drift at their own pace as you scroll ---------- */
-  var WIDE = '(min-width: 1024px) and (pointer: fine)';
-  if (RM || !matchMedia(WIDE).matches) return;
-  var LIBS = [
-    ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js', 'sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc'],
-    ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js', 'sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh']
-  ];
-  function loadLib(i) {
-    if (i >= LIBS.length) { layer(); return; }
-    var s = D.createElement('script');
-    s.src = LIBS[i][0]; s.integrity = LIBS[i][1]; s.crossOrigin = 'anonymous';
-    s.onload = function () { loadLib(i + 1); };
-    D.head.appendChild(s);
-  }
-  if (D.readyState === 'complete') loadLib(0); else addEventListener('load', function () { loadLib(0); });
-
-  function layer() {
-    var g = window.gsap, ST = window.ScrollTrigger;
-    if (!g || !ST) return;
-    g.registerPlugin(ST);
-    g.matchMedia().add(WIDE, function () {
-      g.to('.hero > .cake-link', { y: -46, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 } });
-      $$('.cakes .cake-link').forEach(function (el) {
-        g.fromTo(el, { y: 24 }, { y: -24, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
-      });
-    });
-    ST.refresh();
-  }
-})();
-
+  // Plain script, no libraries: every WhatsApp link gets its message.
+  const wa = text => "https://wa.me/918939973535?text=" + encodeURIComponent(text);
+  document.querySelectorAll("[data-wa]").forEach(a => a.href = wa("Hi High On Cakes! I'd like to order a custom cake. (Saw your website)"));
+  document.querySelectorAll("[data-cake]").forEach(a => a.href = wa(`Hi High On Cakes! I'd like a cake like your ${a.dataset.cake}. (Saw it on your website)`));
 </script>
 <a class="call-fab" href="tel:+918939973535" aria-label="Call High On Cakes, 89399 73535">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"/></svg></a>
