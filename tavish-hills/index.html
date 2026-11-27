@@ -7,13 +7,26 @@
 <title>Tavish Hills, home stay in Kotagiri</title>
 <meta name="description" content="Tavish Hills: homestay and private villa in Kotagiri, Tamil Nadu. Write your dates on the postcard and send it on WhatsApp.">
 <meta name="theme-color" content="#16201a">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/balcony-hills.webp">
+<link rel="preload" as="image" href="assets/balcony-hills.webp" fetchpriority="high">
 <style>
+  /* Fonts are served from this folder, not Google. A rel=preload on them was measured and made it worse (Pixel 7, CPU 4x,
+     Fast 4G: a 900 ms blocking task right at the start, blocking 950-1290 ms, against 50-310 ms without it), so there is
+     none. The stand-in faces carry the first frames: sized to the real face's width, so the swap moves nothing. */
+  @font-face { font-family: "Saira Extra Condensed"; font-weight: 600; font-style: normal; font-display: swap; src: url("assets/fonts/saira-extra-condensed-600-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Saira Extra Condensed"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/saira-extra-condensed-700-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Saira Semi Condensed"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/saira-semi-condensed-400-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Saira Semi Condensed"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/saira-semi-condensed-500-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Saira Semi Condensed"; font-weight: 600; font-style: normal; font-display: swap; src: url("assets/fonts/saira-semi-condensed-600-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Kalam"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/kalam-400-latin.woff2") format("woff2"); }
+  @font-face { font-family: "Saira Stand-in RC"; font-weight: 500 700; font-display: swap; size-adjust: 67%; src: local("Roboto Condensed Bold"), local("RobotoCondensed-Bold"); }
+  @font-face { font-family: "Saira Stand-in AN"; font-weight: 500 700; font-display: swap; size-adjust: 71%; src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"); }
+  @font-face { font-family: "Saira Stand-in A"; font-weight: 500 700; font-display: swap; size-adjust: 58.5%; src: local("Arial Bold"), local("Arial-BoldMT"); }
+  @font-face { font-family: "Saira Semi Stand-in RC"; font-weight: 400; font-display: swap; size-adjust: 106%; src: local("Roboto Condensed"), local("RobotoCondensed-Regular"); }
+  @font-face { font-family: "Saira Semi Stand-in RC"; font-weight: 500 700; font-display: swap; size-adjust: 97%; src: local("Roboto Condensed Bold"), local("RobotoCondensed-Bold"); }
+  @font-face { font-family: "Saira Semi Stand-in AN"; font-weight: 400; font-display: swap; size-adjust: 112%; src: local("Arial Narrow"), local("ArialNarrow"); }
+  @font-face { font-family: "Saira Semi Stand-in AN"; font-weight: 500 700; font-display: swap; size-adjust: 104%; src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"); }
+  @font-face { font-family: "Saira Semi Stand-in A"; font-weight: 400; font-display: swap; size-adjust: 91.7%; src: local("Arial"), local("ArialMT"); }
+  @font-face { font-family: "Saira Semi Stand-in A"; font-weight: 500 700; font-display: swap; size-adjust: 85.4%; src: local("Arial Bold"), local("Arial-BoldMT"); }
   :root {
     /* The world: the dark hedge every group stands in front of, buff postcard stock, laterite print (the lawn's red
        earth), blue ballpoint for what the guest writes, and their own logo blue on the stamp. */
@@ -31,8 +44,8 @@
     --rule: rgba(147, 54, 31, .3);
     --line: 46px;
     --ease: cubic-bezier(.23, 1, .32, 1);
-    --display: "Saira Extra Condensed", "Arial Narrow", sans-serif;
-    --print: "Saira Semi Condensed", "Arial Narrow", sans-serif;
+    --display: "Saira Extra Condensed", "Saira Stand-in RC", "Saira Stand-in AN", "Saira Stand-in A", "Arial Narrow", sans-serif;
+    --print: "Saira Semi Condensed", "Saira Semi Stand-in RC", "Saira Semi Stand-in AN", "Saira Semi Stand-in A", "Arial Narrow", sans-serif;
     --hand: "Kalam", "Segoe Print", cursive;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -56,14 +69,17 @@
     transform: rotate(-.8deg);
     box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .75), 0 2px 6px rgba(0, 0, 0, .35);
   }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; padding-bottom: 9px; border-bottom: 1.5px solid var(--laterite); }
-  .card h1 { margin: 0; font: 700 44px/.88 var(--display); letter-spacing: .005em; text-transform: uppercase; }
+  /* overflow-x: clip keeps the Post card label inside the card while it slides in or if a font is slow */
+  .card-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; padding-bottom: 9px; border-bottom: 1.5px solid var(--laterite); overflow-x: clip; }
+  /* nowrap: the name stays on one line while the web font is still arriving, so the swap does not move the card */
+  .card h1 { margin: 0; font: 700 44px/.88 var(--display); letter-spacing: .005em; text-transform: uppercase; white-space: nowrap; }
+  .card h1 span { white-space: normal; }
   .card h1 span { display: block; margin-top: 7px; font: 500 16px/1.2 var(--print); letter-spacing: .03em; }
   .card-top .pc { margin: 0; font: 600 14px/1.3 var(--display); letter-spacing: .14em; text-align: right; text-transform: uppercase; }
 
   .print { position: relative; margin: 11px 0 0; background: var(--paper); padding: 7px 7px 0; box-shadow: 0 1px 2px rgba(60, 30, 10, .25); }
   .print img { width: 100%; aspect-ratio: 327 / 172; object-fit: cover; object-position: 50% 28%; background: #9aa3a6; }
-  .card .print img { object-position: 50% 18%; }
+  .card .print img { object-position: 50% 18%; /* a 28 px blur of the same photo, so the print is a picture from the very first frame */ background: #9aa3a6 url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAoABwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDXutRQWHmttJHWT+EfWn2V7DdwieOSNkUcsnQVxV5dK2LbJXK4y/8ADn2qxDFNIbWOGZ/KjKh0Riu4E4yfWtlUbWiMlT8zt11ONG8tpQDu+XHYVhyq0sryIBIHOd/rVe3tri11pXK+bHhiSRgZA45PAq4ywA7S4Zl4bLbcH0rO/cq1ji9Qt5Le4BlxvYZJDZFbOg75X27thMY+b1wwNOvIYpZ1Ei5welFoirAylcbQ4GKmNQ2cEtRmo6hfG8lginKxFiMCP39c81vQaPZSwpNcSXDSSKGJMhHb0rmdaEM4tGVh5gjO5F5IO44B/Ork2vXMPlww6cWWNAm5pMZI78US7sVnLRIzp9aikuXMEb/KpKlh1NU49QnlZc5DKrKwz1J6HFFFTsaqKejLILyS+c8IHy9vXIya6WOyEiB8daKKlu6OiMVF6H//2Q==) 50% 18% / cover no-repeat; }
   .print figcaption { font: 400 16px/1.15 var(--hand); color: #3d3a33; padding: 8px 2px 9px; }
   /* the two food photos are stills from another channel's reel: their credit stays on the print */
   .print .credit { display: block; margin-top: 4px; font: 400 16px/1.25 var(--print); color: #6a5a45; }
@@ -102,12 +118,17 @@
   #guests { width: 3.3em; }
   #town { max-width: 100%; }
   .date-blank { position: relative; display: inline-block; vertical-align: baseline; }
-  #date { width: 7.9em; cursor: pointer; }
-  #date::-webkit-calendar-picker-indicator { opacity: .5; }
+  #date { width: 7.9em; cursor: pointer; padding-right: 26px; }
+  /* the calendar glyph is ours, so iPhone (which draws none) shows it too; the browser's own is made invisible and
+     stretched over the whole blank so a tap anywhere on it still opens the picker */
+  #date::-webkit-calendar-picker-indicator { opacity: 0; position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+  .date-blank::after { content: ""; position: absolute; right: 4px; top: 50%; width: 18px; height: 18px; margin-top: -9px; pointer-events: none; opacity: .6;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2393361f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 11h18'/%3E%3C/svg%3E") center / contain no-repeat; }
   .date-blank .hint { position: absolute; left: 6px; top: 0; line-height: 44px; color: var(--ink-ghost); pointer-events: none; white-space: nowrap; }
   .date-blank.filled .hint { display: none; }
-  .date-blank:not(.filled) #date::-webkit-datetime-edit { color: transparent; }
-  .date-blank:not(.filled) #date:focus::-webkit-datetime-edit { color: var(--ink-ghost); }
+  .js .date-blank:not(.filled) #date::-webkit-datetime-edit { color: transparent; }
+  .js .date-blank:not(.filled) #date:focus::-webkit-datetime-edit { color: var(--ink-ghost); }
+  html:not(.js) .date-blank .hint { display: none; }
   .blank.inked { animation: ink .26s var(--ease); }
   @keyframes ink { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
@@ -118,7 +139,7 @@
     border-radius: 2px; transition: transform .14s var(--ease), background-color .2s var(--ease), border-color .2s var(--ease);
   }
   .btn:active { transform: scale(.97); }
-  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn svg { width: 20px; height: 20px; flex: 0 0 20px; }
   .post { background: var(--laterite); color: var(--buff); }
   .post:hover { background: var(--laterite-deep); }
   .call { border: 1.5px solid var(--laterite); color: var(--laterite); padding: 0 14px; }
@@ -175,7 +196,8 @@
     #town { width: 4.8em; }
     /* iPhone SE (320x568): keep Post on one line and inside the first screen, and the postmark off the caption */
     .send .btn { font-size: 16px; padding: 0 10px; }
-    .call svg { display: none; }
+    .send .btn { gap: 6px; }
+    .send .btn svg { width: 18px; height: 18px; flex: 0 0 18px; }
     .card .print figcaption { padding-right: 70px; }
     .postmark { width: 72px; height: 72px; right: 16px; top: -76px; }
     .card-wrap { padding-top: 8px; }
@@ -206,24 +228,140 @@
     .dock { display: none; }
     .close { padding-bottom: 60px; }
   }
+  @media (min-width: 720px) and (max-height: 820px) {
+    .card-wrap { padding-top: 20px; }
+    .card { padding: 18px 26px 20px; }
+  }
   @media (min-width: 960px) {
     .guests { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; margin: 0; padding: 6px 0 18px; gap: 22px; }
     .swipe { display: none; }
   }
+  /* ===== motion (25 Nov 2026) =====
+     The styles above are the END state of everything below, so a page with no script or no animation support is complete.
+     Opening: a postcard is posted (it drops in, the print develops, the stamp lands, the lines are written, the postmark
+     strikes). Scenes: each section arrives its own way. Ambient: dust drifting in low light over the hedge. */
+  :root { --rise: cubic-bezier(.16, 1, .3, 1); }
+  .concept { position: relative; z-index: 1; }
+  main { position: relative; z-index: 1; }
+  #amb { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .35; }
+  @media (max-width: 719px) { #amb { opacity: .45; } }
+
+  /* the name bar: their logo and name, solid, once the postcard has scrolled up */
+  .namebar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 48px; display: flex; align-items: center; padding: 0 12px;
+    background: var(--hedge); border-bottom: 1.5px solid rgba(241, 223, 166, .28);
+    transition: transform .28s var(--ease), visibility 0s linear 0s; }
+  .js:not(.rv-fail) .namebar:not(.on) { transform: translateY(-110%); visibility: hidden; transition: transform .28s var(--ease), visibility 0s linear .28s; }
+  .namebar a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--buff);
+    font: 700 22px/1 var(--display); letter-spacing: .01em; text-transform: uppercase; transition: scale .14s var(--ease); }
+  .namebar a:active { scale: .97; }
+  .namebar .badge { width: 34px; height: 34px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; flex: none; }
+  .namebar .badge img { width: 23px; height: auto; }
+  .namebar small { font: 500 13px/1 var(--print); letter-spacing: .02em; text-transform: none; color: var(--leaf-soft); }
+  #name { scroll-margin-top: 64px; }
+  html:not(.js) .namebar, .rv-fail .namebar { position: sticky; }
+
+  /* words rise out of a mask (the h1 on load, every h2 as it arrives) */
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .08em .04em .14em; margin: -.08em -.04em -.14em; font-style: normal; }
+  .w i { display: inline-block; font-style: normal; }
+
+  /* ---- the opening ---- */
+  @keyframes drop { from { translate: 0 -34px; rotate: -2.2deg; } }
+  @keyframes rise { from { translate: 0 105%; } }
+  /* the print "develops" under a pale veil that fades out: opacity only, so the photo is on screen from the first frame
+     and nothing is re-filtered each frame (a filter animation repainted the photo on every frame of a throttled phone) */
+  @keyframes develop { from { opacity: .5; } to { opacity: 0; } }
+  @keyframes slidein { from { translate: -26px 0; opacity: 0; } }
+  @keyframes settle { from { scale: 1.12; } }
+  @keyframes lay { from { clip-path: inset(-6px 100% -6px -6px); } to { clip-path: inset(-6px -6px -6px -6px); } }
+  @keyframes land { from { translate: 12px -30px; rotate: 16deg; scale: 1.5; opacity: 0; } }
+  @keyframes strike { from { rotate: -12deg; scale: 1.35; opacity: 0; } }
+  @keyframes up { from { translate: 0 14px; opacity: 0; } }
+  @keyframes sheen { to { translate: 120% 0; } }
+  .card { animation: drop .8s var(--rise) backwards; }
+  .card h1 .w i { animation: rise .6s var(--rise) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+  .card h1 span { animation: up .6s var(--rise) .3s backwards; }
+  /* the veil sits over the photo only (not its caption) */
+  .card .print::after { content: ""; position: absolute; left: 7px; right: 7px; top: 7px; aspect-ratio: 327 / 172; background: #d6d4c6; pointer-events: none; opacity: 0;
+    animation: develop .9s var(--rise) .1s backwards; }
+  .card .print img { animation: settle 1.1s var(--rise) .1s backwards; }
+  .card .print figcaption { animation: up .5s var(--rise) .6s backwards; }
+  .card-top .pc { animation: slidein .6s var(--rise) .15s backwards; }
+  .stamp { animation: land .4s var(--rise) .2s backwards; }
+  .postmark { animation: strike .3s var(--ease) .35s backwards; }
+  .lines p { animation: lay .8s var(--rise) backwards; }
+  .lines p:nth-child(1) { animation-delay: .7s; }
+  .lines p:nth-child(2) { animation-delay: .83s; }
+  .lines p:nth-child(3) { animation-delay: .96s; }
+  .lines p:nth-child(4) { animation-delay: 1.09s; }
+  .send .post { animation: up .55s var(--rise) 1s backwards; }
+  .send .call { animation: up .55s var(--rise) 1.1s backwards; }
+  .note .fine { animation: up .5s var(--rise) 1.15s backwards; }
+
+  /* ---- response: the main action has one closing moment, and never waits for it ---- */
+  .post { position: relative; overflow: hidden; }
+  .post::after { content: ""; position: absolute; inset: 0; pointer-events: none; translate: -120% 0;
+    background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .34) 50%, transparent 70%); }
+  .post.go::after { animation: sheen .7s var(--ease); }
+  .blank:active { background-color: rgba(147, 54, 31, .09); }
+
+  /* ---- scroll scenes: each section arrives in its own way, once ---- */
+  .js:not(.rv-fail) .rv:not(.in) h2 { visibility: hidden; }
+  .js:not(.rv-fail) .rv:not(.in) h2 .w i { translate: 0 105%; }
+  h2 .w i { transition: translate .75s var(--rise) calc(var(--i, 0) * 55ms); }
+  .js:not(.rv-fail) .rv:not(.in) .lede { opacity: 0; }
+  .lede { transition: opacity .6s linear .3s; }
+  /* the kinds of stay are rubber-stamped one after another */
+  .js:not(.rv-fail) .rv:not(.in) .kinds li { scale: 1.35; rotate: -4deg; opacity: 0; }
+  .kinds li { transition: scale .4s var(--ease) calc(.4s + var(--i, 0) * 90ms), rotate .4s var(--ease) calc(.4s + var(--i, 0) * 90ms), opacity .25s linear calc(.4s + var(--i, 0) * 90ms); }
+  /* the two food prints are dealt onto the table from either side */
+  .js:not(.rv-fail) .rv:not(.in) .prints .print:nth-child(1) { translate: -44px -26px; rotate: -9deg; opacity: 0; }
+  .js:not(.rv-fail) .rv:not(.in) .prints .print:nth-child(2) { translate: 44px -26px; rotate: 8deg; opacity: 0; }
+  .prints .print { transition: translate .9s var(--rise) calc(.2s + var(--i, 0) * 180ms), rotate .9s var(--rise) calc(.2s + var(--i, 0) * 180ms), opacity .4s linear calc(.2s + var(--i, 0) * 180ms); }
+  /* the guest prints are pinned up along the row, their booking codes written in last */
+  /* the scroll-snapped cards themselves stay put (moving them made Chrome re-snap the row part-way); their insides are pinned */
+  .js:not(.rv-fail) .rv:not(.in) .guests .print > img, .js:not(.rv-fail) .rv:not(.in) .guests .print > figcaption { translate: 56px 0; rotate: 6deg; opacity: 0; }
+  .guests .print > * { transition: translate .8s var(--rise) calc(var(--i, 0) * 90ms), rotate .8s var(--rise) calc(var(--i, 0) * 90ms), opacity .4s linear calc(var(--i, 0) * 90ms); }
+  .js:not(.rv-fail) .rv:not(.in) .guests figcaption b { clip-path: inset(-4px 100% -4px 0); }
+  .guests figcaption b { clip-path: inset(-4px 0 -4px 0); transition: clip-path .5s var(--rise) calc(.45s + var(--i, 0) * 90ms); }
+  /* the closing asks arrive like posted letters */
+  .js:not(.rv-fail) .rv:not(.in) .actions .btn { translate: 0 22px; rotate: -1.5deg; opacity: 0; }
+  .actions .btn { transition: translate .7s var(--rise) calc(.3s + var(--i, 0) * 90ms), rotate .7s var(--rise) calc(.3s + var(--i, 0) * 90ms), opacity .35s linear calc(.3s + var(--i, 0) * 90ms), transform .14s var(--ease), background-color .2s var(--ease), border-color .2s var(--ease); }
+  .js:not(.rv-fail) .rv:not(.in) footer { opacity: 0; }
+  footer { transition: opacity .6s linear .6s; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
+    #amb { display: none; }
+    .js .rv * { translate: none !important; rotate: none !important; scale: none !important; opacity: 1 !important; clip-path: none !important; }
   }
 </style>
+<script>
+/* Marks the page as scripted, shows everything if the script never arrives, and flags the opening done when its last
+   animation ends (or after 3.2 s at the latest). It runs after the stylesheets, so first paint is not delayed. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add("js");
+  setTimeout(function () { if (!window.__th) r.classList.add("rv-fail"); }, 2500);
+  function done() { r.setAttribute("data-opening", "done"); }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { done(); return; }
+  document.addEventListener("animationend", function (e) { if (e.target.classList && e.target.classList.contains("fine")) done(); }, true);
+  setTimeout(done, 3200);
+})();
+</script>
 </head>
 <body>
 
 <div class="concept" data-concept-banner>Concept for <strong>@tavish_hills_kotagiri</strong> &middot; not the official site</div>
 
+<nav class="namebar" aria-label="Tavish Hills">
+  <a href="#name"><span class="badge"><img src="assets/mark.png" width="396" height="402" alt=""></span>Tavish Hills <small>Home stay, Kotagiri</small></a>
+</nav>
+
 <main>
   <section class="card-wrap" aria-labelledby="name">
     <article class="card" id="card">
       <header class="card-top">
-        <h1 id="name">Tavish Hills <span>Home stay &amp; private villa</span></h1>
+        <h1 id="name"><em class="w"><i style="--i:0">Tavish</i></em> <em class="w"><i style="--i:1">Hills</i></em> <span>Home stay &amp; private villa</span></h1>
         <p class="pc">Post card<br>Kotagiri</p>
       </header>
 
@@ -245,7 +383,7 @@
         <div class="lines">
         <p class="dear">Dear Tavish Hills,</p>
         <p>From <input class="blank" id="town" name="town" type="text" placeholder="your town" autocomplete="address-level2" aria-label="Your town or city" maxlength="40"> <span class="nowrap">to the hills,</span></p>
-        <p><select class="blank" id="guests" name="guests" aria-label="How many of you"></select> of us, <select class="blank" id="nights" name="nights" aria-label="How many nights"></select></p>
+        <p><select class="blank" id="guests" name="guests" aria-label="How many of you"><option value="4" selected>4</option></select> of us, <select class="blank" id="nights" name="nights" aria-label="How many nights"><option value="2" selected>2 nights</option></select></p>
         <p>from <span class="date-blank" id="date-wrap"><input class="blank" id="date" name="date" type="date" aria-label="Arrival date"><span class="hint" aria-hidden="true">pick a date</span></span>.</p>
         </div>
         <div class="send">
@@ -256,38 +394,38 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
             Call</a>
         </div>
-        <p class="fine">The tariff comes back to you on WhatsApp.</p>
+        <p class="fine">Bookings on WhatsApp or by phone.</p>
       </form>
     </article>
   </section>
 
   <section class="more" aria-labelledby="stay">
-    <div class="wrap stay-grid">
+    <div class="wrap stay-grid rv">
       <div>
         <h2 id="stay">A homestay and private villa on a Kotagiri tea estate</h2>
         <p class="lede">Hill views, homemade food and trekking, in Kotagiri, Tamil Nadu.</p>
-        <ul class="kinds" aria-label="Kinds of stay">
+        <ul class="kinds" aria-label="Kinds of stay" data-stagger>
           <li>Nature stay</li><li>Family stay</li><li>Corporate stay</li><li>Reunion stay</li>
         </ul>
       </div>
-      <div class="prints">
+      <div class="prints" data-stagger>
         <figure class="print">
-          <img src="assets/terrace-tea.webp" width="722" height="810" loading="lazy" alt="Diners eating lunch from steel vessels on the terrace, tea bushes on the slope beside it">
-          <figcaption>Lunch on the terrace <span class="credit">Still: Semma Theeni</span></figcaption>
+          <img src="assets/terrace-tea.webp" width="722" height="810" loading="lazy" alt="Diners eating from steel vessels on a terrace, tea bushes on the slope beside it">
+          <figcaption>Homely food, tea estate homestay<span class="credit">Still: Semma Theeni</span></figcaption>
         </figure>
         <figure class="print">
           <img src="assets/garden-table.webp" width="722" height="740" loading="lazy" alt="Two diners at a garden table set with steel serving bowls, a tall hedge behind">
-          <figcaption>Homely food, in the garden <span class="credit">Still: Semma Theeni</span></figcaption>
+          <figcaption>Homely food<span class="credit">Still: Semma Theeni</span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
   <section class="more" aria-labelledby="guests-h">
-    <div class="wrap">
-      <h2 id="guests-h">Guests from Kerala, Coimbatore and across Tamil Nadu</h2>
+    <div class="wrap rv">
+      <h2 id="guests-h">Guests from Kerala, Coimbatore and Tamil Nadu</h2>
       <p class="lede">Recent groups, each welcomed by name on our Instagram, most with a booking code.</p>
-      <div class="guests" tabindex="0" aria-label="Guest groups, swipe for more">
+      <div class="guests" tabindex="0" aria-label="Guest groups, swipe for more" data-stagger>
         <figure class="print"><img src="assets/guests-kerala.webp" width="722" height="824" loading="lazy" alt="A large family group from Kerala on the red-earth lawn in front of the hedge"><figcaption>Siva Sir, from Kerala <b>THHS700</b></figcaption></figure>
         <figure class="print"><img src="assets/guests-coimbatore.webp" width="686" height="512" loading="lazy" alt="A big group of young men from Coimbatore lined up on the lawn"><figcaption>Sharvesh Sir, from Coimbatore <b>THHS695</b></figcaption></figure>
         <figure class="print"><img src="assets/guests-tn-682.webp" width="722" height="608" loading="lazy" alt="Seven friends giving a thumbs up on the lawn"><figcaption>Vignesh Sir, from Tamil Nadu <b>THHS682</b></figcaption></figure>
@@ -299,10 +437,10 @@
   </section>
 
   <section class="close" aria-labelledby="close-h">
-    <div class="wrap">
+    <div class="wrap rv">
       <h2 id="close-h">Ask for the tariff, or the whole property</h2>
       <p class="lede">Send your town, your dates and how many of you are coming, on WhatsApp or by phone.</p>
-      <div class="actions">
+      <div class="actions" data-stagger>
         <a class="btn post wa" href="https://wa.me/919047747473" target="_blank" rel="noopener">Post on WhatsApp</a>
         <a class="btn ghost" href="tel:+919047747473">Call 90477 47473</a>
         <a class="btn ghost" href="https://instagram.com/tavish_hills_kotagiri" target="_blank" rel="noopener">Instagram</a>
@@ -331,6 +469,7 @@
   var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+  guests.length = 0; nights.length = 0;
   for (var g = 1; g <= 20; g++) guests.add(new Option(String(g), String(g), g === 4, g === 4));
   guests.add(new Option("20+", "more than 20"));
   for (var n = 1; n <= 7; n++) nights.add(new Option(n + (n === 1 ? " night" : " nights"), String(n), n === 2, n === 2));
@@ -384,28 +523,142 @@
   });
   update();
 
-  /* The dock appears once the postcard has scrolled away. */
-  var dock = $("dock"), card = $("card");
+  /* The dock appears once the postcard has scrolled away, and steps aside while the closing asks are on screen. */
+  var dock = $("dock"), card = $("card"), closer = document.querySelector(".close .actions");
+  var away = false, atClose = false;
+  function showDock() {
+    var on = away && !atClose;
+    dock.classList.toggle("on", on);
+    dock.setAttribute("aria-hidden", on ? "false" : "true");
+    var links = dock.querySelectorAll("a");
+    for (var i = 0; i < links.length; i++) links[i].tabIndex = on ? 0 : -1;
+  }
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      var away = !entries[0].isIntersecting;
-      dock.classList.toggle("on", away);
-      dock.setAttribute("aria-hidden", away ? "false" : "true");
-      var links = dock.querySelectorAll("a");
-      for (var i = 0; i < links.length; i++) links[i].tabIndex = away ? 0 : -1;
-    }).observe(card);
+    new IntersectionObserver(function (entries) { away = !entries[0].isIntersecting; showDock(); }).observe(card);
+    if (closer) new IntersectionObserver(function (entries) { atClose = entries[0].isIntersecting; showDock(); }).observe(closer);
   }
 })();
 </script>
 <script>
-/* One authored moment: the postmark is struck once the page has loaded. Skipped for reduced motion. */
+/* Motion, plain JS (no library): scenes as sections arrive, the name bar, the closing moment on Post, and the dust. */
 (function () {
-  var pm = document.querySelector(".postmark");
-  if (!pm || !pm.animate || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  pm.animate([
-    { transform: "rotate(-26deg) scale(1.35)", opacity: 0 },
-    { transform: "rotate(-14deg) scale(1)", opacity: .7 }
-  ], { duration: 340, delay: 350, easing: "cubic-bezier(.23, 1, .32, 1)", fill: "backwards" });
+  var root = document.documentElement, D = document;
+  window.__th = 1;
+  var rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wide = matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+  var $ = function (s) { return D.querySelector(s); };
+  var $$ = function (s) { return [].slice.call(D.querySelectorAll(s)); };
+  var EASE = "cubic-bezier(.23, 1, .32, 1)";
+
+  /* words of every h2 rise out of a mask when its section arrives */
+  $$("h2").forEach(function (h) {
+    var words = h.textContent.trim().split(/\s+/);
+    h.textContent = "";
+    words.forEach(function (w, i) {
+      var em = D.createElement("em"), it = D.createElement("i");
+      em.className = "w"; it.textContent = w; it.style.setProperty("--i", i);
+      em.appendChild(it); h.appendChild(em); h.appendChild(D.createTextNode(" "));
+    });
+  });
+  $$("[data-stagger]").forEach(function (p) {
+    [].forEach.call(p.children, function (c, i) { c.style.setProperty("--i", i); });
+  });
+
+  var scenes = $$(".rv");
+  if (rm || !("IntersectionObserver" in window)) {
+    scenes.forEach(function (s) { s.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (!(e.isIntersecting || e.boundingClientRect.bottom < 0)) return; /* a jump skips scenes without a callback: reveal every scene above this one too */ for (var j = 0, k = scenes.indexOf(e.target); j <= k; j++) { if (!scenes[j].classList.contains("in")) { scenes[j].classList.add("in"); io.unobserve(scenes[j]); } } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    scenes.forEach(function (s) { io.observe(s); });
+  }
+
+  /* the name bar */
+  var bar = $(".namebar"), tick = false;
+  function sync() { tick = false; bar.classList.toggle("on", (window.pageYOffset || 0) > 80); }
+  addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(sync); } }, { passive: true });
+  sync();
+
+  /* closing moment: a light crosses the button, the postmark is struck again; the link never waits for it */
+  function burst(btn) {
+    if (rm || !btn) return;
+    btn.classList.remove("go"); void btn.offsetWidth; btn.classList.add("go");
+  }
+  function strike() {
+    var pm = $(".postmark"), st = $(".stamp");
+    if (rm || !pm || !pm.animate) return;
+    pm.animate([{ transform: "rotate(-26deg) scale(1.35)", opacity: 0 }, { transform: "rotate(-14deg) scale(1)", opacity: .7 }], { duration: 340, easing: EASE });
+    st.animate([{ transform: "rotate(3deg) scale(1.12)" }, { transform: "rotate(3deg) scale(1)" }], { duration: 240, easing: EASE });
+  }
+  D.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a.wa") : null;
+    if (!a) return;
+    burst(a);
+    if (a.id === "post") strike();
+  });
+  var date = $("#date");
+  if (date) date.addEventListener("change", function () { if (date.value) burst($("#post")); });
+
+  /* desktop only: the postcard leans a little toward the pointer once the opening is over */
+  if (wide && !rm) {
+    var card = $("#card");
+    var lean = function (e) {
+      if (root.getAttribute("data-opening") !== "done") return;
+      var x = e.clientX / innerWidth - .5;
+      card.style.rotate = (x * 1.6) + "deg";
+      card.style.translate = (x * 8) + "px 0";
+    };
+    card.style.transition = "rotate .35s " + EASE + ", translate .35s " + EASE;
+    D.addEventListener("pointermove", lean, { passive: true });
+  }
+
+  /* ambient: dust drifting up through low light, behind the text. DPR 1, 30 fps, 40 specks on a phone (100 on a
+     desktop), a watchdog thins them when frames run slow (never switches them off), paused while the tab is hidden. */
+  function dust() {
+    var cv = D.createElement("canvas"), ctx = cv.getContext && cv.getContext("2d");
+    if (!ctx) return;
+    cv.id = "amb"; cv.setAttribute("aria-hidden", "true");
+    D.body.insertBefore(cv, D.body.firstChild);
+    var W = 0, H = 0;
+    function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+    size();
+    var lastW = W, lastH = H;
+    addEventListener("resize", function () {
+      if (innerWidth !== lastW || Math.abs(innerHeight - lastH) > 150) { size(); lastW = W; lastH = H; }
+    });
+    var N = wide ? 100 : 40, P = [], LEVELS = [1, .6, .36, .2], level = 0, i;
+    for (i = 0; i < N; i++) P.push({ x: Math.random() * W, y: Math.random() * H, r: (innerWidth < 720 ? 1.4 : .8) + Math.random() * 1.8,
+      vy: 8 + Math.random() * 16, ph: Math.random() * 6.28, sw: 6 + Math.random() * 10, a: .5 + Math.random() * .5 });
+    var raf = 0, prev = 0, lastDraw = 0, flip = 0, frames = 0, slow = 0;
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      if (prev) { frames++; if (t - prev > 24) slow++; if (frames >= 90) { if (slow > 45 && level < 3) level++; frames = 0; slow = 0; } }
+      prev = t;
+      if (lastDraw && t - lastDraw < 31) return;
+      var dt = lastDraw ? Math.min(.1, (t - lastDraw) / 1000) : .033; lastDraw = t;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#f1dfa6";
+      var n = Math.max(6, Math.floor(N * LEVELS[level]));
+      for (var k = 0; k < n; k++) {
+        var p = P[k];
+        p.y -= p.vy * dt; p.ph += dt * .6;
+        if (p.y < -6) { p.y = H + 6; p.x = Math.random() * W; }
+        ctx.globalAlpha = p.a;
+        ctx.beginPath(); ctx.arc(p.x + Math.sin(p.ph) * p.sw, p.y, p.r, 0, 6.2832); ctx.fill();
+      }
+    }
+    function go() { if (!raf) { prev = 0; lastDraw = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+    D.addEventListener("visibilitychange", function () { D.hidden ? stop() : go(); });
+    go();
+  }
+  if (!rm) {
+    var start = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 60); })(dust); };
+    if (root.getAttribute("data-opening") === "done") start();
+    else new MutationObserver(function (m, ob) { if (root.getAttribute("data-opening") === "done") { ob.disconnect(); start(); } })
+      .observe(root, { attributes: true, attributeFilter: ["data-opening"] });
+  }
 })();
 </script>
 </body>

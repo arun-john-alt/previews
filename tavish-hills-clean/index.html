@@ -9,10 +9,13 @@
 <meta name="theme-color" content="#eef1f6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="preload" as="image" href="assets/balcony-hills.webp">
 <style>
+  /* Stand-in faces sized like Tiro Tamil (measured), so the headlines do not re-wrap when the real font arrives */
+  @font-face { font-family: "Tiro Stand-in"; src: local("Georgia"), local("Georgia Regular"); size-adjust: 99.2%; ascent-override: 76%; descent-override: 25%; line-gap-override: 0%; }
+  @font-face { font-family: "Tiro Stand-in 2"; src: local("Times New Roman"), local("Liberation Serif"), local("Tinos"); size-adjust: 108.6%; ascent-override: 76%; descent-override: 25%; line-gap-override: 0%; }
   :root {
     /* Receding ranges, as seen from their terrace: palest mist up top, each band one ridge nearer and one tone deeper.
        Sampled from their hills and their blue logo, which is the only colour that acts. */
@@ -30,7 +33,7 @@
     --act-press: #2f4cd0;
     --u: 8px;
     --ease: cubic-bezier(.23, 1, .32, 1);
-    --serif: "Tiro Tamil", Georgia, serif;
+    --serif: "Tiro Tamil", "Tiro Stand-in", "Tiro Stand-in 2", Georgia, serif;
     --sans: "Hind Madurai", "Segoe UI", sans-serif;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -64,21 +67,20 @@
   /* header */
   .top { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { display: inline-flex; align-items: center; gap: calc(var(--u) * 1.25); min-height: 44px; text-decoration: none; font: 400 23px/1 var(--serif); letter-spacing: -.01em; }
-  .brand img { width: 30px; height: 30px; }
+  .brand img { width: 30px; height: 30px; padding: 3px; object-fit: contain; }
   .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(24, 32, 58, .25); color: var(--ink); transition: transform .14s var(--ease), border-color .2s var(--ease); }
   .icon-btn:active { transform: scale(.95); }
   .icon-btn svg { width: 20px; height: 20px; }
 
   h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.015em; text-wrap: balance; margin: 0; }
-  h1 { font-size: 36px; line-height: 1.08; max-width: 13em; }
+  /* greedy wrap: a balanced headline re-wraps when the real font replaces the stand-in, which shifted the page */
+  h1 { font-size: 36px; line-height: 1.08; max-width: 13em; text-wrap: wrap; }
   h2 { font-size: 30px; line-height: 1.1; max-width: 18em; }
   .sub { margin: var(--u) 0 0; color: var(--ink-soft); font-size: 18px; }
 
   .hero-photo { margin: calc(var(--u) * 1.5) 0 0; }
   .hero-photo img { width: 100%; aspect-ratio: 343 / 196; object-fit: cover; object-position: 50% 20%; background: var(--far); }
   figcaption { margin-top: var(--u); font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
-  /* the two food photos are stills from another channel's reel: the credit stays with them */
-  figcaption .credit { display: block; }
 
   /* the request: one sentence, three choices */
   .ask { margin-top: calc(var(--u) * 1.5); }
@@ -97,8 +99,9 @@
   .date-pick { position: relative; display: inline-block; vertical-align: baseline; }
   .date-pick .hint { position: absolute; left: 4px; top: 0; line-height: 44px; color: #586180; pointer-events: none; white-space: nowrap; font-weight: 400; }
   .date-pick.filled .hint { display: none; }
-  .date-pick:not(.filled) input::-webkit-datetime-edit { color: transparent; }
-  .date-pick:not(.filled) input:focus::-webkit-datetime-edit { color: var(--ink-soft); }
+  html:not(.js) .date-pick .hint { display: none; }
+  .js .date-pick:not(.filled) input::-webkit-datetime-edit { color: transparent; }
+  .js .date-pick:not(.filled) input:focus::-webkit-datetime-edit { color: var(--ink-soft); }
   .send { display: flex; align-items: center; justify-content: center; gap: var(--u); width: 100%; min-height: 54px; margin-top: calc(var(--u) * 2);
     background: var(--act); color: #fff; text-decoration: none; font: 600 18px/1 var(--sans); letter-spacing: .01em; padding-top: 2px;
     transition: transform .14s var(--ease), background-color .2s var(--ease); }
@@ -119,6 +122,9 @@
   .duo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%; background: var(--haze); }
   .duo figure:first-child img { object-position: 50% 14%; }
   .far .lede, .far figcaption { color: #2b3552; }
+  .credit { display: block; margin-top: 4px; font-size: 14px; line-height: 1.3; color: var(--ink-soft); }
+  /* on a phone the fixed dock sits over the page foot: the guests band keeps its last photo and caption clear of it */
+  @media (max-width: 859px) { .far { padding-bottom: calc(var(--u) * 6 + 70px); } }
 
   .near h2 { color: #fff; }
   .near .lede { color: var(--on-dark-soft); }
@@ -165,10 +171,124 @@
     .duo { margin-top: 0; }
     .dock { display: none; }
   }
+  /* a short phone (an iPhone SE): the request comes before the photo so the button is on the first screen */
+  @media (max-width: 859px) and (max-height: 720px) {
+    .hero { display: flex; flex-direction: column; }
+    .hero > div { order: 1; }
+    .ask { order: 2; margin-top: var(--u); }
+    .hero-photo { order: 3; margin-top: calc(var(--u) * 2); }
+    .top { height: 52px; }
+    h1 { font-size: 34px; }
+    .sub { font-size: 17px; line-height: 1.45; }
+  }
+  /* ===== motion (25 Nov 2026) =====
+     The styles above are the END state of everything below, so a page with no script or no animation support is complete.
+     Opening: morning mist lifts off the balcony photo as the headline rises from its mask. Scenes: each band is one
+     ridge nearer and arrives its own way. Ambient: slow wisps of mist. Signature: pull the mist back across the photo. */
+  :root { --rise: cubic-bezier(.16, 1, .3, 1); }
+  main { position: relative; z-index: 1; }
+  #amb { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .17; }
+  .band > .wrap { position: relative; z-index: 1; }
+  .concept { position: relative; z-index: 2; }
+  footer.night { z-index: 2; }
+
+  /* the name bar: their logo and name, solid, once the header has scrolled away */
+  .namebar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 56px; background: var(--mist); border-bottom: 1px solid rgba(24, 32, 58, .14);
+    transition: transform .28s var(--ease), visibility 0s linear 0s; }
+  .namebar .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .js:not(.rv-fail) .namebar:not(.on) { transform: translateY(-110%); visibility: hidden; transition: transform .28s var(--ease), visibility 0s linear .28s; }
+  .brand img { border-radius: 50%; background: #fff; }
+  .brand:active { scale: .97; }
+  .brand { transition: scale .14s var(--ease); }
+  #h1 { scroll-margin-top: 72px; }
+  html:not(.js) .namebar, .rv-fail .namebar { position: sticky; }
+  html:not(.js) .top, .rv-fail .top { display: none; }
+  .ph img { transition: scale .14s var(--ease); }
+  .ph:active img { scale: .985; }
+
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em .04em .16em; margin: -.06em -.04em -.16em; }
+  .w i { display: inline-block; font-style: normal; }
+  em.w { font-style: normal; }
+
+  /* the signature: a veil of mist over the photo that follows the thumb and lifts when let go */
+  .ph { position: relative; overflow: hidden; touch-action: pan-y; cursor: grab; background: var(--far); }
+  .ph img { transform-origin: 50% 40%; }
+  .veil { position: absolute; top: 0; bottom: 0; left: 0; width: 130%; translate: -105% 0; pointer-events: none;
+    background: linear-gradient(100deg, rgba(238, 241, 246, .97) 0, rgba(238, 241, 246, .93) 58%, rgba(238, 241, 246, 0) 100%); }
+  .veil.rest { transition: translate 1.2s var(--rise); }
+
+  /* ---- the opening ---- */
+  @keyframes rise { from { translate: 0 105%; } }
+  @keyframes up { from { translate: 0 14px; opacity: 0; } }
+  @keyframes down { from { translate: 0 -10px; opacity: 0; } }
+  @keyframes lift { from { translate: 0 0; opacity: .6; } }
+  @keyframes settle { from { scale: 1.12; } }
+  @keyframes lay { from { clip-path: inset(-6px 100% -6px -6px); } to { clip-path: inset(-6px -6px -6px -6px); } }
+  @keyframes sheen { to { translate: 120% 0; } }
+  /* the place, name and headline are on screen from first paint; the morning mist lies over the photo and drifts off it */
+  .veil { animation: lift 1.2s cubic-bezier(.45, 0, .2, 1) .1s backwards; }
+  .hero-photo figcaption { min-height: 24px; }
+  .ask p:first-child { min-height: 96px; }
+  @media (min-width: 860px) { .ask p:first-child { min-height: 0; } }
+  .hero-photo figcaption { animation: up .5s var(--rise) 1.2s backwards; }
+  .ask > p:first-child { animation: lay .85s var(--rise) .9s backwards; }
+  .ask .send { animation: up .55s var(--rise) 1.1s backwards; }
+  .ask .fine { animation: up .5s var(--rise) 1.2s backwards; }
+
+  /* ---- response ---- */
+  .send { position: relative; overflow: hidden; }
+  .send::after { content: ""; position: absolute; inset: 0; pointer-events: none; translate: -120% 0;
+    background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .38) 50%, transparent 70%); }
+  .send.go::after { animation: sheen .7s var(--ease); }
+  .pick:active { background-color: rgba(80, 112, 248, .1); }
+  .fine a:active, .night a:active { opacity: .7; }
+
+  /* ---- scroll scenes: each band arrives its own way, once ---- */
+  .js:not(.rv-fail) .rv:not(.in) h2 { visibility: hidden; }
+  .js:not(.rv-fail) .rv:not(.in) h2 .w i { translate: 0 105%; }
+  h2 .w i { transition: translate .75s var(--rise) calc(var(--i, 0) * 55ms); }
+  .js:not(.rv-fail) .rv:not(.in) .lede { opacity: 0; }
+  .lede { transition: opacity .6s linear .3s; }
+  /* each ridge is drawn across as its band comes up */
+  /* the ridge is always on screen: it starts low and rises to its full skyline, so a band edge is never empty */
+  .js:not(.rv-fail) .rv:not(.in) > .ridge { scale: 1 .4; }
+  .ridge { transform-origin: 50% 100%; scale: 1 1; transition: scale 1.3s var(--rise); }
+  /* the terrace: two photos rise out of the haze from below, one after the other */
+  .js:not(.rv-fail) .rv:not(.in) .pair img { clip-path: inset(100% 0 0 0); scale: 1.1; }
+  .pair img { clip-path: inset(0 0 0 0); transition: clip-path 1s var(--rise) calc(.25s + var(--i, 0) * 200ms), scale 1.3s var(--rise) calc(.25s + var(--i, 0) * 200ms); }
+  .js:not(.rv-fail) .rv:not(.in) .pair figcaption, .js:not(.rv-fail) .rv:not(.in) .duo figcaption { opacity: 0; }
+  .pair figcaption, .duo figcaption { transition: opacity .6s linear calc(.8s + var(--i, 0) * 200ms); }
+  /* the guests: wiped in from opposite sides, as two ridges meeting */
+  .js:not(.rv-fail) .rv:not(.in) .duo figure:nth-child(1) img { clip-path: inset(0 100% 0 0); }
+  .js:not(.rv-fail) .rv:not(.in) .duo figure:nth-child(2) img { clip-path: inset(0 0 0 100%); }
+  .duo img { clip-path: inset(0 0 0 0); transition: clip-path 1.1s var(--rise) calc(.2s + var(--i, 0) * 220ms); }
+  /* the ask: the button is drawn out like a skyline line, left to right */
+  .js:not(.rv-fail) .rv:not(.in) .near .send, .js:not(.rv-fail) .near.rv:not(.in) .send { clip-path: inset(-4px 100% -4px -4px); }
+  .near .send { clip-path: inset(-4px); transition: clip-path .5s var(--rise) .05s, transform .14s var(--ease), background-color .2s var(--ease); }
+  .js:not(.rv-fail) .rv:not(.in) .near .fine, .js:not(.rv-fail) .near.rv:not(.in) .fine { opacity: 0; }
+  .near .fine { transition: opacity .6s linear .5s; }
+  .js:not(.rv-fail) .rv:not(.in) .wrap > p, .js:not(.rv-fail) footer.rv:not(.in) .wrap > p { opacity: 0; }
+  .night .wrap > p { transition: opacity .7s linear .3s; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
+    #amb { display: none; }
+    .js .rv *, .js .rv { translate: none !important; scale: none !important; opacity: 1 !important; clip-path: none !important; }
   }
 </style>
+<script>
+/* Marks the page as scripted, shows everything if the script never arrives, and flags the opening done when its last
+   animation ends (or after 3.2 s at the latest). It runs after the stylesheets, so first paint is not delayed. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add("js");
+  setTimeout(function () { if (!window.__th) r.classList.add("rv-fail"); }, 2500);
+  function done() { r.setAttribute("data-opening", "done"); }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { done(); return; }
+  document.addEventListener("animationend", function (e) { if (e.target.classList && e.target.classList.contains("fine")) done(); }, true);
+  setTimeout(done, 3200);
+})();
+</script>
 </head>
 <body>
 
@@ -179,11 +299,20 @@
   <symbol id="ridge" viewBox="0 0 720 32" preserveAspectRatio="none"><path d="M0 32V18.8L12 19.7L24 21.3L36 22.6L47.9 23.6L59.9 25.3L71.9 26.8L83.9 27L95.9 25.7L107.9 23.6L119.8 21.3L131.8 19.8L143.8 19.4L155.8 18.4L167.8 16L179.8 13.3L191.7 12.7L203.7 14.6L215.7 17.6L227.7 20.2L239.7 21.4L251.7 21.5L263.6 21.3L275.6 21.3L287.6 22.4L299.6 24.6L311.6 26.7L323.6 27.8L335.5 28L347.5 27.8L359.5 27.5L371.5 26.4L383.5 24.5L395.5 23.3L407.4 23.8L419.4 24.6L431.4 24.5L443.4 24.1L455.4 23.7L467.4 22.3L479.3 21.3L491.3 21.8L503.3 22L515.3 21.2L527.3 20.6L539.3 19.9L551.2 18.5L563.2 18.2L575.2 19.7L587.2 22.1L599.2 22.9L611.2 20L623.1 15L635.1 10.9L647.1 7.1L659.1 3.7L671.1 2.2L683.1 2L695 2.4L707 2.5L719 2.4L720 2.4V32Z"/></symbol>
 </svg>
 
+<nav class="namebar" aria-label="Tavish Hills">
+  <div class="wrap">
+    <a class="brand" href="#h1" aria-label="Tavish Hills"><img src="data:image/webp;base64,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" width="64" height="65" alt="" fetchpriority="high">Tavish Hills</a>
+    <a class="icon-btn" href="tel:+919047747473" aria-label="Call Tavish Hills on 90477 47473">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
+  </div>
+</nav>
+
 <main>
   <section class="band mist" aria-labelledby="h1">
     <div class="wrap">
       <header class="top">
-        <a class="brand" href="./" aria-label="Tavish Hills home"><img src="assets/mark.png" width="396" height="402" alt="">Tavish Hills</a>
+        <a class="brand" href="./" aria-label="Tavish Hills home"><img src="data:image/webp;base64,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" width="64" height="65" alt="" fetchpriority="high">Tavish Hills</a>
         <a class="icon-btn" href="tel:+919047747473" aria-label="Call Tavish Hills on 90477 47473">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
         </a>
@@ -191,17 +320,20 @@
 
       <div class="hero">
         <div>
-          <h1 id="h1">A hill-view homestay in Kotagiri</h1>
+          <h1 id="h1"><em class="w"><i style="--i:0">A</i></em> <em class="w"><i style="--i:1">hill-view</i></em> <em class="w"><i style="--i:2">homestay</i></em> <em class="w"><i style="--i:3">in</i></em> <em class="w"><i style="--i:4">Kotagiri</i></em></h1>
           <p class="sub">and a private villa, with homemade food and trekking.</p>
         </div>
         <figure class="hero-photo">
-          <img src="assets/balcony-hills.webp" width="722" height="1048" alt="Anuroop Sir and his group from Kerala on the balcony, hills behind">
+          <div class="ph" id="ph" role="button" tabindex="0" aria-label="Anuroop Sir and his group from Kerala on the balcony, hills behind. Press to drift the mist across the photo.">
+            <img src="assets/balcony-hills.webp" width="722" height="1048" alt="Anuroop Sir and his group from Kerala on the balcony, hills behind">
+            <div class="veil" id="veil" aria-hidden="true"></div>
+          </div>
           <figcaption>Anuroop Sir's group, from Kerala.</figcaption>
         </figure>
         <form class="ask" id="ask" action="https://wa.me/919047747473" onsubmit="return false">
-          <p>I'd like to stay <select class="pick" id="nights" aria-label="How many nights"></select>
+          <p>I'd like to stay <select class="pick" id="nights" aria-label="How many nights"><option value="2" selected>2 nights</option></select>
             from <span class="date-pick" id="date-wrap"><input class="pick" id="date" type="date" aria-label="Arrival date"><span class="hint" aria-hidden="true">pick a date</span></span>,
-            <select class="pick" id="guests" aria-label="How many guests"></select>.</p>
+            <select class="pick" id="guests" aria-label="How many guests"><option value="4" selected>4 guests</option></select>.</p>
           <a class="send wa" id="send" href="https://wa.me/919047747473" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
             Send on WhatsApp</a>
@@ -211,34 +343,34 @@
     </div>
   </section>
 
-  <section class="band haze" aria-labelledby="stay">
+  <section class="band haze rv" aria-labelledby="stay">
     <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
     <div class="wrap split">
       <div>
         <h2 id="stay">From the terrace</h2>
         <p class="lede">Homemade food on the terrace and in the garden, a hill view, and trekking. We host families, reunions and office groups.</p>
       </div>
-      <div class="pair">
+      <div class="pair" data-stagger>
         <figure>
-          <img src="assets/terrace-tea.webp" width="722" height="810" loading="lazy" alt="Lunch on the Tavish Hills terrace, the tea estate sloping away beside it">
-          <figcaption>Lunch on the terrace <span class="credit">Still: Semma Theeni</span></figcaption>
+          <img src="assets/terrace-tea.webp" width="722" height="810" loading="lazy" alt="Homely food on the Tavish Hills terrace, the tea estate sloping away beside it">
+          <figcaption>Homely food on the terrace<span class="credit">Still: Semma Theeni</span></figcaption>
         </figure>
         <figure>
           <img src="assets/garden-table.webp" width="722" height="740" loading="lazy" alt="Two diners at a garden table set with steel serving bowls, a tall hedge behind">
-          <figcaption>Homely food at the garden table <span class="credit">Still: Semma Theeni</span></figcaption>
+          <figcaption>Homely food at the garden table<span class="credit">Still: Semma Theeni</span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="band far" aria-labelledby="guests-h">
+  <section class="band far rv" aria-labelledby="guests-h">
     <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
     <div class="wrap split">
       <div>
-        <h2 id="guests-h">Guests from Kerala, Coimbatore and across Tamil Nadu</h2>
+        <h2 id="guests-h">Guests from Kerala and Coimbatore</h2>
         <p class="lede">Recent guests, each welcomed by name on our Instagram.</p>
       </div>
-      <div class="duo">
+      <div class="duo" data-stagger>
         <figure>
           <img src="assets/guests-kerala.webp" width="722" height="824" loading="lazy" alt="Siva Sir's group from Kerala, adults and children, on the red-earth lawn in front of the hedge">
           <figcaption>Siva Sir, from Kerala</figcaption>
@@ -251,11 +383,11 @@
     </div>
   </section>
 
-  <section class="band near" aria-labelledby="ask-h">
+  <section class="band near rv" aria-labelledby="ask-h">
     <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
     <div class="wrap">
       <h2 id="ask-h">Send us your dates</h2>
-      <p class="lede">The tariff comes back on WhatsApp. You can also ask about booking the whole property.</p>
+      <p class="lede">Ask for the tariff on WhatsApp. You can also ask about booking the whole property.</p>
       <a class="send wa" href="https://wa.me/919047747473" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
         Send on WhatsApp</a>
@@ -264,7 +396,7 @@
   </section>
 </main>
 
-<footer class="night">
+<footer class="night rv">
   <svg class="ridge" aria-hidden="true" focusable="false"><use href="#ridge"/></svg>
   <div class="wrap">
     <p>Tavish Hills, Kotagiri, Tamil Nadu</p>
@@ -283,6 +415,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var nights = $("nights"), date = $("date"), guests = $("guests");
 
+  nights.length = 0; guests.length = 0; /* the HTML holds the default so the sentence reads whole without script */
   for (var n = 1; n <= 7; n++) nights.add(new Option(n + (n === 1 ? " night" : " nights"), String(n), n === 2, n === 2));
   for (var g = 1; g <= 20; g++) guests.add(new Option(g + (g === 1 ? " guest" : " guests"), String(g), g === 4, g === 4));
   guests.add(new Option("20+ guests", "more than 20"));
@@ -330,6 +463,136 @@
       es.forEach(function (e) { seen.near = e.isIntersecting; });
       sync();
     }).observe(near);
+  }
+})();
+</script>
+<script>
+/* Motion, plain JS (no library): the mist you pull across the photo, scenes as bands arrive, the name bar, the closing
+   moment on Send, and slow wisps of mist. */
+(function () {
+  var root = document.documentElement, D = document;
+  window.__th = 1;
+  var rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wide = matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+  var $ = function (s) { return D.querySelector(s); };
+  var $$ = function (s) { return [].slice.call(D.querySelectorAll(s)); };
+
+  /* words of every h2 rise out of a mask when its band arrives */
+  $$("h2").forEach(function (h) {
+    var words = h.textContent.trim().split(/\s+/);
+    h.textContent = "";
+    words.forEach(function (w, i) {
+      var em = D.createElement("em"), it = D.createElement("i");
+      em.className = "w"; it.textContent = w; it.style.setProperty("--i", i);
+      em.appendChild(it); h.appendChild(em); h.appendChild(D.createTextNode(" "));
+    });
+  });
+  $$("[data-stagger]").forEach(function (p) {
+    [].forEach.call(p.children, function (c, i) { c.style.setProperty("--i", i); });
+  });
+
+  var scenes = $$(".rv");
+  if (rm || !("IntersectionObserver" in window)) {
+    scenes.forEach(function (s) { s.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (!(e.isIntersecting || e.boundingClientRect.bottom < 0)) return; /* a jump skips scenes without a callback: reveal every scene above this one too */ for (var j = 0, k = scenes.indexOf(e.target); j <= k; j++) { if (!scenes[j].classList.contains("in")) { scenes[j].classList.add("in"); io.unobserve(scenes[j]); } } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    scenes.forEach(function (s) { io.observe(s); });
+  }
+
+  /* the name bar */
+  var bar = $(".namebar"), tick = false;
+  function sync() { tick = false; bar.classList.toggle("on", (window.pageYOffset || 0) > 90); }
+  addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(sync); } }, { passive: true });
+  sync();
+
+  /* closing moment: a light crosses the button; the link never waits for it */
+  D.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a.send") : null;
+    if (!a || rm) return;
+    a.classList.remove("go"); void a.offsetWidth; a.classList.add("go");
+  });
+
+  /* signature: pull the mist across the photo with a thumb, let go and it lifts. A tap or a key press drifts it across.
+     On a desktop the mist also follows the pointer. */
+  var ph = $("#ph"), veil = $("#veil");
+  if (ph && veil && !rm) {
+    var drag = false, x0 = 0, moved = 0, W = 0;
+    var pos = function (d) { veil.classList.remove("rest"); veil.style.translate = "calc(-105% + " + Math.round(d) + "px) 0"; };
+    var release = function () { veil.classList.add("rest"); veil.style.translate = ""; };
+    var puff = function () {
+      W = ph.getBoundingClientRect().width; pos(W * .7);
+      requestAnimationFrame(function () { requestAnimationFrame(release); });
+    };
+    ph.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      drag = true; moved = 0; x0 = e.clientX; W = ph.getBoundingClientRect().width;
+      try { ph.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    ph.addEventListener("pointermove", function (e) {
+      if (drag) {
+        var dx = e.clientX - x0; moved = Math.max(moved, Math.abs(dx));
+        pos(Math.max(0, Math.min(W * 1.15, dx * 1.3)));
+      } else if (wide && e.pointerType === "mouse" && root.getAttribute("data-opening") === "done") {
+        var r = ph.getBoundingClientRect();
+        pos(Math.max(0, Math.min(r.width * 1.1, (e.clientX - r.left) * 1.1)));
+      }
+    });
+    var end = function () { if (!drag) return; drag = false; if (moved < 6) puff(); else release(); };
+    ph.addEventListener("pointerup", end);
+    ph.addEventListener("pointercancel", function () { drag = false; release(); });
+    ph.addEventListener("pointerleave", function (e) { if (!drag && e.pointerType === "mouse") release(); });
+    ph.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); puff(); }
+    });
+  }
+
+  /* ambient: slow wisps of mist drifting across, DPR 1, 30 fps, 40 wisps on a phone (100 on a desktop), a watchdog thins
+     them when frames run slow (never switches them off), paused while the tab is hidden. */
+  function mist() {
+    var cv = D.createElement("canvas"), ctx = cv.getContext && cv.getContext("2d");
+    if (!ctx) return;
+    cv.id = "amb"; cv.setAttribute("aria-hidden", "true");
+    D.querySelector("main").appendChild(cv);
+    var W = 0, H = 0;
+    function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+    size();
+    var lastW = W, lastH = H;
+    addEventListener("resize", function () {
+      if (innerWidth !== lastW || Math.abs(innerHeight - lastH) > 150) { size(); lastW = W; lastH = H; }
+    });
+    var N = wide ? 100 : 40, P = [], LEVELS = [1, .6, .36, .2], level = 0, i;
+    for (i = 0; i < N; i++) P.push({ x: Math.random() * W, y: Math.random() * H, w: 26 + Math.random() * 70, h: 2 + Math.random() * 3,
+      vx: 6 + Math.random() * 18, a: .3 + Math.random() * .7 });
+    var raf = 0, prev = 0, lastDraw = 0, flip = 0, frames = 0, slow = 0;
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      if (prev) { frames++; if (t - prev > 24) slow++; if (frames >= 90) { if (slow > 45 && level < 3) level++; frames = 0; slow = 0; } }
+      prev = t;
+      if (lastDraw && t - lastDraw < 31) return;
+      var dt = lastDraw ? Math.min(.1, (t - lastDraw) / 1000) : .033; lastDraw = t;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#8ea2cf";
+      var n = Math.max(6, Math.floor(N * LEVELS[level]));
+      for (var k = 0; k < n; k++) {
+        var p = P[k];
+        p.x += p.vx * dt;
+        if (p.x - p.w > W) { p.x = -p.w; p.y = Math.random() * H; }
+        ctx.globalAlpha = p.a;
+        ctx.fillRect(p.x - p.w, p.y, p.w, p.h);
+      }
+    }
+    function go() { if (!raf) { prev = 0; lastDraw = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+    D.addEventListener("visibilitychange", function () { D.hidden ? stop() : go(); });
+    go();
+  }
+  if (!rm) {
+    var start = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 60); })(mist); };
+    if (root.getAttribute("data-opening") === "done") start();
+    else new MutationObserver(function (m, ob) { if (root.getAttribute("data-opening") === "done") { ob.disconnect(); start(); } })
+      .observe(root, { attributes: true, attributeFilter: ["data-opening"] });
   }
 })();
 </script>
