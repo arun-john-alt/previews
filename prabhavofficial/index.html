@@ -9,14 +9,16 @@
 <meta name="description" content="Website concept for Prabhav (@prabhavofficial): online-only ethnic wear from Chennai, made to order and shipped worldwide.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><style>@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap");@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap");</style></noscript>
 <link rel="preload" as="image" href="assets/hero-purple-sm.webp" imagesrcset="assets/hero-purple-sm.webp 480w, assets/hero-purple.webp 720w" imagesizes="(min-width: 900px) 42vw, 100vw" fetchpriority="high">
 <style>
   :root {
     --plum: #28152e; --plum-2: #3a2242; --plum-3: #4a2f52; --night: #1a0d1f;
     --silver: #cfc6d8; --cream: #f3e9df; --ivory: #fafbf9; --gold: #e8d9b0; --ink: #24141f; --muted: #6b5867; --line: #e6dce4; --accent: #6a2a5c;
-    --ease: cubic-bezier(.23, 1, .32, 1);
+    --ease: cubic-bezier(.23, 1, .32, 1); --out: cubic-bezier(.16, 1, .3, 1);
+    --z0: 1.22; --z1: 1.12;
     --head: 56px; --nav: 60px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,8 +38,8 @@
   .strip { font-size: 13px; text-align: center; padding: 7px 12px; background: var(--cream); color: var(--ink); }
 
   header { position: sticky; top: 0; z-index: 20; height: var(--head); display: flex; align-items: center; justify-content: space-between;
-    padding: 0 6px 0 16px; background: rgba(40, 21, 46, .92); color: var(--ivory); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-  .mark { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: .3em; }
+    padding: 0 6px 0 16px; background: var(--plum); color: var(--ivory); }
+  .mark { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: .3em; }
   .mark .eye { font-size: 16px; letter-spacing: 0; }
   .head-nav { display: none; gap: 4px; }
   .head-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 12px; text-decoration: none; font-size: 15px; }
@@ -59,7 +61,7 @@
   .hero { position: relative; height: calc(100svh - var(--head) - 28px - var(--nav)); min-height: 470px; max-height: 860px; overflow: hidden; background: var(--plum); color: var(--ivory); }
   .hero-media { position: absolute; inset: 0; }
   .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%;
-    transform: scale(1.12); transform-origin: 50% 18%; }
+    transform: scale(var(--z1)); transform-origin: 50% 18%; animation: settle 2.6s var(--out) backwards; }
   .hero-media video, .card-img video, .slide video { opacity: 0; transition: opacity .4s var(--ease); }
   .hero-media video.ready, .card-img video.ready, .slide video.ready { opacity: 1; }
   .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #28152e 0%, #28152ee6 46%, transparent 78%); }
@@ -99,7 +101,6 @@
   .card-img { position: relative; aspect-ratio: 3 / 4; border-radius: 8px; overflow: hidden; background: var(--cream); }
   .card-img img, .card-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
   .tag { position: absolute; left: 8px; top: 8px; z-index: 1; font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: rgba(26, 13, 31, .78); color: var(--gold); }
-  .count { position: absolute; left: 8px; bottom: 8px; z-index: 1; font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: rgba(26, 13, 31, .78); color: var(--ivory); }
   .card h3 { font: 500 16px/1.3 Jost, sans-serif; margin-top: 10px; }
   .card .colour { font-size: 15px; color: var(--muted); }
   .price { font-size: 16px; font-weight: 600; margin-top: 2px; }
@@ -111,11 +112,12 @@
   .bestsellers .lead, .bestsellers .colour, .bestsellers .price small { color: var(--silver); }
 
   /* The first saree */
-  .saree-media { position: relative; margin: 18px -20px 0; }
+  .saree-media { position: relative; margin: 18px -20px 0; overflow-x: clip; }
   .saree-media .main { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
   .saree-media .detail { position: absolute; right: 16px; bottom: -28px; width: 38%; aspect-ratio: 3 / 4; object-fit: cover; border: 4px solid var(--ivory); border-radius: 6px; }
   .notes { list-style: none; margin-top: 46px; display: grid; gap: 10px; }
-  .notes li { padding-top: 10px; border-top: 1px solid var(--line); }
+  .notes li { position: relative; padding-top: 10px; }
+  .notes li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); transform-origin: left; }
   .saree .btn { margin-top: 20px; }
 
   .pastel { background: var(--cream); }
@@ -151,7 +153,7 @@
   .view.enter { animation: rise .28s var(--ease); }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   .vbar { position: sticky; top: 0; z-index: 3; height: var(--head); display: flex; align-items: center; justify-content: space-between; padding: 0 6px;
-    background: rgba(250, 251, 249, .94); border-bottom: 1px solid var(--line); }
+    background: var(--ivory); border-bottom: 1px solid var(--line); }
   .vbar .title { font-weight: 600; font-size: 16px; }
 
   .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--cream); }
@@ -236,8 +238,6 @@
     transition: opacity .2s var(--ease), transform .2s var(--ease); }
   .toast.show { opacity: 1; transform: none; }
 
-  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-  .js .reveal.in { opacity: 1; transform: none; }
 
   @media (max-height: 600px) and (max-width: 899px) { .hero { min-height: 380px; } }
   @media (max-height: 700px) and (max-width: 899px) { .slide { aspect-ratio: auto; height: 54svh; } }  /* name and price stay above the buy bar */
@@ -254,7 +254,7 @@
     .head-nav { display: flex; }
     .hero { display: grid; grid-template-columns: 42vw 1fr; height: calc(100vh - var(--head) - 28px); max-height: 860px; }
     .hero-media { position: relative; }
-    .hero-media img, .hero-media video { transform: none; }
+    :root { --z0: 1.1; --z1: 1; }
     .hero-media::after { background: linear-gradient(to right, transparent 70%, #28152e); }
     .hero-copy { position: relative; align-self: center; padding: 0 6vw 0 4vw; max-width: 640px; }
     h1 { font-size: 64px; }
@@ -287,15 +287,126 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .hero-media video, .card-img video, .slide video { display: none; }
-    .js .reveal { opacity: 1; transform: none; transition: none; }
     .view.enter { animation: none; }
     .btn, .chip, .size, .drawer, .backdrop, .toast { transition: none; }
   }
-  @media (prefers-reduced-transparency: reduce) { header { background: var(--plum); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
+  /* ===== Motion (mock_template/MOTION-SYSTEM.md): a pallu lifts, silk wipes, zari glints. Composite-only where it loops. ===== */
+  .mark .logo { flex: none; width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: #fff; box-shadow: 0 0 0 1.5px var(--gold); }
+  footer .mark .logo { box-shadow: 0 0 0 1.5px rgba(232, 217, 176, .7); }
+  .vbar .mark { letter-spacing: .24em; }
+
+  /* 1. Opening: the plum drape with its zari border lifts off the first screen; the lines rise out of masks. Pure CSS, no waiting. */
+  .drape { position: absolute; inset: 0; z-index: 6; pointer-events: none; display: grid; place-items: center;
+    background: linear-gradient(165deg, #3a2242, #28152e 58%, #1a0d1f); animation: lift .95s var(--out) .04s both; }
+  .drape b { font: 600 15px/1 Jost, system-ui, sans-serif; letter-spacing: .42em; color: var(--gold); padding-left: .42em; }
+  .drape::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 16px;
+    background: repeating-linear-gradient(90deg, #e8d9b0 0 7px, #b99b55 7px 10px, #f3e9c8 10px 13px, #b99b55 13px 16px);
+    box-shadow: 0 -2px 0 #e8d9b0, 0 -5px 0 rgba(185, 155, 85, .55); }
+  @keyframes lift { to { transform: translateY(-104%); } }
+  @keyframes settle { from { transform: scale(var(--z0)); } }
+  @keyframes op { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes up { from { transform: translateY(108%); } }
+  @keyframes draw { from { transform: scaleX(0); } }
+  .op { animation: op .7s var(--out) var(--od, .6s) backwards; }
+  .ln { display: block; overflow: hidden; padding: .1em 0 .16em; margin: -.1em 0 -.16em; }
+  .ln > span { display: block; animation: up .85s var(--out) var(--od, .6s) backwards; }
+  .hz { display: block; width: 76px; height: 2px; margin: 4px 0 12px; background: linear-gradient(90deg, var(--gold), rgba(232, 217, 176, 0)); transform-origin: left; animation: draw 1s var(--out) .6s backwards; }
+
+  /* 2. Signature: tap or swipe the photo and the other colourway wipes in over it like a drape. */
+  .hl-b { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+  .is-b .hl-b { visibility: visible; }
+  .hsws { position: absolute; top: 8px; right: 4px; z-index: 3; display: none; flex-direction: column; }
+  .js .hsws { display: flex; }
+  .hero-media { touch-action: pan-y; }
+  .hsw { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .14s var(--ease); }
+  .hsw:active { transform: scale(.94); }
+  .hsw i { width: 24px; height: 24px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px rgba(250, 251, 249, .5), 0 2px 8px rgba(0, 0, 0, .4); transition: box-shadow .25s var(--ease); }
+  .hsw[aria-pressed="true"] i { box-shadow: 0 0 0 2px var(--gold), 0 0 0 5px rgba(232, 217, 176, .3), 0 2px 8px rgba(0, 0, 0, .4); }
+  .hero-media.is-b video { opacity: 0 !important; }
+
+  /* 3. Scroll scenes: each section enters its own way, once. Hidden states exist only while the script is alive. */
+  .hd { display: block; overflow: hidden; padding: .08em 0 .14em; margin: -.08em 0 -.14em; }
+  .hd > span { display: block; }
+  .js:not(.rv-fail) .hd > span { transform: translateY(108%); transition: transform .95s var(--out); }
+  .js:not(.rv-fail) .hd.in > span { transform: none; }
+  .zr { display: block; height: 2px; width: 100%; max-width: 240px; margin: 12px 0 0; background: linear-gradient(90deg, var(--gold), rgba(232, 217, 176, 0)); transform-origin: left; }
+  .lead b { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* categories: swatches of cloth unroll left to right */
+  .js:not(.rv-fail) [data-scene=wipe] .cat { clip-path: inset(0 100% 0 0 round 8px); transition: clip-path .95s var(--out) calc(var(--i, 0) * 90ms), transform .16s var(--ease); }
+  .js:not(.rv-fail) [data-scene=wipe] .cat img { transform: scale(1.22); transition: transform 1.5s var(--out) calc(var(--i, 0) * 90ms); }
+  .js:not(.rv-fail) [data-scene=wipe] .cat span { opacity: 0; transform: translateX(-12px); transition: opacity .5s var(--out) calc(.45s + var(--i, 0) * 90ms), transform .7s var(--out) calc(.45s + var(--i, 0) * 90ms); }
+  .js:not(.rv-fail) [data-scene=wipe].in .cat { clip-path: inset(0 0 0 0 round 8px); }
+  .js:not(.rv-fail) [data-scene=wipe].in .cat img { transform: none; }
+  .js:not(.rv-fail) [data-scene=wipe].in .cat span { opacity: 1; transform: none; }
+
+  /* bestsellers: the zari line is drawn, then the two cards hang down from it */
+  .bestsellers { position: relative; overflow: hidden; }
+  .bestsellers > *:not(.motes) { position: relative; z-index: 2; }
+  .js:not(.rv-fail) [data-scene=bs] .zr { transform: scaleX(0); transition: transform 1.3s var(--out) .2s; }
+  .js:not(.rv-fail) [data-scene=bs].in .zr { transform: none; }
+  .js:not(.rv-fail) [data-scene=bs] .card { clip-path: inset(0 -8px 100% -8px); transform: translateY(-18px); transition: clip-path 1.05s var(--out) calc(.4s + var(--i, 0) * 160ms), transform 1.05s var(--out) calc(.4s + var(--i, 0) * 160ms); }
+  .js:not(.rv-fail) [data-scene=bs].in .card { clip-path: inset(-8px); transform: none; }
+
+  /* just in: the pieces arrive from the right, one after another */
+  .js:not(.rv-fail) [data-scene=slide] .card { opacity: 0; transform: translateX(60px); transition: opacity .6s var(--out) calc(var(--i, 0) * 100ms), transform .95s var(--out) calc(var(--i, 0) * 100ms); }
+  .js:not(.rv-fail) [data-scene=slide].in .card { opacity: 1; transform: none; }
+
+  /* the first saree: the photo opens from an arch, the zari detail is pinned on, the notes are ruled in */
+  .js:not(.rv-fail) [data-scene=arch] .main { clip-path: inset(9% 12% 0 12% round 50% 50% 0 0 / 22% 22% 0 0); transition: clip-path 1.3s var(--out); }
+  .js:not(.rv-fail) [data-scene=arch].in .main { clip-path: inset(0 0 0 0 round 0); }
+  .js:not(.rv-fail) [data-scene=arch] .detail { opacity: 0; transform: translateY(28px) rotate(-6deg); transition: opacity .6s var(--out) .75s, transform .95s var(--out) .75s; }
+  .js:not(.rv-fail) [data-scene=arch].in .detail { opacity: 1; transform: none; }
+  .js:not(.rv-fail) [data-scene=arch] .notes li { opacity: 0; transition: opacity .6s var(--out) calc(.6s + var(--i, 0) * 150ms); }
+  .js:not(.rv-fail) [data-scene=arch] .notes li::before { transform: scaleX(0); transition: transform 1s var(--out) calc(.5s + var(--i, 0) * 150ms); }
+  .js:not(.rv-fail) [data-scene=arch].in .notes li { opacity: 1; }
+  .js:not(.rv-fail) [data-scene=arch].in .notes li::before { transform: none; }
+
+  /* restocked pastels: each card is dipped in its own colour, which then drains away */
+  .js:not(.rv-fail) [data-scene=wash] .card-img::after { content: ""; position: absolute; inset: 0; z-index: 2; background: var(--wash, #f3e9df); transform-origin: top; transition: transform 1.15s var(--out) calc(var(--i, 0) * 150ms); }
+  .js:not(.rv-fail) [data-scene=wash] .card-img img { transform: scale(1.14); transition: transform 1.6s var(--out) calc(var(--i, 0) * 150ms); }
+  .js:not(.rv-fail) [data-scene=wash].in .card-img::after { transform: scaleY(0); }
+  .js:not(.rv-fail) [data-scene=wash].in .card-img img { transform: none; }
+
+  /* shop all: the pieces turn over like pages */
+  .js:not(.rv-fail) [data-scene=flip] .card { opacity: 0; transform: perspective(700px) rotateY(-18deg) translateX(-14px); transform-origin: 0 50%; transition: opacity .6s var(--out) calc(var(--i, 0) * 60ms), transform .9s var(--out) calc(var(--i, 0) * 60ms); }
+  .js:not(.rv-fail) [data-scene=flip].in .card { opacity: 1; transform: none; }
+
+  /* trust: each reassurance is stamped */
+  .trust span[aria-hidden] { display: inline-block; }
+  .js:not(.rv-fail) [data-scene=stamp] span[aria-hidden] { opacity: 0; transform: scale(1.8) rotate(-16deg); transition: opacity .35s var(--out) calc(var(--i, 0) * 120ms), transform .6s var(--out) calc(var(--i, 0) * 120ms); }
+  .js:not(.rv-fail) [data-scene=stamp] p { opacity: 0; transform: translateX(10px); transition: opacity .6s var(--out) calc(.2s + var(--i, 0) * 120ms), transform .8s var(--out) calc(.2s + var(--i, 0) * 120ms); }
+  .js:not(.rv-fail) [data-scene=stamp].in span[aria-hidden], .js:not(.rv-fail) [data-scene=stamp].in p { opacity: 1; transform: none; }
+
+  /* footer: the evil eye blinks once */
+  @keyframes blink { 0%, 100% { transform: scaleY(1); } 45% { transform: scaleY(.08); } }
+  [data-scene=foot].in .eye { animation: blink .75s var(--ease) .3s; }
+
+  /* 4. Ambient: zari dust on canvas (script sets the density; see the watchdog) */
+  .motes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+  /* 5. Response: every control answers a press; the closing moment is the spark burst */
+  .cat, .card-link, .icon-btn, .bnav a, .bnav button, .swatch, .remove, .text-link, .qty button, .guide, .pay label, .head-nav a, .mark, footer .links a { -webkit-tap-highlight-color: transparent; }
+  .cat:active, .card-link:active, .icon-btn:active, .bnav a:active, .bnav button:active, .swatch:active, .remove:active, .text-link:active, .qty button:active, .guide:active, .pay label:active, .head-nav a:active, .mark:active, footer .links a:active { transform: scale(.97); }
+  .card-link, .icon-btn, .bnav a, .bnav button, .swatch, .remove, .text-link, .qty button, .guide, .pay label, .head-nav a, .mark, footer .links a { transition: transform .14s var(--ease); }
+  .cat { transition: transform .16s var(--ease); }
+  .spark { position: fixed; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 6px rgba(232, 217, 176, .8); z-index: 90; pointer-events: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .card-img img { transition: transform .7s var(--out); }
+    .card-link:hover .card-img img { transform: scale(1.04); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .drape, .motes { display: none; }
+    .op, .ln > span, .hero-media img, .hero-media video { animation: none; }
+    [data-scene] *, [data-scene] *::before, [data-scene] *::after, .hd > span { transition: none !important; animation: none !important; }
+    [data-scene=foot].in .eye { animation: none; }
+  }
 </style>
 <script>
   document.documentElement.classList.add('js');
-  setTimeout(function () { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }, 2500);
+  // If the page script never starts (blocked, slow, broken), show everything after 2.5 s instead of leaving scenes hidden.
+  window.__rvT = setTimeout(function () { document.documentElement.classList.add('rv-fail'); }, 2500);
 </script>
 </head>
 <body>
@@ -303,31 +414,50 @@
 <div class="concept" data-concept-banner>Website concept for @prabhavofficial · not the official site</div>
 
 <header class="dark">
-  <a class="mark" href="#top" aria-label="Prabhav, home"><span class="eye" aria-hidden="true">🧿</span>PRABHAV</a>
+  <a class="mark" href="#top" aria-label="Prabhav, home"><img class="logo" src="assets/logo.jpg" alt="" width="34" height="34">PRABHAV<span class="eye" aria-hidden="true">🧿</span></a>
   <nav class="head-nav" aria-label="Main"><a href="#shop">Shop all</a><a href="#bestsellers">Bestsellers</a><a href="#saree">Sarees</a></nav>
   <a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a>
 </header>
 
 <main id="top">
-  <section class="hero dark" aria-label="New launch: Tussar Silk Salwar Suit in purple">
-    <div class="hero-media">
+  <section class="hero dark" id="hero" aria-label="New launch: Tussar Silk Salwar Suit in purple">
+    <div class="drape" aria-hidden="true"><b>PRABHAV 🧿</b></div>
+    <canvas class="motes" aria-hidden="true"></canvas>
+    <div class="hero-media" id="hero-media">
       <img src="assets/hero-purple-sm.webp" srcset="assets/hero-purple-sm.webp 480w, assets/hero-purple.webp 720w" sizes="(min-width: 900px) 42vw, 100vw"
            alt="Purple Tussar Silk Salwar Suit with a printed dupatta" width="480" height="853" fetchpriority="high">
       <video muted loop playsinline preload="none" data-src="assets/hero-purple.mp4" aria-hidden="true"></video>
+      <div class="hl-b" aria-hidden="true"><img data-src="assets/black-tussar-sm.webp" data-srcset="assets/black-tussar-sm.webp 480w, assets/black-tussar.webp 720w" sizes="(min-width: 900px) 42vw, 100vw" alt="" width="480" height="853"></div>
+      <div class="hsws" role="group" aria-label="Colour: tap or swipe the photo">
+        <button class="hsw" type="button" data-c="purple" aria-pressed="true" aria-label="Purple"><i style="--c:#5a2d91"></i></button>
+        <button class="hsw" type="button" data-c="black" aria-pressed="false" aria-label="Black"><i style="--c:#17121a"></i></button>
+      </div>
     </div>
     <div class="hero-copy">
-      <p class="eyebrow">New launch</p>
-      <h1>Tussar silk, <em>in purple.</em></h1>
-      <p class="proof-line">1,666 comments on the launch reel 🧿</p>
-      <a class="btn light" href="#/p/tussar-purple">Shop the Tussar suit</a>
-      <a class="text-link" href="#shop">Shop all pieces ↓</a>
-      <p class="hero-meta">Made to order · 15–18 working days · Ships worldwide 🌏</p>
+      <p class="eyebrow op" style="--od:.2s">New launch</p>
+      <h1><span class="ln"><span style="--od:.26s">Tussar silk,</span></span> <span class="ln"><span style="--od:.36s"><em id="hero-em">in purple.</em></span></span></h1>
+      <i class="hz" aria-hidden="true"></i>
+      <p class="proof-line op" style="--od:.48s">From traditional to Indo-western 🌻</p>
+      <a class="btn light op" id="hero-cta" data-main-action href="#/p/tussar-purple" style="--od:.56s">Shop the Tussar suit</a>
+      <noscript><style>#hero-cta{display:none}</style><a class="btn light" href="https://instagram.com/prabhavofficial">Shop on Instagram</a></noscript>
+      <a class="text-link op" href="#shop" style="--od:.64s">Shop all pieces ↓</a>
+      <p class="hero-meta op" style="--od:.72s">Made to order · 15–18 working days · Ships worldwide 🌏</p>
     </div>
   </section>
+  <script>
+    /* The opening is CSS and ends by itself; this only reports "done" (the end of the last line, or 1.9 s at the latest). */
+    (function () {
+      var r = document.documentElement, fired = false;
+      function done() { if (fired) return; fired = true; r.dataset.opening = 'done'; try { window.dispatchEvent(new Event('prabhav-open')); } catch (e) {} }
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
+      var t = setTimeout(done, 1900), last = document.querySelector('.hero-meta');
+      if (last) last.addEventListener('animationend', function () { clearTimeout(t); setTimeout(done, 120); }, { once: true });
+    })();
+  </script>
 
   <section class="pad" aria-labelledby="cat-title">
     <h2 id="cat-title" class="visually-hidden">Shop by category</h2>
-    <div class="cats">
+    <div class="cats" data-scene="wipe" data-items=".cat">
 <a class="cat" href="#shop" data-filter="salwar"><img loading="lazy" src="assets/purple-tussar-sm.webp" alt="" width="480" height="853"><span>Tussar salwar suits</span></a>
 <a class="cat" href="#shop" data-filter="aline"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="" width="480" height="853"><span>Georgette A-line suits</span></a>
 <a class="cat" href="#shop" data-filter="sets"><img loading="lazy" src="assets/maroon-silk-cotton-sm.webp" alt="" width="480" height="853"><span>Silk cotton sets</span></a>
@@ -335,23 +465,25 @@
     </div>
   </section>
 
-  <section class="bestsellers pad dark" id="bestsellers" aria-labelledby="best-title">
-    <div class="reveal">
-      <p class="eyebrow">Most loved on Instagram</p>
-      <h2 id="best-title">The Tussar suits, <em>most asked about.</em></h2>
-      <p class="lead">Thousands of comments on the launch reels. Now you can order them here.</p>
+  <section class="bestsellers pad dark" id="bestsellers" aria-labelledby="best-title" data-scene="bs" data-items=".card">
+    <canvas class="motes" aria-hidden="true"></canvas>
+    <div>
+      <p class="eyebrow">New launch reels</p>
+      <h2 id="best-title" class="hd"><span>The Tussar suits, <em>new launch.</em></span></h2>
+      <i class="zr" aria-hidden="true"></i>
+      <p class="lead">Comment for price details on Instagram. Now you can order them here.</p>
     </div>
     <div class="grid" style="margin-top:18px">
 <article class="card" data-cat="salwar">
   <a class="card-link" href="#/p/tussar-purple" aria-label="Tussar Silk Salwar Suit, Purple">
-    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/purple-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span><span class="count">💬 1,666 comments</span></div>
+    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/purple-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
     <h3>Tussar Silk Salwar Suit</h3><p class="colour">Purple</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="salwar">
   <a class="card-link" href="#/p/tussar-black" aria-label="Tussar Silk Salwar Suit, Black">
-    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/black-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span><span class="count">💬 1,501 comments</span></div>
+    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/black-tussar.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
     <h3>Tussar Silk Salwar Suit</h3><p class="colour">Black</p>
   </a>
   <p class="price">₹ —</p>
@@ -360,12 +492,12 @@
   </section>
 
   <section class="pad" aria-labelledby="new-title">
-    <div class="sec-head reveal"><div><p class="eyebrow">New launches ✨</p><h2 id="new-title">Just in</h2></div></div>
-    <div class="row">
+    <div class="sec-head"><div><p class="eyebrow">New launches ✨</p><h2 id="new-title" class="hd"><span>Just in</span></h2></div></div>
+    <div class="row" data-scene="slide" data-items=".card">
 <article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/georgette-red" aria-label="Georgette A-line Suit, Red florals">
-    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral georgette A-line suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/red-georgette.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Red florals</p>
+  <a class="card-link" href="#/p/georgette-red" aria-label="A-line Suit, Red florals">
+    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral A-line suit, worn" width="480" height="853"><video muted loop playsinline preload="none" data-src="assets/red-georgette.mp4" aria-hidden="true"></video><span class="tag">New launch</span></div>
+    <h3>A-line Suit</h3><p class="colour">Red florals</p>
   </a>
   <p class="price">₹ —</p>
 </article>
@@ -387,17 +519,17 @@
   </section>
 
   <section class="saree" id="saree" aria-labelledby="saree-title">
-    <div class="pad wrap">
-      <div class="saree-head reveal">
+    <div class="pad wrap" data-scene="arch" data-items=".notes li">
+      <div class="saree-head">
         <p class="eyebrow">Diwali 🪔</p>
-        <h2 id="saree-title">Our first saree launch, <em>for Diwali.</em></h2>
+        <h2 id="saree-title" class="hd"><span>Our first saree launch, <em>for Diwali.</em></span></h2>
       </div>
-      <div class="saree-media reveal">
+      <div class="saree-media">
         <img class="main" loading="lazy" src="assets/plum-kanjivaram-sm.webp" srcset="assets/plum-kanjivaram-sm.webp 480w, assets/plum-kanjivaram.webp 720w" sizes="(min-width: 900px) 44vw, 100vw"
-             alt="Plum Banarasi Kanjivaram saree with silver zari, worn beside stone temple pillars" width="480" height="853">
+             alt="Plum Banarasi Kanjivaram saree with silver zari, worn beside stone pillars" width="480" height="853">
         <img class="detail" loading="lazy" src="assets/zari-detail-sm.webp" alt="Close-up of the silver zari border" width="480" height="853">
       </div>
-      <div class="saree-body reveal">
+      <div class="saree-body">
         <ul class="notes">
           <li>Banarasi Kanjivaram with silver zari</li>
           <li>Available in colour options</li>
@@ -409,30 +541,30 @@
   </section>
 
   <section class="pastel pad" aria-labelledby="pastel-title">
-    <div class="reveal">
-      <p class="eyebrow">Georgette A-line suits · Pastel edit</p>
-      <h2 id="pastel-title">Restocked our <em>bestsellers!</em></h2>
+    <div>
+      <p class="eyebrow">Georgette A-line suits</p>
+      <h2 id="pastel-title" class="hd"><span>Restocked our <em>bestsellers!</em></span></h2>
       <p class="lead">Limited edition ✨</p>
     </div>
-    <div class="row" style="margin-top:18px">
-<article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Pastel green">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Pastel green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel green</p>
+    <div class="row" style="margin-top:18px" data-scene="wash" data-items=".card">
+<article class="card" style="--wash:#cfe8d6" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Green">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Green</p>
   </a>
   <p class="price">₹ —</p>
 </article>
-<article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pastel pink">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pastel pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel pink</p>
+<article class="card" style="--wash:#f6cfdc" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pink">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pink</p>
   </a>
   <p class="price">₹ —</p>
 </article>
-<article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Pastel yellow">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Pastel yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel yellow</p>
+<article class="card" style="--wash:#f7ecb5" data-cat="aline">
+  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Yellow">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Yellow</p>
   </a>
   <p class="price">₹ —</p>
 </article>
@@ -440,8 +572,8 @@
   </section>
 
   <section class="pad" id="shop" aria-labelledby="shop-title">
-    <h2 id="shop-title">Shop all</h2>
-    <p class="lead" style="margin:4px 0 14px">Prices are added at launch.</p>
+    <h2 id="shop-title" class="hd"><span>Shop all</span></h2>
+    <p class="lead" style="margin:4px 0 14px"><b data-up="9">9</b> pieces. Price details: comment or DM on Instagram.</p>
     <div class="chips" role="group" aria-label="Filter by category">
       <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
       <button class="chip" type="button" data-filter="salwar" aria-pressed="false">Tussar salwar suits</button>
@@ -449,25 +581,25 @@
       <button class="chip" type="button" data-filter="sets" aria-pressed="false">Sets</button>
       <button class="chip" type="button" data-filter="sarees" aria-pressed="false">Sarees</button>
     </div>
-    <div class="grid" id="all">
+    <div class="grid" id="all" data-scene="flip" data-items=".card">
 <article class="card" data-cat="salwar">
   <a class="card-link" href="#/p/tussar-purple" aria-label="Tussar Silk Salwar Suit, Purple">
-    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span><span class="count">💬 1,666 comments</span></div>
+    <div class="card-img"><img loading="lazy" src="assets/hero-purple-sm.webp" alt="Purple Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span></div>
     <h3>Tussar Silk Salwar Suit</h3><p class="colour">Purple</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="salwar">
   <a class="card-link" href="#/p/tussar-black" aria-label="Tussar Silk Salwar Suit, Black">
-    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span><span class="count">💬 1,501 comments</span></div>
+    <div class="card-img"><img loading="lazy" src="assets/black-tussar-sm.webp" alt="Black Tussar Silk Salwar Suit, worn" width="480" height="853"><span class="tag">New launch</span></div>
     <h3>Tussar Silk Salwar Suit</h3><p class="colour">Black</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/georgette-red" aria-label="Georgette A-line Suit, Red florals">
-    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral georgette A-line suit, worn" width="480" height="853"><span class="tag">New launch</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Red florals</p>
+  <a class="card-link" href="#/p/georgette-red" aria-label="A-line Suit, Red florals">
+    <div class="card-img"><img loading="lazy" src="assets/red-georgette-sm.webp" alt="Red floral A-line suit, worn" width="480" height="853"><span class="tag">New launch</span></div>
+    <h3>A-line Suit</h3><p class="colour">Red florals</p>
   </a>
   <p class="price">₹ —</p>
 </article>
@@ -487,45 +619,45 @@
 </article>
 <article class="card" data-cat="sarees">
   <a class="card-link" href="#/p/saree-plum" aria-label="Banarasi Kanjivaram Saree, Plum, silver zari">
-    <div class="card-img"><img loading="lazy" src="assets/plum-kanjivaram-sm.webp" alt="Plum Banarasi Kanjivaram saree by stone temple pillars" width="480" height="853"><span class="tag">Our first saree</span></div>
+    <div class="card-img"><img loading="lazy" src="assets/plum-kanjivaram-sm.webp" alt="Plum Banarasi Kanjivaram saree by stone pillars" width="480" height="853"><span class="tag">Our first saree</span></div>
     <h3>Banarasi Kanjivaram Saree</h3><p class="colour">Plum, silver zari</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Pastel green">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Pastel green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel green</p>
+  <a class="card-link" href="#/p/pastel-green" aria-label="Georgette A-line Suit, Green">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-green-sm.webp" alt="Green georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Green</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pastel pink">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pastel pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel pink</p>
+  <a class="card-link" href="#/p/pastel-pink" aria-label="Georgette A-line Suit, Pink">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-pink-sm.webp" alt="Pink georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Pink</p>
   </a>
   <p class="price">₹ —</p>
 </article>
 <article class="card" data-cat="aline">
-  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Pastel yellow">
-    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Pastel yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
-    <h3>Georgette A-line Suit</h3><p class="colour">Pastel yellow</p>
+  <a class="card-link" href="#/p/pastel-yellow" aria-label="Georgette A-line Suit, Yellow">
+    <div class="card-img"><img loading="lazy" src="assets/pastel-yellow-sm.webp" alt="Yellow georgette suit, folded" width="480" height="853"><span class="tag">Restocked bestseller</span></div>
+    <h3>Georgette A-line Suit</h3><p class="colour">Yellow</p>
   </a>
   <p class="price">₹ —</p>
 </article>
     </div>
   </section>
 
-  <section class="trust" aria-label="Shopping with Prabhav">
-    <div><span aria-hidden="true">🔒</span><p><b>Secure checkout</b>UPI, cards and netbanking</p></div>
+  <section class="trust" aria-label="Shopping with Prabhav" data-scene="stamp" data-items="div">
+    <div><span aria-hidden="true">📍</span><p><b>Online based</b>From Chennai</p></div>
     <div><span aria-hidden="true">🧿</span><p><b>Made to order</b>15–18 working days</p></div>
     <div><span aria-hidden="true">🌏</span><p><b>Shipping</b>Worldwide</p></div>
-    <div><span aria-hidden="true">📦</span><p><b>Order confirmation</b>By email</p></div>
+    <div><span aria-hidden="true">💬</span><p><b>Price details</b>Comment or DM on Instagram</p></div>
   </section>
 </main>
 
-<footer class="dark">
-  <a class="mark" href="#top"><span class="eye" aria-hidden="true">🧿</span>PRABHAV</a>
+<footer class="dark" data-scene="foot">
+  <a class="mark" href="#top"><img class="logo" src="assets/logo.jpg" alt="" width="34" height="34">PRABHAV<span class="eye" aria-hidden="true">🧿</span></a>
   <p style="margin-top:8px">From traditional to Indo-western 🌻</p>
   <div class="links"><a href="#shop">Shop all</a><a href="https://instagram.com/prabhavofficial">@prabhavofficial</a></div>
   <p>Website concept, not the official site. Photos and reels from @prabhavofficial.</p>
@@ -541,18 +673,18 @@
 <!-- Product page -->
 <section class="view" id="pdp" hidden role="dialog" aria-modal="true" aria-labelledby="pdp-title">
   <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <span class="mark" aria-hidden="true"><span class="eye">🧿</span>PRABHAV</span><a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a></div>
+    <span class="mark" aria-hidden="true"><img class="logo" src="assets/logo.jpg" alt="" width="34" height="34">PRABHAV<span class="eye">🧿</span></span><a class="icon-btn" href="#/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" data-n="0" data-count>0</span></a></div>
   <div class="pdp">
     <div><div class="gallery" id="gallery"></div><div class="dots" id="dots" aria-hidden="true"></div></div>
     <div class="pdp-body">
       <p class="eyebrow" id="pdp-tag"></p>
       <h1 id="pdp-title" tabindex="-1"></h1>
       <p class="colour" id="pdp-colour"></p>
-      <p class="price">₹ — <small>price added at launch</small></p>
+      <p class="price">₹ — <small>price details: comment or DM on Instagram</small></p>
       <p class="made"><span aria-hidden="true">🧿</span><span><b>Made to order</b> · 15–18 working days · Ships worldwide 🌏</span></p>
       <div class="opt" id="opt-colour"><div class="opt-label">Colour</div><div class="swatches" id="swatches"></div></div>
       <div class="opt" id="opt-size"><div class="opt-label"><span>Size</span><button class="guide" type="button" id="guide-btn" aria-expanded="false" aria-controls="guide">Size guide</button></div>
-        <p class="guide-text" id="guide" hidden>Prabhav's size chart will be here at launch.</p>
+        <p class="guide-text" id="guide" hidden>DM on Instagram for more info.</p>
         <div class="sizes" id="sizes" role="radiogroup" aria-label="Size"></div><p class="err" id="size-err" hidden>Please choose a size.</p></div>
       <div class="opt"><div class="opt-label">Quantity</div>
         <div class="qty"><button type="button" id="qminus" aria-label="One less">−</button><output id="qty">1</output><button type="button" id="qplus" aria-label="One more">+</button></div></div>
@@ -569,7 +701,7 @@
   <div class="lines" id="lines"></div>
   <div class="drawer-foot" id="cart-foot">
     <div class="sum"><span>Subtotal</span><span>₹ —</span></div>
-    <p class="sum-note">Prices and shipping are added at launch.</p>
+    <p class="sum-note">Price details: comment or DM on Instagram.</p>
     <a class="btn" href="#/checkout" id="to-checkout">Checkout</a>
     <button class="text-link continue" type="button" data-close>Continue shopping</button>
   </div>
@@ -577,7 +709,7 @@
 
 <!-- Checkout -->
 <section class="view" id="checkout" hidden role="dialog" aria-modal="true" aria-labelledby="co-title">
-  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="title" id="co-title" tabindex="-1">Checkout</span><span style="width:44px"></span></div>
+  <div class="vbar"><button class="icon-btn" type="button" data-close aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="mark" aria-hidden="true"><img class="logo" src="assets/logo.jpg" alt="" width="34" height="34">PRABHAV<span class="eye">🧿</span></span><span class="visually-hidden" id="co-title" tabindex="-1">Checkout</span><span style="width:44px"></span></div>
   <form class="co" id="co-form" novalidate>
     <h2>Your order</h2>
     <div class="summary" id="co-summary"></div>
@@ -598,7 +730,7 @@
     <p class="made"><span aria-hidden="true">🧿</span><span>Made to order · 15–18 working days</span></p>
     <h2>Payment</h2>
     <div class="pay" role="radiogroup" aria-label="Payment method">
-      <label><input type="radio" name="pay" value="upi" checked><span>UPI<small>Google Pay, PhonePe, Paytm and others</small></span></label>
+      <label><input type="radio" name="pay" value="upi" checked><span>UPI</span></label>
       <label><input type="radio" name="pay" value="card"><span>Credit or debit card</span></label>
       <label><input type="radio" name="pay" value="nb"><span>Netbanking</span></label>
     </div>
@@ -612,7 +744,7 @@
   <div class="done">
     <div class="tick" aria-hidden="true">🌻</div>
     <h1 id="done-title" tabindex="-1">Thank you!</h1>
-    <p>On the real site, Prabhav would now receive your order with your size, and you'd pay by UPI, card or netbanking. Your piece would be made to order: 15–18 working days.</p>
+    <p>On the real site, Prabhav would now receive your order, and you'd pay by UPI, card or netbanking. Your piece would be made to order: 15–18 working days.</p>
     <p><b>This was a demo:</b> no order was sent and no payment was taken.</p>
     <a class="btn" href="#top" data-home style="margin-top:22px">Back to the shop</a>
   </div>
@@ -622,7 +754,7 @@
 
 <script>
 (function () {
-  var PRODUCTS = [{"id": "tussar-purple", "name": "Tussar Silk Salwar Suit", "colour": "Purple", "cat": "salwar", "tag": "New launch", "comments": 1666, "video": "purple-tussar.mp4", "images": ["hero-purple", "purple-tussar-dupatta", "purple-flatlay"], "details": ["Tussar silk", "Top and shawl set", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Purple Tussar Silk Salwar Suit, worn", "The printed dupatta up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit, as a top and shawl set."}, {"id": "tussar-black", "name": "Tussar Silk Salwar Suit", "colour": "Black", "cat": "salwar", "tag": "New launch", "comments": 1501, "video": "black-tussar.mp4", "images": ["black-tussar", "black-tussar-neck", "black-flatlay"], "details": ["Tussar silk", "Gold zari border", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Black Tussar Silk Salwar Suit, worn", "The zari neckline up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit in black, with a gold zari border."}, {"id": "georgette-red", "name": "Georgette A-line Suit", "colour": "Red florals", "cat": "aline", "tag": "New launch", "video": "red-georgette.mp4", "images": ["red-georgette", "red-georgette-twirl", "red-georgette-mannequin"], "details": ["Georgette", "A-line", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Red floral georgette A-line suit, worn", "The dupatta in motion", "On the mannequin"], "blurb": "Beautiful georgette A-line suits, new launches 🌻 This one in red florals."}, {"id": "georgette-powder", "name": "Georgette A-line Suit", "colour": "Powder blue", "cat": "aline", "tag": "New launch", "video": "mint-georgette.mp4", "images": ["mint-georgette", "powder-blue-dupatta", "powder-blue-mannequin"], "details": ["Georgette", "A-line", "New launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Powder-blue georgette A-line suit with roses, worn", "The rose-print dupatta", "On the mannequin"], "blurb": "Beautiful georgette A-line suits, new launches 🌻 This one in powder blue with roses."}, {"id": "silkcotton-maroon", "name": "Silk Cotton 3 Piece Set", "colour": "Maroon", "cat": "sets", "tag": "Diwali launch", "video": "maroon-silk-cotton.mp4", "images": ["maroon-silk-cotton", "maroon-silk-cotton-drape", "maroon-silk-cotton-zari"], "details": ["Silk cotton", "Top, pant and shawl", "Diwali launch"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Maroon silk cotton 3 piece set, worn", "The zari shawl draped", "The zari border up close"], "blurb": "Diwali launch ✨ A silk cotton 3 piece set: top, pant and shawl."}, {"id": "saree-plum", "name": "Banarasi Kanjivaram Saree", "colour": "Plum, silver zari", "cat": "sarees", "tag": "Our first saree", "video": "plum-kanjivaram.mp4", "images": ["plum-kanjivaram", "plum-kanjivaram-walk", "zari-detail"], "details": ["Banarasi Kanjivaram", "Silver zari", "Available in colour options", "Blouse customised and stitched by Prabhav"], "sizes": [], "alts": ["Plum Banarasi Kanjivaram saree by stone temple pillars", "The saree in the light", "The silver zari border"], "blurb": "Our first saree launch, for Diwali 🪔 A Banarasi Kanjivaram with silver zari, available in colour options. Blouse customised and stitched by Prabhav."}, {"id": "pastel-green", "name": "Georgette A-line Suit", "colour": "Pastel green", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-green", "pastel-green-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel green georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}, {"id": "pastel-pink", "name": "Georgette A-line Suit", "colour": "Pastel pink", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-pink", "pastel-pink-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel pink georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}, {"id": "pastel-yellow", "name": "Georgette A-line Suit", "colour": "Pastel yellow", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-yellow", "pastel-yellow-drape"], "details": ["Georgette", "Pastel edit", "Limited edition"], "sizes": ["S", "M", "L", "XL", "XXL"], "alts": ["Pastel yellow georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits from the pastel edit. Limited edition."}];
+  var PRODUCTS = [{"id": "tussar-purple", "name": "Tussar Silk Salwar Suit", "colour": "Purple", "cat": "salwar", "tag": "New launch", "video": "purple-tussar.mp4", "images": ["hero-purple", "purple-tussar-dupatta", "purple-flatlay"], "details": ["Tussar silk", "Top and shawl set", "New launch"], "sizes": [], "alts": ["Purple Tussar Silk Salwar Suit, worn", "The printed dupatta up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit, as a top and shawl set."}, {"id": "tussar-black", "name": "Tussar Silk Salwar Suit", "colour": "Black", "cat": "salwar", "tag": "New launch", "video": "black-tussar.mp4", "images": ["black-tussar", "black-tussar-neck", "black-flatlay"], "details": ["Tussar silk", "New launch"], "sizes": [], "alts": ["Black Tussar Silk Salwar Suit, worn", "The neckline up close", "The suit laid flat"], "blurb": "New launch ✨ A Tussar silk salwar suit in black."}, {"id": "georgette-red", "name": "A-line Suit", "colour": "Red florals", "cat": "aline", "tag": "New launch", "video": "red-georgette.mp4", "images": ["red-georgette", "red-georgette-twirl", "red-georgette-mannequin"], "details": ["A-line", "New launch"], "sizes": [], "alts": ["Red floral A-line suit, worn", "The dupatta in motion", "On the mannequin"], "blurb": "Aline suits 🌻✨ New launches. This one in red florals."}, {"id": "georgette-powder", "name": "Georgette A-line Suit", "colour": "Powder blue", "cat": "aline", "tag": "New launch", "video": "mint-georgette.mp4", "images": ["mint-georgette", "powder-blue-dupatta", "powder-blue-mannequin"], "details": ["Georgette", "A-line", "New launch"], "sizes": [], "alts": ["Powder-blue georgette A-line suit with roses, worn", "The rose-print dupatta", "On the mannequin"], "blurb": "Beautiful georgette A-line suits, new launches 🌻 This one in powder blue with roses."}, {"id": "silkcotton-maroon", "name": "Silk Cotton 3 Piece Set", "colour": "Maroon", "cat": "sets", "tag": "Diwali launch", "video": "maroon-silk-cotton.mp4", "images": ["maroon-silk-cotton", "maroon-silk-cotton-drape", "maroon-silk-cotton-zari"], "details": ["Silk cotton", "Top, pant and shawl", "Diwali launch"], "sizes": [], "alts": ["Maroon silk cotton 3 piece set, worn", "The shawl draped", "The border up close"], "blurb": "Diwali launch ✨ A silk cotton 3 piece set: top, pant and shawl."}, {"id": "saree-plum", "name": "Banarasi Kanjivaram Saree", "colour": "Plum, silver zari", "cat": "sarees", "tag": "Our first saree", "video": "plum-kanjivaram.mp4", "images": ["plum-kanjivaram", "plum-kanjivaram-walk", "zari-detail"], "details": ["Banarasi Kanjivaram", "Silver zari", "Available in colour options", "Blouse customised and stitched by Prabhav"], "sizes": [], "alts": ["Plum Banarasi Kanjivaram saree by stone pillars", "The saree in the light", "The silver zari border"], "blurb": "Our first saree launch, for Diwali 🪔 A Banarasi Kanjivaram with silver zari, available in colour options. Blouse customised and stitched by Prabhav."}, {"id": "pastel-green", "name": "Georgette A-line Suit", "colour": "Green", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-green", "pastel-green-drape"], "details": ["Georgette", "Restocked", "Limited edition"], "sizes": [], "alts": ["Green georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits. Limited edition."}, {"id": "pastel-pink", "name": "Georgette A-line Suit", "colour": "Pink", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-pink", "pastel-pink-drape"], "details": ["Georgette", "Restocked", "Limited edition"], "sizes": [], "alts": ["Pink georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits. Limited edition."}, {"id": "pastel-yellow", "name": "Georgette A-line Suit", "colour": "Yellow", "cat": "aline", "tag": "Restocked bestseller", "images": ["pastel-yellow", "pastel-yellow-drape"], "details": ["Georgette", "Restocked", "Limited edition"], "sizes": [], "alts": ["Yellow georgette suit, folded", "The georgette up close"], "blurb": "Restocked our bestsellers! ✨ Georgette A-line suits. Limited edition."}];
   var byId = {}; PRODUCTS.forEach(function (p) { byId[p.id] = p; });
   var $ = function (id) { return document.getElementById(id); };
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -812,15 +944,218 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && /^#\//.test(location.hash)) close(); });
 
-  /* ---------- Scroll reveals ---------- */
-  if ('IntersectionObserver' in window) {
-    var rio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.reveal').forEach(function (el) { rio.observe(el); });
-  } else { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); }); }
-
   counts(); route();
+})();
+</script>
+<script>
+/* Prabhav concept: motion. Plain script, no library (the shop works without it). Everything is final-state under reduced
+   motion; scenes only ever add a class once, so nothing hides again after it was readable. */
+(function () {
+  'use strict';
+  try {
+    var D = document, root = D.documentElement;
+    D.addEventListener('touchstart', function () {}, { passive: true });
+    var $ = function (s, c) { return (c || D).querySelector(s); };
+    var $$ = function (s, c) { return [].slice.call((c || D).querySelectorAll(s)); };
+    var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DESK = matchMedia('(min-width: 1024px) and (pointer: fine)').matches;
+    var COARSE = matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+    var EASE = 'cubic-bezier(.16,1,.3,1)';
+    var hasIO = 'IntersectionObserver' in window;
+    var heroVideo = $('.hero-media video');
+
+    /* ---------- scroll scenes ---------- */
+    clearTimeout(window.__rvT);                       // the script is alive: the 2.5 s "show everything" failsafe stands down
+    $$('[data-scene]').forEach(function (g) {
+      var sel = g.getAttribute('data-items');
+      if (sel) $$(sel, g).forEach(function (el, i) { el.style.setProperty('--i', Math.min(i, 8)); });
+    });
+    var pending = $$('[data-scene], .hd, [data-up]');
+    function countUp(el) {
+      var to = +el.getAttribute('data-up'), from = Math.floor(to * 0.35), t0 = 0, tok = el.__tok = {};
+      if (RM || !to) return;
+      el.textContent = from;
+      var step = function (now) {
+        if (el.__tok !== tok) return;                 // a filter chip has set the number since
+        if (!t0) t0 = now;
+        var p = Math.min(1, (now - t0) / 1900), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * e);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = to;
+      };
+      requestAnimationFrame(step);
+    }
+    function show(el) {
+      if (el.classList.contains('in')) return;
+      el.classList.add('in');
+      if (el.hasAttribute('data-up')) countUp(el);
+    }
+    if (!hasIO || RM) pending.forEach(show);
+    else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.04 });
+      pending.forEach(function (el) { io.observe(el); });
+      // a second net: a fast flick can scroll past an element before its first intersection is reported
+      var sweepT = 0;
+      var sweep = function () {
+        sweepT = 0;
+        pending = pending.filter(function (el) {
+          if (el.classList.contains('in')) return false;
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top < innerHeight * 0.9) { show(el); io.unobserve(el); return false; }
+          return true;
+        });
+        if (!pending.length) removeEventListener('scroll', onScroll);
+      };
+      var onScroll = function () { if (!sweepT) sweepT = setTimeout(sweep, 160); };
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    /* ---------- signature: the colourway wipe (tap a swatch, or swipe the photo) ---------- */
+    var hm = $('#hero-media'), layer = $('.hl-b'), bImg = layer && $('img', layer), sw = $$('.hsw');
+    var cur = 'purple', ready = null;
+    var zoom = function () { return parseFloat(getComputedStyle(hm).getPropertyValue('--z1')) || 1; };
+    function loadB() {
+      if (ready) return ready;
+      bImg.srcset = bImg.getAttribute('data-srcset'); bImg.src = bImg.getAttribute('data-src');
+      ready = (bImg.decode ? bImg.decode() : new Promise(function (r) { bImg.onload = r; })).catch(function () {});
+      return ready;
+    }
+    function setColour(c) {
+      if (!hm || !bImg || c === cur) return;
+      cur = c;
+      sw.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-c') === c)); });
+      var black = c === 'black', em = $('#hero-em'), cta = $('#hero-cta');
+      em.textContent = black ? 'in black.' : 'in purple.';
+      cta.setAttribute('href', black ? '#/p/tussar-black' : '#/p/tussar-purple');
+      $('#hero').setAttribute('aria-label', 'New launch: Tussar Silk Salwar Suit in ' + c);
+      if (heroVideo) { if (black) heroVideo.pause(); else if (heroVideo.src) { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); } }
+      var z = zoom(), dur = 780;
+      layer.getAnimations().concat(bImg.getAnimations()).forEach(function (a) { a.cancel(); });
+      loadB().then(function () {
+        if (cur !== c) return;
+        if (black) hm.classList.add('is-b');
+        if (RM || !layer.animate) { if (!black) hm.classList.remove('is-b'); return; }
+        if (black) {
+          layer.animate([{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }], { duration: dur, easing: EASE });
+          bImg.animate([{ transform: 'translateX(-100%) scale(' + z + ')' }, { transform: 'translateX(0) scale(' + z + ')' }], { duration: dur, easing: EASE });
+        } else {
+          var a = layer.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(100%)' }], { duration: dur, easing: EASE, fill: 'forwards' });
+          var b = bImg.animate([{ transform: 'translateX(0) scale(' + z + ')' }, { transform: 'translateX(-100%) scale(' + z + ')' }], { duration: dur, easing: EASE, fill: 'forwards' });
+          a.onfinish = function () { if (cur === 'purple') hm.classList.remove('is-b'); a.cancel(); b.cancel(); };
+        }
+      });
+      if (!RM && em.animate) em.animate([{ opacity: 0, transform: 'translateY(40%)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: EASE });
+    }
+    sw.forEach(function (b) { b.addEventListener('click', function () { setColour(b.getAttribute('data-c')); }); });
+    if (hm) {
+      var sx = 0, sy = 0, sid = null;
+      hm.addEventListener('pointerdown', function (e) { if (e.target.closest('.hsw')) return; sx = e.clientX; sy = e.clientY; sid = e.pointerId; });
+      hm.addEventListener('pointerup', function (e) {
+        if (sid !== e.pointerId) return; sid = null;
+        var dx = e.clientX - sx, dy = e.clientY - sy;
+        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.6) setColour(dx < 0 ? 'black' : 'purple');
+      });
+      hm.addEventListener('pointercancel', function () { sid = null; });
+    }
+
+    /* ---------- ambient: zari dust. Canvas at DPR 1, 30 fps, few on phones, paused off screen, thinned by a watchdog ---------- */
+    var LV = [1, 0.6, 0.36, 0.2];
+    function Motes(cv, n) {
+      var ctx = cv.getContext && cv.getContext('2d'); if (!ctx) return;
+      var host = cv.parentNode, w = 1, h = 1, ps = [], level = 0, vis = false, raf = 0, last = 0, prev = 0, frames = 0, slow = 0, t0 = performance.now();
+      function size() {
+        var r = host.getBoundingClientRect();
+        w = cv.width = Math.max(1, Math.round(r.width)); h = cv.height = Math.max(1, Math.round(r.height));
+        ps = [];
+        for (var i = 0; i < n; i++) ps.push({ x: Math.random() * w, y: Math.random() * h, r: COARSE ? 1.3 + Math.random() * 1.4 : 0.9 + Math.random() * 1.4, vy: 5 + Math.random() * 9, ph: Math.random() * 6.28, sw: 4 + Math.random() * 9, a: COARSE ? 0.30 + Math.random() * 0.15 : 0.12 + Math.random() * 0.08, tw: 0.5 + Math.random() * 1.2 });
+      }
+      function draw(t) {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#e8d9b0';
+        var k = Math.ceil(n * LV[level]);
+        for (var i = 0; i < k; i++) {
+          var p = ps[i], y = (((p.y - p.vy * t) % h) + h) % h, x = p.x + Math.sin(t * 0.45 + p.ph) * p.sw;
+          ctx.globalAlpha = p.a * (0.55 + 0.45 * Math.sin(t * p.tw + p.ph));
+          ctx.beginPath(); ctx.arc(x, y, p.r, 0, 6.2832); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+      function frame(now) {
+        raf = 0;
+        if (!vis || D.hidden) return;
+        raf = requestAnimationFrame(frame);
+        var gap = prev ? now - prev : 16.7; prev = now;
+        frames++; if (gap > 24) slow++;
+        if (frames >= 90) { if (slow > 45 && level < LV.length - 1) level++; frames = 0; slow = 0; }   // thinner, never off
+        if (now - last < 30) return;                                                                   // 30 fps
+        last = now; draw((now - t0) / 1000);
+      }
+      function go() { if (!raf && vis && !D.hidden) { prev = 0; frames = 0; slow = 0; raf = requestAnimationFrame(frame); } }
+      size();
+      if (hasIO) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; go(); }).observe(host); else { vis = true; go(); }
+      D.addEventListener('visibilitychange', go);
+      var rz = 0;
+      addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(size, 250); });
+    }
+
+    /* ---------- response: the closing moment on the main actions (a burst of zari sparks; the link opens at once) ---------- */
+    function burst(el) {
+      if (RM || !el.animate) return;
+      var r = el.getBoundingClientRect(), cy = r.top + r.height / 2, n = 16;
+      for (var i = 0; i < n; i++) {
+        var g = D.createElement('i'); g.className = 'spark'; g.setAttribute('aria-hidden', 'true'); D.body.appendChild(g);
+        var cx = r.left + r.width * (0.2 + 0.6 * Math.random()), a = Math.PI * 2 * i / n + Math.random() * 0.5, d = 40 + Math.random() * 60;
+        var an = g.animate([
+          { transform: 'translate(' + cx + 'px,' + cy + 'px) scale(1)', opacity: 1 },
+          { transform: 'translate(' + (cx + Math.cos(a) * d) + 'px,' + (cy + Math.sin(a) * d - 14) + 'px) scale(.2)', opacity: 0 }
+        ], { duration: 650 + Math.random() * 250, easing: EASE, fill: 'forwards' });
+        an.onfinish = (function (x) { return function () { x.remove(); }; })(g);
+      }
+    }
+    D.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-main-action], #add, #co-form button[type=submit]');
+      if (b) burst(b);
+      if (e.target.closest('#add') && !RM) {                // the cart badges bump as the piece goes in
+        $$('[data-count]').forEach(function (c) { if (c.animate) c.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.4)', offset: 0.4 }, { transform: 'scale(1)' }], { duration: 450, delay: 120, easing: EASE }); });
+      }
+      if (e.target.closest('[data-filter]')) {                  // after the shop's own handler has hidden and shown cards
+        setTimeout(function () {
+          var vis = $$('#all .card').filter(function (c) { return !c.hidden; }), up = $('[data-up]');
+          if (up) { up.__tok = {}; up.textContent = vis.length; }
+          if (!RM) vis.forEach(function (c, i) { if (c.animate) c.animate([{ opacity: 0, transform: 'translateY(10px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 340, delay: Math.min(i, 8) * 35, easing: EASE, fill: 'backwards' }); });
+        }, 0);
+      }
+    });
+
+    /* ---------- desktop only: the pinned-on zari detail drifts against the scroll ---------- */
+    if (DESK && !RM) {
+      var det = $('.saree-media .detail'), pt = 0;
+      if (det) addEventListener('scroll', function () {
+        if (pt) return;
+        pt = requestAnimationFrame(function () {
+          pt = 0;
+          var r = det.parentNode.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > innerHeight) return;
+          det.style.translate = '0 ' + (-(r.top + r.height / 2 - innerHeight / 2) * 0.07).toFixed(1) + 'px';
+        });
+      }, { passive: true });
+    }
+
+    /* ---------- after the opening ---------- */
+    var started = false;
+    function after() {
+      if (started) return; started = true;
+      var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 250); };
+      idle(function () { if (bImg && !ready && !RM) loadB(); });                        // the other colourway, in good time
+      if (RM) return;
+      $$('.motes').forEach(function (cv) { Motes(cv, COARSE ? (cv.closest('.hero') ? 22 : 28) : (cv.closest('.hero') ? 38 : 60)); });
+      if (sw[1] && sw[1].animate) setTimeout(function () {                              // one nudge: the swatches are there to be pressed
+        sw[1].animate([{ transform: 'scale(1)' }, { transform: 'scale(1.28)', offset: 0.35 }, { transform: 'scale(1)', offset: 0.6 }, { transform: 'scale(1.18)', offset: 0.8 }, { transform: 'scale(1)' }], { duration: 1100, easing: 'ease-in-out' });
+      }, 700);
+    }
+    if (root.dataset.opening === 'done') after(); else { addEventListener('prabhav-open', after, { once: true }); setTimeout(after, 3200); }
+  } catch (err) { /* motion is an extra: the shop above keeps working */ root.classList.add('rv-fail'); if (window.console) console.warn('motion script stopped:', err && err.message); }
 })();
 </script>
 </body>
