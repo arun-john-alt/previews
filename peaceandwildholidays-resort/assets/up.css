@@ -1,0 +1,130 @@
+/* ===== Upgrade kit: scenes, ambient layer, closing burst. Content is only ever hidden under .js:not(.rv-fail):not(.rm) ===== */
+:root { --pw-out: cubic-bezier(.16, 1, .3, 1); --pw-ui: cubic-bezier(.23, 1, .32, 1); }
+.sc.sc { transition-duration: .9s; transition-timing-function: var(--pw-out);
+  transition-delay: calc(var(--i, 0) * var(--st, 80ms)); transition-property: opacity, translate, scale, rotate, clip-path; }
+/* headline lines rise out of a mask */
+.sc-mask:not(.sc-in) { clip-path: inset(0 0 100% 0); translate: 0 .32em; }
+.sc-mask.sc-in { clip-path: inset(-45% -45% -45% -45%); }
+/* photos un-clip while the picture settles */
+.sc-clip:not(.sc-in) { clip-path: inset(0 0 100% 0); }
+.sc-clip.sc-in { clip-path: inset(-16px -16px -16px -16px); transition-duration: 1.05s; }
+.sc-clip { overflow: hidden; }
+.sc-clip img { transition: scale 1.5s var(--pw-out) calc(var(--i, 0) * var(--st, 80ms)); }
+.sc-clip:not(.sc-in) img { scale: 1.2; }
+.sc-clipx:not(.sc-in) { clip-path: inset(0 100% 0 0); }
+.sc-clipx.sc-in { clip-path: inset(-30% -30% -30% -30%); transition-duration: 1.05s; }
+.sc-clipr:not(.sc-in) { clip-path: inset(0 0 0 100%); }
+.sc-clipr.sc-in { clip-path: inset(-30% -30% -30% -30%); transition-duration: 1.05s; }
+.sc-clip img, .sc-clipx img { will-change: auto; }
+/* a sheet printing out of the machine: rows reveal from the top */
+.sc-print:not(.sc-in) { clip-path: inset(0 0 100% 0); translate: 0 -10px; }
+.sc-print.sc-in { clip-path: inset(-10px -10px -10px -10px); transition-duration: .7s; }
+.sc-slide-l:not(.sc-in) { translate: -38px 0; opacity: 0; }
+.sc-slide-r:not(.sc-in) { translate: 12px 0; opacity: 0; }
+/* a sticker or stamp lands */
+.sc-stamp:not(.sc-in) { scale: 1.55; rotate: -9deg; opacity: 0; }
+.sc-stamp.sc-in { transition-duration: .55s; }
+.sc-peel:not(.sc-in) { rotate: -6deg; translate: 0 16px; opacity: 0; }
+.sc-grow-x:not(.sc-in) { scale: 0 1; transform-origin: 0 50%; }
+.sc-grow-x.sc-in { transition-duration: 1.1s; transform-origin: 0 50%; }
+.sc-grow-y:not(.sc-in) { scale: 1 0; transform-origin: 50% 0; }
+.sc-grow-y.sc-in { transition-duration: 1.2s; transform-origin: 50% 0; }
+.sc-pop:not(.sc-in) { scale: .78; opacity: 0; }
+.sc-pop.sc-in { transition-duration: .6s; transition-timing-function: cubic-bezier(.34, 1.4, .64, 1); }
+.sc-drop:not(.sc-in) { translate: 0 -22px; opacity: 0; }
+.sc-rise:not(.sc-in) { translate: 0 22px; opacity: 0; }
+
+/* ambient canvas: behind the host's content, away from text, never takes a tap */
+.pw-cv { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1.2s linear; }
+.pw-cv.live { opacity: 1; }
+.pw-amb { isolation: isolate; }
+
+/* the closing moment */
+.pw-burst { position: fixed; z-index: 99; width: 0; height: 0; pointer-events: none; }
+.pw-burst i { position: absolute; left: 0; top: 0; width: 7px; height: 7px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) { .pw-burst { display: none; } }
+
+/* ===== Resort version (quiet, photo-led): opening, scenes, press, name bar ===== */
+/* name bar: solid, logo and name always top-left; a thin ribbon under it shows how far down the trip list you are */
+.top { background: var(--paper); box-shadow: 0 1px 0 var(--line); }
+.top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--teal); transform-origin: 0 50%; scale: var(--p, 0) 1; pointer-events: none; }
+.hero, .dark { position: relative; }
+.hero, .dark { isolation: isolate; }
+.hero .wrap, .hero picture { z-index: 1; }
+
+/* press feedback on everything that is tappable */
+:where(.brand, .vcard, .ocard, .ig-top, .crumb, .foot a, .stepper button, .wall a, .chips li) { transition: scale .16s var(--pw-ui), border-color .14s var(--pw-ui), color .14s var(--pw-ui); }
+:where(.brand, .vcard, .ocard, .ig-top, .crumb, .foot a, .stepper button, .wall a):active { scale: .97; }
+.btn:active, .btn.sm:active { scale: 1; }
+.pw-flash { animation: pw-flash .7s var(--pw-out); }
+@keyframes pw-flash { from { box-shadow: inset 0 0 0 2px rgba(242, 233, 194, .9), 0 0 0 0 rgba(242, 233, 194, .0); background-color: rgba(242, 233, 194, .26); } to { box-shadow: inset 0 0 0 2px rgba(242, 233, 194, 0); background-color: rgba(255, 255, 255, .09); } }
+.hero h1 .ln { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pw-unclip { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes pw-line { from { clip-path: inset(0 0 100% 0); translate: 0 .42em; } to { clip-path: inset(-35% -35% -35% -35%); translate: 0 0; } }
+  @keyframes pw-wipex { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-30% -30% -30% -30%); } }
+  @keyframes pw-up { from { translate: 0 18px; } to { translate: 0 0; } }
+  @keyframes pw-in-l { from { translate: -18px 0; } to { translate: 0 0; } }
+  @keyframes pw-pop { from { scale: .8; opacity: 0; } to { scale: 1; opacity: 1; } }
+  @keyframes pw-badge { from { rotate: -140deg; scale: .55; } to { rotate: 0deg; scale: 1; } }
+  @keyframes pw-spray { from { scale: 1.16; } to { scale: 1; } }
+
+  /* opening, home: lives inline in index.html so it plays at first paint */
+
+  /* opening, trip pages: the photo or date panel opens, the name rises, the chips drop in, the buttons settle */
+  .vtop .photo { animation: pw-unclip 1s var(--pw-out) backwards; }
+  .vtop .photo.plain .panel-art b { animation: pw-wipex .95s var(--pw-out) .35s backwards; }
+  .vtop .photo.plain .panel-art span { animation: pw-up .8s var(--pw-out) .7s backwards; }
+  .vtop .photo:not(.plain) img { animation: pw-spray 2.4s var(--pw-out) backwards; }
+  .vtop .crumb { animation: pw-in-l .6s var(--pw-out) .15s backwards; }
+  .vtop h1 { animation: pw-line .95s var(--pw-out) .3s backwards; }
+  .vtop .lead { animation: pw-up .8s var(--pw-out) .55s backwards; }
+  .vtop .chips li { animation: pw-pop .55s var(--pw-out) .75s backwards; }
+  .vtop .chips li:nth-child(2) { animation-delay: .83s; }
+  .vtop .chips li:nth-child(3) { animation-delay: .91s; }
+  .vtop .cta-row .btn { animation: pw-up .7s var(--pw-out) .95s backwards; }
+  .vtop .cta-row .btn:nth-child(2) { animation-delay: 1.05s; }
+  .vtop .cta-row .btn:nth-child(3) { animation-delay: 1.15s; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .vcard { transition: translate .35s var(--pw-ui), scale .16s var(--pw-ui); }
+  .vcard:hover { translate: 0 -4px; }
+}
+
+/* a departure that has left is hidden by site.js (data-past-hide): an element's own display rule must not win */
+[hidden] { display: none !important; }
+
+/* the words that replace a departed date ("Every weekend", "Next dates") are longer than "21-22 Nov": a little smaller so they stay inside their panels */
+@media (max-width: 759px) { .vcard.plain .panel-art b.is-past { font-size: .78rem; letter-spacing: 0; padding: 8px 0; } }
+.ocard .thumb-plain.is-past { font-size: .9rem; }
+@media (min-width: 760px) { .vcard.plain .panel-art b.is-past { font-size: 1rem; } }
+
+/* the images inside a clipped card settle as they un-clip (the card itself is never clipped, so it can always be tapped) */
+img.sc-clip:not(.sc-in) { scale: 1.18; }
+
+/* ===== Peace & Wild: the waterfall's mist over the hero photo, the logo's black ring and warm tone on the date chips ===== */
+.hero picture::before { content: ""; position: absolute; z-index: 1; left: -30%; top: 0; width: 160%; height: 100%; pointer-events: none; opacity: .55;
+  background: radial-gradient(46% 38% at 22% 78%, rgba(255, 255, 255, .5), transparent 72%), radial-gradient(40% 34% at 66% 62%, rgba(255, 255, 255, .38), transparent 72%), radial-gradient(34% 30% at 46% 100%, rgba(242, 233, 194, .5), transparent 72%); }
+.hero picture::after { z-index: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pw-mist { from { translate: -6% 0; } to { translate: 9% -3%; } }
+  @keyframes pw-mistin { from { opacity: 0; } to { opacity: .55; } }
+  .hero picture::before { animation: pw-mistin 1.6s linear 1.4s backwards, pw-mist 15s ease-in-out 1.4s infinite alternate; }
+  .hero.mist-off picture::before { animation-play-state: paused; }
+}
+/* date chips: white badge, the logo's black ring and its warm tone */
+.vcard.plain .panel-art b, .ocard .thumb-plain { color: #141a15; background: #fdfdf9; box-shadow: inset 0 0 0 2px #fdfdf9, inset 0 0 0 3.5px #141a15, 0 0 0 1.5px #b4622f; }
+.vcard.plain .panel-art b { display: block; justify-self: start; border-radius: 12px; padding: 7px 12px; font-size: 1.15rem; line-height: 1.1; text-align: center; }
+@media (max-width: 759px) {
+  .vcard.plain .panel-art { background: none; }
+  .vcard.plain .panel-art b { width: 72px; padding: 8px 4px; font-size: 1.05rem; }
+}
+.ocard .thumb-plain { color: #141a15; }
+
+/* the floating WhatsApp and call pair rests while the booking block or the footer is on screen, so it never sits on their buttons */
+.dock-off .dock { opacity: 0; visibility: hidden; pointer-events: none; }
+@media (max-width: 759px) {
+  .sec { padding-bottom: 0; }
+  .sec > .wrap > :last-child { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+}

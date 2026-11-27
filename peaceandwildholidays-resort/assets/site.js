@@ -22,10 +22,89 @@
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    update();
+    // The page opens at the top, where the page's own buttons are still below the name bar: start in that state without
+    // measuring anything (a measurement here forced a full layout before first paint: one 700 ms task on a throttled
+    // phone; even reading the scroll position forces it). A reload that restores the scroll fires a scroll event, and
+    // every scroll measures as before.
+    root.classList.add("hero-in");
+    doc.body.classList.add("dock-ready");
   } else {
     doc.body.classList.add("dock-ready");
   }
+
+  // Work that is not the opening (the dock's observers, the photo viewer) waits until the opening has played and the browser
+  // is idle. Observers measure the whole page, which cost a 500 ms task on a throttled phone when set up at load.
+  var afterOpening = function (fn) {
+    var ran = 0, go = function () {
+      if (ran) return; ran = 1;
+      (window.requestIdleCallback || function (f) { setTimeout(f, 60); })(fn, { timeout: 1200 });
+    };
+    if (root.dataset.opening === "done") { go(); return; }
+    try { new MutationObserver(function (m, o) { if (root.dataset.opening === "done") { o.disconnect(); go(); } }).observe(root, { attributes: true, attributeFilter: ["data-opening"] }); } catch (x) {}
+    setTimeout(go, 3600);
+  };
+
+  // 1a. The pair also rests while the booking block or the footer is on screen: it would sit on their buttons.
+  afterOpening(function () {
+  if ("IntersectionObserver" in window) {
+    //     It also rests while a trip card, a "more trips" card or the outing button sits in the strip the pair covers
+    //     (the name bar keeps a WhatsApp button, so contact is never out of reach).
+    var seen = 0, mark = null, big = doc.querySelectorAll("#book, .foot"), marks = [].slice.call(doc.querySelectorAll(".vcard, .ocard, .after-wall"));
+    var all = [].slice.call(big).concat(marks);
+    var upd = function (es) {
+      es.forEach(function (e) { e.target.__on = e.isIntersecting; });
+      root.classList.toggle("dock-off", all.some(function (el) { return el.__on; }));
+    };
+    var bigIO = new IntersectionObserver(upd);
+    [].forEach.call(big, function (el) { bigIO.observe(el); });
+    var watch = function () {
+      if (mark) mark.disconnect();
+      mark = new IntersectionObserver(upd, { rootMargin: "-" + Math.max(0, window.innerHeight - 96) + "px 0px 0px 0px" });   // the bottom 96 px of the screen
+      marks.forEach(function (el) { el.__on = false; mark.observe(el); });
+    };
+    watch();
+    window.addEventListener("resize", function () { clearTimeout(watch.t); watch.t = setTimeout(watch, 200); });
+  }
+  });
+
+  // 1b. Departures that have left (India date, UTC+5:30: no daylight saving). Whatever carries data-start (the first day of
+  //     a dated trip) is changed once it has started (on the day it leaves, like the other versions: a departure that has left is no longer offered), so a visitor never sees a trip that already ran offered as upcoming:
+  //       data-past="text"     the element's text becomes this ("a|b" makes a line break)
+  //       data-past-hide       the element is hidden
+  //       data-past-wa="text"  a WhatsApp link asks for the next dates instead of the departed ones
+  //       <option>             becomes data-past-value / data-past-label (no date, so the date field returns), or is
+  //                            removed when it has none; a removed selected option hands the selection to the next one
+  //     Only wording already on the page is used. Without JS the page reads as it always did.
+  var today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
+  [].forEach.call(doc.querySelectorAll("[data-start]"), function (el) {
+    if (el.getAttribute("data-start") > today) return;
+    el.classList.add("is-past");
+    if (el.tagName === "OPTION") {
+      var pv = el.getAttribute("data-past-value");
+      if (pv) {
+        el.setAttribute("data-was", el.value);
+        el.value = pv;
+        el.textContent = el.getAttribute("data-past-label") || el.textContent;
+        el.removeAttribute("data-fixed");
+      } else {
+        var sel = el.parentNode, wasSel = el.selected, nxt = el.nextElementSibling;
+        sel.removeChild(el);
+        if (wasSel) sel.value = nxt ? nxt.value : "";
+      }
+      return;
+    }
+    if (el.hasAttribute("data-past-hide")) { el.hidden = true; return; }
+    var wa = el.getAttribute("data-past-wa");
+    if (wa) { el.href = el.href.split("?")[0] + "?text=" + encodeURIComponent(wa); return; }
+    var text = el.getAttribute("data-past");
+    if (text !== null) {
+      el.textContent = "";
+      text.split("|").forEach(function (part, i) {
+        if (i) el.appendChild(doc.createElement("br"));
+        el.appendChild(doc.createTextNode(part));
+      });
+    }
+  });
 
   // 2. Planner: builds the WhatsApp message the visitor will send.
   var planner = doc.querySelector("[data-planner]");
@@ -57,6 +136,8 @@
     };
     var capNote = planner.querySelector("[data-cap]"), caps = {};
     try { caps = JSON.parse(planner.getAttribute("data-caps") || "{}"); } catch (e) { caps = {}; }
+    // an option that lost its dates keeps its price note
+    [].forEach.call(planner.querySelectorAll("option[data-was]"), function (o) { if (caps[o.getAttribute("data-was")] && !caps[o.value]) caps[o.value] = caps[o.getAttribute("data-was")]; });
     var showCap = function () { if (capNote) capNote.textContent = caps[trip.value] || ""; };
     trip.addEventListener("change", showCap);
     // a team outing starts at 10 people, unless the visitor already changed the count
@@ -84,7 +165,9 @@
   }
 
   // 3. Photo viewer: tapping a photo in a wall opens it large. Without JS the link opens the image itself.
+  //    Wired after the opening has played (idle): until then the link simply opens the image.
   var links = [].slice.call(doc.querySelectorAll("[data-zoom]"));
+  var wireViewer = function () {
   if (links.length && typeof HTMLDialogElement === "function") {
     var dlg = doc.createElement("dialog");
     dlg.className = "lb";
@@ -106,8 +189,12 @@
         e.preventDefault();
         show(i);
         dlg.showModal();
+        // one history entry while a photo is open, so the phone's Back button closes the photo instead of leaving the page
+        try { history.pushState({ lb: 1 }, ""); } catch (x) {}
       });
     });
+    window.addEventListener("popstate", function () { if (dlg.open) dlg.close(); });
+    dlg.addEventListener("close", function () { try { if (history.state && history.state.lb) history.back(); } catch (x) {} });
     dlg.querySelector(".x").addEventListener("click", function () { dlg.close(); });
     dlg.querySelector(".prev").addEventListener("click", function () { show(cur - 1); });
     dlg.querySelector(".next").addEventListener("click", function () { show(cur + 1); });
@@ -117,4 +204,6 @@
       if (e.key === "ArrowRight") show(cur + 1);
     });
   }
+  };
+  afterOpening(wireViewer);
 })();
