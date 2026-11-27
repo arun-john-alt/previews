@@ -9,9 +9,18 @@
 <meta name="theme-color" content="#1e3a27">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The stencil face sets the name and the yellow blanks; fetch it early so phones on slow data don't reflow -->
-<link rel="preload" as="font" type="font/woff" crossorigin href="https://fonts.gstatic.com/s/bigshouldersstencil/v4/TwM2-JIEQ1Je5sI6Bx1TKHD83rT3u3NSCfbFxqa9oQbR_CiZMvOwPB7iSLKdsgE9Sp0x4uZK.woff">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- The stencil face (see @font-face below) is not preloaded: on a throttled phone the preload made first paint wait over a second -->
+<!-- Barlow loads without blocking the first paint; the phone's own sans stands in until it arrives -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<script>
+/* js class turns the reveal CSS on; if the page script has not started within 2.5 s the failsafe shows everything */
+document.documentElement.classList.add('js');
+setTimeout(function () { if (!window.__wv) document.documentElement.classList.add('rv-fail'); }, 2500);
+/* the opening is CSS keyframes (about 1.6 s); this marks it done, timed from the start of the page, not from the
+   end of parsing, so a slow phone does not stretch it */
+setTimeout(function () { document.documentElement.dataset.opening = 'done'; },
+  matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1800);
+</script>
 <style>
   /* Static 800 / display-size cut of Big Shoulders Stencil, straight from Google's font server. The variable file
      draws at its thinnest weight in some WebKit builds, so the page asks for the fixed instance instead. */
@@ -32,6 +41,10 @@
       local("Helvetica"), local("Liberation Sans");
     size-adjust: 74%;
   }
+  /* Barlow arrives after first paint, so until then the phone's own sans is scaled to Barlow's width: the sentence
+     keeps its line breaks when the real face lands (measured: Barlow is about 95% of Arial's width, 103% of Roboto's). */
+  @font-face { font-family: "Barlow R"; font-weight: 400 600; src: local("Roboto"), local("Roboto-Regular"); size-adjust: 103%; }
+  @font-face { font-family: "Barlow A"; font-weight: 400 600; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Liberation Sans"); size-adjust: 95%; }
   /* Estate-board world: painted estate green, paint white, and one signal yellow taken from their own reel-cover
      headlines and the sun in their logo. Yellow is only for what the guest changes and the Send button. */
   :root {
@@ -43,7 +56,7 @@
     --sun: #f4d23c;
     --ink: #13200f;
     --stencil: "Big Shoulders Stencil", "BSS fallback", sans-serif;
-    --read: "Barlow", "Segoe UI", Roboto, sans-serif;
+    --read: "Barlow", "Barlow R", "Barlow A", "Segoe UI", Roboto, sans-serif;
     --gut: 16px;
     --ease: cubic-bezier(.23, 1, .32, 1);
   }
@@ -74,7 +87,8 @@
 
   /* Photo notices: each photo in a paint-white mount with a ruled caption under it */
   .plate { margin: 0; }
-  .plate .mount { background: var(--paint); padding: 5px; }
+  /* the paper frame is a border, so a photo that settles from a zoom is clipped inside it and never widens the page */
+  .plate .mount { background: var(--paint); border: 5px solid var(--paint); overflow: hidden; }
   .plate .mount > img { aspect-ratio: 4 / 5; background: #2a4733; }
   .plate figcaption { border-top: 1px solid var(--rule); margin-top: 10px; padding-top: 8px; }
   .plate .what { display: block; font-family: var(--stencil); font-weight: 800; text-transform: uppercase; font-size: 21px; line-height: 1; letter-spacing: .02em; }
@@ -99,8 +113,9 @@
   .blank .v { display: inline-block; min-width: 0; white-space: normal; }
   /* keeps a blank and the comma after it on one line (the browser would otherwise start a line with the comma) */
   .nw { white-space: nowrap; }
-  .blank .v.stamp { animation: stamp .2s var(--ease); }
-  @keyframes stamp { from { opacity: .3; transform: translateY(3px) scale(1.06); } to { opacity: 1; transform: none; } }
+  /* a new choice is painted in from the left, like a fresh coat on the board */
+  .blank .v.stamp { animation: stamp .34s var(--ease); }
+  @keyframes stamp { from { clip-path: inset(-4px 100% -4px 0); } to { clip-path: inset(-4px -4px -4px 0); } }
 
   .send { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; margin-top: 14px; padding: 12px 18px;
     background: var(--sun); color: var(--ink); text-decoration: none; font-family: var(--stencil); font-weight: 800; font-size: 25px; letter-spacing: .03em; text-transform: uppercase;
@@ -169,7 +184,7 @@
     :root { --gut: 40px; }
     .head { padding-top: 30px; }
     .name { font-size: clamp(90px, 10.5vw, 150px); }
-    .name span { display: inline; }
+    .name span { display: inline-block; }
     .where { font-size: 16px; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 56px; align-items: center; }
     .hero { padding-top: 26px; padding-bottom: 64px; }
@@ -196,15 +211,110 @@
     .ghost:hover { background: rgba(242, 241, 234, .1); }
     .plank:hover { transform: translateX(4px); }
   }
+
+  /* ---- Name bar: the logo and name stay top-left once the page is scrolled. Solid, so text never ghosts through. ---- */
+  html { scroll-padding-top: 64px; }
+  body > * { -webkit-tap-highlight-color: transparent; }
+  .bar { position: sticky; top: 0; z-index: 30; background: var(--board-deep); border-bottom: 1px solid var(--rule); }
+  .bar .wrap { display: flex; align-items: center; gap: 10px; height: 52px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; min-width: 0; transition: transform .14s var(--ease); }
+  .brand img { width: 38px; height: 38px; border-radius: 50%; background: #fff; object-fit: cover; flex: none; border: 2px solid var(--paint); }
+  .brand b { font-family: var(--stencil); font-weight: 800; text-transform: uppercase; font-size: 26px; line-height: 1; letter-spacing: .02em; white-space: nowrap; }
+  .brand small { font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--paint-dim); white-space: nowrap; }
+  .bar .icon-link { margin-left: auto; }
+  .js .bar { position: fixed; left: 0; right: 0; transform: translateY(-100%); visibility: hidden; transition: transform .26s var(--ease), visibility 0s linear .26s; }
+  .js .bar.on { transform: none; visibility: visible; transition: transform .26s var(--ease), visibility 0s; }
+  @media (max-width: 359px) { .brand small { display: none; } }
+
+  /* ---- Press feedback on everything that can be pressed ---- */
+  .blank, .icon-link, .alt a, footer li a { transition: transform .14s var(--ease); }
+  .blank:active { transform: scale(.97); }
+  .icon-link:active, .alt a:active, footer li a:active, .brand:active { transform: scale(.96); }
+  .plank:active { transform: translateX(4px) scale(.985); }
+
+  /* ---- Closing moment on the main action: a band of paint-white light crosses the button. It never waits on the link. ---- */
+  .send { position: relative; overflow: hidden; }
+  .send::after { content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-120%);
+    background: linear-gradient(100deg, transparent 32%, rgba(255, 255, 255, .6) 50%, transparent 68%); }
+  .send.go::after { animation: sheen .8s var(--ease); }
+  @keyframes sheen { to { transform: translateX(120%); } }
+
+  /* ---- Ambient: sun-yellow and paint-white specks drift up behind the page, like dust in estate light ---- */
+  #amb { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .concept, .head, main, footer { position: relative; z-index: 1; }
+
+  /* ---- Opening: base styles above are the end state; these keyframes only play from the start (about 2 s) ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .name span { animation: paint .85s var(--enter) .05s backwards; }
+    .name span + span { animation-delay: .2s; }
+    .head::after { transform-origin: 0 50%; animation: rule .9s var(--enter) .3s backwards; }
+    .where, .head .icon-link { animation: soft .6s ease-out .55s backwards; }
+    .hero .plate .mount { animation: unveil 1s var(--enter) .25s backwards; }
+    .hero .plate .mount > img { animation: settle 1.7s var(--enter) .2s backwards; }
+    .hero .plate figcaption { animation: soft .6s ease-out .9s backwards; }
+    .sentence { animation: soft .7s ease-out .55s backwards; }
+    .blank { animation: blankIn .5s var(--enter) calc(.8s + var(--i, 0) * .08s) backwards; }
+    #send { animation: sendIn .6s var(--enter) 1s backwards; }
+    .alt { animation: soft .6s ease-out 1.3s backwards; }
+  }
+  @keyframes paint { from { clip-path: inset(-.1em 100% -.1em -.05em); } to { clip-path: inset(-.1em -.05em -.1em -.05em); } }
+  @keyframes rule { from { transform: scaleX(0); } to { transform: none; } }
+  @keyframes soft { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes unveil { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes settle { from { scale: 1.14; } to { scale: 1; } }
+  @keyframes blankIn { from { clip-path: inset(-8px 100% -8px 0); } to { clip-path: inset(-8px -8px -8px -8px); } }
+  @keyframes sendIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+  /* ---- Scroll scenes: each section enters in its own way, once. Content is never hidden without the script. ---- */
+  :root { --enter: cubic-bezier(.16, 1, .3, 1); }
+  @media (prefers-reduced-motion: no-preference) {
+    /* headings: painted across, left to right */
+    .js h2.rv, .js .fname.rv { transition: clip-path .9s var(--enter); }
+    .js:not(.rv-fail) h2.rv:not(.in), .js:not(.rv-fail) .fname.rv:not(.in) { clip-path: inset(-.12em 100% -.12em -.05em); }
+    /* the days: photo notices unveiled, wide ones across, tall ones upward, the photo settling from a zoom */
+    .js .plate.rv .mount { transition: clip-path 1s var(--enter) var(--d, 0s); }
+    .js .plate.rv .mount > img { transition: scale 1.5s var(--enter) var(--d, 0s); }
+    .js .plate.rv figcaption { transition: opacity .6s ease-out calc(.3s + var(--d, 0s)); }
+    .js:not(.rv-fail) .plate.rv:not(.in) .mount > img { scale: 1.16; }
+    .js:not(.rv-fail) .plate.rv:not(.in) figcaption { opacity: 0; }
+    .js:not(.rv-fail) .plate.wide.rv:not(.in) .mount { clip-path: inset(0 100% 0 0); }
+    .js:not(.rv-fail) .plate.tall.rv:not(.in) .mount { clip-path: inset(100% 0 0 0); }
+    /* the stays: signposts nailed up one after another */
+    .js .planks li.rv { transition: clip-path .7s var(--enter) var(--d, 0s); }
+    .js .planks li.rv .plank { transition: translate .7s var(--enter) var(--d, 0s), transform .14s var(--ease); }
+    .js:not(.rv-fail) .planks li.rv:not(.in) { clip-path: inset(0 100% 0 0); }
+    .js:not(.rv-fail) .planks li.rv:not(.in) .plank { translate: -18px 0; }
+    .js .planks-note.rv { transition: opacity .6s ease-out .3s; }
+    .js:not(.rv-fail) .planks-note.rv:not(.in) { opacity: 0; }
+    /* getting here: the gate swings open from the middle, the address is written under it */
+    .js .plate.gate.rv .mount { transition: clip-path 1.1s var(--enter); }
+    .js:not(.rv-fail) .plate.gate.rv:not(.in) .mount { clip-path: inset(0 50% 0 50%); }
+    .js .addr.rv, .js .route.rv, .js .row-btns.rv { transition: clip-path .8s var(--enter) var(--d, 0s); }
+    .js:not(.rv-fail) :is(.addr, .route, .row-btns).rv:not(.in) { clip-path: inset(0 0 100% 0); }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
-<body>
+<body id="top">
+<canvas id="amb" aria-hidden="true"></canvas>
 
 <div class="concept" data-concept-banner>Concept for <strong>@westernvalleyresorts</strong> &middot; not the official site</div>
+
+<div class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Western Valley Resorts, back to the top">
+      <img src="assets/logo.jpg" width="38" height="38" alt="">
+      <b>Western Valley</b><small>Ooty</small>
+    </a>
+    <a class="icon-link" href="tel:+919003930530" aria-label="Call Western Valley on 90039 30530">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+      Call
+    </a>
+  </div>
+</div>
 
 <header class="head wrap">
   <h1 class="name"><span>Western</span> <span>Valley</span></h1>
@@ -221,30 +331,30 @@
   <section class="hero wrap" aria-label="Plan a stay">
     <div class="hero-grid">
       <figure class="plate">
-        <div class="mount"><img src="assets/aerial.jpg" width="512" height="552" alt="Western Valley's red-roofed buildings among terraced tea gardens, seen from above"></div>
+        <div class="mount"><img src="assets/aerial.jpg" width="512" height="552" fetchpriority="high" alt="Western Valley's red-roofed buildings among terraced tea gardens, seen from above"></div>
         <figcaption><span class="what">Red roofs in the tea, Nanjanad</span></figcaption>
       </figure>
 
       <form class="ask" id="ask" action="https://wa.me/919003930530" method="get">
         <p class="sentence">
           <span data-we>We&rsquo;re</span>
-          <label class="blank"><span class="v" aria-hidden="true" data-v="guests">2 guests</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <label class="blank" style="--i:0"><span class="v" aria-hidden="true" data-v="guests">2 guests</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <select name="guests" aria-label="How many guests"></select></label>
           for
-          <label class="blank"><span class="v" aria-hidden="true" data-v="nights">2 nights</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <label class="blank" style="--i:1"><span class="v" aria-hidden="true" data-v="nights">2 nights</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <select name="nights" aria-label="How many nights"></select></label>
           from
-          <span class="nw"><label class="blank"><span class="v" aria-hidden="true" data-v="date">a date</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="nw"><label class="blank" style="--i:2"><span class="v" aria-hidden="true" data-v="date">a date</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <select name="date" aria-label="First night"><option value="a date we'll confirm">a date</option></select></label>,</span>
           in
-          <span class="nw"><label class="blank"><span class="v" aria-hidden="true" data-v="stay">a Valley View Suite</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="nw"><label class="blank" style="--i:3"><span class="v" aria-hidden="true" data-v="stay">a Valley View Suite</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <select name="stay" aria-label="Which stay">
               <option value="a Valley View Suite">a Valley View Suite</option>
               <option value="a Wooden Villa">a Wooden Villa</option>
               <option value="whichever is free">whichever is free</option>
             </select></label>,</span>
           reaching<span data-around> around</span>
-          <span class="nw"><label class="blank"><span class="v" aria-hidden="true" data-v="hour">4 PM</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="nw"><label class="blank" style="--i:4"><span class="v" aria-hidden="true" data-v="hour">4 PM</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <select name="hour" aria-label="Roughly when you will reach"></select></label>.</span>
         </p>
         <a class="send" id="send" href="https://wa.me/919003930530?text=Hello%20Western%20Valley!%20We%27d%20like%20to%20plan%20a%20stay.%20Please%20share%20the%20tariff.">
@@ -258,29 +368,29 @@
 
   <section class="sec" aria-labelledby="days-h">
     <div class="wrap">
-      <h2 id="days-h">Slow mornings, cosy nights</h2>
+      <h2 class="rv" id="days-h">Slow mornings, cosy nights</h2>
       <div class="notices">
-        <figure class="plate wide">
+        <figure class="plate wide rv">
           <div class="mount"><img src="assets/house-lawn.jpg" width="512" height="474" loading="lazy" alt="A brick and white building with a pergola, a sloping lawn and flower beds under a blue sky"></div>
           <figcaption><span class="what">Lawn and flower beds</span><span class="said">For the love of quiet mornings and mountain views.</span></figcaption>
         </figure>
-        <figure class="plate tall">
+        <figure class="plate tall rv">
           <div class="mount"><img src="assets/view.jpg" width="360" height="504" loading="lazy" alt="The view from a railing over rows of tea, a red-roofed building and the hills beyond"></div>
           <figcaption><span class="what">The view</span><span class="said">Surrounded by the beauty of the Nilgiris.</span></figcaption>
         </figure>
-        <figure class="plate tall" id="garden">
+        <figure class="plate tall rv" id="garden">
           <div class="mount"><img src="assets/garden-path.jpg" width="360" height="606" loading="lazy" alt="A couple walking on stepping stones through a hedged garden"></div>
           <figcaption><span class="what">The garden path</span><span class="said">The quieter side of Ooty.</span></figcaption>
         </figure>
-        <figure class="plate wide">
+        <figure class="plate wide rv">
           <div class="mount"><img src="assets/pergola.jpg" width="480" height="640" loading="lazy" style="object-position: 50% 62%" alt="A white and brick building with a timber pergola and balcony, a couple at the railing"></div>
           <figcaption><span class="what">Pergola and balcony</span><span class="said">The moments you share along the way.</span></figcaption>
         </figure>
-        <figure class="plate tall">
+        <figure class="plate tall rv">
           <div class="mount"><img src="assets/railing.jpg" width="360" height="518" loading="lazy" alt="Two guests at a railing looking out over the valley on a cloudy afternoon"></div>
           <figcaption><span class="what">At the railing</span><span class="said">Views that make you slow down.</span></figcaption>
         </figure>
-        <figure class="plate tall lamps">
+        <figure class="plate tall lamps rv">
           <div class="mount"><img src="assets/lamps.jpg" width="512" height="352" loading="lazy" alt="A three-globe lamp post lit against the dusk sky"></div>
           <figcaption><span class="what">Lamps at dusk</span><span class="said">Time that doesn&rsquo;t need to be rushed.</span></figcaption>
         </figure>
@@ -290,28 +400,28 @@
 
   <section class="sec" aria-labelledby="stays-h">
     <div class="wrap">
-      <h2 id="stays-h">Suites, villas and a garden</h2>
+      <h2 class="rv" id="stays-h">Suites, villas and a garden</h2>
       <ul class="planks">
-        <li><button class="plank" type="button" data-stay="a Valley View Suite">Valley View Suites <small>Add</small></button></li>
-        <li><button class="plank" type="button" data-stay="a Wooden Villa">Wooden Villas <small>Add</small></button></li>
-        <li><a class="plank" href="#garden">Scenic Garden <small>See</small></a></li>
+        <li class="rv"><button class="plank" type="button" data-stay="a Valley View Suite">Valley View Suites <small>Add</small></button></li>
+        <li class="rv"><button class="plank" type="button" data-stay="a Wooden Villa">Wooden Villas <small>Add</small></button></li>
+        <li class="rv"><a class="plank" href="#garden">Scenic Garden <small>See</small></a></li>
       </ul>
-      <p class="planks-note">Tap a stay to add it to your message. Tariff on WhatsApp.</p>
+      <p class="planks-note rv">Tap a stay to add it to your message. Tariff on WhatsApp.</p>
     </div>
   </section>
 
   <section class="sec" aria-labelledby="here-h">
     <div class="wrap">
-      <h2 id="here-h">Getting here</h2>
+      <h2 class="rv" id="here-h">Getting here</h2>
       <div class="arrive-grid">
-        <figure class="plate gate">
+        <figure class="plate gate rv">
           <div class="mount"><img src="assets/gate.jpg" width="512" height="426" loading="lazy" alt="Brick gate pillars, an open iron gate and the Western Valley sign on a stone wall"></div>
           <figcaption><span class="what">Our gate</span></figcaption>
         </figure>
         <div>
-          <address class="addr"><b>Western Valley Resorts</b>Bygada Road, Yellakandi, Nanjanad, Ooty, Tamil Nadu 643004</address>
-          <p class="route"><b>Coming up from Mettupalayam?</b><span>While the Mettupalayam&ndash;Coonoor route is closed, take the Kotagiri road to Ooty.</span></p>
-          <div class="row-btns">
+          <address class="addr rv"><b>Western Valley Resorts</b>Bygada Road, Yellakandi, Nanjanad, Ooty, Tamil Nadu 643004</address>
+          <p class="route rv" style="--d:.12s"><b>Coming up from Mettupalayam?</b><span>While the Mettupalayam&ndash;Coonoor route is closed, take the Kotagiri road to Ooty.</span></p>
+          <div class="row-btns rv" style="--d:.24s">
             <a class="ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Western%20Valley%20Resorts%2C%20Bygada%20Road%2C%20Nanjanad%2C%20Ooty%20643004" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>
               Open in Maps</a>
@@ -327,7 +437,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="fname">Western Valley</div>
+    <div class="fname rv">Western Valley</div>
     <p style="margin:6px 0 0">Immersed in nature, nestled in Ooty.</p>
     <ul>
       <li><a href="https://instagram.com/westernvalleyresorts" target="_blank" rel="noopener">@westernvalleyresorts &middot; 20K followers</a></li>
@@ -431,6 +541,118 @@
     }).observe(send);
   }
   update();
+})();
+</script>
+<script>
+/* Motion, plain script (no library): the opening's end marker, scroll reveals, the name bar, the closing sheen on
+   the main action and the ambient specks. Everything is complete and still under reduced motion. */
+(function () {
+  "use strict";
+  window.__wv = 1;
+  var D = document, root = D.documentElement;
+  var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var rvs = [].slice.call(D.querySelectorAll(".rv"));
+
+  // Stagger photos and signposts inside their own group
+  [].forEach.call(D.querySelectorAll(".notices, .planks"), function (g) {
+    [].forEach.call(g.querySelectorAll(".rv"), function (el, i) { el.style.setProperty("--d", (i % 3) * 70 + "ms"); });
+  });
+
+  function show(el) { el.classList.add("in"); }
+  var io = null;
+  if (RM || !("IntersectionObserver" in window) || root.classList.contains("rv-fail")) {
+    rvs.forEach(show);
+  } else {
+    io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    rvs.forEach(function (el) { io.observe(el); });
+  }
+  // A fast flick can jump past an element before the observer reports it: reveal anything now on or above the screen.
+  function sweep() {
+    var vh = innerHeight;
+    for (var i = 0; i < rvs.length; i++) {
+      var el = rvs[i];
+      if (!el.classList.contains("in") && el.getBoundingClientRect().top < vh * 0.94) show(el);
+    }
+  }
+
+  // Name bar: shown once the page has moved
+  var bar = D.getElementById("bar"), ticking = false;
+  function onScroll() {
+    ticking = false;
+    bar.classList.toggle("on", (window.pageYOffset || root.scrollTop) > 24);
+    sweep();
+  }
+  addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener("resize", sweep);
+  addEventListener("load", function () { onScroll(); setTimeout(sweep, 400); });
+  onScroll();
+
+  // Closing moment: a band of light crosses the button. The link is never held back.
+  function sheen(el) {
+    el.classList.remove("go"); void el.offsetWidth; el.classList.add("go");
+    setTimeout(function () { el.classList.remove("go"); }, 900);
+  }
+  D.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest(".send") : null;
+    if (a && !RM) sheen(a);
+  }, true);
+
+  // The opening is CSS; this only marks when it has finished
+  var send = D.getElementById("send");
+  if (!RM) setTimeout(function () { if (send) sheen(send); }, 1450);
+
+  // Ambient specks: DPR 1, about 30 frames a second, paused when the tab is hidden, thinned if frames run slow
+  if (RM) return;
+  var cv = D.getElementById("amb"), cx = cv && cv.getContext && cv.getContext("2d");
+  if (!cx) return;
+  var phone = matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+  var MAX = phone ? 28 : 70, LV = [1, 0.6, 0.36, 0.2], lvl = 0, W = 0, H = 0, parts = [], raf = 0, last = 0, tick = 0, lastDraw = 0, slow = 0, frames = 0;
+  function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+  function seed() {
+    parts = [];
+    for (var i = 0; i < MAX; i++) {
+      parts.push({ x: Math.random() * W, y: Math.random() * H, r: 0.8 + Math.random() * 1.7, v: 6 + Math.random() * 12,
+        ph: Math.random() * 6.28, sw: 4 + Math.random() * 10, a: 0.07 + Math.random() * 0.11, sun: Math.random() < 0.55 });
+    }
+  }
+  function draw(now) {
+    var dt = Math.min(0.1, (now - lastDraw) / 1000); lastDraw = now;
+    cx.clearRect(0, 0, W, H);
+    var n = Math.round(MAX * LV[lvl]);
+    for (var i = 0; i < n; i++) {
+      var p = parts[i];
+      p.y -= p.v * dt; p.ph += dt * 0.6;
+      if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
+      cx.fillStyle = (p.sun ? "rgba(244,210,60," : "rgba(242,241,234,") + p.a.toFixed(3) + ")";
+      cx.beginPath(); cx.arc(p.x + Math.sin(p.ph) * p.sw, p.y, p.r, 0, 6.2832); cx.fill();
+    }
+  }
+  function loop(now) {
+    raf = requestAnimationFrame(loop);
+    if (last) {
+      var d = now - last;
+      if (d < 500) {
+        frames++; if (d > 24) slow++;
+        if (frames >= 90) { if (slow > 45 && lvl < LV.length - 1) lvl++; frames = 0; slow = 0; }
+      }
+    }
+    last = now;
+    tick ^= 1;
+    if (tick) draw(now);
+  }
+  function start() { if (!raf) { last = 0; lastDraw = performance.now(); raf = requestAnimationFrame(loop); } }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+  D.addEventListener("visibilitychange", function () { if (D.hidden) stop(); else start(); });
+  var rt = 0;
+  addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { size(); }, 200); });
+  function boot() { size(); seed(); start(); }
+  // after load, and after the opening has had its first seconds, so it never competes with the first paint
+  addEventListener("load", function () {
+    if (window.requestIdleCallback) requestIdleCallback(function () { setTimeout(boot, 900); }, { timeout: 2500 });
+    else setTimeout(boot, 1500);
+  });
 })();
 </script>
 </body>
