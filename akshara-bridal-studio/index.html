@@ -9,6 +9,9 @@
 <meta name="description" content="Bridal makeup, saree draping and bridal hairstyling in Anna Nagar, Chennai. Pick a look and send it on WhatsApp.">
 <link rel="preload" href="fonts/kalnia-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/catamaran-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/catamaran-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/catamaran-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/kalnia-600.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* Static instances (Latin), self-hosted so every phone engine draws the same weights */
   @font-face { font-family: "Kalnia"; font-weight: 500; font-display: swap; src: url(fonts/kalnia-500.woff2) format("woff2"); }
@@ -35,6 +38,7 @@
     --display: "Kalnia", "Georgia", serif;
     --body: "Catamaran", "Segoe UI", system-ui, sans-serif;
     --ease: cubic-bezier(.23, 1, .32, 1);
+    --out: cubic-bezier(.16, 1, .3, 1);
     --gutter: 16px;
   }
   * { box-sizing: border-box; }
@@ -58,6 +62,8 @@
 
   /* Header: the studio's name over the door */
   .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) 6px; max-width: 1180px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .badge { width: 40px; height: 40px; border-radius: 50%; flex: none; }
   .name h1 { font-family: var(--display); font-size: 23px; line-height: 1.08; letter-spacing: -.01em; }
   .name p { margin: 3px 0 0; font-size: 16px; color: var(--ink-soft); line-height: 1.3; }
   .round { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--brass-deep); color: var(--brass); text-decoration: none; transition: transform .14s var(--ease), border-color .2s; }
@@ -72,7 +78,7 @@
   .bulb { position: relative; width: 44px; height: 46px; display: grid; place-items: center; }
   .bulb::before { /* the light the bulb throws on the frame */
     content: ""; position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(255, 206, 136, .42), rgba(255, 206, 136, 0));
+    background: radial-gradient(closest-side, rgba(255, 206, 136, .6), rgba(255, 206, 136, 0));
     opacity: .35; transition: opacity .3s var(--ease); pointer-events: none;
   }
   .bulb i { position: relative; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #6e5237;
@@ -119,9 +125,9 @@
   .blank.date { width: 9.4em; }
   /* iPhone draws an empty date field as a bare line, so the slip writes its own hint until a date is picked */
   .datewrap { position: relative; display: inline-block; max-width: 100%; vertical-align: baseline; }
-  .datewrap::after { content: "pick a date"; position: absolute; left: 2px; right: 30px; top: 0; bottom: 3px; display: flex; align-items: center; font: 500 20px/1.3 var(--body); color: #7a5248; pointer-events: none; white-space: nowrap; overflow: hidden; }
+  .js .datewrap::after { content: "pick a date"; position: absolute; left: 2px; right: 30px; top: 0; bottom: 3px; display: flex; align-items: center; font: 500 20px/1.3 var(--body); color: #7a5248; pointer-events: none; white-space: nowrap; overflow: hidden; }
   .datewrap.filled::after, .datewrap:focus-within::after { display: none; }
-  .datewrap:not(.filled) .blank.date:not(:focus) { color: transparent; }
+  .js .datewrap:not(.filled) .blank.date:not(:focus) { color: transparent; }
   .blank.place { width: 100%; }
   .blank::-webkit-calendar-picker-indicator { opacity: .7; }
 
@@ -148,7 +154,7 @@
 
   /* Why people trust the studio */
   .proof { max-width: 1180px; margin: 0 auto; padding: 52px var(--gutter) 8px; }
-  .proof p { margin: 0; padding: 18px 0 20px; border-top: 1px solid rgba(201, 163, 108, .3); border-bottom: 1px solid rgba(201, 163, 108, .3); font-family: var(--display); font-weight: 500; font-size: 23px; line-height: 1.4; color: var(--ink); max-width: 26em; text-wrap: pretty; }
+  .proof p { position: relative; margin: 0; padding: 18px 0 20px; font-family: var(--display); font-weight: 500; font-size: 23px; line-height: 1.4; color: var(--ink); max-width: 26em; text-wrap: pretty; }
 
   /* Reels */
   .reels { max-width: 1180px; margin: 0 auto; padding: 48px var(--gutter) 8px; }
@@ -184,10 +190,11 @@
 
   /* The mirror switches on: the one authored moment */
   @media (prefers-reduced-motion: no-preference) {
-    .js .bulb i { animation: on .5s var(--ease) both; animation-delay: calc(var(--n) * 70ms + 120ms); }
-    .js .bulb::before { animation: glow .6s var(--ease) both; animation-delay: calc(var(--n) * 70ms + 160ms); }
-    @keyframes on { from { filter: saturate(.2) brightness(.45); } }
-    @keyframes glow { from { opacity: 0; } }
+    .js .bulb i { animation: on .85s var(--out) backwards; animation-delay: calc(var(--n) * 70ms + 150ms); }
+    /* every bulb flares warm in turn (opacity and transform only), then settles: only the current look's bulb stays lit */
+    .js .bulb::before { animation: flashOn .85s var(--out) backwards; animation-delay: calc(var(--n) * 70ms + 150ms); }
+    @keyframes on { 0% { transform: scale(.82); } 35% { transform: scale(1.14); } }
+    @keyframes flashOn { 0% { opacity: 0; transform: scale(.6); } 35% { opacity: 1; transform: scale(1.5); } }
   }
   @media (prefers-reduced-transparency: reduce) { .dock { background: #1a0d0b; } }
   @media (hover: hover) {
@@ -201,10 +208,96 @@
     .more:hover, footer a:hover { text-decoration-thickness: 2px; }
   }
 
-  .proof .num { font-family: var(--body); font-weight: 700; letter-spacing: 0; }
+  /* the sections below the mirror are laid out as they near the screen, not in the opening's first pass (the page has no in-page links to jump into them; the sizes are their phone heights, so the scrollbar barely moves) */
+  .proof { content-visibility: auto; contain-intrinsic-size: auto 300px; }
+  .reels { content-visibility: auto; contain-intrinsic-size: auto 740px; }
+  .studio { content-visibility: auto; contain-intrinsic-size: auto 560px; }
+  footer { content-visibility: auto; contain-intrinsic-size: auto 260px; }
+  .proof .num { font-family: var(--body); font-weight: 700; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  /* the two brass rules are drawn, so a scene can draw them */
+  .proof p::before, .proof p::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: rgba(201, 163, 108, .3); transform-origin: 0 50%; transition: transform 1.2s var(--out); }
+  .proof p::before { top: 0; }
+  .proof p::after { bottom: 0; transition-delay: .25s; }
+
+  /* ===== The name bar: solid, always on top, never over the main action ===== */
+  .namebar { position: sticky; top: 0; z-index: 30; background: var(--room); border-bottom: 1px solid rgba(201, 163, 108, .2); }
+  .namebar .top { padding-top: 9px; padding-bottom: 9px; }
+  .ln { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+  .ln > span { display: block; }
+
+  /* ===== Ambient: warm dust drifting up the mirror (canvas, behind nothing that is text) ===== */
+  .amb { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 3; }
+  .spot { position: absolute; inset: 0; pointer-events: none; z-index: 2; opacity: 0; transition: opacity .4s var(--ease);
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 40%), rgba(255, 214, 150, .2), rgba(255, 214, 150, 0)); }
+  .glass:hover .spot { opacity: 1; }
+  .glass::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 55%; z-index: 2; pointer-events: none; opacity: 0;
+    background: linear-gradient(100deg, rgba(255, 226, 170, 0), rgba(255, 226, 170, .34), rgba(255, 226, 170, 0)); }
+  .look { overflow: hidden; }
+  .look img { transform: translate3d(var(--px, 0%), 0, 0) scale(1.06); }
+  .drape { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .drape { display: block; position: absolute; top: 0; bottom: 0; width: 50.5%; z-index: 4; pointer-events: none; background: #140b09; }
+    .js .drape.l { left: 0; border-right: 1px solid rgba(201, 163, 108, .5); }
+    .js .drape.r { right: 0; border-left: 1px solid rgba(201, 163, 108, .5); }
+  }
+
+  /* press feedback on everything that was missing it */
+  .more, footer .links a { transition: transform .14s var(--ease); }
+  .more:active, footer .links a:active { transform: scale(.97); }
+  .spark { position: fixed; left: 0; top: 0; width: 7px; height: 7px; margin: -3px 0 0 -3px; border-radius: 50%; pointer-events: none; z-index: 60;
+    background: radial-gradient(circle at 40% 34%, #fff6e6, #ffd492 55%, #c98f4e); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* --- the opening: the room, the bulbs, the glass parts, the light passes, the bar rises. ~1.8 s --- */
+    .js .name .ln > span { animation: rise .8s var(--out) .12s backwards; }
+    .js .name p { animation: fadeUp .6s var(--out) .42s backwards; }
+    .js .round { animation: popIn .5s var(--out) .55s backwards; }
+    .js .drape.l { animation: drapeL .95s var(--out) .35s both; }
+    .js .drape.r { animation: drapeR .95s var(--out) .35s both; }
+    .js .look:first-child img { animation: settle 1.5s var(--out) .4s backwards; }
+    .js .glass::before { animation: sweep .9s var(--ease) .95s backwards; }
+    .js .foot { animation: fadeUp .6s var(--out) 1.05s backwards; }
+    .js .dock { animation: dockIn .55s var(--out) .95s backwards; }
+    @keyframes rise { from { transform: translateY(105%); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } }
+    @keyframes popIn { from { opacity: 0; transform: scale(.82); } }
+    /* the two halves of the glass's curtain slide apart: transforms only, so the first photo is never repainted */
+    @keyframes drapeL { to { transform: translateX(-101%); } }
+    @keyframes drapeR { to { transform: translateX(101%); } }
+    @keyframes settle { from { transform: translate3d(0, 0, 0) scale(1.22); } }
+    @keyframes sweep { from { opacity: 1; transform: translateX(-110%); } 70% { opacity: 1; } to { opacity: 0; transform: translateX(190%); } }
+    @keyframes dockIn { from { transform: translateY(110%); } }
+    /* a new look catches the light as it lands */
+    @keyframes sweepLook { from { opacity: 1; transform: translateX(-110%); } 70% { opacity: 1; } to { opacity: 0; transform: translateX(190%); } }
+    .glass.sw::before { animation: sweepLook .7s var(--ease); }
+    .bulbs.flash .bulb::before { animation: flash .85s var(--out); }
+    @keyframes flash { 0% { opacity: 0; transform: scale(.6); } 35% { opacity: 1; transform: scale(1.5); } 100% { opacity: .35; transform: scale(1); } }
+
+    /* --- scroll scenes, one per section, each its own way; reveals run once and never hide text again --- */
+    /* the booking slip prints out under the mirror */
+    .js:not(.rv-fail) .slip { clip-path: inset(0 -40px calc(100% - 8px) -40px); transform: translateY(-10px); transition: clip-path .9s var(--out), transform .9s var(--out); }
+    .js:not(.rv-fail) .slip.in { clip-path: inset(0 -40px -60px -40px); transform: none; }
+    /* the proof: the brass rules draw, the numbers count up */
+    .js:not(.rv-fail) .proof:not(.in) p::before, .js:not(.rv-fail) .proof:not(.in) p::after { transform: scaleX(0); }
+    /* the reels un-clip from the foot, one after the other */
+    .js:not(.rv-fail) .reel { clip-path: inset(100% 0 0 0 round 8px); transition: clip-path .9s var(--out) calc(var(--i) * 90ms), transform .16s var(--ease); }
+    .js:not(.rv-fail) .reel img { transform: scale(1.2); transition: transform 1.3s var(--out) calc(var(--i) * 90ms); }
+    .js:not(.rv-fail) .reels.in .reel { clip-path: inset(0 0 0 0 round 8px); }
+    .js:not(.rv-fail) .reels.in .reel img { transform: none; }
+    /* the studio is written out left to right, then its buttons light up */
+    .js:not(.rv-fail) .studio .wipe { clip-path: inset(-.2em 100% -.2em 0); transition: clip-path 1s var(--out) calc(var(--i) * 130ms); }
+    .js:not(.rv-fail) .studio.in .wipe { clip-path: inset(-.2em -.2em -.2em 0); }
+    .js:not(.rv-fail) .studio:not(.in) .btn { border-color: rgba(201, 163, 108, 0); }
+    .studio .btn { transition: transform .14s var(--ease), border-color .9s var(--out) .5s; }
+    .studio.in .btn { animation: lightOn 1.4s var(--out) .5s; }
+    @keyframes lightOn { 0% { box-shadow: 0 0 0 0 rgba(255, 212, 146, 0); } 35% { box-shadow: 0 0 22px 2px rgba(255, 212, 146, .38); } 100% { box-shadow: 0 0 0 0 rgba(255, 212, 146, 0); } }
+  }
 
   @media (max-width: 359px) {
-    .name h1 { font-size: 19px; }
+    /* a one-line name bar of about 56 px; the place line returns in 'Come to the studio' once the mirror is behind you */
+    .namebar .top { padding-top: 6px; padding-bottom: 6px; }
+    .round { width: 44px; height: 44px; }
+    .namebar.past .name p { display: none; }
     .glass { height: clamp(200px, calc(100svh - 390px), 420px); }
   }
   @media (min-width: 600px) {
@@ -221,7 +314,7 @@
     .name h1 { font-size: 32px; }
     .stage { display: grid; grid-template-columns: minmax(0, 470px) minmax(0, 500px); justify-content: center; gap: 0 64px; align-items: start; padding-top: 18px; }
     .mirror-col { max-width: none; margin: 0; }
-    .stage > .slip { margin: 0; max-width: none; position: sticky; top: 24px; padding: 30px 28px 26px; }
+    .stage > .slip { margin: 0; max-width: none; position: sticky; top: 96px; padding: 30px 28px 26px; }
     .top, .proof, .reels, .studio, footer { max-width: calc(1034px + 2 * var(--gutter)); }
     .btns { align-self: start; }
     .glass { height: min(640px, calc(100vh - 220px)); }
@@ -230,21 +323,33 @@
     .studio-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .reels h2, .studio h2 { font-size: 36px; }
   }
+  @media (min-width: 960px) and (max-height: 820px) { .stage > .slip { padding: 20px 24px 18px; } .sentence { line-height: 1.6; } }
+  @media (max-width: 959px) { .name h1 { font-size: clamp(17px, calc((100vw - 146px) / 11.7), 23px); white-space: nowrap; } }
+  @media (max-width: 359px) { .name h1 { font-size: clamp(14px, calc((100vw - 138px) / 11.5), 18px); white-space: nowrap; } }
+  @media (max-width: 399px) { .name p .svc { display: none; } }
 </style>
-<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="assets/post-11.jpg" as="image" fetchpriority="high">
+<script>
+/* .js lets the reveal CSS hide things; if the page script has not started by 2.5 s, rv-fail shows everything */
+document.documentElement.classList.add('js');
+setTimeout(function () { if (!window.__ak) document.documentElement.classList.add('rv-fail'); }, 2500);
+</script>
 </head>
 <body>
 <div class="concept" data-concept-banner>Concept for @aksharabridalstudio.in · not the official site</div>
 
+<div class="namebar">
 <header class="top">
+  <div class="brand"><img class="badge" src="assets/logo.jpg" width="40" height="40" alt="">
   <div class="name">
-    <h1>Akshara Bridal Studio</h1>
-    <p>Bridal makeup · <span class="nb">Anna Nagar, Chennai</span></p>
-  </div>
+    <h1><span class="ln"><span>Akshara Bridal Studio</span></span></h1>
+    <p><span class="svc">Bridal makeup · </span><span class="nb">Anna Nagar, Chennai</span></p>
+  </div></div>
   <a class="round" href="tel:+919884078045" aria-label="Call the studio, +91 98840 78045">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></svg>
   </a>
 </header>
+</div>
 
 <main>
 <section class="stage" aria-label="Pick a look">
@@ -279,6 +384,7 @@
             <img src="assets/post-12.jpg" width="360" height="640" alt="Woman in an ivory saree with a pearl necklace and a loose side braid, by a white curtain" loading="lazy">
           </figure>
         </div>
+        <i class="drape l" aria-hidden="true"></i><i class="drape r" aria-hidden="true"></i>
       </div>
       <div class="foot">
         <button class="arrow" id="prev" aria-label="Previous look"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -304,8 +410,14 @@
       </div>
     </fieldset>
     <p class="preview-label" id="pvLabel">Your WhatsApp message</p>
-    <output class="preview" id="preview" aria-labelledby="pvLabel">Hello Akshara Bridal Studio, I'd like this look: Plum saree, temple jewellery.</output>
-    <a class="send" id="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%20I%27d%20like%20to%20book%20bridal%20makeup." target="_blank" rel="noopener">
+    <output class="preview" id="preview" aria-labelledby="pvLabel">Hello Akshara Bridal Studio,
+I'd like this look: Plum saree, temple jewellery
+https://www.instagram.com/p/DfB5KZLu08o
+Occasion: muhurtham
+Date: not fixed yet
+I need: Bridal makeup
+Could you share your availability and details?</output>
+    <a class="send" id="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%0AI%27d%20like%20this%20look%3A%20Plum%20saree%2C%20temple%20jewellery%0Ahttps%3A%2F%2Fwww.instagram.com%2Fp%2FDfB5KZLu08o%0AOccasion%3A%20muhurtham%0ADate%3A%20not%20fixed%20yet%0AI%20need%3A%20Bridal%20makeup%0ACould%20you%20share%20your%20availability%20and%20details%3F" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
       Send this look on WhatsApp</a>
     <p class="fine">Opens WhatsApp to +91 98840 78045 with this message. You can change it there before sending.</p>
@@ -313,26 +425,26 @@
 </section>
 
 <section class="proof" aria-label="About the studio">
-  <p><span class="num">4.8</span> on Google from <span class="num">532</span> reviews. <span class="num">325K</span> follow the studio on Instagram. A decade of expertise.</p>
+  <p><span class="num" data-n="4.8" data-dec="1">4.8</span> on Google from <span class="num" data-n="532">532</span> reviews. <span class="num" data-n="325" data-suf="K">325K</span> follow the studio on Instagram. A decade of expertise.</p>
 </section>
 
 <section class="reels" aria-labelledby="reelsTitle">
   <h2 id="reelsTitle">More looks, in the reels</h2>
   <p>Each one opens the reel on Instagram.</p>
   <div class="reel-grid">
-    <a class="reel" href="https://www.instagram.com/p/DfHS4ljuyNb" target="_blank" rel="noopener" style="--pos:50% 30%">
+    <a class="reel" href="https://www.instagram.com/p/DfHS4ljuyNb" target="_blank" rel="noopener" style="--pos:50% 30%; --i:0">
       <img src="assets/post-08.jpg" width="360" height="640" alt="A gold necklace being fastened on a woman in wine silk" fetchpriority="low" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
     </a>
-    <a class="reel" href="https://www.instagram.com/p/DfML7jaO971" target="_blank" rel="noopener" style="--pos:50% 2%">
+    <a class="reel" href="https://www.instagram.com/p/DfML7jaO971" target="_blank" rel="noopener" style="--pos:50% 2%; --i:1">
       <img src="assets/post-07.jpg" width="360" height="640" alt="Woman seated in orange and cream silk with a long temple necklace" fetchpriority="low" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
     </a>
-    <a class="reel" href="https://www.instagram.com/p/DfChpBhu8PC" target="_blank" rel="noopener" style="--pos:50% 38%">
+    <a class="reel" href="https://www.instagram.com/p/DfChpBhu8PC" target="_blank" rel="noopener" style="--pos:50% 38%; --i:2">
       <img src="assets/post-10.jpg" width="360" height="640" alt="Woman with long waves and a layered stone necklace, smiling" fetchpriority="low" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
     </a>
-    <a class="reel" href="https://www.instagram.com/p/DfRc1aHuDYw" target="_blank" rel="noopener" style="--pos:50% 30%">
+    <a class="reel" href="https://www.instagram.com/p/DfRc1aHuDYw" target="_blank" rel="noopener" style="--pos:50% 30%; --i:3">
       <img src="assets/post-06.jpg" width="360" height="640" alt="Bride in red silk and flower garlands beside the groom during the wedding ritual" fetchpriority="low" decoding="async">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span>
     </a>
@@ -343,9 +455,9 @@
 <section class="studio" aria-labelledby="studioTitle">
   <div class="studio-wrap">
     <div>
-      <h2 id="studioTitle">Come to the studio</h2>
-      <address>AJ-52, 4th Street, A J Block, Shanthi Colony, Anna Nagar, Chennai 600040</address>
-      <p class="hours">Open every day, 10 AM to 8:30 PM</p>
+      <h2 id="studioTitle" class="wipe" style="--i:0">Come to the studio</h2>
+      <address class="wipe" style="--i:1">AJ-52, 4th Street, A J Block, Shanthi Colony, Anna Nagar, Chennai 600040</address>
+      <p class="hours wipe" style="--i:2">Open every day, 10 AM to 8:30 PM</p>
     </div>
     <div class="btns">
       <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Akshara%20bridal%20studio%20Anna%20Nagar&amp;query_place_id=ChIJW2EznMBvUjoRqkbqpNrfGSY" target="_blank" rel="noopener">
@@ -367,13 +479,14 @@
 </footer>
 
 <div class="dock" id="dock">
-  <a class="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%20I%27d%20like%20to%20book%20bridal%20makeup." target="_blank" rel="noopener">
+  <a class="send" data-wa href="https://wa.me/919884078045?text=Hello%20Akshara%20Bridal%20Studio%2C%0AI%27d%20like%20this%20look%3A%20Plum%20saree%2C%20temple%20jewellery%0Ahttps%3A%2F%2Fwww.instagram.com%2Fp%2FDfB5KZLu08o%0AOccasion%3A%20muhurtham%0ADate%3A%20not%20fixed%20yet%0AI%20need%3A%20Bridal%20makeup%0ACould%20you%20share%20your%20availability%20and%20details%3F" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
     Send this look on WhatsApp</a>
 </div>
 
 <script>
 (function () {
+  window.__ak = 1;
   var WA = '919884078045';
   var track = document.getElementById('track');
   var looks = Array.prototype.slice.call(track.querySelectorAll('.look'));
@@ -430,19 +543,37 @@
     nowName.textContent = look.dataset.name;
     nowCount.textContent = 'Look ' + (i + 1) + ' of ' + looks.length;
     nowHint.hidden = true;
+    sweep();
     if (look.dataset.credit) { nowCredit.textContent = look.dataset.credit; nowCredit.hidden = false; } else { nowCredit.hidden = true; }
-    if (picked.textContent !== look.dataset.name) {
-      if (reduce) { picked.textContent = look.dataset.name; }
-      else {
-        picked.classList.add('swap');
-        setTimeout(function () { picked.textContent = look.dataset.name; picked.classList.remove('swap'); }, 160);
-      }
+    clearTimeout(show.t);
+    if (reduce) { picked.textContent = look.dataset.name; picked.classList.remove('swap'); }
+    else if (picked.textContent !== look.dataset.name || picked.classList.contains('swap')) {
+      picked.classList.add('swap');
+      show.t = setTimeout(function () { picked.textContent = looks[current].dataset.name; picked.classList.remove('swap'); }, 160);
     }
     refresh();
   }
 
+  var D = document, root = D.documentElement, glass = D.querySelector('.glass'), bulbRow = D.querySelector('.bulbs');
+
+  /* the signature: swiping the mirror slides each photo a touch slower than its frame, and every new look catches the light */
+  function drift() {
+    if (reduce) return;
+    var w = Math.max(1, track.clientWidth), sl = track.scrollLeft;
+    looks.forEach(function (l, n) {
+      var o = (sl - n * w) / w;
+      if (o > -1.2 && o < 1.2) l.style.setProperty('--px', (-o * 3).toFixed(2) + '%');
+    });
+  }
+  function sweep() {
+    if (reduce || !glass || root.dataset.opening !== 'done') return;
+    glass.classList.remove('sw'); void glass.offsetWidth; glass.classList.add('sw');
+  }
+
+  var target = null, targetTimer = 0;
   function go(i) {
     i = (i + looks.length) % looks.length;
+    target = i; clearTimeout(targetTimer); targetTimer = setTimeout(function () { target = null; }, 1400);
     track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
     show(i);
   }
@@ -453,11 +584,15 @@
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
+      drift();
       var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
       i = Math.max(0, Math.min(looks.length - 1, i));
+      if (target !== null) { if (i === target) target = null; return; }
       if (i !== current) show(i);
     });
   }, { passive: true });
+  /* a finger on the mirror takes over from a tap's smooth scroll */
+  ['touchstart', 'pointerdown', 'wheel'].forEach(function (ev) { track.addEventListener(ev, function () { target = null; }, { passive: true }); });
 
   bulbs.forEach(function (b, n) {
     b.setAttribute('aria-label', 'Look ' + (n + 1) + ' of ' + looks.length + ': ' + looks[n].dataset.name);
@@ -482,7 +617,169 @@
     }, { threshold: 0.2 }).observe(slipSend);
   }
 
+  document.addEventListener('touchstart', function () {}, { passive: true });   // lets iOS Safari apply :active on tap
   refresh();
+
+  // On the narrowest phones the bar drops its place line once the mirror has scrolled away (the line is repeated further down)
+  var nbar = D.querySelector('.namebar'), mirrorEl = D.querySelector('.mirror');
+  if (nbar && mirrorEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      var e = es[es.length - 1];
+      nbar.classList.toggle('past', !e.isIntersecting && e.boundingClientRect.bottom < 0);
+    }, { threshold: 0 }).observe(mirrorEl);
+  }
+
+  /* ---------------- scroll scenes: each section adds .in once, and never hides again ---------------- */
+  function count(el) {
+    var to = parseFloat(el.dataset.n), dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '', t0 = 0;
+    if (reduce || isNaN(to)) return;
+    function fmt(v) { return v.toFixed(dec) + suf; }
+    el.textContent = fmt(to * 0.35);
+    (function step(now) {
+      if (!t0) t0 = now;
+      var k = Math.min(1, (now - t0) / 1900), e = 1 - Math.pow(1 - k, 3);   // power3.out
+      el.textContent = fmt(to * (0.35 + 0.65 * e));
+      if (k < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
+    })(performance.now());
+  }
+  var scenes = Array.prototype.slice.call(D.querySelectorAll('.slip, .proof, .reels, .studio'));
+  function enter(el) {
+    // on a wide screen the slip is part of the opening: it prints while the light passes
+    if (el.classList.contains('slip') && root.dataset.opening !== 'done') el.style.transitionDelay = '.7s';
+    el.classList.add('in');
+    if (el.classList.contains('proof')) Array.prototype.forEach.call(el.querySelectorAll('[data-n]'), count);
+  }
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { enter(e.target); so.unobserve(e.target); } });
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    // the slip is clipped to a thin strip until it prints, and the browser measures that strip, so it needs a threshold of 0
+    var slipIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { enter(e.target); slipIO.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    scenes.forEach(function (s) { (s.classList.contains('slip') ? slipIO : so).observe(s); });
+  } else scenes.forEach(function (s) { s.classList.add('in'); });
+
+  /* ---------------- the closing moment: sending lights every bulb and throws sparks. The link is never held back ---------------- */
+  function sparks(a) {
+    if (reduce) return;
+    if (bulbbar()) { bulbRow.classList.remove('flash'); void bulbRow.offsetWidth; bulbRow.classList.add('flash'); }
+    if (!a.animate) return;
+    var r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    for (var i = 0; i < 14; i++) {
+      var s = D.createElement('i'); s.className = 'spark'; s.setAttribute('aria-hidden', 'true'); D.body.appendChild(s);
+      var ang = (i / 14) * Math.PI * 2 + Math.random() * .4, d = 60 + Math.random() * 70, x = cx + (Math.random() - .5) * r.width * .5;
+      var an = s.animate([
+        { transform: 'translate(' + x + 'px,' + cy + 'px) scale(1)', opacity: 1 },
+        { transform: 'translate(' + (x + Math.cos(ang) * d) + 'px,' + (cy + Math.sin(ang) * d * .8 - 24) + 'px) scale(.2)', opacity: 0 }
+      ], { duration: 560 + Math.random() * 240, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
+      an.onfinish = (function (el) { return function () { el.remove(); }; })(s);
+    }
+  }
+  function bulbbar() { return !!bulbRow && !!bulbRow.getBoundingClientRect().height; }
+  waLinks.forEach(function (a) { a.addEventListener('click', function () { sparks(a); }); });
+
+  /* ---------------- ambient: warm dust rising through the mirror's light ----------------
+     Canvas at DPR 1, drawn at 30 fps, 28 motes on a phone and 80 on a desktop. It sleeps off screen and in a hidden tab, and a
+     watchdog thins it (60%, 36%, 20%) when frames run slow. It is never switched off. */
+  function ambient() {
+    if (reduce || ambient.on) return;
+    var mirror = D.querySelector('.mirror');
+    if (!mirror || !glass) return;
+    ambient.on = 1;
+    var cv = D.createElement('canvas'); cv.className = 'amb'; cv.setAttribute('aria-hidden', 'true'); mirror.appendChild(cv);
+    var ctx = cv.getContext('2d'); if (!ctx) return;
+    var small = matchMedia('(max-width: 767px), (pointer: coarse)').matches, N = small ? 28 : 80, LV = [1, .6, .36, .2], level = 0;
+    var W = 0, H = 0, P = [], seen = true, raf = 0, lastDraw = 0, lastRaf = 0, frames = 0, slow = 0;
+    var GX = 0, GY = 0, GW = 0, GH = 0;   // the glass rectangle inside the mirror, where the makeup photo is
+    function size() {
+      W = mirror.clientWidth; H = mirror.clientHeight; cv.width = W; cv.height = H; cv.style.height = H + 'px';
+      GX = glass.offsetLeft; GY = glass.offsetTop; GW = glass.offsetWidth; GH = glass.offsetHeight;
+    }
+    /* The bride's face is what a makeup artist checks first, so dust never sits on the photo. Motes are born in the frame margins
+       (rising from the foot) or in the top 15% of the glass (the warm spill), and drift up into the bulb light. */
+    function make(fresh) {
+      var top = Math.random() < .45, x, y, m = Math.min(GX, W - GX - GW), lane = null;
+      if (top) { x = GX + Math.random() * GW; y = fresh ? GY + Math.random() * GH * .15 : GY + GH * .15; }
+      var r = small ? 1.6 + Math.random() * 1.8 : .7 + Math.random() * 1.6, sw = 4 + Math.random() * 8;
+      if (!top) {   // down the middle of a frame margin, swaying only as far as keeps the whole mote off the glass (so none blinks out)
+        x = Math.random() < .5 ? GX / 2 : GX + GW + (W - GX - GW) / 2; y = fresh ? Math.random() * H : H + 6;
+        sw = Math.max(0, m / 2 - r - 1);
+        if (small && Math.random() < .8) {   // phone: the margins are only a few px, so half the motes live in the bulb row and the caption band
+          lane = (Math.random() < .5 && GY > 8) ? [0, GY] : [GY + GH, H];
+          if (lane[1] - lane[0] < 8) lane = [0, Math.max(8, GY)];
+          x = Math.random() * W; y = lane[0] + Math.random() * (lane[1] - lane[0]); sw = Math.random() * 10;
+        }
+      }
+      return { x: x, y: y, top: top, lane: lane, r: r, v: small ? 6 + Math.random() * 10 : 9 + Math.random() * 16, ph: Math.random() * 6.28, sw: sw, a: small ? .6 + Math.random() * .35 : .1 + Math.random() * .15, big: Math.random() < .22 };
+    }
+    // is a circle of radius r at (x, y) touching the glass?
+    function onGlass(x, y, r) { return x + r > GX && x - r < GX + GW && y + r > GY && y - r < GY + GH; }
+    size();
+    for (var i = 0; i < N; i++) P.push(make(true));
+    var rz = 0; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { size(); for (var i = 0; i < N; i++) P[i] = make(true); }, 200); });
+    function draw(dt, t) {
+      ctx.clearRect(0, 0, W, H);
+      var n = Math.floor(N * LV[level]), lim = GY + GH * .15;
+      for (var i = 0; i < n; i++) {
+        var p = P[i];
+        p.y -= p.v * dt;
+        if (p.lane) { if (p.y < p.lane[0]) p.y = p.lane[1]; }
+        else if (p.y < -12) { P[i] = p = make(false); }
+        var x = p.x + Math.sin(t * .0007 + p.ph) * p.sw, tw = .6 + .4 * Math.sin(t * .0021 + p.ph * 3);
+        // a mote that has drifted into the lower glass is skipped (never drawn on the photo)
+        if (onGlass(x, p.y, p.r) && p.y + p.r > lim) continue;
+        // the soft halo is kept to the bulb row and the frame margin, where it lies wholly off the glass
+        if (p.big && !onGlass(x, p.y, p.r * 5)) { ctx.fillStyle = 'rgba(255,214,150,' + ((small ? .18 : .08) * tw).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(x, p.y, p.r * 5, 0, 6.2832); ctx.fill(); }
+        ctx.fillStyle = 'rgba(255,226,176,' + Math.min(small ? .95 : .25, p.a * tw).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(x, p.y, p.r, 0, 6.2832); ctx.fill();
+      }
+    }
+    function tick(now) {
+      raf = 0;
+      if (!seen || D.hidden) return;
+      var gap = lastRaf ? now - lastRaf : 16.7; lastRaf = now;
+      frames++; if (gap > 24) slow++;
+      if (frames >= 90) { if (slow > 45 && level < 3) level++; frames = 0; slow = 0; }
+      if (now - lastDraw >= 33) { draw(Math.min(.1, (now - (lastDraw || now - 33)) / 1000), now); lastDraw = now; }
+      raf = requestAnimationFrame(tick);
+    }
+    function wake() { if (!raf && seen && !D.hidden) { lastRaf = 0; lastDraw = 0; frames = 0; slow = 0; raf = requestAnimationFrame(tick); } }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; wake(); }, { threshold: 0 }).observe(mirror);
+    D.addEventListener('visibilitychange', wake);
+    window.__ambient = { level: function () { return level; }, count: function () { return Math.floor(N * LV[level]); } };
+    wake();
+  }
+
+  /* a wide, mouse-driven screen also gets a lamp that follows the pointer across the glass */
+  function lamp() {
+    if (reduce || !glass || !matchMedia('(min-width: 1024px) and (pointer: fine)').matches) return;
+    var s = D.createElement('div'); s.className = 'spot'; s.setAttribute('aria-hidden', 'true'); glass.appendChild(s);
+    var q = 0;
+    glass.addEventListener('pointermove', function (e) {
+      if (q) return;
+      q = requestAnimationFrame(function () { q = 0; var r = glass.getBoundingClientRect(); s.style.setProperty('--mx', (e.clientX - r.left) + 'px'); s.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+    }, { passive: true });
+  }
+
+  /* ---------------- the opening hands over ---------------- */
+  function after() { ambient(); lamp(); }
+  function opened() {
+    if (root.dataset.opening === 'done') return;
+    root.dataset.opening = 'done';
+    after();
+  }
+  if (reduce) opened();
+  else {
+    // the light passing over the glass is the last beat of the opening; asking the browser for every running animation
+    // instead (document.getAnimations) cost about 400 ms of blocking time on a throttled phone, so the page listens for it
+    var fb = setTimeout(opened, 2600), dockEl = D.getElementById('dock');
+    // it ends with the light's pass and, on a phone, the dock's arrival: the send button is on screen before the page says "done"
+    var swept = false, docked = !dockEl || matchMedia('(min-width: 960px)').matches;   // the dock is hidden from 960 px up
+    function maybe() { if (swept && docked) { clearTimeout(fb); opened(); } }
+    glass.addEventListener('animationend', function (e) { if (e.animationName === 'sweep') { swept = true; maybe(); } });
+    if (!docked) dockEl.addEventListener('animationend', function (e) { if (e.animationName === 'dockIn') { docked = true; maybe(); } });
+  }
 })();
 </script>
 </body>
