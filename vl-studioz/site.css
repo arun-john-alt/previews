@@ -683,3 +683,19 @@ html.calm .logo .lc,html.calm .logo .lg-s{opacity:1!important;animation:none!imp
 .brand,.brand:hover{text-decoration:none}
 
 @media (max-aspect-ratio:4/5){.day-pin{align-content:center}.day-side .h2{margin-bottom:6px}}
+
+/* ================= Final logo: 03 Inscriptional capitals (chosen by AJ, 28 Nov 2026) =================
+   Marcellus capitals, wide tracking; small line in Montserrat with hairline rules (large sizes only).
+   Animation: Rise (each letter rises into place, then the line eases in). */
+@font-face{font-family:"Marcellus";font-weight:400;font-display:swap;src:url("fonts/logo/marcellus-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:100 900;font-display:swap;src:url("fonts/logo/montserrat-latin.woff2") format("woff2")}
+.lg-m{font:400 1em/1 "Marcellus","Times New Roman",serif;letter-spacing:.07em;padding:.1em .02em .06em}
+.lg-s{font:500 .19em/1 "Montserrat",system-ui,sans-serif;letter-spacing:.34em;padding-left:.34em;margin-top:.62em;opacity:.92;display:flex;align-items:center;justify-content:center;gap:1.1em}
+/* hairline rules either side of the small line: only where the logo is large */
+.ftr-logo .lg-s::before,.ftr-logo .lg-s::after,.ac-front .logo .lg-s::before,.ac-front .logo .lg-s::after,.ld-logo .lg-s::before,.ld-logo .lg-s::after{content:"";flex:none;width:3.2em;height:1px;background:currentColor;opacity:.7}
+.hdr .logo{font-size:24px}
+@media (max-width:759px){.hdr .logo{font-size:21px}}
+.hdr .logo .lg-s{font-size:.24em;letter-spacing:.26em;padding-left:.26em;margin-top:.5em}
+.ftr-logo{font-size:clamp(52px,11vw,180px)}
+.ftr-logo .lg-s{font-size:.13em;color:#f5e3b5}
+.ld-logo{font-size:clamp(28px,5vw,52px)}
