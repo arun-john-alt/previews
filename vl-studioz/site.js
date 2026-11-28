@@ -315,12 +315,14 @@
   mm.add({ desk: '(min-aspect-ratio: 4/5)', phone: '(max-aspect-ratio: 4/5)' }, function (ctx) {
     var desk = ctx.conditions.desk;
     var frame = desk ? 'inset(13% 31% 13% 31% round 24px)' : 'inset(26% 11% 26% 11% round 18px)';
-    var tl = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: desk ? '+=170%' : '+=140%', pin: true, scrub: .9, anticipatePin: 1 } });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: desk ? '+=170%' : '+=140%', pin: true, scrub: .9, anticipatePin: 1,
+      // Once the collage starts forming, the centre photo fills its frame (no blurred bands inside the frame).
+      onUpdate: function (s) { $('#slides').classList.toggle('collage', s.progress > .06); } } });
     tl.to('.h-copy', { y: -90, opacity: 0, duration: .32, ease: 'power2.in' }, 0)
       .to('.h-cue', { opacity: 0, duration: .15 }, 0)
       .to('#hMain', { clipPath: frame, duration: 1, ease: 'power2.inOut' }, .05)
       .fromTo('#hMain', { '--scrim': 1 }, { '--scrim': 0, duration: .5 }, .05)
-      .to('#slides', { scale: desk ? .62 : .8, duration: 1, ease: 'power2.inOut' }, .05)
+      .to('#slides', { scale: .8, duration: 1, ease: 'power2.inOut' }, .05)
       .to('#slides .sl:not(.cover) .fg', { objectPosition: '50% 50%', duration: .6, ease: 'power2.inOut' }, .05)
       .fromTo('.hc1', { opacity: 0, x: -140, y: -80, rotation: -4 }, { opacity: 1, x: 0, y: 0, rotation: 0, duration: .6, ease: 'power3.out' }, .45)
       .fromTo('.hc3', { opacity: 0, x: 140, y: -100, rotation: 4 }, { opacity: 1, x: 0, y: 0, rotation: 0, duration: .6, ease: 'power3.out' }, .52)

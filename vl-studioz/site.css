@@ -699,3 +699,6 @@ html.calm .logo .lc,html.calm .logo .lg-s{opacity:1!important;animation:none!imp
 .ftr-logo{font-size:clamp(52px,11vw,180px)}
 .ftr-logo .lg-s{font-size:.13em;color:#f5e3b5}
 .ld-logo{font-size:clamp(28px,5vw,52px)}
+/* collage: the centre photo fills its frame */
+#slides.collage .sl .fg{object-fit:cover!important;object-position:50% 30%!important}
+#slides.collage .sl .bg{display:none}
