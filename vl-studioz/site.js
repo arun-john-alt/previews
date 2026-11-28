@@ -7,26 +7,12 @@
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function waLink(t) { return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(t); }
 
-  /* ================= The VL Studioz wordmark, rebuilt as vector (sharp at any size) ================= */
-  (function () {
-    var NS = 'http://www.w3.org/2000/svg', defs = document.createElementNS(NS, 'svg');
-    defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true'); defs.style.cssText = 'position:absolute;width:0;height:0';
-    defs.innerHTML = '<defs>' +
-      '<linearGradient id="vlGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1c4"/><stop offset=".38" stop-color="#f1cf74"/><stop offset=".72" stop-color="#d9a940"/><stop offset="1" stop-color="#f4d888"/></linearGradient>' +
-      '<linearGradient id="vlShineG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>' +
-      '</defs>';
-    document.body.appendChild(defs);
-    var n = 0;
-    $$('.logo').forEach(function (el) {
-      var id = 'vlc' + (++n);
-      var t = '<text class="vl-t vl-main" x="500" y="168" text-anchor="middle" textLength="980" lengthAdjust="spacingAndGlyphs">VL STUDIOZ</text>' +
-              '<text class="vl-t vl-sub" x="500" y="240" text-anchor="middle" textLength="760" lengthAdjust="spacingAndGlyphs">PHOTOGRAPHY &amp; VIDEOGRAPHY</text>';
-      el.innerHTML = '<svg class="vlogo" viewBox="0 0 1000 256" role="img" aria-label="VL Studioz, photography and videography">' +
-        '<clipPath id="' + id + '">' + t + '</clipPath>' + t +
-        '<g clip-path="url(#' + id + ')"><rect class="vl-shine" x="-260" y="0" width="240" height="256" fill="url(#vlShineG)"/></g></svg>';
-    });
-  })();
-
+  /* ================= The VL Studioz wordmark: live text (sharp at any size), each letter ready to rise into place ================= */
+  $$('.logo').forEach(function (el) {
+    var main = 'VL STUDIOZ'.split('').map(function (ch, k) { return '<span class="lc" style="--i:' + k + '">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>'; }).join('');
+    el.innerHTML = '<span class="lg-m" aria-hidden="true">' + main + '</span><span class="lg-s" aria-hidden="true">PHOTOGRAPHY &amp; VIDEOGRAPHY</span>';
+    if (!el.closest('a')) { el.setAttribute('role', 'img'); el.setAttribute('aria-label', 'VL Studioz, photography and videography'); }
+  });
   /* ================= Content: recent work ================= */
   // [file, category, shape]  shape: '' normal, 't' tall, 'w' wide
   var WORK = [
@@ -65,7 +51,8 @@
        encoded in R/G around 128 and fed to feDisplacementMap through backdrop-filter;
      - a specular rim from a fixed top-left light, painted as the element's ::after. */
   var LG = (function () {
-    var chromium = /Chrome\/|Edg\//.test(navigator.userAgent) && !/Firefox/.test(navigator.userAgent);
+    // Live refraction on mouse/trackpad screens only; phones get plain frosted glass (cheaper, no repaint flicker over moving photos).
+    var chromium = /Chrome\/|Edg\//.test(navigator.userAgent) && !/Firefox/.test(navigator.userAgent) && matchMedia('(pointer: fine)').matches;
     var svgNS = 'http://www.w3.org/2000/svg', defs = document.createElementNS(svgNS, 'svg'), seq = 0;
     defs.setAttribute('width', '0'); defs.setAttribute('height', '0'); defs.setAttribute('aria-hidden', 'true');
     defs.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
@@ -248,7 +235,8 @@
   function fitSlide(s) {
     var im = $('.fg', s); if (!im.naturalWidth) return;
     var r = (im.naturalWidth / im.naturalHeight) / (innerWidth / innerHeight);
-    var cover = r > .8 && r < 1.28;
+    var portraitScreen = innerWidth / innerHeight < 1;
+    var cover = r > .8 && r < (portraitScreen ? 2.1 : 1.28);
     s.classList.toggle('cover', cover);
     im.style.objectPosition = cover ? s.getAttribute('data-pos') : '';
   }
@@ -300,7 +288,7 @@
   var seen = false; try { seen = sessionStorage.getItem('vl-seen') === '1'; sessionStorage.setItem('vl-seen', '1'); } catch (e) {}
   // First visit of a session: a quick "VL" moment (~1 s). Repeat visits: no loader at all, so the photo shows at once.
   var L = seen ? 0 : .55;
-  var ldL = $('.ld-logo .vlogo'); if (ldL) ldL.classList.add('drawing');
+  var ldL = $('.ld-logo'); if (ldL) ldL.classList.add('reveal');
   var lt = gsap.timeline({ defaults: { ease: EX } });
   if (!seen) {
     // The first photo shows through a giant "VL", then the camera flies through the letters into the hero.
@@ -313,7 +301,7 @@
   } else {
     gsap.set('#loader', { display: 'none' }); D.classList.remove('loading');
   }
-  lt.add(function () { D.classList.remove('loading'); gsap.set('#loader', { display: 'none' }); if (lenis) lenis.start(); var hl = $('.hdr .vlogo'); if (hl) hl.classList.add('drawing', 'shine'); }, L + .35)
+  lt.add(function () { D.classList.remove('loading'); gsap.set('#loader', { display: 'none' }); if (lenis) lenis.start(); var hl = $('.hdr .logo'); if (hl) hl.classList.add('reveal'); }, L + .35)
     .to('#slides', { filter: 'brightness(1) saturate(1)', duration: 1.6, ease: 'power2.out', clearProps: 'filter' }, L + .1)
     .to(heroSplit ? heroSplit.chars : '.h1', { yPercent: 0, duration: 1.2, stagger: .016, ease: EX }, L + .55)
     .to('.h-foot', { opacity: 1, duration: .9 }, L + 1)
@@ -393,16 +381,16 @@
       var dist = function () { return Math.max(0, track.scrollWidth - innerWidth); };
       var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.svc', start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: 1, invalidateOnRefresh: true } });
       $$('.panel', track).forEach(function (p) {
-        var im = $('.p-img img', p);
-        if (im) gsap.fromTo(im, { xPercent: -3.5 }, { xPercent: 3.5, ease: 'none', scrollTrigger: { trigger: p, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
+        var im = $$('.p-img img', p);
+        if (im.length) gsap.fromTo(im, { xPercent: -3.5 }, { xPercent: 3.5, ease: 'none', scrollTrigger: { trigger: p, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
         gsap.from($('.p-txt', p).children, { y: 40, opacity: 0, stagger: .08, duration: 1, ease: EX, scrollTrigger: { trigger: p, containerAnimation: tw, start: 'left 80%', toggleActions: 'play none none reverse' } });
         gsap.from(p.firstElementChild, { clipPath: 'inset(0% 0% 0% 100%)', duration: 1.3, ease: 'expo.inOut', scrollTrigger: { trigger: p, containerAnimation: tw, start: 'left 95%', toggleActions: 'play none none reverse' } });
       });
     } else {
       $$('.panel', track).forEach(function (p) {
-        var box = p.firstElementChild, im = $('img', box);
+        var box = p.firstElementChild, im = $$('img', box);
         gsap.fromTo(box, { clipPath: 'inset(18% 10% 18% 10%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: p, start: 'top 95%', end: 'top 35%', scrub: true } });
-        if (im) gsap.fromTo(im, { scale: 1.1 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: true } });
+        if (im.length) gsap.fromTo(im, { scale: 1.1 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: true } });
         gsap.from($('.p-txt', p).children, { y: 30, opacity: 0, stagger: .08, duration: 1, ease: EX, scrollTrigger: { trigger: $('.p-txt', p), start: 'top 90%', once: true } });
       });
     }
@@ -468,8 +456,8 @@
   gsap.from('.ask', { y: 120, rotation: 2, opacity: 0, duration: 1.4, ease: EX, scrollTrigger: { trigger: '.ask', start: 'top 92%', once: true } });
 
   /* ---------- Footer wordmark rises, traces itself in gold, then catches the light ---------- */
-  var fl = $('.ftr-logo .vlogo');
-  if (fl) new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { fl.classList.add('drawing', 'shine'); o.disconnect(); } }); }, { threshold: .35 }).observe(fl);
+  var fl = $('.ftr-logo');
+  if (fl) new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { fl.classList.add('reveal'); o.disconnect(); } }); }, { threshold: .35 }).observe(fl);
   gsap.fromTo('#ftrLogo', { yPercent: 70, scale: .82, opacity: .15 }, { yPercent: 0, scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.ftr', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
   /* ---------- Cursor + magnetic button (mouse only) ---------- */
@@ -490,21 +478,54 @@
 
   /* ---------- Hero film: brides and couples crossfade, each photo whole and centred ---------- */
   (function () {
-    var i = 0;
-    function warm(k) { var s = SL[k % SL.length]; $$('img[data-src]', s).forEach(function (im) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }); }
-    gsap.set(SL, { opacity: 0 }); gsap.set(SL[0], { opacity: 1 });
-    setTimeout(function () { warm(1); }, 2000);
-    setTimeout(function () { setInterval(function () {
+    // Flicker-free crossfade: the next photo is loaded and decoded before its turn, fades in fully on top of
+    // the still-opaque current photo, and only then is the old one hidden. Nothing is ever half-transparent
+    // over the dark background.
+    var i = 0, busy = false;
+    function warm(k) {
+      var s = SL[k % SL.length], ims = $$('img', s);
+      ims.forEach(function (im) { if (im.getAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); } });
+      return Promise.all(ims.map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); }));
+    }
+    SL.forEach(function (s, k) { gsap.set(s, { opacity: k ? 0 : 1, zIndex: k ? 0 : 1 }); });
+    setTimeout(function () { warm(1); warm(2); }, 1500);
+    function step() {
       // Hold still once the visitor starts scrolling, so the collage shrinks one photo.
-      if (window.scrollY > 4 || document.hidden) return;
-      var prev = SL[i]; i = (i + 1) % SL.length; var next = SL[i]; warm(i + 1);
-      gsap.set(next, { zIndex: 1 }); gsap.set(prev, { zIndex: 0 });
-      gsap.fromTo(next, { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.inOut' });
-      gsap.fromTo($('.fg', next), { scale: 1.05 }, { scale: 1, duration: 6, ease: 'none' });
-      gsap.fromTo($('.bg', next), { scale: 1.15 }, { scale: 1.05, duration: 6, ease: 'none' });
-      gsap.to(prev, { opacity: 0, duration: 1, delay: .6 });
-    }, 5200); }, 1800);
+      if (busy || window.scrollY > 4 || document.hidden) return;
+      var prev = SL[i], ni = (i + 1) % SL.length, next = SL[ni];
+      busy = true;
+      warm(ni).then(function () {
+        warm(ni + 1); warm(ni + 2);
+        gsap.set(next, { zIndex: 2, opacity: 0 });
+        gsap.fromTo($('.fg', next), { scale: 1.04 }, { scale: 1, duration: 6.5, ease: 'none', force3D: true });
+        gsap.to(next, { opacity: 1, duration: 1.2, ease: 'power1.inOut', onComplete: function () {
+          gsap.set(prev, { opacity: 0, zIndex: 0 }); gsap.set(next, { zIndex: 1 }); i = ni; busy = false;
+        } });
+      });
+    }
+    setTimeout(function () { step(); setInterval(step, 5200); }, 5200);
   })();
+
+  /* ---------- Service slideshows (Traditional, Candid): flicker-free, only while on screen ---------- */
+  $$('.p-img.show').forEach(function (box) {
+    var ims = $$('img', box), i = 0, busy = false, timer = null;
+    function load(im) { if (im.getAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); } return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); }
+    ims.forEach(function (im, k) { gsap.set(im, { opacity: k ? 0 : 1, zIndex: k ? 0 : 1 }); });
+    function step() {
+      if (busy) return; busy = true;
+      var prev = ims[i], ni = (i + 1) % ims.length, next = ims[ni];
+      load(next).then(function () {
+        load(ims[(ni + 1) % ims.length]);
+        gsap.set(next, { zIndex: 2, opacity: 0 });
+        gsap.fromTo(next, { scale: 1.06 }, { scale: 1, duration: 4, ease: 'none' });
+        gsap.to(next, { opacity: 1, duration: .9, ease: 'power1.inOut', onComplete: function () { gsap.set(prev, { opacity: 0, zIndex: 0 }); gsap.set(next, { zIndex: 1 }); i = ni; busy = false; } });
+      });
+    }
+    new IntersectionObserver(function (es) { es.forEach(function (e) {
+      if (e.isIntersecting && !timer) { load(ims[1]); timer = setInterval(step, 3200); }
+      else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+    }); }, { threshold: .3 }).observe(box);
+  });
 
   /* ---------- Falling petals: marigold, rose and jasmine, tumbling in 3D at three depths ---------- */
   var KINDS = [

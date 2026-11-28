@@ -620,3 +620,66 @@ body{overflow-x:clip}
 .sheet nav a{font:500 clamp(20px,5vw,28px)/1.2 var(--display);letter-spacing:-.02em;padding:14px 0;border-bottom:1px solid rgba(251,238,240,.16)}
 .sheet nav a:first-child{border-top:1px solid rgba(251,238,240,.16)}
 @media (min-width:900px){.sheet nav{max-width:560px}}
+/* ================= v3.6 ================= */
+/* collage: four equal tiles, mirrored around the centre frame, corners locked round */
+.hc{border-radius:var(--r-photo);clip-path:inset(0 round var(--r-photo));isolation:isolate;transform:translateZ(0)}
+@media (min-aspect-ratio:4/5){
+  .hc{width:23vw;height:33vh}
+  .hc1{left:4vw;right:auto;top:13vh;bottom:auto}
+  .hc2{left:4vw;right:auto;top:auto;bottom:13vh}
+  .hc3{right:4vw;left:auto;top:13vh;bottom:auto}
+  .hc4{right:4vw;left:auto;top:auto;bottom:13vh}
+}
+@media (max-aspect-ratio:4/5){
+  .hc{width:44vw;height:15vh}
+  .hc1{left:4vw;right:auto;top:9vh;bottom:auto}
+  .hc2{left:4vw;right:auto;top:auto;bottom:9vh}
+  .hc3{right:4vw;left:auto;top:9vh;bottom:auto}
+  .hc4{right:4vw;left:auto;top:auto;bottom:9vh}
+}
+/* hero slides never animate their blurred fill (cheaper, no shimmer) */
+.sl .bg{transform:none!important}
+/* service slideshows */
+.p-img.show{position:relative}
+.p-img.show img{position:absolute;top:0;left:-4%;width:108%;height:100%;max-width:none;margin:0;object-fit:cover;object-position:50% 30%;opacity:0;will-change:opacity,transform}
+.p-img.show img.on{opacity:1}
+/* wedding day: landscape frame, landscape photos, no blurred bands */
+.day-stage{align-self:center;width:100%;height:auto;aspect-ratio:3/2;min-height:0}
+.day-stage figure .dbg{display:none}
+.day-stage figure img:first-child{object-fit:cover;object-position:50% 45%}
+@media (max-aspect-ratio:4/5){
+  .day-pin{grid-template-rows:auto auto auto;align-content:start;gap:16px}
+  .day-stage{grid-row:2;aspect-ratio:3/2}
+  .day-stage::after{display:none}
+  .day-list{position:static!important;color:inherit!important;margin:4px 0 0;grid-row:3}
+  .day-list li{display:none;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+  .day-list li.on{display:block}
+  .day-list li.on b{font-size:22px}
+  .day-list span{color:var(--mute)!important;max-height:none;margin-top:6px}
+  .day-bar{position:static!important;grid-row:4;margin-top:8px;background:var(--line)!important}
+}
+/* ================= Wordmark: modern, legible, revealed letter by letter ================= */
+.logo{width:auto!important;aspect-ratio:auto!important;height:auto!important;display:inline-flex!important;flex-direction:column;align-items:center;line-height:1;background:none!important;-webkit-mask:none!important;mask:none!important;color:inherit}
+.lg-m{display:block;overflow:hidden;padding:.08em .02em .04em;font:700 1em/1 var(--display);letter-spacing:.05em;white-space:nowrap}
+.lg-m .lc{display:inline-block}
+.lg-s{display:block;margin-top:.42em;font:600 .262em/1 var(--body);letter-spacing:.2em;padding-left:.2em;white-space:nowrap;opacity:.9}
+.hdr .brand{display:inline-flex}
+.hdr .logo{font-size:23px;color:#fff}
+.hdr.solid .logo{color:var(--wine)}
+body.menu-open .hdr .logo{color:#fff}
+@media (max-width:759px){.hdr .logo{font-size:20px}}
+.ld-logo{font-size:clamp(26px,5vw,48px);color:var(--wine);left:50%!important;top:auto!important;bottom:12vh;transform:translateX(-50%);width:auto!important}
+.ftr-logo{display:flex!important;width:100%;font-size:clamp(54px,12.5vw,200px);color:#f0cd78;margin:clamp(50px,8vw,110px) 0 20px;filter:none}
+.ftr-logo .lg-s{color:#f5e3b5}
+.ac-front .logo{font-size:clamp(34px,4.4vw,70px);color:#f0cd78}
+/* the reveal */
+html.motion .logo:not(.reveal) .lc,html.motion .logo:not(.reveal) .lg-s{opacity:0}
+.logo.reveal .lc{animation:lgRise 1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i) * 55ms)}
+.logo.reveal .lg-s{animation:lgSub 1.1s .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes lgRise{from{transform:translateY(105%);opacity:0;filter:blur(6px)}to{transform:none;opacity:1;filter:none}}
+@keyframes lgSub{from{opacity:0;transform:scaleX(1.18);filter:blur(3px)}to{opacity:.9;transform:none;filter:none}}
+html.motion .ac-front .logo .lc,html.motion .ac-front .logo .lg-s{opacity:1}
+html.calm .logo .lc,html.calm .logo .lg-s{opacity:1!important;animation:none!important}
+.brand,.brand:hover{text-decoration:none}
+
+@media (max-aspect-ratio:4/5){.day-pin{align-content:center}.day-side .h2{margin-bottom:6px}}
