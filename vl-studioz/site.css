@@ -702,3 +702,10 @@ html.calm .logo .lc,html.calm .logo .lg-s{opacity:1!important;animation:none!imp
 /* collage: the centre photo fills its frame */
 #slides.collage .sl .fg{object-fit:cover!important;object-position:50% 30%!important}
 #slides.collage .sl .bg{display:none}
+
+/* booking form: never wider than the screen, centred with equal margins */
+@media (max-width:899px){.book{grid-template-columns:minmax(0,1fr)}.ask{min-width:0;width:100%;max-width:560px;justify-self:center}.ask .seg{min-width:0}.fld select,.fld input{min-width:0;max-width:100%}}
+
+.ask{grid-template-columns:minmax(0,1fr)}
+.ask .btn.big{white-space:normal;text-align:center;line-height:1.25;padding:12px 18px}
+@media (max-width:380px){.ask .btn.big{font-size:15px}}
