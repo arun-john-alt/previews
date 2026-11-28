@@ -1,645 +1,244 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aara Events &amp; Experiences · DJ, sound, lighting and entries in Chennai</title>
+<meta name="description" content="DJ, sound, lighting, LED dance floors, couple entries and live acts for weddings, receptions, sangeets and parties. Choolaimedu, Chennai. Call or WhatsApp +91 96772 18580.">
 <meta name="robots" content="noindex, nofollow">
-<title>Aara Events &amp; Experiences, Chennai</title>
-<meta name="description" content="Aara Events &amp; Experiences, Chennai: DJ, RCF sound, lights, LED dance floors, entries and SFX. From setup to show, one crew. Send your event on WhatsApp.">
-<meta name="theme-color" content="#100d0b">
-<link rel="preload" as="image" href="img/p11.webp" imagesrcset="img/p11.webp 360w, img/p11-720.webp 720w" imagesizes="(min-width: 1024px) 440px, 100vw" fetchpriority="high">
+<meta name="theme-color" content="#fbf7f0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aara Events &amp; Experiences">
+<meta property="og:title" content="Aara Events &amp; Experiences · Turning events into experiences">
+<meta property="og:description" content="DJ, sound, lighting, LED dance floors and grand entries for weddings and celebrations in Chennai.">
+<meta property="og:url" content="https://arun-john-alt.github.io/previews/aaraevents-experiences/">
+<meta property="og:image" content="https://arun-john-alt.github.io/previews/aaraevents-experiences/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon-32.png">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="preload" as="image" href="assets/logo.jpg">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/marcellus-400-latin.woff2" crossorigin>
+<link rel="preload" as="image" media="(max-width: 767px), (orientation: portrait)" imagesrcset="assets/img/hero-p3-640.webp 640w, assets/img/hero-p3-960.webp 960w, assets/img/hero-p3-1180.webp 1180w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-width: 768px) and (orientation: landscape)" imagesrcset="assets/img/hero-l-960.webp 960w, assets/img/hero-l-1440.webp 1440w, assets/img/hero-l-2000.webp 2000w, assets/img/hero-l-2560.webp 2560w, assets/img/hero-l-2880.webp 2880w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="site.css?v=2">
 <script>
-/* Marks the page as scripted, shows everything if the main script never runs, and flags the opening done on a fixed
-   timer (the opening is pure CSS and lasts 2.1 s). Under reduced motion it is done at once. */
-(function () {
-  var r = document.documentElement;
-  r.classList.add("js");
-  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (still) r.classList.add("still");
-  setTimeout(function () { if (!window.__aara) r.classList.add("rv-fail"); }, 2500);
-  setTimeout(function () { r.setAttribute("data-opening", "done"); }, still ? 0 : 2150);
-  /* the follow-spot starts when the hero photo is in, or after 700 ms at the latest */
-  function lit() { var f = document.querySelector(".hero-fig"); if (f) f.classList.add("lit"); }
-  document.addEventListener("load", function (e) { if (e.target.closest && e.target.closest(".hero-fig")) lit(); }, true);
-  setTimeout(lit, 700);
-})();
+  (function (d) {
+    var calm = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]still/.test(location.search);
+    d.classList.add('js', calm ? 'calm' : 'motion');
+    // If site.js never runs, show everything after 2.5 s
+    setTimeout(function () { if (!window.__aara) d.classList.add('rv-fail'); }, 2500);
+    // The opening is pure CSS; it ends at 1.6 s (at once when motion is reduced)
+    setTimeout(function () { d.dataset.opening = 'done'; }, calm ? 0 : 1600);
+  })(document.documentElement);
 </script>
-<style>
-  /* Self-hosted, swap, no preload (measured worse on the throttled phone for other mocks). The fallback is Arial
-     sized close to Schibsted Grotesk so the swap barely moves a line. */
-  @font-face { font-family: "Schibsted Grotesk"; font-weight: 400 700; font-style: normal; font-display: swap; src: url("fonts/schibsted-var.woff2") format("woff2"); }
-  @font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/plexmono-500.woff2") format("woff2"); }
-  @font-face { font-family: "Grotesk Stand-in"; font-display: swap; src: local("Arial"), local("ArialMT"), local("Roboto"); size-adjust: 101%; ascent-override: 96%; descent-override: 25%; }
-
-  :root {
-    /* A hall with the house lights down: warm black, raised panels, faint rules, warm white ink. One accent, the amber
-       of cold pyro (also their logo's gold). Their LED floors bring every other colour through the photos. */
-    --night: #100d0b;
-    --panel: #1a1512;
-    --rule: #2c2520;
-    --rule-hi: #4a3f37;
-    --ink: #f1ece5;
-    --mute: #a99e92;
-    --amber: #f0a24a;
-    --amber-deep: #c97a26;
-    --sans: "Schibsted Grotesk", "Grotesk Stand-in", Arial, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
-    --ease: cubic-bezier(.23, 1, .32, 1);
-    --enter: cubic-bezier(.16, 1, .3, 1);
-    --gut: 18px;
-    color-scheme: dark;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body { margin: 0; background: var(--night); color: var(--ink); font: 400 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
-  img { display: block; max-width: 100%; }
-  a { color: inherit; }
-  ::selection { background: var(--amber); color: var(--night); }
-  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
-  h1, h2, h3, p, ol, ul, figure, blockquote { margin: 0; padding: 0; }
-  ol, ul { list-style: none; }
-  .svg { width: 1em; height: 1em; flex: none; }
-
-  /* ---- concept strip + name bar ---- */
-  .concept { font-size: 12px; line-height: 1.35; color: var(--mute); text-align: center; padding: 5px 12px; border-bottom: 1px solid var(--rule); }
-  .bar { position: sticky; top: 0; z-index: 20; background: var(--night); border-bottom: 1px solid var(--rule); }
-  .bar-in { display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 var(--gut); max-width: 1240px; margin: 0 auto; }
-  .badge { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #3a2f22; }
-  .name { display: flex; align-items: center; gap: 10px; min-height: 44px; min-width: 0; text-decoration: none; }
-  .name-t { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
-  .name b { font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
-  .name small { font-size: 12.5px; color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .bar-call { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 2px 0 10px; font-weight: 500; font-size: 15px; text-decoration: none; color: var(--ink); }
-  .bar-call .svg { color: var(--amber); }
-
-  /* ---- hero ---- */
-  .hero-fig { position: relative; overflow: hidden; background: #0a0807 url("data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAAAQBgCdASoSACAAPu1mq0+ppSOiMBgIATAdiWwAnTLT7LGWf/6X/ArUuse5G3kDnqHxTxwmyJjfpQAA/nGY686mPpD9PkB9I01xt9mgndDBwpT83YLJxYxsez1P61yAu9YLcSm/VfSO5laaOigI131Z4B7L3Rc6Yi0nWhQ+guDCObzn1Oc7eagXgskoau/bkYwNBxaMwc90YqV6iayAyMZXQDr/ocvTPE/9Zz83pmVLrk49noedoVZlRUT/rvX7k7O7UcensVPrBnAA") 50% 57% / cover no-repeat; height: clamp(112px, calc(100svh - 460px), 300px); }
-  .hero-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 57%; }
-  .spot { position: absolute; top: 0; bottom: 0; left: -100%; width: 300%; pointer-events: none; opacity: 0;
-    background: radial-gradient(ellipse 13% 75% at 50% 50%, rgba(16,13,11,0) 0%, rgba(16,13,11,.35) 45%, rgba(16,13,11,.9) 100%); }
-  .sparks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  .tag { position: absolute; left: calc(var(--gut) - 5px); bottom: 2px; z-index: 2; display: flex; }
-  .tag a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 5px; text-decoration: none; font: 500 13px/1 var(--mono); color: var(--ink); -webkit-tap-highlight-color: transparent; }
-  .tag span { display: block; background: rgba(16,13,11,.8); padding: 7px 8px 6px; border-bottom: 1px solid var(--rule-hi); transition: transform .14s var(--ease), border-color .2s var(--ease); }
-  .tag a:active span { transform: scale(.96); }
-  @media (hover: hover) { .tag a:hover span { border-color: var(--amber); } }
-  .tag b { font-weight: 500; color: var(--amber); margin-right: 5px; }
-
-  .hero-copy { padding: 16px var(--gut) 0; }
-  h1 { font-weight: 400; font-size: clamp(27px, 8.6vw, 40px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
-  .ln { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
-  .ln > span { display: block; }
-  .sub { margin-top: 8px; color: var(--mute); font-size: 16px; line-height: 1.42; max-width: 34em; }
-
-  .sheet { margin-top: 12px; scroll-margin-top: 150px; }
-  .row { position: relative; display: grid; grid-template-columns: 74px 1fr; align-items: center; min-height: 46px; }
-  .row::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--rule); transform-origin: 0 50%; }
-  .row:first-child::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--rule-hi); transform-origin: 0 50%; }
-  .row:focus-within::after { background: var(--amber); }
-  .row label { font-size: 15px; color: var(--mute); }
-  .row input, .row select { width: 100%; min-height: 44px; font: 400 16px/1.2 var(--sans); color: var(--ink); background: transparent; border: 0; border-radius: 0; padding: 0; caret-color: var(--amber); outline: none; }
-  .row input::placeholder { color: #8a7f74; opacity: 1; }
-  .row select { appearance: none; -webkit-appearance: none; padding-right: 26px; cursor: pointer;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f0a24a' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 4px center; }
-  .row select option { background: var(--panel); color: var(--ink); }
-
-  .cta { display: flex; gap: 8px; margin-top: 12px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 16px; white-space: nowrap; font: 600 16px/1 var(--sans); text-decoration: none; border-radius: 3px; position: relative; -webkit-tap-highlight-color: transparent; transition: transform .14s var(--ease), background-color .2s var(--ease), border-color .2s var(--ease); }
-  .btn:active { transform: scale(.97); }
-  .btn-wa { flex: 1; background: var(--ink); color: var(--night); }
-  .btn-wa .svg { width: 19px; height: 19px; }
-  .btn-call { width: 104px; border: 1px solid var(--rule-hi); color: var(--ink); }
-  .btn-call .svg { color: var(--amber); }
-  @media (hover: hover) { .btn-wa:hover { background: #fff; } .btn-call:hover { border-color: var(--mute); } }
-  .proof { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 12px; font: 500 14px/1.3 var(--mono); color: var(--mute); }
-  .proof .svg { color: var(--amber); width: 12px; height: 12px; margin: -2px 2px 0 -4px; }
-  .proof i { font-style: normal; color: var(--rule-hi); }
-  .burst { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); pointer-events: none; }
-
-  /* ---- shared section rhythm ---- */
-  .sec { padding: 64px var(--gut) 0; max-width: 1240px; margin: 0 auto; content-visibility: auto; contain-intrinsic-size: auto 1100px; }
-  h2 { font-weight: 500; font-size: clamp(28px, 7.4vw, 34px); line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
-  .lede { margin-top: 10px; color: var(--mute); max-width: 36em; }
-
-  /* ---- run of show (the signature) ---- */
-  /* The stage stays in view while the cues scroll under it, so a tapped cue always shows its photo. */
-  .stage { position: sticky; top: 57px; z-index: 2; margin-top: 22px; padding-bottom: 10px; background: var(--night); }
-  .frame { position: relative; aspect-ratio: 16 / 10; max-height: 34svh; width: 100%; overflow: hidden; background: var(--panel); }
-  /* A new cue's photo wipes up over the last one, like the next lighting state coming in from the floor. */
-  .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; clip-path: inset(100% 0 0 0); transform: scale(1.06); z-index: 0; }
-  .frame img.was { clip-path: inset(0); transform: none; z-index: 1; }
-  .frame img.on { clip-path: inset(0); transform: none; z-index: 2; transition: clip-path .75s var(--enter), transform 1.3s var(--enter), opacity .8s var(--ease); }
-  .frame figcaption { z-index: 3; }
-  .frame figcaption { position: absolute; left: 12px; bottom: 10px; font: 500 13px/1 var(--mono); background: rgba(16,13,11,.8); padding: 6px 7px 5px; }
-  .frame figcaption b { font-weight: 500; color: var(--amber); margin-right: 6px; }
-  .cues { margin-top: 18px; border-top: 1px solid var(--rule-hi); }
-  .cue { position: relative; display: grid; grid-template-columns: 40px 1fr 28px; gap: 0 4px; align-items: start; width: 100%; min-height: 64px; padding: 15px 0 14px; text-align: left; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .14s var(--ease); }
-  .cue:active { transform: scale(.985); }
-  .cue::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--rule); transform-origin: 0 50%; transition: transform .9s var(--enter); }
-  .cue::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: 0 50%; transition: transform .5s var(--ease); }
-  .cue.live::after { transform: scaleX(1); }
-  .cue .n { font: 500 13px/1.5 var(--mono); color: var(--mute); padding-top: 2px; transition: color .3s var(--ease); }
-  .cue.live .n, .cue[aria-pressed="true"] .n { color: var(--amber); }
-  .cue strong { display: block; font-weight: 600; font-size: 18px; line-height: 1.3; }
-  .cue .d { display: block; margin-top: 3px; color: var(--mute); font-size: 16px; line-height: 1.42; }
-  /* the mark is a honeycomb cell, the shape of their DJ wall */
-  .cue .mk { position: relative; width: 26px; height: 30px; margin-top: -1px; display: grid; place-items: center; color: var(--mute); background: var(--rule-hi); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); transition: background-color .2s var(--ease), color .2s var(--ease); }
-  .cue .mk::before { content: ""; position: absolute; inset: 1.5px; background: var(--night); clip-path: inherit; transition: background-color .2s var(--ease); }
-  .cue .mk .svg { position: relative; }
-  .cue.live .mk { background: var(--amber); }
-  .cue[aria-pressed="true"] .mk::before { background: var(--amber); }
-  .cue .mk .svg { width: 12px; height: 12px; transition: transform .25s var(--ease); }
-  .cue[aria-pressed="true"] .mk { background: var(--amber); color: var(--night); }
-  .cue { scroll-margin-top: 70px; }
-  #run { scroll-margin-top: 40px; }
-  .cue[aria-pressed="true"] .mk .svg { transform: rotate(45deg); }
-  .picked { margin-top: 14px; font-size: 16px; color: var(--mute); min-height: 2.9em; }
-  .picked b { color: var(--ink); font-weight: 500; }
-  .picked a { display: inline-flex; align-items: center; min-height: 44px; color: var(--amber); text-underline-offset: 3px; }
-
-  /* ---- recent nights (swipe row) ---- */
-  .row-x { display: flex; gap: 10px; margin: 22px calc(var(--gut) * -1) 0; padding: 0 var(--gut) 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gut); overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--rule-hi) transparent; }
-  .row-x::-webkit-scrollbar { height: 4px; } .row-x::-webkit-scrollbar-thumb { background: var(--rule-hi); }
-  .night { flex: none; width: 78vw; max-width: 320px; scroll-snap-align: start; }
-  .work-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .count { font: 500 14px/1 var(--mono); color: var(--mute); white-space: nowrap; }
-  .count b { font-weight: 500; color: var(--amber); }
-  .night .ph { aspect-ratio: 4 / 5; overflow: hidden; background: var(--panel); }
-  .night img { width: 100%; height: 100%; object-fit: cover; }
-  .night figcaption { margin-top: 9px; font-size: 16px; line-height: 1.4; color: var(--mute); }
-  .night figcaption b { display: block; color: var(--ink); font-weight: 500; }
-  .more { display: inline-block; padding: 11px 0; margin-top: 4px; color: var(--ink); font-weight: 500; text-underline-offset: 4px; text-decoration-color: var(--rule-hi); }
-  .more .svg { color: var(--amber); vertical-align: -2px; margin-left: 6px; }
-
-  /* ---- what we bring: a lighting check ---- */
-  .kit { margin-top: 22px; font-size: clamp(29px, 8.8vw, 36px); line-height: 1.13; letter-spacing: -.03em; font-weight: 400; }
-  .kit li { display: inline; }
-  .kit li + li::before { content: " / "; color: var(--rule-hi); }
-  .occ { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--mute); max-width: 38em; }
-  .occ b { color: var(--ink); font-weight: 500; }
-
-  /* ---- reviews ---- */
-  .score { margin-top: 20px; }
-  .score-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 10px; }
-  .score .num { display: block; font-weight: 400; font-size: clamp(128px, 42vw, 176px); line-height: .78; letter-spacing: -.055em; margin-left: -.04em; white-space: nowrap; }
-  .stars { position: relative; display: inline-flex; gap: 3px; color: var(--rule-hi); }
-  .stars .svg { width: 20px; height: 20px; }
-  .stars .lit { position: absolute; inset: 0; display: inline-flex; gap: 3px; color: var(--amber); clip-path: inset(0 1.6% 0 0); }
-  .score p { color: var(--mute); font-size: 16px; }
-  .quotes { margin-top: 30px; display: grid; gap: 26px; }
-  .quote { padding-top: 16px; border-top: 1px solid var(--rule); }
-  .quote p { font-size: 19px; line-height: 1.45; letter-spacing: -.005em; }
-  .quote footer { margin-top: 10px; font-size: 15px; color: var(--mute); }
-  .quote footer b { color: var(--ink); font-weight: 500; }
-  .snips { margin-top: 30px; }
-  .snips h3 { font-size: 15px; font-weight: 500; color: var(--mute); }
-  .snips li { margin-top: 10px; padding-left: 16px; position: relative; color: var(--ink); }
-  .snips li::before { content: ""; position: absolute; left: 0; top: .66em; width: 6px; height: 6px; border-radius: 50%; background: var(--amber-deep); }
-
-  /* ---- find us + last enquiry ---- */
-  .find { margin-top: 22px; border-top: 1px solid var(--rule-hi); }
-  .find > div { display: grid; grid-template-columns: 82px 1fr; gap: 0 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--rule); }
-  .find dt { font-size: 15px; color: var(--mute); }
-  .find dd { margin: 0; font-size: 17px; }
-  .find dd a { text-underline-offset: 4px; text-decoration-color: var(--rule-hi); display: inline-flex; align-items: center; min-height: 44px; }
-  .attr { font-size: 15px; color: var(--mute); }
-  .last { position: relative; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--rule-hi); }
-  .last p { color: var(--mute); max-width: 32em; }
-  .last .cta { margin-top: 16px; }
-  .rise { position: absolute; left: 24px; top: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); opacity: 0; pointer-events: none; }
-  .glow { position: absolute; inset: -4px; border-radius: 6px; border: 2px solid var(--amber); opacity: 0; pointer-events: none; }
-
-  footer.end { margin-top: 72px; padding: 22px var(--gut) calc(26px + env(safe-area-inset-bottom)); border-top: 1px solid var(--rule); color: var(--mute); font-size: 14px; }
-  footer.end .in { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
-
-  /* ================= motion ================= */
-  /* Opening (inline CSS, plays at first paint): house lights come up on the reception, a follow-spot sweeps once,
-     the headline rises from its masks, the three cues tick amber 380 ms apart (well under 3 a second), the rules of
-     the enquiry draw, and the actions arrive by 1.1 s. Nothing flashes. */
-  @keyframes spot { 0% { opacity: 1; transform: translateX(-17%); } 62% { opacity: 1; transform: translateX(9%); } 100% { opacity: 0; transform: translateX(13%); } }
-  @keyframes settle { from { transform: scale(1.07); } to { transform: none; } }
-  @keyframes rise { from { transform: translateY(106%); } to { transform: none; } }
-  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes draw { from { transform: scaleX(0); } to { transform: none; } }
-  @keyframes lift { from { transform: translateY(12px); } to { transform: none; } }
-  @keyframes cueon { from { color: var(--mute); } to { color: var(--amber); } }
-  /* the house stays dark until the photo is in (capped at 450 ms), then the follow-spot sweeps */
-  .js .spot { opacity: 1; transform: translateX(-17%); }
-  .js .lit .spot { animation: spot 1.2s cubic-bezier(.45, .05, .25, 1) both; }
-  .js .hero-fig img { animation: settle 1.9s var(--enter) backwards; }
-  .js .ln > span { animation: rise .85s var(--enter) both; }
-  .js .ln:nth-child(1) > span { animation-delay: .12s; }
-  .js .ln:nth-child(2) > span { animation-delay: .19s; }
-  .js .sub { animation: fadein .7s var(--ease) .42s both; }
-  .js .row::after, .js .row:first-child::before { animation: draw .7s var(--enter) both; }
-  .js .row:nth-child(1)::before { animation-delay: .45s; }
-  .js .row:nth-child(1)::after { animation-delay: .52s; }
-  .js .row:nth-child(2)::after { animation-delay: .58s; }
-  .js .row:nth-child(3)::after { animation-delay: .64s; }
-  .js .hero-copy .cta { animation: lift .5s var(--enter) .34s both; }
-  .js .proof { animation: fadein .5s var(--ease) .55s both; }
-  .js .tag a { animation: fadein .5s var(--ease) both; }
-  .js .tag a:nth-child(1) { animation-delay: .45s; } .js .tag a:nth-child(2) { animation-delay: .83s; } .js .tag a:nth-child(3) { animation-delay: 1.21s; }
-  .js .tag b { animation: cueon .4s var(--ease) both; }
-  .js .tag a:nth-child(1) b { animation-delay: .55s; } .js .tag a:nth-child(2) b { animation-delay: .93s; } .js .tag a:nth-child(3) b { animation-delay: 1.31s; }
-
-  /* Scroll scenes, each its own (hidden states only under .js:not(.rv-fail); text never starts invisible). */
-  /* run of show: the cue rules draw left to right, one after another */
-  .js:not(.rv-fail) #run:not(.in) .cue::before { transform: scaleX(0); }
-  #run.in .cue::before { transition-delay: calc(var(--i) * 140ms + 150ms); }
-  .js:not(.rv-fail) #run:not(.in) .frame img.on { opacity: .2; transform: scale(1.08); }
-  /* recent nights: each photo un-clips from the bottom, like a floor lighting row by row */
-  .night .ph img { transition: clip-path 1s var(--enter), transform 1.4s var(--enter); transition-delay: calc(var(--i) * 110ms); }
-  .js:not(.rv-fail) #work:not(.in) .night .ph img { clip-path: inset(100% 0 0 0); transform: scale(1.1); }
-  /* what we bring: words light amber one by one, then settle, like a lighting check */
-  .js:not(.rv-fail) #kit:not(.in) .kit li { color: var(--mute); }
-  @keyframes check { 0% { color: var(--mute); } 35% { color: var(--amber); } 100% { color: var(--ink); } }
-  #kit.in .kit li { animation: check 1.1s var(--ease) both; animation-delay: calc(var(--i) * 85ms); }
-  /* reviews: the stars fill (the number counts up in the script) */
-  .stars .lit { transition: clip-path 1.6s cubic-bezier(.33, 1, .68, 1) .1s; }
-  .js:not(.rv-fail) #reviews:not(.in) .stars .lit { clip-path: inset(0 100% 0 0); }
-  .quote { transition: border-color .8s var(--ease); }
-  .js:not(.rv-fail) #reviews:not(.in) .quote { border-color: transparent; }
-  /* last enquiry: one spark rises to the button and it catches the light */
-  @keyframes sparkup { 0% { opacity: 0; transform: translateY(var(--from, 220px)) scale(.6); } 15% { opacity: 1; } 85% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(0) scale(2.4); } }
-  @keyframes catch { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
-  #find.in .rise { animation: sparkup 1.1s cubic-bezier(.3, .7, .2, 1) .2s both; }
-  #find.in .last .btn-wa .glow { animation: catch 1.4s var(--ease) 1.15s both; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-    .spot, .sparks, .rise, .glow { display: none !important; }
-  }
-  .still .spot, .still .sparks { display: none; }
-  @media (max-width: 359px) { .btn { padding: 0 12px; } .btn-call { width: 84px; } .city { display: none; } }
-
-  /* ================= wider screens ================= */
-  @media (min-width: 600px) {
-    :root { --gut: 28px; }
-    .hero-fig { height: clamp(220px, 42vh, 380px); }
-    .night { width: 260px; }
-    .quotes { grid-template-columns: 1fr 1fr; gap: 30px; }
-  }
-  @media (min-width: 1024px) {
-    :root { --gut: 40px; }
-    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 64px; max-width: 1240px; margin: 0 auto; padding: 40px var(--gut) 0; align-items: center; }
-    .hero-fig { order: 2; height: 620px; max-height: calc(100vh - 130px); min-height: 480px; }
-    .hero-copy { padding: 0; }
-    h1 { font-size: clamp(48px, 4.3vw, 62px); }
-    .sub { font-size: 18px; margin-top: 16px; }
-    .sheet { margin-top: 28px; max-width: 520px; }
-    .row { grid-template-columns: 96px 1fr; min-height: 54px; }
-    .hero-copy .cta, .proof { max-width: 520px; }
-    .btn-call { width: 140px; }
-    .sec { padding-top: 120px; }
-    h2 { font-size: 46px; }
-    .ros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-top: 8px; }
-    .stage { top: 84px; margin-top: 22px; padding: 0; }
-    .frame { aspect-ratio: 4 / 5; max-height: calc(100vh - 110px); }
-    .cues { margin-top: 22px; }
-    .row-x { margin: 30px 0 0; padding: 0 0 8px; overflow: visible; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .night { width: auto; max-width: none; }
-    .count { display: none; }
-    .sec { contain-intrinsic-size: auto 700px; }
-    .kit { font-size: 64px; }
-    .score .num { font-size: 220px; }
-    .rev-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; margin-top: 36px; }
-    .rev-score { position: sticky; top: 96px; }
-    .rev-score .score { margin-top: 0; padding-top: 17px; }
-    .quotes { grid-template-columns: 1fr; margin-top: 0; }
-    .quote:first-child p { font-size: 26px; }
-    .find-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
-  }
-</style>
+<script>
+  // start the photo's settle when it has actually arrived (cached or not)
+  document.addEventListener('DOMContentLoaded', function () {
+    var i = document.getElementById('heroImg'), h = i && i.closest('.hero');
+    if (!h) return; function go() { h.classList.add('ready'); }
+    if (i.complete && i.naturalWidth) go(); else { i.addEventListener('load', go); i.addEventListener('error', go); }
+  });
+</script>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-star" viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.6l2.47 5.3 5.8.68-4.28 3.96 1.13 5.73L10 14.4l-5.12 2.87 1.13-5.73L1.73 7.58l5.8-.68z"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 20 20"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6.2 2.5H3.6a1 1 0 0 0-1 1.1c.5 7.3 6.5 13.3 13.8 13.8a1 1 0 0 0 1.1-1v-2.6a1 1 0 0 0-.75-.97l-2.9-.75a1 1 0 0 0-1 .3l-1.1 1.2a10.4 10.4 0 0 1-4.6-4.6l1.2-1.1a1 1 0 0 0 .3-1l-.75-2.9a1 1 0 0 0-.97-.75z"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 12 12"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 1.5v9M1.5 6h9"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 11.5l7-7M5.5 4.5h6v6"/></symbol>
-</svg>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="concept" data-concept-banner>Concept for Aara Events &middot; not the official site</div>
-
-<header class="bar">
-  <div class="bar-in">
-    <a class="name" href="#top" aria-label="Aara Events and Experiences, back to the top">
-      <img class="badge" src="data:image/webp;base64,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" width="38" height="38" alt="Aara logo: gold script with a crown arc and wings">
-      <span class="name-t"><b>Aara</b><small>Events &amp; Experiences<span class="city">, Chennai</span></small></span>
-    </a>
-    <a class="bar-call" href="tel:+919677218580"><svg class="svg" aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
-  </div>
+<header class="hdr" id="hdr">
+  <a class="brand" href="#top" aria-label="Aara Events &amp; Experiences, home">
+    <img class="brand-logo" src="assets/logo.jpg" width="40" height="40" alt="">
+    <span class="brand-name"><b>Aara</b><small>Events &amp; Experiences</small></span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#services">Services</a><a href="#work">Recent nights</a><a href="#booking">Booking</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="btn ink sm hdr-wa" href="https://wa.me/919677218580?text=Hi%20Aara%20Events%2C%20I%27d%20like%20to%20enquire%20about%20an%20event." target="_blank" rel="noopener" data-wa><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp us</span></a>
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet"><span class="mb-l"></span><span class="mb-l"></span><span class="sr">Menu</span></button>
 </header>
 
-<main id="top">
-  <section class="hero" aria-label="Aara Events and Experiences">
-    <figure class="hero-fig">
-      <img src="img/p11.webp" srcset="img/p11.webp 360w, img/p11-720.webp 720w" sizes="(min-width: 1024px) 440px, 100vw" width="360" height="640" fetchpriority="high" alt="A reception hall: a honeycomb DJ wall under moving-head lights, cold pyro sparks rising behind it, a purple and red LED dance floor in front">
-      <div class="spot" aria-hidden="true"></div>
-      <canvas class="sparks" aria-hidden="true"></canvas>
-      <p class="tag"><a href="#cue-1" data-cue="0"><span><b>01</b>Setup</span></a><a href="#cue-2" data-cue="1"><span><b>02</b>Entry</span></a><a href="#cue-3" data-cue="2"><span><b>03</b>Floor</span></a></p>
-    </figure>
-    <div class="hero-copy">
-      <h1><span class="ln"><span>From setup to show,</span></span><span class="ln"><span>we handle everything.</span></span></h1>
-      <p class="sub">DJ, RCF sound, lights, LED floors, entries and SFX for weddings, receptions and sangeets in Chennai.</p>
-      <form class="sheet" id="enquiry" action="https://wa.me/919677218580" onsubmit="return false">
-        <div class="row"><label for="f-event">Event</label>
-          <select id="f-event" name="event">
-            <option>Reception</option><option>Wedding</option><option>Sangeet</option><option>Engagement</option>
-            <option>Corporate event</option><option>Government function</option><option>Private party</option><option value="Other">Something else</option>
-          </select></div>
-        <div class="row"><label for="f-date">Date</label><input id="f-date" name="date" type="text" placeholder="When is it?" autocomplete="off" enterkeyhint="next"></div>
-        <div class="row"><label for="f-venue">Venue</label><input id="f-venue" name="venue" type="text" placeholder="Hall or area" autocomplete="off" enterkeyhint="send"></div>
-      </form>
-      <div class="cta">
-        <a class="btn btn-wa js-wa" data-main-action href="https://wa.me/919677218580" target="_blank" rel="noopener"><svg class="svg" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
-        <a class="btn btn-call" href="tel:+919677218580"><svg class="svg" aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
-      </div>
-      <p class="proof"><span>4.9</span><svg class="svg" aria-hidden="true"><use href="#i-star"/></svg><span>116 Google reviews</span><i aria-hidden="true">/</i><span>Open 24 hours</span></p>
-    </div>
-  </section>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <nav aria-label="Menu">
+    <a href="#services">Services</a><a href="#work">Recent nights</a><a href="#booking">How booking works</a><a href="#faq">Questions</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="sheet-acts">
+    <a class="btn ink" href="https://wa.me/919677218580?text=Hi%20Aara%20Events%2C%20I%27d%20like%20to%20enquire%20about%20an%20event." target="_blank" rel="noopener" data-wa><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp us</a>
+    <a class="btn line" href="tel:+919677218580"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>+91 96772 18580</a>
+  </div>
+</div>
 
-  <section class="sec rv" id="run" aria-labelledby="run-h">
-    <h2 id="run-h">A night, cue by cue</h2>
-    <p class="lede">Tap a cue to see it. Every cue you tap goes into your WhatsApp message.</p>
-    <div class="ros-grid">
-      <div class="stage"><figure class="frame">
-        <img class="on" src="img/p07.webp" width="361" height="640" loading="lazy" decoding="async" alt="An outdoor dance floor lit red under festoon lights and paper lanterns, the honeycomb DJ booth behind it, the floor still empty" style="object-position:50% 72%">
-        <img src="img/p11.webp" width="360" height="640" loading="lazy" decoding="async" alt="Cold pyro sparks rising behind a honeycomb DJ wall in a reception hall" style="object-position:50% 30%">
-        <img src="img/p12.webp" width="360" height="528" loading="lazy" decoding="async" alt="Six women dancing a sangeet on a green and red LED floor in front of a purple backdrop" style="object-position:50% 45%">
-        <img src="img/p04.webp" width="360" height="284" loading="lazy" decoding="async" alt="A violinist and a dancer in a red silk saree on a lit floor, chendamellam drummers on either side" style="object-position:50% 40%">
-        <figcaption aria-live="polite"><b>01</b><span>Setup</span></figcaption>
-      </figure></div>
-      <div>
-        <ol class="cues">
-          <li><button class="cue" id="cue-1" type="button" aria-pressed="false" style="--i:0" data-want="the full setup (sound, lights, LED wall, dance floor)"><span class="n">01</span><span><strong>Setup</strong><span class="d">RCF sound, Sharpy lights, the honeycomb DJ booth, LED wall and the dance floor.</span></span><span class="mk"><svg class="svg" aria-hidden="true"><use href="#i-plus"/></svg></span></button></li>
-          <li><button class="cue" id="cue-2" type="button" aria-pressed="false" style="--i:1" data-want="a couple entry with cold pyro"><span class="n">02</span><span><strong>Entry</strong><span class="d">Bride and groom entries, a couple or car entry, with cold pyro, CO2 and fog.</span></span><span class="mk"><svg class="svg" aria-hidden="true"><use href="#i-plus"/></svg></span></button></li>
-          <li><button class="cue" id="cue-3" type="button" aria-pressed="false" style="--i:2" data-want="the DJ and an LED dance floor"><span class="n">03</span><span><strong>Floor open</strong><span class="d">The DJ opens the floor: sangeet dances, dance teams, a 3D mirror or LED floor.</span></span><span class="mk"><svg class="svg" aria-hidden="true"><use href="#i-plus"/></svg></span></button></li>
-          <li><button class="cue" id="cue-4" type="button" aria-pressed="false" style="--i:3" data-want="live acts (violin, chendamellam or thappu)"><span class="n">04</span><span><strong>Live acts</strong><span class="d">Live violin, Chendamellam and dancers together, or thappu, while the DJ keeps the floor going.</span></span><span class="mk"><svg class="svg" aria-hidden="true"><use href="#i-plus"/></svg></span></button></li>
-        </ol>
-        <p class="picked" aria-live="polite">Nothing added yet. Your message will carry the event, date and venue from the top.</p>
-      </div>
-    </div>
-  </section>
+<main id="main">
 
-  <section class="sec rv" id="work" aria-labelledby="work-h">
-    <div class="work-head"><h2 id="work-h">Recent nights</h2><span class="count" aria-hidden="true"><b>1</b> / 3</span></div>
-    <div class="row-x" tabindex="0" aria-label="Recent nights, swipe sideways">
-      <figure class="night" style="--i:0"><div class="ph"><img src="img/p01.webp" width="296" height="318" loading="lazy" decoding="async" alt="LED lights on a truss and a mirror-ball burst through haze"></div><figcaption><b>Honeycomb DJ setup</b>Sharpy lights, mirror ball, smoke and bubbles</figcaption></figure>
-      <figure class="night" style="--i:1"><div class="ph"><img src="img/p09.webp" width="360" height="640" loading="lazy" decoding="async" alt="A laughing guest in a polka-dot dress dancing with friends under a pink-lit tent" style="object-position:50% 40%"></div><figcaption><b>Private DJ party</b>Endless dancing under a pink-lit tent</figcaption></figure>
-      <figure class="night" style="--i:2"><div class="ph"><img src="img/p02.webp" width="360" height="490" loading="lazy" decoding="async" alt="Guests in kurtas and an anarkali dancing outdoors under the trees in daylight" style="object-position:50% 30%"></div><figcaption><b>Daytime celebration</b>Guests dancing under the trees</figcaption></figure>
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="h1" style="background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAaABIDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCWOCyIE9oFzuC/Llf/ANVWFFysswhvLmNY8YKtkHI9CKr2UkLXn2KKDyvIl2uUJIb655zVq4nWzS7xy7BUxjpzwfesFJ21NpQV3YkEGtEAjVDg+uz/AAorIbViGIEPGfQ0UXIt5FBriVXku5PNUyPmN4wNr46n1/Gp7qRVvJWuLlHAJZ1yQxwMjnHBx3+tUbX/AFcP+yePb56q64zNq0+5if3p6n2qeX3kv66GrSUbmi1/oMjFzHcgsc48w8Z/CimRxp5a/IvQdqKV0Zn/2Q==)">
+  <picture class="hero-img">
+    <source media="(min-width: 768px) and (orientation: landscape)" srcset="assets/img/hero-l-960.webp 960w, assets/img/hero-l-1440.webp 1440w, assets/img/hero-l-2000.webp 2000w, assets/img/hero-l-2560.webp 2560w, assets/img/hero-l-2880.webp 2880w" sizes="100vw" width="2880" height="1620">
+    <img src="assets/img/hero-p3-1180.webp" srcset="assets/img/hero-p3-640.webp 640w, assets/img/hero-p3-960.webp 960w, assets/img/hero-p3-1180.webp 1180w" sizes="100vw" width="1180" height="1736" fetchpriority="high" decoding="async" id="heroImg" alt="A bride and groom make their entry on a flower-lined stage as cold pyro fountains spark around them">
+  </picture>
+  <i class="hero-beam" aria-hidden="true"></i>
+  <div class="hero-copy">
+    <p class="eyebrow light"><span>DJ · Sound · Light · Chennai</span></p>
+    <h1 id="h1" class="h1"><span class="ln"><span>Turning events</span></span> <span class="ln"><span>into <em>experiences.</em></span></span></h1>
+    <p class="hero-line">DJ, sound, lights and grand entries for weddings and parties in Chennai.</p>
+    <div class="hero-acts">
+      <a class="btn gold" data-main-action data-wa href="https://wa.me/919677218580?text=Hi%20Aara%20Events%2C%20I%27d%20like%20to%20enquire%20about%20an%20event." target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp us</a>
+      <a class="btn ghost" href="#work">See our work</a>
     </div>
-    <a class="more" href="https://instagram.com/aaraevents_experiences" target="_blank" rel="noopener">More nights on Instagram, @aaraevents_experiences<svg class="svg" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-  </section>
+  </div>
+</section>
 
-  <section class="sec rv" id="kit" aria-labelledby="kit-h">
-    <h2 id="kit-h">One crew brings all of it</h2>
-    <ul class="kit">
-      <li style="--i:0">DJ</li><li style="--i:1">RCF sound</li><li style="--i:2">Sharpy lights</li><li style="--i:3">mirror ball</li><li style="--i:4">LED walls</li><li style="--i:5">3D mirror and LED dance floors</li><li style="--i:6">honeycomb DJ booth</li><li style="--i:7">couple and car entries</li><li style="--i:8">cold pyro</li><li style="--i:9">CO2</li><li style="--i:10">fog pots</li><li style="--i:11">smoke and bubbles</li><li style="--i:12">live violin</li><li style="--i:13">Chendamellam</li><li style="--i:14">thappu</li><li style="--i:15">dance teams</li>
+<!-- INTRO: one team (the why-us points live here) -->
+<section class="intro wrap" aria-labelledby="intro-h">
+  <div class="intro-txt">
+    <p class="eyebrow" data-rv="up"><span>One team</span></p>
+    <h2 id="intro-h" class="h2" data-rv="mask"><span class="ln"><span>From setup to show,</span></span> <span class="ln"><span>we handle <em>everything.</em></span></span></h2>
+    <p class="lead" data-rv="up">Sound, lights, the dance floor, your entry and the entertainment come from one team. We set it up, run it on the night, and you get to enjoy your own celebration.</p>
+    <p class="occ-line" data-rv="up">For weddings, receptions, sangeets, engagements, corporate events and private parties.</p>
+  </div>
+  <figure class="ph intro-ph arch" data-rv="clip"><img src="assets/img/g-lights-960.webp" srcset="assets/img/g-lights-640.webp 640w, assets/img/g-lights-960.webp 960w, assets/img/g-lights-1440.webp 1440w" sizes="(min-width: 900px) min(40vw, 480px), calc(100vw - 40px)" width="1440" height="1800" loading="lazy" decoding="async" alt="A crowd dancing with their hands up in red, green and blue party lights"></figure>
+</section>
+
+<!-- SERVICES -->
+<section class="svc" id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <p class="eyebrow" data-rv="up"><span>What we do</span></p>
+    <h2 id="svc-h" class="h2" data-rv="up">Everything the night <em>needs</em></h2>
+    <div class="svc-list">
+      <article class="svc-row">
+        <figure class="ph" data-rv="clip"><img src="assets/img/svc-dj-960.webp" srcset="assets/img/svc-dj-640.webp 640w, assets/img/svc-dj-960.webp 960w, assets/img/svc-dj-1440.webp 1440w, assets/img/svc-dj-2000.webp 2000w" sizes="(min-width: 900px) min(52vw, 640px), calc(100vw - 40px)" width="2000" height="1500" loading="lazy" decoding="async" alt="The DJ holds his headphones to his ear under a truss of stage lights"></figure>
+        <div class="svc-txt" data-rv="up"><h3>DJ &amp; sound</h3><p>RCF sound and a DJ who keeps the floor full all night.</p></div>
+      </article>
+      <article class="svc-row">
+        <figure class="ph" data-rv="clip"><img src="assets/img/svc-floor-960.webp" srcset="assets/img/svc-floor-640.webp 640w, assets/img/svc-floor-960.webp 960w, assets/img/svc-floor-1440.webp 1440w, assets/img/svc-floor-2000.webp 2000w" sizes="(min-width: 900px) min(52vw, 640px), calc(100vw - 40px)" width="2000" height="1500" loading="lazy" decoding="async" alt="An infinity LED dance floor glowing in front of a stage with an LED wall and hanging crystal lights"></figure>
+        <div class="svc-txt" data-rv="up"><h3>Lights &amp; dance floors</h3><p>Sharpy beams, mirror balls, LED walls, and LED or 3D mirror dance floors.</p></div>
+      </article>
+      <article class="svc-row">
+        <figure class="ph" data-rv="clip"><img src="assets/img/svc-entry-960.webp" srcset="assets/img/svc-entry-640.webp 640w, assets/img/svc-entry-960.webp 960w, assets/img/svc-entry-1440.webp 1440w, assets/img/svc-entry-1600.webp 1600w" sizes="(min-width: 900px) min(52vw, 640px), calc(100vw - 40px)" width="1600" height="1200" loading="lazy" decoding="async" alt="A bride and groom walk in through cold pyro sparks while dancers in white carry giant red roses"></figure>
+        <div class="svc-txt" data-rv="up"><h3>Entries, effects &amp; live acts</h3><p>Couple and car entries with cold pyro, fog and CO2. Live violin, chendamellam, thappu and dance teams when you want more.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE: the one dark band -->
+<section class="band" aria-label="What guests say">
+  <div class="wrap band-in" data-rv="up">
+    <svg class="qmark" viewBox="0 0 48 36" aria-hidden="true"><path fill="currentColor" d="M0 36V22C0 9.7 6.4 2.4 19.2 0l2 5C14 7 10.6 11 10.2 17H20v19H0Zm27 0V22C27 9.7 33.4 2.4 46.2 0l1.8 5c-7.2 2-10.6 6-11 12H47v19H27Z"/></svg>
+    <blockquote class="pull">Great song selection, smooth transitions, and kept the energy high all night.</blockquote>
+    <p class="pull-src">From a Google review</p>
+    <a class="rating" href="https://www.google.com/maps/search/?api=1&amp;query=Aara%20Events%20%26%20Experiences%20Choolaimedu&amp;query_place_id=ChIJx964jbBnUjoRLuCeOUhjxs0" target="_blank" rel="noopener"><svg class="star" aria-hidden="true"><use href="#i-star"/></svg><span>4.9 · 116 Google reviews</span></a>
+  </div>
+</section>
+
+<!-- RECENT NIGHTS: masonry grid, tap for full screen (the signature) -->
+<section class="work" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <p class="eyebrow" data-rv="up"><span>Recent work</span></p>
+    <h2 id="work-h" class="h2" data-rv="up">Recent <em>nights</em></h2>
+    <ul class="grid" id="grid" data-rv="grid">
+      <li class="arch"><button type="button" class="shot" data-full="g-dance" data-fw="640,1080" data-cap="Everyone on the floor"><img src="assets/img/g-dance-640.webp" srcset="assets/img/g-dance-640.webp 640w, assets/img/g-dance-1080.webp 1080w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="1080" height="1920" loading="lazy" decoding="async" alt="Women in yellow dancing in a crowd at an evening celebration"></button></li>
+      <li><button type="button" class="shot" data-full="g-floor" data-fw="960,1440,2000" data-cap="LED dance floor"><img src="assets/img/g-floor-640.webp" srcset="assets/img/g-floor-640.webp 640w, assets/img/g-floor-960.webp 960w, assets/img/g-floor-1440.webp 1440w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="1440" height="1016" loading="lazy" decoding="async" alt="An LED dance floor glowing red and blue"></button></li>
+      <li><button type="button" class="shot" data-full="g-decks" data-fw="960,1440" data-cap="The dance floor, seen from the decks"><img src="assets/img/g-decks-640.webp" srcset="assets/img/g-decks-640.webp 640w, assets/img/g-decks-960.webp 960w, assets/img/g-decks-1440.webp 1440w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="1440" height="1800" loading="lazy" decoding="async" alt="Guests dancing under a crystal chandelier, seen over the DJ's laptop"></button></li>
+      <li class="arch"><button type="button" class="shot" data-full="g-acts" data-fw="640,870" data-cap="A dance team on stage"><img src="assets/img/g-acts-640.webp" srcset="assets/img/g-acts-640.webp 640w, assets/img/g-acts-870.webp 870w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="870" height="1088" loading="lazy" decoding="async" alt="Two dancers in sequinned costumes performing on a stage in front of a wall of lights"></button></li>
+      <li><button type="button" class="shot" data-full="g-beams2" data-fw="960,1440,1771" data-cap="Sharpy beams across an LED floor"><img src="assets/img/g-beams2-640.webp" srcset="assets/img/g-beams2-640.webp 640w, assets/img/g-beams2-960.webp 960w, assets/img/g-beams2-1440.webp 1440w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="1440" height="1499" loading="lazy" decoding="async" alt="Yellow Sharpy light beams crossing an LED dance floor in front of a honeycomb DJ booth"></button></li>
+      <li><button type="button" class="shot" data-full="g-heart" data-fw="960,1280" data-cap="A giant heart on the stage"><img src="assets/img/g-heart-640.webp" srcset="assets/img/g-heart-640.webp 640w, assets/img/g-heart-960.webp 960w, assets/img/g-heart-1280.webp 1280w" sizes="(min-width: 900px) 360px, calc(50vw - 25px)" width="1280" height="960" loading="lazy" decoding="async" alt="A giant pink heart with a white bow on a flower-lined stage"></button></li>
     </ul>
-    <p class="occ">For <b>weddings, receptions, sangeets, engagements</b>, corporate celebrations, government functions and private DJ parties in Chennai.</p>
-  </section>
+    <p class="more"><a class="link" href="https://instagram.com/aaraevents_experiences" target="_blank" rel="noopener">More on Instagram @aaraevents_experiences</a></p>
+  </div>
+</section>
 
-  <section class="sec rv" id="reviews" aria-labelledby="rev-h">
-    <h2 id="rev-h">What clients wrote on Google</h2>
-    <div class="rev-grid"><div class="rev-score">
-    <div class="score">
-      <span class="num" aria-label="Rated 4.9 out of 5">4.9</span>
-      <div class="score-meta">
-        <span class="stars" aria-hidden="true"><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg>
-          <span class="lit"><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg><svg class="svg"><use href="#i-star"/></svg></span></span>
-        <p>from 116 Google reviews</p>
-      </div>
+<!-- HOW BOOKING WORKS -->
+<section class="steps wrap" id="booking" aria-labelledby="steps-h">
+  <p class="eyebrow" data-rv="up"><span>Booking</span></p>
+  <h2 id="steps-h" class="h2" data-rv="up">How booking <em>works</em></h2>
+  <ol class="steps-list" data-rv="steps">
+    <li><span class="dot" aria-hidden="true"></span><h3>Send your date and venue</h3><p>On WhatsApp or a call, with the occasion and what you have in mind.</p></li>
+    <li><span class="dot" aria-hidden="true"></span><h3>We plan the setup with you</h3><p>DJ, lights, dance floor, entries and live acts, picked for your venue.</p></li>
+    <li><span class="dot" aria-hidden="true"></span><h3>Setup and show</h3><p>We set everything up and run it on the night.</p></li>
+  </ol>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <div>
+      <p class="eyebrow" data-rv="up"><span>Questions</span></p>
+      <h2 id="faq-h" class="h2" data-rv="up">Good to <em>know</em></h2>
     </div>
-    </div><div>
-    <div class="quotes">
-      <blockquote class="quote"><p>&ldquo;In dj part bro made everyone to dance. Overall price effective compare to others and professional service.&rdquo;</p><footer><b>Kamalesh Kannan</b> &middot; Reception &middot; 5 stars</footer></blockquote>
-      <blockquote class="quote"><p>&ldquo;The car entry amazing work thank you for the so much special to us.&rdquo;</p><footer><b>Monika Vinoth Raj</b> &middot; 5 stars</footer></blockquote>
+    <div class="qa" data-rv="up">
+      <details><summary>How much does a setup cost?<i aria-hidden="true"></i></summary><div class="ans"><p>Every setup is planned for the event, so we quote once we know the date, the venue and what you'd like. Send those on WhatsApp and we'll come back with a quote.</p></div></details>
+      <details><summary>Can you add live performers?<i aria-hidden="true"></i></summary><div class="ans"><p>Yes. Live violin, chendamellam, thappu and dance teams, on their own or together with the DJ.</p></div></details>
+      <details><summary>Which effects do you have?<i aria-hidden="true"></i></summary><div class="ans"><p>Cold pyro, fog, CO2, and smoke and bubble effects, often used for the couple's entry.</p></div></details>
+      <details><summary>Where are you based?<i aria-hidden="true"></i></summary><div class="ans"><p>116A, Thiruvalluvarpuram 2nd Street, Thiruvenkatapuram, Choolaimedu, Chennai 600094.</p></div></details>
     </div>
-    <div class="snips">
-      <h3>From other reviews</h3>
-      <ul>
-        <li>&ldquo;Great song selection, smooth transitions, and kept the energy high all night.&rdquo;</li>
-        <li>&ldquo;Very nice music and workers discipline and work dedication&rdquo;</li>
-        <li>&ldquo;Good collection of songs and on time selection&rdquo;</li>
+  </div>
+</section>
+
+<!-- ENQUIRY + CONTACT -->
+<section class="book" id="contact" aria-labelledby="book-h">
+  <div class="wrap book-grid">
+    <div class="book-copy" data-rv="up">
+      <p class="eyebrow"><span>Enquire</span></p>
+      <h2 id="book-h" class="h2">Tell us about your <em>event</em></h2>
+      <p>Fill this in and WhatsApp opens with your message ready to send. Prefer to talk? Call us.</p>
+      <ul class="contact">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+919677218580">+91 96772 18580</a></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span>116A, Thiruvalluvarpuram 2nd St, Thiruvenkatapuram, Choolaimedu, Chennai 600094<br><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Aara%20Events%20%26%20Experiences%20Choolaimedu&amp;query_place_id=ChIJx964jbBnUjoRLuCeOUhjxs0" target="_blank" rel="noopener">Get directions</a></span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><a href="https://instagram.com/aaraevents_experiences" target="_blank" rel="noopener">@aaraevents_experiences</a></li>
       </ul>
     </div>
-    </div></div>
-  </section>
-
-  <section class="sec rv" id="find" aria-labelledby="find-h">
-    <div class="find-grid">
-      <div>
-        <h2 id="find-h">Open 24 hours, in Choolaimedu</h2>
-        <dl class="find">
-          <div><dt>Address</dt><dd>116A, Thiruvalluvarpuram 2nd St, Thiruvenkatapuram, Choolaimedu, Chennai 600094</dd></div>
-          <div><dt>Phone and WhatsApp</dt><dd><a href="tel:+919677218580">+91 96772 18580</a></dd></div>
-          <div><dt>Hours</dt><dd>Open 24 hours, every day</dd></div>
-        </dl>
-        <p class="attr" style="margin-top:16px">Identifies as women-owned on Google.</p>
+    <form class="ask" id="ask" novalidate data-rv="up">
+      <label class="fld"><span>Occasion</span>
+        <select id="fType"><option value="">Choose one</option><option>Wedding</option><option>Reception</option><option>Sangeet</option><option>Engagement</option><option>Corporate event</option><option>Private party</option><option>Something else</option></select>
+      </label>
+      <div class="fld-row">
+        <label class="fld"><span>Date</span><input type="date" id="fDate"></label>
+        <label class="fld"><span>Venue</span><input type="text" id="fVenue" maxlength="80" placeholder="Hall or area"></label>
       </div>
-      <div class="last">
-        <span class="rise" aria-hidden="true"></span>
-        <p>Tell us the event, the date and the hall. The message is ready to send; change anything before it goes.</p>
-        <div class="cta">
-          <a class="btn btn-wa js-wa" href="https://wa.me/919677218580" target="_blank" rel="noopener"><span class="glow" aria-hidden="true"></span><svg class="svg" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
-          <a class="btn btn-call" href="tel:+919677218580"><svg class="svg" aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      <label class="fld"><span>Your name <i>(optional)</i></span><input type="text" id="fName" autocomplete="name" maxlength="60"></label>
+      <div class="preview" aria-live="polite"><span>Your message</span><p id="bubble">Hi Aara Events, I'd like to enquire about an event.</p></div>
+      <a class="btn ink big" id="send" data-wa href="https://wa.me/919677218580?text=Hi%20Aara%20Events%2C%20I%27d%20like%20to%20enquire%20about%20an%20event." target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span class="send-l">Send on WhatsApp</span><svg class="ic tick" aria-hidden="true"><use href="#i-check"/></svg></a>
+    </form>
+  </div>
+</section>
 </main>
 
-<footer class="end"><div class="in"><span>Aara Events &amp; Experiences &middot; Choolaimedu, Chennai</span><span>Website concept, not the official site</span></div></footer>
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <a class="brand" href="#top" aria-label="Aara Events &amp; Experiences, back to top"><img class="brand-logo" src="assets/logo.jpg" width="40" height="40" alt="" loading="lazy"><span class="brand-name"><b>Aara</b><small>Events &amp; Experiences</small></span></a>
+    <p class="ftr-line">Turning events into experiences. Women-owned, in Choolaimedu, Chennai.</p>
+    <ul class="ftr-links">
+      <li><a href="tel:+919677218580">+91 96772 18580</a></li>
+      <li><a href="https://instagram.com/aaraevents_experiences" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Aara%20Events%20%26%20Experiences%20Choolaimedu&amp;query_place_id=ChIJx964jbBnUjoRLuCeOUhjxs0" target="_blank" rel="noopener">Google Maps</a></li>
+    </ul>
+  </div>
+  <p class="concept" data-concept-banner>Concept for Aara Events · not the official site</p>
+</footer>
 
-<script>
-(function () {
-  window.__aara = true;
-  var root = document.documentElement;
-  var still = root.classList.contains("still");
-  var $ = function (s, c) { return (c || document).querySelector(s); };
-  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+<div class="mbar" id="mbar">
+  <a class="btn line" href="tel:+919677218580" aria-label="Call +91 96772 18580"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
+  <a class="btn ink" data-wa href="https://wa.me/919677218580?text=Hi%20Aara%20Events%2C%20I%27d%20like%20to%20enquire%20about%20an%20event." target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+</div>
 
-  /* ---- the WhatsApp message: event, date, venue from the top, plus every cue the visitor added ---- */
-  var NUM = "919677218580";
-  var ev = $("#f-event"), dt = $("#f-date"), ve = $("#f-venue");
-  var cues = $$(".cue");
-  var ART = { "Engagement": "an engagement" };
-  function and(l) { return l.length < 2 ? l.join("") : l.slice(0, -1).join(", ") + " and " + l[l.length - 1]; }
-  function picks() { return cues.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; }).map(function (c) { return c.dataset.want; }); }
-  function message() {
-    var e = ev.value, what = e === "Other" ? "an event" : (ART[e] || "a " + e.toLowerCase());
-    var s = "Hello Aara Events & Experiences! We're planning " + what;
-    var d = dt.value.trim(), v = ve.value.trim();
-    if (d) s += " on " + d;
-    if (v) s += " at " + v;
-    s += ".";
-    var p = picks();
-    if (p.length) s += " We'd like " + and(p) + ".";
-    return s + " Could you share the details?";
-  }
-  function sync() {
-    var href = "https://wa.me/" + NUM + "?text=" + encodeURIComponent(message());
-    $$(".js-wa").forEach(function (a) { a.href = href; });
-    var p = picks(), out = $(".picked");
-    if (out) out.innerHTML = p.length ? "Your message will ask for <b>" + and(p).replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</b>. <a href=\"#enquiry\">Edit the event</a>" : "Nothing added yet. Your message will carry the event, date and venue from the top.";
-  }
-  [ev, dt, ve].forEach(function (f) { f.addEventListener("input", sync); f.addEventListener("change", sync); });
-  ve.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $(".js-wa").click(); } });
-  dt.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); ve.focus(); } });
-  sync();
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo" hidden>
+  <button class="lb-x" id="lbX" type="button" aria-label="Close photo"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+  <button class="lb-n lb-p" id="lbP" type="button" aria-label="Previous photo"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+  <button class="lb-n lb-nx" id="lbN" type="button" aria-label="Next photo"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+  <figure class="lb-fig"><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
 
-  /* ---- signature: the run of show. A tapped cue goes live, its photo crosses in once decoded, and it joins the message ---- */
-  var frameImgs = $$(".frame img"), cap = $(".frame figcaption");
-  var names = ["Setup", "Entry", "Floor open", "Live acts"];
-  function live(i) {
-    cues.forEach(function (c, k) { c.classList.toggle("live", k === i); });
-    var img = frameImgs[i];
-    var show = function () {
-      if (img.classList.contains("on")) return;
-      frameImgs.forEach(function (m) { m.classList.remove("was"); if (m.classList.contains("on")) { m.classList.remove("on"); m.classList.add("was"); } });
-      img.classList.add("on");
-      cap.innerHTML = "<b>0" + (i + 1) + "</b><span>" + names[i] + "</span>"; };
-    img.loading = "eager";
-    var t = setTimeout(show, 900);  /* a slow network still gets the swap */
-    if (img.decode) img.decode().then(function () { clearTimeout(t); show(); }, function () { clearTimeout(t); show(); }); else show();
-  }
-  cues.forEach(function (c, i) {
-    c.addEventListener("click", function () {
-      var on = c.getAttribute("aria-pressed") === "true";
-      c.setAttribute("aria-pressed", on ? "false" : "true");
-      live(i);
-      sync();
-    });
-  });
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+</svg>
 
-  /* the hero's 01 / 02 / 03 open the run of show on that cue */
-  $$(".tag a").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      e.preventDefault();
-      var i = +a.dataset.cue, run = $("#run");
-      reveal(run);
-      live(i);
-      requestAnimationFrame(function () {
-        var beh = still ? "auto" : "smooth";
-        if (matchMedia("(min-width: 1024px)").matches) return run.scrollIntoView({ behavior: beh });
-        var bar = $(".bar").offsetHeight, stage = $(".stage").offsetHeight;
-        var y = cues[i].getBoundingClientRect().top + scrollY - bar - stage - 6;
-        scrollTo({ top: Math.max(0, y), behavior: beh });
-      });
-      cues[i].focus({ preventScroll: true });
-    });
-  });
-
-  /* recent nights: which photo of how many */
-  var rowx = $(".row-x"), cnt = $(".count b");
-  if (rowx && cnt) rowx.addEventListener("scroll", function () {
-    var card = rowx.querySelector(".night"); if (!card) return;
-    cnt.textContent = Math.min(3, Math.round(rowx.scrollLeft / (card.offsetWidth + 10)) + 1);
-  }, { passive: true });
-
-  /* ---- closing moment: a short amber spark burst from the button; never delays the link ---- */
-  $$(".js-wa").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      sync();
-      if (still || !a.animate) return;
-      var r = a.getBoundingClientRect();
-      var x = (e.clientX || r.left + r.width / 2) - r.left, y = (e.clientY || r.top + r.height / 2) - r.top;
-      for (var k = 0; k < 9; k++) {
-        var s = document.createElement("span"); s.className = "burst"; s.style.left = (x - 2.5) + "px"; s.style.top = (y - 2.5) + "px";
-        a.appendChild(s);
-        var ang = (k / 9) * Math.PI * 2 + Math.random() * .4, dist = 26 + Math.random() * 22;
-        s.animate([{ transform: "translate(0,0) scale(1)", opacity: 1 }, { transform: "translate(" + Math.cos(ang) * dist + "px," + (Math.sin(ang) * dist - 10) + "px) scale(.3)", opacity: 0 }],
-          { duration: 480 + Math.random() * 100, easing: "cubic-bezier(.23,1,.32,1)" }).onfinish = (function (n) { return function () { n.remove(); }; })(s);
-      }
-    });
-  });
-
-  /* ---- scroll scenes: an observer, plus a check on scroll so a fast flick never leaves a section unrevealed ---- */
-  var secs = $$(".rv");
-  function reveal(s) {
-    if (s.classList.contains("in")) return;
-    s.classList.add("in");
-    if (s.id === "run") frameImgs.forEach(function (m) { m.loading = "eager"; });
-    if (s.id === "reviews") countUp($(".score .num", s));
-    if (s.id === "find") { var r = $(".rise", s), b = $(".last .btn-wa", s); if (r && b) r.style.setProperty("--from", Math.max(80, b.offsetTop + 10) + "px"); r && (r.style.top = (b.offsetTop + b.offsetHeight / 2 - 2) + "px"); }
-  }
-  function countUp(el) {
-    if (!el || still) return;
-    var t0 = performance.now(), from = 1.7, to = 4.9, dur = 1600;
-    (function f(t) { var p = Math.min(1, (t - t0) / dur), k = 1 - Math.pow(1 - p, 3); el.textContent = (from + (to - from) * k).toFixed(1); if (p < 1) requestAnimationFrame(f); })(t0);
-  }
-  if (still || !("IntersectionObserver" in window)) secs.forEach(function (s) { s.classList.add("in"); });
-  else {
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -12% 0px" });
-    secs.forEach(function (s) { io.observe(s); });
-    var ticking = false;
-    addEventListener("scroll", function () {
-      if (ticking) return; ticking = true;
-      requestAnimationFrame(function () { ticking = false; secs.forEach(function (s) { if (s.getBoundingClientRect().top < innerHeight * .88) reveal(s); }); });
-    }, { passive: true });
-  }
-
-  /* ---- ambient: a few cold-pyro sparks rising inside the hero photo only. DPR 1, 30 fps, at most 24 on phones,
-     paused off screen and in hidden tabs, with a frame watchdog that thins them but never switches them off ---- */
-  function sparks() {
-    var fig = $(".hero-fig"), cv = $(".sparks", fig);
-    if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext("2d"), W = 0, H = 0, ps = [], run = false, seen = true, last = 0, raf = 0;
-    var phone = !matchMedia("(min-width: 1024px)").matches, MAX = phone ? 24 : 60, dens = 1, steps = [1, .6, .36, .2], si = 0;
-    var slow = 0, frames = 0, prev = 0;
-    function size() { W = cv.width = fig.clientWidth; H = cv.height = fig.clientHeight; }
-    function spawn() {
-      return { x: W * (.38 + Math.random() * .3), y: H * (.5 + Math.random() * .35), vx: (Math.random() - .5) * .35, vy: -(.35 + Math.random() * .7),
-               r: .7 + Math.random() * 1.3, life: 0, max: 90 + Math.random() * 90 };
-    }
-    function step(t) {
-      raf = requestAnimationFrame(step);
-      if (t - last < 32) return;
-      if (prev) { frames++; if (t - prev > 24 + 33) slow++; if (frames >= 90) { if (slow > 45 && si < steps.length - 1) dens = steps[++si]; frames = slow = 0; } }
-      prev = t; last = t;
-      var want = Math.round(MAX * dens);
-      while (ps.length < want && Math.random() < .5) ps.push(spawn());
-      ctx.clearRect(0, 0, W, H);
-      for (var i = ps.length - 1; i >= 0; i--) {
-        var p = ps[i]; p.life++; p.x += p.vx; p.y += p.vy; p.vy *= .995;
-        var a = Math.sin(Math.PI * Math.min(1, p.life / p.max)) * .85;
-        if (p.life >= p.max || p.y < 0) { if (ps.length > want) ps.splice(i, 1); else ps[i] = spawn(); continue; }
-        ctx.globalAlpha = a; ctx.fillStyle = p.r > 1.4 ? "#ffd59a" : "#f0a24a";
-        ctx.fillRect(p.x, p.y, p.r, p.r);
-      }
-      ctx.globalAlpha = 1;
-    }
-    function go() { if (run || !seen || document.hidden) return; run = true; prev = 0; raf = requestAnimationFrame(step); }
-    function stop() { run = false; cancelAnimationFrame(raf); }
-    size(); addEventListener("resize", size);
-    new IntersectionObserver(function (es) { seen = es[0].isIntersecting; seen ? go() : stop(); }).observe(fig);
-    document.addEventListener("visibilitychange", function () { document.hidden ? stop() : go(); });
-    go();
-  }
-  function afterOpening(fn) {
-    if (root.getAttribute("data-opening") === "done") return fn();
-    new MutationObserver(function (m, ob) { if (root.getAttribute("data-opening") === "done") { ob.disconnect(); fn(); } }).observe(root, { attributes: true, attributeFilter: ["data-opening"] });
-  }
-  if (!still) afterOpening(function () { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(sparks, { timeout: 1200 }); });
-
-  /* ---- desktop only, after load: GSAP adds a slow scrubbed drift to the photos. Nothing depends on it. ---- */
-  addEventListener("load", function () {
-    if (still || !matchMedia("(min-width: 1024px) and (pointer: fine)").matches) return;
-    function add(src, sri, cb) { var s = document.createElement("script"); s.src = src; s.integrity = sri; s.crossOrigin = "anonymous"; s.onload = cb; s.onerror = function () {}; document.head.appendChild(s); }
-    add("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js", "sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc", function () {
-      add("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js", "sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh", function () {
-        if (!window.gsap || !window.ScrollTrigger) return;
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.matchMedia().add("(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", function () {
-          gsap.to(".hero-fig img", { yPercent: 7, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-        });
-      });
-    });
-  });
-})();
-</script>
+<script defer src="site.js?v=2"></script>
 </body>
 </html>
